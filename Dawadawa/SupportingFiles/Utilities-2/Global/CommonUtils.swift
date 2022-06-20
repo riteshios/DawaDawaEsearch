@@ -71,7 +71,7 @@ class CommonUtils {
         let nav = UIApplication.shared.keyWindow?.rootViewController as? UINavigationController
         nav?.present(alertController, animated: true, completion: nil)
     }
-    
+    //wed3eh
     // To show alert controller with two button and call back to receiver.
     static func showAlert(title: String,
                           message: String,
