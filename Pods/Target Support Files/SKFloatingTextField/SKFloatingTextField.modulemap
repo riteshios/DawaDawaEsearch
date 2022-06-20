@@ -1,0 +1,6 @@
+framework module SKFloatingTextField {
+  umbrella header "SKFloatingTextField-umbrella.h"
+
+  export *
+  module * { export * }
+}

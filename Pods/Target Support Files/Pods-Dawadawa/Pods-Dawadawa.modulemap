@@ -1,0 +1,6 @@
+framework module Pods_Dawadawa {
+  umbrella header "Pods-Dawadawa-umbrella.h"
+
+  export *
+  module * { export * }
+}

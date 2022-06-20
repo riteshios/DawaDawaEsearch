@@ -1,0 +1,138 @@
+
+/* Class = "UILabel"; text = "Account activated successfully"; ObjectID = "1se-yZ-srG"; */
+"1se-yZ-srG.text" = "Account activated successfully";
+
+/* Class = "UIViewController"; title = "LoginVC"; ObjectID = "8RW-YP-m4s"; */
+"8RW-YP-m4s.title" = "LoginVC";
+
+/* Class = "UILabel"; text = "Sudan"; ObjectID = "8Rc-Br-3YF"; */
+"8Rc-Br-3YF.text" = "Sudan";
+
+/* Class = "UIViewController"; title = "CreateAccountVC"; ObjectID = "9Uz-l7-6E1"; */
+"9Uz-l7-6E1.title" = "CreateAccountVC";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "A5f-ua-Wna"; */
+"A5f-ua-Wna.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Facebook"; ObjectID = "AU1-cH-KVC"; */
+"AU1-cH-KVC.text" = "Facebook";
+
+/* Class = "UIButton"; normalTitle = "Login"; ObjectID = "Cw3-DO-T0Q"; */
+"Cw3-DO-T0Q.normalTitle" = "Login";
+
+/* Class = "UILabel"; text = "or"; ObjectID = "HnA-AZ-nem"; */
+"HnA-AZ-nem.text" = "or";
+
+/* Class = "UILabel"; text = "Provide your registered email address or phone number to reset your password "; ObjectID = "IZA-Ou-8Dh"; */
+"IZA-Ou-8Dh.text" = "Provide your registered email address or phone number to reset your password ";
+
+/* Class = "UILabel"; text = "Twitter"; ObjectID = "J35-VG-evp"; */
+"J35-VG-evp.text" = "Twitter";
+
+/* Class = "UILabel"; text = "Wrong code entered!"; ObjectID = "Lm7-VH-IT4"; */
+"Lm7-VH-IT4.text" = "Wrong code entered!";
+
+/* Class = "UILabel"; text = "Enter a new password for your account"; ObjectID = "MaW-4a-xdB"; */
+"MaW-4a-xdB.text" = "Enter a new password for your account";
+
+/* Class = "UILabel"; text = " An account activation code has been sent to your email address and phone number "; ObjectID = "O17-sR-qc5"; */
+"O17-sR-qc5.text" = " An account activation code has been sent to your email address and phone number ";
+
+/* Class = "UILabel"; text = " Activate account"; ObjectID = "OuP-Uy-gkF"; */
+"OuP-Uy-gkF.text" = " Activate account";
+
+/* Class = "UILabel"; text = "Dont's have an account"; ObjectID = "PL2-nJ-Uuw"; */
+"PL2-nJ-Uuw.text" = "Dont's have an account";
+
+/* Class = "UILabel"; text = "Forgot Password"; ObjectID = "TgN-a2-EdO"; */
+"TgN-a2-EdO.text" = "Forgot Password";
+
+/* Class = "UILabel"; text = "or"; ObjectID = "Uee-dx-xN0"; */
+"Uee-dx-xN0.text" = "or";
+
+/* Class = "UIButton"; normalTitle = "Verify"; ObjectID = "Vrv-Un-Tzv"; */
+"Vrv-Un-Tzv.normalTitle" = "Verify";
+
+/* Class = "UILabel"; text = "Google"; ObjectID = "WED-or-KVH"; */
+"WED-or-KVH.text" = "Google";
+
+/* Class = "UILabel"; text = "or"; ObjectID = "XY4-gh-gd7"; */
+"XY4-gh-gd7.text" = "or";
+
+/* Class = "UILabel"; text = "and"; ObjectID = "Yld-8C-Oin"; */
+"Yld-8C-Oin.text" = "and";
+
+/* Class = "UIViewController"; title = "ResetPasswordVC"; ObjectID = "bCr-1X-1Cw"; */
+"bCr-1X-1Cw.title" = "ResetPasswordVC";
+
+/* Class = "UIViewController"; title = "ForgotPasswordVC"; ObjectID = "bgA-ok-E1Q"; */
+"bgA-ok-E1Q.title" = "ForgotPasswordVC";
+
+/* Class = "UIButton"; normalTitle = "Privacy Policy"; ObjectID = "bmW-Im-gCu"; */
+"bmW-Im-gCu.normalTitle" = "Privacy Policy";
+
+/* Class = "UILabel"; text = "Facebook"; ObjectID = "bsS-7I-hXb"; */
+"bsS-7I-hXb.text" = "Facebook";
+
+/* Class = "UILabel"; text = "Reset Password"; ObjectID = "cEL-JH-Y2l"; */
+"cEL-JH-Y2l.text" = "Reset Password";
+
+/* Class = "UIButton"; normalTitle = "Login"; ObjectID = "duB-ij-YXM"; */
+"duB-ij-YXM.normalTitle" = "Login";
+
+/* Class = "UIButton"; normalTitle = "Create account"; ObjectID = "eAf-4r-0hP"; */
+"eAf-4r-0hP.normalTitle" = "Create account";
+
+/* Class = "UILabel"; text = "Twitter"; ObjectID = "fNK-Mo-iVP"; */
+"fNK-Mo-iVP.text" = "Twitter";
+
+/* Class = "UILabel"; text = "Login"; ObjectID = "fpz-2u-ZJh"; */
+"fpz-2u-ZJh.text" = "Login";
+
+/* Class = "UILabel"; text = "Google"; ObjectID = "grT-eS-or5"; */
+"grT-eS-or5.text" = "Google";
+
+/* Class = "UIButton"; normalTitle = "create Account"; ObjectID = "kUH-Dm-taG"; */
+"kUH-Dm-taG.normalTitle" = "create Account";
+
+/* Class = "UILabel"; text = " (*) indicates mandatory fields *"; ObjectID = "ljH-t9-jgP"; */
+"ljH-t9-jgP.text" = " (*) indicates mandatory fields *";
+
+/* Class = "UILabel"; text = "or"; ObjectID = "ltz-ln-f0s"; */
+"ltz-ln-f0s.text" = "or";
+
+/* Class = "UIButton"; normalTitle = "Reset password"; ObjectID = "mud-RP-HJ3"; */
+"mud-RP-HJ3.normalTitle" = "Reset password";
+
+/* Class = "UIButton"; normalTitle = "Skip login"; ObjectID = "p0T-fc-Nxx"; */
+"p0T-fc-Nxx.normalTitle" = "Skip login";
+
+/* Class = "UILabel"; text = "Create account"; ObjectID = "qkn-s5-8IS"; */
+"qkn-s5-8IS.text" = "Create account";
+
+/* Class = "UIButton"; normalTitle = "Send code "; ObjectID = "rnl-0i-IMd"; */
+"rnl-0i-IMd.normalTitle" = "Send code ";
+
+/* Class = "UIButton"; normalTitle = "Skip registration "; ObjectID = "u0v-uN-S8r"; */
+"u0v-uN-S8r.normalTitle" = "Skip registration ";
+
+/* Class = "UILabel"; text = "Send on email address "; ObjectID = "u58-gB-Vce"; */
+"u58-gB-Vce.text" = "Send on email address ";
+
+/* Class = "UIButton"; normalTitle = "Continue "; ObjectID = "u7I-sP-cnF"; */
+"u7I-sP-cnF.normalTitle" = "Continue ";
+
+/* Class = "UILabel"; text = "Your account activated successfully, now you can explore all the exclusive opportunities."; ObjectID = "vfl-kb-3ux"; */
+"vfl-kb-3ux.text" = "Your account activated successfully, now you can explore all the exclusive opportunities.";
+
+/* Class = "UIButton"; normalTitle = "Forgot Password"; ObjectID = "vjo-jz-ZKr"; */
+"vjo-jz-ZKr.normalTitle" = "Forgot Password";
+
+/* Class = "UILabel"; text = "Already have an account? "; ObjectID = "vyj-ww-Aq6"; */
+"vyj-ww-Aq6.text" = "Already have an account? ";
+
+/* Class = "UILabel"; text = "By creating account your accepting our"; ObjectID = "x2V-ah-q5I"; */
+"x2V-ah-q5I.text" = "By creating account your accepting our";
+
+/* Class = "UIButton"; normalTitle = "T&C"; ObjectID = "ya6-Kl-EgT"; */
+"ya6-Kl-EgT.normalTitle" = "T&C";
