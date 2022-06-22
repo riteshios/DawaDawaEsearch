@@ -10,7 +10,17 @@ import UIKit
 class MoreVC: UIViewController {
     
     @IBOutlet weak var ViewMain: UIView!
-    //    var callback4:(()->())?
+    @IBOutlet weak var viewSetting: UIView!
+    @IBOutlet weak var viewEditProfile: UIView!
+    @IBOutlet weak var viewChangePassword: UIView!
+    @IBOutlet weak var viewSavedOpportunies: UIView!
+    @IBOutlet weak var viewContactUs: UIView!
+    @IBOutlet weak var viewLogOut: UIView!
+    
+    
+    
+    var callback4:(()->())?
+    var callback5:((String)->())?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,14 +28,12 @@ class MoreVC: UIViewController {
         ViewMain.layer.cornerRadius = 25
         ViewMain.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
         ViewMain.addShadowWithBlurOnView(ViewMain, spread: 0, blur: 10, color: .black, opacity: 0.16, OffsetX: 0, OffsetY: 1)
-
+        self.viewSetting.backgroundColor = UIColor.init(red: 241/255, green: 249/255, blue: 253/255, alpha: 1)
     }
     @IBAction func btnDismissTapped(_ sender: UIButton) {
-        let vc = UIStoryboard(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "TabBarVC") as! TabBarVC
-        self.navigationController?.pushViewController(vc, animated: true)
+        self.callback4?()
     }
-    
-
-  
-
+    @IBAction func btnSettingTapped(_ sender: UIButton) {
+        self.callback5?("Setting")
+    }
 }

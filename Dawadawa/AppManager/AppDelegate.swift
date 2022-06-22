@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import DropDown
+import AlamofireImage
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -30,7 +32,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
-
-
+ 
+    func dropDown(dataSource:[String] ,img:UIImage? , text:UIView , completion: @escaping (   _ index: Int ,   _ item: String , _ item1: UIImage) -> ()) -> Void {
+                                     let dropDown = DropDown()
+                                     dropDown.anchorView = text
+                                     dropDown.dataSource = dataSource
+                                     dropDown.img = img
+                                     dropDown.backgroundColor = UIColor.white
+                                     dropDown.textColor = .black
+                                     dropDown.width = text.frame.size.width
+                                     dropDown.direction = .bottom
+                                     dropDown.selectionBackgroundColor = UIColor.white
+                                     dropDown.bottomOffset = CGPoint(x: 0, y:(dropDown.anchorView?.plainView.bounds.height)!)
+                                     dropDown.dismissMode = .onTap
+                                     dropDown.show()
+                                     dropDown.selectionAction = {(index: Int, item: String, item1: UIImage) in
+                                         print("Selected item: \(item) at index: \(index)")
+                                         completion(index,item,item1)
+                                 }
+                     }
+           
 }
 

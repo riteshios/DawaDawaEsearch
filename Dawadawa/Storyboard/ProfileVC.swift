@@ -9,25 +9,42 @@ import UIKit
 
 class ProfileVC: UIViewController {
     
+    @IBOutlet weak var ImageProfile: UIImageView!
     
-    
+    var isProfileImageSelected = false
     override func viewDidLoad() {
         super.viewDidLoad()
         
         
     }
     
+    @IBAction func btnEditImage(_ sender: UIButton) {
+        ImagePickerHelper.shared.showPickerController { image, url in
+                  self.ImageProfile.image = image
+                  self.isProfileImageSelected = true
+    }
+}
+        
     @IBAction func btnMoreTapped(_ sender: UIButton) {
+        
         let vc = self.storyboard?.instantiateViewController(withIdentifier: MoreVC.getStoryboardID()) as! MoreVC
-        self.present(vc, animated: true, completion: nil)
         vc.modalTransitionStyle = .crossDissolve
         vc.modalPresentationStyle = .overCurrentContext
-
-//        self.present(vc, animated: true)
-//        vc.callback4 = {
-//            vc.dismiss(animated: false){
-//
-//            }
-//        }
+        vc.callback4 = {
+           vc.dismiss(animated: false){
+                self.dismiss(animated: true, completion: nil)
+            }
+        }
+//    self.present(vc, animated: false)
+        vc.callback5 = { txt in
+            if txt == "Setting"{
+                vc.dismiss(animated: false){
+                    let obj = self.storyboard?.instantiateViewController(identifier: SettingVC.getStoryboardID()) as! SettingVC
+                    self.navigationController?.pushViewController(obj, animated: true)
+                }
+            }
+        }
+        self.present(vc, animated: false)
     }
+    
 }

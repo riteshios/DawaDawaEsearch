@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		044D71762861988B0054DAA5 /* SettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044D71752861988B0054DAA5 /* SettingVC.swift */; };
 		045BD9BE285844DA00A848FA /* Product Sans Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 045BD9BD285844DA00A848FA /* Product Sans Regular.ttf */; };
 		046DEA97285C7E1300D1E1A5 /* sucess.gif in Resources */ = {isa = PBXBuildFile; fileRef = 046DEA96285C7E1300D1E1A5 /* sucess.gif */; };
 		046DEA99285C80AF00D1E1A5 /* success.gif in Resources */ = {isa = PBXBuildFile; fileRef = 046DEA98285C80AF00D1E1A5 /* success.gif */; };
@@ -556,6 +557,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		044D71752861988B0054DAA5 /* SettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingVC.swift; sourceTree = "<group>"; };
 		045BD9BD285844DA00A848FA /* Product Sans Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Product Sans Regular.ttf"; sourceTree = "<group>"; };
 		046DEA96285C7E1300D1E1A5 /* sucess.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = sucess.gif; sourceTree = "<group>"; };
 		046DEA98285C80AF00D1E1A5 /* success.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = success.gif; sourceTree = "<group>"; };
@@ -1122,6 +1124,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		044D7174286198600054DAA5 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				044D71752861988B0054DAA5 /* SettingVC.swift */,
+			);
+			name = Setting;
+			sourceTree = "<group>";
+		};
 		045BD9BC285844B300A848FA /* Font_Family */ = {
 			isa = PBXGroup;
 			children = (
@@ -1976,6 +1986,7 @@
 				04FD1D332860429C00BE414A /* TabBarVC.swift */,
 				44D7F8F02853685F001554C9 /* HomeVC.swift */,
 				04FD1D382860794E00BE414A /* ProfileVC.swift */,
+				044D7174286198600054DAA5 /* Setting */,
 				04FD1D35286077A900BE414A /* More */,
 			);
 			name = Home;
@@ -2605,6 +2616,7 @@
 				447DCC602851CB1100C40DDD /* Array+Extensions.swift in Sources */,
 				447DCC752851CB1100C40DDD /* PhoneCodeCell.swift in Sources */,
 				447DCC882851CB1100C40DDD /* NSNumberExtended.swift in Sources */,
+				044D71762861988B0054DAA5 /* SettingVC.swift in Sources */,
 				447DCC632851CB1100C40DDD /* UIViewController+Extensions.swift in Sources */,
 				447DCC852851CB1100C40DDD /* UIViewController.swift in Sources */,
 				447DCC662851CB1100C40DDD /* String+Extensions.swift in Sources */,

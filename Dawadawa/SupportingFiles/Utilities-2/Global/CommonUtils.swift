@@ -49,7 +49,7 @@ class CommonUtils {
                               buttonTitle: kButtonTitle) { (_) in
         }
     }
-        
+    
     // To show alert controller with single button and call back to receiver.
     static func showAlert(title: String,
                           message: String,
@@ -63,15 +63,14 @@ class CommonUtils {
         let defaultAction = UIAlertAction(title: buttonTitle.count>0 ? buttonTitle: kButtonTitle,
                                           style: .default,
                                           handler: { (alert) in
-                                            print("Alert button tapped")
-                                            completion(alert.title!)
+            print("Alert button tapped")
+            completion(alert.title!)
         })
         
         alertController.addAction(defaultAction)
         let nav = UIApplication.shared.keyWindow?.rootViewController as? UINavigationController
         nav?.present(alertController, animated: true, completion: nil)
     }
-    //wed3ehfdvcxd
     // To show alert controller with two button and call back to receiver.
     static func showAlert(title: String,
                           message: String,
@@ -85,20 +84,20 @@ class CommonUtils {
                                                 preferredStyle: .alert)
         
         let firstAction = UIAlertAction(title: firstTitle.count>0 ? firstTitle: kButtonTitle, style: .default, handler: { (alert) in
-                                            print(alert.title!)
-                                            completion(alert.title!)
+            print(alert.title!)
+            completion(alert.title!)
         })
         
         let secondAction = UIAlertAction(title: secondTitle.count>0 ? secondTitle: kButtonTitle,
                                          style: .default,
                                          handler: { (alert) in
-                                            print(alert.title!)
-                                            completion(alert.title!)
+            print(alert.title!)
+            completion(alert.title!)
         })
         
         alertController.addAction(firstAction)
         alertController.addAction(secondAction)
-//        let nav = UIApplication.shared.windows.first?.rootViewController as? UINavigationController
+        //        let nav = UIApplication.shared.windows.first?.rootViewController as? UINavigationController
         refrence?.present(alertController, animated: true, completion: nil)
     }
     
@@ -112,19 +111,19 @@ class CommonUtils {
         let firstAction = UIAlertAction(title: "Camera",
                                         style: .default,
                                         handler: { (alert) in
-                                            completion(0)
+            completion(0)
         })
         
         let secondAction = UIAlertAction(title: "Gallery",
                                          style: .default,
                                          handler: { (alert) in
-                                            completion(1)
+            completion(1)
         })
         
         let thirdAction = UIAlertAction(title: "Cancel",
                                         style: .cancel,
                                         handler: { (alert) in
-                                            completion(2)
+            completion(2)
         })
         
         alertController.addAction(firstAction)
@@ -135,31 +134,31 @@ class CommonUtils {
     }
     
     
-//    // MARK: - Toast Popup Methods
-//
-//    // To show toast popup with message.
-//    static func showToast(message: String) {
-//        FTIndicator.showNotification(withTitle: kAlertTitle,
-//                                     message: message.count>0 ? message: "Message")
-//    }
-//
-//    // To show toast popup for no internet available.
-//    static func showToastForInternetUnavailable() {
-//        FTIndicator.showNotification(withTitle: kAlertTitle,
-//                                     message: kNoInternetMsg)
-//    }
-//
-//    // To show toast popup for under development.
-//    static func showToastForUnderDevelopment() {
-//        FTIndicator.showNotification(withTitle: kAlertTitle,
-//                                     message: "Under Development")
-//    }
-//
-//    // To show toast popup for any error.
-//    static func showToastForDefaultError() {
-//        FTIndicator.showNotification(withTitle: kAlertTitle,
-//                                     message: kDefaultErrorMsg)
-//    }
+    //    // MARK: - Toast Popup Methods
+    //
+    //    // To show toast popup with message.
+    //    static func showToast(message: String) {
+    //        FTIndicator.showNotification(withTitle: kAlertTitle,
+    //                                     message: message.count>0 ? message: "Message")
+    //    }
+    //
+    //    // To show toast popup for no internet available.
+    //    static func showToastForInternetUnavailable() {
+    //        FTIndicator.showNotification(withTitle: kAlertTitle,
+    //                                     message: kNoInternetMsg)
+    //    }
+    //
+    //    // To show toast popup for under development.
+    //    static func showToastForUnderDevelopment() {
+    //        FTIndicator.showNotification(withTitle: kAlertTitle,
+    //                                     message: "Under Development")
+    //    }
+    //
+    //    // To show toast popup for any error.
+    //    static func showToastForDefaultError() {
+    //        FTIndicator.showNotification(withTitle: kAlertTitle,
+    //                                     message: kDefaultErrorMsg)
+    //    }
     
     static func showError(_ theme: Theme,_ message: String) {
         let view = MessageView.viewFromNib(layout: .cardView)
@@ -236,7 +235,7 @@ class CommonUtils {
                        initialSpringVelocity: 0.15,
                        options: .curveEaseOut,
                        animations: {
-                        view.transform = expendTransform.inverted()
+            view.transform = expendTransform.inverted()
         }) { (finished) in
             
         }
@@ -376,7 +375,7 @@ class CommonUtils {
         
         imagePicker.delegate = viewController as? UIImagePickerControllerDelegate & UINavigationControllerDelegate
         
-         imagePicker.allowsEditing = true
+        imagePicker.allowsEditing = true
         if UIImagePickerController.isSourceTypeAvailable(.camera){
             
             imagePicker.sourceType = .camera
@@ -388,7 +387,7 @@ class CommonUtils {
             })
             
         }
-            
+        
         else {
             
             CommonUtils.showError(.warning, "Camera not found")
@@ -400,14 +399,14 @@ class CommonUtils {
         
         imagePicker.delegate = viewController as? UIImagePickerControllerDelegate & UINavigationControllerDelegate
         
-         imagePicker.allowsEditing = true
+        imagePicker.allowsEditing = true
         imagePicker.sourceType = .photoLibrary
+        
+        viewController.present(imagePicker, animated: true, completion: {
             
-            viewController.present(imagePicker, animated: true, completion: {
-                
-                imagePicker.delegate = viewController as? UIImagePickerControllerDelegate & UINavigationControllerDelegate
-                
-            })
+            imagePicker.delegate = viewController as? UIImagePickerControllerDelegate & UINavigationControllerDelegate
+            
+        })
     }
     // function for image picker
     static func imagePicker(viewController:UIViewController){
@@ -416,7 +415,7 @@ class CommonUtils {
         
         imagePicker.delegate = viewController as? UIImagePickerControllerDelegate & UINavigationControllerDelegate
         
-         imagePicker.allowsEditing = true
+        imagePicker.allowsEditing = true
         
         let actionSheet = UIAlertController(title: "Photo Source ", message: "Choose a source", preferredStyle: .actionSheet)
         
@@ -433,12 +432,9 @@ class CommonUtils {
                 })
                 
             }
-                
+            
             else {
-                
-                
                 CommonUtils.showError(.warning, "Camera not found")
-                
             }
             
         }))
@@ -454,8 +450,8 @@ class CommonUtils {
         }))
         
         actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler:
-            
-            nil))
+                                                
+                                                nil))
         
         viewController.present(actionSheet, animated: true, completion: nil )
         
@@ -484,7 +480,7 @@ class CommonUtils {
             })
             
         }
-            
+        
         else {
             
             CommonUtils.showError(.error, "Camera not found")
@@ -538,44 +534,44 @@ class CommonUtils {
     class func moveFileFrom(sourcePath: URL?, destinationPath: URL?) {
         DispatchQueue.global().async {
             if destinationPath != nil {
-               do {
-                   let fileManager = FileManager.default
-                   try fileManager.moveItem(at: sourcePath!, to: destinationPath!)
-               } catch {
-                   print_debug(items:"Unable to load data: \(error)")
-               }
-        }
-        }
-    }
-    class func requestAuthorization(completion: @escaping ()->Void) {
-             if PHPhotoLibrary.authorizationStatus() == .notDetermined {
-                 PHPhotoLibrary.requestAuthorization { (status) in
-                     DispatchQueue.main.async {
-                         completion()
-                     }
-                 }
-             } else if PHPhotoLibrary.authorizationStatus() == .authorized{
-                 completion()
-             }
-         }
-    
-    class func saveVideoToAlbum(_ outputURL: URL, _ completion: ((Error?) -> Void)?) {
-            requestAuthorization {
-                PHPhotoLibrary.shared().performChanges({
-                    let request = PHAssetCreationRequest.forAsset()
-                    request.addResource(with: .video, fileURL: outputURL, options: nil)
-                }) { (result, error) in
-                    DispatchQueue.main.async {
-                        if let error = error {
-                            print(error.localizedDescription)
-                        } else {
-                            print("Saved successfully")
-                        }
-                        completion?(error)
-                    }
+                do {
+                    let fileManager = FileManager.default
+                    try fileManager.moveItem(at: sourcePath!, to: destinationPath!)
+                } catch {
+                    print_debug(items:"Unable to load data: \(error)")
                 }
             }
         }
+    }
+    class func requestAuthorization(completion: @escaping ()->Void) {
+        if PHPhotoLibrary.authorizationStatus() == .notDetermined {
+            PHPhotoLibrary.requestAuthorization { (status) in
+                DispatchQueue.main.async {
+                    completion()
+                }
+            }
+        } else if PHPhotoLibrary.authorizationStatus() == .authorized{
+            completion()
+        }
+    }
+    
+    class func saveVideoToAlbum(_ outputURL: URL, _ completion: ((Error?) -> Void)?) {
+        requestAuthorization {
+            PHPhotoLibrary.shared().performChanges({
+                let request = PHAssetCreationRequest.forAsset()
+                request.addResource(with: .video, fileURL: outputURL, options: nil)
+            }) { (result, error) in
+                DispatchQueue.main.async {
+                    if let error = error {
+                        print(error.localizedDescription)
+                    } else {
+                        print("Saved successfully")
+                    }
+                    completion?(error)
+                }
+            }
+        }
+    }
     
     class func saveFile(url: String, fileName: String, completion: @escaping(_ path: String?) -> ()) -> Void {
         if url.isEmpty {
@@ -602,46 +598,46 @@ class CommonUtils {
     }
     
     class func downloadVideo(url: String) {
-         let videpUrl = URL(string: url)
-         if videpUrl != nil {
-             
-             CommonUtils.showHudWithNoInteraction(show: true)
-             DispatchQueue.global(qos: .background).async {
-                 if let urlData = NSData(contentsOf: videpUrl!){
-                     let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
-                     let filePath="\(documentsPath)/tempVideo.mp4"
-                     urlData.write(toFile: filePath, atomically: true)
-                     if let videoUrl = URL(string: filePath) {
-                     
-                     CommonUtils.saveVideoToAlbum(videoUrl) { (error) in
-                         
-                         if error == nil {
-                             
-                             CommonUtils.showError(.success, "Video saved successfully")
-                             
-                             if FileManager.default.fileExists(atPath: filePath) {
-                                 do {
-                                     try FileManager.default.removeItem(atPath: filePath)
-                                 } catch {
-                                     
-                                 }
-                             }
-                         }
-                         CommonUtils.showHudWithNoInteraction(show: false)
-                     }
-                   }
-                 }
-             }
-         }
-     }
-    static func getBottomSafeArea() -> CGFloat {
-            if #available(iOS 13.0, *) {
-                let window = UIApplication.shared.windows[0]
-                let bottomPadding = window.safeAreaInsets.bottom
-                return bottomPadding
+        let videpUrl = URL(string: url)
+        if videpUrl != nil {
+            
+            CommonUtils.showHudWithNoInteraction(show: true)
+            DispatchQueue.global(qos: .background).async {
+                if let urlData = NSData(contentsOf: videpUrl!){
+                    let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+                    let filePath="\(documentsPath)/tempVideo.mp4"
+                    urlData.write(toFile: filePath, atomically: true)
+                    if let videoUrl = URL(string: filePath) {
+                        
+                        CommonUtils.saveVideoToAlbum(videoUrl) { (error) in
+                            
+                            if error == nil {
+                                
+                                CommonUtils.showError(.success, "Video saved successfully")
+                                
+                                if FileManager.default.fileExists(atPath: filePath) {
+                                    do {
+                                        try FileManager.default.removeItem(atPath: filePath)
+                                    } catch {
+                                        
+                                    }
+                                }
+                            }
+                            CommonUtils.showHudWithNoInteraction(show: false)
+                        }
+                    }
+                }
             }
-            return 0
         }
+    }
+    static func getBottomSafeArea() -> CGFloat {
+        if #available(iOS 13.0, *) {
+            let window = UIApplication.shared.windows[0]
+            let bottomPadding = window.safeAreaInsets.bottom
+            return bottomPadding
+        }
+        return 0
+    }
     
 }
 

@@ -10,7 +10,6 @@ target 'Dawadawa' do
  pod 'Alamofire','~> 4.0'
   pod 'SDWebImage', '~> 4.0'
   pod 'AlamofireImage'
-  pod 'DropDown'
   pod 'IQKeyboardManagerSwift'
   pod 'GoogleMaps'
   pod 'GoogleSignIn'
@@ -21,6 +20,7 @@ target 'Dawadawa' do
   pod 'SKFloatingTextField'
   pod 'SwiftMessages'
   pod 'STTabbar'
+  pod 'DropDown'
 
 
 end

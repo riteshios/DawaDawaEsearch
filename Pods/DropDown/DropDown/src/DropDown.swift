@@ -134,7 +134,7 @@ public final class DropDown: UIView {
 	public var bottomOffset: CGPoint = .zero {
 		didSet { setNeedsUpdateConstraints() }
 	}
-
+     
     /**
     The offset from the bottom of the window when the drop down is shown below the anchor view.
     DropDown applies this offset only if keyboard is hidden.
@@ -199,7 +199,13 @@ public final class DropDown: UIView {
 	public var dimmedBackgroundColor = UIColor.clear {
 		willSet { super.backgroundColor = newValue }
 	}
-
+    
+    // for adding image
+    public var img:UIImage?{
+        willSet {
+            reloadAllComponents()
+        }
+    }
 	/**
 	The background color of the selected cell in the drop down.
 
