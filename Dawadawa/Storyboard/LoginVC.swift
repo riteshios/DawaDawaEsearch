@@ -16,6 +16,7 @@ class LoginVC: UIViewController {
     @IBOutlet weak var txtFieldPhoneNumer: SKFloatingTextField!
     @IBOutlet weak var txtFieldPassword: SKFloatingTextField!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         viewMain.clipsToBounds = true

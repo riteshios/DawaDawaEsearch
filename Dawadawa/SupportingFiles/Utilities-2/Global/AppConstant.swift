@@ -33,6 +33,7 @@ let kIs_Notification            = "is_notification"
 let kIsAppInstalled             = "isAppInstalled"
 let kAccessToken                = "access_token"
 let kDeviceToken                = "device_token"
+let kemail                      = "email"
 let iosDeviceType               = "1"
 let iosDeviceTokan              = "123456789"
 var kBucketUrl                  = ""
@@ -62,48 +63,9 @@ struct Keys {
 }
 
 struct ServiceName {
-    static let kSellerSignUp = "api/seller/registerSeller"
-    static let kServiceSignUp  = "api/service/registerServiceProvider"
-    static let kSellerOTP = "api/seller/verifyOtp"
-    static let kServiceOTP      = "api/service/verifyOtp"
-    static let kSellerResendOTP = "api/seller/resendOtp"
-    static let kSellerCreateProfile  = "api/seller/comleteProfile"
-    static let kSellerBankDetails = "api/seller/bankSecurityAdd"
-    static let kSellerForgotPassword = "api/seller/forgetPassword"
-    static let kSellerReset = "api/seller/resetPassword"
-    static let kSellerLogin = "api/seller/login"
-    static let kServiceLogin = "api/service/login"
-    static let kServiceResendOTP = "api/service/resendOtp"
-    static let kServiceForgot = "api/service/forgetPassword"
-    static let kServiceReset    = "api/service/resetPassword"
-    static let kServiceCreateProfile      = "api/service/completeProfile"
-    static let kServiceBankDetails        = "api/service/bankSecurityAdd"
-    static let keditprofile               = "api/seller/edit_profile"
-    static let Kupload_File               = "api/seller/upload_file"
-    static let kServiceUploadFile         = "api/service/upload_file"
-    
-    static let kservicEdit                = "api/service/edit_profile"
-    static let keditAddress               = "api/seller/edit_address"
-    static let keditAddressService     = "api/service/edit_address"
-    static let kallproduct               = "api/seller/seller_product_list"
-    static let KProductCat =           "api/seller/get_main_product_list"
-    static let kGetcategory               = "api/seller/product_cat_List"
-    static let ksubCategory               = "api/seller/product_sub_cat_List"
-    static let KAddProduct                = "api/seller/add_seller_product"
-    
-    static let KEditProduct                = "api/seller/edit_seller_product"//////
-    
-    static let KChangepassword   = "api/seller/change_password"
-    static let kServiceChangePass = "api/service/change_password"
-    static let KfetchData = "api/seller/get_profile"
-    static let KServicegetProfile = "api/service/get_profile"
-    
-    static let ksellerlogout           = "api/seller/logout"
-    static let KserviceLogout          = "api/service/logout"
-    static let KSellerDelete           = "api/seller/delete_seller_product"
-    static let kSellerProductQty       = "api/seller/update_seller_product_quantity"
-    static let kSellerSkuLimit         = "api/seller/update_sku_min_limit"
-    static let kSellerProductStatus    = "api/seller/update_product_status"
+    static let kcreateAccount = "api/register"
+    static let kOtpVerify = "api/verify_user"
+   
 }
 
 struct Notifications {
@@ -300,7 +262,6 @@ struct AlertTitle {
     static let SelectCountry      = "Select Country"
     static let logout             = "Logout"
     static let kInvalidOtp        = "Invalid OTP"
-    
 }
 
 struct Notification {

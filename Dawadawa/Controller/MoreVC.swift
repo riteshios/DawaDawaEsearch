@@ -19,8 +19,7 @@ class MoreVC: UIViewController {
     
     
     
-    var callback4:(()->())?
-    var callback5:((String)->())?
+    var callback4:((String)->())?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,9 +30,13 @@ class MoreVC: UIViewController {
         self.viewSetting.backgroundColor = UIColor.init(red: 241/255, green: 249/255, blue: 253/255, alpha: 1)
     }
     @IBAction func btnDismissTapped(_ sender: UIButton) {
-        self.callback4?()
+        self.callback4?("Dismiss")
     }
     @IBAction func btnSettingTapped(_ sender: UIButton) {
-        self.callback5?("Setting")
+        self.callback4?("Setting")
     }
+    @IBAction func btnLogOutTapped(_ sender: UIButton) {
+        self.callback4?("Logout")
+    }
+    
 }

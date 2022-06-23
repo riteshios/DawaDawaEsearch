@@ -30,6 +30,7 @@ class ActivationCodeVC: UIViewController{
     
     var callback:(()->())?
     var type:HasCameFrom?
+    var otp = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -61,12 +62,17 @@ class ActivationCodeVC: UIViewController{
     
   
     @IBAction func buttonVerify(_ sender: UIButton) {
+        self.otp = String.getString(self.txtfieldOtp1.text) + String.getString(self.txtfieldOtp2.text) + String.getString(self.txtfieldOtp3.text) + String.getString(self.txtfieldOtp4.text) +
+        String.getString(self.txtfieldOtp5.text) +
+        String.getString(self.txtfieldOtp6.text)
+        if !otp.isEmpty{
+            self.verifydOtpapi()
+        }
+        else{
+            CommonUtils.showError(.info, "Please enter otp")
+            return
+        }
         self.callback?()
-//            guard let vc = self.storyboard?.instantiateViewController(identifier: "ActivatedSuccessfullyPopUpVC") as? ActivatedSuccessfullyPopUpVC else {return}
-//            vc.modalTransitionStyle = .crossDissolve
-//            vc.modalPresentationStyle = .overCurrentContext
-//            self.present(vc, animated: true)
-        
     }
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
@@ -169,4 +175,50 @@ extension ActivationCodeVC: UITextFieldDelegate{
 //            return
 //       }
 //    }
+}
+// MARK:
+extension ActivationCodeVC{
+    func verifydOtpapi(){
+        
+        CommonUtils.showHud(show: true)
+        
+        let params:[String : Any] = [
+            "email":String.getString(UserData.shared.email),
+            "otp":self.otp]
+
+        
+        TANetworkManager.sharedInstance.requestApi(withServiceName:ServiceName.kOtpVerify, requestMethod: .POST,
+                                                   requestParameters:params, withProgressHUD: false)
+        {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
+            
+            CommonUtils.showHudWithNoInteraction(show: false)
+            
+            if errorType == .requestSuccess {
+                let dictResult = kSharedInstance.getDictionary(result)
+                
+                switch Int.getInt(statusCode) {
+                case 200:
+                    switch self?.type{
+                    case .signUp:
+                        
+                        let vc = self?.storyboard?.instantiateViewController(withIdentifier: ActivatedSuccessfullyPopUpVC.getStoryboardID()) as! ActivatedSuccessfullyPopUpVC
+                        self?.navigationController?.pushViewController(vc, animated: true)
+                    case .forgotPass:
+                        guard let vc = UIStoryboard(name: Storyboards.kMain, bundle: nil).instantiateViewController(withIdentifier: ResetPasswordVC.getStoryboardID()) as? ResetPasswordVC else { return }
+                        self?.navigationController?.pushViewController(vc, animated: true)
+                    default:
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                      
+                    }
+                default:
+                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                }
+            } else if errorType == .noNetwork {
+                CommonUtils.showToastForInternetUnavailable()
+                
+            } else {
+                CommonUtils.showToastForDefaultError()
+            }
+        }
+    }
 }
