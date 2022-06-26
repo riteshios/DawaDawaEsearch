@@ -16,6 +16,7 @@ class ForgotPasswordVC: UIViewController {
     @IBOutlet weak var btnSendEmail_Phone: UIButton!
     @IBOutlet weak var lblSendEmail_Phone: UILabel!
     
+    
     @IBOutlet weak var txtFieldPhone_Email: SKFloatingTextField!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,41 +47,14 @@ class ForgotPasswordVC: UIViewController {
     
     
     @IBAction func btnsendCodeTapped(_ sender: UIButton) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: ActivationCodeVC.getStoryboardID()) as! ActivationCodeVC
-        vc.modalTransitionStyle = .crossDissolve
-        vc.modalPresentationStyle = .overCurrentContext
-        vc.type = .forgotPass
+      
         if (self.lblSendEmail_Phone.text == "Send on email address"){
             self.fieldvalidationPhoneNumber()
         }
         else if (self.lblSendEmail_Phone.text == "Send on phone number"){
             self.fieldvalidationEmailAdress()
         }
-        vc.callback =
-        {
-            vc.dismiss(animated: false){
-                let vc = self.storyboard?.instantiateViewController(withIdentifier: ResetPasswordVC.getStoryboardID()) as! ResetPasswordVC
-                vc.modalTransitionStyle = .crossDissolve
-                vc.modalPresentationStyle = .overCurrentContext
-                vc.callback2 = {
-                    self.dismiss(animated: false) {
-                        let vc = self.storyboard?.instantiateViewController(withIdentifier: "ActivatedSuccessfullyPopUpVC") as! ActivatedSuccessfullyPopUpVC
-                        vc.modalTransitionStyle = .crossDissolve
-                        vc.modalPresentationStyle = .overCurrentContext
-                        vc.type = .reset
-                        vc.callback1 = {
-                            self.dismiss(animated: true){
-                                let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
-                                self.navigationController?.pushViewController(vc, animated: true)
-                            }
-                        }
-                        self.present(vc, animated: false)
-                    }
-                }
-                self.present(vc, animated: false)
-            }
-        }
-        self.present(vc, animated: false)
+       
     }
     
     
@@ -108,6 +82,8 @@ class ForgotPasswordVC: UIViewController {
             self.showSimpleAlert(message: Notifications.kEnterValidEmail)
             return
         }
+        self.view.endEditing(true)
+        self.forgotpasswordapi()
     }
 }
 
@@ -145,6 +121,81 @@ extension ForgotPasswordVC : SKFlaotingTextFieldDelegate {
         print("begin editing")
     }
     
-    
 }
+
+extension ForgotPasswordVC{
+    func forgotpasswordapi(){
+        
+        CommonUtils.showHud(show: true)
+        let accessToken = kSharedUserDefaults.getLoggedInAccessToken()
+       
+
+        let params:[String : Any] = [
+            "email":String.getString(self.txtFieldPhone_Email.text),
+        ]
+
+        
+        TANetworkManager.sharedInstance.requestApi(withServiceName:ServiceName.kforgotpassword, requestMethod: .POST,
+                                                   requestParameters:params, withProgressHUD: false)
+        {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
+            
+            CommonUtils.showHudWithNoInteraction(show: false)
+            
+            if errorType == .requestSuccess {
+                
+                let dictResult = kSharedInstance.getDictionary(result)
+                
+                switch Int.getInt(statusCode) {
+                case 200:
+                    if Int.getInt(dictResult["status"]) == 200{
+                        let vc = self?.storyboard?.instantiateViewController(withIdentifier: ActivationCodeVC.getStoryboardID()) as! ActivationCodeVC
+                        vc.modalTransitionStyle = .crossDissolve
+                        vc.modalPresentationStyle = .overCurrentContext
+                        vc.type = .forgotPass
+                        vc.email = String.getString(self?.txtFieldPhone_Email.text)
+                        vc.callback =
+                        {
+                            vc.dismiss(animated: false){
+                                let vc = self?.storyboard?.instantiateViewController(withIdentifier: ResetPasswordVC.getStoryboardID()) as! ResetPasswordVC
+                                vc.modalTransitionStyle = .crossDissolve
+                                vc.modalPresentationStyle = .overCurrentContext
+                                vc.callback2 = {
+                                    self?.dismiss(animated: false) {
+                                        let vc = self?.storyboard?.instantiateViewController(withIdentifier: "ActivatedSuccessfullyPopUpVC") as! ActivatedSuccessfullyPopUpVC
+                                        vc.modalTransitionStyle = .crossDissolve
+                                        vc.modalPresentationStyle = .overCurrentContext
+                                        vc.type = .reset
+                                        vc.callback1 = {
+                                            self?.dismiss(animated: true){
+                                                let vc = self?.storyboard?.instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
+                                                self?.navigationController?.pushViewController(vc, animated: true)
+                                            }
+                                        }
+                                        self?.present(vc, animated: false)
+                                    }
+                                }
+                                self?.present(vc, animated: false)
+                            }
+                        }
+                        self?.present(vc, animated: false)
+                    }
+                    else if  Int.getInt(dictResult["status"]) == 400{
+                        CommonUtils.showError(.info, String.getString(dictResult["successStatus"]))
+                    }
+                    else if Int.getInt(dictResult["status"]) == 401{
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    }
+                default:
+                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                }
+            } else if errorType == .noNetwork {
+                CommonUtils.showToastForInternetUnavailable()
+                
+            } else {
+                CommonUtils.showToastForDefaultError()
+            }
+        }
+    }
+}
+
 

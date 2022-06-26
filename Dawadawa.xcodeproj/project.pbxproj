@@ -7,11 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0432E33D286430EA00B4B40D /* userData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0432E33C286430EA00B4B40D /* userData.swift */; };
 		044D71762861988B0054DAA5 /* SettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044D71752861988B0054DAA5 /* SettingVC.swift */; };
 		045BD9BE285844DA00A848FA /* Product Sans Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 045BD9BD285844DA00A848FA /* Product Sans Regular.ttf */; };
 		046DEA97285C7E1300D1E1A5 /* sucess.gif in Resources */ = {isa = PBXBuildFile; fileRef = 046DEA96285C7E1300D1E1A5 /* sucess.gif */; };
 		046DEA99285C80AF00D1E1A5 /* success.gif in Resources */ = {isa = PBXBuildFile; fileRef = 046DEA98285C80AF00D1E1A5 /* success.gif */; };
 		04836F162859C1B300AF8C8B /* Localizable.string.strings in Resources */ = {isa = PBXBuildFile; fileRef = 04836F182859C1B300AF8C8B /* Localizable.string.strings */; };
+		0494642E28646CCA0010076A /* LogOutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0494642D28646CCA0010076A /* LogOutVC.swift */; };
 		04FD1D342860429C00BE414A /* TabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FD1D332860429C00BE414A /* TabBarVC.swift */; };
 		04FD1D37286077E800BE414A /* MoreVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FD1D36286077E800BE414A /* MoreVC.swift */; };
 		04FD1D392860794E00BE414A /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FD1D382860794E00BE414A /* ProfileVC.swift */; };
@@ -557,6 +559,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0432E33C286430EA00B4B40D /* userData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userData.swift; sourceTree = SOURCE_ROOT; };
 		044D71752861988B0054DAA5 /* SettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingVC.swift; sourceTree = "<group>"; };
 		045BD9BD285844DA00A848FA /* Product Sans Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Product Sans Regular.ttf"; sourceTree = "<group>"; };
 		046DEA96285C7E1300D1E1A5 /* sucess.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = sucess.gif; sourceTree = "<group>"; };
@@ -564,6 +567,7 @@
 		04836F122859C0A200AF8C8B /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		04836F132859C0A200AF8C8B /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Main.strings; sourceTree = "<group>"; };
 		04836F172859C1B300AF8C8B /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.string.strings; sourceTree = "<group>"; };
+		0494642D28646CCA0010076A /* LogOutVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LogOutVC.swift; path = Dawadawa/Storyboard/LogOutVC.swift; sourceTree = SOURCE_ROOT; };
 		04FD1D332860429C00BE414A /* TabBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TabBarVC.swift; path = Dawadawa/Storyboard/TabBarVC.swift; sourceTree = SOURCE_ROOT; };
 		04FD1D36286077E800BE414A /* MoreVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreVC.swift; sourceTree = "<group>"; };
 		04FD1D382860794E00BE414A /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProfileVC.swift; path = Dawadawa/Storyboard/ProfileVC.swift; sourceTree = SOURCE_ROOT; };
@@ -1143,6 +1147,7 @@
 		04FD1D35286077A900BE414A /* More */ = {
 			isa = PBXGroup;
 			children = (
+				0494642D28646CCA0010076A /* LogOutVC.swift */,
 				04FD1D36286077E800BE414A /* MoreVC.swift */,
 			);
 			name = More;
@@ -1964,6 +1969,7 @@
 		44C286D82851B682007AF36F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				0432E33C286430EA00B4B40D /* userData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2641,6 +2647,7 @@
 				447DCC672851CB1100C40DDD /* UITextView+Extensions.swift in Sources */,
 				447DCC5E2851CB1100C40DDD /* TANetworkManager.swift in Sources */,
 				447DCE5A2851CB1300C40DDD /* locationManager.swift in Sources */,
+				0432E33D286430EA00B4B40D /* userData.swift in Sources */,
 				447DCC7D2851CB1100C40DDD /* UIButtonSublayerBorderWidthAndColor.swift in Sources */,
 				447DCE552851CB1300C40DDD /* GradientView.swift in Sources */,
 				447DCC822851CB1100C40DDD /* UIImageViewCornerRadius.swift in Sources */,
@@ -2668,6 +2675,7 @@
 				447DCE652851CB1300C40DDD /* SharedClass.swift in Sources */,
 				447DCC692851CB1100C40DDD /* UIImage+Extensions.swift in Sources */,
 				04FD1D342860429C00BE414A /* TabBarVC.swift in Sources */,
+				0494642E28646CCA0010076A /* LogOutVC.swift in Sources */,
 				04FD1D392860794E00BE414A /* ProfileVC.swift in Sources */,
 				447DCE662851CB1300C40DDD /* CommonUtils.swift in Sources */,
 				447DCC7E2851CB1100C40DDD /* UIViewBorderWidthAndColor.swift in Sources */,
@@ -2758,6 +2766,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				"EXCLUDED_ARCHS[sdk=*]" = arm64;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -2819,6 +2828,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				"EXCLUDED_ARCHS[sdk=*]" = arm64;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -2847,6 +2857,8 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 753Q2374BG;
+				EXCLUDED_ARCHS = "";
+				"EXCLUDED_ARCHS[sdk=*]" = arm64;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Dawadawa/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -2879,6 +2891,8 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 753Q2374BG;
+				EXCLUDED_ARCHS = "";
+				"EXCLUDED_ARCHS[sdk=*]" = arm64;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Dawadawa/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

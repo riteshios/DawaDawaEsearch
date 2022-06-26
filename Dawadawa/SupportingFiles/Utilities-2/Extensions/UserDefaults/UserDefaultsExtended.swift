@@ -139,6 +139,9 @@ extension UserDefaults {
         return self.bool(forKey: kLocationPreferences)
     }
     
+    func getemail() -> String {
+        return String.getString(self.string(forKey: kemail))
+    }
     
     func updateUserPics(_ dict: Dictionary<String, Any>) {
         var dictUserData = getLoggedInUserDetails()

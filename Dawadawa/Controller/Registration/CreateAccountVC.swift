@@ -78,34 +78,7 @@ class CreateAccountVC: UIViewController {
     }
     
     @IBAction func btnCreateAccountTapped(_ sender: UIButton){
-        //        guard let vc = self.storyboard?.instantiateViewController(identifier: "ActivationCodeVC") as? ActivationCodeVC else {return}
-        //        vc.modalTransitionStyle = .crossDissolve
-        //        vc.modalPresentationStyle = .overCurrentContext
-        //        self.present(vc, animated: true)
-        
-        
         self.Validation()
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: ActivationCodeVC.getStoryboardID()) as! ActivationCodeVC
-        vc.modalTransitionStyle = .crossDissolve
-        vc.modalPresentationStyle = .overCurrentContext
-        vc.type = .signUp
-        vc.callback =
-        {
-            vc.dismiss(animated: false){
-                let vc = self.storyboard?.instantiateViewController(withIdentifier: ActivatedSuccessfullyPopUpVC.getStoryboardID()) as! ActivatedSuccessfullyPopUpVC
-                vc.modalTransitionStyle = .crossDissolve
-                vc.modalPresentationStyle = .overCurrentContext
-                vc.type = .signUp
-                vc.callback1 = {
-                    self.dismiss(animated: false) {
-                        let vc = UIStoryboard(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "TabBarVC") as! TabBarVC
-                        self.navigationController?.pushViewController(vc, animated: true)
-                    }
-                }
-                self.present(vc, animated: false)
-            }
-        }
-        self.present(vc, animated: false)
     }
     
     // MARK: - Validation
@@ -176,9 +149,11 @@ class CreateAccountVC: UIViewController {
             self.showSimpleAlert(message: Notifications.kMatchPassword)
             return
         }
-        
+        self.view.endEditing(true)
+        self.createAccountapi()
     }
 }
+
 extension CreateAccountVC{
     
     func setTextFieldUI(textField:SKFloatingTextField,place:String ,floatingText:String){
@@ -210,6 +185,67 @@ extension CreateAccountVC : SKFlaotingTextFieldDelegate {
     func textFieldDidBeginEditing(textField: SKFloatingTextField) {
         print("begin editing")
     }
-    
-    
 }
+
+//    MARK: - API
+
+extension CreateAccountVC {
+    func createAccountapi(){
+        
+        CommonUtils.showHud(show: true)
+        let params: [String:Any] = [
+            "firstname":String.getString(self.txtFieldFirstName.text),
+            "lastname":String.getString(self.txtFieldLastName.text),
+            "email":String.getString(self.txtFieldEmail.text),
+            "user_country":self.labelCountry.text,
+            "phone":String.getString(self.txtFieldPhoneNumber.text),
+            "device_type":"F23rdwewee",
+            "device_id":"REFw2321",
+            "password":String.getString(self.txtFieldPassword.text),
+            "confirm_password":String.getString(self.txtFieldConfirmPassword.text)
+        ]
+        
+        TANetworkManager.sharedInstance.requestApi(withServiceName: ServiceName.kcreateAccount, requestMethod: .POST, requestParameters: params, withProgressHUD: false) { (user_detail: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
+            
+            if errorType == .requestSuccess {
+                let dictResult = kSharedInstance.getDictionary(user_detail)
+                
+                switch Int.getInt(statusCode){
+                case 200:
+                   
+//                    UserDefaults.standard.set(String.getString(self.txtFieldEmail.text), forKey: "email")
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: ActivationCodeVC.getStoryboardID()) as! ActivationCodeVC
+                    vc.modalTransitionStyle = .crossDissolve
+                    vc.modalPresentationStyle = .overCurrentContext
+                    vc.type = .signUp
+                    vc.email = String.getString(self.txtFieldEmail.text)
+                    vc.callback =
+                    {
+                        vc.dismiss(animated: false){
+                            let vc = self.storyboard?.instantiateViewController(withIdentifier: ActivatedSuccessfullyPopUpVC.getStoryboardID()) as! ActivatedSuccessfullyPopUpVC
+                            vc.modalTransitionStyle = .crossDissolve
+                            vc.modalPresentationStyle = .overCurrentContext
+                            vc.type = .signUp
+                            vc.callback1 = {
+                                self.dismiss(animated: false) {
+                                    let vc = UIStoryboard(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "TabBarVC") as! TabBarVC
+                                    self.navigationController?.pushViewController(vc, animated: true)
+                                }
+                            }
+                            self.present(vc, animated: false)
+                        }
+                    }
+                    self.present(vc, animated: false)
+                default:
+                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                }
+            }else if errorType == .noNetwork {
+                CommonUtils.showToastForInternetUnavailable()
+                
+            } else {
+                CommonUtils.showToastForDefaultError()
+            }
+        }
+    }
+}
+

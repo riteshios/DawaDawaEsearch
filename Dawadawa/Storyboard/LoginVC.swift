@@ -16,6 +16,8 @@ class LoginVC: UIViewController {
     @IBOutlet weak var txtFieldPhoneNumer: SKFloatingTextField!
     @IBOutlet weak var txtFieldPassword: SKFloatingTextField!
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         viewMain.clipsToBounds = true
@@ -43,9 +45,7 @@ class LoginVC: UIViewController {
     //    }
     
     @IBAction func btnLoginTapped(_ sender: UIButton){
-        let vc = UIStoryboard(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "TabBarVC") as! TabBarVC
-        self.navigationController?.pushViewController(vc, animated: true)
-//        self.validation()
+        self.validation()
     }
     
     // MARK: -validation
@@ -72,8 +72,7 @@ class LoginVC: UIViewController {
             return
         }
         self.view.endEditing(true)
-        let vc = UIStoryboard(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "TabBarVC") as! TabBarVC
-        self.navigationController?.pushViewController(vc, animated: true)
+        self.loginapi()
     }
 }
 extension LoginVC{
@@ -107,6 +106,57 @@ extension LoginVC : SKFlaotingTextFieldDelegate {
     func textFieldDidBeginEditing(textField: SKFloatingTextField) {
         print("begin editing")
     }
-    
-    
+}
+// MARK: Api
+
+extension LoginVC{
+    func loginapi(){
+        
+        CommonUtils.showHud(show: true)
+        
+        let params:[String : Any] = [
+            "phone":String.getString(self.txtFieldPhoneNumer.text),
+            "password":String.getString(self.txtFieldPassword.text)
+        ]
+
+        
+        TANetworkManager.sharedInstance.requestApi(withServiceName:ServiceName.klogin, requestMethod: .POST,
+                                                   requestParameters:params, withProgressHUD: false)
+        {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
+            
+            CommonUtils.showHudWithNoInteraction(show: false)
+            
+            if errorType == .requestSuccess {
+                
+                let dictResult = kSharedInstance.getDictionary(result)
+                
+                switch Int.getInt(statusCode) {
+                case 200:
+                    if Int.getInt(dictResult["status"]) == 200{
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: "Bearer \(String.getString(dictResult["token"]))")
+                        kSharedAppDelegate?.makeRootViewController()
+                        
+                        
+//                        let vc = UIStoryboard(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "TabBarVC") as! TabBarVC
+//                        vc.navigationController?.pushViewController(vc, animated: true)
+                    }
+                    else if  Int.getInt(dictResult["status"]) == 400{
+//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        CommonUtils.showError(.info, "Password incorrect")
+                    }
+                    else if Int.getInt(dictResult["status"]) == 401{
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    }
+                default:
+                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                }
+            } else if errorType == .noNetwork {
+                CommonUtils.showToastForInternetUnavailable()
+                
+            } else {
+                CommonUtils.showToastForDefaultError()
+            }
+        }
+    }
 }

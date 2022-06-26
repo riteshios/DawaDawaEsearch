@@ -34,7 +34,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
- 
+    
+    
+    func makeRootViewController(){
+            guard  let controller = UIStoryboard(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "TabBarVC") as? TabBarVC else {return}
+            let navC = UINavigationController(rootViewController: controller)
+            navC.navigationBar.isHidden = true
+            navC.navigationBar.barStyle = .black
+            UIApplication.shared.windows.first?.rootViewController = navC
+            UIApplication.shared.windows.first?.makeKeyAndVisible()
+    }
     func dropDown(dataSource:[String] , text:UIView , completion: @escaping ( _ index: Int ,    _ item: String) -> ()) -> Void {
                                         let dropDown = DropDown()
                                         dropDown.anchorView = text

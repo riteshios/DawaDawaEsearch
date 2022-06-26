@@ -27,9 +27,10 @@ class ActivationCodeVC: UIViewController{
     @IBOutlet weak var viewOtp5: UIView!
     @IBOutlet weak var viewOtp6: UIView!
     
-    
+    var email:String?
     var callback:(()->())?
     var type:HasCameFrom?
+    var otp = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -38,8 +39,9 @@ class ActivationCodeVC: UIViewController{
             self.lblSubHeading.text = "An account activation code has been sent to your email address and phone number"
         }
         else if type == .forgotPass{
+            
             self.lblHeading.text = "Verify Account"
-            self.lblSubHeading.text = "Password reset code is sent on your phone number 75******67"
+            self.lblSubHeading.text = "Password reset code is sent on your email address"
         }
 
      
@@ -61,13 +63,18 @@ class ActivationCodeVC: UIViewController{
     
   
     @IBAction func buttonVerify(_ sender: UIButton) {
-        self.callback?()
-//            guard let vc = self.storyboard?.instantiateViewController(identifier: "ActivatedSuccessfullyPopUpVC") as? ActivatedSuccessfullyPopUpVC else {return}
-//            vc.modalTransitionStyle = .crossDissolve
-//            vc.modalPresentationStyle = .overCurrentContext
-//            self.present(vc, animated: true)
-        
+        self.otp = String.getString(self.txtfieldOtp1.text) + String.getString(self.txtfieldOtp2.text) + String.getString(self.txtfieldOtp3.text) + String.getString(self.txtfieldOtp4.text) +
+        String.getString(self.txtfieldOtp5.text) +
+        String.getString(self.txtfieldOtp6.text)
+        if !otp.isEmpty{
+            self.verifyuserotpapi()
+        }
+        else{
+            CommonUtils.showError(.info, "Please enter otp")
+            return
+        }
     }
+    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
         if (string.count == 1){
@@ -169,4 +176,93 @@ extension ActivationCodeVC: UITextFieldDelegate{
 //            return
 //       }
 //    }
+}
+// MARK:
+extension ActivationCodeVC{
+    func verifyuserotpapi(){
+        
+        CommonUtils.showHud(show: true)
+        
+        let params:[String : Any] = [
+            "email":self.email,
+            "otp":self.otp]
+
+        
+        TANetworkManager.sharedInstance.requestApi(withServiceName:ServiceName.kOtpVerify, requestMethod: .POST,
+                                                   requestParameters:params, withProgressHUD: false)
+        {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
+            
+            CommonUtils.showHudWithNoInteraction(show: false)
+            
+            if errorType == .requestSuccess {
+                
+                let dictResult = kSharedInstance.getDictionary(result)
+                
+                switch Int.getInt(statusCode) {
+                case 200:
+                    if Int.getInt(dictResult["status"]) == 200{
+                        self?.callback?()
+                    }
+                    else if  Int.getInt(dictResult["status"]) == 400{
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    }
+                    else if Int.getInt(dictResult["status"]) == 403{
+                        let response = kSharedInstance.getDictionary(dictResult["response"])
+                        let msg = kSharedInstance.getStringArray(response["otp"])
+                        CommonUtils.showError(.info, msg[0])// msg is on 0th index
+                    }
+                default:
+                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                }
+            } else if errorType == .noNetwork {
+                CommonUtils.showToastForInternetUnavailable()
+                
+            } else {
+                CommonUtils.showToastForDefaultError()
+            }
+        }
+    }
+    func verifydforgotOtpapi(){
+        
+        CommonUtils.showHud(show: true)
+        let accessToken = kSharedUserDefaults.getLoggedInAccessToken()
+        let params:[String : Any] = [
+            "email":self.email,
+            "otp":self.otp]
+
+        
+        TANetworkManager.sharedInstance.requestApi(withServiceName:ServiceName.kverifyforgototp, requestMethod: .POST,
+                                                   requestParameters:params, withProgressHUD: false)
+        {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
+            
+            CommonUtils.showHudWithNoInteraction(show: false)
+            
+            if errorType == .requestSuccess {
+                
+                let dictResult = kSharedInstance.getDictionary(result)
+                
+                switch Int.getInt(statusCode) {
+                case 200:
+                    if Int.getInt(dictResult["status"]) == 200{
+                            self?.callback?()
+                    }
+                    else if  Int.getInt(dictResult["status"]) == 400{
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    }
+                    else if Int.getInt(dictResult["status"]) == 403{
+                        let response = kSharedInstance.getDictionary(dictResult["response"])
+                        let msg = kSharedInstance.getStringArray(response["otp"])
+                        CommonUtils.showError(.info, msg[0])// msg is on 0th index
+                    }
+                default:
+                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                }
+            } else if errorType == .noNetwork {
+                CommonUtils.showToastForInternetUnavailable()
+                
+            } else {
+                CommonUtils.showToastForDefaultError()
+            }
+        }
+    }
 }

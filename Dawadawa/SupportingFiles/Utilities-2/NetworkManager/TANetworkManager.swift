@@ -369,15 +369,15 @@ public class TANetworkManager {
         var headers:[String: String] = [:]
 
         if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
-      headers["access_token"] = kSharedUserDefaults.getLoggedInAccessToken()
+      headers["Authorization"] = kSharedUserDefaults.getLoggedInAccessToken()
 
         }
 
         else {
-            headers["access_token"] = ""
+            headers["Authorization"] = ""
         }
 
-        print_debug(items: "access_token: \(headers)")
+        print_debug(items: "Authorization: \(headers)")
         return headers
     }
 
