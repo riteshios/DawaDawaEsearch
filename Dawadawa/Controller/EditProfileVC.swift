@@ -73,8 +73,8 @@ class EditProfileVC: UIViewController {
                                 vc.modalPresentationStyle = .overCurrentContext
                                 vc.callbackpopup = {
                                     self.dismiss(animated: true){
-                                        let vc = self.storyboard?.instantiateViewController(withIdentifier: ) as! EditProfileVC
-                                        self.navigationController?.pushViewController(vc, animated: true)
+                                        let vc = self.storyboard?.instantiateViewController(withIdentifier: EditProfileVC.getStoryboardID()) as! EditProfileVC
+                                        self.navigationController?.pushViewController(vc, animated: false)
                                     }
                                 }
                                 self.present(vc, animated: false)

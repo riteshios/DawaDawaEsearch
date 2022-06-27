@@ -159,6 +159,7 @@ extension ForgotPasswordVC{
                                 let vc = self?.storyboard?.instantiateViewController(withIdentifier: ResetPasswordVC.getStoryboardID()) as! ResetPasswordVC
                                 vc.modalTransitionStyle = .crossDissolve
                                 vc.modalPresentationStyle = .overCurrentContext
+                                vc.email = String.getString(self?.txtFieldPhone_Email.text)
                                 vc.callback2 = {
                                     self?.dismiss(animated: false) {
                                         let vc = self?.storyboard?.instantiateViewController(withIdentifier: "ActivatedSuccessfullyPopUpVC") as! ActivatedSuccessfullyPopUpVC

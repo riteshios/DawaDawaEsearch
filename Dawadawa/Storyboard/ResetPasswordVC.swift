@@ -16,6 +16,7 @@ class ResetPasswordVC: UIViewController {
     @IBOutlet weak var txtFieldNewPassword: SKFloatingTextField!
     @IBOutlet weak var txtFieldConfirmPassword: SKFloatingTextField!
     var callback2:(()->())?
+    var email:String?
     
     
     override func viewDidLoad() {
@@ -48,8 +49,8 @@ class ResetPasswordVC: UIViewController {
     return
 }
         self.view.endEditing(true)
-        self.callback2?()
-//        self.resetPasswordAPI()
+        self.resetpasswordapi()
+//        self.callback2?()
     }
 
 }
@@ -88,16 +89,18 @@ extension ResetPasswordVC : SKFlaotingTextFieldDelegate {
 }
 
 extension ResetPasswordVC{
-    func verifydforgotOtpapi(){
+    func resetpasswordapi(){
         
         CommonUtils.showHud(show: true)
         let accessToken = kSharedUserDefaults.getLoggedInAccessToken()
         let params:[String : Any] = [
-            "email":"",
-            "otp":""]
+            "email":self.email,
+            "password":String.getString(self.txtFieldNewPassword.text),
+            "password_confirmation":String.getString(self.txtFieldConfirmPassword.text)
+        ]
 
         
-        TANetworkManager.sharedInstance.requestApi(withServiceName:ServiceName.kverifyforgototp, requestMethod: .POST,
+        TANetworkManager.sharedInstance.requestApi(withServiceName:ServiceName.kresetpassword, requestMethod: .POST,
                                                    requestParameters:params, withProgressHUD: false)
         {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
             

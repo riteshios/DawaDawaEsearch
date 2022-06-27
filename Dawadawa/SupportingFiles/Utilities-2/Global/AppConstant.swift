@@ -68,6 +68,7 @@ struct ServiceName {
     static let klogin                =      "api/login"
     static let kforgotpassword       =       "api/forgot-password"
     static let kverifyforgototp      =       "api/verify-forgot-otp"
+    static let kresetpassword        =       "api/forgot-psd"
    
 }
 
