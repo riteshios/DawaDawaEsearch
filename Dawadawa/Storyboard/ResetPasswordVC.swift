@@ -86,3 +86,49 @@ extension ResetPasswordVC : SKFlaotingTextFieldDelegate {
     }
 
 }
+
+extension ResetPasswordVC{
+    func verifydforgotOtpapi(){
+        
+        CommonUtils.showHud(show: true)
+        let accessToken = kSharedUserDefaults.getLoggedInAccessToken()
+        let params:[String : Any] = [
+            "email":"",
+            "otp":""]
+
+        
+        TANetworkManager.sharedInstance.requestApi(withServiceName:ServiceName.kverifyforgototp, requestMethod: .POST,
+                                                   requestParameters:params, withProgressHUD: false)
+        {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
+            
+            CommonUtils.showHudWithNoInteraction(show: false)
+            
+            if errorType == .requestSuccess {
+                
+                let dictResult = kSharedInstance.getDictionary(result)
+                
+                switch Int.getInt(statusCode) {
+                case 200:
+                    if Int.getInt(dictResult["status"]) == 200{
+                            self?.callback2?()
+                    }
+                    else if  Int.getInt(dictResult["status"]) == 400{
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    }
+                    else if Int.getInt(dictResult["status"]) == 403{
+                        let response = kSharedInstance.getDictionary(dictResult["response"])
+                        let msg = kSharedInstance.getStringArray(response["otp"])
+                        CommonUtils.showError(.info, msg[0])// msg is on 0th index
+                    }
+                default:
+                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                }
+            } else if errorType == .noNetwork {
+                CommonUtils.showToastForInternetUnavailable()
+                
+            } else {
+                CommonUtils.showToastForDefaultError()
+            }
+        }
+    }
+}

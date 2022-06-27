@@ -35,6 +35,11 @@ class MoreVC: UIViewController {
     @IBAction func btnSettingTapped(_ sender: UIButton) {
         self.callback4?("Setting")
     }
+    
+    @IBAction func btnEditProfileTapped(_ sender: UIButton) {
+        self.callback4?("EditProfile")
+    }
+    
     @IBAction func btnLogOutTapped(_ sender: UIButton) {
         self.callback4?("Logout")
     }

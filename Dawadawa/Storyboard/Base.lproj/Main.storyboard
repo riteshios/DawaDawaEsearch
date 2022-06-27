@@ -391,13 +391,13 @@
                                                                 </constraints>
                                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                             </button>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="By creating account your accepting our" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x2V-ah-q5I">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="By creating account your accepting our" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x2V-ah-q5I">
                                                                 <rect key="frame" x="19" y="-0.33333333333337123" width="221" height="16"/>
                                                                 <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="13"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ya6-Kl-EgT">
+                                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ya6-Kl-EgT">
                                                                 <rect key="frame" x="241" y="-3" width="30" height="21"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="21" id="qVq-8x-EZD"/>
@@ -407,14 +407,14 @@
                                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                                 <state key="normal" title="T&amp;C"/>
                                                             </button>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="and" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yld-8C-Oin">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="and" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yld-8C-Oin">
                                                                 <rect key="frame" x="272" y="-0.33333333333337123" width="21.333333333333314" height="16"/>
                                                                 <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="13"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bmW-Im-gCu">
-                                                                <rect key="frame" x="294.33333333333331" y="-3" width="92.666666666666686" height="21"/>
+                                                                <rect key="frame" x="289.33333333333331" y="-3" width="92.666666666666686" height="21"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="21" id="fva-DK-MSd"/>
                                                                     <constraint firstAttribute="width" constant="92.670000000000002" id="yK8-qz-e8W"/>
@@ -435,6 +435,7 @@
                                                             <constraint firstAttribute="height" constant="17" id="M3O-T3-9a3"/>
                                                             <constraint firstItem="Yld-8C-Oin" firstAttribute="leading" secondItem="ya6-Kl-EgT" secondAttribute="trailing" constant="1" id="Rvx-2v-ge6"/>
                                                             <constraint firstItem="ZDP-yt-enP" firstAttribute="leading" secondItem="vJF-Hg-kpO" secondAttribute="leading" id="XNo-9t-Qbe"/>
+                                                            <constraint firstAttribute="trailing" secondItem="bmW-Im-gCu" secondAttribute="trailing" id="Zs6-MM-Zq5"/>
                                                             <constraint firstItem="ya6-Kl-EgT" firstAttribute="leading" secondItem="x2V-ah-q5I" secondAttribute="trailing" constant="1" id="eD6-ws-Qgw"/>
                                                             <constraint firstItem="x2V-ah-q5I" firstAttribute="leading" secondItem="ZDP-yt-enP" secondAttribute="trailing" constant="5" id="xPJ-tQ-l20"/>
                                                             <constraint firstItem="bmW-Im-gCu" firstAttribute="centerY" secondItem="Yld-8C-Oin" secondAttribute="centerY" id="xXi-nZ-z1o"/>

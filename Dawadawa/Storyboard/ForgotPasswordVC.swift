@@ -180,7 +180,7 @@ extension ForgotPasswordVC{
                         self?.present(vc, animated: false)
                     }
                     else if  Int.getInt(dictResult["status"]) == 400{
-                        CommonUtils.showError(.info, String.getString(dictResult["successStatus"]))
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     else if Int.getInt(dictResult["status"]) == 401{
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))

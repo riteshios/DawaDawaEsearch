@@ -199,7 +199,7 @@ extension CreateAccountVC {
             "email":String.getString(self.txtFieldEmail.text),
             "user_country":self.labelCountry.text,
             "phone":String.getString(self.txtFieldPhoneNumber.text),
-            "device_type":"F23rdwewee",
+            "device_type":"1",
             "device_id":"REFw2321",
             "password":String.getString(self.txtFieldPassword.text),
             "confirm_password":String.getString(self.txtFieldConfirmPassword.text)

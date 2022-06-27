@@ -43,6 +43,12 @@ class ProfileVC: UIViewController {
                     self.navigationController?.pushViewController(vc, animated: true)
                 }
             }
+            if txt == "EditProfile"{
+                vc.dismiss(animated: false){
+                    let vc = self.storyboard?.instantiateViewController(identifier: EditProfileVC.getStoryboardID()) as! EditProfileVC
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
+            }
             if txt == "Logout"{
                 vc.dismiss(animated: false){
                     let vc = self.storyboard?.instantiateViewController(withIdentifier: LogOutVC.getStoryboardID()) as! LogOutVC
@@ -50,23 +56,25 @@ class ProfileVC: UIViewController {
                     vc.modalPresentationStyle = .overCurrentContext
                     vc.callbacklogout = { txt in
                         if txt == "Cancel"{
+                            vc.dismiss(animated: false){
                             let vc = self.storyboard?.instantiateViewController(withIdentifier: ProfileVC.getStoryboardID()) as! ProfileVC
                             self.navigationController?.pushViewController(vc, animated: false)
                         }
-                        
-                        if txt == "Logout"{
-                            vc.dismiss(animated: false) {
-                                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
-                                self.navigationController?.pushViewController(vc, animated: true)
-                            }
-                            
-                        }
                     }
-                    self.present(vc, animated: false)
+                    
+                    if txt == "Logout"{
+                        vc.dismiss(animated: false) {
+                            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
+                            self.navigationController?.pushViewController(vc, animated: true)
+                        }
+                        
+                    }
                 }
+                self.present(vc, animated: false)
             }
-          
         }
-        self.present(vc, animated: false)
+        
     }
+    self.present(vc, animated: false)
+}
 }
