@@ -1,25 +1,25 @@
 //
-//  NumberChangedSuccessfulPopUpVC.swift
+//  PasswordChangedSuccessfullyPopUpVC.swift
 //  Dawadawa
 //
-//  Created by Alekh on 27/06/22.
+//  Created by Alekh on 28/06/22.
 //
 
 import UIKit
 import SwiftyGif
-class NumberChangedSuccessfulPopUpVC: UIViewController {
+
+class PasswordChangedSuccessfullyPopUpVC: UIViewController {
 
     @IBOutlet weak var animationView: UIView!
-    var callbackpopup:(()->())?
+    var callbackpopuop:(()->())?
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.setUI()
 
+        self.setUI()
     }
     
     @IBAction func btnCloseTapped(_ sender: UIButton) {
-        self.callbackpopup?()
+        self.callbackpopuop?()
     }
     
     func setUI(){
@@ -36,6 +36,5 @@ class NumberChangedSuccessfulPopUpVC: UIViewController {
             print(error)
         }
     }
-
 
 }

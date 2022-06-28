@@ -35,7 +35,11 @@ class EditProfileVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.setup()
+        self.fetchdata()
+    }
+    
+    func setup(){
         self.setTextFieldUI(textField: txtFieldPhoneNumber, place: "", floatingText: "Phone number")
         self.setTextFieldUI(textField: txtFieldEmailAddress, place: "", floatingText: "Email address")
         self.setTextFieldUI(textField: txtFieldFirstName, place: "", floatingText: "First name")
@@ -48,7 +52,24 @@ class EditProfileVC: UIViewController {
         self.viewEnglish.backgroundColor = UIColor(red: 21, green: 114, blue: 161)
         self.lblEnglish.textColor = UIColor.systemBackground
         self.lblArabic.textColor = UIColor(red: 21, green: 114, blue: 161)
+
     }
+    func fetchdata(){
+        self.txtFieldFirstName.text  = UserData.shared.name
+        self.txtFieldLastName.text = UserData.shared.last_name
+        self.txtFieldPhoneNumber.text = UserData.shared.phone
+        self.txtFieldEmailAddress.text = UserData.shared.email
+        self.txtFieldWhatsappNumber.text = UserData.shared.whatspp_number
+        self.txtFieldDOB.text = UserData.shared.dob
+        self.lblCountry.text = UserData.shared.user_country
+        self.lblGender.text = UserData.shared.user_gender
+        self.lblUserType.text = UserData.shared.user_type
+    }
+    
+    @IBAction func btnBackTapped(_ sender: UIButton) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
     
     @IBAction func btnChangePhoneNumberTapped(_ sender: UIButton) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: VerifyNumberOTPVC.getStoryboardID()) as! VerifyNumberOTPVC
@@ -67,13 +88,13 @@ class EditProfileVC: UIViewController {
                         vc.modalTransitionStyle = .crossDissolve
                         vc.modalPresentationStyle = .overCurrentContext
                         vc.callbackOTP2 = {
-                            self.dismiss(animated: true){
+                            self.dismiss(animated: false){
                                 let vc = self.storyboard?.instantiateViewController(withIdentifier: NumberChangedSuccessfulPopUpVC.getStoryboardID()) as! NumberChangedSuccessfulPopUpVC
                                 vc.modalTransitionStyle = .crossDissolve
                                 vc.modalPresentationStyle = .overCurrentContext
                                 vc.callbackpopup = {
-                                    self.dismiss(animated: true){
-                                        let vc = self.storyboard?.instantiateViewController(withIdentifier: EditProfileVC.getStoryboardID()) as! EditProfileVC
+                                    self.dismiss(animated: false){
+                                        let vc = self.storyboard?.instantiateViewController(withIdentifier: ProfileVC.getStoryboardID()) as! ProfileVC
                                         self.navigationController?.pushViewController(vc, animated: false)
                                     }
                                 }
@@ -89,6 +110,45 @@ class EditProfileVC: UIViewController {
         self.present(vc, animated: false)
     }
     
+    @IBAction func btnChangeEmailTapped(_ sender: UIButton) {
+        
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: VerifyEmailOTPVC.getStoryboardID()) as! VerifyEmailOTPVC
+        vc.modalTransitionStyle = .crossDissolve
+        vc.modalPresentationStyle = .overCurrentContext
+//        vc.email = String.getString(self?.txtFieldPhone_Email.text)
+        vc.callbackOTP1 =
+        {
+            vc.dismiss(animated: false){
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: ChangeEmailVC.getStoryboardID()) as! ChangeEmailVC
+                vc.modalTransitionStyle = .crossDissolve
+                vc.modalPresentationStyle = .overCurrentContext
+                vc.callbackchangenumber = {
+                    self.dismiss(animated: false) {
+                        let vc = self.storyboard?.instantiateViewController(withIdentifier: VerifyNewEmailOTPVC.getStoryboardID()) as! VerifyNewEmailOTPVC
+                        vc.modalTransitionStyle = .crossDissolve
+                        vc.modalPresentationStyle = .overCurrentContext
+                        vc.callbackOTP2 = {
+                            self.dismiss(animated: false){
+                                let vc = self.storyboard?.instantiateViewController(withIdentifier: EmailChangedSuccessfullyPopUpVC.getStoryboardID()) as! EmailChangedSuccessfullyPopUpVC
+                                vc.modalTransitionStyle = .crossDissolve
+                                vc.modalPresentationStyle = .overCurrentContext
+                                vc.callbackpopup = {
+                                    self.dismiss(animated: false){
+                                        let vc = self.storyboard?.instantiateViewController(withIdentifier: ProfileVC.getStoryboardID()) as! ProfileVC
+                                        self.navigationController?.pushViewController(vc, animated: false)
+                                    }
+                                }
+                                self.present(vc, animated: false)
+                            }
+                        }
+                        self.present(vc, animated: false)
+                    }
+                }
+                self.present(vc, animated: false)
+            }
+        }
+        self.present(vc, animated: false)
+    }
     
     @IBAction func btnDropGender(_ sender: UIButton){
         let dataSource1 = ["Male","Female"]

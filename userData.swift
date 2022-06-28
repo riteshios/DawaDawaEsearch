@@ -9,32 +9,47 @@ import Foundation
 class UserData{
     static let shared = UserData()
     var id:String?
-    var firstname:String?
-    var lastname:String?
+    var name:String?
+    var last_name:String?
     var email:String?
     var phone:String?
-    var images:String?
-    var editProfile = false
-    var countryCode:String?
-    var profilePic:String?
-    var isimageSelected = false
-    var countData:Int?
-  
-   private init(){
-       let  data:[String:Any] = kSharedUserDefaults.getLoggedInUserDetails()
-       saveData(data:data)
-   }
-    func saveData(data:[String:Any]){
-        self.id = String.getString(data["_id"])
-        self.firstname = String.getString(data["firstname"])
-        self.lastname = String.getString(data["lastname"])
+    var user_country:String?
+    var language:String?
+    var profile_image:String?
+    var dob:String?
+    var whatspp_number:String?
+    var user_gender:String?
+    var user_type:String?
+    var device_type:String?
+    var device_id:String?
+    var google_id:String?
+    var facebook_id:String?
+    
+    private init(){
+        let  data:[String:Any] = kSharedUserDefaults.getLoggedInUserDetails()
+        saveData(data:data,token: kSharedUserDefaults.getLoggedInAccessToken())
+    }
+    func saveData(data:[String:Any],token:String){
+        self.id = String.getString(data["id"])
+        self.name = String.getString(data["name"])
+        self.last_name = String.getString(data["last_name"])
         self.email = String.getString(data["email"])
         self.phone = String.getString(data["phone"])
-        self.images = String.getString(data["images"])
-        self.countryCode = String.getString(data["country_code"])
-        self.profilePic = String.getString(data["profile_pic"])
+        self.user_country = String.getString(data["user_country"])
+        self.language = String.getString(data["language"])
+        self.profile_image = String.getString(data["profile_image"])
+        self.dob = String.getString(data["dob"])
+        self.whatspp_number = String.getString(data["whatspp_number"])
+        self.user_gender = String.getString(data["user_gender"])
+        self.user_type = String.getString(data["user_type"])
+        self.device_type = String.getString(data["device_type"])
+        self.device_id = String.getString(data["device_id"])
+        self.google_id = String.getString(data["google_id"])
+        self.facebook_id = String.getString(data["facebook_id"])
+        
         kSharedUserDefaults.getLoggedInUserDetails()
+        kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken:token)
         
     }
-
+    
 }

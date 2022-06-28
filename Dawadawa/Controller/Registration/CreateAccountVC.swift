@@ -35,6 +35,13 @@ class CreateAccountVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.setup()
+       
+        
+    }
+   
+    func setup(){
+        
         viewMain.clipsToBounds = true
         viewMain.layer.cornerRadius = 25
         viewMain.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
@@ -47,8 +54,8 @@ class CreateAccountVC: UIViewController {
         self.setTextFieldUI(textField: txtFieldPhoneNumber, place: "Phone number* ", floatingText: "Phone number")
         self.setTextFieldUI(textField: txtFieldPassword, place: "Password*", floatingText: "Password")
         self.setTextFieldUI(textField: txtFieldConfirmPassword, place: "Confirm password*", floatingText: "Confirm password")
-        self.viewCountry.isHidden = true
         
+        self.viewCountry.isHidden = true
     }
     //   MARK: - @IBACtions
     @IBAction func btnCountrySelecTapped(_ sender: UIButton) {
@@ -205,37 +212,56 @@ extension CreateAccountVC {
             "confirm_password":String.getString(self.txtFieldConfirmPassword.text)
         ]
         
-        TANetworkManager.sharedInstance.requestApi(withServiceName: ServiceName.kcreateAccount, requestMethod: .POST, requestParameters: params, withProgressHUD: false) { (user_detail: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
+        TANetworkManager.sharedInstance.requestApi(withServiceName: ServiceName.kcreateAccount, requestMethod: .POST, requestParameters: params, withProgressHUD: false) { (result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
             
             if errorType == .requestSuccess {
-                let dictResult = kSharedInstance.getDictionary(user_detail)
+                let dictResult = kSharedInstance.getDictionary(result)
                 
                 switch Int.getInt(statusCode){
                 case 200:
-                   
+//                    UserData.shared.saveData (data:dictResult)
+//                    self.save()
 //                    UserDefaults.standard.set(String.getString(self.txtFieldEmail.text), forKey: "email")
-                    let vc = self.storyboard?.instantiateViewController(withIdentifier: ActivationCodeVC.getStoryboardID()) as! ActivationCodeVC
-                    vc.modalTransitionStyle = .crossDissolve
-                    vc.modalPresentationStyle = .overCurrentContext
-                    vc.type = .signUp
-                    vc.email = String.getString(self.txtFieldEmail.text)
-                    vc.callback =
-                    {
-                        vc.dismiss(animated: false){
-                            let vc = self.storyboard?.instantiateViewController(withIdentifier: ActivatedSuccessfullyPopUpVC.getStoryboardID()) as! ActivatedSuccessfullyPopUpVC
-                            vc.modalTransitionStyle = .crossDissolve
-                            vc.modalPresentationStyle = .overCurrentContext
-                            vc.type = .signUp
-                            vc.callback1 = {
-                                self.dismiss(animated: false) {
-                                    let vc = UIStoryboard(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "TabBarVC") as! TabBarVC
-                                    self.navigationController?.pushViewController(vc, animated: true)
+                    if Int.getInt(dictResult["status"]) == 200{
+                        let vc = self.storyboard?.instantiateViewController(withIdentifier: ActivationCodeVC.getStoryboardID()) as! ActivationCodeVC
+                        vc.modalTransitionStyle = .crossDissolve
+                        vc.modalPresentationStyle = .overCurrentContext
+                        vc.type = .signUp
+                        vc.email = String.getString(self.txtFieldEmail.text)
+                        vc.callback =
+                        {
+                            vc.dismiss(animated: false){
+                                let vc = self.storyboard?.instantiateViewController(withIdentifier: ActivatedSuccessfullyPopUpVC.getStoryboardID()) as! ActivatedSuccessfullyPopUpVC
+                                vc.modalTransitionStyle = .crossDissolve
+                                vc.modalPresentationStyle = .overCurrentContext
+                                vc.type = .signUp
+                                vc.callback1 = {
+                                    self.dismiss(animated: false) {
+                                        let vc = UIStoryboard(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "TabBarVC") as! TabBarVC
+                                        self.navigationController?.pushViewController(vc, animated: true)
+                                    }
                                 }
+                                self.present(vc, animated: false)
                             }
-                            self.present(vc, animated: false)
                         }
+                        self.present(vc, animated: false)
                     }
-                    self.present(vc, animated: false)
+                    if Int.getInt(dictResult["status"]) == 400{
+                        let response = kSharedInstance.getDictionary(dictResult["response"])
+                        
+                    if let _ = response["email"] {
+                            let msg = kSharedInstance.getStringArray(response["email"])
+                            CommonUtils.showError(.info, msg[0])// msg is on 0th index
+                        }
+                       else if let _ = response["phone"] {
+                            let msg = kSharedInstance.getStringArray(response["phone"])
+                            CommonUtils.showError(.info, msg[0])// msg is on 0th index
+                        }
+                        //let msg = kSharedInstance.getStringArray(response["phone"])
+                       // CommonUtils.showError(.info, msg[0])// msg is on 0th index
+                        
+                    }
+
                 default:
                     CommonUtils.showError(.info, String.getString(dictResult["message"]))
                 }

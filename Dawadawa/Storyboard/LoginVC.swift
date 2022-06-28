@@ -132,9 +132,16 @@ extension LoginVC{
                 
                 switch Int.getInt(statusCode) {
                 case 200:
+                   
                     if Int.getInt(dictResult["status"]) == 200{
+                       
+                        let data = kSharedInstance.getDictionary(dictResult["data"])
+                        kSharedUserDefaults.setLoggedInUserDetails(loggedInUserDetails: data)
+                        kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: String.getString(dictResult[kLoggedInAccessToken]))
+                        UserData.shared.saveData(data: data, token: String.getString(dictResult[kLoggedInAccessToken]))
+
+//                        kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: "Bearer \(String.getString(dictResult["token"]))")
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                        kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: "Bearer \(String.getString(dictResult["token"]))")
                         kSharedAppDelegate?.makeRootViewController()
                         
                         

@@ -51,7 +51,7 @@ class ActivatedSuccessfullyPopUpVC: UIViewController {
         do {
             let gif = try UIImage(gifName: "success.gif")
             DispatchQueue.main.async {
-                let imageview = UIImageView(gifImage:gif, loopCount: -1) //Use -1 for infinite loop
+                let imageview = UIImageView(gifImage:gif, loopCount: 1) //Use -1 for infinite loop
                 imageview.contentMode = .scaleAspectFill
                 imageview.frame = self.animationView.bounds
                 self.animationView.addSubview(imageview)

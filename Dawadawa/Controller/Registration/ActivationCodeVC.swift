@@ -61,7 +61,10 @@ class ActivationCodeVC: UIViewController{
         self.viewOtp6.borderColor = UIColor(hexString: "#A6A6A6")
     }
     
-  
+    @IBAction func btnResendCode(_ sender: UIButton) {
+        self.resendOtpApi()
+    }
+    
     @IBAction func buttonVerify(_ sender: UIButton) {
         self.otp = String.getString(self.txtfieldOtp1.text) + String.getString(self.txtfieldOtp2.text) + String.getString(self.txtfieldOtp3.text) + String.getString(self.txtfieldOtp4.text) +
         String.getString(self.txtfieldOtp5.text) +
@@ -201,6 +204,10 @@ extension ActivationCodeVC{
                 switch Int.getInt(statusCode) {
                 case 200:
                     if Int.getInt(dictResult["status"]) == 200{
+                        let data = kSharedInstance.getDictionary(dictResult["data"])
+                        kSharedUserDefaults.setLoggedInUserDetails(loggedInUserDetails: data)
+                        kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: String.getString(dictResult[kLoggedInAccessToken]))
+                        UserData.shared.saveData(data: data, token: String.getString(dictResult[kLoggedInAccessToken]))
                         self?.callback?()
                     }
                     else if  Int.getInt(dictResult["status"]) == 400{
@@ -258,6 +265,43 @@ extension ActivationCodeVC{
                     CommonUtils.showError(.info, String.getString(dictResult["message"]))
                 }
             } else if errorType == .noNetwork {
+                CommonUtils.showToastForInternetUnavailable()
+                
+            } else {
+                CommonUtils.showToastForDefaultError()
+            }
+        }
+    }
+    func resendOtpApi(){
+        CommonUtils.showHudWithNoInteraction(show: true)
+        let params:[String : Any] = [
+            "email":self.email
+        ]
+        
+        TANetworkManager.sharedInstance.requestApi(withServiceName:ServiceName.kresendotp,                                                   requestMethod: .POST,
+                                                   requestParameters:params, withProgressHUD: false)
+        {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
+            
+            CommonUtils.showHudWithNoInteraction(show: false)
+            
+            if errorType == .requestSuccess {
+                let dictResult = kSharedInstance.getDictionary(result)
+                
+                switch Int.getInt(statusCode) {
+                case 200:
+                    if Int.getInt(dictResult["status"]) == 200{
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    }
+                    else if  Int.getInt(dictResult["status"]) == 400{
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    }
+                default:
+                    
+                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    
+                }
+            }
+            else if errorType == .noNetwork {
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {

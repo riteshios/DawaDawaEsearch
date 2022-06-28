@@ -40,6 +40,9 @@ class MoreVC: UIViewController {
         self.callback4?("EditProfile")
     }
     
+    @IBAction func btnChangePasswordTapped(_ sender: UIButton) {
+        self.callback4?("ChangePassword")
+    }
     @IBAction func btnLogOutTapped(_ sender: UIButton) {
         self.callback4?("Logout")
     }

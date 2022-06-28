@@ -21,7 +21,7 @@ let kAppName                    = "DawaDawa"
 let kIsTutorialAlreadyShown     = "isTutorialAlreadyShown"
 let kIsUserLoggedIn             = "isUserLoggedIn"
 let kLoggedInAccessToken        = "token"
-let kLoggedInUserDetails        = "loggedInUserDetails"
+let kLoggedInUserDetails        = "data"
 let kLoggedInUserId             = "loggedInUserId"
 let kLocationPreferences        = "LocationPreferences"
 let kLatitude                   = "latitude"
@@ -66,9 +66,11 @@ struct ServiceName {
     static let kcreateAccount        =      "api/register"
     static let kOtpVerify            =      "api/verify_user"
     static let klogin                =      "api/login"
-    static let kforgotpassword       =       "api/forgot-password"
+    static let kforgotpassword       =       "api/forgot-password" // this api is also used for change password
     static let kverifyforgototp      =       "api/verify-forgot-otp"
     static let kresetpassword        =       "api/forgot-psd"
+    static let kresendotp            =       "api/resend-user-verify"
+    static let kchangepassword       =       "api/change-password"
    
 }
 

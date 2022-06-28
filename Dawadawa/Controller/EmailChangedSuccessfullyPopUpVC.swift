@@ -1,21 +1,21 @@
 //
-//  NumberChangedSuccessfulPopUpVC.swift
+//  EmailChangedSuccessfullyPopUpVC.swift
 //  Dawadawa
 //
-//  Created by Alekh on 27/06/22.
+//  Created by Alekh on 28/06/22.
 //
 
 import UIKit
 import SwiftyGif
-class NumberChangedSuccessfulPopUpVC: UIViewController {
+
+class EmailChangedSuccessfullyPopUpVC: UIViewController {
 
     @IBOutlet weak var animationView: UIView!
     var callbackpopup:(()->())?
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.setUI()
-
+        
     }
     
     @IBAction func btnCloseTapped(_ sender: UIButton) {
@@ -36,6 +36,5 @@ class NumberChangedSuccessfulPopUpVC: UIViewController {
             print(error)
         }
     }
-
 
 }

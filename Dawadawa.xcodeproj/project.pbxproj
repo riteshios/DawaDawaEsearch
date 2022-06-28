@@ -18,7 +18,14 @@
 		046DEA99285C80AF00D1E1A5 /* success.gif in Resources */ = {isa = PBXBuildFile; fileRef = 046DEA98285C80AF00D1E1A5 /* success.gif */; };
 		04836F162859C1B300AF8C8B /* Localizable.string.strings in Resources */ = {isa = PBXBuildFile; fileRef = 04836F182859C1B300AF8C8B /* Localizable.string.strings */; };
 		0494642E28646CCA0010076A /* LogOutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0494642D28646CCA0010076A /* LogOutVC.swift */; };
+		04B9190A286B133B009ABAE4 /* VerifyEmailOTPVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B91909286B133B009ABAE4 /* VerifyEmailOTPVC.swift */; };
+		04B9190C286B1372009ABAE4 /* ChangeEmailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B9190B286B1372009ABAE4 /* ChangeEmailVC.swift */; };
+		04B91910286B13B8009ABAE4 /* EmailChangedSuccessfullyPopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B9190F286B13B8009ABAE4 /* EmailChangedSuccessfullyPopUpVC.swift */; };
+		04B91912286B1553009ABAE4 /* VerifyNewEmailOTPVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B91911286B1553009ABAE4 /* VerifyNewEmailOTPVC.swift */; };
 		04F1AD9A28697B0D002CC167 /* EditProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F1AD9928697B0D002CC167 /* EditProfileVC.swift */; };
+		04F8452F286AC4E40081120F /* ChangePasswordOTPVerifyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F8452E286AC4E40081120F /* ChangePasswordOTPVerifyVC.swift */; };
+		04F84531286AC4FA0081120F /* ChangePasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F84530286AC4FA0081120F /* ChangePasswordVC.swift */; };
+		04F84533286AC52C0081120F /* PasswordChangedSuccessfullyPopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F84532286AC52C0081120F /* PasswordChangedSuccessfullyPopUpVC.swift */; };
 		04FD1D342860429C00BE414A /* TabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FD1D332860429C00BE414A /* TabBarVC.swift */; };
 		04FD1D37286077E800BE414A /* MoreVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FD1D36286077E800BE414A /* MoreVC.swift */; };
 		04FD1D392860794E00BE414A /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FD1D382860794E00BE414A /* ProfileVC.swift */; };
@@ -577,7 +584,14 @@
 		04836F132859C0A200AF8C8B /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Main.strings; sourceTree = "<group>"; };
 		04836F172859C1B300AF8C8B /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.string.strings; sourceTree = "<group>"; };
 		0494642D28646CCA0010076A /* LogOutVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LogOutVC.swift; path = Dawadawa/Storyboard/LogOutVC.swift; sourceTree = SOURCE_ROOT; };
+		04B91909286B133B009ABAE4 /* VerifyEmailOTPVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyEmailOTPVC.swift; sourceTree = "<group>"; };
+		04B9190B286B1372009ABAE4 /* ChangeEmailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeEmailVC.swift; sourceTree = "<group>"; };
+		04B9190F286B13B8009ABAE4 /* EmailChangedSuccessfullyPopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailChangedSuccessfullyPopUpVC.swift; sourceTree = "<group>"; };
+		04B91911286B1553009ABAE4 /* VerifyNewEmailOTPVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = VerifyNewEmailOTPVC.swift; path = Dawadawa/Storyboard/VerifyNewEmailOTPVC.swift; sourceTree = SOURCE_ROOT; };
 		04F1AD9928697B0D002CC167 /* EditProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileVC.swift; sourceTree = "<group>"; };
+		04F8452E286AC4E40081120F /* ChangePasswordOTPVerifyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordOTPVerifyVC.swift; sourceTree = "<group>"; };
+		04F84530286AC4FA0081120F /* ChangePasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordVC.swift; sourceTree = "<group>"; };
+		04F84532286AC52C0081120F /* PasswordChangedSuccessfullyPopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordChangedSuccessfullyPopUpVC.swift; sourceTree = "<group>"; };
 		04FD1D332860429C00BE414A /* TabBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TabBarVC.swift; path = Dawadawa/Storyboard/TabBarVC.swift; sourceTree = SOURCE_ROOT; };
 		04FD1D36286077E800BE414A /* MoreVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreVC.swift; sourceTree = "<group>"; };
 		04FD1D382860794E00BE414A /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProfileVC.swift; path = Dawadawa/Storyboard/ProfileVC.swift; sourceTree = SOURCE_ROOT; };
@@ -1154,22 +1168,63 @@
 			path = Font_Family;
 			sourceTree = "<group>";
 		};
-		04F1AD9828697AE9002CC167 /* EditProfile */ = {
+		04B91907286B12C4009ABAE4 /* ChangePhoneNumber */ = {
 			isa = PBXGroup;
 			children = (
 				043EBE322869ABD8001EBA02 /* VerifyNumberOTPVC.swift */,
+				042293BD2869B1BC000503B7 /* ChangeNumberVC.swift */,
 				042293BF2869B1E2000503B7 /* VerifyNewNumberOTPVC.swift */,
 				042293C12869B203000503B7 /* NumberChangedSuccessfulPopUpVC.swift */,
+			);
+			name = ChangePhoneNumber;
+			sourceTree = "<group>";
+		};
+		04B91908286B12FC009ABAE4 /* ChangeEmail */ = {
+			isa = PBXGroup;
+			children = (
+				04B91909286B133B009ABAE4 /* VerifyEmailOTPVC.swift */,
+				04B9190B286B1372009ABAE4 /* ChangeEmailVC.swift */,
+				04B91911286B1553009ABAE4 /* VerifyNewEmailOTPVC.swift */,
+				04B9190F286B13B8009ABAE4 /* EmailChangedSuccessfullyPopUpVC.swift */,
+			);
+			name = ChangeEmail;
+			sourceTree = "<group>";
+		};
+		04F1AD9828697AE9002CC167 /* EditProfile */ = {
+			isa = PBXGroup;
+			children = (
+				04B91908286B12FC009ABAE4 /* ChangeEmail */,
+				04B91907286B12C4009ABAE4 /* ChangePhoneNumber */,
 				04F1AD9928697B0D002CC167 /* EditProfileVC.swift */,
-				042293BD2869B1BC000503B7 /* ChangeNumberVC.swift */,
 			);
 			name = EditProfile;
+			sourceTree = "<group>";
+		};
+		04F8452C286AC4730081120F /* LogOut */ = {
+			isa = PBXGroup;
+			children = (
+				0494642D28646CCA0010076A /* LogOutVC.swift */,
+			);
+			name = LogOut;
+			sourceTree = "<group>";
+		};
+		04F8452D286AC4930081120F /* ChangePassword */ = {
+			isa = PBXGroup;
+			children = (
+				04F8452E286AC4E40081120F /* ChangePasswordOTPVerifyVC.swift */,
+				04F84530286AC4FA0081120F /* ChangePasswordVC.swift */,
+				04F84532286AC52C0081120F /* PasswordChangedSuccessfullyPopUpVC.swift */,
+			);
+			name = ChangePassword;
 			sourceTree = "<group>";
 		};
 		04FD1D35286077A900BE414A /* More */ = {
 			isa = PBXGroup;
 			children = (
-				0494642D28646CCA0010076A /* LogOutVC.swift */,
+				04F8452D286AC4930081120F /* ChangePassword */,
+				04F8452C286AC4730081120F /* LogOut */,
+				044D7174286198600054DAA5 /* Setting */,
+				04F1AD9828697AE9002CC167 /* EditProfile */,
 				04FD1D36286077E800BE414A /* MoreVC.swift */,
 			);
 			name = More;
@@ -2014,8 +2069,6 @@
 				04FD1D332860429C00BE414A /* TabBarVC.swift */,
 				44D7F8F02853685F001554C9 /* HomeVC.swift */,
 				04FD1D382860794E00BE414A /* ProfileVC.swift */,
-				044D7174286198600054DAA5 /* Setting */,
-				04F1AD9828697AE9002CC167 /* EditProfile */,
 				04FD1D35286077A900BE414A /* More */,
 			);
 			name = Home;
@@ -2652,6 +2705,7 @@
 				447DCC852851CB1100C40DDD /* UIViewController.swift in Sources */,
 				447DCC662851CB1100C40DDD /* String+Extensions.swift in Sources */,
 				44C286C22851B4AF007AF36F /* AppDelegate.swift in Sources */,
+				04B9190A286B133B009ABAE4 /* VerifyEmailOTPVC.swift in Sources */,
 				447DCC652851CB1100C40DDD /* Date+Extension.swift in Sources */,
 				447DCC8F2851CB1100C40DDD /* UITextFieldExtended.swift in Sources */,
 				44D7F8F12853685F001554C9 /* HomeVC.swift in Sources */,
@@ -2672,6 +2726,7 @@
 				447DCC672851CB1100C40DDD /* UITextView+Extensions.swift in Sources */,
 				447DCC5E2851CB1100C40DDD /* TANetworkManager.swift in Sources */,
 				447DCE5A2851CB1300C40DDD /* locationManager.swift in Sources */,
+				04B91910286B13B8009ABAE4 /* EmailChangedSuccessfullyPopUpVC.swift in Sources */,
 				0432E33D286430EA00B4B40D /* userData.swift in Sources */,
 				447DCC7D2851CB1100C40DDD /* UIButtonSublayerBorderWidthAndColor.swift in Sources */,
 				447DCE552851CB1300C40DDD /* GradientView.swift in Sources */,
@@ -2688,18 +2743,22 @@
 				447DCE602851CB1300C40DDD /* AlertView.swift in Sources */,
 				447DCC892851CB1100C40DDD /* UIApplication.swift in Sources */,
 				447DCC7F2851CB1100C40DDD /* UIviewCornerRadius.swift in Sources */,
+				04B9190C286B1372009ABAE4 /* ChangeEmailVC.swift in Sources */,
 				447DCC802851CB1100C40DDD /* viewshadow.swift in Sources */,
 				04F1AD9A28697B0D002CC167 /* EditProfileVC.swift in Sources */,
 				447DCC702851CB1100C40DDD /* UITextField+Extensions.swift in Sources */,
 				042293C22869B203000503B7 /* NumberChangedSuccessfulPopUpVC.swift in Sources */,
 				447DCC5F2851CB1100C40DDD /* OldTAManagerOld.swift in Sources */,
+				04B91912286B1553009ABAE4 /* VerifyNewEmailOTPVC.swift in Sources */,
 				447DCC872851CB1100C40DDD /* String+Utilities.swift in Sources */,
 				447DCE5C2851CB1300C40DDD /* NotificationHalper.swift in Sources */,
+				04F84533286AC52C0081120F /* PasswordChangedSuccessfullyPopUpVC.swift in Sources */,
 				447DCC6F2851CB1100C40DDD /* Locale+Extensions.swift in Sources */,
 				447DCC6C2851CB1100C40DDD /* UIAlertController+Extensions.swift in Sources */,
 				447DCC6B2851CB1100C40DDD /* UIApplication+Extensions.swift in Sources */,
 				447DCC5D2851CB1100C40DDD /* NetworkUrl.swift in Sources */,
 				44C286C42851B4AF007AF36F /* SceneDelegate.swift in Sources */,
+				04F8452F286AC4E40081120F /* ChangePasswordOTPVerifyVC.swift in Sources */,
 				447DCE652851CB1300C40DDD /* SharedClass.swift in Sources */,
 				447DCC692851CB1100C40DDD /* UIImage+Extensions.swift in Sources */,
 				04FD1D342860429C00BE414A /* TabBarVC.swift in Sources */,
@@ -2714,6 +2773,7 @@
 				447DCC7A2851CB1100C40DDD /* UIButtonCornerRadius.swift in Sources */,
 				447DCC612851CB1100C40DDD /* UISegmentedControl+Extensions.swift in Sources */,
 				3D0C9648285581F6000384BD /* ResetPasswordVC.swift in Sources */,
+				04F84531286AC4FA0081120F /* ChangePasswordVC.swift in Sources */,
 				447DCC6E2851CB1100C40DDD /* Common+Extensions.swift in Sources */,
 				447DCE5E2851CB1300C40DDD /* AppsNetworkManager.swift in Sources */,
 				447DCC7B2851CB1100C40DDD /* UIButtonGradiant.swift in Sources */,
