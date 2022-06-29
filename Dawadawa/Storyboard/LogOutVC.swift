@@ -9,6 +9,7 @@ import UIKit
 
 class LogOutVC: UIViewController {
     
+    @IBOutlet weak var btnLogOut: UIButton!
     var callbacklogout:((String)->())?
     
     override func viewDidLoad() {
@@ -21,9 +22,10 @@ class LogOutVC: UIViewController {
         self.callbacklogout?("Cancel")
       
 }
-
+  
     @IBAction func btnLogoutTapped(_ sender: UIButton) {
-        self.callbacklogout?("Logout")
+            kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: "")
+        print("\(kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: ""))")
+            self.callbacklogout?("Logout")
     }
-    
 }

@@ -41,10 +41,58 @@ class MoreVC: UIViewController {
     }
     
     @IBAction func btnChangePasswordTapped(_ sender: UIButton) {
-        self.callback4?("ChangePassword")
+//        self.callback4?("ChangePassword")
+        self.getoptapi()
     }
     @IBAction func btnLogOutTapped(_ sender: UIButton) {
         self.callback4?("Logout")
     }
     
 }
+extension MoreVC{
+    func getoptapi(){
+        
+        CommonUtils.showHud(show: true)
+//        let accessToken = kSharedUserDefaults.getLoggedInAccessToken()
+        let params:[String : Any] = [
+            "email":UserData.shared.email
+        ]
+
+        
+        TANetworkManager.sharedInstance.requestApi(withServiceName:ServiceName.kforgotpassword, requestMethod: .POST,
+                                                   requestParameters:params, withProgressHUD: false)
+        {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
+            
+            CommonUtils.showHudWithNoInteraction(show: false)
+            
+            if errorType == .requestSuccess {
+                
+                let dictResult = kSharedInstance.getDictionary(result)
+                
+                switch Int.getInt(statusCode) {
+                case 200:
+                    if Int.getInt(dictResult["status"]) == 200{
+                        self?.callback4?("ChangePassword")
+                    }
+                    else if  Int.getInt(dictResult["status"]) == 400{
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    }
+                    else if Int.getInt(dictResult["status"]) == 401{
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    }
+
+                   
+                default:
+                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                }
+            } else if errorType == .noNetwork {
+                CommonUtils.showToastForInternetUnavailable()
+                
+            } else {
+                CommonUtils.showToastForDefaultError()
+            }
+        }
+    }
+}
+
+

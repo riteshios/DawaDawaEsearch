@@ -1025,6 +1025,9 @@
                             <constraint firstItem="eIC-zn-SiR" firstAttribute="centerY" secondItem="msa-pt-Pb9" secondAttribute="centerY" id="vxp-9R-Dty"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="btnLogOut" destination="xLs-ug-uoq" id="Piw-mT-UfC"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aQJ-5o-GoM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -2420,6 +2423,9 @@
                                                         <color key="textColor" red="0.08235294118" green="0.44705882349999998" blue="0.63137254899999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
+                                                        <connections>
+                                                            <outlet property="delegate" destination="e7b-pr-0qa" id="Azy-Xu-3bz"/>
+                                                        </connections>
                                                     </textField>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -2656,6 +2662,21 @@
                             <constraint firstItem="FHu-NI-faV" firstAttribute="centerX" secondItem="KvH-Fj-Owq" secondAttribute="centerX" id="juY-E5-QXU"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="lblWrongOtp" destination="g50-FV-yv6" id="ogj-YB-ZyS"/>
+                        <outlet property="txtfieldOtp1" destination="THg-Cf-Mt7" id="Wr0-IJ-efS"/>
+                        <outlet property="txtfieldOtp2" destination="J7d-JY-XiU" id="uxj-md-LEg"/>
+                        <outlet property="txtfieldOtp3" destination="Z6m-cJ-yTR" id="Kxc-ig-ehY"/>
+                        <outlet property="txtfieldOtp4" destination="xsP-cH-no1" id="nxF-Rt-jYn"/>
+                        <outlet property="txtfieldOtp5" destination="RcZ-sg-z0W" id="LsR-gx-s14"/>
+                        <outlet property="txtfieldOtp6" destination="4lZ-oY-0oW" id="3DP-kP-cEH"/>
+                        <outlet property="viewOtp1" destination="thN-qA-M79" id="f8w-vr-St7"/>
+                        <outlet property="viewOtp2" destination="FGF-B3-8iK" id="Sbi-gs-cFG"/>
+                        <outlet property="viewOtp3" destination="SBQ-tn-kbf" id="QxC-qc-MII"/>
+                        <outlet property="viewOtp4" destination="BnE-S7-jQj" id="U9i-St-cno"/>
+                        <outlet property="viewOtp5" destination="bLc-sn-wDy" id="jMp-Ef-HGB"/>
+                        <outlet property="viewOtp6" destination="wdy-b0-SLK" id="oEc-Zi-skl"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M0N-R2-IlV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

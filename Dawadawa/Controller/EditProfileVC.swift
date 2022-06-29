@@ -32,7 +32,7 @@ class EditProfileVC: UIViewController {
     @IBOutlet weak var imageFlag: UIImageView!
     @IBOutlet weak var lblCountry: UILabel!
     @IBOutlet weak var btnSelectCountry: UIButton!
-    
+    var userdata = [UserData]()
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setup()
@@ -159,10 +159,10 @@ class EditProfileVC: UIViewController {
         
     }
     @IBAction func btnDropSelectUserType(_ sender: UIButton){
-        let dataSource1 = ["User Type-1","User Type-2"]
-               kSharedAppDelegate?.dropDown(dataSource:dataSource1 , text: btnDropUserType)
+        let dataSource1 = ["Business Owner","Service Provider","Investor"]
+        kSharedAppDelegate?.dropDown(dataSource:self.userdata.map{String.getString($0.user_type)} , text: btnDropUserType)
                {(Index ,item) in
-                   self.lblUserType.text = item
+                   self.lblUserType.text = String.getString(item)
                }
     }
     @IBAction func btnSelectCountryTapped(_ sender: UIButton) {

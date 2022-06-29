@@ -8,7 +8,7 @@
 import Foundation
 class UserData{
     static let shared = UserData()
-    var id:String?
+    var id:Int?
     var name:String?
     var last_name:String?
     var email:String?
@@ -30,7 +30,7 @@ class UserData{
         saveData(data:data,token: kSharedUserDefaults.getLoggedInAccessToken())
     }
     func saveData(data:[String:Any],token:String){
-        self.id = String.getString(data["id"])
+        self.id = Int.getInt(data["id"])
         self.name = String.getString(data["name"])
         self.last_name = String.getString(data["last_name"])
         self.email = String.getString(data["email"])

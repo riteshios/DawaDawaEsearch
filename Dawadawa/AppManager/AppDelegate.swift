@@ -14,9 +14,10 @@ import AlamofireImage
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-
+   
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         IQKeyboardManager.shared.enable = true
+        window = UIWindow(frame: UIScreen.main.bounds)
         sleep(3)
         return true
     }
@@ -44,6 +45,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UIApplication.shared.windows.first?.rootViewController = navC
             UIApplication.shared.windows.first?.makeKeyAndVisible()
     }
+    func moveToLoginScreen(){
+                let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+                let vc = storyBoard.instantiateViewController(identifier:"LoginVC") as! LoginVC
+                let navigationController = UINavigationController(rootViewController: vc)
+                navigationController.setNavigationBarHidden(true, animated: true)
+                UIApplication.shared.windows.first?.rootViewController = navigationController
+                UIApplication.shared.windows.first?.makeKeyAndVisible()
+            }
     func dropDown(dataSource:[String] , text:UIView , completion: @escaping ( _ index: Int ,    _ item: String) -> ()) -> Void {
                                         let dropDown = DropDown()
                                         dropDown.anchorView = text
