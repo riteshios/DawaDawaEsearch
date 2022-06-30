@@ -1202,7 +1202,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gnV-ZJ-3T8">
                                                 <rect key="frame" x="15" y="444" width="383" height="55"/>
                                                 <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Sudan.png" translatesAutoresizingMaskIntoConstraints="NO" id="EE1-zS-d6W">
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="India.png" translatesAutoresizingMaskIntoConstraints="NO" id="EE1-zS-d6W">
                                                         <rect key="frame" x="20" y="20" width="16" height="15"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="16" id="ji9-N3-8hl"/>
@@ -1472,6 +1472,9 @@
                                                                 <real key="value" value="8"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="btnSaveTapped:" destination="SrG-Sa-6yC" eventType="touchUpInside" id="UBU-hz-QCT"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -3780,7 +3783,7 @@
         <image name="Frame 162" width="24" height="24"/>
         <image name="Frame 65" width="24" height="24"/>
         <image name="IND" width="16" height="16"/>
-        <image name="Sudan.png" width="70" height="47"/>
+        <image name="India.png" width="70" height="47"/>
         <image name="Vector" width="9.6666669845581055" height="5.3333334922790527"/>
         <image name="arrow-left" width="24" height="24"/>
         <image name="calendar" width="16" height="16"/>

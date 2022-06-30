@@ -34,6 +34,8 @@ class ResetPasswordVC: UIViewController {
     @IBAction func btnResetPasswordTapped(_ sender: UIButton) {
         self.fieldValidations()
     }
+// MARK: -Validation
+    
     func fieldValidations(){
     if String.getString(self.txtFieldNewPassword.text).isEmpty{
         self.showSimpleAlert(message: Notifications.kNewPassword)
@@ -54,6 +56,7 @@ class ResetPasswordVC: UIViewController {
     }
 
 }
+
 extension ResetPasswordVC{
     
     func setTextFieldUI(textField:SKFloatingTextField,place:String ,floatingText:String){
@@ -87,6 +90,8 @@ extension ResetPasswordVC : SKFlaotingTextFieldDelegate {
     }
 
 }
+
+// MARK: - API Call
 
 extension ResetPasswordVC{
     func resetpasswordapi(){

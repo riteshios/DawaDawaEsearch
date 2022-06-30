@@ -25,12 +25,33 @@ class ChangePasswordVC: UIViewController {
     
     @IBAction func btnChangePasswordTapped(_ sender: UIButton) {
 //        self.callbackchangepassword?()
-        self.changepasswordapi()
+        self.fieldValidations()
     }
     
-   
+//   MARK: - Validation
+    
+    func fieldValidations(){
+    if String.getString(self.txtFieldNewPassword.text).isEmpty{
+        self.showSimpleAlert(message: "Please Enter New Password")
+        return
+    }else if !String.getString(self.txtFieldNewPassword.text).isPasswordValidate(){
+        self.showSimpleAlert(message: Notifications.kValidPassword)
+        return
+    }else if String.getString(txtFieldConfirmPassword.text).isEmpty {
+        self.showSimpleAlert(message: Notifications.kConfirmpassword)
+        return
+}else if(txtFieldNewPassword.text != self.txtFieldConfirmPassword.text){
+    self.showSimpleAlert(message: Notifications.kconfirmMismatch)
+    return
+}
+        self.view.endEditing(true)
+        self.changepasswordapi()
+//        self.callback2?()
+    }
 
 }
+
+
 extension ChangePasswordVC{
     
     func setTextFieldUI(textField:SKFloatingTextField,place:String ,floatingText:String){
@@ -63,26 +84,34 @@ extension ChangePasswordVC : SKFlaotingTextFieldDelegate {
         print("begin editing")
     }
 }
+
+// MARK: - API call
+
 extension ChangePasswordVC{
     func changepasswordapi(){
         
         CommonUtils.showHud(show: true)
         
        
+       
         if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
-            let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
-            kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
+            let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+            let septoken = endToken.components(separatedBy: " ")
+            if septoken[0] != "Bearer"{
+                let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
+                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
+            }
 //            headers["token"] = kSharedUserDefaults.getLoggedInAccessToken()
         }
 
         let params:[String : Any] = [
-            "user_id":UserData.shared.id,
+            "id":UserData.shared.id,
             "new_password":String.getString(self.txtFieldNewPassword.text),
             "confirm_password":String.getString(self.txtFieldConfirmPassword.text)
         ]
 
         
-        TANetworkManager.sharedInstance.requestApi(withServiceName:ServiceName.kforgotpassword, requestMethod: .POST,
+        TANetworkManager.sharedInstance.requestApi(withServiceName:ServiceName.kchangepassword, requestMethod: .POST,
                                                    requestParameters:params, withProgressHUD: false)
         {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
             
@@ -95,6 +124,11 @@ extension ChangePasswordVC{
                 switch Int.getInt(statusCode) {
                 case 200:
                     if Int.getInt(dictResult["status"]) == 200{
+                        let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+                        let septoken = endToken.components(separatedBy: " ")
+                        if septoken[0] == "Bearer"{
+                            kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
+                        }
                         self?.callbackchangepassword?()
                     }
                     else if  Int.getInt(dictResult["status"]) == 400{

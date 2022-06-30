@@ -18,6 +18,7 @@ class UserData{
     var profile_image:String?
     var dob:String?
     var whatspp_number:String?
+    var social_profile:String?
     var user_gender:String?
     var user_type:String?
     var device_type:String?
@@ -40,6 +41,7 @@ class UserData{
         self.profile_image = String.getString(data["profile_image"])
         self.dob = String.getString(data["dob"])
         self.whatspp_number = String.getString(data["whatspp_number"])
+        self.social_profile = String.getString(data["social_profile"])
         self.user_gender = String.getString(data["user_gender"])
         self.user_type = String.getString(data["user_type"])
         self.device_type = String.getString(data["device_type"])

@@ -27,6 +27,8 @@ class ProfileVC: UIViewController {
         self.lblEmail.text = UserData.shared.email
     }
     
+// MARK: - @IBAction
+    
     @IBAction func btnEditImage(_ sender: UIButton) {
         ImagePickerHelper.shared.showPickerController { image, url in
             self.isProfileImageSelected = true
@@ -119,16 +121,19 @@ class ProfileVC: UIViewController {
         self.present(vc, animated: false)
     }
 }
+// MARK: -API call
 
 extension ProfileVC{
     
     func uploadImage(image:UIImage?){
         CommonUtils.showHud(show: true)
-        var params = [String:String]()
         
+        let params:[String : Any] = [
+            "user_id":UserData.shared.id
+        ]
+
         let uploadimage:[String:Any] =
-        ["profile_image": self.ImageProfile.image ?? UIImage(),
-         "user_id":UserData.shared.id
+        ["profile_image": self.ImageProfile.image ?? UIImage()
         ]
                 
         TANetworkManager.sharedInstance.requestMultiPart(withServiceName:ServiceName.keditprofileimage , requestMethod: .post, requestImages: [uploadimage], requestVideos: [:], requestData:params)

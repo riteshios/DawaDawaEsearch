@@ -72,6 +72,7 @@ struct ServiceName {
     static let kresendotp            =       "api/resend-user-verify"
     static let kchangepassword       =       "api/change-password"
     static let  keditprofileimage     =       "api/edit-profile-image"
+    static let  kedituserdetails     =       "api/edit-user-detail"
 }
 
 struct Notifications {
@@ -86,7 +87,7 @@ struct Notifications {
     static let kName                            = "Please Enter  Name"
     static let Kimage                             = "Please Select Image"
     static let kPassword                        = "Please Enter Password"
-    static let kValidPassword                   = "Password should contains 6 charater one lower uppercase including digits & Special charaters"
+    static let kValidPassword                   = "Password should contains 8 charater one lower uppercase including digits & Special charaters"
     static let kConfirmPassword                  = "Please Enter Confirm Password"
     static let kNewPassword                     = "Please Enter Password"
     

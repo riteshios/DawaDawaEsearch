@@ -66,6 +66,13 @@ class EditProfileVC: UIViewController {
         self.lblUserType.text = UserData.shared.user_type
     }
     
+    
+// MARK: - @IBAction
+    
+    @IBAction func btnSaveTapped(_ sender: UIButton) {
+        self.editdetailapi()
+        
+    }
     @IBAction func btnBackTapped(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
     }
@@ -160,9 +167,9 @@ class EditProfileVC: UIViewController {
     }
     @IBAction func btnDropSelectUserType(_ sender: UIButton){
         let dataSource1 = ["Business Owner","Service Provider","Investor"]
-        kSharedAppDelegate?.dropDown(dataSource:self.userdata.map{String.getString($0.user_type)} , text: btnDropUserType)
+        kSharedAppDelegate?.dropDown(dataSource:dataSource1 , text: btnDropUserType)
                {(Index ,item) in
-                   self.lblUserType.text = String.getString(item)
+                   self.lblUserType.text = item
                }
     }
     @IBAction func btnSelectCountryTapped(_ sender: UIButton) {
@@ -205,5 +212,78 @@ extension EditProfileVC : SKFlaotingTextFieldDelegate {
     
     func textFieldDidBeginEditing(textField: SKFloatingTextField) {
         print("begin editing")
+    }
+}
+
+// MARK: - API Call
+extension EditProfileVC{
+    func editdetailapi(){
+        
+        CommonUtils.showHud(show: true)
+        
+        
+         if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
+             let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+             let septoken = endToken.components(separatedBy: " ")
+             if septoken[0] != "Bearer"{
+                 let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
+                 kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
+             }
+ //            headers["token"] = kSharedUserDefaults.getLoggedInAccessToken()
+         }
+        
+       
+        let params:[String : Any] = [
+            "user_id":UserData.shared.id,
+            "first_name":String.getString(self.txtFieldFirstName.text),
+            "dob":String.getString(self.txtFieldDOB.text),
+            "phone":String.getString(self.txtFieldPhoneNumber.text),
+            "country_detail":self.lblCountry.text,
+            "gender":self.lblGender.text,
+            "user_type":self.lblUserType.text
+        ]
+
+        
+        TANetworkManager.sharedInstance.requestApi(withServiceName:ServiceName.kedituserdetails, requestMethod: .POST,
+                                                   requestParameters:params, withProgressHUD: false)
+        {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
+            
+            CommonUtils.showHudWithNoInteraction(show: false)
+            
+            if errorType == .requestSuccess {
+                
+                let dictResult = kSharedInstance.getDictionary(result)
+                
+                switch Int.getInt(statusCode) {
+                case 200:
+                    if Int.getInt(dictResult["status"]) == 200{
+                        
+                        let data = kSharedInstance.getDictionary(dictResult["data"])
+                        kSharedUserDefaults.setLoggedInUserDetails(loggedInUserDetails: data)
+                        let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+                        let septoken = endToken.components(separatedBy: " ")
+                        if septoken[0] == "Bearer"{
+                            kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
+                        }
+                        UserData.shared.saveData(data: data, token: String.getString(kSharedUserDefaults.getLoggedInAccessToken()))
+                        let vc = self?.storyboard?.instantiateViewController(withIdentifier: ProfileVC.getStoryboardID()) as! ProfileVC
+                        self?.navigationController?.pushViewController(vc, animated: true)
+                        
+                            
+                    }
+                    else if  Int.getInt(dictResult["status"]) == 400{
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    }
+                    
+                default:
+                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                }
+            } else if errorType == .noNetwork {
+                CommonUtils.showToastForInternetUnavailable()
+                
+            } else {
+                CommonUtils.showToastForDefaultError()
+            }
+        }
     }
 }
