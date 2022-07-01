@@ -9,6 +9,8 @@ import UIKit
 
 class MoreVC: UIViewController {
     
+//    MARK: - Properties
+    
     @IBOutlet weak var ViewMain: UIView!
     @IBOutlet weak var viewSetting: UIView!
     @IBOutlet weak var viewEditProfile: UIView!
@@ -17,38 +19,67 @@ class MoreVC: UIViewController {
     @IBOutlet weak var viewContactUs: UIView!
     @IBOutlet weak var viewLogOut: UIView!
     
+    @IBOutlet weak var btnSetting: UIButton!
+    @IBOutlet weak var btnEdit: UIButton!
+    @IBOutlet weak var btnChangePasword: UIButton!
+    @IBOutlet weak var btnContactUs: UIButton!
+    @IBOutlet weak var btnLogOut: UIButton!
     
     
     var callback4:((String)->())?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setup()
+    }
+    
+// MARK: - Life Cyclye
+    func setup(){
         ViewMain.clipsToBounds = true
         ViewMain.layer.cornerRadius = 25
         ViewMain.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
         ViewMain.addShadowWithBlurOnView(ViewMain, spread: 0, blur: 10, color: .black, opacity: 0.16, OffsetX: 0, OffsetY: 1)
-        self.viewSetting.backgroundColor = UIColor.init(red: 241/255, green: 249/255, blue: 253/255, alpha: 1)
+       
     }
+// MARK: - @IBAction
     @IBAction func btnDismissTapped(_ sender: UIButton) {
         self.callback4?("Dismiss")
     }
     @IBAction func btnSettingTapped(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        if self.btnSetting.isSelected == true{
+            self.viewSetting.backgroundColor = UIColor.init(red: 241/255, green: 249/255, blue: 253/255, alpha: 1)
+        }
         self.callback4?("Setting")
     }
     
     @IBAction func btnEditProfileTapped(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        if self.btnEdit.isSelected == true{
+            self.viewEditProfile.backgroundColor = UIColor.init(red: 241/255, green: 249/255, blue: 253/255, alpha: 1)
+        }
         self.callback4?("EditProfile")
     }
     
     @IBAction func btnChangePasswordTapped(_ sender: UIButton) {
 //        self.callback4?("ChangePassword")
+        sender.isSelected = !sender.isSelected
+        if self.btnChangePasword.isSelected == true{
+            self.viewChangePassword.backgroundColor = UIColor.init(red: 241/255, green: 249/255, blue: 253/255, alpha: 1)
+        }
         self.getoptapi()
     }
     @IBAction func btnLogOutTapped(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        if self.btnLogOut.isSelected == true{
+            self.viewSetting.backgroundColor = UIColor.init(red: 255/255, green: 240/255, blue: 240/255, alpha : 1)
+        }
         self.callback4?("Logout")
     }
     
 }
+// MARK: - Api call
+
 extension MoreVC{
     func getoptapi(){
         

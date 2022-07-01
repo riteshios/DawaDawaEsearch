@@ -73,6 +73,7 @@ struct ServiceName {
     static let kchangepassword       =       "api/change-password"
     static let  keditprofileimage     =       "api/edit-profile-image"
     static let  kedituserdetails     =       "api/edit-user-detail"
+    static let kchangeemail           =      "api/change-email"
 }
 
 struct Notifications {
@@ -87,7 +88,7 @@ struct Notifications {
     static let kName                            = "Please Enter  Name"
     static let Kimage                             = "Please Select Image"
     static let kPassword                        = "Please Enter Password"
-    static let kValidPassword                   = "Password should contains 8 charater one lower uppercase including digits & Special charaters"
+    static let kValidPassword                   = "Password should contain atleast 8 characters, one uppercase, one lowercase including digits and special characters"
     static let kConfirmPassword                  = "Please Enter Confirm Password"
     static let kNewPassword                     = "Please Enter Password"
     
@@ -103,7 +104,7 @@ struct Notifications {
     static let kvehreg                          = "Please Uplaod Your Vehicle registration Image"
     static let kvehinsu                         = "Please Upload your Vehicle Insurance Image"
     static let kvehlicence                      = "Please upload Your Vehicle Licence Image"
-    static let kMatchPassword                   = "Password & Confirm Password doesn't Match"
+    static let kMatchPassword                   = "Password & Confirm Password doesn't match"
     static let kEnterOTP                        = "OTP Can't be Empty"
     static let kEnterFullName                   = "Please Enter Full Name"
     static let kvalidFullName                   = "Please Enter Valid Full Name"

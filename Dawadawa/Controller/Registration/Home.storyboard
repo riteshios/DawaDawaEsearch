@@ -322,7 +322,6 @@
                                                                 </connections>
                                                             </button>
                                                         </subviews>
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstItem="MbS-yt-buM" firstAttribute="leading" secondItem="np0-Bk-h1D" secondAttribute="leading" constant="18" id="3c9-cz-Swn"/>
                                                             <constraint firstItem="tJx-m8-Scq" firstAttribute="leading" secondItem="np0-Bk-h1D" secondAttribute="leading" id="6kw-g5-Fb8"/>
@@ -393,6 +392,7 @@
                                                             </label>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FCH-yr-yVs">
                                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                                 <connections>
                                                                     <action selector="btnChangePasswordTapped:" destination="Xh5-40-dPj" eventType="touchUpInside" id="g8Y-DO-fTd"/>
@@ -454,15 +454,23 @@
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hUd-iQ-eeW">
+                                                                <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                            </button>
                                                         </subviews>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="50" id="04v-Cd-Ef0"/>
                                                             <constraint firstAttribute="bottom" secondItem="rMj-9X-flz" secondAttribute="bottom" constant="15" id="FJ1-2i-997"/>
+                                                            <constraint firstItem="hUd-iQ-eeW" firstAttribute="leading" secondItem="ObE-Me-Euk" secondAttribute="leading" id="R2v-WP-seR"/>
                                                             <constraint firstItem="pzW-v9-kgG" firstAttribute="centerY" secondItem="rMj-9X-flz" secondAttribute="centerY" id="T4L-Kt-9vW"/>
+                                                            <constraint firstAttribute="bottom" secondItem="hUd-iQ-eeW" secondAttribute="bottom" id="TlA-lw-Q6z"/>
+                                                            <constraint firstItem="hUd-iQ-eeW" firstAttribute="top" secondItem="ObE-Me-Euk" secondAttribute="top" id="V3J-qc-pgG"/>
                                                             <constraint firstItem="rMj-9X-flz" firstAttribute="leading" secondItem="ObE-Me-Euk" secondAttribute="leading" constant="18" id="Zgp-Ej-yYy"/>
                                                             <constraint firstItem="rMj-9X-flz" firstAttribute="top" secondItem="ObE-Me-Euk" secondAttribute="top" constant="15" id="anN-mf-akg"/>
                                                             <constraint firstItem="pzW-v9-kgG" firstAttribute="leading" secondItem="rMj-9X-flz" secondAttribute="trailing" constant="17" id="qsc-xY-bQI"/>
+                                                            <constraint firstAttribute="trailing" secondItem="hUd-iQ-eeW" secondAttribute="trailing" id="v1P-70-2uG"/>
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wPc-Rl-5sY">
@@ -488,7 +496,6 @@
                                                                 </connections>
                                                             </button>
                                                         </subviews>
-                                                        <color key="backgroundColor" red="1" green="0.94117647058823528" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="trailing" secondItem="aLj-r2-fDq" secondAttribute="trailing" id="5pr-XJ-1CM"/>
                                                             <constraint firstItem="Agc-NS-2AT" firstAttribute="leading" secondItem="ZS6-eW-fPP" secondAttribute="trailing" constant="17" id="91a-tw-DIR"/>
@@ -562,6 +569,11 @@
                     <size key="freeformSize" width="414" height="874"/>
                     <connections>
                         <outlet property="ViewMain" destination="80Q-lc-qBc" id="wsb-wg-WVM"/>
+                        <outlet property="btnChangePasword" destination="FCH-yr-yVs" id="27Z-Fk-Qm7"/>
+                        <outlet property="btnContactUs" destination="hUd-iQ-eeW" id="Q2a-fQ-GjS"/>
+                        <outlet property="btnEdit" destination="kst-MI-Ioz" id="oOq-h5-Npu"/>
+                        <outlet property="btnLogOut" destination="aLj-r2-fDq" id="Zmc-Xa-Qn0"/>
+                        <outlet property="btnSetting" destination="tJx-m8-Scq" id="zWz-7g-iFo"/>
                         <outlet property="viewChangePassword" destination="N4P-rG-ULV" id="LE0-PO-Q8b"/>
                         <outlet property="viewContactUs" destination="ObE-Me-Euk" id="HBu-uV-hLY"/>
                         <outlet property="viewEditProfile" destination="df2-9I-y28" id="wpB-J6-fI9"/>
@@ -2399,13 +2411,26 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FHu-NI-faV">
                                 <rect key="frame" x="16" y="191.66666666666663" width="382" height="353"/>
                                 <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xaP-Mf-Jhk">
+                                        <rect key="frame" x="335" y="29" width="24" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="24" id="96g-dc-wct"/>
+                                            <constraint firstAttribute="height" constant="24" id="Dq5-Cc-aQv"/>
+                                        </constraints>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" image="Frame 65"/>
+                                        <connections>
+                                            <action selector="btnDismiss:" destination="e7b-pr-0qa" eventType="touchUpInside" id="AAZ-Fo-cua"/>
+                                            <action selector="btnDismissTapped:" destination="Xh5-40-dPj" eventType="touchUpInside" id="jaD-LE-EYg"/>
+                                        </connections>
+                                    </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Verify Account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iNP-8d-h6b">
                                         <rect key="frame" x="135.33333333333334" y="37" width="111.33333333333334" height="20.333333333333329"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone number verification code is sent on your phone number" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a9L-BX-hoP" userLabel="An account activation code has been sent to your email address and phone number">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password change code is sent on your email address" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a9L-BX-hoP" userLabel="An account activation code has been sent to your email address and phone number">
                                         <rect key="frame" x="28" y="85.333333333333343" width="326" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="Xw6-7b-VoI"/>
@@ -2630,12 +2655,16 @@
                                         <state key="normal" title="Resend code">
                                             <color key="titleColor" red="0.08235294118" green="0.44705882349999998" blue="0.63137254899999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="btnResendOtpTappedWith_sender:" destination="e7b-pr-0qa" eventType="touchUpInside" id="wCr-PH-VeM"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="3KR-FS-nZc" secondAttribute="trailing" constant="21" id="6zr-Io-82x"/>
                                     <constraint firstItem="2OX-CO-i7g" firstAttribute="leading" secondItem="FHu-NI-faV" secondAttribute="leading" constant="21" id="Gno-kH-ICW"/>
+                                    <constraint firstAttribute="trailing" secondItem="xaP-Mf-Jhk" secondAttribute="trailing" constant="23" id="L15-Ap-75m"/>
                                     <constraint firstAttribute="bottom" secondItem="2OX-CO-i7g" secondAttribute="bottom" constant="38" id="OWn-TF-pCt"/>
                                     <constraint firstItem="g50-FV-yv6" firstAttribute="top" secondItem="mrw-n0-02s" secondAttribute="bottom" constant="25.666666666666657" id="P5c-vS-oya"/>
                                     <constraint firstAttribute="height" constant="353" id="QIf-GH-pZb"/>
@@ -2643,6 +2672,7 @@
                                     <constraint firstAttribute="width" constant="382" id="aJy-zC-lns"/>
                                     <constraint firstAttribute="trailing" secondItem="mrw-n0-02s" secondAttribute="trailing" constant="21" id="b7x-dL-ePE"/>
                                     <constraint firstItem="mrw-n0-02s" firstAttribute="top" secondItem="a9L-BX-hoP" secondAttribute="bottom" constant="20.999999999999972" id="e9g-UT-hSw"/>
+                                    <constraint firstItem="xaP-Mf-Jhk" firstAttribute="top" secondItem="FHu-NI-faV" secondAttribute="top" constant="29" id="eCT-qc-7dF"/>
                                     <constraint firstItem="3KR-FS-nZc" firstAttribute="centerY" secondItem="g50-FV-yv6" secondAttribute="centerY" id="gBY-Zo-pwj"/>
                                     <constraint firstItem="a9L-BX-hoP" firstAttribute="centerX" secondItem="FHu-NI-faV" secondAttribute="centerX" id="hPy-ct-Nnl"/>
                                     <constraint firstItem="g50-FV-yv6" firstAttribute="leading" secondItem="FHu-NI-faV" secondAttribute="leading" constant="28" id="nmN-B1-SYA"/>
@@ -2666,6 +2696,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="lblSubHeading" destination="a9L-BX-hoP" id="bmW-qu-BdY"/>
                         <outlet property="lblWrongOtp" destination="g50-FV-yv6" id="ogj-YB-ZyS"/>
                         <outlet property="txtfieldOtp1" destination="THg-Cf-Mt7" id="Wr0-IJ-efS"/>
                         <outlet property="txtfieldOtp2" destination="J7d-JY-XiU" id="uxj-md-LEg"/>
@@ -2978,6 +3009,20 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2zz-aS-Ldx">
                                 <rect key="frame" x="16" y="191.66666666666663" width="382" height="353"/>
                                 <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PX8-2G-6Tw">
+                                        <rect key="frame" x="335" y="29" width="24" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="24" id="KRx-8U-BjR"/>
+                                            <constraint firstAttribute="height" constant="24" id="tDU-88-gNi"/>
+                                        </constraints>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" image="Frame 65"/>
+                                        <connections>
+                                            <action selector="btnDismiss:" destination="qtZ-Qy-tRb" eventType="touchUpInside" id="AH3-CB-BRX"/>
+                                            <action selector="btnDismiss:" destination="e7b-pr-0qa" eventType="touchUpInside" id="jFN-c0-0Pa"/>
+                                            <action selector="btnDismissTapped:" destination="Xh5-40-dPj" eventType="touchUpInside" id="oDX-Gm-Hvj"/>
+                                        </connections>
+                                    </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Verify it’s you " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fpb-OB-Fcs">
                                         <rect key="frame" x="135.66666666666666" y="37" width="110.66666666666666" height="20.333333333333329"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -3206,6 +3251,9 @@
                                         <state key="normal" title="Resend code">
                                             <color key="titleColor" red="0.08235294118" green="0.44705882349999998" blue="0.63137254899999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="BtnAResendTapped:" destination="qtZ-Qy-tRb" eventType="touchUpInside" id="9fx-bn-ENH"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -3218,7 +3266,9 @@
                                     <constraint firstAttribute="trailing" secondItem="zgw-Be-OV2" secondAttribute="trailing" constant="21" id="EIx-88-rn2"/>
                                     <constraint firstItem="rYf-4B-b33" firstAttribute="centerX" secondItem="2zz-aS-Ldx" secondAttribute="centerX" id="H3l-nO-FJL"/>
                                     <constraint firstAttribute="bottom" secondItem="HoP-IL-9KF" secondAttribute="bottom" constant="38" id="J8Z-7O-4Rt"/>
+                                    <constraint firstItem="PX8-2G-6Tw" firstAttribute="top" secondItem="2zz-aS-Ldx" secondAttribute="top" constant="29" id="KVX-N0-lED"/>
                                     <constraint firstItem="5w9-VY-wnM" firstAttribute="top" secondItem="rYf-4B-b33" secondAttribute="bottom" constant="20.999999999999972" id="Lub-8x-anI"/>
+                                    <constraint firstAttribute="trailing" secondItem="PX8-2G-6Tw" secondAttribute="trailing" constant="23" id="N8M-Zt-zzh"/>
                                     <constraint firstItem="5w9-VY-wnM" firstAttribute="leading" secondItem="2zz-aS-Ldx" secondAttribute="leading" constant="21" id="Pbv-Ff-8Ol"/>
                                     <constraint firstAttribute="trailing" secondItem="HoP-IL-9KF" secondAttribute="trailing" constant="21" id="Rk3-Cb-dTg"/>
                                     <constraint firstItem="HoP-IL-9KF" firstAttribute="leading" secondItem="2zz-aS-Ldx" secondAttribute="leading" constant="21" id="dPu-aH-eq3"/>
@@ -3242,7 +3292,20 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="lblSubHeading" destination="rYf-4B-b33" id="vDJ-3Q-txg"/>
                         <outlet property="lblWrongCode" destination="n55-vV-6ow" id="iKF-cC-waP"/>
+                        <outlet property="txtfieldOtp1" destination="Xwl-aW-NcM" id="vx7-Gm-Aq3"/>
+                        <outlet property="txtfieldOtp2" destination="NwH-Yx-wcy" id="3R9-AO-o4D"/>
+                        <outlet property="txtfieldOtp3" destination="uQR-LK-qcY" id="IAz-sy-hpC"/>
+                        <outlet property="txtfieldOtp4" destination="gBV-uf-QOd" id="O4F-ID-ILn"/>
+                        <outlet property="txtfieldOtp5" destination="uOB-15-mLi" id="YGV-DH-623"/>
+                        <outlet property="txtfieldOtp6" destination="Vnk-55-WoA" id="Uyu-Rn-UCQ"/>
+                        <outlet property="viewOtp1" destination="8qq-K6-azc" id="2LX-H8-tei"/>
+                        <outlet property="viewOtp2" destination="5X4-Qm-MVH" id="aq1-8u-N2z"/>
+                        <outlet property="viewOtp3" destination="kBV-rC-WcF" id="VmB-hK-IQe"/>
+                        <outlet property="viewOtp4" destination="zUV-d3-w9t" id="tDE-ec-fRL"/>
+                        <outlet property="viewOtp5" destination="tzY-lS-8hj" id="Vxh-aX-Ped"/>
+                        <outlet property="viewOtp6" destination="MBa-Cp-p5i" id="wg5-75-3gH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qsc-Uu-pCb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -3393,6 +3456,21 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S1W-Qi-dsz">
                                 <rect key="frame" x="16" y="191.66666666666663" width="382" height="353"/>
                                 <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yil-4O-fAx">
+                                        <rect key="frame" x="335" y="29" width="24" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="24" id="D44-xP-27F"/>
+                                            <constraint firstAttribute="width" constant="24" id="gTC-ev-OAH"/>
+                                        </constraints>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" image="Frame 65"/>
+                                        <connections>
+                                            <action selector="btnDismiss:" destination="qtZ-Qy-tRb" eventType="touchUpInside" id="fJf-k2-DTS"/>
+                                            <action selector="btnDismiss:" destination="cn9-sB-IuX" eventType="touchUpInside" id="iRI-0D-AY9"/>
+                                            <action selector="btnDismiss:" destination="e7b-pr-0qa" eventType="touchUpInside" id="naE-Lv-tFZ"/>
+                                            <action selector="btnDismissTapped:" destination="Xh5-40-dPj" eventType="touchUpInside" id="vZd-J4-Deg"/>
+                                        </connections>
+                                    </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Verify new email address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ldo-RO-sMm">
                                         <rect key="frame" x="96.333333333333329" y="37" width="189.66666666666669" height="20.333333333333329"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -3626,6 +3704,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="buf-lU-MBQ" firstAttribute="centerX" secondItem="S1W-Qi-dsz" secondAttribute="centerX" id="4fD-sE-F2t"/>
+                                    <constraint firstAttribute="trailing" secondItem="yil-4O-fAx" secondAttribute="trailing" constant="23" id="5Uy-H8-bku"/>
                                     <constraint firstAttribute="trailing" secondItem="U8k-rX-ObN" secondAttribute="trailing" constant="21" id="7Bh-XN-5r3"/>
                                     <constraint firstItem="ldo-RO-sMm" firstAttribute="top" secondItem="S1W-Qi-dsz" secondAttribute="top" constant="37" id="7M9-7g-IVt"/>
                                     <constraint firstItem="ldo-RO-sMm" firstAttribute="centerX" secondItem="S1W-Qi-dsz" secondAttribute="centerX" id="BK8-gy-d7I"/>
@@ -3638,6 +3717,7 @@
                                     <constraint firstAttribute="trailing" secondItem="WhV-0A-fxN" secondAttribute="trailing" constant="21" id="VxI-0a-F32"/>
                                     <constraint firstItem="jfe-Qr-N4a" firstAttribute="leading" secondItem="S1W-Qi-dsz" secondAttribute="leading" constant="21" id="avB-6M-Gze"/>
                                     <constraint firstAttribute="bottom" secondItem="WhV-0A-fxN" secondAttribute="bottom" constant="38" id="chW-8G-rWG"/>
+                                    <constraint firstItem="yil-4O-fAx" firstAttribute="top" secondItem="S1W-Qi-dsz" secondAttribute="top" constant="29" id="dVo-q4-lgz"/>
                                     <constraint firstItem="WhV-0A-fxN" firstAttribute="leading" secondItem="S1W-Qi-dsz" secondAttribute="leading" constant="21" id="jKA-2B-B2G"/>
                                     <constraint firstItem="Jrf-L9-HZZ" firstAttribute="top" secondItem="jfe-Qr-N4a" secondAttribute="bottom" constant="25.666666666666657" id="rPz-jg-bve"/>
                                     <constraint firstAttribute="trailing" secondItem="jfe-Qr-N4a" secondAttribute="trailing" constant="21" id="zLR-kr-fHT"/>
@@ -3657,7 +3737,21 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="lblSubHeading" destination="buf-lU-MBQ" id="Gpv-rb-DqU"/>
                         <outlet property="lblWrongCode" destination="Jrf-L9-HZZ" id="w6g-eR-61o"/>
+                        <outlet property="txtfieldOtp1" destination="uve-Ey-VT2" id="gOy-bc-7wU"/>
+                        <outlet property="txtfieldOtp2" destination="Bew-SH-5uL" id="mlt-dL-V8w"/>
+                        <outlet property="txtfieldOtp3" destination="HwX-iQ-FWx" id="Ede-Sr-r8C"/>
+                        <outlet property="txtfieldOtp4" destination="mml-cj-1fs" id="Ikw-wy-xiU"/>
+                        <outlet property="txtfieldOtp5" destination="bwF-iH-QAe" id="ydq-c8-ii0"/>
+                        <outlet property="txtfieldOtp6" destination="hPy-mU-auF" id="N5Z-jE-tAm"/>
+                        <outlet property="viewOtp1" destination="5eE-LA-oPQ" id="dWg-Gk-L8c"/>
+                        <outlet property="viewOtp2" destination="Z0T-Sn-J3Y" id="33C-Hv-ogr"/>
+                        <outlet property="viewOtp3" destination="LzL-VG-M6D" id="awE-nA-eGt"/>
+                        <outlet property="viewOtp4" destination="XHw-hc-cm2" id="CSf-ug-gyI"/>
+                        <outlet property="viewOtp5" destination="sdg-5t-pBI" id="2IF-9u-7nV"/>
+                        <outlet property="viewOtp6" destination="mXG-Pc-ZMa" id="abu-zz-I39"/>
+                        <outlet property="viewVerify" destination="WhV-0A-fxN" id="WPV-oh-eaQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mjy-Ee-jCW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -118,43 +118,7 @@ class EditProfileVC: UIViewController {
     }
     
     @IBAction func btnChangeEmailTapped(_ sender: UIButton) {
-        
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: VerifyEmailOTPVC.getStoryboardID()) as! VerifyEmailOTPVC
-        vc.modalTransitionStyle = .crossDissolve
-        vc.modalPresentationStyle = .overCurrentContext
-//        vc.email = String.getString(self?.txtFieldPhone_Email.text)
-        vc.callbackOTP1 =
-        {
-            vc.dismiss(animated: false){
-                let vc = self.storyboard?.instantiateViewController(withIdentifier: ChangeEmailVC.getStoryboardID()) as! ChangeEmailVC
-                vc.modalTransitionStyle = .crossDissolve
-                vc.modalPresentationStyle = .overCurrentContext
-                vc.callbackchangenumber = {
-                    self.dismiss(animated: false) {
-                        let vc = self.storyboard?.instantiateViewController(withIdentifier: VerifyNewEmailOTPVC.getStoryboardID()) as! VerifyNewEmailOTPVC
-                        vc.modalTransitionStyle = .crossDissolve
-                        vc.modalPresentationStyle = .overCurrentContext
-                        vc.callbackOTP2 = {
-                            self.dismiss(animated: false){
-                                let vc = self.storyboard?.instantiateViewController(withIdentifier: EmailChangedSuccessfullyPopUpVC.getStoryboardID()) as! EmailChangedSuccessfullyPopUpVC
-                                vc.modalTransitionStyle = .crossDissolve
-                                vc.modalPresentationStyle = .overCurrentContext
-                                vc.callbackpopup = {
-                                    self.dismiss(animated: false){
-                                        let vc = self.storyboard?.instantiateViewController(withIdentifier: ProfileVC.getStoryboardID()) as! ProfileVC
-                                        self.navigationController?.pushViewController(vc, animated: false)
-                                    }
-                                }
-                                self.present(vc, animated: false)
-                            }
-                        }
-                        self.present(vc, animated: false)
-                    }
-                }
-                self.present(vc, animated: false)
-            }
-        }
-        self.present(vc, animated: false)
+        self.verifyemail()
     }
     
     @IBAction func btnDropGender(_ sender: UIButton){
@@ -218,7 +182,6 @@ extension EditProfileVC : SKFlaotingTextFieldDelegate {
 // MARK: - API Call
 extension EditProfileVC{
     func editdetailapi(){
-        
         CommonUtils.showHud(show: true)
         
         
@@ -236,6 +199,8 @@ extension EditProfileVC{
         let params:[String : Any] = [
             "user_id":UserData.shared.id,
             "first_name":String.getString(self.txtFieldFirstName.text),
+            "last_name":String.getString(self.txtFieldLastName.text),
+            "whatsapp_number":String.getString(self.txtFieldWhatsappNumber.text),
             "dob":String.getString(self.txtFieldDOB.text),
             "phone":String.getString(self.txtFieldPhoneNumber.text),
             "country_detail":self.lblCountry.text,
@@ -286,4 +251,97 @@ extension EditProfileVC{
             }
         }
     }
+
+    // send otp to email api
+    func verifyemail(){
+        
+        CommonUtils.showHud(show: true)
+        let accessToken = kSharedUserDefaults.getLoggedInAccessToken()
+       
+
+        let params:[String : Any] = [
+            "email":UserData.shared.email,
+        ]
+
+        
+        TANetworkManager.sharedInstance.requestApi(withServiceName:ServiceName.kforgotpassword, requestMethod: .POST,
+                                                   requestParameters:params, withProgressHUD: false)
+        {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
+            
+            CommonUtils.showHudWithNoInteraction(show: false)
+            
+            if errorType == .requestSuccess {
+                
+                let dictResult = kSharedInstance.getDictionary(result)
+               
+                switch Int.getInt(statusCode) {
+                case 200:
+                    if Int.getInt(dictResult["status"]) == 200{
+                        let vc = self?.storyboard?.instantiateViewController(withIdentifier: VerifyEmailOTPVC.getStoryboardID()) as! VerifyEmailOTPVC
+                        vc.modalTransitionStyle = .crossDissolve
+                        vc.modalPresentationStyle = .overCurrentContext
+                //        vc.email = String.getString(self?.txtFieldPhone_Email.text)
+                        vc.callbackOTP1 =
+                        {
+                            vc.dismiss(animated: false){
+                                let vc = self?.storyboard?.instantiateViewController(withIdentifier: ChangeEmailVC.getStoryboardID()) as! ChangeEmailVC
+                                vc.modalTransitionStyle = .crossDissolve
+                                vc.modalPresentationStyle = .overCurrentContext
+                                vc.callbackchangenumber =  { txt in
+                                   debugPrint("email===,", txt)
+                                        self?.dismiss(animated: false) {
+                                            let vc = self?.storyboard?.instantiateViewController(withIdentifier: VerifyNewEmailOTPVC.getStoryboardID()) as! VerifyNewEmailOTPVC
+                                            vc.modalTransitionStyle = .crossDissolve
+                                            vc.modalPresentationStyle = .overCurrentContext
+                                            
+                                            
+                                            let em:String = String(describing:txt)
+                                            debugPrint("emmm",em)
+                                            vc.email = em
+                                            vc.callbackOTP2 = {
+                                                self?.dismiss(animated: false){
+                                                    let vc = self?.storyboard?.instantiateViewController(withIdentifier: EmailChangedSuccessfullyPopUpVC.getStoryboardID()) as! EmailChangedSuccessfullyPopUpVC
+                                                    vc.modalTransitionStyle = .crossDissolve
+                                                    vc.modalPresentationStyle = .overCurrentContext
+                                                    vc.callbackpopup = {
+                                                        self?.dismiss(animated: false){
+                                                            let vc = self?.storyboard?.instantiateViewController(withIdentifier: ProfileVC.getStoryboardID()) as! ProfileVC
+                                                            self?.navigationController?.pushViewController(vc, animated: false)
+                                                        }
+                                                    }
+                                                    self?.present(vc, animated: false)
+                                                }
+                                            }
+                                            self?.present(vc, animated: false)
+                                        }
+                                    
+                             
+                                }
+                                self?.present(vc, animated: false)
+                            }
+                        }
+                        self?.present(vc, animated: false)
+                    }
+             
+                    else if  Int.getInt(dictResult["status"]) == 400{
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    }
+                    else if Int.getInt(dictResult["status"]) == 401{
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    }
+                default:
+                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                }
+            } else if errorType == .noNetwork {
+                CommonUtils.showToastForInternetUnavailable()
+                
+            } else {
+                CommonUtils.showToastForDefaultError()
+            }
+        }
+    }
 }
+
+
+
+

@@ -8,6 +8,8 @@
 import UIKit
 
 class ActivationCodeVC: UIViewController{
+    
+//    MARK: -  Properties
 
     @IBOutlet weak var lblWrongCode: UILabel!
     @IBOutlet weak var lblHeading: UILabel!
@@ -26,13 +28,21 @@ class ActivationCodeVC: UIViewController{
     @IBOutlet weak var viewOtp4: UIView!
     @IBOutlet weak var viewOtp5: UIView!
     @IBOutlet weak var viewOtp6: UIView!
+    @IBOutlet weak var viewVerify: UIView!
     
     var email:String?
     var callback:(()->())?
     var type:HasCameFrom?
     var otp = ""
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setup()
+    }
+    
+//    MARK: - LIfe Cycle
+    func setup(){
         
         if type == .signUp{
             self.lblHeading.text = "Activate account"
@@ -41,7 +51,7 @@ class ActivationCodeVC: UIViewController{
         else if type == .forgotPass{
             
             self.lblHeading.text = "Verify Account"
-            self.lblSubHeading.text = "Password reset code is sent on your email address"
+            self.lblSubHeading.text = "Password reset code is sent on your email address \(String.getString(UserData.shared.email))"
         }
 
      
@@ -61,8 +71,23 @@ class ActivationCodeVC: UIViewController{
         self.viewOtp6.borderColor = UIColor(hexString: "#A6A6A6")
     }
     
+    func changebordercolor(){
+        
+        self.viewOtp1.borderColor = UIColor(hexString: "#FF4C4D")
+        self.viewOtp2.borderColor = UIColor(hexString: "#FF4C4D")
+        self.viewOtp3.borderColor = UIColor(hexString: "#FF4C4D")
+        self.viewOtp4.borderColor = UIColor(hexString: "#FF4C4D")
+        self.viewOtp5.borderColor = UIColor(hexString: "#FF4C4D")
+        self.viewOtp6.borderColor = UIColor(hexString: "#FF4C4D")
+    }
+//   MARK: - @IBAction
+    
     @IBAction func btnResendCode(_ sender: UIButton) {
         self.resendOtpApi()
+    }
+    
+    @IBAction func BtnDismissTapped(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func buttonVerify(_ sender: UIButton) {
@@ -98,6 +123,7 @@ class ActivationCodeVC: UIViewController{
             }
             if textField == txtfieldOtp6{
                 txtfieldOtp6?.resignFirstResponder()
+                self.viewVerify.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
             }
             
             textField.text? = string
@@ -127,6 +153,7 @@ class ActivationCodeVC: UIViewController{
     }
     
 }
+// MARK: - TextField Delegate
 
 extension ActivationCodeVC: UITextFieldDelegate{
     func textFieldDidBeginEditing(_ textField: UITextField){
@@ -180,7 +207,7 @@ extension ActivationCodeVC: UITextFieldDelegate{
 //       }
 //    }
 }
-// MARK:
+// MARK: - Api call
 extension ActivationCodeVC{
     func verifyuserotpapi(){
         
@@ -204,14 +231,17 @@ extension ActivationCodeVC{
                 switch Int.getInt(statusCode) {
                 case 200:
                     if Int.getInt(dictResult["status"]) == 200{
-                        let data = kSharedInstance.getDictionary(dictResult["data"])
-                        kSharedUserDefaults.setLoggedInUserDetails(loggedInUserDetails: data)
-                        kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: String.getString(dictResult[kLoggedInAccessToken]))
-                        UserData.shared.saveData(data: data, token: String.getString(dictResult[kLoggedInAccessToken]))
+//                        let data = kSharedInstance.getDictionary(dictResult["data"])
+//                        kSharedUserDefaults.setLoggedInUserDetails(loggedInUserDetails: data)
+//                        kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: String.getString(dictResult[kLoggedInAccessToken]))
+//                        UserData.shared.saveData(data: data, token: String.getString(dictResult[kLoggedInAccessToken]))
                         self?.callback?()
                     }
                     else if  Int.getInt(dictResult["status"]) == 400{
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        self?.lblWrongCode.isHidden = false
+                        self?.changebordercolor()
+                        
                     }
                     else if Int.getInt(dictResult["status"]) == 403{
                         let response = kSharedInstance.getDictionary(dictResult["response"])
@@ -255,6 +285,8 @@ extension ActivationCodeVC{
                     }
                     else if  Int.getInt(dictResult["status"]) == 400{
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        self?.lblWrongCode.isHidden = false
+                        self?.changebordercolor()
                     }
                     else if Int.getInt(dictResult["status"]) == 403{
                         let response = kSharedInstance.getDictionary(dictResult["response"])

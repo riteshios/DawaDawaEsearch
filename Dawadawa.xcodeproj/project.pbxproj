@@ -12,6 +12,7 @@
 		042293C22869B203000503B7 /* NumberChangedSuccessfulPopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042293C12869B203000503B7 /* NumberChangedSuccessfulPopUpVC.swift */; };
 		0432E33D286430EA00B4B40D /* userData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0432E33C286430EA00B4B40D /* userData.swift */; };
 		043EBE332869ABD8001EBA02 /* VerifyNumberOTPVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043EBE322869ABD8001EBA02 /* VerifyNumberOTPVC.swift */; };
+		0448C567286F2B3900B98648 /* client_101161173244-gtg9i6lsvjvcn60sc518c2ii7iqtkg07.apps.googleusercontent.com.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0448C566286F2B3900B98648 /* client_101161173244-gtg9i6lsvjvcn60sc518c2ii7iqtkg07.apps.googleusercontent.com.plist */; };
 		044D71762861988B0054DAA5 /* SettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044D71752861988B0054DAA5 /* SettingVC.swift */; };
 		045BD9BE285844DA00A848FA /* Product Sans Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 045BD9BD285844DA00A848FA /* Product Sans Regular.ttf */; };
 		046DEA97285C7E1300D1E1A5 /* sucess.gif in Resources */ = {isa = PBXBuildFile; fileRef = 046DEA96285C7E1300D1E1A5 /* sucess.gif */; };
@@ -576,6 +577,7 @@
 		042293C12869B203000503B7 /* NumberChangedSuccessfulPopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberChangedSuccessfulPopUpVC.swift; sourceTree = "<group>"; };
 		0432E33C286430EA00B4B40D /* userData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userData.swift; sourceTree = SOURCE_ROOT; };
 		043EBE322869ABD8001EBA02 /* VerifyNumberOTPVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = VerifyNumberOTPVC.swift; path = Dawadawa/Storyboard/VerifyNumberOTPVC.swift; sourceTree = SOURCE_ROOT; };
+		0448C566286F2B3900B98648 /* client_101161173244-gtg9i6lsvjvcn60sc518c2ii7iqtkg07.apps.googleusercontent.com.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "client_101161173244-gtg9i6lsvjvcn60sc518c2ii7iqtkg07.apps.googleusercontent.com.plist"; sourceTree = "<group>"; };
 		044D71752861988B0054DAA5 /* SettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingVC.swift; sourceTree = "<group>"; };
 		045BD9BD285844DA00A848FA /* Product Sans Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Product Sans Regular.ttf"; sourceTree = "<group>"; };
 		046DEA96285C7E1300D1E1A5 /* sucess.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = sucess.gif; sourceTree = "<group>"; };
@@ -2011,6 +2013,7 @@
 				44C286D62851B669007AF36F /* Controller */,
 				44C286D92851B6A9007AF36F /* SupportingFiles */,
 				44C286CF2851B4B3007AF36F /* Info.plist */,
+				0448C566286F2B3900B98648 /* client_101161173244-gtg9i6lsvjvcn60sc518c2ii7iqtkg07.apps.googleusercontent.com.plist */,
 			);
 			path = Dawadawa;
 			sourceTree = "<group>";
@@ -2245,6 +2248,7 @@
 				447DCE432851CB1300C40DDD /* UM.png in Resources */,
 				447DCD8F2851CB1200C40DDD /* MW.png in Resources */,
 				447DCE4F2851CB1300C40DDD /* ZA.png in Resources */,
+				0448C567286F2B3900B98648 /* client_101161173244-gtg9i6lsvjvcn60sc518c2ii7iqtkg07.apps.googleusercontent.com.plist in Resources */,
 				447DCDD22851CB1200C40DDD /* SD.png in Resources */,
 				447DCE382851CB1300C40DDD /* CV.png in Resources */,
 				447DCDB72851CB1200C40DDD /* GP.png in Resources */,
@@ -2854,7 +2858,6 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				"EXCLUDED_ARCHS[sdk=*]" = arm64;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -2916,7 +2919,6 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				"EXCLUDED_ARCHS[sdk=*]" = arm64;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -2945,7 +2947,6 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 753Q2374BG;
-				"EXCLUDED_ARCHS[sdk=*]" = arm64;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Dawadawa/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -2978,7 +2979,6 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 753Q2374BG;
-				"EXCLUDED_ARCHS[sdk=*]" = arm64;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Dawadawa/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

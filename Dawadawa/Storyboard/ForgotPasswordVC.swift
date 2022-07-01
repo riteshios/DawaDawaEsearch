@@ -10,8 +10,8 @@ import SKFloatingTextField
 
 class ForgotPasswordVC: UIViewController {
     
+//    MARK: - Properties
     @IBOutlet weak var viewMain: UIView!
-    
     @IBOutlet weak var viewButtonSendCode: UIView!
     @IBOutlet weak var btnSendEmail_Phone: UIButton!
     @IBOutlet weak var lblSendEmail_Phone: UILabel!
@@ -21,6 +21,10 @@ class ForgotPasswordVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.setup()
+    }
+// MARK: - Life Cyclye
+    func setup(){
         viewMain.clipsToBounds = true
         viewMain.layer.cornerRadius = 25
         viewMain.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
@@ -28,7 +32,13 @@ class ForgotPasswordVC: UIViewController {
         self.viewButtonSendCode.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
         
         self.setTextFieldUI(textField: txtFieldPhone_Email, place: "Phone number", floatingText: "Phone number")
-        self.lblSendEmail_Phone.text = "Send on email address"
+        self.lblSendEmail_Phone.text = "Send on email address" 
+    }
+    
+// MARK: - @IBAction
+    
+    @IBAction func btnBackTapped(_ sender: UIButton) {
+        self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func btnSendEmail_PhoneTapped(_ sender: UIButton) {

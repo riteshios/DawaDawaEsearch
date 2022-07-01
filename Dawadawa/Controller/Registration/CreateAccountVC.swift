@@ -28,7 +28,7 @@ class CreateAccountVC: UIViewController {
     @IBOutlet weak var txtFieldConfirmPassword: SKFloatingTextField!
     
     @IBOutlet weak var viewCountry: UIView!
-    
+    @IBOutlet weak var btnTermAndCondition: UIButton!
     
     
     var isCountry = false
@@ -71,14 +71,18 @@ class CreateAccountVC: UIViewController {
         }
     }
     
-    //    @IBAction func btnSecurePasswordTapped(_ sender: UIButton) {
-    //        sender.isSelected = !sender.isSelected
-    //        txtFieldPassword.isSecureTextEntry.toggle()
-    //    }
-    //    @IBAction func btnSecureConfirmPasswordTapped(_ sender: UIButton){
-    //        sender.isSelected = !sender.isSelected
-    //        txtFieldConfirmPassword.isSecureTextEntry.toggle()
-    //    }
+    @IBAction func btnTermsAndCondition(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+    }
+    //        @IBAction func btnSecurePasswordTapped(_ sender: UIButton) {
+//            sender.isSelected = !sender.isSelected
+//            self.txtFieldPassword.isSecureTextEntry.toggle()
+//        }
+//        @IBAction func btnSecureConfirmPasswordTapped(_ sender: UIButton){
+//            sender.isSelected = !sender.isSelected
+//            txtFieldConfirmPassword.isSecureTextEntry.toggle()
+//        }
+    
     @IBAction func btnLoginTapped(_ sender: UIButton) {
         let vc  = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
         self.navigationController?.pushViewController(vc, animated: true)
@@ -237,8 +241,10 @@ extension CreateAccountVC {
                                 vc.type = .signUp
                                 vc.callback1 = {
                                     self.dismiss(animated: false) {
-                                        let vc = UIStoryboard(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "TabBarVC") as! TabBarVC
-                                        self.navigationController?.pushViewController(vc, animated: true)
+                                        
+                                        kSharedAppDelegate?.moveToLoginScreen()
+//                                        let vc = UIStoryboard(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "TabBarVC") as! TabBarVC
+//                                        self.navigationController?.pushViewController(vc, animated: true)
                                     }
                                 }
                                 self.present(vc, animated: false)

@@ -12,6 +12,7 @@ class ChangePasswordOTPVerifyVC: UIViewController {
     @IBOutlet weak var txtfieldOtp1: UITextField!
     @IBOutlet weak var txtfieldOtp2: UITextField!
     @IBOutlet weak var lblWrongOtp: UILabel!
+    @IBOutlet weak var lblSubHeading: UILabel!
     @IBOutlet weak var txtfieldOtp3: UITextField!
     @IBOutlet weak var txtfieldOtp4: UITextField!
     @IBOutlet weak var txtfieldOtp5: UITextField!
@@ -35,7 +36,7 @@ class ChangePasswordOTPVerifyVC: UIViewController {
         self.setup()
         
     }
-    
+//     MARK: - Life Cycle
     func setup(){
         self.txtfieldOtp1.delegate = self
         self.txtfieldOtp2.delegate = self
@@ -51,7 +52,18 @@ class ChangePasswordOTPVerifyVC: UIViewController {
         self.viewOtp5.borderColor = UIColor(hexString: "#A6A6A6")
         self.viewOtp6.borderColor = UIColor(hexString: "#A6A6A6")
         self.lblWrongOtp.isHidden = true
+        self.lblSubHeading.text = "Password change code is sent on your email address \(String.getString(UserData.shared.email))"
     }
+    func changebordercolor(){
+        
+        self.viewOtp1.borderColor = UIColor(hexString: "#FF4C4D")
+        self.viewOtp2.borderColor = UIColor(hexString: "#FF4C4D")
+        self.viewOtp3.borderColor = UIColor(hexString: "#FF4C4D")
+        self.viewOtp4.borderColor = UIColor(hexString: "#FF4C4D")
+        self.viewOtp5.borderColor = UIColor(hexString: "#FF4C4D")
+        self.viewOtp6.borderColor = UIColor(hexString: "#FF4C4D")
+    }
+// MARK: - @IBAction
     @IBAction func btnVerifyOtpTaooed(_ sender: UIButton) {
         self.otp = String.getString(self.txtfieldOtp1.text) + String.getString(self.txtfieldOtp2.text) + String.getString(self.txtfieldOtp3.text) + String.getString(self.txtfieldOtp4.text) +
         String.getString(self.txtfieldOtp5.text) +
@@ -63,8 +75,13 @@ class ChangePasswordOTPVerifyVC: UIViewController {
             CommonUtils.showError(.info, "Please enter otp")
             return
         }
-        
-        
+    }
+    @IBAction func btnDismiss(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func btnResendOtpTapped(_sender: UIButton){
+        self.resendOtpApi()
     }
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
@@ -144,7 +161,7 @@ extension ChangePasswordOTPVerifyVC: UITextFieldDelegate{
 }
 
 
-// MARK: -
+// MARK: - API Call
 extension ChangePasswordOTPVerifyVC{
     func verifyotpapi(){
         
@@ -171,6 +188,8 @@ extension ChangePasswordOTPVerifyVC{
                         self?.callbackotp?()
                     }
                     else if  Int.getInt(dictResult["status"]) == 400{
+                        self?.changebordercolor()
+                        self?.lblWrongOtp.isHidden = false
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     else if Int.getInt(dictResult["status"]) == 403{
@@ -190,5 +209,42 @@ extension ChangePasswordOTPVerifyVC{
         }
     }
     
-    
+    func resendOtpApi(){
+        CommonUtils.showHudWithNoInteraction(show: true)
+        let params:[String : Any] = [
+            "email":UserData.shared.email
+        ]
+        
+        TANetworkManager.sharedInstance.requestApi(withServiceName:ServiceName.kresendotp,                                                   requestMethod: .POST,
+                                                   requestParameters:params, withProgressHUD: false)
+        {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
+            
+            CommonUtils.showHudWithNoInteraction(show: false)
+            
+            if errorType == .requestSuccess {
+                let dictResult = kSharedInstance.getDictionary(result)
+                
+                switch Int.getInt(statusCode) {
+                case 200:
+                    if Int.getInt(dictResult["status"]) == 200{
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    }
+                    else if  Int.getInt(dictResult["status"]) == 400{
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    }
+                default:
+                    
+                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    
+                }
+            }
+            else if errorType == .noNetwork {
+                CommonUtils.showToastForInternetUnavailable()
+                
+            } else {
+                CommonUtils.showToastForDefaultError()
+            }
+        }
+    }
+
 }

@@ -10,9 +10,10 @@ import SKFloatingTextField
 
 class LoginVC: UIViewController {
     
+//     MARK: - Properties
+    
     @IBOutlet weak var viewMain: UIView!
     @IBOutlet weak var viewButtonLogin: UIView!
-    
     @IBOutlet weak var txtFieldPhoneNumer: SKFloatingTextField!
     @IBOutlet weak var txtFieldPassword: SKFloatingTextField!
     
@@ -20,6 +21,12 @@ class LoginVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setup()
+        
+    }
+//    MARK: - LIfe Cyclye
+    func setup(){
+        self.txtFieldPhoneNumer.keyBoardType = .numberPad
         viewMain.clipsToBounds = true
         viewMain.layer.cornerRadius = 25
         viewMain.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
@@ -107,12 +114,13 @@ extension LoginVC : SKFlaotingTextFieldDelegate {
         print("begin editing")
     }
 }
-// MARK: Api
+// MARK: - Api Call
 
 extension LoginVC{
     func loginapi(){
         
         CommonUtils.showHud(show: true)
+        
         
         let params:[String : Any] = [
             "phone":String.getString(self.txtFieldPhoneNumer.text),
