@@ -2710,6 +2710,7 @@
                         <outlet property="viewOtp4" destination="BnE-S7-jQj" id="U9i-St-cno"/>
                         <outlet property="viewOtp5" destination="bLc-sn-wDy" id="jMp-Ef-HGB"/>
                         <outlet property="viewOtp6" destination="wdy-b0-SLK" id="oEc-Zi-skl"/>
+                        <outlet property="viewVerify" destination="2OX-CO-i7g" id="Lrd-xI-Dhy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M0N-R2-IlV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

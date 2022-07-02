@@ -19,10 +19,11 @@ class SettingVC: UIViewController {
     }
     
     @IBAction func btnDropTapped(_ sender: UIButton) {
-        let dataSource1 = ["English-IND","Arabic","Japanese"]
+        let dataSource1 = ["English-IND","Arabic"]
                kSharedAppDelegate?.dropDown(dataSource:dataSource1 , text: btndrop)
                {(Index ,item) in
                    self.lblDropDownMenu.text = item
+                   self.imgDropDownMenu.image = item == "English-IND" ? UIImage(named: "image 2") : UIImage(named: "Boss")
     }
 }
     

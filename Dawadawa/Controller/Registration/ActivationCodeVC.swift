@@ -123,7 +123,6 @@ class ActivationCodeVC: UIViewController{
             }
             if textField == txtfieldOtp6{
                 txtfieldOtp6?.resignFirstResponder()
-                self.viewVerify.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
             }
             
             textField.text? = string
@@ -176,6 +175,7 @@ extension ActivationCodeVC: UITextFieldDelegate{
             
         case self.txtfieldOtp6:
             self.viewOtp6.borderColor = UIColor(hexString: "#1572A1")
+            self.viewVerify.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
         
         default:
             return

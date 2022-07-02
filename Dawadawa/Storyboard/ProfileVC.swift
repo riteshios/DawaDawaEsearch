@@ -128,14 +128,20 @@ extension ProfileVC{
     func uploadImage(image:UIImage?){
         CommonUtils.showHud(show: true)
         
+        if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
+            let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+            let septoken = endToken.components(separatedBy: " ")
+            if septoken[0] != "Bearer"{
+                let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
+                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
+            }
+//            headers["token"] = kSharedUserDefaults.getLoggedInAccessToken()
+        }
         let params:[String : Any] = [
             "user_id":UserData.shared.id
         ]
 
-        let uploadimage:[String:Any] =
-        ["profile_image": self.ImageProfile.image ?? UIImage()
-        ]
-                
+    let uploadimage:[String:Any] = ["imageName":"profile_image","image":self.ImageProfile.image ?? UIImage()]
         TANetworkManager.sharedInstance.requestMultiPart(withServiceName:ServiceName.keditprofileimage , requestMethod: .post, requestImages: [uploadimage], requestVideos: [:], requestData:params)
         { (result:Any?, error:Error?, errortype:ErrorType?, statusCode:Int?) in
             CommonUtils.showHudWithNoInteraction(show: false)
@@ -144,6 +150,11 @@ extension ProfileVC{
                 switch Int.getInt(statusCode) {
                 case 200:
                     if Int.getInt(dictResult["status"]) == 200{
+                        let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+                        let septoken = endToken.components(separatedBy: " ")
+                        if septoken[0] == "Bearer"{
+                            kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
+                        }
                         let data =  kSharedInstance.getDictionary(dictResult["data"])
                         let obj = kSharedInstance.getDictionary(data["social_profile"])
                         self.userImage = String.getString(obj.first)

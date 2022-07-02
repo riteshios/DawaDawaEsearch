@@ -25,6 +25,7 @@ class ChangePasswordOTPVerifyVC: UIViewController {
     @IBOutlet weak var viewOtp5: UIView!
     @IBOutlet weak var viewOtp6: UIView!
     
+    @IBOutlet weak var viewVerify: UIView!
     
     var callbackotp:(()->())?
     
@@ -153,6 +154,7 @@ extension ChangePasswordOTPVerifyVC: UITextFieldDelegate{
             
         case self.txtfieldOtp6:
             self.viewOtp6.borderColor = UIColor(hexString: "#1572A1")
+            self.viewVerify.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
             
         default:
             return
