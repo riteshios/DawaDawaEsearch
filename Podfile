@@ -14,6 +14,8 @@ target 'Dawadawa' do
   pod 'GoogleMaps'
   pod 'GoogleSignIn'
   pod 'GooglePlaces'
+  pod  'Firebase/Auth'
+  pod  'Firebase/Core'
 # pod 'PTCardTabBar'
   pod 'SVProgressHUD'
   pod 'SwiftyGif'

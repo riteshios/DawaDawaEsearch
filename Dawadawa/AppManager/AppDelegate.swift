@@ -8,8 +8,10 @@
 import UIKit
 import IQKeyboardManagerSwift
 import DropDown
+import Firebase
 import AlamofireImage
-
+import FirebaseCore
+import GoogleSignIn
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
@@ -19,6 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.shared.enable = true
         window = UIWindow(frame: UIScreen.main.bounds)
         sleep(3)
+//        FirebaseApp.configure()
+//        GIDSignIn.sharedInstance.clientID = "330854842489-c25b86f35mmp4ckogq99l06tn52jj4ki.apps.googleusercontent.com"
         return true
     }
 
