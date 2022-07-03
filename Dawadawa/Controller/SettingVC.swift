@@ -23,7 +23,7 @@ class SettingVC: UIViewController {
                kSharedAppDelegate?.dropDown(dataSource:dataSource1 , text: btndrop)
                {(Index ,item) in
                    self.lblDropDownMenu.text = item
-                   self.imgDropDownMenu.image = item == "English-IND" ? UIImage(named: "image 2") : UIImage(named: "Boss")
+                   self.imgDropDownMenu.image = item == "English-IND" ? UIImage(named: "IND") : UIImage(named: "sudan")
     }
 }
     

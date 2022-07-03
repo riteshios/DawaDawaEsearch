@@ -25,6 +25,8 @@ class VerifyEmailOTPVC: UIViewController {
     @IBOutlet weak var viewOtp4: UIView!
     @IBOutlet weak var viewOtp6: UIView!
     @IBOutlet weak var viewOtp5: UIView!
+    @IBOutlet weak var viewVerify: UIView!
+    
     var callbackOTP1:(()->())?
     var otp = ""
     
@@ -51,7 +53,9 @@ class VerifyEmailOTPVC: UIViewController {
         self.viewOtp4.borderColor = UIColor(hexString: "#A6A6A6")
         self.viewOtp5.borderColor = UIColor(hexString: "#A6A6A6")
         self.viewOtp6.borderColor = UIColor(hexString: "#A6A6A6")
+        self.viewVerify.backgroundColor = UIColor(hexString: "#A6A6A6")
     }
+    
     func changebordercolor(){
         
         self.viewOtp1.borderColor = UIColor(hexString: "#FF4C4D")
@@ -159,10 +163,12 @@ extension VerifyEmailOTPVC: UITextFieldDelegate{
             
         case self.txtfieldOtp6:
             self.viewOtp6.borderColor = UIColor(hexString: "#1572A1")
-            
+            self.viewVerify.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
         default:
             return
         }
+            
+        
     }
 }
 

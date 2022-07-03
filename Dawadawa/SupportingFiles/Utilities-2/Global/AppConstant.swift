@@ -74,6 +74,7 @@ struct ServiceName {
     static let  keditprofileimage     =       "api/edit-profile-image"
     static let  kedituserdetails     =       "api/edit-user-detail"
     static let kchangeemail           =      "api/change-email"
+    static let kgooglelogin          =       "api/google-login"
 }
 
 struct Notifications {

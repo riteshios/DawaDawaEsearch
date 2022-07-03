@@ -22,6 +22,13 @@ class EditProfileVC: UIViewController {
     @IBOutlet weak var viewEnglish: UIView!
     @IBOutlet weak var viewArabic: UIView!
     
+    @IBOutlet weak var viewPhone: UIView!
+    @IBOutlet weak var viewEmail: UIView!
+    @IBOutlet weak var viewFirstName: UIView!
+    @IBOutlet weak var viewLastName: UIView!
+    @IBOutlet weak var viewWhatsappNumber: UIView!
+    @IBOutlet weak var viewDOB: UIView!
+    
     @IBOutlet weak var lblGender: UILabel!
     @IBOutlet weak var btnDropGender: UIButton!
     @IBOutlet weak var lblUserType: UILabel!
@@ -52,6 +59,21 @@ class EditProfileVC: UIViewController {
         self.viewEnglish.backgroundColor = UIColor(red: 21, green: 114, blue: 161)
         self.lblEnglish.textColor = UIColor.systemBackground
         self.lblArabic.textColor = UIColor(red: 21, green: 114, blue: 161)
+        
+        self.txtFieldPhoneNumber.delegate = self
+        self.txtFieldEmailAddress.delegate = self
+        self.txtFieldDOB.delegate = self
+        self.txtFieldFirstName.delegate = self
+        self.txtFieldLastName.delegate = self
+        self.txtFieldWhatsappNumber.delegate = self
+        
+        self.viewPhone.isHidden = false
+        self.viewEmail.isHidden = false
+        self.viewDOB.isHidden = false
+        self.viewFirstName.isHidden = false
+        self.viewLastName.isHidden = false
+        self.viewWhatsappNumber.isHidden = false
+        
 
     }
     func fetchdata(){
@@ -176,6 +198,33 @@ extension EditProfileVC : SKFlaotingTextFieldDelegate {
     
     func textFieldDidBeginEditing(textField: SKFloatingTextField) {
         print("begin editing")
+    }
+}
+
+extension EditProfileVC: UITextFieldDelegate{
+    func textFieldDidBeginEditing(_ textField: UITextField){
+        switch textField{
+        case self.txtFieldPhoneNumber:
+            self.viewPhone.isHidden = true
+            
+        case self.txtFieldEmailAddress:
+            self.viewEmail.isHidden = true
+        
+        case self.txtFieldDOB:
+            self.viewDOB.isHidden = true
+            
+        case self.txtFieldFirstName:
+            self.viewFirstName.isHidden = true
+            
+        case self.txtFieldLastName:
+            self.viewLastName.isHidden = true
+            
+        case self.txtFieldWhatsappNumber:
+            self.viewWhatsappNumber.isHidden = true
+            
+        default:
+            return
+       }
     }
 }
 
@@ -314,8 +363,6 @@ extension EditProfileVC{
                                             }
                                             self?.present(vc, animated: false)
                                         }
-                                    
-                             
                                 }
                                 self?.present(vc, animated: false)
                             }
@@ -341,6 +388,7 @@ extension EditProfileVC{
         }
     }
 }
+
 
 
 

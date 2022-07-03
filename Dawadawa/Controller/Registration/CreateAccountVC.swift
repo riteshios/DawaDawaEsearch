@@ -8,6 +8,7 @@
 
 import UIKit
 import SKFloatingTextField
+import WebKit
 
 
 class CreateAccountVC: UIViewController {
@@ -30,16 +31,40 @@ class CreateAccountVC: UIViewController {
     @IBOutlet weak var viewCountry: UIView!
     @IBOutlet weak var btnTermAndCondition: UIButton!
     
-    
+    let webview = WKWebView()
     var isCountry = false
+    var isprivacypolicy = false
+    var google_id = ""
+    var socialprofile = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.setup()
-       
         
     }
-   
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        webview.frame = view.bounds
+    }
+    
+    func webviewstermsetup(){
+        view.addSubview(webview)
+        guard let url = URL(string: "https://demo4app.com/dawadawa/api-terms") else{
+            return
+        }
+        webview.load(URLRequest(url:url))
+    }
+    func webviewprivacysetup(){
+        view.addSubview(webview)
+        guard let url = URL(string: "https://demo4app.com/dawadawa/api-privacy-policy") else{
+            return
+        }
+        webview.load(URLRequest(url:url))
+    }
+    
+    
     func setup(){
         
         viewMain.clipsToBounds = true
@@ -54,10 +79,24 @@ class CreateAccountVC: UIViewController {
         self.setTextFieldUI(textField: txtFieldPhoneNumber, place: "Phone number* ", floatingText: "Phone number")
         self.setTextFieldUI(textField: txtFieldPassword, place: "Password*", floatingText: "Password")
         self.setTextFieldUI(textField: txtFieldConfirmPassword, place: "Confirm password*", floatingText: "Confirm password")
-        
+        self.txtFieldPassword.delegate = self
+        self.txtFieldConfirmPassword.delegate = self
         self.viewCountry.isHidden = true
     }
     //   MARK: - @IBACtions
+    
+    
+    @IBAction func btnTerms(_ sender: UIButton) {
+        self.webviewstermsetup()
+    }
+    @IBAction func btnprivacy(_ sender: UIButton) {
+        self.webviewprivacysetup()
+    }
+    
+    @IBAction func btnGoogleLoginTapped(_ sender: UIButton) {
+//        self.googleSignin()
+    }
+    
     @IBAction func btnCountrySelecTapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         if self.btnCountrySelect.isSelected == true{
@@ -73,15 +112,17 @@ class CreateAccountVC: UIViewController {
     
     @IBAction func btnTermsAndCondition(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
+        self.isprivacypolicy = true
     }
-    //        @IBAction func btnSecurePasswordTapped(_ sender: UIButton) {
-//            sender.isSelected = !sender.isSelected
-//            self.txtFieldPassword.isSecureTextEntry.toggle()
-//        }
-//        @IBAction func btnSecureConfirmPasswordTapped(_ sender: UIButton){
-//            sender.isSelected = !sender.isSelected
-//            txtFieldConfirmPassword.isSecureTextEntry.toggle()
-//        }
+    
+    @IBAction func btnSecurePasswordTapped(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        self.txtFieldPassword.isSecureTextInput.toggle()
+    }
+    @IBAction func btnSecureConfirmPasswordTapped(_ sender: UIButton){
+        sender.isSelected = !sender.isSelected
+        txtFieldConfirmPassword.isSecureTextInput.toggle()
+    }
     
     @IBAction func btnLoginTapped(_ sender: UIButton) {
         let vc  = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
@@ -120,6 +161,7 @@ class CreateAccountVC: UIViewController {
         else if self.isCountry == false{
             self.showSimpleAlert(message: "Please Select the Country")
         }
+      
         else if String.getString(self.txtFieldEmail.text).isEmpty
         {
             showSimpleAlert(message: Notifications.kEnterEmail)
@@ -160,9 +202,52 @@ class CreateAccountVC: UIViewController {
             self.showSimpleAlert(message: Notifications.kMatchPassword)
             return
         }
+        else if self.isprivacypolicy == false{
+            self.showSimpleAlert(message: "Please select the T&C")
+        }
         self.view.endEditing(true)
         self.createAccountapi()
     }
+    //    social login
+//    func googleSignin(){
+//        let signInConfig = GIDConfiguration.init(clientID: "290314984120-fidp05vtumuat8sn6mcpc0pofrunrjs5.apps.googleusercontent.com")
+//        GIDSignIn.sharedInstance.signOut()
+//        GIDSignIn.sharedInstance.signIn(with: signInConfig, presenting: self) { user, error in
+//
+//
+//            guard error == nil else { return }
+//            guard let user = user else { return }
+//
+//            let emailAddress = user.profile?.email
+//
+//            let fullName = user.profile?.name
+//            let givenName = user.profile?.givenName
+//            let familyName = user.profile?.familyName
+//            let profilePicUrl = user.profile?.imageURL(withDimension: 320)
+//            let userID      =  user.userID
+//            print("Email: \(emailAddress), Name: \(fullName), GiveName: \(givenName), FamilyName: \(familyName), PIC: \(profilePicUrl), ID: \(userID)")
+//
+//            var firstName = String.getString(fullName)
+//            var lastName = String.getString(familyName)
+//            self.id = String.getString(userID)
+//            //            self.socialData.googleImage = profilePicUrl
+//            self.socialType = "1"
+//            self.emailId = String.getString(emailAddress)
+//
+//            //            user.authentication.do { authentication, error in
+//            //                    guard error == nil else { return }
+//            //                    guard let authentication = authentication else { return }
+//            //
+//            //                    let idToken = authentication.idToken
+//            //                    // Send ID token to backend (example below).
+//            //                print("Token :", idToken)
+//            //
+//            //
+//            //                }
+//            self.googleSigninApi()
+//
+//        }
+//    }
 }
 
 extension CreateAccountVC{
@@ -223,9 +308,9 @@ extension CreateAccountVC {
                 
                 switch Int.getInt(statusCode){
                 case 200:
-//                    UserData.shared.saveData (data:dictResult)
-//                    self.save()
-//                    UserDefaults.standard.set(String.getString(self.txtFieldEmail.text), forKey: "email")
+                    //                    UserData.shared.saveData (data:dictResult)
+                    //                    self.save()
+                    //                    UserDefaults.standard.set(String.getString(self.txtFieldEmail.text), forKey: "email")
                     if Int.getInt(dictResult["status"]) == 200{
                         let vc = self.storyboard?.instantiateViewController(withIdentifier: ActivationCodeVC.getStoryboardID()) as! ActivationCodeVC
                         vc.modalTransitionStyle = .crossDissolve
@@ -243,8 +328,8 @@ extension CreateAccountVC {
                                     self.dismiss(animated: false) {
                                         
                                         kSharedAppDelegate?.moveToLoginScreen()
-//                                        let vc = UIStoryboard(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "TabBarVC") as! TabBarVC
-//                                        self.navigationController?.pushViewController(vc, animated: true)
+                                        //                                        let vc = UIStoryboard(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "TabBarVC") as! TabBarVC
+                                        //                                        self.navigationController?.pushViewController(vc, animated: true)
                                     }
                                 }
                                 self.present(vc, animated: false)
@@ -255,19 +340,19 @@ extension CreateAccountVC {
                     if Int.getInt(dictResult["status"]) == 400{
                         let response = kSharedInstance.getDictionary(dictResult["response"])
                         
-                    if let _ = response["email"] {
+                        if let _ = response["email"] {
                             let msg = kSharedInstance.getStringArray(response["email"])
                             CommonUtils.showError(.info, msg[0])// msg is on 0th index
                         }
-                       else if let _ = response["phone"] {
+                        else if let _ = response["phone"] {
                             let msg = kSharedInstance.getStringArray(response["phone"])
                             CommonUtils.showError(.info, msg[0])// msg is on 0th index
                         }
                         //let msg = kSharedInstance.getStringArray(response["phone"])
-                       // CommonUtils.showError(.info, msg[0])// msg is on 0th index
+                        // CommonUtils.showError(.info, msg[0])// msg is on 0th index
                         
                     }
-
+                    
                 default:
                     CommonUtils.showError(.info, String.getString(dictResult["message"]))
                 }
@@ -279,5 +364,57 @@ extension CreateAccountVC {
             }
         }
     }
+//    GoogleLoginApi
+    func googleSigninApi(){
+        CommonUtils.showHudWithNoInteraction(show: true)
+        
+        if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
+            let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+            let septoken = endToken.components(separatedBy: " ")
+            if septoken[0] != "Bearer"{
+                let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
+                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
+            }
+            //            headers["token"] = kSharedUserDefaults.getLoggedInAccessToken()
+        }
+        
+        let params:[String:Any] = ["username":UserData.shared.name,
+                                   "email":UserData.shared.email,
+                                   "mobile":UserData.shared.phone,
+                                   "g_id":String.getString(self.google_id),
+                                   "device_type":"IOS",
+                                   "device_id":"1212",
+                                   "social_profile":String.getString(self.socialprofile)
+                                   
+        ]
+        
+        TANetworkManager.sharedInstance.requestApi(withServiceName: ServiceName.kgooglelogin, requestMethod: .POST, requestParameters: params, withProgressHUD: false) { (result:Any?,error: Error?, errorType:ErrorType, statussCode:Int?) in
+            if errorType == .requestSuccess{
+                let dictResult = kSharedInstance.getDictionary(result)
+                switch Int.getInt(statussCode) {
+                case 200:
+                    if Int.getInt(dictResult["status"]) == 200{
+                        let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+                        let septoken = endToken.components(separatedBy: " ")
+                        if septoken[0] == "Bearer"{
+                            kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
+                        }
+                        kSharedAppDelegate?.makeRootViewController()
+                    }
+                    else if  Int.getInt(dictResult["status"]) == 400{
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    }
+                default:
+                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                }
+            }else if errorType == .noNetwork {
+                CommonUtils.showToastForInternetUnavailable()
+                
+            } else {
+                CommonUtils.showToastForDefaultError()
+            }
+        }
+    }
+
 }
 

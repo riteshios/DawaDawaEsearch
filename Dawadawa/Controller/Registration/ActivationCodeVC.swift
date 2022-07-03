@@ -69,6 +69,7 @@ class ActivationCodeVC: UIViewController{
         self.viewOtp4.borderColor = UIColor(hexString: "#A6A6A6")
         self.viewOtp5.borderColor = UIColor(hexString: "#A6A6A6")
         self.viewOtp6.borderColor = UIColor(hexString: "#A6A6A6")
+        self.viewVerify.backgroundColor = UIColor(hexString: "#A6A6A6")
     }
     
     func changebordercolor(){

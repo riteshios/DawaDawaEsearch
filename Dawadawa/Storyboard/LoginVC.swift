@@ -37,6 +37,12 @@ class LoginVC: UIViewController {
         self.setTextFieldUI(textField: txtFieldPassword, place: "Password", floatingText: "Password")
     }
     //  MARK: - @IBAction
+    
+    @IBAction func btnSecurePasswordTaspped(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        txtFieldPassword.isSecureTextInput.toggle()
+    }
+    
     @IBAction func btnCreateAccountTapped(_ sender: UIButton) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "CreateAccountVC") as! CreateAccountVC
         self.navigationController?.pushViewController(vc, animated: true)
