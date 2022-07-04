@@ -51,11 +51,11 @@ class CreateAccountVC: UIViewController {
     }
     
     func webviewstermsetup(){
-        view.addSubview(webview)
-        guard let url = URL(string: "https://demo4app.com/dawadawa/api-terms") else{
-            return
-        }
-        webview.load(URLRequest(url:url))
+//        view.addSubview(webview)
+//        guard let url = URL(string: "https://demo4app.com/dawadawa/api-terms") else{
+//            return
+//        }
+//        webview.load(URLRequest(url:url))
     }
     func webviewprivacysetup(){
         view.addSubview(webview)
@@ -83,19 +83,62 @@ class CreateAccountVC: UIViewController {
         self.txtFieldPassword.delegate = self
         self.txtFieldConfirmPassword.delegate = self
         self.viewCountry.isHidden = true
+        
+        self.txtFieldPhoneNumber.keyBoardType = .numberPad
     }
     //   MARK: - @IBACtions
     
     
     @IBAction func btnTerms(_ sender: UIButton) {
-        self.webviewstermsetup()
+//        self.webviewstermsetup()
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: WebViewVC.getStoryboardID()) as! WebViewVC
+        vc.strurl = "https://demo4app.com/dawadawa/api-terms"
+        vc.head = "Terms and Condition"
+        self.navigationController?.pushViewController(vc, animated: false)
     }
     @IBAction func btnprivacy(_ sender: UIButton) {
-        self.webviewprivacysetup()
+//        self.webviewprivacysetup()
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: WebViewVC.getStoryboardID()) as! WebViewVC
+        vc.strurl = "https://demo4app.com/dawadawa/api-privacy-policy"
+        vc.head = "Privacy Policy"
+        self.navigationController?.pushViewController(vc, animated: false)
     }
     
     @IBAction func btnGoogleLoginTapped(_ sender: UIButton) {
-//        self.googleSignin()
+        //        self.googleSignin()
+        let signInConfig = GIDConfiguration.init(clientID: "330854842489-c25b86f35mmp4ckogq99l06tn52jj4ki.apps.googleusercontent.com")
+        
+        
+        
+        GIDSignIn.sharedInstance.signIn(with: signInConfig, presenting: self) { user, error in
+            
+            guard error == nil else { return }
+            
+            guard let user = user else { return }
+            
+            
+            
+            if let profiledata = user.profile {
+                
+                
+                
+                let userId : String = user.userID ?? ""
+                
+                let username : String = profiledata.givenName ?? ""
+                
+                let email : String = profiledata.email
+                
+                
+                if let imgurl = user.profile?.imageURL(withDimension: 100) {
+                    
+                    let absoluteurl : String = imgurl.absoluteString
+                    
+                    //HERE CALL YOUR SERVER APP
+                }
+                self.googleSigninApi(accountName: username, email: email, googleId: userId)
+    
+            }
+        }
     }
     
     @IBAction func btnCountrySelecTapped(_ sender: UIButton) {
@@ -133,6 +176,11 @@ class CreateAccountVC: UIViewController {
     @IBAction func btnCreateAccountTapped(_ sender: UIButton){
         self.Validation()
     }
+    @IBAction func btnSkipRegistration(_ sender: UIButton) {
+        kSharedAppDelegate?.makeRootViewController()
+    }
+    
+    
     
     // MARK: - Validation
     
@@ -159,10 +207,10 @@ class CreateAccountVC: UIViewController {
             self.showSimpleAlert(message: Notifications.kvalidlastname)
             return
         }
-        else if self.isCountry == false{
-            self.showSimpleAlert(message: "Please Select the Country")
-        }
-      
+        //        else if self.isCountry == false{
+        //            self.showSimpleAlert(message: "Please Select the Country")
+        //        }
+        
         else if String.getString(self.txtFieldEmail.text).isEmpty
         {
             showSimpleAlert(message: Notifications.kEnterEmail)
@@ -204,51 +252,51 @@ class CreateAccountVC: UIViewController {
             return
         }
         else if self.isprivacypolicy == false{
-            self.showSimpleAlert(message: "Please select the T&C")
+            self.showSimpleAlert(message: "Please Select T&C and Privacy Policy")
         }
         self.view.endEditing(true)
         self.createAccountapi()
     }
     //    social login
-//    func googleSignin(){
-//        let signInConfig = GIDConfiguration.init(clientID: "290314984120-fidp05vtumuat8sn6mcpc0pofrunrjs5.apps.googleusercontent.com")
-//        GIDSignIn.sharedInstance.signOut()
-//        GIDSignIn.sharedInstance.signIn(with: signInConfig, presenting: self) { user, error in
-//
-//
-//            guard error == nil else { return }
-//            guard let user = user else { return }
-//
-//            let emailAddress = user.profile?.email
-//
-//            let fullName = user.profile?.name
-//            let givenName = user.profile?.givenName
-//            let familyName = user.profile?.familyName
-//            let profilePicUrl = user.profile?.imageURL(withDimension: 320)
-//            let userID      =  user.userID
-//            print("Email: \(emailAddress), Name: \(fullName), GiveName: \(givenName), FamilyName: \(familyName), PIC: \(profilePicUrl), ID: \(userID)")
-//
-//            var firstName = String.getString(fullName)
-//            var lastName = String.getString(familyName)
-//            self.id = String.getString(userID)
-//            //            self.socialData.googleImage = profilePicUrl
-//            self.socialType = "1"
-//            self.emailId = String.getString(emailAddress)
-//
-//            //            user.authentication.do { authentication, error in
-//            //                    guard error == nil else { return }
-//            //                    guard let authentication = authentication else { return }
-//            //
-//            //                    let idToken = authentication.idToken
-//            //                    // Send ID token to backend (example below).
-//            //                print("Token :", idToken)
-//            //
-//            //
-//            //                }
-//            self.googleSigninApi()
-//
-//        }
-//    }
+    //    func googleSignin(){
+    //        let signInConfig = GIDConfiguration.init(clientID: "290314984120-fidp05vtumuat8sn6mcpc0pofrunrjs5.apps.googleusercontent.com")
+    //        GIDSignIn.sharedInstance.signOut()
+    //        GIDSignIn.sharedInstance.signIn(with: signInConfig, presenting: self) { user, error in
+    //
+    //
+    //            guard error == nil else { return }
+    //            guard let user = user else { return }
+    //
+    //            let emailAddress = user.profile?.email
+    //
+    //            let fullName = user.profile?.name
+    //            let givenName = user.profile?.givenName
+    //            let familyName = user.profile?.familyName
+    //            let profilePicUrl = user.profile?.imageURL(withDimension: 320)
+    //            let userID      =  user.userID
+    //            print("Email: \(emailAddress), Name: \(fullName), GiveName: \(givenName), FamilyName: \(familyName), PIC: \(profilePicUrl), ID: \(userID)")
+    //
+    //            var firstName = String.getString(fullName)
+    //            var lastName = String.getString(familyName)
+    //            self.id = String.getString(userID)
+    //            //            self.socialData.googleImage = profilePicUrl
+    //            self.socialType = "1"
+    //            self.emailId = String.getString(emailAddress)
+    //
+    //            //            user.authentication.do { authentication, error in
+    //            //                    guard error == nil else { return }
+    //            //                    guard let authentication = authentication else { return }
+    //            //
+    //            //                    let idToken = authentication.idToken
+    //            //                    // Send ID token to backend (example below).
+    //            //                print("Token :", idToken)
+    //            //
+    //            //
+    //            //                }
+    //            self.googleSigninApi()
+    //
+    //        }
+    //    }
 }
 
 extension CreateAccountVC{
@@ -365,8 +413,8 @@ extension CreateAccountVC {
             }
         }
     }
-//    GoogleLoginApi
-    func googleSigninApi(){
+    //    GoogleLoginApi
+    func googleSigninApi(accountName: String, email: String, googleId: String){
         CommonUtils.showHudWithNoInteraction(show: true)
         
         if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
@@ -379,14 +427,11 @@ extension CreateAccountVC {
             //            headers["token"] = kSharedUserDefaults.getLoggedInAccessToken()
         }
         
-        let params:[String:Any] = ["username":UserData.shared.name,
-                                   "email":UserData.shared.email,
-                                   "mobile":UserData.shared.phone,
-                                   "g_id":String.getString(self.google_id),
+        let params:[String:Any] = ["username":accountName,
+                                   "email":email,
+                                   "g_id":googleId,
                                    "device_type":"IOS",
                                    "device_id":"1212",
-                                   "social_profile":String.getString(self.socialprofile)
-                                   
         ]
         
         TANetworkManager.sharedInstance.requestApi(withServiceName: ServiceName.kgooglelogin, requestMethod: .POST, requestParameters: params, withProgressHUD: false) { (result:Any?,error: Error?, errorType:ErrorType, statussCode:Int?) in
@@ -395,12 +440,11 @@ extension CreateAccountVC {
                 switch Int.getInt(statussCode) {
                 case 200:
                     if Int.getInt(dictResult["status"]) == 200{
-                        let endToken = kSharedUserDefaults.getLoggedInAccessToken()
-                        let septoken = endToken.components(separatedBy: " ")
-                        if septoken[0] == "Bearer"{
-                            kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
-                        }
+                        let data = kSharedInstance.getDictionary(dictResult["data"])
+                        kSharedUserDefaults.setLoggedInUserDetails(loggedInUserDetails: data)
+                        UserData.shared.saveData(data: data, token: "")
                         kSharedAppDelegate?.makeRootViewController()
+                        
                     }
                     else if  Int.getInt(dictResult["status"]) == 400{
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
@@ -416,6 +460,6 @@ extension CreateAccountVC {
             }
         }
     }
-
+    
 }
 

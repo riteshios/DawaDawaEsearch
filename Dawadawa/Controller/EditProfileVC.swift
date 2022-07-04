@@ -40,6 +40,7 @@ class EditProfileVC: UIViewController {
     @IBOutlet weak var lblCountry: UILabel!
     @IBOutlet weak var btnSelectCountry: UIButton!
     var userdata = [UserData]()
+    var timePicker = UIDatePicker()
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setup()
@@ -74,6 +75,27 @@ class EditProfileVC: UIViewController {
         self.viewLastName.isHidden = false
         self.viewWhatsappNumber.isHidden = false
         
+        if UserData.shared.user_type == "" {
+            self.lblUserType.text = " Select user type*"
+        }
+        debugPrint("UserData.shared.user_type",UserData.shared.user_type)
+        if UserData.shared.user_gender == "" {
+            self.lblGender.text = "Select gender"
+        }
+       
+        if UserData.shared.whatspp_number == ""{
+            self.txtFieldWhatsappNumber.placeholder = "+91***********"
+        }
+        if UserData.shared.user_country == ""{
+            self.lblCountry.text = "India"
+        }
+      
+        if UserData.shared.phone == ""{
+            self.txtFieldPhoneNumber.placeholder = "91***********"
+        }
+        if UserData.shared.dob == ""{
+            self.txtFieldDOB.placeholder = "XX/XX/XXXX"
+        }
 
     }
     func fetchdata(){
@@ -86,9 +108,9 @@ class EditProfileVC: UIViewController {
         self.lblCountry.text = UserData.shared.user_country
         self.lblGender.text = UserData.shared.user_gender
         self.lblUserType.text = UserData.shared.user_type
+        debugPrint("UserData.shared.user_type",UserData.shared.user_type)
     }
-    
-    
+  
 // MARK: - @IBAction
     
     @IBAction func btnSaveTapped(_ sender: UIButton) {
@@ -280,12 +302,13 @@ extension EditProfileVC{
                             kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
                         }
                         UserData.shared.saveData(data: data, token: String.getString(kSharedUserDefaults.getLoggedInAccessToken()))
-                        let vc = self?.storyboard?.instantiateViewController(withIdentifier: ProfileVC.getStoryboardID()) as! ProfileVC
-                        self?.navigationController?.pushViewController(vc, animated: true)
-                        
+                        self?.navigationController?.popViewController(animated: true)
                             
                     }
                     else if  Int.getInt(dictResult["status"]) == 400{
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    }
+                    else if  Int.getInt(dictResult["status"]) == 401{
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
@@ -354,8 +377,7 @@ extension EditProfileVC{
                                                     vc.modalPresentationStyle = .overCurrentContext
                                                     vc.callbackpopup = {
                                                         self?.dismiss(animated: false){
-                                                            let vc = self?.storyboard?.instantiateViewController(withIdentifier: ProfileVC.getStoryboardID()) as! ProfileVC
-                                                            self?.navigationController?.pushViewController(vc, animated: false)
+                                                            self?.navigationController?.popViewController(animated: true)
                                                         }
                                                     }
                                                     self?.present(vc, animated: false)
@@ -389,7 +411,55 @@ extension EditProfileVC{
     }
 }
 
+// MARK: - DatePicker
 
-
+//extension EditProfileVC{
+//    func setupOpeningTime(){
+//        if #available(iOS 13.4, *) {
+//            timePicker.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 250.0)
+//            timePicker.preferredDatePickerStyle = .wheels
+//        }
+//        self.timePicker.datePickerMode = .time
+//        timePicker.minuteInterval = 30
+//        //
+//        var components = Calendar.current.dateComponents([.hour, .minute, .month, .year, .day], from: timePicker.date)
+//        components.hour = 1
+//        components.minute = 30
+//        timePicker.setDate(Calendar.current.date(from: components)!, animated: true)
+//
+//
+//        self.txtFieldDOB.inputView = self.timePicker
+//        self.txtFieldDOB.inputAccessoryView = self.getToolBar()
+//    }
+//
+//    func getToolBar() -> UIToolbar {
+//        let toolBar = UIToolbar()
+//        toolBar.barStyle = .default
+//        toolBar.isTranslucent = true
+//        let myColor : UIColor = UIColor( red: 2/255, green: 14/255, blue:70/255, alpha: 1.0 )
+//        toolBar.tintColor = myColor
+//        toolBar.sizeToFit()
+//        // Adding Button ToolBar
+//        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneClick))
+//        let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+//        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelClick))
+//        toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
+//        toolBar.isUserInteractionEnabled = true
+//        return toolBar
+//    }
+//
+//    @objc func doneClick() {
+//        self.view.endEditing(true)
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.dateFormat = "HH:mm"
+//        self.txtFieldDOB.text = dateFormatter.string(from: self.timePicker.date)
+//
+//    }
+//
+//    @objc func cancelClick() {
+//        self.view.endEditing(true)
+//    }
+//
+//}
 
 

@@ -201,6 +201,11 @@ extension VerifyNewEmailOTPVC{
                             if septoken[0] == "Bearer"{
                                 kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
                             }
+                            let data = kSharedInstance.getDictionary(dictResult["data"])
+                            kSharedUserDefaults.setLoggedInUserDetails(loggedInUserDetails: data)
+                           
+                            UserData.shared.saveData(data: data, token: String.getString(                                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])))
+                            
                             self?.callbackOTP2?()
                         }
                         else if  Int.getInt(dictResult["status"]) == 400{

@@ -70,6 +70,13 @@ class ActivationCodeVC: UIViewController{
         self.viewOtp5.borderColor = UIColor(hexString: "#A6A6A6")
         self.viewOtp6.borderColor = UIColor(hexString: "#A6A6A6")
         self.viewVerify.backgroundColor = UIColor(hexString: "#A6A6A6")
+        self.txtfieldOtp1.keyboardType = .numberPad
+        self.txtfieldOtp2.keyboardType = .numberPad
+        self.txtfieldOtp3.keyboardType = .numberPad
+        self.txtfieldOtp4.keyboardType = .numberPad
+        self.txtfieldOtp5.keyboardType = .numberPad
+        self.txtfieldOtp6.keyboardType = .numberPad
+        
     }
     
     func changebordercolor(){

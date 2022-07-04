@@ -19,6 +19,8 @@
 		04836F162859C1B300AF8C8B /* Localizable.string.strings in Resources */ = {isa = PBXBuildFile; fileRef = 04836F182859C1B300AF8C8B /* Localizable.string.strings */; };
 		0494642E28646CCA0010076A /* LogOutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0494642D28646CCA0010076A /* LogOutVC.swift */; };
 		04AEBC122872195C00063E51 /* GoogleService-Info-2.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04AEBC112872195C00063E51 /* GoogleService-Info-2.plist */; };
+		04B2653A2872C84000B2DF7C /* ContactUsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B265392872C83F00B2DF7C /* ContactUsVC.swift */; };
+		04B2653C28731CAE00B2DF7C /* WebViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B2653B28731CAD00B2DF7C /* WebViewVC.swift */; };
 		04B9190A286B133B009ABAE4 /* VerifyEmailOTPVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B91909286B133B009ABAE4 /* VerifyEmailOTPVC.swift */; };
 		04B9190C286B1372009ABAE4 /* ChangeEmailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B9190B286B1372009ABAE4 /* ChangeEmailVC.swift */; };
 		04B91910286B13B8009ABAE4 /* EmailChangedSuccessfullyPopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B9190F286B13B8009ABAE4 /* EmailChangedSuccessfullyPopUpVC.swift */; };
@@ -586,6 +588,8 @@
 		04836F172859C1B300AF8C8B /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.string.strings; sourceTree = "<group>"; };
 		0494642D28646CCA0010076A /* LogOutVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LogOutVC.swift; path = Dawadawa/Storyboard/LogOutVC.swift; sourceTree = SOURCE_ROOT; };
 		04AEBC112872195C00063E51 /* GoogleService-Info-2.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-2.plist"; sourceTree = "<group>"; };
+		04B265392872C83F00B2DF7C /* ContactUsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ContactUsVC.swift; path = Dawadawa/Storyboard/ContactUsVC.swift; sourceTree = SOURCE_ROOT; };
+		04B2653B28731CAD00B2DF7C /* WebViewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewVC.swift; sourceTree = SOURCE_ROOT; };
 		04B91909286B133B009ABAE4 /* VerifyEmailOTPVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyEmailOTPVC.swift; sourceTree = "<group>"; };
 		04B9190B286B1372009ABAE4 /* ChangeEmailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeEmailVC.swift; sourceTree = "<group>"; };
 		04B9190F286B13B8009ABAE4 /* EmailChangedSuccessfullyPopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailChangedSuccessfullyPopUpVC.swift; sourceTree = "<group>"; };
@@ -1228,6 +1232,7 @@
 				044D7174286198600054DAA5 /* Setting */,
 				04F1AD9828697AE9002CC167 /* EditProfile */,
 				04FD1D36286077E800BE414A /* MoreVC.swift */,
+				04B265392872C83F00B2DF7C /* ContactUsVC.swift */,
 			);
 			name = More;
 			sourceTree = "<group>";
@@ -1235,6 +1240,7 @@
 		446E66A428531BF8006D4692 /* Registration */ = {
 			isa = PBXGroup;
 			children = (
+				04B2653B28731CAD00B2DF7C /* WebViewVC.swift */,
 				3D0C9647285581F6000384BD /* ResetPasswordVC.swift */,
 				3D0C964528557FC2000384BD /* ForgotPasswordVC.swift */,
 				3D0B08512854B8F700590891 /* LoginVC.swift */,
@@ -2752,6 +2758,7 @@
 				04F1AD9A28697B0D002CC167 /* EditProfileVC.swift in Sources */,
 				447DCC702851CB1100C40DDD /* UITextField+Extensions.swift in Sources */,
 				042293C22869B203000503B7 /* NumberChangedSuccessfulPopUpVC.swift in Sources */,
+				04B2653A2872C84000B2DF7C /* ContactUsVC.swift in Sources */,
 				447DCC5F2851CB1100C40DDD /* OldTAManagerOld.swift in Sources */,
 				04B91912286B1553009ABAE4 /* VerifyNewEmailOTPVC.swift in Sources */,
 				447DCC872851CB1100C40DDD /* String+Utilities.swift in Sources */,
@@ -2780,6 +2787,7 @@
 				04F84531286AC4FA0081120F /* ChangePasswordVC.swift in Sources */,
 				447DCC6E2851CB1100C40DDD /* Common+Extensions.swift in Sources */,
 				447DCE5E2851CB1300C40DDD /* AppsNetworkManager.swift in Sources */,
+				04B2653C28731CAE00B2DF7C /* WebViewVC.swift in Sources */,
 				447DCC7B2851CB1100C40DDD /* UIButtonGradiant.swift in Sources */,
 				447DCC722851CB1100C40DDD /* LocaleStore.swift in Sources */,
 				447DCC6A2851CB1100C40DDD /* UISearchBar+Extensions.swift in Sources */,

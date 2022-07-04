@@ -12,6 +12,9 @@
         <array key="Archivo-Regular.ttf">
             <string>Archivo-Regular</string>
         </array>
+        <array key="HelveticaNeue.ttc">
+            <string>HelveticaNeue</string>
+        </array>
         <array key="Product Sans Regular.ttf">
             <string>ProductSans-Regular</string>
         </array>
@@ -331,6 +334,7 @@
                                                                 <rect key="frame" x="347" y="20" width="16" height="15"/>
                                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                                 <state key="normal" image="eye"/>
+                                                                <state key="selected" image="eye-slash"/>
                                                                 <connections>
                                                                     <action selector="btnSecurePasswordTapped:" destination="9Uz-l7-6E1" eventType="touchUpInside" id="Oxc-Ez-LMr"/>
                                                                 </connections>
@@ -367,6 +371,7 @@
                                                                 <rect key="frame" x="347" y="20" width="16" height="15"/>
                                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                                 <state key="normal" image="eye"/>
+                                                                <state key="selected" image="eye-slash"/>
                                                                 <connections>
                                                                     <action selector="btnSecureConfirmPasswordTapped:" destination="9Uz-l7-6E1" eventType="touchUpInside" id="vHA-N2-bOY"/>
                                                                 </connections>
@@ -406,14 +411,14 @@
                                                                     <action selector="btnTermsAndCondition:" destination="9Uz-l7-6E1" eventType="touchUpInside" id="Bdg-GS-v8y"/>
                                                                 </connections>
                                                             </button>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="By creating account your accepting our" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x2V-ah-q5I">
-                                                                <rect key="frame" x="19" y="-0.33333333333325754" width="221" height="16"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please accept our" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x2V-ah-q5I">
+                                                                <rect key="frame" x="19" y="-0.33333333333325754" width="100" height="16"/>
                                                                 <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="13"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ya6-Kl-EgT">
-                                                                <rect key="frame" x="241" y="-6.3333333333332575" width="30" height="28"/>
+                                                                <rect key="frame" x="120" y="-6.3333333333332575" width="30" height="28"/>
                                                                 <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="13"/>
                                                                 <color key="tintColor" red="0.08235294118" green="0.44705882349999998" blue="0.63137254899999995" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -423,13 +428,13 @@
                                                                 </connections>
                                                             </button>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="and" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yld-8C-Oin">
-                                                                <rect key="frame" x="274" y="-0.33333333333325754" width="21.333333333333314" height="16"/>
+                                                                <rect key="frame" x="153" y="-0.33333333333325754" width="21.333333333333343" height="16"/>
                                                                 <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="13"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bmW-Im-gCu">
-                                                                <rect key="frame" x="305" y="-3" width="77" height="21"/>
+                                                                <rect key="frame" x="179.33333333333334" y="-3" width="77.000000000000028" height="21"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="21" id="fva-DK-MSd"/>
                                                                 </constraints>
@@ -445,13 +450,12 @@
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstItem="x2V-ah-q5I" firstAttribute="centerY" secondItem="ZDP-yt-enP" secondAttribute="centerY" id="6g2-br-qx7"/>
-                                                            <constraint firstAttribute="trailing" secondItem="bmW-Im-gCu" secondAttribute="trailing" id="DF7-DX-d9F"/>
                                                             <constraint firstItem="ZDP-yt-enP" firstAttribute="top" secondItem="vJF-Hg-kpO" secondAttribute="top" id="G99-wf-FjJ"/>
                                                             <constraint firstItem="Yld-8C-Oin" firstAttribute="leading" secondItem="ya6-Kl-EgT" secondAttribute="trailing" constant="3" id="KX6-Hr-CLl"/>
+                                                            <constraint firstItem="bmW-Im-gCu" firstAttribute="leading" secondItem="Yld-8C-Oin" secondAttribute="trailing" constant="5" id="LEu-k4-f00"/>
                                                             <constraint firstAttribute="height" constant="17" id="M3O-T3-9a3"/>
                                                             <constraint firstItem="Yld-8C-Oin" firstAttribute="centerY" secondItem="ya6-Kl-EgT" secondAttribute="centerY" id="VEj-xR-3Ud"/>
                                                             <constraint firstItem="ZDP-yt-enP" firstAttribute="leading" secondItem="vJF-Hg-kpO" secondAttribute="leading" id="XNo-9t-Qbe"/>
-                                                            <constraint firstAttribute="trailing" secondItem="bmW-Im-gCu" secondAttribute="trailing" id="Zs6-MM-Zq5"/>
                                                             <constraint firstItem="bmW-Im-gCu" firstAttribute="centerY" secondItem="Yld-8C-Oin" secondAttribute="centerY" id="cNS-8w-QJZ"/>
                                                             <constraint firstItem="ya6-Kl-EgT" firstAttribute="centerY" secondItem="x2V-ah-q5I" secondAttribute="centerY" id="cUQ-lZ-aPy"/>
                                                             <constraint firstItem="ya6-Kl-EgT" firstAttribute="leading" secondItem="x2V-ah-q5I" secondAttribute="trailing" constant="1" id="jEP-Ma-XrO"/>
@@ -566,6 +570,9 @@
                                                                         <real key="value" value="8"/>
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
+                                                                <connections>
+                                                                    <action selector="btnSkipRegistration:" destination="9Uz-l7-6E1" eventType="touchUpInside" id="RZy-Ke-amf"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1158,6 +1165,9 @@
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s8F-6a-g95">
                                                                         <rect key="frame" x="0.0" y="0.0" width="120.66666666666667" height="55"/>
                                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                        <connections>
+                                                                            <action selector="btnGoogleTapped:" destination="8RW-YP-m4s" eventType="touchUpInside" id="bRb-tL-v9E"/>
+                                                                        </connections>
                                                                     </button>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Google" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WED-or-KVH">
                                                                         <rect key="frame" x="47" y="18.333333333333343" width="52" height="19.333333333333329"/>
@@ -1334,6 +1344,7 @@
                                                                 <rect key="frame" x="347" y="20" width="16" height="15"/>
                                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                                 <state key="normal" image="eye"/>
+                                                                <state key="selected" image="eye-slash"/>
                                                                 <connections>
                                                                     <action selector="btnSecureConfirmPasswordTapped:" destination="9Uz-l7-6E1" eventType="touchUpInside" id="xD7-S2-sAv"/>
                                                                     <action selector="btnSecurePasswordTaspped:" destination="8RW-YP-m4s" eventType="touchUpInside" id="toe-4O-r2M"/>
@@ -1470,6 +1481,9 @@
                                                                         <real key="value" value="8"/>
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
+                                                                <connections>
+                                                                    <action selector="btnSkipLoginTapped:" destination="8RW-YP-m4s" eventType="touchUpInside" id="Z7A-xm-D7t"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1936,6 +1950,60 @@
             </objects>
             <point key="canvasLocation" x="6010.144927536232" y="-294.29347826086956"/>
         </scene>
+        <!--Web ViewVC-->
+        <scene sceneID="se2-E1-DVj">
+            <objects>
+                <viewController storyboardIdentifier="WebViewVC" id="XfY-77-Vo8" customClass="WebViewVC" customModule="Dawadawa" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Rlq-Md-M40">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vlq-Lh-ZI3">
+                                <rect key="frame" x="10" y="10" width="24" height="24"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="arrow-left"/>
+                                <connections>
+                                    <action selector="btnBackTapped:" destination="XfY-77-Vo8" eventType="touchUpInside" id="BZC-v0-E3n"/>
+                                </connections>
+                            </button>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fPN-j9-SF7">
+                                <rect key="frame" x="0.0" y="35" width="414" height="701"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sxy-an-a7L">
+                                <rect key="frame" x="114" y="8" width="59" height="28"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="CCh-nq-g88"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="CCh-nq-g88" firstAttribute="trailing" secondItem="fPN-j9-SF7" secondAttribute="trailing" id="0uf-tx-Nqh"/>
+                            <constraint firstItem="fPN-j9-SF7" firstAttribute="leading" secondItem="CCh-nq-g88" secondAttribute="leading" id="5AB-7q-lbc"/>
+                            <constraint firstItem="sxy-an-a7L" firstAttribute="centerY" secondItem="vlq-Lh-ZI3" secondAttribute="centerY" id="6AJ-Lh-5Wg"/>
+                            <constraint firstItem="CCh-nq-g88" firstAttribute="bottom" secondItem="fPN-j9-SF7" secondAttribute="bottom" id="E2T-6o-I3X"/>
+                            <constraint firstItem="vlq-Lh-ZI3" firstAttribute="top" secondItem="CCh-nq-g88" secondAttribute="top" constant="10" id="HOa-gv-Fal"/>
+                            <constraint firstItem="vlq-Lh-ZI3" firstAttribute="leading" secondItem="CCh-nq-g88" secondAttribute="leading" constant="10" id="N5e-Fg-Sbc"/>
+                            <constraint firstItem="fPN-j9-SF7" firstAttribute="top" secondItem="CCh-nq-g88" secondAttribute="top" constant="35" id="bLU-4U-JSD"/>
+                            <constraint firstItem="sxy-an-a7L" firstAttribute="leading" secondItem="vlq-Lh-ZI3" secondAttribute="trailing" constant="80" id="hLH-oa-hmh"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="lblheading" destination="sxy-an-a7L" id="pJK-I3-Fcz"/>
+                        <outlet property="webkit" destination="fPN-j9-SF7" id="nxh-oz-Dme"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="S1g-5e-Mze" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6700.0000000000009" y="-350.54347826086962"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="44R-oE-1gl">
             <objects>
@@ -1963,6 +2031,7 @@
         <image name="Vector" width="9.6666669845581055" height="5.3333334922790527"/>
         <image name="arrow-left" width="24" height="24"/>
         <image name="eye" width="16" height="16"/>
+        <image name="eye-slash" width="16" height="16"/>
         <image name="eye.slash" catalog="system" width="128" height="86"/>
         <image name="image 2" width="16" height="16"/>
         <image name="image 3" width="16" height="16"/>

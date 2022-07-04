@@ -69,6 +69,15 @@ class MoreVC: UIViewController {
         }
         self.getoptapi()
     }
+    
+    @IBAction func btnContactUs(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        if self.btnContactUs.isSelected == true{
+            self.viewContactUs.backgroundColor = UIColor.init(red: 241/255, green: 249/255, blue: 253/255, alpha: 1)
+        }
+        self.callback4?("ContactUs")
+    }
+    
     @IBAction func btnLogOutTapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         if self.btnLogOut.isSelected == true{

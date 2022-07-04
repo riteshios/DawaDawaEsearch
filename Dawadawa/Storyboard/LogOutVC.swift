@@ -24,6 +24,7 @@ class LogOutVC: UIViewController {
 }
   
     @IBAction func btnLogoutTapped(_ sender: UIButton) {
+      
             kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: "")
         print("\(kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: ""))")
             self.callbacklogout?("Logout")

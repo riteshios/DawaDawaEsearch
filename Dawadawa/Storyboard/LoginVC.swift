@@ -7,6 +7,7 @@
 
 import UIKit
 import SKFloatingTextField
+import GoogleSignIn
 
 class LoginVC: UIViewController {
     
@@ -38,6 +39,44 @@ class LoginVC: UIViewController {
     }
     //  MARK: - @IBAction
     
+    @IBAction func btnGoogleTapped(_ sender: UIButton) {
+        let signInConfig = GIDConfiguration.init(clientID: "330854842489-c25b86f35mmp4ckogq99l06tn52jj4ki.apps.googleusercontent.com")
+        
+        
+        
+        GIDSignIn.sharedInstance.signIn(with: signInConfig, presenting: self) { user, error in
+            
+            guard error == nil else { return }
+            
+            guard let user = user else { return }
+            
+            
+            
+            if let profiledata = user.profile {
+                
+                
+                
+                let userId : String = user.userID ?? ""
+                
+                let username : String = profiledata.givenName ?? ""
+                
+                let email : String = profiledata.email
+                
+                
+                
+                if let imgurl = user.profile?.imageURL(withDimension: 100) {
+                    
+                    let absoluteurl : String = imgurl.absoluteString
+                    
+                    //HERE CALL YOUR SERVER APP
+                }
+                self.googleSigninApi(accountName: username, email: email, googleId: userId)
+                //                           self.googleloginApi(accountName: givenName, email: email, googleId: userId)
+                
+            }
+        }
+    }
+    
     @IBAction func btnSecurePasswordTaspped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         txtFieldPassword.isSecureTextInput.toggle()
@@ -60,6 +99,11 @@ class LoginVC: UIViewController {
     @IBAction func btnLoginTapped(_ sender: UIButton){
         self.validation()
     }
+    @IBAction func btnSkipLoginTapped(_ sender: UIButton) {
+        
+        kSharedAppDelegate?.makeRootViewController()
+    }
+    
     
     // MARK: -validation
     func validation(){
@@ -164,7 +208,7 @@ extension LoginVC{
                     }
                     else if  Int.getInt(dictResult["status"]) == 400{
 //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                        CommonUtils.showError(.info, "Password incorrect")
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     else if Int.getInt(dictResult["status"]) == 401{
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
@@ -180,4 +224,55 @@ extension LoginVC{
             }
         }
     }
-}
+    //    GoogleLoginApi
+        func googleSigninApi(accountName: String, email: String, googleId: String){
+            CommonUtils.showHudWithNoInteraction(show: true)
+            
+            if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
+                let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+                let septoken = endToken.components(separatedBy: " ")
+                if septoken[0] != "Bearer"{
+                    let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
+                    kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
+                }
+                //            headers["token"] = kSharedUserDefaults.getLoggedInAccessToken()
+            }
+            
+            let params:[String:Any] = ["username":accountName,
+                                       "email":email,
+                                       "g_id":googleId,
+                                       "device_type":"IOS",
+                                       "device_id":"1212",
+            ]
+            
+            TANetworkManager.sharedInstance.requestApi(withServiceName: ServiceName.kgooglelogin, requestMethod: .POST, requestParameters: params, withProgressHUD: false) { (result:Any?,error: Error?, errorType:ErrorType, statussCode:Int?) in
+                if errorType == .requestSuccess{
+                    let dictResult = kSharedInstance.getDictionary(result)
+                    switch Int.getInt(statussCode) {
+                    case 200:
+                        if Int.getInt(dictResult["status"]) == 200{
+                            let data = kSharedInstance.getDictionary(dictResult["data"])
+                            kSharedUserDefaults.setLoggedInUserDetails(loggedInUserDetails: data)
+
+                            UserData.shared.saveData(data: data, token: "")
+                            kSharedAppDelegate?.makeRootViewController()
+                        }
+                        else if  Int.getInt(dictResult["status"]) == 400{
+                            CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        }
+                    default:
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    }
+                }else if errorType == .noNetwork {
+                    CommonUtils.showToastForInternetUnavailable()
+                    
+                } else {
+                    CommonUtils.showToastForDefaultError()
+                }
+            }
+        }
+
+    }
+
+
+

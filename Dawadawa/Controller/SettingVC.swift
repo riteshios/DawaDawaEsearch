@@ -8,16 +8,19 @@
 import UIKit
 
 
+
 class SettingVC: UIViewController {
 
     @IBOutlet weak var lblDropDownMenu: UILabel!
     @IBOutlet weak var imgDropDownMenu: UIImageView!
     @IBOutlet weak var btndrop: UIButton!
     
+   
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
+  
     @IBAction func btnDropTapped(_ sender: UIButton) {
         let dataSource1 = ["English-IND","Arabic"]
                kSharedAppDelegate?.dropDown(dataSource:dataSource1 , text: btndrop)
@@ -31,4 +34,19 @@ class SettingVC: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
+    @IBAction func btnAboutUs(_ sender: UIButton) {
+        guard let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WebViewVC") as? WebViewVC else
+        {return}
+           vc.strurl = "https://demo4app.com/dawadawa/api-about"
+           vc.head = "About Us"
+        self.navigationController?.pushViewController(vc, animated: false)
+    }
+    
+    @IBAction func btnFAQTapped(_ sender: UIButton) {
+        guard let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WebViewVC") as? WebViewVC else
+        {return}
+        vc.strurl = "https://demo4app.com/dawadawa/api-faq"
+        vc.head = "FAQ"
+        self.navigationController?.pushViewController(vc, animated: false)
+    }
 }

@@ -22,9 +22,18 @@ class ProfileVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.fetchdata()
+    }
+    
+    func fetchdata(){
         self.lblFullName.text = String.getString(UserData.shared.name) + " " + String.getString(UserData.shared.last_name)
         self.lblMobileNumber.text = UserData.shared.phone
         self.lblEmail.text = UserData.shared.email
+        
+//        if String.getString(UserData.shared.name) && String.getString(UserData.shared.last_name) == ""{
+//            self.lblFullName.text = "XYZ"
+//        }
+        
     }
     
 // MARK: - @IBAction
@@ -36,7 +45,11 @@ class ProfileVC: UIViewController {
             self.uploadImage(image: self.ImageProfile.image ?? UIImage())
         }
     }
-    
+//    override func viewWillAppear(_ animated: Bool) {
+//        self.tabBarController?.tabBar.isHidden = false
+//        self.tabBarController?.tabBar.layer.zPosition = 0
+//    }
+
     @IBAction func btnMoreTapped(_ sender: UIButton) {
         
         let vc = self.storyboard?.instantiateViewController(withIdentifier: MoreVC.getStoryboardID()) as! MoreVC
@@ -91,6 +104,12 @@ class ProfileVC: UIViewController {
                         
                     }
                     self.present(vc, animated: false)
+                }
+            }
+            if txt == "ContactUs"{
+                vc.dismiss(animated: false){
+                    let vc = self.storyboard?.instantiateViewController(identifier: ContactUsVC.getStoryboardID()) as! ContactUsVC
+                    self.navigationController?.pushViewController(vc, animated: true)
                 }
             }
             if txt == "Logout"{
