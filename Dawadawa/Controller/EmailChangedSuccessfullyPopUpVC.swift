@@ -12,6 +12,7 @@ class EmailChangedSuccessfullyPopUpVC: UIViewController {
 
     @IBOutlet weak var animationView: UIView!
     var callbackpopup:(()->())?
+    var email:String?
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setUI()

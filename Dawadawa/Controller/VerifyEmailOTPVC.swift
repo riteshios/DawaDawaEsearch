@@ -29,7 +29,7 @@ class VerifyEmailOTPVC: UIViewController {
     
     var callbackOTP1:(()->())?
     var otp = ""
-    
+    var email = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setup()
@@ -39,7 +39,7 @@ class VerifyEmailOTPVC: UIViewController {
     
     func setup(){
         self.lblWrongCode.isHidden = true
-        self.lblSubHeading.text = "Phone number verification code is sent on your email \(String.getString(UserData.shared.email))"
+        self.lblSubHeading.text = "Phone number verification code is sent on your email \(String.getString(self.email))"
         self.txtfieldOtp1.delegate = self
         self.txtfieldOtp2.delegate = self
         self.txtfieldOtp3.delegate = self
@@ -180,7 +180,7 @@ extension VerifyEmailOTPVC{
         CommonUtils.showHud(show: true)
         
         let params:[String : Any] = [
-            "email":UserData.shared.email,
+            "email":String.getString(self.email),
             "otp":self.otp]
         
         

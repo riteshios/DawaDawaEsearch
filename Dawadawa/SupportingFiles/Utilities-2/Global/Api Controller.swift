@@ -16,40 +16,7 @@ class Apicontroller {
     static let shared_instance = Apicontroller()
 
 
-    //Func for maltipart
-    func postMulipartApi(parameters :Dictionary<String ,Any> , imagedic : [Dictionary<String ,Any>] , serviceName: String, completionClosure: @escaping (_ result: Any?) -> ()) -> Void {
-
-        //            let image: [String: Any] = [
-        //                "image"                                       : self.ProfileImage.image ?? #imageLiteral(resourceName: "icon_default-1"),
-        //                "imageName"                                       : ApiParameters.profile_image
-        //            ]
-
-
-        CommonUtils.showHudWithNoInteraction(show: true)
-        AlmofireApiInstanse.requestMultiPart(withServiceName  : serviceName ,   requestMethod  : .post,   requestImages  : imagedic,  requestVideos  : [:], requestData : parameters)
-        {[weak self] (result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
-            CommonUtils.showHudWithNoInteraction(show: false)
-            guard self != nil else { return }
-            if errorType == ErrorType.requestSuccess {
-                let dicResponse     = kSharedInstance.getDictionary(result)
-
-                switch Int.getInt(statusCode) {
-                case 200:
-                    let data = kSharedInstance.getDictionary(dicResponse[kResponse])
-                    completionClosure(data)
-                case 501:
-                    showAlertMessage.alert(message: AlertMessage.Under_Development)
-                default:
-                    showAlertMessage.alert(message: "\(String.getString(dicResponse[ApiParameters.message])) 🎈")
-
-                }
-            } else if errorType == ErrorType.noNetwork {
-                showAlertMessage.alert(message: AlertMessage.knoNetwork)
-            } else {
-                showAlertMessage.alert(message: AlertMessage.knoNetwork)
-            }
-        }
-    }
+    
 
 
 

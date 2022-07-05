@@ -205,109 +205,56 @@ public class TANetworkManager {
      *  @param postData     parameters
      *  @param responeBlock call back in block
      */
-    func requestMultiPart(withServiceName serviceName: String, requestMethod method: HTTPMethod, requestImages arrImages: [Dictionary<String, Any>], requestVideos arrVideos: Dictionary<String, Any>, requestData postData: Dictionary<String, Any>, completionClosure: @escaping (_ result: Any?, _ error: Error?, _ errorType: ErrorType, _ statusCode: Int?) -> ()) -> Void {
+    func requestMultiPart(withServiceName serviceName: String, requestMethod method: HTTPMethod, requestImages arrImages: [Dictionary<String, Any>], requestVideos arrVideos: Dictionary<String, Any>, requestData postData: Dictionary<String, Any>, req reqImage : UIImage, completionClosure: @escaping (_ result: Any?, _ error: Error?, _ errorType: ErrorType, _ statusCode: Int?) -> ()) -> Void {
 
         if NetworkReachabilityManager()?.isReachable == true {
             let serviceUrl = getServiceUrl(string: serviceName)
             let params  = getPrintableParamsFromJson(postData: postData)
             let headers = getHeaderWithAPIName(serviceName: serviceName)
 
+            debugPrint("serviceUrl=",serviceUrl)
+            debugPrint("headers=",headers)
+            debugPrint("params=",params)
             print_debug(items: "Connecting to Host with URL \(kBASEURL)\(serviceName) with parameters: \(params)")
 
             Alamofire.upload(multipartFormData:{ (multipartFormData: MultipartFormData) in
-                for (key,value) in postData {
-
-                    if key == "location_id[]" {
-
-                        for loc in kSharedInstance.getStringArray(value) {
-
-                            multipartFormData.append(self.convertToData(loc),withName: key)
-
-                        }
-                    } else {
-
-                        multipartFormData.append(self.convertToData(value),withName: key)
-
-                    }
-
+                
+                
+                
+               // let profileImage = UIImage(named:"profile")!
+                let imageData:Data = reqImage.fixedOrientation().jpegData(compressionQuality: 0.4) ?? Data()
+                debugPrint("imageData=",imageData)
+                
+                var cri: Data
+                
+                cri = imageData
+                
+               // multipartFormData.append(cri?.base64EncodedData()!, withName: "profile_image", fileName: "profile_image", mimeType: "image/jpeg")
+                
+             //   multipartFormData.append(cri?.base64EncodedData()!, withName: "profile_image", fileName: "profile_image", mimeType: "image/jpeg")
+                
+                
+              //  multipartFormData.append(cri, withName: "profile_image")
+             //   multipartFormData.append(cri.base64EncodedData(), withName: "profile_image", fileName: "profile_image", mimeType: "image/png")
+                
+                if let jpegData = reqImage.jpegData(compressionQuality: 0.4)
+                {
+                    multipartFormData.append(jpegData, withName: "profile_image", fileName: "profile_image111", mimeType: "image/png")
+                }
+                
+                
+                for (key, value) in postData{
+                    debugPrint("key==",key)
+                    debugPrint("value==",value)
+                    
+                    let userid = Int(value as! Int) ?? 0
+                
+                    debugPrint("tempvalue....",userid)
+                    multipartFormData.append(String(describing:userid).data(using: String.Encoding.utf8)!,withName: key)
                 }
 
 
-                let videoDic = kSharedInstance.getDictionary(arrVideos)
-
-                if let videoData = videoDic["video"] as? URL {
-
-                    multipartFormData.append(videoData, withName: videoDic["videoName"] as! String,  fileName: "messagevideo.mp4", mimeType: "video/mp4")
-
-                }
-
-
-
-                for dictImage in arrImages {
-                    let validDict = kSharedInstance.getDictionary(dictImage)
-
-                    if let image = validDict["image"] as? UIImage {
-                        if let imageData: Data = image.jpegData(compressionQuality: 0.4) {
-
-                            print(String.getString(validDict["imageName"]),imageData)
-
-                            multipartFormData.append(imageData, withName: String.getString(validDict["imageName"]), fileName: String.getString(NSNumber.getNSNumber(message: self.getCurrentTimeStamp()).intValue) + ".jpeg", mimeType: "image/jpeg")
-                        }
-                  } else if let image  = validDict["image"] as? [UIImage]  {
-                          let imageArr = kSharedInstance.getArray(validDict["image"])
-
-                          if imageArr.count > 0 {
-
-                            for i in 0..<imageArr.count {
-                              if let image = imageArr[i] as? UIImage
-                              {
-                                if let imageData: Data = image.jpegData(compressionQuality: 0.4)                  {
-                                  multipartFormData.append(imageData, withName: String.getString(validDict["imageName"]), fileName: String.getString(NSNumber.getNSNumber(message: self.getCurrentTimeStamp()).intValue) + ".jpeg", mimeType: "image/jpeg")
-                                }
-                              }
-                            }
-                          }
-                        }
-
-                    else if let url = validDict["image"] as? URL {
-                        do{
-                            let _ = url.startAccessingSecurityScopedResource()
-                            if let data = try? Data.init(contentsOf: url) {
-                                let pdfData = data
-                                print(String.getString(validDict["imageName"]),data)
-                                multipartFormData.append(pdfData, withName: String.getString(dictImage["imageName"]), fileName: url.lastPathComponent, mimeType:"application/pdf")
-
-                                url.stopAccessingSecurityScopedResource()
-                            }
-                        }
-//                        catch let error {
-//                            url.stopAccessingSecurityScopedResource()
-//                            print("error: \(error.localizedDescription)")
-//                        }
-
-                    } else {
-                        if let urlString = validDict["image"] as? String {
-                            if let url = URL.init(string: urlString) {
-                                do {
-                                    let data = try Data.init(contentsOf: url)
-                                    if String.getString(postData[kKey]) == "2" {
-                                        multipartFormData.append(data,
-                                                                 withName: String.getString(validDict["imageName"]),
-                                                                 fileName: String.getString(NSNumber.getNSNumber(message: self.getCurrentTimeStamp()).intValue) + ".mp4",
-                                                                 mimeType: "video/mp4")
-
-                                    } else {
-
-                                        multipartFormData.append(data, withName: String.getString(validDict["imageName"]), fileName: String.getString(NSNumber.getNSNumber(message: self.getCurrentTimeStamp()).intValue) + "audiofile.m4a", mimeType: "audio/m4a")
-
-                                    }
-
-                                } catch {print(error.localizedDescription)}
-                            }
-                        }
-                    }
-
-                }
+               
 
             }, to: serviceUrl, method: method, headers:headers, encodingCompletion: { (encodingResult: SessionManager.MultipartFormDataEncodingResult) in
                 switch encodingResult
@@ -315,7 +262,12 @@ public class TANetworkManager {
                 case .success(request: let upload, streamingFromDisk: _, streamFileURL: _):
                     upload.responseJSON(completionHandler: { (Response) in
                         //  SVProgressHUD.dismiss()
+                        debugPrint("Response=",Response)
+                        debugPrint("Response.data=",Response.data)
                         let response = self.getResponseDataDictionaryFromData(data: Response.data!)
+                        debugPrint("response.responseData====",response.responseData)
+                        
+                        
                         completionClosure(response.responseData, response.error, .requestSuccess, Int.getInt(Response.response?.statusCode))
                     })
                 case .failure(let error):
@@ -632,43 +584,7 @@ extension TANetworkManager {
 
 
 
-    public func apiCallMultipart(withServiceName serviceName: String, requestMethod method: HTTPMethod, requestImages arrImages: [Dictionary<String, Any>], requestVideo videoDict: Dictionary<String, Any>, requestData postData: Dictionary<String, Any>){
 
-        self.requestMultiPart(withServiceName: serviceName, requestMethod: method, requestImages:arrImages , requestVideos: videoDict, requestData: postData) { (result, error, errorType, statusCode) in
-            guard let response = result  as? Dictionary<String,Any> else{
-                return
-            }
-            var message = ""
-            if let msg = response["message"] as? String{
-                message = msg
-            }
-
-            switch errorType{
-            case .noNetwork :
-                Indicator.showToast(message: AlertMessage.kNoInternet)
-            case .requestCancelled , .requestFailed :
-                Indicator.showToast(message: AlertMessage.kInvalidUser)
-
-                self.customDelegate?.failedWithError(error: error!)
-            case .requestSuccess :
-                switch statusCode{
-                case 200,201:
-
-                    self.customDelegate?.dataDidfetched(data: response)
-                case 400,401:
-
-                    Indicator.showToast(message: message)
-                default :
-                    if let msg = response["message"] as? String{
-                        message = msg
-                        Indicator.showToast(message: msg)
-                    }else{
-                        break
-                    }
-                }
-            }
-        }
-    }
 }
 
 
@@ -688,3 +604,114 @@ protocol TANetworkManagerDelegate {
 
 
 
+extension UIImage {
+
+    
+
+    func fixedOrientation() -> UIImage
+
+    {
+
+        if imageOrientation == .up {
+
+            return self
+
+        }
+
+        
+
+        var transform: CGAffineTransform = CGAffineTransform.identity
+
+        
+
+        switch imageOrientation {
+
+        case .down, .downMirrored:
+
+            transform = transform.translatedBy(x: size.width, y: size.height)
+
+            transform = transform.rotated(by: CGFloat.pi)
+
+            break
+
+        case .left, .leftMirrored:
+
+            transform = transform.translatedBy(x: size.width, y: 0)
+
+            transform = transform.rotated(by: CGFloat.pi / 2.0)
+
+            break
+
+        case .right, .rightMirrored:
+
+            transform = transform.translatedBy(x: 0, y: size.height)
+
+            transform = transform.rotated(by: CGFloat.pi / -2.0)
+
+            break
+
+        case .up, .upMirrored:
+
+            break
+
+        }
+
+        switch imageOrientation {
+
+        case .upMirrored, .downMirrored:
+
+            transform.translatedBy(x: size.width, y: 0)
+
+            transform.scaledBy(x: -1, y: 1)
+
+            break
+
+        case .leftMirrored, .rightMirrored:
+
+            transform.translatedBy(x: size.height, y: 0)
+
+            transform.scaledBy(x: -1, y: 1)
+
+        case .up, .down, .left, .right:
+
+            break
+
+        }
+
+        
+
+        let ctx: CGContext = CGContext(data: nil, width: Int(size.width), height: Int(size.height), bitsPerComponent: self.cgImage!.bitsPerComponent, bytesPerRow: 0, space: self.cgImage!.colorSpace!, bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue)!
+
+        
+
+        ctx.concatenate(transform)
+
+        
+
+        switch imageOrientation {
+
+        case .left, .leftMirrored, .right, .rightMirrored:
+
+            ctx.draw(self.cgImage!, in: CGRect(x: 0, y: 0, width: size.height, height: size.width))
+
+        default:
+
+            ctx.draw(self.cgImage!, in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
+
+            break
+
+        }
+
+        
+
+        return UIImage(cgImage: ctx.makeImage()!)
+
+    }
+
+    
+
+    
+
+    
+
+}

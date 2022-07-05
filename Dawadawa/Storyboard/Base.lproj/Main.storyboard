@@ -1976,7 +1976,7 @@
                                 </wkWebViewConfiguration>
                             </wkWebView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sxy-an-a7L">
-                                <rect key="frame" x="114" y="8" width="59" height="28"/>
+                                <rect key="frame" x="177.66666666666666" y="8" width="59" height="28"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="24"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -1992,7 +1992,7 @@
                             <constraint firstItem="vlq-Lh-ZI3" firstAttribute="top" secondItem="CCh-nq-g88" secondAttribute="top" constant="10" id="HOa-gv-Fal"/>
                             <constraint firstItem="vlq-Lh-ZI3" firstAttribute="leading" secondItem="CCh-nq-g88" secondAttribute="leading" constant="10" id="N5e-Fg-Sbc"/>
                             <constraint firstItem="fPN-j9-SF7" firstAttribute="top" secondItem="CCh-nq-g88" secondAttribute="top" constant="35" id="bLU-4U-JSD"/>
-                            <constraint firstItem="sxy-an-a7L" firstAttribute="leading" secondItem="vlq-Lh-ZI3" secondAttribute="trailing" constant="80" id="hLH-oa-hmh"/>
+                            <constraint firstItem="sxy-an-a7L" firstAttribute="centerX" secondItem="Rlq-Md-M40" secondAttribute="centerX" id="l71-WE-EEG"/>
                         </constraints>
                     </view>
                     <connections>

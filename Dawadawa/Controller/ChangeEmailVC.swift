@@ -122,6 +122,8 @@ extension ChangeEmailVC{
                         if septoken[0] == "Bearer"{
                             kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
                         }
+                        UserData.shared.email = String.getString(self?.txtFieldEmail.text)
+                        kSharedUserDefaults.set(String.getString(self?.txtFieldEmail.text), forKey: "email")
                         self?.callbackchangenumber?(self?.txtFieldEmail.text ?? "")
                     }
                     else if  Int.getInt(dictResult["status"]) == 401{

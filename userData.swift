@@ -26,6 +26,7 @@ class UserData{
     var device_id:String?
     var google_id:String?
     var facebook_id:String?
+    var isskiplogin = false
     
     private init(){
         let  data:[String:Any] = kSharedUserDefaults.getLoggedInUserDetails()

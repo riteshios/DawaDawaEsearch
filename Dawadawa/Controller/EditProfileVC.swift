@@ -10,7 +10,9 @@ import SKFloatingTextField
 
 
 class EditProfileVC: UIViewController {
-
+    
+//    MARK: - Properties
+    
     @IBOutlet weak var txtFieldPhoneNumber: SKFloatingTextField!
     @IBOutlet weak var txtFieldEmailAddress: SKFloatingTextField!
     @IBOutlet weak var txtFieldFirstName: SKFloatingTextField!
@@ -41,11 +43,30 @@ class EditProfileVC: UIViewController {
     @IBOutlet weak var btnSelectCountry: UIButton!
     var userdata = [UserData]()
     var timePicker = UIDatePicker()
+    
+    
+    var storeemail:String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setupOpeningTime()
         self.setup()
-        self.fetchdata()
+        if UserData.shared.isskiplogin == true{
+            print("hghjj")
+            self.txtFieldFirstName.placeholder = "XYZ"
+            self.txtFieldLastName.placeholder = "XYZ"
+            self.txtFieldPhoneNumber.placeholder = "91***********"
+            self.txtFieldEmailAddress.placeholder = "examiple@.com"
+            self.txtFieldWhatsappNumber.placeholder = "+91***********"
+            self.txtFieldDOB.placeholder = "XX/XX/XXXX"
+            self.lblCountry.text = "India"
+            
+        }
+        else{
+            self.fetchdata()
+        }
     }
+//    MARK: - Life Cycle
     
     func setup(){
         self.setTextFieldUI(textField: txtFieldPhoneNumber, place: "", floatingText: "Phone number")
@@ -56,7 +77,7 @@ class EditProfileVC: UIViewController {
         self.setTextFieldUI(textField: txtFieldWhatsappNumber, place: "", floatingText: "Whatsapp number")
         
         self.ViewSaveChange.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
-     
+        
         self.viewEnglish.backgroundColor = UIColor(red: 21, green: 114, blue: 161)
         self.lblEnglish.textColor = UIColor.systemBackground
         self.lblArabic.textColor = UIColor(red: 21, green: 114, blue: 161)
@@ -74,47 +95,83 @@ class EditProfileVC: UIViewController {
         self.viewFirstName.isHidden = false
         self.viewLastName.isHidden = false
         self.viewWhatsappNumber.isHidden = false
+        self.txtFieldWhatsappNumber.keyBoardType = .numberPad
+        self.txtFieldPhoneNumber.isUserInteractionEnabled = false
+        self.txtFieldEmailAddress.isUserInteractionEnabled = false
         
-        if UserData.shared.user_type == "" {
-            self.lblUserType.text = " Select user type*"
-        }
-        debugPrint("UserData.shared.user_type",UserData.shared.user_type)
-        if UserData.shared.user_gender == "" {
-            self.lblGender.text = "Select gender"
-        }
-       
-        if UserData.shared.whatspp_number == ""{
-            self.txtFieldWhatsappNumber.placeholder = "+91***********"
-        }
-        if UserData.shared.user_country == ""{
-            self.lblCountry.text = "India"
-        }
-      
-        if UserData.shared.phone == ""{
-            self.txtFieldPhoneNumber.placeholder = "91***********"
-        }
-        if UserData.shared.dob == ""{
-            self.txtFieldDOB.placeholder = "XX/XX/XXXX"
-        }
-
     }
+    
+    
     func fetchdata(){
         self.txtFieldFirstName.text  = UserData.shared.name
         self.txtFieldLastName.text = UserData.shared.last_name
         self.txtFieldPhoneNumber.text = UserData.shared.phone
         self.txtFieldEmailAddress.text = UserData.shared.email
-        self.txtFieldWhatsappNumber.text = UserData.shared.whatspp_number
-        self.txtFieldDOB.text = UserData.shared.dob
-        self.lblCountry.text = UserData.shared.user_country
-        self.lblGender.text = UserData.shared.user_gender
-        self.lblUserType.text = UserData.shared.user_type
-        debugPrint("UserData.shared.user_type",UserData.shared.user_type)
+        debugPrint("email....",UserData.shared.email)
+        
+        if UserData.shared.whatspp_number != ""{
+            self.txtFieldWhatsappNumber.text = UserData.shared.whatspp_number
+        }
+        if UserData.shared.whatspp_number == ""{
+            self.txtFieldWhatsappNumber.placeholder = "+91111111111"
+        }
+       
+        if UserData.shared.dob != ""{
+            self.txtFieldDOB.text = UserData.shared.user_gender
+        }
+        if UserData.shared.dob == ""{
+            self.txtFieldDOB.placeholder = "01/01/1975"
+        }
+        if UserData.shared.dob != ""{
+            self.txtFieldDOB.text = UserData.shared.dob
+        }
+       
+        if UserData.shared.user_country != ""{
+            self.lblCountry.text = UserData.shared.user_country
+        }
+       
+        if UserData.shared.user_gender != ""{
+            self.lblGender.text = UserData.shared.user_gender
+        }
+        
+        if UserData.shared.user_type != ""{
+            self.lblUserType.text = UserData.shared.user_type
+        }
     }
-  
-// MARK: - @IBAction
+//    Validation
+    func Validation()
+    {
+        
+         if !String.getString(self.txtFieldFirstName.text).isValidUserName()
+        {
+            self.showSimpleAlert(message: Notifications.kvalidfirsname)
+            return
+        }
+        
+        else if !String.getString(txtFieldLastName.text).isValidUserName()
+        {
+            self.showSimpleAlert(message: Notifications.kvalidlastname)
+            return
+        }
+        else if !String.getString(txtFieldEmailAddress.text).isEmail()
+        {
+            self.showSimpleAlert(message: Notifications.kEnterValidEmail)
+            return
+        }
+        else if !String.getString(txtFieldWhatsappNumber.text).isPhoneNumber()
+        {
+            self.showSimpleAlert(message: "Please Enter valid Whatsapp Number")
+            return
+        }
+        self.view.endEditing(true)
+        self.editdetailapi()
+    }
+    
+    // MARK: - @IBAction
     
     @IBAction func btnSaveTapped(_ sender: UIButton) {
-        self.editdetailapi()
+//        self.editdetailapi()
+        self.Validation()
         
     }
     @IBAction func btnBackTapped(_ sender: UIButton) {
@@ -126,7 +183,7 @@ class EditProfileVC: UIViewController {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: VerifyNumberOTPVC.getStoryboardID()) as! VerifyNumberOTPVC
         vc.modalTransitionStyle = .crossDissolve
         vc.modalPresentationStyle = .overCurrentContext
-//        vc.email = String.getString(self?.txtFieldPhone_Email.text)
+        //        vc.email = String.getString(self?.txtFieldPhone_Email.text)
         vc.callbackOTP1 =
         {
             vc.dismiss(animated: false){
@@ -167,18 +224,18 @@ class EditProfileVC: UIViewController {
     
     @IBAction func btnDropGender(_ sender: UIButton){
         let dataSource1 = ["Male","Female"]
-               kSharedAppDelegate?.dropDown(dataSource:dataSource1 , text: btnDropGender)
-               {(Index ,item) in
-                   self.lblGender.text = item
-               }
+        kSharedAppDelegate?.dropDown(dataSource:dataSource1 , text: btnDropGender)
+        {(Index ,item) in
+            self.lblGender.text = item
+        }
         
     }
     @IBAction func btnDropSelectUserType(_ sender: UIButton){
         let dataSource1 = ["Business Owner","Service Provider","Investor"]
         kSharedAppDelegate?.dropDown(dataSource:dataSource1 , text: btnDropUserType)
-               {(Index ,item) in
-                   self.lblUserType.text = item
-               }
+        {(Index ,item) in
+            self.lblUserType.text = item
+        }
     }
     @IBAction func btnSelectCountryTapped(_ sender: UIButton) {
         AppsCountryPickerInstanse.sharedInstanse.showController(referense: self) { (selectedCountry) in
@@ -187,8 +244,6 @@ class EditProfileVC: UIViewController {
             self.imageFlag.image = selectedCountry?.image ?? UIImage()
         }
     }
-    
-    
 }
 extension EditProfileVC{
     
@@ -231,7 +286,7 @@ extension EditProfileVC: UITextFieldDelegate{
             
         case self.txtFieldEmailAddress:
             self.viewEmail.isHidden = true
-        
+            
         case self.txtFieldDOB:
             self.viewDOB.isHidden = true
             
@@ -246,7 +301,7 @@ extension EditProfileVC: UITextFieldDelegate{
             
         default:
             return
-       }
+        }
     }
 }
 
@@ -256,17 +311,17 @@ extension EditProfileVC{
         CommonUtils.showHud(show: true)
         
         
-         if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
-             let endToken = kSharedUserDefaults.getLoggedInAccessToken()
-             let septoken = endToken.components(separatedBy: " ")
-             if septoken[0] != "Bearer"{
-                 let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
-                 kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
-             }
- //            headers["token"] = kSharedUserDefaults.getLoggedInAccessToken()
-         }
+        if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
+            let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+            let septoken = endToken.components(separatedBy: " ")
+            if septoken[0] != "Bearer"{
+                let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
+                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
+            }
+            //            headers["token"] = kSharedUserDefaults.getLoggedInAccessToken()
+        }
         
-       
+        
         let params:[String : Any] = [
             "user_id":UserData.shared.id,
             "first_name":String.getString(self.txtFieldFirstName.text),
@@ -278,7 +333,7 @@ extension EditProfileVC{
             "gender":self.lblGender.text,
             "user_type":self.lblUserType.text
         ]
-
+        
         
         TANetworkManager.sharedInstance.requestApi(withServiceName:ServiceName.kedituserdetails, requestMethod: .POST,
                                                    requestParameters:params, withProgressHUD: false)
@@ -303,7 +358,7 @@ extension EditProfileVC{
                         }
                         UserData.shared.saveData(data: data, token: String.getString(kSharedUserDefaults.getLoggedInAccessToken()))
                         self?.navigationController?.popViewController(animated: true)
-                            
+                        
                     }
                     else if  Int.getInt(dictResult["status"]) == 400{
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
@@ -323,18 +378,18 @@ extension EditProfileVC{
             }
         }
     }
-
+    
     // send otp to email api
     func verifyemail(){
         
         CommonUtils.showHud(show: true)
         let accessToken = kSharedUserDefaults.getLoggedInAccessToken()
-       
-
+        
+        
         let params:[String : Any] = [
-            "email":UserData.shared.email,
+            "email":String.getString(self.txtFieldEmailAddress.text),
         ]
-
+        
         
         TANetworkManager.sharedInstance.requestApi(withServiceName:ServiceName.kforgotpassword, requestMethod: .POST,
                                                    requestParameters:params, withProgressHUD: false)
@@ -345,14 +400,15 @@ extension EditProfileVC{
             if errorType == .requestSuccess {
                 
                 let dictResult = kSharedInstance.getDictionary(result)
-               
+                
                 switch Int.getInt(statusCode) {
                 case 200:
                     if Int.getInt(dictResult["status"]) == 200{
                         let vc = self?.storyboard?.instantiateViewController(withIdentifier: VerifyEmailOTPVC.getStoryboardID()) as! VerifyEmailOTPVC
                         vc.modalTransitionStyle = .crossDissolve
                         vc.modalPresentationStyle = .overCurrentContext
-                //        vc.email = String.getString(self?.txtFieldPhone_Email.text)
+                        vc.email = String.getString(self?.txtFieldEmailAddress.text)
+                        //        vc.email = String.getString(self?.txtFieldPhone_Email.text)
                         vc.callbackOTP1 =
                         {
                             vc.dismiss(animated: false){
@@ -360,38 +416,40 @@ extension EditProfileVC{
                                 vc.modalTransitionStyle = .crossDissolve
                                 vc.modalPresentationStyle = .overCurrentContext
                                 vc.callbackchangenumber =  { txt in
-                                   debugPrint("email===,", txt)
-                                        self?.dismiss(animated: false) {
-                                            let vc = self?.storyboard?.instantiateViewController(withIdentifier: VerifyNewEmailOTPVC.getStoryboardID()) as! VerifyNewEmailOTPVC
-                                            vc.modalTransitionStyle = .crossDissolve
-                                            vc.modalPresentationStyle = .overCurrentContext
-                                            
-                                            
-                                            let em:String = String(describing:txt)
-                                            debugPrint("emmm",em)
-                                            vc.email = em
-                                            vc.callbackOTP2 = {
-                                                self?.dismiss(animated: false){
-                                                    let vc = self?.storyboard?.instantiateViewController(withIdentifier: EmailChangedSuccessfullyPopUpVC.getStoryboardID()) as! EmailChangedSuccessfullyPopUpVC
-                                                    vc.modalTransitionStyle = .crossDissolve
-                                                    vc.modalPresentationStyle = .overCurrentContext
-                                                    vc.callbackpopup = {
-                                                        self?.dismiss(animated: false){
-                                                            self?.navigationController?.popViewController(animated: true)
-                                                        }
+                                    self?.storeemail = txt
+                                    debugPrint("email===,", txt)
+                                    self?.dismiss(animated: false) {
+                                        let vc = self?.storyboard?.instantiateViewController(withIdentifier: VerifyNewEmailOTPVC.getStoryboardID()) as! VerifyNewEmailOTPVC
+                                        vc.modalTransitionStyle = .crossDissolve
+                                        vc.modalPresentationStyle = .overCurrentContext
+                                        
+                                        
+                                        let em:String = String(describing:txt)
+                                        debugPrint("emmm",em)
+                                        vc.email = em
+                                        vc.callbackOTP2 = {
+                                            self?.dismiss(animated: false){
+                                                let vc = self?.storyboard?.instantiateViewController(withIdentifier: EmailChangedSuccessfullyPopUpVC.getStoryboardID()) as! EmailChangedSuccessfullyPopUpVC
+                                                vc.modalTransitionStyle = .crossDissolve
+                                                vc.modalPresentationStyle = .overCurrentContext
+                                                vc.email = self?.storeemail
+                                                vc.callbackpopup = {
+                                                    self?.dismiss(animated: false){
+                                                        self?.navigationController?.popViewController(animated: true)
                                                     }
-                                                    self?.present(vc, animated: false)
                                                 }
+                                                self?.present(vc, animated: false)
                                             }
-                                            self?.present(vc, animated: false)
                                         }
+                                        self?.present(vc, animated: false)
+                                    }
                                 }
                                 self?.present(vc, animated: false)
                             }
                         }
                         self?.present(vc, animated: false)
                     }
-             
+                    
                     else if  Int.getInt(dictResult["status"]) == 400{
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
@@ -413,53 +471,54 @@ extension EditProfileVC{
 
 // MARK: - DatePicker
 
-//extension EditProfileVC{
-//    func setupOpeningTime(){
-//        if #available(iOS 13.4, *) {
-//            timePicker.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 250.0)
-//            timePicker.preferredDatePickerStyle = .wheels
-//        }
-//        self.timePicker.datePickerMode = .time
-//        timePicker.minuteInterval = 30
-//        //
+extension EditProfileVC{
+    func setupOpeningTime(){
+        if #available(iOS 13.4, *) {
+            timePicker.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 250.0)
+            timePicker.preferredDatePickerStyle = .wheels
+        }
+        self.timePicker.datePickerMode = .date
+        timePicker.minuteInterval = 30
+        //
 //        var components = Calendar.current.dateComponents([.hour, .minute, .month, .year, .day], from: timePicker.date)
 //        components.hour = 1
 //        components.minute = 30
 //        timePicker.setDate(Calendar.current.date(from: components)!, animated: true)
-//
-//
-//        self.txtFieldDOB.inputView = self.timePicker
-//        self.txtFieldDOB.inputAccessoryView = self.getToolBar()
-//    }
-//
-//    func getToolBar() -> UIToolbar {
-//        let toolBar = UIToolbar()
-//        toolBar.barStyle = .default
-//        toolBar.isTranslucent = true
-//        let myColor : UIColor = UIColor( red: 2/255, green: 14/255, blue:70/255, alpha: 1.0 )
-//        toolBar.tintColor = myColor
-//        toolBar.sizeToFit()
-//        // Adding Button ToolBar
-//        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneClick))
-//        let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-//        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelClick))
-//        toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
-//        toolBar.isUserInteractionEnabled = true
-//        return toolBar
-//    }
-//
-//    @objc func doneClick() {
-//        self.view.endEditing(true)
-//        let dateFormatter = DateFormatter()
-//        dateFormatter.dateFormat = "HH:mm"
-//        self.txtFieldDOB.text = dateFormatter.string(from: self.timePicker.date)
-//
-//    }
-//
-//    @objc func cancelClick() {
-//        self.view.endEditing(true)
-//    }
-//
-//}
+        
+        
+        self.txtFieldDOB.inputView = self.timePicker
+//            self.txtFieldDOB.inputAccessoryView = self.getToolBar()
+    }
+    
+    func getToolBar() -> UIToolbar {
+        let toolBar = UIToolbar()
+        toolBar.barStyle = .default
+        toolBar.isTranslucent = true
+        let myColor : UIColor = UIColor( red: 2/255, green: 14/255, blue:70/255, alpha: 1.0 )
+        toolBar.tintColor = myColor
+        toolBar.sizeToFit()
+        // Adding Button ToolBar
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneClick))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelClick))
+        toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
+        toolBar.isUserInteractionEnabled = true
+        return toolBar
+    }
+    
+    @objc func doneClick() {
+        self.view.endEditing(true)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy"
+        self.txtFieldDOB.placeholder = dateFormatter.string(from: self.timePicker.date)
+        debugPrint("txtdob",self.txtFieldDOB.placeholder)
+
+    }
+    
+    @objc func cancelClick() {
+        self.view.endEditing(true)
+    }
+    
+}
 
 

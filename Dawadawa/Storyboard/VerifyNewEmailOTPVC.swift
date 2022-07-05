@@ -39,7 +39,7 @@ class VerifyNewEmailOTPVC: UIViewController {
     // MARK: - Life Cycle
     func setup(){
         self.lblWrongCode.isHidden = true
-        self.lblSubHeading.text = "Phone number verification code is sent on your email"
+        self.lblSubHeading.text = "Phone number verification code is sent on your email \(String.getString(UserData.shared.email))"
         self.txtfieldOtp1.delegate = self
         self.txtfieldOtp2.delegate = self
         self.txtfieldOtp3.delegate = self
@@ -183,7 +183,7 @@ extension VerifyNewEmailOTPVC{
                 "otp":self.otp]
             
             debugPrint("params==",params)
-            TANetworkManager.sharedInstance.requestApi(withServiceName:ServiceName.kchangeemail, requestMethod: .POST,
+            TANetworkManager.sharedInstance.requestApi(withServiceName:ServiceName.knewemailotpverify, requestMethod: .POST,
                                                        requestParameters:params, withProgressHUD: false)
             {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
                 
@@ -201,10 +201,6 @@ extension VerifyNewEmailOTPVC{
                             if septoken[0] == "Bearer"{
                                 kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
                             }
-                            let data = kSharedInstance.getDictionary(dictResult["data"])
-                            kSharedUserDefaults.setLoggedInUserDetails(loggedInUserDetails: data)
-                           
-                            UserData.shared.saveData(data: data, token: String.getString(                                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])))
                             
                             self?.callbackOTP2?()
                         }

@@ -1210,6 +1210,7 @@
 			isa = PBXGroup;
 			children = (
 				0494642D28646CCA0010076A /* LogOutVC.swift */,
+				044D7174286198600054DAA5 /* Setting */,
 			);
 			name = LogOut;
 			sourceTree = "<group>";
@@ -1229,7 +1230,6 @@
 			children = (
 				04F8452D286AC4930081120F /* ChangePassword */,
 				04F8452C286AC4730081120F /* LogOut */,
-				044D7174286198600054DAA5 /* Setting */,
 				04F1AD9828697AE9002CC167 /* EditProfile */,
 				04FD1D36286077E800BE414A /* MoreVC.swift */,
 				04B265392872C83F00B2DF7C /* ContactUsVC.swift */,

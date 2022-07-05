@@ -22,12 +22,11 @@ class WebViewVC: UIViewController {
         guard let url = URL(string: strurl) else{
             return
         }
+        
         webkit.load(URLRequest(url:url))
         self.lblheading.text = self.head
     }
     
-    
-   
     @IBAction func btnBackTapped(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
     }

@@ -10,13 +10,14 @@ import UIKit
 
 
 class SettingVC: UIViewController {
+    
+//    MARK: - Properties
 
     @IBOutlet weak var lblDropDownMenu: UILabel!
     @IBOutlet weak var imgDropDownMenu: UIImageView!
     @IBOutlet weak var btndrop: UIButton!
     
    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -29,6 +30,13 @@ class SettingVC: UIViewController {
                    self.imgDropDownMenu.image = item == "English-IND" ? UIImage(named: "IND") : UIImage(named: "sudan")
     }
 }
+    @IBAction func btntermsandCondition(_ sender: UIButton) {
+        guard let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WebViewVC") as? WebViewVC else
+        {return}
+           vc.strurl = "https://demo4app.com/dawadawa/api-terms"
+           vc.head = "Terms and Condition"
+        self.navigationController?.pushViewController(vc, animated: false)
+    }
     
     @IBAction func btnBackTapped(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)

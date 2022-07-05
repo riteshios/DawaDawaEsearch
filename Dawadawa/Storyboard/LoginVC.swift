@@ -100,7 +100,7 @@ class LoginVC: UIViewController {
         self.validation()
     }
     @IBAction func btnSkipLoginTapped(_ sender: UIButton) {
-        
+        UserData.shared.isskiplogin = true
         kSharedAppDelegate?.makeRootViewController()
     }
     
@@ -192,6 +192,7 @@ extension LoginVC{
                 case 200:
                    
                     if Int.getInt(dictResult["status"]) == 200{
+                        UserData.shared.isskiplogin = false
                        
                         let data = kSharedInstance.getDictionary(dictResult["data"])
                         kSharedUserDefaults.setLoggedInUserDetails(loggedInUserDetails: data)

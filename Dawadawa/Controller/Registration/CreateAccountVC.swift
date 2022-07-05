@@ -177,6 +177,7 @@ class CreateAccountVC: UIViewController {
         self.Validation()
     }
     @IBAction func btnSkipRegistration(_ sender: UIButton) {
+        UserData.shared.isskiplogin = true
         kSharedAppDelegate?.makeRootViewController()
     }
     

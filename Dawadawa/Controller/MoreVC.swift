@@ -58,6 +58,7 @@ class MoreVC: UIViewController {
         if self.btnEdit.isSelected == true{
             self.viewEditProfile.backgroundColor = UIColor.init(red: 241/255, green: 249/255, blue: 253/255, alpha: 1)
         }
+        
         self.callback4?("EditProfile")
     }
     
