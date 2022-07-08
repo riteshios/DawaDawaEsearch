@@ -87,6 +87,8 @@ public class TANetworkManager {
                             if DataResponse.response?.statusCode == 401 { // 401: Token Expired
                                showAlertMessage.alert(message: AlertMessage.kSessionExpired)
                               kSharedUserDefaults.setUserLoggedIn(userLoggedIn: false)
+                                
+            
                                // kSharedAppDelegate?.moveToHome()
                             } else {
                                 let response = self.getResponseDataDictionaryFromData(data: DataResponse.data!)
@@ -228,15 +230,6 @@ public class TANetworkManager {
                 var cri: Data
                 
                 cri = imageData
-                
-               // multipartFormData.append(cri?.base64EncodedData()!, withName: "profile_image", fileName: "profile_image", mimeType: "image/jpeg")
-                
-             //   multipartFormData.append(cri?.base64EncodedData()!, withName: "profile_image", fileName: "profile_image", mimeType: "image/jpeg")
-                
-                
-              //  multipartFormData.append(cri, withName: "profile_image")
-             //   multipartFormData.append(cri.base64EncodedData(), withName: "profile_image", fileName: "profile_image", mimeType: "image/png")
-                
                 if let jpegData = reqImage.jpegData(compressionQuality: 0.4)
                 {
                     multipartFormData.append(jpegData, withName: "profile_image", fileName: "profile_image111", mimeType: "image/png")

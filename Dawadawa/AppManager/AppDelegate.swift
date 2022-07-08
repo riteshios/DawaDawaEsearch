@@ -24,6 +24,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         sleep(3)
 //        FirebaseApp.configure()
 //        GIDSignIn.sharedInstance.clientID = "330854842489-c25b86f35mmp4ckogq99l06tn52jj4ki.apps.googleusercontent.com"
+        
+        if UserDefaults.standard.object(forKey: "Language") != nil && UserDefaults.standard.object(forKey: "Language") as! String == "ar"
+        {
+            UserDefaults.standard.set("ar", forKey: "Language")
+            UIView.appearance().semanticContentAttribute = .forceRightToLeft
+        }
+        else
+        {
+            UserDefaults.standard.set("en", forKey: "Language")
+            UIView.appearance().semanticContentAttribute = .forceLeftToRight
+        }
         return true
     }
 

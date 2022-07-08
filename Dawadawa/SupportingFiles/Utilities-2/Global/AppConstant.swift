@@ -63,19 +63,21 @@ struct Keys {
 }
 
 struct ServiceName {
-    static let kcreateAccount        =      "api/register"
-    static let kOtpVerify            =      "api/verify_user"
-    static let klogin                =      "api/login"
-    static let kforgotpassword       =       "api/forgot-password" // this api is also used for change password
-    static let kverifyforgototp      =       "api/verify-forgot-otp"
-    static let kresetpassword        =       "api/forgot-psd"
-    static let kresendotp            =       "api/resend-user-verify"
-    static let kchangepassword       =       "api/change-password"
+    static let kcreateAccount         =      "api/register"
+    static let kOtpVerify             =      "api/verify_user"
+    static let klogin                 =      "api/login"
+    static let kforgotpassword        =       "api/forgot-password" // this api is also used for change password
+    static let kverifyforgototp       =       "api/verify-forgot-otp"
+    static let kresetpassword         =       "api/forgot-psd"
+    static let kresendotp             =       "api/resend-user-verify"
+    static let kchangepassword        =       "api/change-password"
     static let  keditprofileimage     =       "api/edit-profile-image"
-    static let  kedituserdetails     =       "api/edit-user-detail"
+    static let  kedituserdetails      =       "api/edit-user-detail"
     static let kchangeemail           =      "api/change-email"
-    static let kgooglelogin          =       "api/google-login"
-    static let knewemailotpverify   =        "api/change-email-otp-verify"
+    static let kgooglelogin           =       "api/google-login"
+    static let knewemailotpverify     =        "api/change-email-otp-verify"
+    
+    static let kgetcategory         =        "api/category"
 }
 
 struct Notifications {

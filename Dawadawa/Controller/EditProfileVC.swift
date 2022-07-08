@@ -11,13 +11,14 @@ import SKFloatingTextField
 
 class EditProfileVC: UIViewController {
     
-//    MARK: - Properties
+    //    MARK: - Properties
     
+    @IBOutlet weak var textfieldDATE: UITextField!
     @IBOutlet weak var txtFieldPhoneNumber: SKFloatingTextField!
     @IBOutlet weak var txtFieldEmailAddress: SKFloatingTextField!
     @IBOutlet weak var txtFieldFirstName: SKFloatingTextField!
     @IBOutlet weak var txtFieldLastName: SKFloatingTextField!
-    @IBOutlet weak var txtFieldDOB: SKFloatingTextField!
+//    @IBOutlet weak var txtFieldDOB: SKFloatingTextField!
     @IBOutlet weak var txtFieldWhatsappNumber: SKFloatingTextField!
     
     @IBOutlet weak var ViewSaveChange: UIView!
@@ -36,7 +37,10 @@ class EditProfileVC: UIViewController {
     @IBOutlet weak var lblUserType: UILabel!
     @IBOutlet weak var lblEnglish: UILabel!
     @IBOutlet weak var lblArabic: UILabel!
+    
     @IBOutlet weak var btnDropUserType: UIButton!
+    @IBOutlet weak var btnEnglish: UIButton!
+    @IBOutlet weak var btnArabic: UIButton!
     
     @IBOutlet weak var imageFlag: UIImageView!
     @IBOutlet weak var lblCountry: UILabel!
@@ -45,11 +49,12 @@ class EditProfileVC: UIViewController {
     var timePicker = UIDatePicker()
     
     
-    var storeemail:String?
+    var dictLanguage:[String:String] = ["en" : "English", "ar":"Arabic"]
+    var selectedLanguage: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setupOpeningTime()
+        self.setupdate()
         self.setup()
         if UserData.shared.isskiplogin == true{
             print("hghjj")
@@ -58,7 +63,7 @@ class EditProfileVC: UIViewController {
             self.txtFieldPhoneNumber.placeholder = "91***********"
             self.txtFieldEmailAddress.placeholder = "examiple@.com"
             self.txtFieldWhatsappNumber.placeholder = "+91***********"
-            self.txtFieldDOB.placeholder = "XX/XX/XXXX"
+            self.textfieldDATE.placeholder = "DD/MM/YYYY"
             self.lblCountry.text = "India"
             
         }
@@ -66,25 +71,46 @@ class EditProfileVC: UIViewController {
             self.fetchdata()
         }
     }
-//    MARK: - Life Cycle
+    
+    override func viewWillAppear(_ animated: Bool)
+    {
+        super.viewWillAppear(animated)
+        self.selectedLanguage = dictLanguage[UserDefaults.standard.object(forKey: "Language") as! String]!
+        lblEnglish.text = AppHelper.getLocalizeString(str: "English")
+        
+        //        btnEnglish.setTitle(AppHelper.getLocalizeString(str: ""), for: .normal)
+    }
+    //    MARK: - Life Cycle
     
     func setup(){
         self.setTextFieldUI(textField: txtFieldPhoneNumber, place: "", floatingText: "Phone number")
         self.setTextFieldUI(textField: txtFieldEmailAddress, place: "", floatingText: "Email address")
         self.setTextFieldUI(textField: txtFieldFirstName, place: "", floatingText: "First name")
         self.setTextFieldUI(textField: txtFieldLastName, place: "", floatingText: "Last name")
-        self.setTextFieldUI(textField: txtFieldDOB, place: "", floatingText: "Date of birth")
+//        self.setTextFieldUI(textField: txtFieldDOB, place: "", floatingText: "Date of birth")
         self.setTextFieldUI(textField: txtFieldWhatsappNumber, place: "", floatingText: "Whatsapp number")
         
         self.ViewSaveChange.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
-        
+        if self.btnEnglish.isSelected == true{
+            self.viewEnglish.backgroundColor = UIColor(red: 21, green: 114, blue: 161)
+            self.lblArabic.textColor = UIColor(red: 21, green: 114, blue: 161)
+            self.lblEnglish.textColor = UIColor.systemBackground
+            self.viewArabic.backgroundColor = UIColor.systemBackground
+        }
+        else{
+            self.viewArabic.backgroundColor =  UIColor(red: 21, green: 114, blue: 161)
+            self.lblEnglish.textColor = UIColor(red: 21, green: 114, blue: 161)
+            self.lblArabic.textColor = UIColor.systemBackground
+            self.viewEnglish.backgroundColor = UIColor.systemBackground
+        }
         self.viewEnglish.backgroundColor = UIColor(red: 21, green: 114, blue: 161)
-        self.lblEnglish.textColor = UIColor.systemBackground
         self.lblArabic.textColor = UIColor(red: 21, green: 114, blue: 161)
+        self.lblEnglish.textColor = UIColor.systemBackground
+        self.viewArabic.backgroundColor = UIColor.systemBackground
         
         self.txtFieldPhoneNumber.delegate = self
         self.txtFieldEmailAddress.delegate = self
-        self.txtFieldDOB.delegate = self
+//        self.txtFieldDOB.delegate = self
         self.txtFieldFirstName.delegate = self
         self.txtFieldLastName.delegate = self
         self.txtFieldWhatsappNumber.delegate = self
@@ -115,21 +141,18 @@ class EditProfileVC: UIViewController {
         if UserData.shared.whatspp_number == ""{
             self.txtFieldWhatsappNumber.placeholder = "+91111111111"
         }
-       
-        if UserData.shared.dob != ""{
-            self.txtFieldDOB.text = UserData.shared.user_gender
-        }
+        
         if UserData.shared.dob == ""{
-            self.txtFieldDOB.placeholder = "01/01/1975"
+            self.textfieldDATE.placeholder = "DD/MM/YYYY"
         }
         if UserData.shared.dob != ""{
-            self.txtFieldDOB.text = UserData.shared.dob
+            self.textfieldDATE.text = UserData.shared.dob
         }
-       
+        
         if UserData.shared.user_country != ""{
             self.lblCountry.text = UserData.shared.user_country
         }
-       
+        
         if UserData.shared.user_gender != ""{
             self.lblGender.text = UserData.shared.user_gender
         }
@@ -138,11 +161,11 @@ class EditProfileVC: UIViewController {
             self.lblUserType.text = UserData.shared.user_type
         }
     }
-//    Validation
+    //    Validation
     func Validation()
     {
         
-         if !String.getString(self.txtFieldFirstName.text).isValidUserName()
+        if !String.getString(self.txtFieldFirstName.text).isValidUserName()
         {
             self.showSimpleAlert(message: Notifications.kvalidfirsname)
             return
@@ -163,14 +186,62 @@ class EditProfileVC: UIViewController {
             self.showSimpleAlert(message: "Please Enter valid Whatsapp Number")
             return
         }
+//        else if !String.getString(textfieldDATE.text).isdob(){
+//            self.showSimpleAlert(message: "Please Enter your DOB")
+//            return
+//        }
         self.view.endEditing(true)
         self.editdetailapi()
     }
     
     // MARK: - @IBAction
     
+    @IBAction func btnEnglishLanguageTapped(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        if self.btnEnglish.isSelected == true{
+            self.viewEnglish.backgroundColor = UIColor(red: 21, green: 114, blue: 161)
+            self.lblArabic.textColor = UIColor(red: 21, green: 114, blue: 161)
+            self.lblEnglish.textColor = UIColor.systemBackground
+            self.viewArabic.backgroundColor = UIColor.systemBackground
+        }
+        
+        UserDefaults.standard.set("en", forKey: "Language")
+        UIView.appearance().semanticContentAttribute = .forceLeftToRight
+    }
+    @IBAction func btnArabicLanguageTapped(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        if self.btnArabic.isSelected == true{
+            self.viewArabic.backgroundColor =  UIColor(red: 21, green: 114, blue: 161)
+            self.lblEnglish.textColor = UIColor(red: 21, green: 114, blue: 161)
+            self.lblArabic.textColor = UIColor.systemBackground
+            self.viewEnglish.backgroundColor = UIColor.systemBackground
+        }
+        
+        UserDefaults.standard.set("ar", forKey: "Language")
+        UIView.appearance().semanticContentAttribute = .forceRightToLeft
+        
+    }
+//    @IBAction func btnDobTapped(_ sender: UIButton) {
+//        let vc = self.storyboard?.instantiateViewController(withIdentifier: "CalendarVC") as! CalendarVC
+//
+//        vc.modalTransitionStyle = .crossDissolve
+//
+//        vc.modalPresentationStyle = .overCurrentContext
+//
+//        vc.callBack = { txt in
+//
+//            vc.dismiss(animated: true) {
+//
+//                debugPrint("tettext",txt)
+//            }
+//        }
+//
+//        self.present(vc, animated: true)
+//    }
+    
+    
     @IBAction func btnSaveTapped(_ sender: UIButton) {
-//        self.editdetailapi()
+        //        self.editdetailapi()
         self.Validation()
         
     }
@@ -287,7 +358,7 @@ extension EditProfileVC: UITextFieldDelegate{
         case self.txtFieldEmailAddress:
             self.viewEmail.isHidden = true
             
-        case self.txtFieldDOB:
+        case self.textfieldDATE:
             self.viewDOB.isHidden = true
             
         case self.txtFieldFirstName:
@@ -327,7 +398,7 @@ extension EditProfileVC{
             "first_name":String.getString(self.txtFieldFirstName.text),
             "last_name":String.getString(self.txtFieldLastName.text),
             "whatsapp_number":String.getString(self.txtFieldWhatsappNumber.text),
-            "dob":String.getString(self.txtFieldDOB.text),
+            "dob":String.getString(self.textfieldDATE.text),
             "phone":String.getString(self.txtFieldPhoneNumber.text),
             "country_detail":self.lblCountry.text,
             "gender":self.lblGender.text,
@@ -416,7 +487,6 @@ extension EditProfileVC{
                                 vc.modalTransitionStyle = .crossDissolve
                                 vc.modalPresentationStyle = .overCurrentContext
                                 vc.callbackchangenumber =  { txt in
-                                    self?.storeemail = txt
                                     debugPrint("email===,", txt)
                                     self?.dismiss(animated: false) {
                                         let vc = self?.storyboard?.instantiateViewController(withIdentifier: VerifyNewEmailOTPVC.getStoryboardID()) as! VerifyNewEmailOTPVC
@@ -432,10 +502,11 @@ extension EditProfileVC{
                                                 let vc = self?.storyboard?.instantiateViewController(withIdentifier: EmailChangedSuccessfullyPopUpVC.getStoryboardID()) as! EmailChangedSuccessfullyPopUpVC
                                                 vc.modalTransitionStyle = .crossDissolve
                                                 vc.modalPresentationStyle = .overCurrentContext
-                                                vc.email = self?.storeemail
                                                 vc.callbackpopup = {
                                                     self?.dismiss(animated: false){
                                                         self?.navigationController?.popViewController(animated: true)
+                                                        //                                                        let vc = self?.storyboard?.instantiateViewController(withIdentifier: ProfileVC.getStoryboardID()) as! ProfileVC
+                                                        //                                                        self?.navigationController?.pushViewController(vc, animated: false)
                                                     }
                                                 }
                                                 self?.present(vc, animated: false)
@@ -472,7 +543,7 @@ extension EditProfileVC{
 // MARK: - DatePicker
 
 extension EditProfileVC{
-    func setupOpeningTime(){
+    func setupdate(){
         if #available(iOS 13.4, *) {
             timePicker.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 250.0)
             timePicker.preferredDatePickerStyle = .wheels
@@ -484,12 +555,22 @@ extension EditProfileVC{
 //        components.hour = 1
 //        components.minute = 30
 //        timePicker.setDate(Calendar.current.date(from: components)!, animated: true)
+
         
-        
-        self.txtFieldDOB.inputView = self.timePicker
-//            self.txtFieldDOB.inputAccessoryView = self.getToolBar()
+                        let currentDate = Date()
+                        var dateComponents = DateComponents()
+                        let calendar = Calendar.init(identifier: .gregorian)
+                        dateComponents.year = -100
+                        let minDate = calendar.date(byAdding: dateComponents, to: currentDate)
+                        dateComponents.year = 0
+                        let maxDate = calendar.date(byAdding: dateComponents, to: currentDate)
+        timePicker.maximumDate = maxDate
+        timePicker.minimumDate = minDate
+        self.textfieldDATE.inputView = self.timePicker
+       self.textfieldDATE.inputAccessoryView = self.getToolBar()
+//       self.txtFieldDOB.inputView = self.getToolBar()
     }
-    
+
     func getToolBar() -> UIToolbar {
         let toolBar = UIToolbar()
         toolBar.barStyle = .default
@@ -505,20 +586,19 @@ extension EditProfileVC{
         toolBar.isUserInteractionEnabled = true
         return toolBar
     }
-    
+
     @objc func doneClick() {
         self.view.endEditing(true)
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd/MM/yyyy"
-        self.txtFieldDOB.placeholder = dateFormatter.string(from: self.timePicker.date)
-        debugPrint("txtdob",self.txtFieldDOB.placeholder)
+        self.textfieldDATE.text = dateFormatter.string(from: self.timePicker.date)
+       
+       
 
     }
-    
+
     @objc func cancelClick() {
         self.view.endEditing(true)
     }
-    
+
 }
-
-

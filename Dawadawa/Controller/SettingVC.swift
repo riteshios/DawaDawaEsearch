@@ -28,6 +28,14 @@ class SettingVC: UIViewController {
                {(Index ,item) in
                    self.lblDropDownMenu.text = item
                    self.imgDropDownMenu.image = item == "English-IND" ? UIImage(named: "IND") : UIImage(named: "sudan")
+                   if self.lblDropDownMenu.text == "English-IND"{
+                       UserDefaults.standard.set("en", forKey: "Language")
+                       UIView.appearance().semanticContentAttribute = .forceLeftToRight
+                   }
+                   else if self.lblDropDownMenu.text == "Arabic"{
+                       UserDefaults.standard.set("ar", forKey: "Language")
+                       UIView.appearance().semanticContentAttribute = .forceRightToLeft
+                   }
     }
 }
     @IBAction func btntermsandCondition(_ sender: UIButton) {

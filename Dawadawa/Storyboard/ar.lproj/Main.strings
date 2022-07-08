@@ -1,12 +1,15 @@
 
+/* Class = "UIButton"; normalTitle = "Resend code"; ObjectID = "1oX-SX-abe"; */
+"1oX-SX-abe.normalTitle" = "Resend code";
+
 /* Class = "UILabel"; text = "Account activated successfully"; ObjectID = "1se-yZ-srG"; */
 "1se-yZ-srG.text" = "Account activated successfully";
 
 /* Class = "UIViewController"; title = "LoginVC"; ObjectID = "8RW-YP-m4s"; */
 "8RW-YP-m4s.title" = "LoginVC";
 
-/* Class = "UILabel"; text = "Sudan"; ObjectID = "8Rc-Br-3YF"; */
-"8Rc-Br-3YF.text" = "Sudan";
+/* Class = "UILabel"; text = "India"; ObjectID = "8Rc-Br-3YF"; */
+"8Rc-Br-3YF.text" = "India";
 
 /* Class = "UIViewController"; title = "CreateAccountVC"; ObjectID = "9Uz-l7-6E1"; */
 "9Uz-l7-6E1.title" = "CreateAccountVC";
@@ -41,8 +44,11 @@
 /* Class = "UILabel"; text = " Activate account"; ObjectID = "OuP-Uy-gkF"; */
 "OuP-Uy-gkF.text" = " Activate account";
 
-/* Class = "UILabel"; text = "Dont's have an account"; ObjectID = "PL2-nJ-Uuw"; */
-"PL2-nJ-Uuw.text" = "Dont's have an account";
+/* Class = "UILabel"; text = "Don't have an account?"; ObjectID = "PL2-nJ-Uuw"; */
+"PL2-nJ-Uuw.text" = "Don't have an account?";
+
+/* Class = "UILabel"; text = "Country "; ObjectID = "QoX-PC-mwW"; */
+"QoX-PC-mwW.text" = "Country ";
 
 /* Class = "UILabel"; text = "Forgot Password"; ObjectID = "TgN-a2-EdO"; */
 "TgN-a2-EdO.text" = "Forgot Password";
@@ -92,11 +98,11 @@
 /* Class = "UILabel"; text = "Google"; ObjectID = "grT-eS-or5"; */
 "grT-eS-or5.text" = "Google";
 
-/* Class = "UIButton"; normalTitle = "create Account"; ObjectID = "kUH-Dm-taG"; */
-"kUH-Dm-taG.normalTitle" = "create Account";
+/* Class = "UIButton"; normalTitle = "Create account"; ObjectID = "kUH-Dm-taG"; */
+"kUH-Dm-taG.normalTitle" = "Create account";
 
-/* Class = "UILabel"; text = " (*) indicates mandatory fields *"; ObjectID = "ljH-t9-jgP"; */
-"ljH-t9-jgP.text" = " (*) indicates mandatory fields *";
+/* Class = "UILabel"; text = " (*) indicates mandatory fields "; ObjectID = "ljH-t9-jgP"; */
+"ljH-t9-jgP.text" = " (*) indicates mandatory fields ";
 
 /* Class = "UILabel"; text = "or"; ObjectID = "ltz-ln-f0s"; */
 "ltz-ln-f0s.text" = "or";
@@ -113,6 +119,9 @@
 /* Class = "UIButton"; normalTitle = "Send code "; ObjectID = "rnl-0i-IMd"; */
 "rnl-0i-IMd.normalTitle" = "Send code ";
 
+/* Class = "UILabel"; text = "Label"; ObjectID = "sxy-an-a7L"; */
+"sxy-an-a7L.text" = "Label";
+
 /* Class = "UIButton"; normalTitle = "Skip registration "; ObjectID = "u0v-uN-S8r"; */
 "u0v-uN-S8r.normalTitle" = "Skip registration ";
 
@@ -125,14 +134,14 @@
 /* Class = "UILabel"; text = "Your account activated successfully, now you can explore all the exclusive opportunities."; ObjectID = "vfl-kb-3ux"; */
 "vfl-kb-3ux.text" = "Your account activated successfully, now you can explore all the exclusive opportunities.";
 
-/* Class = "UIButton"; normalTitle = "Forgot Password"; ObjectID = "vjo-jz-ZKr"; */
-"vjo-jz-ZKr.normalTitle" = "Forgot Password";
+/* Class = "UIButton"; normalTitle = "Forgot Password?"; ObjectID = "vjo-jz-ZKr"; */
+"vjo-jz-ZKr.normalTitle" = "Forgot Password?";
 
 /* Class = "UILabel"; text = "Already have an account? "; ObjectID = "vyj-ww-Aq6"; */
 "vyj-ww-Aq6.text" = "Already have an account? ";
 
-/* Class = "UILabel"; text = "By creating account your accepting our"; ObjectID = "x2V-ah-q5I"; */
-"x2V-ah-q5I.text" = "By creating account your accepting our";
+/* Class = "UILabel"; text = "Please accept our"; ObjectID = "x2V-ah-q5I"; */
+"x2V-ah-q5I.text" = "Please accept our";
 
 /* Class = "UIButton"; normalTitle = "T&C"; ObjectID = "ya6-Kl-EgT"; */
 "ya6-Kl-EgT.normalTitle" = "T&C";

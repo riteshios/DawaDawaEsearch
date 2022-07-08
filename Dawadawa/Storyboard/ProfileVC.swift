@@ -17,19 +17,18 @@ class ProfileVC: UIViewController {
     
     var isProfileImageSelected = false
     var userImage:String?
-   
+    
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
         
-
+        
+        
         if UserData.shared.isskiplogin == true{
             print("hghjj")
-//            self.lblFullName.text = "XYZ"
-//            self.lblMobileNumber.text = "exnsds"
-            
+            //            self.lblFullName.text = "XYZ"
+            //            self.lblMobileNumber.text = "exnsds"
         }
         else{
             self.fetchdata()
@@ -41,9 +40,9 @@ class ProfileVC: UIViewController {
         self.lblMobileNumber.text = UserData.shared.phone
         self.lblEmail.text = UserData.shared.email
         
-//           let imgurl = "https://demo4app.com/dawadawa/public/admin_assets/user_profile/user_profile1657013122.png"
+        //           let imgurl = "https://demo4app.com/dawadawa/public/admin_assets/user_profile/user_profile1657013122.png"
         //https://demo4app.com/dawadawa/public/admin_assets/user_profile/user_profile1657013122.png
-       
+        
         if let url = URL(string: "\("https://demo4app.com/dawadawa/public/admin_assets/user_profile/" + String.getString(UserData.shared.social_profile))"){
             debugPrint("url...",  url)
             
@@ -60,23 +59,8 @@ class ProfileVC: UIViewController {
         
     }
     
-// MARK: - @IBAction
+    // MARK: - @IBAction
     
-    func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
-        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
-    }
-    func downloadImage(from url: URL) {
-        print("Download Started")
-        getData(from: url) { data, response, error in
-            guard let data = data, error == nil else { return }
-            print(response?.suggestedFilename ?? url.lastPathComponent)
-            print("Download Finished")
-            // always update the UI from the main thread
-            DispatchQueue.main.async() { [weak self] in
-                self?.ImageProfile.image = UIImage(data: data)
-            }
-        }
-    }
     @IBAction func btnEditImage(_ sender: UIButton) {
         ImagePickerHelper.shared.showPickerController { image, url in
             self.isProfileImageSelected = true
@@ -84,11 +68,12 @@ class ProfileVC: UIViewController {
             self.uploadImage(image: self.ImageProfile.image ?? UIImage())
         }
     }
-//    override func viewWillAppear(_ animated: Bool) {
-//        self.tabBarController?.tabBar.isHidden = false
-//        self.tabBarController?.tabBar.layer.zPosition = 0
-//    }
+    override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false
+        self.tabBarController?.tabBar.layer.zPosition = 0
+    }
 
+    
     @IBAction func btnMoreTapped(_ sender: UIButton) {
         
         let vc = self.storyboard?.instantiateViewController(withIdentifier: MoreVC.getStoryboardID()) as! MoreVC
@@ -193,13 +178,13 @@ extension ProfileVC{
                 let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
                 kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
             }
-//            headers["token"] = kSharedUserDefaults.getLoggedInAccessToken()
+            //            headers["token"] = kSharedUserDefaults.getLoggedInAccessToken()
         }
         let params:[String : Any] = [
             "user_id":UserData.shared.id
         ]
-
-    let uploadimage:[String:Any] = ["profile_image":self.ImageProfile.image ?? UIImage()]
+        
+        let uploadimage:[String:Any] = ["profile_image":self.ImageProfile.image ?? UIImage()]
         TANetworkManager.sharedInstance.requestMultiPart(withServiceName:ServiceName.keditprofileimage , requestMethod: .post, requestImages: [uploadimage], requestVideos: [:], requestData:params, req : self.ImageProfile.image! )
         { (result:Any?, error:Error?, errortype:ErrorType?, statusCode:Int?) in
             CommonUtils.showHudWithNoInteraction(show: false)
@@ -217,22 +202,15 @@ extension ProfileVC{
                         }
                         let data =  kSharedInstance.getDictionary(dictResult["data"])
                         kSharedUserDefaults.setLoggedInUserDetails(loggedInUserDetails: data)
-                        UserData.shared.saveData(data:data, token: String.getString(kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])))
+                        UserData.shared.saveData(data:data, token: String.getString(kSharedUserDefaults.getLoggedInAccessToken()))
                         
-                        debugPrint("dataaa....",UserData.shared.saveData(data:data, token: String.getString(kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1]))))
-//                        let Image_url = kSharedInstance.getDictionary(dictResult["Image_url"])
-//                        kSharedUserDefaults.set(Image_url, forKey: "Image_url")
-//                        debugPrint("Image_url........",Image_url)
                         let obj = kSharedInstance.getDictionary(data["social_profile"])
-//
-                                                
-        
                         self.userImage = String.getString(obj.first)
                     }
                     else if  Int.getInt(dictResult["status"]) == 401{
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
-                   
+                    
                 default:
                     CommonUtils.showError(.info, String.getString(dictResult["message"]))
                 }
