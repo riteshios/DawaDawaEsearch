@@ -131,7 +131,7 @@ extension SelectCategoryVC{
     func categoryapi(language:String, completionBlock: @escaping (_ success: Int, _ catdata : [getCartegoryModel]?, _ baseurl: String,_ message: String) -> Void) {
            
            
-        let headers : HTTPHeaders = ["Authorization": kSharedUserDefaults.getLoggedInAccessToken(), "Accept-Language": language]
+        let headers : HTTPHeaders = ["Authorization": "Bearer " + kSharedUserDefaults.getLoggedInAccessToken(), "Accept-Language": language]
         debugPrint("headers......\(headers)")
            
            var params = Dictionary<String, String>()
