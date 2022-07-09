@@ -23,6 +23,7 @@ target 'Dawadawa' do
   pod 'SwiftMessages'
   pod 'STTabbar'
   pod 'DropDown'
+  pod 'SwiftyJSON'
 
 
 end

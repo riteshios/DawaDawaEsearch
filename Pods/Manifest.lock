@@ -127,6 +127,7 @@ PODS:
     - SwiftMessages/App (= 9.0.6)
   - SwiftMessages/App (9.0.6)
   - SwiftyGif (5.4.3)
+  - SwiftyJSON (5.0.1)
 
 DEPENDENCIES:
   - Alamofire (~> 4.0)
@@ -144,6 +145,7 @@ DEPENDENCIES:
   - SVProgressHUD
   - SwiftMessages
   - SwiftyGif
+  - SwiftyJSON
 
 SPEC REPOS:
   trunk:
@@ -174,6 +176,7 @@ SPEC REPOS:
     - SVProgressHUD
     - SwiftMessages
     - SwiftyGif
+    - SwiftyJSON
 
 SPEC CHECKSUMS:
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
@@ -203,7 +206,8 @@ SPEC CHECKSUMS:
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftMessages: f0c7ef4705a570ad6c5e208b611f4333e660ed92
   SwiftyGif: 6c3eafd0ce693cad58bb63d2b2fb9bacb8552780
+  SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
 
-PODFILE CHECKSUM: 03dcc265302a28d2a79e9a78a24c1c6f0426fb5e
+PODFILE CHECKSUM: 547a2b1bf55607afd5f1b411ca30a2344e41497b
 
 COCOAPODS: 1.11.3
