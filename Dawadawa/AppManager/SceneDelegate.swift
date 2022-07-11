@@ -18,7 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         
         if ((kSharedUserDefaults.getLoggedInAccessToken() as? String) != ""){
-            print("\(kSharedUserDefaults.getLoggedInAccessToken())")
+//            print("\(kSharedUserDefaults.getLoggedInAccessToken())")
             kSharedUserDefaults.getLoggedInUserDetails()
             kSharedAppDelegate?.makeRootViewController()
         }

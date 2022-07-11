@@ -33,6 +33,7 @@
 		04B91910286B13B8009ABAE4 /* EmailChangedSuccessfullyPopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B9190F286B13B8009ABAE4 /* EmailChangedSuccessfullyPopUpVC.swift */; };
 		04B91912286B1553009ABAE4 /* VerifyNewEmailOTPVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B91911286B1553009ABAE4 /* VerifyNewEmailOTPVC.swift */; };
 		04F1AD9A28697B0D002CC167 /* EditProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F1AD9928697B0D002CC167 /* EditProfileVC.swift */; };
+		04F4D050287C402F001CC173 /* QuitVCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F4D04F287C402F001CC173 /* QuitVCViewController.swift */; };
 		04F8452F286AC4E40081120F /* ChangePasswordOTPVerifyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F8452E286AC4E40081120F /* ChangePasswordOTPVerifyVC.swift */; };
 		04F84531286AC4FA0081120F /* ChangePasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F84530286AC4FA0081120F /* ChangePasswordVC.swift */; };
 		04F84533286AC52C0081120F /* PasswordChangedSuccessfullyPopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F84532286AC52C0081120F /* PasswordChangedSuccessfullyPopUpVC.swift */; };
@@ -610,6 +611,7 @@
 		04B9190F286B13B8009ABAE4 /* EmailChangedSuccessfullyPopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailChangedSuccessfullyPopUpVC.swift; sourceTree = "<group>"; };
 		04B91911286B1553009ABAE4 /* VerifyNewEmailOTPVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = VerifyNewEmailOTPVC.swift; path = Dawadawa/Storyboard/VerifyNewEmailOTPVC.swift; sourceTree = SOURCE_ROOT; };
 		04F1AD9928697B0D002CC167 /* EditProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileVC.swift; sourceTree = "<group>"; };
+		04F4D04F287C402F001CC173 /* QuitVCViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuitVCViewController.swift; sourceTree = "<group>"; };
 		04F8452E286AC4E40081120F /* ChangePasswordOTPVerifyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordOTPVerifyVC.swift; sourceTree = "<group>"; };
 		04F84530286AC4FA0081120F /* ChangePasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordVC.swift; sourceTree = "<group>"; };
 		04F84532286AC52C0081120F /* PasswordChangedSuccessfullyPopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordChangedSuccessfullyPopUpVC.swift; sourceTree = "<group>"; };
@@ -1212,6 +1214,7 @@
 				0490F3D92876E7BF00F8A84A /* Cell */,
 				04A73F412876E07300A46E12 /* RockPitOpportunity */,
 				04A73F3D2876B64E00A46E12 /* SelectCategoryVC.swift */,
+				04F4D04F287C402F001CC173 /* QuitVCViewController.swift */,
 			);
 			name = "Select Category";
 			sourceTree = "<group>";
@@ -2801,6 +2804,7 @@
 				043EBE332869ABD8001EBA02 /* VerifyNumberOTPVC.swift in Sources */,
 				447DCC742851CB1100C40DDD /* LocalePickerViewController.swift in Sources */,
 				447DCC812851CB1100C40DDD /* UIImageViewBorderWidthAndColor.swift in Sources */,
+				04F4D050287C402F001CC173 /* QuitVCViewController.swift in Sources */,
 				447DCC5B2851CB1100C40DDD /* CornerWithShadow.swift in Sources */,
 				447DCC622851CB1100C40DDD /* UIImageView+Extensions.swift in Sources */,
 				447DCE582851CB1300C40DDD /* MTGoogleHelper.swift in Sources */,

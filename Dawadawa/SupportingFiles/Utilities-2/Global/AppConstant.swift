@@ -78,6 +78,9 @@ struct ServiceName {
     static let knewemailotpverify     =        "api/change-email-otp-verify"
     
     static let kgetcategory         =        "api/category"
+    static let ksubcategory         =        "api/sub-category"
+    static let kgetstate             =       "api/state"
+    static let kgetlocality          =       "api/locality"
 }
 
 struct Notifications {
