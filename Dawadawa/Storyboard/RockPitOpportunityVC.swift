@@ -34,8 +34,10 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
     @IBOutlet weak var viewselectcategorybottom: NSLayoutConstraint!
     @IBOutlet weak var UploadimageCollectionView: UICollectionView!
     var stateid:Int?
+    var subcatid:Int?
     var imagearr = [UIImage]()
     
+    var getCategorylist    = [getCartegoryModel]()
     var getSubCategorylist = [getSubCartegoryModel]()
     var getstatelist       = [getStateModel]()
     var getlocalitylist    = [getLocalityModel]()
@@ -46,8 +48,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
         super.viewDidLoad()
         self.getsubcategoryapi()
         self.getstateapi()
-        
-        
+
         self.setup()
         
     }
@@ -107,18 +108,14 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
     @IBAction func btnAddmoreImageTapped(_ sender: UIButton) {
     }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        switch collectionView{
-        case self.UploadimageCollectionView:
-            return self.imagearr.count
-            
-        default: return 5
-        }
-    }
+  
     
     @IBAction func btnSelectSubCategoryTapped(_ sender: UIButton) {
         kSharedAppDelegate?.dropDown(dataSource: getSubCategorylist.map{String.getString($0.sub_cat_name)}, text: btnSubCategory) { (index, item) in
             self.lblSubCategory.text = item
+            let subcatid = self.getSubCategorylist[index].id
+            self.subcatid = subcatid
+            debugPrint("subcatid........",subcatid)
         }
     }
     
@@ -137,14 +134,25 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
     @IBAction func btnLocalityTapped(_ sender: UIButton) {
         kSharedAppDelegate?.dropDown(dataSource: getlocalitylist.map{String.getString($0.local_name)}, text: btnLocality){
             (index,item) in
-            let id = self.getstatelist[index].id
-            self.stateid = id
             self.lblLocality.text = item
            
         }
     }
     
+    @IBAction func btnCreateOppTapped(_ sender: UIButton) {
+        self.Createopportunityapi()
+    }
+    
     // Collection view
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        switch collectionView{
+        case self.UploadimageCollectionView:
+            return self.imagearr.count
+            
+        default: return 5
+        }
+    }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch collectionView{
@@ -489,5 +497,85 @@ extension RockPitOpportunityVC{
             super.init()
         }
     }
+    
+//   Post opportunity Api
+    
+    func Createopportunityapi(){
+        CommonUtils.showHud(show: true)
+
+
+        if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
+            let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+            let septoken = endToken.components(separatedBy: " ")
+            if septoken[0] != "Bearer"{
+                let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
+                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
+            }
+            //            headers["token"] = kSharedUserDefaults.getLoggedInAccessToken()
+        }
+
+
+        let params:[String : Any] = [
+            "user_id":UserData.shared.id,
+            "category_id":"1",
+            "sub_category":self.subcatid,
+            "title":String.getString(self.txtFieldTitle.text),
+            "opp_state":self.lblState.text,
+            "opp_locality":self.lblLocality.text,
+            "location_name":String.getString(self.txtFieldLocationName.text),
+            "location_map":String.getString(self.txtFieldLocationOnMap.text),
+            "description":String.getString(self.txtFieldTitle.text), // to be changed
+            "mobile_num":String.getString(self.txtFieldMobileNumber.text),
+            "whatsaap_num":String.getString(self.txtFieldWhatsappNumber.text),
+            "pricing":String.getString(self.txtFieldPricing.text),
+            "plan":"Basic",
+            "cat_type_id":"\(Int(0))",
+            "filenames":"jdjd",
+            "opportunity_documents":"jfdc"
+        ]
+
+
+        TANetworkManager.sharedInstance.requestApi(withServiceName:ServiceName.kcreateopportunity, requestMethod: .POST,
+                                                   requestParameters:params, withProgressHUD: false)
+        {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
+
+            CommonUtils.showHudWithNoInteraction(show: false)
+
+            if errorType == .requestSuccess {
+
+                let dictResult = kSharedInstance.getDictionary(result)
+
+                switch Int.getInt(statusCode) {
+                case 200:
+                    if Int.getInt(dictResult["status"]) == 200{
+
+                        let data = kSharedInstance.getDictionary(dictResult["data"])
+                        kSharedUserDefaults.setLoggedInUserDetails(loggedInUserDetails: data)
+                        let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+                        let septoken = endToken.components(separatedBy: " ")
+                        if septoken[0] == "Bearer"{
+                            kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
+                        }
+                        categorydata.shared.saveData(data: data, token: String.getString(kSharedUserDefaults.getLoggedInAccessToken()))
+                        kSharedAppDelegate?.makeRootViewController()
+
+                    }
+                    else if  Int.getInt(dictResult["status"]) == 400{
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    }
+
+                default:
+                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                }
+            } else if errorType == .noNetwork {
+                CommonUtils.showToastForInternetUnavailable()
+
+            } else {
+                CommonUtils.showToastForDefaultError()
+            }
+        }
+    }
+    
+    
     
 }

@@ -13,6 +13,13 @@ let kAppDelegate = UIApplication.shared.delegate as! AppDelegate
 
 
 class SharedClass: NSObject {
+    class func fetchString(forKey key: String) -> String {
+        if UserDefaults.standard.string(forKey: key) == nil {
+            return ""
+        }
+        return UserDefaults.standard.string(forKey: key)!
+    }
+
     static let sharedInstance = SharedClass()
     private override init() {
     }

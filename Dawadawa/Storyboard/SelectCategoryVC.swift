@@ -28,7 +28,7 @@ class SelectCategoryVC: UIViewController,UITableViewDelegate,UITableViewDataSour
         super.viewDidLoad()
         self.getcategoryapi()
         
-        // Do any additional setup after loading the view.
+       
     }
     
     // MARK: - Life Cycle
@@ -68,6 +68,14 @@ class SelectCategoryVC: UIViewController,UITableViewDelegate,UITableViewDataSour
         case 1:
             let vc = UIStoryboard.init(name: "Home", bundle: Bundle.main).instantiateViewController(withIdentifier: "TrailingOpportunityVC") as? TrailingOpportunityVC
             self.navigationController?.pushViewController(vc!, animated: true)
+        case 2:
+            let vc = UIStoryboard.init(name: "Home", bundle: Bundle.main).instantiateViewController(withIdentifier: "MiningBusinessVC") as? MiningBusinessVC
+            self.navigationController?.pushViewController(vc!, animated: true)
+        case 3:
+            let vc = UIStoryboard.init(name: "Home", bundle: Bundle.main).instantiateViewController(withIdentifier: "MiningServiceVC") as? MiningServiceVC
+            self.navigationController?.pushViewController(vc!, animated: true)
+            
+            
         default: break
             
             

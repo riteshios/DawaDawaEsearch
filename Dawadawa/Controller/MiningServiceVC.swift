@@ -1,5 +1,5 @@
 //
-//  TrailingOpportunityVC.swift
+//  MiningServiceVC.swift
 //  Dawadawa
 //
 //  Created by Alekh on 12/07/22.
@@ -9,16 +9,18 @@ import UIKit
 import SKFloatingTextField
 import Alamofire
 import SwiftyJSON
-class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
-    //   MARK: - Properties
 
-    
+class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
+
+    //   MARK: - Properties
     @IBOutlet weak var txtFieldTitle: SKFloatingTextField!
     @IBOutlet weak var txtFieldLocationName: SKFloatingTextField!
     @IBOutlet weak var txtFieldLocationOnMap: SKFloatingTextField!
     @IBOutlet weak var txtFieldMobileNumber: SKFloatingTextField!
     @IBOutlet weak var txtFieldWhatsappNumber: SKFloatingTextField!
     @IBOutlet weak var txtFieldPricing: SKFloatingTextField!
+    @IBOutlet weak var txtFieldBusinessName: SKFloatingTextField!
+    @IBOutlet weak var txtFieldBusinessMiningBlock: SKFloatingTextField!
     
     @IBOutlet weak var lblSubCategory: UILabel!
     @IBOutlet weak var btnSubCategory: UIButton!
@@ -26,11 +28,15 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
     @IBOutlet weak var btnState: UIButton!
     @IBOutlet weak var lblLocality: UILabel!
     @IBOutlet weak var btnLocality: UIButton!
+    @IBOutlet weak var lblBusinesstype: UILabel!
+    @IBOutlet weak var btnBusinessType: UIButton!
+   
     
     
     @IBOutlet weak var viewCreateOpportunity: UIView!
     @IBOutlet weak var viewSelectCategoryTop: NSLayoutConstraint!
     @IBOutlet weak var btnSelectImage: UIButton!
+   
     @IBOutlet weak var UploadimageCollectionView: UICollectionView!
     var stateid:Int?
     var imagearr = [UIImage]()
@@ -38,16 +44,17 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
     var getSubCategorylist = [getSubCartegoryModel]()
     var getstatelist       = [getStateModel]()
     var getlocalitylist    = [getLocalityModel]()
-
+    
+    // MARK: - Life Cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.getsubcategoryapi()
         self.getstateapi()
-        self.setup()
 
+        self.setup()
+        
     }
-    
-//    MARK: - Life Cyclye
     
     func setup(){
         self.viewCreateOpportunity.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
@@ -57,6 +64,8 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
         self.setTextFieldUI(textField: txtFieldMobileNumber, place: "Mobile number", floatingText: "Mobile number")
         self.setTextFieldUI(textField: txtFieldWhatsappNumber, place: "WhatsApp number", floatingText: "WhatsApp number")
         self.setTextFieldUI(textField: txtFieldPricing, place: "Pricing ( optional )", floatingText: "Pricing ( optional )")
+        self.setTextFieldUI(textField: txtFieldBusinessName, place: "Business name", floatingText: "Business name")
+        self.setTextFieldUI(textField: txtFieldBusinessMiningBlock, place: "Business mining BLOCK", floatingText: "Business mining BLOCK")
         
     }
     
@@ -73,7 +82,7 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
         vc.callbackquit =  { txt in
             if txt == "Cancel"{
                 vc.dismiss(animated: false){
-                    let vc = self.storyboard?.instantiateViewController(withIdentifier: TrailingOpportunityVC.getStoryboardID()) as! TrailingOpportunityVC
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: MiningServiceVC.getStoryboardID()) as! MiningServiceVC
                     self.navigationController?.pushViewController(vc, animated: false)
                 }
                 
@@ -104,7 +113,8 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
     @IBAction func btnAddmoreImageTapped(_ sender: UIButton) {
     }
     
- 
+  
+    
     @IBAction func btnSelectSubCategoryTapped(_ sender: UIButton) {
         kSharedAppDelegate?.dropDown(dataSource: getSubCategorylist.map{String.getString($0.sub_cat_name)}, text: btnSubCategory) { (index, item) in
             self.lblSubCategory.text = item
@@ -134,6 +144,7 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
     }
     
     // Collection view
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch collectionView{
         case self.UploadimageCollectionView:
@@ -142,7 +153,6 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
         default: return 5
         }
     }
-    
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch collectionView{
@@ -161,9 +171,8 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
     }
     
 }
-  
 
-extension TrailingOpportunityVC{
+extension MiningServiceVC{
     
     func setTextFieldUI(textField:SKFloatingTextField,place:String ,floatingText:String){
         
@@ -181,7 +190,7 @@ extension TrailingOpportunityVC{
         
     }
 }
-extension TrailingOpportunityVC : SKFlaotingTextFieldDelegate {
+extension MiningServiceVC : SKFlaotingTextFieldDelegate {
     
     func textFieldDidEndEditing(textField: SKFloatingTextField) {
         print("end editing")
@@ -196,7 +205,8 @@ extension TrailingOpportunityVC : SKFlaotingTextFieldDelegate {
     }
 }
 
-extension TrailingOpportunityVC{
+//MARK: - API Call
+extension MiningServiceVC{
     //
     func getsubcategoryapi(){
         CommonUtils.showHudWithNoInteraction(show: true)
@@ -242,10 +252,11 @@ extension TrailingOpportunityVC{
             }
             
         }
+        
     }
     
 }
-extension TrailingOpportunityVC{
+extension MiningServiceVC{
     //    Sub-Category API
     func subcategoryapi(language:String, completionBlock: @escaping (_ success: Int, _ catdata : [getSubCartegoryModel]?, _ message: String) -> Void) {
         
@@ -254,7 +265,7 @@ extension TrailingOpportunityVC{
         debugPrint("headers......\(headers)")
         
         var params = Dictionary<String, String>()
-        params.updateValue("2", forKey: "category_id")
+        params.updateValue("4", forKey: "category_id")
         
         
         
@@ -488,4 +499,3 @@ extension TrailingOpportunityVC{
     }
     
 }
-

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Localize_Swift
 
 
 
@@ -30,10 +31,12 @@ class SettingVC: UIViewController {
                    self.imgDropDownMenu.image = item == "English-IND" ? UIImage(named: "IND") : UIImage(named: "sudan")
                    if self.lblDropDownMenu.text == "English-IND"{
                        UserDefaults.standard.set("en", forKey: "Language")
+//                       Localize.setCurrentLanguage("en")
                        UIView.appearance().semanticContentAttribute = .forceLeftToRight
                    }
                    else if self.lblDropDownMenu.text == "Arabic"{
                        UserDefaults.standard.set("ar", forKey: "Language")
+//                       Localize.setCurrentLanguage("ar")
                        UIView.appearance().semanticContentAttribute = .forceRightToLeft
                    }
     }

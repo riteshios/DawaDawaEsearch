@@ -1,5 +1,5 @@
 //
-//  TrailingOpportunityVC.swift
+//  MiningBusinessVC.swift
 //  Dawadawa
 //
 //  Created by Alekh on 12/07/22.
@@ -9,8 +9,9 @@ import UIKit
 import SKFloatingTextField
 import Alamofire
 import SwiftyJSON
-class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
-    //   MARK: - Properties
+
+
+class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
 
     
     @IBOutlet weak var txtFieldTitle: SKFloatingTextField!
@@ -26,6 +27,8 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
     @IBOutlet weak var btnState: UIButton!
     @IBOutlet weak var lblLocality: UILabel!
     @IBOutlet weak var btnLocality: UIButton!
+    @IBOutlet weak var lblServiceType: UILabel!
+    @IBOutlet weak var btnServiceType: UIButton!
     
     
     @IBOutlet weak var viewCreateOpportunity: UIView!
@@ -73,7 +76,7 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
         vc.callbackquit =  { txt in
             if txt == "Cancel"{
                 vc.dismiss(animated: false){
-                    let vc = self.storyboard?.instantiateViewController(withIdentifier: TrailingOpportunityVC.getStoryboardID()) as! TrailingOpportunityVC
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: MiningBusinessVC.getStoryboardID()) as! MiningBusinessVC
                     self.navigationController?.pushViewController(vc, animated: false)
                 }
                 
@@ -163,7 +166,7 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
 }
   
 
-extension TrailingOpportunityVC{
+extension MiningBusinessVC{
     
     func setTextFieldUI(textField:SKFloatingTextField,place:String ,floatingText:String){
         
@@ -181,7 +184,7 @@ extension TrailingOpportunityVC{
         
     }
 }
-extension TrailingOpportunityVC : SKFlaotingTextFieldDelegate {
+extension MiningBusinessVC : SKFlaotingTextFieldDelegate {
     
     func textFieldDidEndEditing(textField: SKFloatingTextField) {
         print("end editing")
@@ -196,7 +199,7 @@ extension TrailingOpportunityVC : SKFlaotingTextFieldDelegate {
     }
 }
 
-extension TrailingOpportunityVC{
+extension MiningBusinessVC{
     //
     func getsubcategoryapi(){
         CommonUtils.showHudWithNoInteraction(show: true)
@@ -245,7 +248,7 @@ extension TrailingOpportunityVC{
     }
     
 }
-extension TrailingOpportunityVC{
+extension MiningBusinessVC{
     //    Sub-Category API
     func subcategoryapi(language:String, completionBlock: @escaping (_ success: Int, _ catdata : [getSubCartegoryModel]?, _ message: String) -> Void) {
         
@@ -254,7 +257,7 @@ extension TrailingOpportunityVC{
         debugPrint("headers......\(headers)")
         
         var params = Dictionary<String, String>()
-        params.updateValue("2", forKey: "category_id")
+        params.updateValue("3", forKey: "category_id")
         
         
         
@@ -488,4 +491,5 @@ extension TrailingOpportunityVC{
     }
     
 }
+
 
