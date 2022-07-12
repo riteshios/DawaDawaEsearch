@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0406DB7E287D3DF700B57A0B /* TrailingOpportunityVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0406DB7D287D3DF700B57A0B /* TrailingOpportunityVC.swift */; };
 		042293BE2869B1BC000503B7 /* ChangeNumberVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042293BD2869B1BC000503B7 /* ChangeNumberVC.swift */; };
 		042293C02869B1E2000503B7 /* VerifyNewNumberOTPVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042293BF2869B1E2000503B7 /* VerifyNewNumberOTPVC.swift */; };
 		042293C22869B203000503B7 /* NumberChangedSuccessfulPopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042293C12869B203000503B7 /* NumberChangedSuccessfulPopUpVC.swift */; };
@@ -582,6 +583,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0406DB7D287D3DF700B57A0B /* TrailingOpportunityVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TrailingOpportunityVC.swift; path = Dawadawa/Storyboard/TrailingOpportunityVC.swift; sourceTree = SOURCE_ROOT; };
 		042293BD2869B1BC000503B7 /* ChangeNumberVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeNumberVC.swift; sourceTree = "<group>"; };
 		042293BF2869B1E2000503B7 /* VerifyNewNumberOTPVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyNewNumberOTPVC.swift; sourceTree = "<group>"; };
 		042293C12869B203000503B7 /* NumberChangedSuccessfulPopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberChangedSuccessfulPopUpVC.swift; sourceTree = "<group>"; };
@@ -1175,6 +1177,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0406DB7F287D3E1100B57A0B /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				44D7F8F02853685F001554C9 /* HomeVC.swift */,
+				04FD1D332860429C00BE414A /* TabBarVC.swift */,
+				04FD1D382860794E00BE414A /* ProfileVC.swift */,
+			);
+			name = TabBar;
+			sourceTree = "<group>";
+		};
+		0406DB80287D3E3900B57A0B /* TrailingOpportunity */ = {
+			isa = PBXGroup;
+			children = (
+				0406DB7D287D3DF700B57A0B /* TrailingOpportunityVC.swift */,
+			);
+			name = TrailingOpportunity;
+			sourceTree = "<group>";
+		};
 		044D7174286198600054DAA5 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
@@ -1213,6 +1233,7 @@
 			children = (
 				0490F3D92876E7BF00F8A84A /* Cell */,
 				04A73F412876E07300A46E12 /* RockPitOpportunity */,
+				0406DB80287D3E3900B57A0B /* TrailingOpportunity */,
 				04A73F3D2876B64E00A46E12 /* SelectCategoryVC.swift */,
 				04F4D04F287C402F001CC173 /* QuitVCViewController.swift */,
 			);
@@ -2131,10 +2152,8 @@
 		44D7F8EF28536826001554C9 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				0406DB7F287D3E1100B57A0B /* TabBar */,
 				04A73F352876B25800A46E12 /* Add */,
-				04FD1D332860429C00BE414A /* TabBarVC.swift */,
-				44D7F8F02853685F001554C9 /* HomeVC.swift */,
-				04FD1D382860794E00BE414A /* ProfileVC.swift */,
 				04FD1D35286077A900BE414A /* More */,
 			);
 			name = Home;
@@ -2758,6 +2777,7 @@
 				447DCE682851CB7D00C40DDD /* CreateAccountVC.swift in Sources */,
 				447DCE562851CB1300C40DDD /* MTFacebookHelper.swift in Sources */,
 				04FD1D37286077E800BE414A /* MoreVC.swift in Sources */,
+				0406DB7E287D3DF700B57A0B /* TrailingOpportunityVC.swift in Sources */,
 				042293C02869B1E2000503B7 /* VerifyNewNumberOTPVC.swift in Sources */,
 				447DCE642851CB1300C40DDD /* AppConstant.swift in Sources */,
 				447DCC642851CB1100C40DDD /* UIView+Extensions.swift in Sources */,

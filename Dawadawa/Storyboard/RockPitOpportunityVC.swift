@@ -130,15 +130,17 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
             self.stateid = id
             debugPrint("State idddd.....btnnnnt",  self.stateid = id)
             self.getlocalityapi(id: self.stateid ?? 0 )
-            CommonUtils.showHudWithNoInteraction(show: false)
+           
         }
         
     }
     @IBAction func btnLocalityTapped(_ sender: UIButton) {
         kSharedAppDelegate?.dropDown(dataSource: getlocalitylist.map{String.getString($0.local_name)}, text: btnLocality){
             (index,item) in
+            let id = self.getstatelist[index].id
+            self.stateid = id
             self.lblLocality.text = item
-            
+           
         }
     }
     
@@ -220,7 +222,6 @@ extension RockPitOpportunityVC{
             if sucess == 200 {
                 if let statedata = statedata {
                     self.getstatelist = statedata
-                    
                 }
             }
             else {
@@ -272,7 +273,7 @@ extension RockPitOpportunityVC{
                 if let value = response.result.value {
                     let json = JSON(value)
                     
-                    print(" team Details json is:\n\(json)")
+                    print("Sub-Category Details json is:\n\(json)")
                     
                     let parser = getSubCategoryParser(json: json)
                     
@@ -352,7 +353,7 @@ extension RockPitOpportunityVC{
                 if let value = response.result.value {
                     let json = JSON(value)
                     
-                    print(" team Details json is:\n\(json)")
+                    print(" State Details json is:\n\(json)")
                     
                     let parser = getstateParser(json: json)
                     
@@ -418,7 +419,7 @@ extension RockPitOpportunityVC{
         
         var params = Dictionary<String, String>()
         params.updateValue("\(self.stateid ?? 0)", forKey: "localitys_id")
-//        debugPrint("stateiddddddd.....",  params.updateValue("\(self.getstatelist.first?.id ?? "")", forKey: "localitys_id"))
+        debugPrint("stateiddddddd.....",   params.updateValue("\(self.stateid ?? 0)", forKey: "localitys_id"))
         
         
         
@@ -433,12 +434,11 @@ extension RockPitOpportunityVC{
                 if let value = response.result.value {
                     let json = JSON(value)
                     
-                    print(" team Details json is:\n\(json)")
+                    print(" locality Details json is:\n\(json)")
                     
                     let parser = getlocalityParser(json: json)
-                    
-                    
-                    //                    completionBlock(parser.status,parser.local,parser.message)
+                    completionBlock(parser.status,parser.local,parser.message)
+                
                 }else{
                     completionBlock(0,nil,response.result.error?.localizedDescription ?? "Some thing went wrong")
                 }

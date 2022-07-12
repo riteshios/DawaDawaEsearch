@@ -66,7 +66,7 @@ class SelectCategoryVC: UIViewController,UITableViewDelegate,UITableViewDataSour
             let vc = UIStoryboard.init(name: "Home", bundle: Bundle.main).instantiateViewController(withIdentifier: "RockPitOpportunityVC") as? RockPitOpportunityVC
             self.navigationController?.pushViewController(vc!, animated: true)
         case 1:
-            let vc = UIStoryboard.init(name: "Home", bundle: Bundle.main).instantiateViewController(withIdentifier: "ProfileVC") as? ProfileVC
+            let vc = UIStoryboard.init(name: "Home", bundle: Bundle.main).instantiateViewController(withIdentifier: "TrailingOpportunityVC") as? TrailingOpportunityVC
             self.navigationController?.pushViewController(vc!, animated: true)
         default: break
             

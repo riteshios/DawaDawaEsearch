@@ -87,6 +87,8 @@ class getStateModel:NSObject{
     init(dictionary:[String:AnyObject]){
         if let id = dictionary[keys.id.stringValue] as? Int{
             self.id = Int(id)
+            debugPrint("modal idddddd........",   self.id = Int(id))
+            
         }
         if let state_name = dictionary[keys.state_name.stringValue] as? String{
             self.state_name = state_name
