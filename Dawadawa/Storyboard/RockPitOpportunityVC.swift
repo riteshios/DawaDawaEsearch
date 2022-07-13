@@ -600,28 +600,136 @@ extension RockPitOpportunityVC{
         //        print("============\(params)")
         print(url)
         
-        Alamofire.request(url,method: .post, parameters : params, headers: headers).responseJSON { response in
-            switch response.result {
-            case.success:
-                if let value = response.result.value {
-                    let json = JSON(value)
-                    
-                    print("Create Opportunity Details json is:\n\(json)")
-                    
-                    let parser = createOpportunityParser(json: json)
-                    
-                    
-                    completionBlock(parser.status,parser.message)
-                }else{
-                    completionBlock(0,response.result.error?.localizedDescription ?? "Some thing went wrong")
-                }
-                
-            case .failure(let error):
-                completionBlock(0,error.localizedDescription)
-            }
-            
-        }
-    }
+        Alamofire.upload(
+
+                 multipartFormData: { multipartFormData in
+
+                     
+
+                     for img in  filenames
+                     {
+
+                   ///  if let pimage = img {
+
+                         if let data = img.pngData(), let imageName = self.jpegData(compressionQuality: 0.3) as? String {
+
+                             multipartFormData.append(data, withName: "filenames[]", fileName: "\(imageName).png", mimeType: "image/png")
+
+                             print("==========image=========\(data)")
+
+                         }
+
+                  //   }
+
+                     }
+                     
+//                     let imageData:Data = filenames.fixedOrientation().jpegData(compressionQuality: 0.4) ?? Data()
+//                     debugPrint("imageData=",imageData)
+//
+//                     var cri: Data
+//
+//                     cri = imageData
+//                     if let jpegData = filenames.jpegData(compressionQuality: 0.4)
+//                     {
+//                         multipartFormData.append(jpegData, withName: "filenames[]", fileName: "\(jpegData).png", mimeType: "image/png")
+//                     }
+
+                     for img in  opportunity_documents
+                     {
+
+                   ///  if let pimage = img {
+
+                         if let data = img.pngData(), let imageName = self.jpegData(compressionQuality: 0.3) as? String {
+
+                             multipartFormData.append(data, withName: "opportunity_documents[]", fileName: "\(imageName).png", mimeType: "image/png")
+
+                             print("==========image=========\(data)")
+
+                         }
+
+                  //   }
+
+                     }
+                     
+                     
+                     
+                     
+                     
+//                     let documentdata:Data = opportunity_documents.fixedOrientation().jpegData(compressionQuality: 0.4) ?? Data()
+//                     debugPrint("imageData=",documentdata)
+//
+//                     var doc: Data
+//
+//                     doc = documentdata
+//                     if let jpegData = opportunity_documents.jpegData(compressionQuality: 0.4)
+//                     {
+//                         multipartFormData.append(jpegData, withName: "opportunity_documents[]", fileName: "\(jpegData).png", mimeType: "image/png")
+//                     }
+
+                     
+
+                     for (key, value) in params {
+
+                         multipartFormData.append((value).data(using: .utf8)!, withName: key)
+
+                     }
+
+                     
+
+                 },to: url,method:.post, headers: headers ,encodingCompletion: { encodingResult in
+
+                     switch encodingResult {
+
+                     case .success(let upload, _, _):
+
+                         upload.responseJSON { response in
+
+                             
+
+                             switch response.result {
+
+                             case .success:
+
+                                 if let value = response.result.value {
+
+                                     let json = JSON(value)
+
+                                     print("\(json)")
+
+
+                                     guard let message = json["message"].string as String? else{
+
+                                         return
+
+                                     }
+                                     completionBlock(0,message)
+
+                                 }else{
+
+                                     completionBlock(0,response.result.error?.localizedDescription ?? "Some thing went wrong")
+
+                                 }
+
+                             case .failure(let error):
+
+                                 completionBlock(0,error.localizedDescription)
+
+                             }
+
+                         }
+
+                     case .failure(let encodingError):
+
+                         print(encodingError)
+
+                     }
+
+                 })
+
+             
+
+         }
+    
     //    parser
     class createOpportunityParser : NSObject{
         
