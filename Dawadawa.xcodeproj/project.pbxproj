@@ -35,6 +35,7 @@
 		04B9190C286B1372009ABAE4 /* ChangeEmailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B9190B286B1372009ABAE4 /* ChangeEmailVC.swift */; };
 		04B91910286B13B8009ABAE4 /* EmailChangedSuccessfullyPopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B9190F286B13B8009ABAE4 /* EmailChangedSuccessfullyPopUpVC.swift */; };
 		04B91912286B1553009ABAE4 /* VerifyNewEmailOTPVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B91911286B1553009ABAE4 /* VerifyNewEmailOTPVC.swift */; };
+		04D0AB35287ED8B500DB0F23 /* UploadDocumentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D0AB34287ED8B400DB0F23 /* UploadDocumentCollectionViewCell.swift */; };
 		04F1AD9A28697B0D002CC167 /* EditProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F1AD9928697B0D002CC167 /* EditProfileVC.swift */; };
 		04F4D050287C402F001CC173 /* QuitVCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F4D04F287C402F001CC173 /* QuitVCViewController.swift */; };
 		04F8452F286AC4E40081120F /* ChangePasswordOTPVerifyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F8452E286AC4E40081120F /* ChangePasswordOTPVerifyVC.swift */; };
@@ -616,6 +617,7 @@
 		04B9190B286B1372009ABAE4 /* ChangeEmailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeEmailVC.swift; sourceTree = "<group>"; };
 		04B9190F286B13B8009ABAE4 /* EmailChangedSuccessfullyPopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailChangedSuccessfullyPopUpVC.swift; sourceTree = "<group>"; };
 		04B91911286B1553009ABAE4 /* VerifyNewEmailOTPVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = VerifyNewEmailOTPVC.swift; path = Dawadawa/Storyboard/VerifyNewEmailOTPVC.swift; sourceTree = SOURCE_ROOT; };
+		04D0AB34287ED8B400DB0F23 /* UploadDocumentCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UploadDocumentCollectionViewCell.swift; path = Dawadawa/Storyboard/UploadDocumentCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
 		04F1AD9928697B0D002CC167 /* EditProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileVC.swift; sourceTree = "<group>"; };
 		04F4D04F287C402F001CC173 /* QuitVCViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuitVCViewController.swift; sourceTree = "<group>"; };
 		04F8452E286AC4E40081120F /* ChangePasswordOTPVerifyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordOTPVerifyVC.swift; sourceTree = "<group>"; };
@@ -1234,6 +1236,7 @@
 		0490F3D92876E7BF00F8A84A /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				04D0AB34287ED8B400DB0F23 /* UploadDocumentCollectionViewCell.swift */,
 				04647ECB287814CB0006B8D2 /* SelectCategoryTableViewCell.swift */,
 				0490F3DA2876E7E300F8A84A /* UploadImageCollectionViewCell.swift */,
 			);
@@ -2873,6 +2876,7 @@
 				04F84533286AC52C0081120F /* PasswordChangedSuccessfullyPopUpVC.swift in Sources */,
 				447DCC6F2851CB1100C40DDD /* Locale+Extensions.swift in Sources */,
 				447DCC6C2851CB1100C40DDD /* UIAlertController+Extensions.swift in Sources */,
+				04D0AB35287ED8B500DB0F23 /* UploadDocumentCollectionViewCell.swift in Sources */,
 				447DCC6B2851CB1100C40DDD /* UIApplication+Extensions.swift in Sources */,
 				447DCC5D2851CB1100C40DDD /* NetworkUrl.swift in Sources */,
 				44C286C42851B4AF007AF36F /* SceneDelegate.swift in Sources */,

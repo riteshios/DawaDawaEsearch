@@ -9,9 +9,9 @@ import UIKit
 import SKFloatingTextField
 import Alamofire
 import SwiftyJSON
-class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
+class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout, UITextViewDelegate {
     //   MARK: - Properties
-
+    
     
     @IBOutlet weak var txtFieldTitle: SKFloatingTextField!
     @IBOutlet weak var txtFieldLocationName: SKFloatingTextField!
@@ -19,6 +19,7 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
     @IBOutlet weak var txtFieldMobileNumber: SKFloatingTextField!
     @IBOutlet weak var txtFieldWhatsappNumber: SKFloatingTextField!
     @IBOutlet weak var txtFieldPricing: SKFloatingTextField!
+    @IBOutlet weak var txtViewDiscription: UITextView!
     
     @IBOutlet weak var lblSubCategory: UILabel!
     @IBOutlet weak var btnSubCategory: UIButton!
@@ -31,23 +32,40 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
     @IBOutlet weak var viewCreateOpportunity: UIView!
     @IBOutlet weak var viewSelectCategoryTop: NSLayoutConstraint!
     @IBOutlet weak var btnSelectImage: UIButton!
+    @IBOutlet weak var btnSelectDocument: UIButton!
     @IBOutlet weak var UploadimageCollectionView: UICollectionView!
+    @IBOutlet weak var UploaddocumentCollectionView: UICollectionView!
+    
     var stateid:Int?
     var imagearr = [UIImage]()
+    var documentarr = [UIImage]()
+    
+    
+    var placeholder = "Please comment here"
     
     var getSubCategorylist = [getSubCartegoryModel]()
     var getstatelist       = [getStateModel]()
     var getlocalitylist    = [getLocalityModel]()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.getsubcategoryapi()
         self.getstateapi()
         self.setup()
-
+        self.txtViewDiscription.delegate = self
+        func textViewDidEndEditing(_ textView: UITextView) {
+            if textView.text.isEmpty {
+                txtViewDiscription.text = "Please comment here..."
+                txtViewDiscription.textColor = UIColor(red: 21, green: 114, blue: 161)
+                placeholder = ""
+            } else {
+                placeholder = txtViewDiscription.text
+            }
+        }
+        
     }
     
-//    MARK: - Life Cyclye
+    //    MARK: - Life Cyclye
     
     func setup(){
         self.viewCreateOpportunity.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
@@ -96,7 +114,7 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
                     self.UploadimageCollectionView.reloadData()
                 }
             }
-            self.viewSelectCategoryTop.constant = 420
+            self.viewSelectCategoryTop.constant = 310
         }
         
     }
@@ -104,7 +122,22 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
     @IBAction func btnAddmoreImageTapped(_ sender: UIButton) {
     }
     
- 
+    @IBAction func btnSelectDocument(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        if self.btnSelectDocument.isSelected == true{
+            if documentarr.count <= 5 {
+                ImagePickerHelper.shared.showPickerController {
+                    image,url in
+                    self.documentarr.append(image ?? UIImage())
+                    self.UploaddocumentCollectionView.reloadData()
+                }
+            }
+            self.viewSelectCategoryTop.constant = 420
+            
+        }
+    }
+    
+    
     @IBAction func btnSelectSubCategoryTapped(_ sender: UIButton) {
         kSharedAppDelegate?.dropDown(dataSource: getSubCategorylist.map{String.getString($0.sub_cat_name)}, text: btnSubCategory) { (index, item) in
             self.lblSubCategory.text = item
@@ -119,7 +152,7 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
             self.stateid = id
             debugPrint("State idddd.....btnnnnt",  self.stateid = id)
             self.getlocalityapi(id: self.stateid ?? 0 )
-           
+            
         }
         
     }
@@ -129,7 +162,7 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
             let id = self.getstatelist[index].id
             self.stateid = id
             self.lblLocality.text = item
-           
+            
         }
     }
     
@@ -138,6 +171,9 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
         switch collectionView{
         case self.UploadimageCollectionView:
             return self.imagearr.count
+            
+        case self.UploaddocumentCollectionView:
+            return self.documentarr.count
             
         default: return 5
         }
@@ -154,14 +190,27 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
                 self.UploadimageCollectionView.reloadData()
             }
             return cell
+        case self.UploaddocumentCollectionView:
+            let cell = UploaddocumentCollectionView.dequeueReusableCell(withReuseIdentifier: "UploadDocumentCollectionViewCell", for: indexPath) as! UploadDocumentCollectionViewCell
+            cell.imagedocument.image = documentarr[indexPath.row]
+            cell.callbackclose = {
+                self.documentarr.remove(at: indexPath.row)
+                self.UploaddocumentCollectionView.reloadData()
+                //                if self.imagearr == []{
+                //                    self.viewSelectCategoryTop.constant = 310
+                //                }
+            }
+            return cell
+            
             
         default: return UICollectionViewCell()
             
         }
+        return UICollectionViewCell()
     }
     
 }
-  
+
 
 extension TrailingOpportunityVC{
     
@@ -435,7 +484,7 @@ extension TrailingOpportunityVC{
                     
                     let parser = getlocalityParser(json: json)
                     completionBlock(parser.status,parser.local,parser.message)
-                
+                    
                 }else{
                     completionBlock(0,nil,response.result.error?.localizedDescription ?? "Some thing went wrong")
                 }

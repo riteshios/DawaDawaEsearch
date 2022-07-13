@@ -19,7 +19,7 @@ import SwiftyJSON
 //    }
 //}
 
-
+// Category Model
 class getCartegoryModel:NSObject{
     enum keys:String, CodingKey{
         case id = "id"
@@ -50,6 +50,7 @@ class getCartegoryModel:NSObject{
         super.init()
     }
 }
+// SubCategory Model
 class getSubCartegoryModel:NSObject{
     enum keys:String, CodingKey{
         case id = "id"
@@ -73,6 +74,7 @@ class getSubCartegoryModel:NSObject{
         super.init()
     }
 }
+// State Model
 class getStateModel:NSObject{
     enum keys:String, CodingKey{
         case id = "id"
@@ -99,6 +101,7 @@ class getStateModel:NSObject{
     }
 }
 
+// Locality Model
 class getLocalityModel:NSObject{
     enum keys:String, CodingKey{
         case id = "id"
@@ -126,55 +129,149 @@ class getLocalityModel:NSObject{
 
 // Create Opportunity Model
 
-class categorydata{
-    static let shared = categorydata()
-//    var id:Int?
+class opportunityydataModel:NSObject{
+    enum keys:String, CodingKey{
+        
+        case category_id = "category_id"
+        case sub_category = "sub_category"
+        case title = "title"
+        case opp_state = "opp_state"
+        case opp_locality = "opp_locality"
+        case location_name = "location_name"
+        case location_map = "location_map"
+        case description = "description"
+        case mobile_num = "mobile_num"
+        case whatspp_number = "whatspp_number"
+        case pricing = "pricing"
+        case looking_for = "looking_for"
+        case plan = "plan"
+        case filenames = "filenames"
+        case opportunity_documents = "opportunity_documents"
+        case cat_type_id = "cat_type_id"
+
+    }
     var category_id:Int?
     var sub_category:Int?
-    var title:String?
-    var opp_state:String?
-    var opp_locality:String?
-    var location_name:String?
-    var location_map:String?
-    var description:String?
-    var mobile_num:String?
-    var whatspp_number:String?
-    var whatsaap_num:String?
-    var pricing:String?
-    var looking_for:String?
-    var plan:String?
-    var filenames = [Any]()
-    var opportunity_documents = [Any]()
-    var cat_type_id:Int?
+    var title = ""
+    var opp_state = ""
+    var opp_locality = ""
+    var location_name = ""
+    var location_map = ""
+    var descriptions = ""
+    var mobile_num = ""
+    var whatspp_number = ""
+    var pricing = ""
+    var looking_for = ""
+    var plan = ""
+    var filenames = ""
+    var opportunity_documents = ""
+    var cat_type_id = ""
     
     
-    private init(){
-        let  data:[String:Any] = kSharedUserDefaults.getLoggedInUserDetails()
-        saveData(data:data,token: kSharedUserDefaults.getLoggedInAccessToken())
-    }
-    func saveData(data:[String:Any],token:String){
-//        self.id = Int.getInt(data["id"])
-        self.category_id = Int.getInt(data["category_id"])
-        self.sub_category = Int.getInt(data["sub_category"])
-        self.title = String.getString(data["title"])
-        self.opp_state = String.getString(data["opp_state"])
-        self.opp_locality = String.getString(data["opp_locality"])
-        self.location_name = String.getString(data["location_name"])
-        self.location_map = String.getString(data["location_map"])
-        self.description = String.getString(data["description"])
-        self.mobile_num = String.getString(data["mobile_num"])
-        self.whatsaap_num = String.getString(data["whatsaap_num"])
-        self.pricing = String.getString(data["pricing"])
-        self.looking_for = String.getString(data["looking_for"])
-        self.plan = String.getString(data["plan"])
-        self.filenames = (data["filenames"]) as! [Any]
-        self.opportunity_documents = (data["device_id"]) as! [Any]
-        self.cat_type_id = Int.getInt(data["cat_type_id"])
-        
-        kSharedUserDefaults.getLoggedInUserDetails()
-        kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken:token)
+    override init(){
+        super.init()
         
     }
-    
+    init(dictionary:[String:AnyObject]){
+        if let category_id = dictionary[keys.category_id.stringValue] as? Int{
+            self.category_id = category_id
+        }
+        if let sub_category = dictionary[keys.sub_category.stringValue] as? Int{
+            self.sub_category = sub_category
+        }
+        if let title = dictionary[keys.title.stringValue] as? String{
+            self.title = title
+        }
+        if let opp_state = dictionary[keys.opp_state.stringValue] as? String{
+            self.opp_state = opp_state
+        }
+        if let opp_locality = dictionary[keys.opp_locality.stringValue] as? String{
+            self.opp_locality = opp_locality
+        }
+        if let location_name = dictionary[keys.location_name.stringValue] as? String{
+            self.location_name = location_name
+        }
+        if let location_map = dictionary[keys.location_map.stringValue] as? String{
+            self.location_map = location_map
+        }
+        if let descriptions = dictionary[keys.description.stringValue] as? String{
+            self.descriptions = descriptions
+        }
+        if let mobile_num = dictionary[keys.mobile_num.stringValue] as? String{
+            self.mobile_num = mobile_num
+        }
+        if let pricing = dictionary[keys.pricing.stringValue] as? String{
+            self.pricing = pricing
+        }
+        if let looking_for = dictionary[keys.looking_for.stringValue] as? String{
+            self.looking_for = looking_for
+        }
+        if let plan = dictionary[keys.plan.stringValue] as? String{
+            self.plan = plan
+        }
+        if let filenames = dictionary[keys.filenames.stringValue] as? String{
+            self.filenames = filenames
+        }
+        if let opportunity_documents = dictionary[keys.opportunity_documents.stringValue] as? String{
+            self.opportunity_documents = opportunity_documents
+        }
+        if let cat_type_id = dictionary[keys.cat_type_id.stringValue] as? String{
+            self.cat_type_id = cat_type_id
+        }
+        super.init()
+    }
 }
 
+
+//class opportunityydataModel{
+//    static let shared = opportunityydataModel()
+////    var id:Int?
+//    var category_id:Int?
+//    var sub_category:Int?
+//    var title:String?
+//    var opp_state:String?
+//    var opp_locality:String?
+//    var location_name:String?
+//    var location_map:String?
+//    var description:String?
+//    var mobile_num:String?
+//    var whatspp_number:String?
+//    var whatsaap_num:String?
+//    var pricing:String?
+//    var looking_for:String?
+//    var plan:String?
+//    var filenames = [Any]()
+//    var opportunity_documents = [Any]()
+//    var cat_type_id:Int?
+//
+//
+//    private init(){
+//        let  data:[String:Any] = kSharedUserDefaults.getLoggedInUserDetails()
+//        saveData(data:data,token: kSharedUserDefaults.getLoggedInAccessToken())
+//    }
+//    func saveData(data:[String:Any],token:String){
+////        self.id = Int.getInt(data["id"])
+//        self.category_id = Int.getInt(data["category_id"])
+//        self.sub_category = Int.getInt(data["sub_category"])
+//        self.title = String.getString(data["title"])
+//        self.opp_state = String.getString(data["opp_state"])
+//        self.opp_locality = String.getString(data["opp_locality"])
+//        self.location_name = String.getString(data["location_name"])
+//        self.location_map = String.getString(data["location_map"])
+//        self.description = String.getString(data["description"])
+//        self.mobile_num = String.getString(data["mobile_num"])
+//        self.whatsaap_num = String.getString(data["whatsaap_num"])
+//        self.pricing = String.getString(data["pricing"])
+//        self.looking_for = String.getString(data["looking_for"])
+//        self.plan = String.getString(data["plan"])
+//        self.filenames = (data["filenames"]) as! [Any]
+//        self.opportunity_documents = (data["device_id"]) as! [Any]
+//        self.cat_type_id = Int.getInt(data["cat_type_id"])
+//
+//        kSharedUserDefaults.getLoggedInUserDetails()
+//        kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken:token)
+//
+//    }
+//
+//}
+//
