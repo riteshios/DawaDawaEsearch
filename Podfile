@@ -24,7 +24,7 @@ target 'Dawadawa' do
   pod 'STTabbar'
   pod 'DropDown'
   pod 'SwiftyJSON'
-  pod 'Localize-Swift', '~> 3.2'
+#  pod 'Localize-Swift', '~> 3.2'
 
 
 end

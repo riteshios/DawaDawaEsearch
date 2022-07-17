@@ -117,7 +117,12 @@ extension UserDefaults {
     func getLoggedInAccessToken() -> String {
         return String.getString(self.string(forKey: kLoggedInAccessToken))
     }
-    
+    func getAcceptlanguage() -> String {
+        return String.getString(self.string(forKey:kacceptlanguage))
+    }
+    func getdefaultlanguage() -> String{
+        return String.getString(self.string(forKey:kdefaultlanguage))
+    }
     func setUserSelectedLocation(_ latitude: Double, _ longitude: Double) {
         self.set(latitude, forKey: kLatitude)
         self.set(longitude, forKey: kLongitude)

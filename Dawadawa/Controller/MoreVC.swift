@@ -25,15 +25,34 @@ class MoreVC: UIViewController {
     @IBOutlet weak var btnContactUs: UIButton!
     @IBOutlet weak var btnLogOut: UIButton!
     
+    @IBOutlet weak var lblSetting: UILabel!
+    @IBOutlet weak var lblEditProfile: UILabel!
+    @IBOutlet weak var lblChangePassword: UILabel!
+    @IBOutlet weak var lblSavedOpportunity: UILabel!
+    @IBOutlet weak var lblContactUs: UILabel!
+    @IBOutlet weak var lblLogout: UILabel!
+    
+    
     
     var callback4:((String)->())?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setlanguage()
         self.setup()
     }
     
 // MARK: - Life Cyclye
+    
+    func setlanguage(){
+        lblSetting.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Setting", comment: "")
+        lblEditProfile.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Edit Profile", comment: "")
+        lblChangePassword.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Change password", comment: "")
+        lblSavedOpportunity.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Saved Opportunities", comment: "")
+        lblContactUs.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Contact Us", comment: "")
+        lblLogout.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Log Out", comment: "")
+    }
+    
     func setup(){
         ViewMain.clipsToBounds = true
         ViewMain.layer.cornerRadius = 25

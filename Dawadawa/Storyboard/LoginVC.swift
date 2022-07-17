@@ -18,14 +18,34 @@ class LoginVC: UIViewController {
     @IBOutlet weak var txtFieldPhoneNumer: SKFloatingTextField!
     @IBOutlet weak var txtFieldPassword: SKFloatingTextField!
     
+    @IBOutlet weak var lblLogin: UILabel!
+    @IBOutlet weak var lblGoogle: UILabel!
+    @IBOutlet weak var lblFacebook: UILabel!
+    @IBOutlet weak var lblTwitter: UILabel!
     
+    @IBOutlet weak var lblDontHaveAccount: UILabel!
+    
+    @IBOutlet weak var btnCreateAccount: UIButton!
+    @IBOutlet weak var btnForgotPassword: UIButton!
+    @IBOutlet weak var btnSkipLogin: UIButton!
+    @IBOutlet weak var btnLogin: UIButton!
+    
+    @IBOutlet weak var lblFirstOR: UILabel!
+    @IBOutlet weak var lblSecondOR: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setup()
+        self.setuplanguage()
         
     }
+    
+    
 //    MARK: - LIfe Cyclye
+    
+
+    
+    
     func setup(){
         self.txtFieldPhoneNumer.keyBoardType = .numberPad
         viewMain.clipsToBounds = true
@@ -274,6 +294,26 @@ extension LoginVC{
         }
 
     }
-
+extension LoginVC{
+    
+    func setuplanguage(){
+        lblLogin.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Login", comment: "")
+        lblGoogle.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Google", comment: "")
+        lblFacebook.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Facebook", comment: "")
+        lblTwitter.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Twitter", comment: "")
+        lblDontHaveAccount.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Don't have Account", comment: "")
+        lblFirstOR.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "or", comment: "")
+        lblSecondOR.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "or", comment: "")
+        btnCreateAccount.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "Create account", comment: ""), for: .normal)
+        btnForgotPassword.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "Forgot Password", comment: ""), for: .normal)
+        btnSkipLogin.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "Skip login", comment: ""), for: .normal)
+        btnLogin.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "Login", comment: ""), for: .normal)
+        txtFieldPassword.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Password", comment: "")
+        txtFieldPassword.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Password", comment: "")
+        txtFieldPhoneNumer.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Phone number", comment: "")
+        txtFieldPhoneNumer.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Phone number", comment: "")
+        
+    }
+}
 
 

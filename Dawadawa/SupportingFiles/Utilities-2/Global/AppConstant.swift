@@ -38,9 +38,12 @@ let kLanguage                   = "Language"
 let kEnglish                    = "English"
 let kArabic                     = "Arabic"
 let kUpdateLanguage             = "kUpdateLanguage"
+let kacceptlanguage             = "Accept-Language"
+let kdefaultlanguage            = "language"
 let iosDeviceType               = "1"
 let iosDeviceTokan              = "123456789"
 var kBucketUrl                  = ""
+
 let kSharedAppDelegate          = UIApplication.shared.delegate as? AppDelegate
 let kSharedInstance             = SharedClass.sharedInstance
 let kSharedSceneDelegate        = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
@@ -81,10 +84,16 @@ struct ServiceName {
     static let kgooglelogin           =       "api/google-login"
     static let knewemailotpverify     =        "api/change-email-otp-verify"
     
+    static let ktermsandcondition     =        "api/terms"
+    static let kprivacypolicy        =         "api/privacy-policy"
+    static let kAboutUs             =           "api/about"
+    static let kFaq                 =               "api/faq"
+    
     static let kgetcategory         =        "api/category"
     static let ksubcategory         =        "api/sub-category"
     static let kgetstate             =       "api/state"
     static let kgetlocality          =       "api/locality"
+    static let kgetlookingfor        =       "api/looking-for"
     static let kcreateopportunity    =       "api/create-opportunities"
 }
 

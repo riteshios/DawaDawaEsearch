@@ -18,6 +18,7 @@ class WebViewVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
        debugPrint("strurl=",strurl)
+        debugPrint("head=",head)
         
         guard let url = URL(string: strurl) else{
             return

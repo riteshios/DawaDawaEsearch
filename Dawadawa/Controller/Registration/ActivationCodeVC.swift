@@ -30,6 +30,9 @@ class ActivationCodeVC: UIViewController{
     @IBOutlet weak var viewOtp6: UIView!
     @IBOutlet weak var viewVerify: UIView!
     
+    @IBOutlet weak var btnResendCode: UIButton!
+    @IBOutlet weak var btnverify: UIButton!
+    
     var email:String?
     var callback:(()->())?
     var type:HasCameFrom?
@@ -38,7 +41,9 @@ class ActivationCodeVC: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.setup()
+        self.setuplanguage()
     }
     
 //    MARK: - LIfe Cycle
@@ -46,12 +51,16 @@ class ActivationCodeVC: UIViewController{
         
         if type == .signUp{
             self.lblHeading.text = "Activate account"
+            lblHeading.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Activate account", comment: "")
             self.lblSubHeading.text = "An account activation code has been sent to your email address and phone number"
+            lblSubHeading.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "An account activation code has been sent to your email address and phone number", comment: "")
         }
         else if type == .forgotPass{
             
             self.lblHeading.text = "Verify Account"
+            lblHeading.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Verify Account", comment: "")
             self.lblSubHeading.text = "Password reset code is sent on your email address \(String.getString(UserData.shared.email))"
+            lblSubHeading.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Password reset code is sent on your phone number", comment: "")
         }
 
      
@@ -238,6 +247,7 @@ extension ActivationCodeVC{
                 
                 switch Int.getInt(statusCode) {
                 case 200:
+                    
                     if Int.getInt(dictResult["status"]) == 200{
 //                        let data = kSharedInstance.getDictionary(dictResult["data"])
 //                        kSharedUserDefaults.setLoggedInUserDetails(loggedInUserDetails: data)
@@ -348,5 +358,13 @@ extension ActivationCodeVC{
                 CommonUtils.showToastForDefaultError()
             }
         }
+    }
+}
+
+extension ActivationCodeVC{
+    func setuplanguage(){
+        btnResendCode.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "Resend code", comment: ""), for: .normal)
+        btnverify.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "Verify", comment: ""), for: .normal)
+        lblWrongCode.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Wrong code", comment: "")
     }
 }

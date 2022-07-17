@@ -17,11 +17,20 @@ class ForgotPasswordVC: UIViewController {
     @IBOutlet weak var lblSendEmail_Phone: UILabel!
     
     
+    @IBOutlet weak var lblForgotPassword: UILabel!
+    @IBOutlet weak var lblSubHeading: UILabel!
+    @IBOutlet weak var btnSendCode: UIButton!
+    
     @IBOutlet weak var txtFieldPhone_Email: SKFloatingTextField!
+    
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.setuplanguage()
         self.setup()
+       
     }
 // MARK: - Life Cyclye
     func setup(){
@@ -32,7 +41,10 @@ class ForgotPasswordVC: UIViewController {
         self.viewButtonSendCode.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
         
         self.setTextFieldUI(textField: txtFieldPhone_Email, place: "Phone number", floatingText: "Phone number")
-        self.lblSendEmail_Phone.text = "Send on email address" 
+        txtFieldPhone_Email.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Phone number", comment: "")
+        txtFieldPhone_Email.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Phone number", comment: "")
+        self.lblSendEmail_Phone.text = "Send on email address"
+        lblSendEmail_Phone.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Send on email address", comment: "")
     }
     
 // MARK: - @IBAction
@@ -45,12 +57,18 @@ class ForgotPasswordVC: UIViewController {
         sender.isSelected = !sender.isSelected
         if self.btnSendEmail_Phone.isSelected == true{
             self.lblSendEmail_Phone.text = "Send on phone number"
+            lblSendEmail_Phone.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Send on phone number", comment: "")
             self.setTextFieldUI(textField: txtFieldPhone_Email, place: "Email address", floatingText: "Email address")
+            txtFieldPhone_Email.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Email address", comment: "")
+            txtFieldPhone_Email.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Email address", comment: "")
            
         }
         else{
             self.setTextFieldUI(textField: txtFieldPhone_Email, place: "Phone number", floatingText: "Phone number")
             self.lblSendEmail_Phone.text = "Send on email address"
+            lblSendEmail_Phone.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Send on email address", comment: "")
+            txtFieldPhone_Email.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Phone number", comment: "")
+            txtFieldPhone_Email.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Phone number", comment: "")
            
         }
     }
@@ -58,10 +76,27 @@ class ForgotPasswordVC: UIViewController {
     
     @IBAction func btnsendCodeTapped(_ sender: UIButton) {
       
-        if (self.lblSendEmail_Phone.text == "Send on email address"){
+//        if (self.lblSendEmail_Phone.text == "Send on email address")
+//           {
+//            self.lblSendEmail_Phone.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Send on email address", comment: "")
+//            self.fieldvalidationPhoneNumber()
+//        }
+//
+//        else if (self.lblSendEmail_Phone.text == "Send on phone number")
+//
+//        {
+//            lblSendEmail_Phone.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Send on phone number", comment: "")
+//            self.fieldvalidationEmailAdress()
+//        }
+        
+        if self.lblSendEmail_Phone.text == LocalizationSystem.sharedInstance.localizedStringForKey(key: "Send on email address", comment: "")
+        {
             self.fieldvalidationPhoneNumber()
         }
-        else if (self.lblSendEmail_Phone.text == "Send on phone number"){
+       
+        else if  lblSendEmail_Phone.text == LocalizationSystem.sharedInstance.localizedStringForKey(key: "Send on phone number", comment: "")
+                    
+        {
             self.fieldvalidationEmailAdress()
         }
        
@@ -210,3 +245,10 @@ extension ForgotPasswordVC{
 }
 
 
+extension ForgotPasswordVC{
+    func setuplanguage(){
+        btnSendCode.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "Send code", comment: ""), for: .normal)
+        lblForgotPassword.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Forgot Password", comment: "")
+        lblSubHeading.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Provide your registered email address or phone number to reset your password ", comment: "")
+    }
+}

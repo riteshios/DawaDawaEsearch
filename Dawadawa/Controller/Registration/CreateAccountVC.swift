@@ -16,12 +16,23 @@ class CreateAccountVC: UIViewController {
     
     // MARK: - Properties
     @IBOutlet weak var viewMain: UIView!
-    @IBOutlet weak var labelCountry: UILabel!
+   
     @IBOutlet weak var imageFlag: UIImageView!
     @IBOutlet weak var viewCreateAccountButton: UIView!
     @IBOutlet weak var btnCountrySelect: UIButton!
     
+    @IBOutlet weak var lblCreateAccount: UILabel!
+    @IBOutlet weak var lblGoogle: UILabel!
+    @IBOutlet weak var lblFacebook: UILabel!
+    @IBOutlet weak var labelCountry: UILabel!
+    @IBOutlet weak var lblPleaseAccept: UILabel!
+    @IBOutlet weak var lbland: UILabel!
+    @IBOutlet weak var lblAlready: UILabel!
+    @IBOutlet weak var lblOr: UILabel!
+    @IBOutlet weak var lblor: UILabel!
+    @IBOutlet weak var lblIndicate: UILabel!
     
+    @IBOutlet weak var lblTwitter: UILabel!
     @IBOutlet weak var txtFieldFirstName: SKFloatingTextField!
     @IBOutlet weak var txtFieldLastName: SKFloatingTextField!
     @IBOutlet weak var txtFieldEmail: SKFloatingTextField!
@@ -31,6 +42,11 @@ class CreateAccountVC: UIViewController {
     
     @IBOutlet weak var viewCountry: UIView!
     @IBOutlet weak var btnTermAndCondition: UIButton!
+    @IBOutlet weak var btnPrivacyPolicy: UIButton!
+    @IBOutlet weak var btnLogin: UIButton!
+    @IBOutlet weak var btnCreateAccount: UIButton!
+    @IBOutlet weak var btnSkip: UIButton!
+    @IBOutlet weak var btnTandC: UIButton!
     
     let webview = WKWebView()
     var isCountry = false
@@ -42,28 +58,10 @@ class CreateAccountVC: UIViewController {
         super.viewDidLoad()
         
         self.setup()
+        self.setuplanguage()
         
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        webview.frame = view.bounds
-    }
-    
-    func webviewstermsetup(){
-//        view.addSubview(webview)
-//        guard let url = URL(string: "https://demo4app.com/dawadawa/api-terms") else{
-//            return
-//        }
-//        webview.load(URLRequest(url:url))
-    }
-    func webviewprivacysetup(){
-        view.addSubview(webview)
-        guard let url = URL(string: "https://demo4app.com/dawadawa/api-privacy-policy") else{
-            return
-        }
-        webview.load(URLRequest(url:url))
-    }
     
     
     func setup(){
@@ -90,18 +88,18 @@ class CreateAccountVC: UIViewController {
     
     
     @IBAction func btnTerms(_ sender: UIButton) {
-//        self.webviewstermsetup()
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: WebViewVC.getStoryboardID()) as! WebViewVC
-        vc.strurl = "https://demo4app.com/dawadawa/api-terms"
-        vc.head = "Terms and Condition"
-        self.navigationController?.pushViewController(vc, animated: false)
+        self.termsandConditionApi()
+//        let vc = self.storyboard?.instantiateViewController(withIdentifier: WebViewVC.getStoryboardID()) as! WebViewVC
+//        vc.strurl = "https://demo4app.com/dawadawa/api-terms?lang=en"
+//        vc.head = "Terms and Condition"
+//        self.navigationController?.pushViewController(vc, animated: false)
     }
     @IBAction func btnprivacy(_ sender: UIButton) {
-//        self.webviewprivacysetup()
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: WebViewVC.getStoryboardID()) as! WebViewVC
-        vc.strurl = "https://demo4app.com/dawadawa/api-privacy-policy"
-        vc.head = "Privacy Policy"
-        self.navigationController?.pushViewController(vc, animated: false)
+        self.PrivacypolicyApi()
+//        let vc = self.storyboard?.instantiateViewController(withIdentifier: WebViewVC.getStoryboardID()) as! WebViewVC
+//        vc.strurl = "https://demo4app.com/dawadawa/api-privacy-policy"
+//        vc.head = "Privacy Policy"
+//        self.navigationController?.pushViewController(vc, animated: false)
     }
     
     @IBAction func btnGoogleLoginTapped(_ sender: UIButton) {
@@ -136,7 +134,7 @@ class CreateAccountVC: UIViewController {
                     //HERE CALL YOUR SERVER APP
                 }
                 self.googleSigninApi(accountName: username, email: email, googleId: userId)
-    
+                
             }
         }
     }
@@ -335,6 +333,7 @@ extension CreateAccountVC : SKFlaotingTextFieldDelegate {
 
 //    MARK: - API
 
+// Create Account
 extension CreateAccountVC {
     func createAccountapi(){
         
@@ -462,5 +461,121 @@ extension CreateAccountVC {
         }
     }
     
+    // terms and Condition api
+    
+    func termsandConditionApi(){
+        CommonUtils.showHudWithNoInteraction(show: true)
+        
+        
+        TANetworkManager.sharedInstance.requestlangApi(withServiceName: ServiceName.ktermsandcondition, requestMethod: .GET, requestParameters:[:], withProgressHUD: false) { (result:Any?, error:Error?, errorType:ErrorType?,statusCode:Int?) in
+            CommonUtils.showHudWithNoInteraction(show: false)
+            if errorType == .requestSuccess {
+                let dictResult = kSharedInstance.getDictionary(result)
+            
+                switch Int.getInt(statusCode) {
+                case 200:
+                    if Int.getInt(dictResult["status"]) == 200{
+                        let url = String.getString(dictResult["page_url"])
+                        let pagename = String.getString(dictResult["page_name"])
+                        debugPrint("page_url====",url)
+                        
+                        let vc = self.storyboard?.instantiateViewController(withIdentifier: WebViewVC.getStoryboardID()) as! WebViewVC
+                        vc.strurl = url
+                        vc.head = pagename
+                        self.navigationController?.pushViewController(vc, animated: false)
+                        
+                    }
+                    else if  Int.getInt(dictResult["status"]) == 401{
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    }
+                    
+                    // CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                default:
+                    CommonUtils.showError(.error, String.getString(dictResult["message"]))
+                }
+            }else if errorType == .noNetwork {
+                CommonUtils.showToastForInternetUnavailable()
+                
+            } else {
+                CommonUtils.showToastForDefaultError()
+            }
+        }
+        
+    }
+    
+//    Privacy policy api
+    
+    func PrivacypolicyApi(){
+        CommonUtils.showHudWithNoInteraction(show: true)
+        
+        
+        TANetworkManager.sharedInstance.requestlangApi(withServiceName: ServiceName.kprivacypolicy, requestMethod: .GET, requestParameters:[:], withProgressHUD: false) { (result:Any?, error:Error?, errorType:ErrorType?,statusCode:Int?) in
+            CommonUtils.showHudWithNoInteraction(show: false)
+            if errorType == .requestSuccess {
+                let dictResult = kSharedInstance.getDictionary(result)
+            
+                switch Int.getInt(statusCode) {
+                case 200:
+                    if Int.getInt(dictResult["status"]) == 200{
+                        let url = String.getString(dictResult["page_url"])
+                        let pagename = String.getString(dictResult["page_name"])
+                        debugPrint("page_url====",url)
+                        
+                        let vc = self.storyboard?.instantiateViewController(withIdentifier: WebViewVC.getStoryboardID()) as! WebViewVC
+                        vc.strurl = url
+                        vc.head = pagename
+                        self.navigationController?.pushViewController(vc, animated: false)
+                        
+                    }
+                    else if  Int.getInt(dictResult["status"]) == 401{
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    }
+                    
+                    // CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                default:
+                    CommonUtils.showError(.error, String.getString(dictResult["message"]))
+                }
+            }else if errorType == .noNetwork {
+                CommonUtils.showToastForInternetUnavailable()
+                
+            } else {
+                CommonUtils.showToastForDefaultError()
+            }
+        }
+    }
+    
+}
+
+extension CreateAccountVC{
+    func setuplanguage(){
+        lblCreateAccount.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Create account", comment: "")
+        lblGoogle.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Google", comment: "")
+        lblFacebook.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Facebook", comment: "")
+        lblTwitter.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Twitter", comment: "")
+        lblAlready.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Already have an account?", comment: "")
+        lblPleaseAccept.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Please accept our", comment: "")
+        lbland.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "and", comment: "")
+        lblOr.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "or", comment: "")
+        lblor.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "or", comment: "")
+        lblIndicate.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "(*) indicates mandatory fields *", comment: "")
+        btnPrivacyPolicy.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "Privacy Policy", comment: ""), for: .normal)
+        btnSkip.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "Skip registration", comment: ""), for: .normal)
+        btnLogin.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "Login", comment: ""), for: .normal)
+        btnCreateAccount.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "Create account", comment: ""), for: .normal)
+        btnTandC.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "T&C", comment: ""), for: .normal)
+        txtFieldFirstName.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "First name", comment: "")
+        txtFieldFirstName.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "First name", comment: "")
+        txtFieldLastName.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Last name", comment: "")
+        txtFieldLastName.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Last name", comment: "")
+        txtFieldEmail.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Email address*", comment: "")
+        txtFieldEmail.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Email address*", comment: "")
+        txtFieldPhoneNumber.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Phone number*", comment: "")
+        txtFieldPhoneNumber.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Phone number*", comment: "")
+        txtFieldPassword.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Password", comment: "")
+        txtFieldPassword.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Password", comment: "")
+        txtFieldConfirmPassword.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Confirm password", comment: "")
+        txtFieldConfirmPassword.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Confirm password", comment: "")
+        
+    }
 }
 

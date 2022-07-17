@@ -178,25 +178,25 @@
                                                         </constraints>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Guest User" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QoG-Bm-aqe">
-                                                        <rect key="frame" x="112" y="20" width="88" height="22"/>
+                                                        <rect key="frame" x="112" y="20" width="90.666666666666686" height="21"/>
                                                         <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="18"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+91***********" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4ob-h4-8SN">
-                                                        <rect key="frame" x="112" y="43" width="88" height="17"/>
+                                                        <rect key="frame" x="112" y="42" width="78.333333333333314" height="17"/>
                                                         <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="14"/>
                                                         <color key="textColor" red="0.65098039215686276" green="0.65098039215686276" blue="0.65098039215686276" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="example@xyz.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jA3-3W-vB3">
-                                                        <rect key="frame" x="112" y="61" width="113.66666666666669" height="17"/>
+                                                        <rect key="frame" x="112" y="60" width="117" height="17"/>
                                                         <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="14"/>
                                                         <color key="textColor" red="0.65098039220000004" green="0.65098039220000004" blue="0.65098039220000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="p0h-Ho-UDg">
-                                                        <rect key="frame" x="382.66666666666669" y="39.666666666666671" width="24" height="24"/>
+                                                        <rect key="frame" x="382.66666666666669" y="38.666666666666664" width="24" height="24"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="24" id="hGx-8M-HTL"/>
                                                             <constraint firstAttribute="width" constant="24" id="vWo-jS-5pq"/>
@@ -310,7 +310,7 @@
                                                                 </constraints>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pco-xv-XJQ">
-                                                                <rect key="frame" x="55" y="14" width="63.666666666666657" height="22"/>
+                                                                <rect key="frame" x="54.999999999999993" y="14.666666666666629" width="66.333333333333314" height="21"/>
                                                                 <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="18"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -346,7 +346,7 @@
                                                                 </constraints>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Edit profile" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NCv-AS-pab">
-                                                                <rect key="frame" x="55" y="14" width="84" height="22"/>
+                                                                <rect key="frame" x="54.999999999999993" y="14.666666666666629" width="86.333333333333314" height="21"/>
                                                                 <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="18"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -386,7 +386,7 @@
                                                                 </constraints>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Change password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ITo-hx-jKE">
-                                                                <rect key="frame" x="55" y="14" width="141" height="22"/>
+                                                                <rect key="frame" x="54.999999999999986" y="14.666666666666629" width="146.66666666666663" height="21"/>
                                                                 <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="18"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -424,7 +424,7 @@
                                                                 </constraints>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Saved opportunities" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tJG-3S-GIm">
-                                                                <rect key="frame" x="55" y="14" width="157" height="22"/>
+                                                                <rect key="frame" x="55" y="14.666666666666629" width="162" height="21"/>
                                                                 <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="18"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -450,7 +450,7 @@
                                                                 </constraints>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contact Us" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pzW-v9-kgG">
-                                                                <rect key="frame" x="54.999999999999993" y="14" width="86.333333333333314" height="22"/>
+                                                                <rect key="frame" x="54.999999999999993" y="14.666666666666629" width="91.333333333333314" height="21"/>
                                                                 <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="18"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -487,7 +487,7 @@
                                                                 </constraints>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Log out" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Agc-NS-2AT">
-                                                                <rect key="frame" x="55" y="14" width="59.666666666666657" height="22"/>
+                                                                <rect key="frame" x="55" y="14.666666666666629" width="62" height="21"/>
                                                                 <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="18"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -578,6 +578,12 @@
                         <outlet property="btnEdit" destination="kst-MI-Ioz" id="oOq-h5-Npu"/>
                         <outlet property="btnLogOut" destination="aLj-r2-fDq" id="Zmc-Xa-Qn0"/>
                         <outlet property="btnSetting" destination="tJx-m8-Scq" id="zWz-7g-iFo"/>
+                        <outlet property="lblChangePassword" destination="ITo-hx-jKE" id="vkN-91-SFB"/>
+                        <outlet property="lblContactUs" destination="pzW-v9-kgG" id="9WI-Cv-C8d"/>
+                        <outlet property="lblEditProfile" destination="NCv-AS-pab" id="LJN-cm-Gfz"/>
+                        <outlet property="lblLogout" destination="Agc-NS-2AT" id="vaj-1w-v2x"/>
+                        <outlet property="lblSavedOpportunity" destination="tJG-3S-GIm" id="rQE-Lr-7pu"/>
+                        <outlet property="lblSetting" destination="Pco-xv-XJQ" id="BTb-2X-3je"/>
                         <outlet property="viewChangePassword" destination="N4P-rG-ULV" id="LE0-PO-Q8b"/>
                         <outlet property="viewContactUs" destination="ObE-Me-Euk" id="HBu-uV-hLY"/>
                         <outlet property="viewEditProfile" destination="df2-9I-y28" id="wpB-J6-fI9"/>
@@ -760,6 +766,9 @@
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GVy-Cl-8gj">
                                                         <rect key="frame" x="0.0" y="0.0" width="382" height="50"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <connections>
+                                                            <action selector="btnPrivacyPolicyTapped:" destination="aG0-Ie-aFw" eventType="touchUpInside" id="PTI-Vd-pQH"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -932,13 +941,13 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Logout" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gQO-0z-2Wk">
-                                        <rect key="frame" x="154" y="143.00000000000003" width="74.333333333333314" height="29.333333333333343"/>
+                                        <rect key="frame" x="153.33333333333334" y="143.00000000000003" width="75.666666666666657" height="28"/>
                                         <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="24"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Do you really want to log out?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1aH-vl-4NG">
-                                        <rect key="frame" x="30" y="182.33333333333334" width="322" height="22"/>
+                                        <rect key="frame" x="30" y="181.00000000000003" width="322" height="21"/>
                                         <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="18"/>
                                         <color key="textColor" red="0.65098039215686276" green="0.65098039215686276" blue="0.65098039215686276" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1291,7 +1300,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4aP-5i-jpQ">
-                                        <rect key="frame" x="282" y="221.66666666666666" width="79" height="29"/>
+                                        <rect key="frame" x="278" y="221.66666666666666" width="83" height="29"/>
                                         <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="14"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" title="Resend code">
@@ -1811,7 +1820,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u2W-aw-3iC">
-                                        <rect key="frame" x="282" y="221.66666666666666" width="79" height="29"/>
+                                        <rect key="frame" x="278" y="221.66666666666666" width="83" height="29"/>
                                         <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="14"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" title="Resend code">
@@ -2106,7 +2115,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3KR-FS-nZc">
-                                        <rect key="frame" x="282" y="221.66666666666666" width="79" height="29"/>
+                                        <rect key="frame" x="278" y="221.66666666666666" width="83" height="29"/>
                                         <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="14"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" title="Resend code">
@@ -2703,7 +2712,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zgw-Be-OV2">
-                                        <rect key="frame" x="282" y="221.66666666666666" width="79" height="29"/>
+                                        <rect key="frame" x="278" y="221.66666666666666" width="83" height="29"/>
                                         <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="14"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" title="Resend code">
@@ -3152,7 +3161,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U8k-rX-ObN">
-                                        <rect key="frame" x="282" y="221.66666666666666" width="79" height="29"/>
+                                        <rect key="frame" x="278" y="221.66666666666666" width="83" height="29"/>
                                         <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="14"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" title="Resend code">
@@ -4628,7 +4637,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="1567"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FIV-fB-hsK">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1131"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1531"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aaV-Ub-dhd">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="120"/>
@@ -4891,7 +4900,6 @@
                                                                 <size key="customSize" width="411" height="60"/>
                                                                 <connections>
                                                                     <outlet property="btnClose" destination="BRQ-gc-t9i" id="jMp-90-7EW"/>
-                                                                    <outlet property="imagedocument" destination="01f-fv-jWL" id="4hk-Dw-Zmt"/>
                                                                 </connections>
                                                             </collectionViewCell>
                                                         </cells>
@@ -4943,7 +4951,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w05-0V-LtQ">
-                                                <rect key="frame" x="0.0" y="130" width="414" height="1000"/>
+                                                <rect key="frame" x="0.0" y="530" width="414" height="1000"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="huC-42-gfv">
                                                         <rect key="frame" x="16" y="0.0" width="382" height="55"/>
@@ -5205,6 +5213,7 @@
                                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                                 <connections>
                                                                     <action selector="btnDropGender:" destination="6w6-lV-jYx" eventType="touchUpInside" id="sb2-6J-qS4"/>
+                                                                    <action selector="btnLookingForTapped:" destination="VA4-LP-a16" eventType="touchUpInside" id="ToP-OY-iO2"/>
                                                                 </connections>
                                                             </button>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Vector" translatesAutoresizingMaskIntoConstraints="NO" id="do1-Av-8UV">
@@ -5253,7 +5262,7 @@
                                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                                     </button>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Basic" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ysk-fn-UJU">
-                                                                        <rect key="frame" x="51" y="18.333333333333371" width="36.666666666666657" height="19.666666666666671"/>
+                                                                        <rect key="frame" x="51" y="18.333333333333258" width="36.666666666666657" height="19.666666666666671"/>
                                                                         <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="16"/>
                                                                         <color key="textColor" red="0.08235294118" green="0.44705882349999998" blue="0.63137254899999995" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <nil key="highlightedColor"/>
@@ -5294,7 +5303,7 @@
                                                                         <rect key="frame" x="13" y="20" width="20" height="16"/>
                                                                     </imageView>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Featured" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QBV-4t-ppc">
-                                                                        <rect key="frame" x="43" y="18.333333333333371" width="62.333333333333343" height="19.666666666666671"/>
+                                                                        <rect key="frame" x="43" y="18.333333333333258" width="62.333333333333343" height="19.666666666666671"/>
                                                                         <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="16"/>
                                                                         <color key="textColor" red="0.08235294118" green="0.44705882349999998" blue="0.63137254899999995" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <nil key="highlightedColor"/>
@@ -5331,7 +5340,7 @@
                                                                         <rect key="frame" x="21" y="20" width="20" height="16"/>
                                                                     </imageView>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Premium" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="akJ-pz-AIG">
-                                                                        <rect key="frame" x="51" y="18.333333333333371" width="62.666666666666657" height="19.666666666666671"/>
+                                                                        <rect key="frame" x="51" y="18.333333333333258" width="62.666666666666657" height="19.666666666666671"/>
                                                                         <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="16"/>
                                                                         <color key="textColor" red="0.08235294118" green="0.44705882349999998" blue="0.63137254899999995" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <nil key="highlightedColor"/>
@@ -5453,7 +5462,7 @@
                                             <constraint firstItem="aaV-Ub-dhd" firstAttribute="top" secondItem="FIV-fB-hsK" secondAttribute="top" id="CjH-No-msO"/>
                                             <constraint firstAttribute="bottom" secondItem="w05-0V-LtQ" secondAttribute="bottom" constant="1" id="Nde-kW-BZc"/>
                                             <constraint firstAttribute="trailing" secondItem="w05-0V-LtQ" secondAttribute="trailing" id="Ofj-RG-gdX"/>
-                                            <constraint firstItem="w05-0V-LtQ" firstAttribute="top" secondItem="aaV-Ub-dhd" secondAttribute="bottom" constant="10" id="Pqy-ZX-jPv"/>
+                                            <constraint firstItem="w05-0V-LtQ" firstAttribute="top" secondItem="aaV-Ub-dhd" secondAttribute="bottom" constant="410" id="Pqy-ZX-jPv"/>
                                             <constraint firstAttribute="trailing" secondItem="uCZ-Vd-Qqi" secondAttribute="trailing" id="Pza-ea-Rgy"/>
                                             <constraint firstItem="uCZ-Vd-Qqi" firstAttribute="leading" secondItem="FIV-fB-hsK" secondAttribute="leading" id="flU-Fw-GCM"/>
                                             <constraint firstItem="w05-0V-LtQ" firstAttribute="leading" secondItem="FIV-fB-hsK" secondAttribute="leading" id="hqj-6Z-rpn"/>
@@ -5489,11 +5498,13 @@
                         <outlet property="UploaddocumentCollectionView" destination="AeL-p1-eze" id="uyw-DM-UNy"/>
                         <outlet property="UploadimageCollectionView" destination="Edj-yg-fvo" id="Zaf-r7-n49"/>
                         <outlet property="btnLocality" destination="m7u-jM-ksz" id="YmZ-DZ-nKt"/>
+                        <outlet property="btnLookingFor" destination="Ygy-e0-TE6" id="ZCM-YK-VJu"/>
                         <outlet property="btnSelectDocument" destination="jkL-7F-j2u" id="CBe-bN-gE6"/>
                         <outlet property="btnSelectImage" destination="hfL-q6-X34" id="yTa-k9-BBx"/>
                         <outlet property="btnState" destination="2El-XU-Yko" id="a0R-f2-b0E"/>
                         <outlet property="btnSubCategory" destination="7Qx-T4-TB1" id="vTA-MS-O7p"/>
                         <outlet property="lblLocality" destination="QnW-iP-wBW" id="izA-5c-uNf"/>
+                        <outlet property="lblLookingFor" destination="hX5-mb-Gor" id="08t-5h-nuO"/>
                         <outlet property="lblState" destination="oNQ-ji-Tad" id="6AS-kK-JmK"/>
                         <outlet property="lblSubCategory" destination="BqC-nr-V4g" id="cc9-72-il6"/>
                         <outlet property="txtFieldLocationName" destination="sgG-JZ-is1" id="BaD-ob-AzL"/>
@@ -5543,13 +5554,13 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TWR-gv-eOv">
-                                        <rect key="frame" x="168" y="143.00000000000003" width="46.333333333333343" height="29.333333333333343"/>
+                                        <rect key="frame" x="168.66666666666666" y="143.00000000000003" width="44.666666666666657" height="28"/>
                                         <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="24"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Do you really want to quit now?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ya5-Zl-BcV">
-                                        <rect key="frame" x="30" y="182.33333333333334" width="322" height="22"/>
+                                        <rect key="frame" x="30" y="181.00000000000003" width="322" height="21"/>
                                         <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="18"/>
                                         <color key="textColor" red="0.65098039220000004" green="0.65098039220000004" blue="0.65098039220000004" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>

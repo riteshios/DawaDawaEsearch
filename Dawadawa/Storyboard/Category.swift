@@ -8,48 +8,53 @@
 import Foundation
 import SwiftyJSON
 
-//class getCartegoryModel{
-//    let id: Int?
-//    let category_name: String?
-//    let cat_image: String?
-//    init(data:[String:Any]){
-//        self.id = Int.getInt(data["id"])
-//        self.category_name = String.getString(data["category_name"])
-//        self.cat_image = String.getString(data["cat_image"])
+// Category Model
+
+class getCartegoryModel{
+    let id: Int?
+    let category_name: String?
+    let cat_image: String?
+    
+    init(data:[String:Any]){
+        self.id = Int.getInt(data["id"])
+        self.category_name = String.getString(data["category_name"])
+        self.cat_image = String.getString(data["cat_image"])
+    }
+}
+
+// Category Model
+//class getCartegoryModel:NSObject{
+//    enum keys:String, CodingKey{
+//        case id = "id"
+//        case category_name = "category_name"
+//        case cat_image = "cat_image"
+//    }
+//    var id = ""
+//    var category_name = ""
+//    var cat_image = ""
+//
+//
+//
+//    override init(){
+//        super.init()
+//
+//    }
+//    init(dictionary:[String:AnyObject]){
+//        if let id = dictionary[keys.id.stringValue] as? String{
+//            self.id = id
+//        }
+//        if let category_name = dictionary[keys.category_name.stringValue] as? String{
+//            self.category_name = category_name
+//        }
+//        if let cat_image = dictionary[keys.cat_image.stringValue] as? String{
+//            self.cat_image = cat_image
+//
+//        }
+//        super.init()
 //    }
 //}
 
-// Category Model
-class getCartegoryModel:NSObject{
-    enum keys:String, CodingKey{
-        case id = "id"
-        case category_name = "category_name"
-        case cat_image = "cat_image"
-    }
-    var id = ""
-    var category_name = ""
-    var cat_image = ""
-    
-    
-    
-    override init(){
-        super.init()
-        
-    }
-    init(dictionary:[String:AnyObject]){
-        if let id = dictionary[keys.id.stringValue] as? String{
-            self.id = id
-        }
-        if let category_name = dictionary[keys.category_name.stringValue] as? String{
-            self.category_name = category_name
-        }
-        if let cat_image = dictionary[keys.cat_image.stringValue] as? String{
-            self.cat_image = cat_image
-            
-        }
-        super.init()
-    }
-}
+
 // SubCategory Model
 class getSubCartegoryModel:NSObject{
     enum keys:String, CodingKey{
@@ -126,6 +131,31 @@ class getLocalityModel:NSObject{
     }
 }
 
+// Looking For Model
+
+class getLookingForModel:NSObject{
+    enum keys:String, CodingKey{
+        case id = "id"
+        case looking_for = "looking_for"
+        
+    }
+    var id:Int?
+    var looking_for = ""
+    
+    override init(){
+        super.init()
+        
+    }
+    init(dictionary:[String:AnyObject]){
+        if let id = dictionary[keys.id.stringValue] as? Int{
+            self.id = id
+        }
+        if let looking_for = dictionary[keys.looking_for.stringValue] as? String{
+            self.looking_for = looking_for
+        }
+        super.init()
+    }
+}
 
 // Create Opportunity Model
 

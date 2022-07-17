@@ -40,8 +40,6 @@ class ProfileVC: UIViewController {
         self.lblMobileNumber.text = UserData.shared.phone
         self.lblEmail.text = UserData.shared.email
         
-        //           let imgurl = "https://demo4app.com/dawadawa/public/admin_assets/user_profile/user_profile1657013122.png"
-        //https://demo4app.com/dawadawa/public/admin_assets/user_profile/user_profile1657013122.png
         
         if let url = URL(string: "\("https://demo4app.com/dawadawa/public/admin_assets/user_profile/" + String.getString(UserData.shared.social_profile))"){
             debugPrint("url...",  url)
@@ -67,6 +65,7 @@ class ProfileVC: UIViewController {
             self.ImageProfile.image = image
             self.uploadImage(image: self.ImageProfile.image ?? UIImage())
         }
+       
     }
     override func viewWillAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = false

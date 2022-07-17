@@ -13,14 +13,13 @@
 "Twitter" = "تويتر";
 "or" = "أو";
 "Country" = "دولة";
-"First name" = "الاسم الاول";
-"Last name" = "اللقب";
-"Email address" = "عنوان البريد الالكترونى";
-"Phone number" = "رقم الهاتف";
-"Password" = "كلمة المرور";
-"Confirm password" = "تأكيد كلمة المرور";
+"First name" = "الاسم الاول*";
+"Last name" = "*اللقب";
+"Email address*" = "عنوان البريد الالكترونى*";
+"Phone number*" = "رقم الهاتف*";
+"Password" = "*كلمة المرور";
 "(*) indicates mandatory fields *" = "(*) تشير إلى الحقول الإلزامية *";
-"By creating account your accepting our" = "عن طريق إنشاء حساب الخاص بك قبول لدينا";
+"Please accept our" = "الرجاء قبول";
 "T&C" = "الشروط والأحكام";
 "and" = "و";
 "Privacy Policy" = "سياسة الخصوصية";
@@ -33,6 +32,7 @@
 "Forgot Password" = "هل نسيت كلمة السر";
 "Dont's have an account" = "ليس لديك حساب";
 "Skip login" = "تخطي تسجيل الدخول";
+"Don't have Account" = "ليس لديك حساب";
 
 // MARK: - ForgotPasswordVC
 
@@ -40,6 +40,8 @@
 "Send on email address" = "أرسل على عنوان البريد الإلكتروني";
 "Send on phone number" = "أرسل على رقم الهاتف";
 "Send code" = "أرسل الرمز";
+"Email address" = "عنوان البريد الالكترونى";
+"Phone number" = "رقم الهاتف";
 
 // MARK: - ResetPasswordVC
 
@@ -47,7 +49,7 @@
 "Enter a new password for your account" = "أدخل كلمة مرور جديدة لحسابك";
 "New password" = "كلمة السر الجديدة";
 "Confirm password" = "تأكيد كلمة المرور";
-"Reset password" = "إعادة تعيين كلمة المرور";
+
 
 // MARK: - ActivationCodeVC
 
@@ -56,6 +58,8 @@
 "Verify Account" = "التحقق من الحساب";
 "Password reset code is sent on your phone number" = "يتم إرسال رمز إعادة تعيين كلمة المرور على رقم هاتفك";
 "Verify" = "يؤكد";
+"Resend code" = "أعد إرسال الرمز";
+"Wrong code" = "دبليو";
 
 // MARK: - ActivatedSuccessfullyPopUpVC
 
@@ -66,3 +70,13 @@
 "Successfully reset your password, now you can login to your account" = "إعادة تعيين كلمة المرور الخاصة بك بنجاح ، الآن يمكنك تسجيل الدخول إلى حسابك";
 "Close" = "قريب";
 
+
+
+// MARK: - MoreVC
+
+"Setting" = "ضبط";
+"Edit Profile" = "تعديل الملف الشخصي";
+"Change password" = "غير كلمة السر";
+"Saved Opportunities" = "الفرص المحفوظة";
+"Contact Us" = "اتصل بنا";
+"Log Out" = "تسجيل خروج";

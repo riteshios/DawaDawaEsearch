@@ -13,14 +13,13 @@
 "Twitter" = "Twitter";
 "or" = "or";
 "Country" = "Country";
-"First name" = "First name";
-"Last name" = "Last name";
-"Email address" = "Email address";
-"Phone number" = "Phone number";
-"Password" = "Password";
-"Confirm password" = "Confirm password";
+"First name" = "First name*";
+"Last name" = "Last name*";
+"Email address*" = "Email address*";
+"Phone number*" = "Phone number*";
+"Password" = "Password*";
 "(*) indicates mandatory fields *" = "(*) indicates mandatory fields *";
-"By creating account your accepting our" = "By creating account your accepting our";
+"Please accept our" = "Please accept our";
 "T&C" = "T&C";
 "and" = "and";
 "Privacy Policy" = "Privacy Policy";
@@ -37,25 +36,29 @@
 // MARK: - ForgotPasswordVC
 
 "Provide your registered email address or phone number to reset your password " = "Provide your registered email address or phone number to reset your password";
-"Send on email address" = "أرسل على عنوان البريد الإلكتروني";
-"Send on phone number" = "أرسل على رقم الهاتف";
-"Send code" = "أرسل الرمز";
+"Send on email address" = "Send on email address";
+"Send on phone number" = "Send on phone number";
+"Send code" = "Send code";
+"Email address" = "Email address";
+"Phone number" = "Phone number";
 
 // MARK: - ResetPasswordVC
 
-"Reset Password" = "إعادة تعيين كلمة المرور";
-"Enter a new password for your account" = "أدخل كلمة مرور جديدة لحسابك";
-"New password" = "كلمة السر الجديدة";
-"Confirm password" = "تأكيد كلمة المرور";
-"Reset password" = "إعادة تعيين كلمة المرور";
+"Reset Password" = "Reset Password";
+"Enter a new password for your account" = "Enter a new password for your account";
+"New password" = "New password";
+"Confirm password" = "Confirm password";
+
 
 // MARK: - ActivationCodeVC
 
-"Activate account" = "تفعيل حساب";
-"An account activation code has been sent to your email address and phone number" = "تم إرسال رمز تفعيل الحساب إلى عنوان بريدك الإلكتروني ورقم هاتفك";
-"Verify Account" = "التحقق من الحساب";
-"Password reset code is sent on your phone number" = "يتم إرسال رمز إعادة تعيين كلمة المرور على رقم هاتفك";
-"Verify" = "يؤكد";
+"Activate account" = "Activate account";
+"An account activation code has been sent to your email address and phone number" = "An account activation code has been sent to your email address and phone number";
+"Verify Account" = "Verify Account";
+"Password reset code is sent on your phone number" = "Password reset code is sent on your phone number";
+"Verify" =  "Verify";
+"Resend code" = "Resend code";
+"Wrong code" = "Wrong code";
 
 // MARK: - ActivatedSuccessfullyPopUpVC
 
@@ -66,3 +69,12 @@
 "Successfully reset your password, now you can login to your account" = "إعادة تعيين كلمة المرور الخاصة بك بنجاح ، الآن يمكنك تسجيل الدخول إلى حسابك";
 "Close" = "قريب";
 
+
+// MARK: - MoreVC
+
+"Setting" = "Setting";
+"Edit Profile" = "Edit Profile";
+"Change password" = "Change password";
+"Saved Opportunities" = "Saved Opportunities";
+"Contact Us" = "Contact Us";
+"Log Out" = "Log Out";

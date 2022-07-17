@@ -684,9 +684,24 @@
                     <size key="freeformSize" width="414" height="1153"/>
                     <connections>
                         <outlet property="btnCountrySelect" destination="Bag-bp-wRw" id="ePU-i3-pxl"/>
+                        <outlet property="btnCreateAccount" destination="eAf-4r-0hP" id="z9J-Gv-eqk"/>
+                        <outlet property="btnLogin" destination="Cw3-DO-T0Q" id="R5f-fH-EEg"/>
+                        <outlet property="btnPrivacyPolicy" destination="bmW-Im-gCu" id="uci-RR-uDs"/>
+                        <outlet property="btnSkip" destination="u0v-uN-S8r" id="jq6-0y-jvj"/>
+                        <outlet property="btnTandC" destination="ya6-Kl-EgT" id="HvU-8P-gAF"/>
                         <outlet property="btnTermAndCondition" destination="ZDP-yt-enP" id="XD8-Oo-XoQ"/>
                         <outlet property="imageFlag" destination="tWQ-Wd-3bT" id="LAy-gT-Sv6"/>
                         <outlet property="labelCountry" destination="8Rc-Br-3YF" id="CEX-Rn-4IR"/>
+                        <outlet property="lblAlready" destination="vyj-ww-Aq6" id="zIe-7w-3Rg"/>
+                        <outlet property="lblCreateAccount" destination="qkn-s5-8IS" id="stM-Ms-wCi"/>
+                        <outlet property="lblFacebook" destination="bsS-7I-hXb" id="ITy-mG-K3S"/>
+                        <outlet property="lblGoogle" destination="grT-eS-or5" id="1l2-eh-cuH"/>
+                        <outlet property="lblIndicate" destination="ljH-t9-jgP" id="CNb-MX-GVt"/>
+                        <outlet property="lblOr" destination="Uee-dx-xN0" id="qSw-4C-xPg"/>
+                        <outlet property="lblPleaseAccept" destination="x2V-ah-q5I" id="9Ww-NR-YEy"/>
+                        <outlet property="lblTwitter" destination="fNK-Mo-iVP" id="LpN-tV-qYf"/>
+                        <outlet property="lbland" destination="Yld-8C-Oin" id="maO-70-chd"/>
+                        <outlet property="lblor" destination="XY4-gh-gd7" id="sja-IL-KZI"/>
                         <outlet property="txtFieldConfirmPassword" destination="68l-96-fBg" id="EYm-bk-HeN"/>
                         <outlet property="txtFieldEmail" destination="fW1-t8-4Pz" id="pHf-gl-q2S"/>
                         <outlet property="txtFieldFirstName" destination="e69-xM-Fr7" id="BMP-0L-VOP"/>
@@ -994,6 +1009,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="btnResendCode" destination="1oX-SX-abe" id="HrB-wF-jct"/>
+                        <outlet property="btnverify" destination="Vrv-Un-Tzv" id="OZ6-Rc-ePk"/>
                         <outlet property="lblHeading" destination="OuP-Uy-gkF" id="lQe-yo-Quq"/>
                         <outlet property="lblSubHeading" destination="O17-sR-qc5" id="3Qq-gT-qi3"/>
                         <outlet property="lblWrongCode" destination="Lm7-VH-IT4" id="IPp-50-y02"/>
@@ -1577,6 +1594,17 @@
                     <navigationItem key="navigationItem" id="1Xs-xk-JuL"/>
                     <size key="freeformSize" width="414" height="874"/>
                     <connections>
+                        <outlet property="btnCreateAccount" destination="kUH-Dm-taG" id="mXO-MQ-e8l"/>
+                        <outlet property="btnForgotPassword" destination="vjo-jz-ZKr" id="fSp-wW-1uk"/>
+                        <outlet property="btnLogin" destination="duB-ij-YXM" id="iOw-TR-1GL"/>
+                        <outlet property="btnSkipLogin" destination="p0T-fc-Nxx" id="upA-CM-XmN"/>
+                        <outlet property="lblDontHaveAccount" destination="PL2-nJ-Uuw" id="nPN-bK-JAu"/>
+                        <outlet property="lblFacebook" destination="AU1-cH-KVC" id="l1d-Rw-Hmp"/>
+                        <outlet property="lblFirstOR" destination="HnA-AZ-nem" id="fF1-94-rfF"/>
+                        <outlet property="lblGoogle" destination="WED-or-KVH" id="MxV-hZ-YJP"/>
+                        <outlet property="lblLogin" destination="fpz-2u-ZJh" id="t4a-Ct-PWY"/>
+                        <outlet property="lblSecondOR" destination="ltz-ln-f0s" id="r2s-Mx-ByF"/>
+                        <outlet property="lblTwitter" destination="J35-VG-evp" id="iaC-ah-pl1"/>
                         <outlet property="txtFieldPassword" destination="MHP-QY-uKI" id="9R4-df-iI4"/>
                         <outlet property="txtFieldPhoneNumer" destination="6NK-4U-dLY" id="mo8-rQ-CgZ"/>
                         <outlet property="viewButtonLogin" destination="jOk-mt-MvB" id="pSy-AU-lvJ"/>
@@ -1759,8 +1787,11 @@
                     <navigationItem key="navigationItem" id="gXe-4Z-ceG"/>
                     <size key="freeformSize" width="414" height="874"/>
                     <connections>
+                        <outlet property="btnSendCode" destination="rnl-0i-IMd" id="SHV-Yq-tTl"/>
                         <outlet property="btnSendEmail_Phone" destination="A5f-ua-Wna" id="rgT-tN-gf1"/>
+                        <outlet property="lblForgotPassword" destination="TgN-a2-EdO" id="xu3-ee-4R7"/>
                         <outlet property="lblSendEmail_Phone" destination="u58-gB-Vce" id="CzG-NN-aP8"/>
+                        <outlet property="lblSubHeading" destination="IZA-Ou-8Dh" id="NQY-TN-pw1"/>
                         <outlet property="txtFieldPhone_Email" destination="1I7-IL-iaJ" id="Mcw-tX-BIM"/>
                         <outlet property="viewButtonSendCode" destination="rja-6O-1DG" id="zRg-gD-o2P"/>
                         <outlet property="viewMain" destination="7ZO-vq-f5r" id="Wbr-Vg-jB1"/>
@@ -1941,6 +1972,9 @@
                     <size key="freeformSize" width="414" height="874"/>
                     <connections>
                         <outlet property="ViewButtonResetPassword" destination="apE-nQ-dDq" id="CpM-G0-OGK"/>
+                        <outlet property="btnResetPassword" destination="mud-RP-HJ3" id="hBU-C0-R9P"/>
+                        <outlet property="lblResetPaswword" destination="cEL-JH-Y2l" id="Pzj-nB-m0s"/>
+                        <outlet property="lblSubHeading" destination="MaW-4a-xdB" id="zxj-3X-e84"/>
                         <outlet property="txtFieldConfirmPassword" destination="ES1-01-3Le" id="qMI-eT-dos"/>
                         <outlet property="txtFieldNewPassword" destination="uPB-Iy-7mJ" id="J7r-XL-hip"/>
                         <outlet property="viewMain" destination="igb-Mf-EBc" id="Aiw-Jt-khE"/>

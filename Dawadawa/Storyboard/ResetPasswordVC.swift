@@ -15,6 +15,11 @@ class ResetPasswordVC: UIViewController {
     
     @IBOutlet weak var txtFieldNewPassword: SKFloatingTextField!
     @IBOutlet weak var txtFieldConfirmPassword: SKFloatingTextField!
+    
+    @IBOutlet weak var lblResetPaswword: UILabel!
+    @IBOutlet weak var lblSubHeading: UILabel!
+    @IBOutlet weak var btnResetPassword: UIButton!
+    
     var callback2:(()->())?
     var email:String?
     
@@ -138,5 +143,17 @@ extension ResetPasswordVC{
                 CommonUtils.showToastForDefaultError()
             }
         }
+    }
+}
+
+extension ResetPasswordVC{
+    func resetpassword(){
+        lblResetPaswword.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Reset Password", comment: "")
+        lblSubHeading.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Enter a new password for your account", comment: "")
+        btnResetPassword.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "Reset Password", comment: ""), for: .normal)
+        txtFieldNewPassword.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "New password", comment: "")
+        txtFieldNewPassword.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "New password", comment: "")
+        txtFieldConfirmPassword.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Confirm password", comment: "")
+        txtFieldConfirmPassword.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Confirm password", comment: "")
     }
 }
