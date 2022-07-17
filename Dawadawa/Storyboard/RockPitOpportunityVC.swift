@@ -43,7 +43,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
     var subcatid:Int?
     var lookingforid:Int?
     var imagearr = [UIImage]()
-    var documentarr = [UIImage]()
+    var documentarr = [String]()
  
     var imagess = [UIImage(named: "IND")]
     var imagedd = [UIImage(named: "Crown")]
@@ -151,7 +151,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
         if self.btnSelectDocument.isSelected == true{
             if documentarr.count <= 5{
                 ImagePickerHelper.shared.showPickerController { image, url in
-                    self.documentarr.append(image ?? UIImage())
+                   
                     self.UploaddocumentCollectionView.reloadData()
                 }
             }
@@ -164,7 +164,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
     @IBAction func btnAddMoreDocumentTapped(_ sender: UIButton) {
         if documentarr.count <= 5{
             ImagePickerHelper.shared.showPickerController { image, url in
-                self.documentarr.append(image ?? UIImage())
+//                self.documentarr.append(image ?? UIImage())
                 self.UploaddocumentCollectionView.reloadData()
             }
         }
@@ -246,7 +246,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
             return cell
         case self.UploaddocumentCollectionView:
             let cell = UploaddocumentCollectionView.dequeueReusableCell(withReuseIdentifier: "UploadDocumentCollectionViewCell", for: indexPath) as! UploadDocumentCollectionViewCell
-            cell.imagedocument.image = documentarr[indexPath.row]
+            cell.lbldocument.text = documentarr[indexPath.row]
             cell.callbackclose = {
                 self.documentarr.remove(at: indexPath.row)
                 self.UploaddocumentCollectionView.reloadData()

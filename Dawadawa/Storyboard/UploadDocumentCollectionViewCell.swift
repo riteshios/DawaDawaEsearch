@@ -12,6 +12,8 @@ class UploadDocumentCollectionViewCell: UICollectionViewCell {
     var callbackclose:(()->())?
     @IBOutlet weak var btnClose: UIButton!
     @IBOutlet weak var imagedocument: UIImageView!
+    @IBOutlet weak var lbldocument: UILabel!
+    
     
     @IBAction func btnCloseTapped(_ sender: UIButton) {
         self.callbackclose?()

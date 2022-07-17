@@ -77,8 +77,12 @@ class MoreVC: UIViewController {
         if self.btnEdit.isSelected == true{
             self.viewEditProfile.backgroundColor = UIColor.init(red: 241/255, green: 249/255, blue: 253/255, alpha: 1)
         }
-        
+        if UserData.shared.isskiplogin == true{
+            self.showSimpleAlert(message: "First Create Account")
+        }
+        else{
         self.callback4?("EditProfile")
+        }
     }
     
     @IBAction func btnChangePasswordTapped(_ sender: UIButton) {
