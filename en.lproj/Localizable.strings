@@ -62,13 +62,12 @@
 
 // MARK: - ActivatedSuccessfullyPopUpVC
 
-"Account activated successfully" = "تم تفعيل الحساب بنجاح";
-"Your account activated successfully, now you can explore all the exclusive opportunities" = "تم تفعيل حسابك بنجاح ، يمكنك الآن استكشاف جميع الفرص الحصرية";
-"Continue" = "يكمل";
-"Password reset successfully" = "إعادة تعيين كلمة المرور بنجاح";
-"Successfully reset your password, now you can login to your account" = "إعادة تعيين كلمة المرور الخاصة بك بنجاح ، الآن يمكنك تسجيل الدخول إلى حسابك";
-"Close" = "قريب";
-
+"Account activated successfully" = "Account activated successfully";
+"Your account activated successfully, now you can explore all the exclusive opportunities" = "Your account activated successfully, now you can explore all the exclusive opportunities";
+"Continue" = "Continue";
+"Password reset successfully" = "Password reset successfully";
+"Successfully reset your password, now you can login to your account" = "Successfully reset your password, now you can login to your account";
+"Close" = "Close";
 
 // MARK: - MoreVC
 

@@ -28,11 +28,18 @@ class ActivatedSuccessfullyPopUpVC: UIViewController {
             self.lblHeading.text = "Account activated successfully"
             self.lblSubHeading.text = "Your account activated successfully, now you can explore all the exclusive opportunities"
             self.btnContinue.setTitle("Continue", for: .normal)
+            
+            lblHeading.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Account activated successfully", comment: "")
+            lblSubHeading.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Your account activated successfully, now you can explore all the exclusive opportunities", comment: "")
+            btnContinue.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "Continue", comment: ""), for: .normal)
         }
         else if type == .reset{
             self.lblHeading.text = "Password reset successfully"
             self.lblSubHeading.text = "Successfully reset your password, now you can login to your account"
             self.btnContinue.setTitle("Close", for: .normal)
+            lblHeading.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Password reset successfully", comment: "")
+            lblSubHeading.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Successfully reset your password, now you can login to your account", comment: "")
+            btnContinue.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "Close", comment: ""), for: .normal)
             self.btnContinue.setTitleColor(UIColor(hexString: "#A6A6A6"), for: .normal)
         }
         self.setUI()
