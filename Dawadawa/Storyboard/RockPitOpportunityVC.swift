@@ -10,7 +10,7 @@ import SKFloatingTextField
 import Alamofire
 import SwiftyJSON
 
-class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
+class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout, UIDocumentPickerDelegate{
     
     //   MARK: - Properties
     @IBOutlet weak var txtFieldTitle: SKFloatingTextField!
@@ -30,7 +30,8 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
     @IBOutlet weak var btnLookingFor: UIButton!
     
     
-    
+    var doc = ""
+    //    let testimonialArray = ["You rock", "You suck"]
     @IBOutlet weak var viewCreateOpportunity: UIView!
     @IBOutlet weak var viewSelectCategoryTop: NSLayoutConstraint!
     @IBOutlet weak var btnSelectImage: UIButton!
@@ -44,7 +45,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
     var lookingforid:Int?
     var imagearr = [UIImage]()
     var documentarr = [String]()
- 
+    
     var imagess = [UIImage(named: "IND")]
     var imagedd = [UIImage(named: "Crown")]
     
@@ -61,7 +62,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
         self.getsubcategoryapi()
         self.getstateapi()
         self.getlookingforapi(id: self.lookingforid ?? 0)
-    
+        
         self.setup()
         
     }
@@ -74,7 +75,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
         self.setTextFieldUI(textField: txtFieldMobileNumber, place: "Mobile number", floatingText: "Mobile number")
         self.setTextFieldUI(textField: txtFieldWhatsappNumber, place: "WhatsApp number", floatingText: "WhatsApp number")
         self.setTextFieldUI(textField: txtFieldPricing, place: "Pricing ( optional )", floatingText: "Pricing ( optional )")
-       
+        
     }
     
     // MARK: - @IBActions
@@ -113,14 +114,14 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
                     self.UploadimageCollectionView.reloadData()
                 }
                 
-                debugPrint("imageararty..........",self.imagearr.count)
+                debugPrint("imagearraycount..........",self.imagearr.count)
             }
             self.viewSelectCategoryTop.constant = 310
             if imagearr.count == 0{
                 btnSelectImage.isEnabled = true
             }
             else{
-            btnSelectImage.isEnabled = false
+                btnSelectImage.isEnabled = false
             }
         }
         
@@ -135,44 +136,37 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
                     self.imagearr.append(image ?? UIImage())
                     self.UploadimageCollectionView.reloadData()
                     
-             
+                    
                 }
             }
-    }
+        }
     }
     
     @IBAction func btnSelectDocumentTapped(_ sender: UIButton) {
         if imagearr.count == 0{
-            showSimpleAlert(message: "First upload Select Image")
+            showSimpleAlert(message: "First upload Image")
         }
         else{
             btnSelectDocument.isEnabled = true
-        sender.isSelected = !sender.isSelected
-        if self.btnSelectDocument.isSelected == true{
-            if documentarr.count <= 5{
-                ImagePickerHelper.shared.showPickerController { image, url in
-                   
-                    self.UploaddocumentCollectionView.reloadData()
+            sender.isSelected = !sender.isSelected
+            if self.btnSelectDocument.isSelected == true{
+                if documentarr.count <= 5{
+                    self.openFileBrowser()
+                    self.viewSelectCategoryTop.constant = 420
+                    
                 }
             }
-            self.viewSelectCategoryTop.constant = 420
-//            btnSelectDocument.isEnabled = false
-          
         }
     }
-}
     @IBAction func btnAddMoreDocumentTapped(_ sender: UIButton) {
         if documentarr.count <= 5{
-            ImagePickerHelper.shared.showPickerController { image, url in
-//                self.documentarr.append(image ?? UIImage())
-                self.UploaddocumentCollectionView.reloadData()
-            }
+            
         }
     }
     
     
     @IBAction func btnSelectSubCategoryTapped(_ sender: UIButton) {
-       
+        
         kSharedAppDelegate?.dropDown(dataSource: getSubCategorylist.map{String.getString($0.sub_cat_name)}, text: btnSubCategory) { (index, item) in
             self.lblSubCategory.text = item
             let subcatid = self.getSubCategorylist[index].id
@@ -189,7 +183,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
             self.stateid = id
             debugPrint("State idddd.....btnnnnt",  self.stateid = id)
             self.getlocalityapi(id: self.stateid ?? 0 )
-           
+            
         }
         
     }
@@ -197,7 +191,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
         kSharedAppDelegate?.dropDown(dataSource: getlocalitylist.map{String.getString($0.local_name)}, text: btnLocality){
             (index,item) in
             self.lblLocality.text = item
-           
+            
         }
     }
     
@@ -214,7 +208,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
     }
     
     @IBAction func btnCreateOppTapped(_ sender: UIButton) {
-//        self.createopportunityapi()
+        self.createopportunityapi(image: self.imagearr, doc: self.documentarr)
     }
     
     // Collection view
@@ -226,6 +220,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
             
         case self.UploaddocumentCollectionView:
             return self.documentarr.count
+            
             
         default: return 5
         }
@@ -239,9 +234,9 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
             cell.callback = {
                 self.imagearr.remove(at: indexPath.row)
                 self.UploadimageCollectionView.reloadData()
-//                if self.imagearr.count == 0{
-//                    self.viewSelectCategoryTop.constant = 10
-//                }
+                //                if self.imagearr.count == 0{
+                //                    self.viewSelectCategoryTop.constant = 10
+                //                }
             }
             return cell
         case self.UploaddocumentCollectionView:
@@ -250,9 +245,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
             cell.callbackclose = {
                 self.documentarr.remove(at: indexPath.row)
                 self.UploaddocumentCollectionView.reloadData()
-//                if self.documentarr.count == 0{
-//                    self.viewSelectCategoryTop.constant = 310
-//                }
+
             }
             return cell
             
@@ -260,6 +253,98 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
             
         }
         return UICollectionViewCell()
+    }
+    
+    
+    //  MARK: - Document Picker
+    
+    
+    func openFileBrowser() {
+        
+        let alert:UIAlertController=UIAlertController(title: "Choose File", message: nil, preferredStyle: UIAlertController.Style.actionSheet)
+        
+        let fileAttachmentAction = UIAlertAction(title: "File Attachment", style: UIAlertAction.Style.default)
+        {
+            UIAlertAction in self.openFileBrowser()
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel)
+        {_ in
+            
+            alert.dismiss(animated: false, completion: nil)
+        }
+        
+        alert.addAction(fileAttachmentAction)
+        alert.addAction(cancelAction)
+        
+        if let popoverPresentationController = alert.popoverPresentationController {
+            //            popoverPresentationController.sourceView = Utils.getController().view
+            //            popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirection()
+            //            popoverPresentationController.sourceRect = CGRect(x: Utils.getController().view.bounds.midX, y: Utils.getController().view.bounds.midY, width: 0, height: 0)
+            
+            
+            // self.present(alert, animated: true, completion: nil)
+            self.present(alert, animated: true, completion: nil)
+        }
+        
+        
+        let documentPicker = UIDocumentPickerViewController(documentTypes: ["com.apple.iwork.pages.pages", "com.apple.iwork.numbers.numbers", "com.apple.iwork.keynote.key","public.image", "com.apple.application", "public.item","public.data", "public.content", "public.audiovisual-content", "public.movie", "public.audiovisual-content", "public.video", "public.audio", "public.text", "public.data", "public.zip-archive", "com.pkware.zip-archive", "public.composite-content", "public.text"], in: .import)
+        
+        let documentTypes =  ["public.image", "com.apple.application", "public.item","public.data", "public.content", "public.audiovisual-content", "public.movie", "public.audiovisual-content", "public.video", "public.audio", "public.text", "public.data", "public.composite-content", "public.text"]
+        
+        //[String(kUTTypeText),String(kUTTypeContent),String(kUTTypeItem),String(kUTTypeData)
+        let documentsPicker = UIDocumentPickerViewController(documentTypes: documentTypes, in: .import)
+        //Call Delegate
+        documentsPicker.delegate = self
+        self.present(documentsPicker, animated: true)
+        
+    }
+    
+    
+    
+    func documentMenu(_ documentMenu: UIDocumentMenuViewController, didPickDocumentPicker documentPicker: UIDocumentPickerViewController) {
+        documentPicker.delegate = self
+        self.present(documentPicker, animated: true, completion: nil)
+    }
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
+        
+        debugPrint("url = ",url)
+        debugPrint("url = ",url.path)
+        debugPrint("url = ",url.absoluteString)
+        debugPrint("url = ",url.absoluteURL)
+        
+        
+        //          self.urlAttachemnt = url
+        //          if self.sizePerMB(url: url) > 500
+        //          {
+        //
+        //
+        //              NKToastHelper.sharedInstance.showAlert(self, title: warningMessage.title, message: "File size must be lesser or equal to 500MB.")
+        //              return
+        //
+        //          }
+        
+        
+        self.doc = (url.lastPathComponent)
+        print("doc path=-=-=\(doc)")
+        self.documentarr.append(url.lastPathComponent)
+        print("doc documentarr=-=-=\(documentarr)")
+        self.UploaddocumentCollectionView.reloadData()
+        
+        
+    }
+    func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    
+    func savePdf(url:URL, fileName:String) {
+        
+    }
+    
+    func updateImageViewWithExtension(_ fileExtention:String) {
+        
+        
+        
     }
     
 }
@@ -354,22 +439,22 @@ extension RockPitOpportunityVC{
                     self.getlookingForList = lookingfordata
                 }
             }
-         }
+        }
     }
     
     
-//    func createopportunityapi(){
-//        CommonUtils.showHudWithNoInteraction(show: true)
-//        createopportunity(language: "en",user_id:UserData.shared.id ?? 0,category_id:1,sub_category:self.subcatid ?? 0,title:self.txtFieldTitle.text ?? "",opp_state:self.lblState.text ?? "",opp_locality:self.lblLocality.text ?? "",location_name:self.txtFieldLocationName.text ?? "",location_map:self.txtFieldLocationOnMap.text ?? "",description:"Ritesh", mobile_num:Int.getInt(self.txtFieldMobileNumber.text),whatsaap_num:Int.getInt(self.txtFieldWhatsappNumber.text),pricing:22,looking_for:self.lookingforid ?? 0, plan:"Basic",filenames:self.imagess,opportunity_documents: self.imagedd,cat_type_id:0){ sucess, message in
-//            CommonUtils.showHudWithNoInteraction(show: false)
-//            if sucess == 200{
-//                kSharedAppDelegate?.makeRootViewController()
-//            }
-//            if sucess == 400{
-//                CommonUtils.showError(.error, String.getString(message))
-//            }
-//        }
-//    }
+    //    func createopportunityapi(){
+    //        CommonUtils.showHudWithNoInteraction(show: true)
+    //        createopportunity(language: "en",user_id:UserData.shared.id ?? 0,category_id:1,sub_category:self.subcatid ?? 0,title:self.txtFieldTitle.text ?? "",opp_state:self.lblState.text ?? "",opp_locality:self.lblLocality.text ?? "",location_name:self.txtFieldLocationName.text ?? "",location_map:self.txtFieldLocationOnMap.text ?? "",description:"Ritesh", mobile_num:Int.getInt(self.txtFieldMobileNumber.text),whatsaap_num:Int.getInt(self.txtFieldWhatsappNumber.text),pricing:22,looking_for:self.lookingforid ?? 0, plan:"Basic",filenames:self.imagess,opportunity_documents: self.imagedd,cat_type_id:0){ sucess, message in
+    //            CommonUtils.showHudWithNoInteraction(show: false)
+    //            if sucess == 200{
+    //                kSharedAppDelegate?.makeRootViewController()
+    //            }
+    //            if sucess == 400{
+    //                CommonUtils.showError(.error, String.getString(message))
+    //            }
+    //        }
+    //    }
     
 }
 extension RockPitOpportunityVC{
@@ -461,7 +546,7 @@ extension RockPitOpportunityVC{
         debugPrint("headers......\(headers)")
         
         var params = Dictionary<String, String>()
-    
+        
         
         let url = kBASEURL + ServiceName.kgetstate
         //
@@ -559,7 +644,7 @@ extension RockPitOpportunityVC{
                     
                     let parser = getlocalityParser(json: json)
                     completionBlock(parser.status,parser.local,parser.message)
-                
+                    
                 }else{
                     completionBlock(0,nil,response.result.error?.localizedDescription ?? "Some thing went wrong")
                 }
@@ -611,7 +696,7 @@ extension RockPitOpportunityVC{
         }
     }
     
-//  Looking For Api
+    //  Looking For Api
     
     func LookingForapi(language:String, completionBlock: @escaping (_ success: Int, _ lookingfordata : [getLookingForModel]?, _ message: String) -> Void) {
         
@@ -620,7 +705,7 @@ extension RockPitOpportunityVC{
         debugPrint("headers......\(headers)")
         
         var params = Dictionary<String, String>()
-    
+        
         
         let url = kBASEURL + ServiceName.kgetlookingfor
         //
@@ -692,7 +777,7 @@ extension RockPitOpportunityVC{
     
     
     
-//   Post opportunity Api
+    //   Post opportunity Api
     
     
     
@@ -700,300 +785,318 @@ extension RockPitOpportunityVC{
     
     
     
-//    func createopportunity(language:String,user_id:Int,category_id:Int,sub_category:Int,title:String,opp_state:String,opp_locality:String,location_name:String,location_map:String,description:String,mobile_num:Int,whatsaap_num:Int,pricing:Int,looking_for:Int,plan:String,filenames:[UIImage?],opportunity_documents:[UIImage?],cat_type_id:Int,completionBlock: @escaping (_ success: Int, _ message: String) -> Void) {
-//
-//
-//        let headers : HTTPHeaders = ["Authorization": "Bearer " + kSharedUserDefaults.getLoggedInAccessToken(), "Accept-Language": language]
-//        debugPrint("headers......\(headers)")
-//
-//        var params = Dictionary<String, String>()
-////        params.updateValue("\(UserData.shared.id)", forKey: "user_id")
-//////        params.updateValue(String(describing: UserData.shared.id), forKey: "user_id")
-////        params.updateValue("\(Int(1))", forKey: "category_id")
-////        params.updateValue("\(self.subcatid)", forKey: "sub_category")
-////        params.updateValue(String.getString(self.txtFieldTitle.text), forKey: "title")
-////        params.updateValue(self.lblState.text ?? "", forKey: "opp_state")
-////        params.updateValue(self.lblLocality.text ?? "", forKey: "opp_locality")
-////        params.updateValue(String.getString(self.txtFieldLocationName.text), forKey: "location_name")
-////        params.updateValue(String.getString(self.txtFieldLocationOnMap.text), forKey: "location_map")
-////        params.updateValue(String.getString(self.txtFieldTitle.text), forKey: "description")
-////        params.updateValue(String.getString(self.txtFieldMobileNumber.text), forKey: "mobile_num")
-////        params.updateValue(String.getString(self.txtFieldWhatsappNumber.text), forKey: "whatsaap_num")
-////        params.updateValue("\(22)", forKey: "pricing")
-////        params.updateValue("\(self.lookingforid)", forKey: "looking_for")
-////        params.updateValue("Basic", forKey: "plan")
-////        params.updateValue("\(0)", forKey: "cat_type_id")
-//
-//        params.updateValue("\(user_id)", forKey: "user_id")
-////        params.updateValue(String(describing: UserData.shared.id), forKey: "user_id")
-//        params.updateValue("\(category_id)", forKey: "category_id")
-//        params.updateValue("\(sub_category)", forKey: "sub_category")
-//        params.updateValue(title, forKey: "title")
-//        params.updateValue(opp_state, forKey: "opp_state")
-//        params.updateValue(opp_locality, forKey: "opp_locality")
-//        params.updateValue(location_name, forKey: "location_name")
-//        params.updateValue(location_map, forKey: "location_map")
-//        params.updateValue(description, forKey: "description")
-//        params.updateValue("\(mobile_num)", forKey: "mobile_num")
-//        params.updateValue("\(whatsaap_num)", forKey: "whatsaap_num")
-//        params.updateValue("\(pricing)", forKey: "pricing")
-//        params.updateValue("\(looking_for)", forKey: "looking_for")
-//        params.updateValue(plan, forKey: "plan")
-//        params.updateValue("\(cat_type_id)", forKey: "cat_type_id")
-//
-//
-//        debugPrint("userid........",  params.updateValue("\(user_id)", forKey: "user_id"))
-//        debugPrint("category_id......", params.updateValue("\(category_id)", forKey: "category_id") )
-//        debugPrint("sub_category.......",   params.updateValue("\(sub_category)", forKey: "sub_category"))
-//        debugPrint("title........",        params.updateValue(title, forKey: "title"))
-//        debugPrint("opp_state......",         params.updateValue(opp_state, forKey: "opp_state"))
-//        debugPrint("opp_locality.....",     params.updateValue(self.lblLocality.text ?? "", forKey: "opp_locality"))
-//        debugPrint("location_name.....",      params.updateValue(String.getString(self.txtFieldLocationName.text), forKey: "location_name"))
-//        debugPrint("location_map.......",  params.updateValue(String.getString(self.txtFieldLocationOnMap.text), forKey: "location_map"))
-//        debugPrint("description........",      params.updateValue(String.getString(self.txtFieldTitle.text), forKey: "description"))
-//        debugPrint("mobile_num....",    params.updateValue(String.getString(self.txtFieldMobileNumber.text), forKey: "mobile_num"))
-//        debugPrint("whatsaap_num.....",          params.updateValue(String.getString(self.txtFieldWhatsappNumber.text), forKey: "whatsaap_num"))
-//        debugPrint("pricing.....",    params.updateValue(String.getString(self.txtFieldPricing.text), forKey: "pricing"))
-//        debugPrint("looking_for....." ,   params.updateValue("\(self.lookingforid)", forKey: "looking_for"))
-//        debugPrint("plan.....",    params.updateValue(String.getString(self.txtFieldTitle.text), forKey: "title"))
-//        debugPrint("cat_typer_id.........",params.updateValue("\(0)", forKey: "cat_type_id"))
-//
-////        debugPrint("userid........", params.updateValue("\(UserData.shared.id)", forKey: "user_id"))
-////        debugPrint("category_id......",params.updateValue("\(1)", forKey: "category_id") )
-////        debugPrint("sub_category.......",  params.updateValue("\(self.subcatid)", forKey: "sub_category"))
-////        debugPrint("title........",    params.updateValue(String.getString(self.txtFieldTitle.text), forKey: "title"))
-////        debugPrint("opp_state......",    params.updateValue(self.lblState.text ?? "", forKey: "opp_state"))
-////        debugPrint("opp_locality.....",     params.updateValue(self.lblLocality.text ?? "", forKey: "opp_locality"))
-////        debugPrint("location_name.....",      params.updateValue(String.getString(self.txtFieldLocationName.text), forKey: "location_name"))
-////        debugPrint("location_map.......",  params.updateValue(String.getString(self.txtFieldLocationOnMap.text), forKey: "location_map"))
-////        debugPrint("description........",      params.updateValue(String.getString(self.txtFieldTitle.text), forKey: "description"))
-////        debugPrint("mobile_num....",    params.updateValue(String.getString(self.txtFieldMobileNumber.text), forKey: "mobile_num"))
-////        debugPrint("whatsaap_num.....",          params.updateValue(String.getString(self.txtFieldWhatsappNumber.text), forKey: "whatsaap_num"))
-////        debugPrint("pricing.....",    params.updateValue(String.getString(self.txtFieldPricing.text), forKey: "pricing"))
-////        debugPrint("looking_for....." ,   params.updateValue("\(self.lookingforid)", forKey: "looking_for"))
-////        debugPrint("plan.....",    params.updateValue(String.getString(self.txtFieldTitle.text), forKey: "title"))
-////        debugPrint("cat_typer_id.........",params.updateValue("\(0)", forKey: "cat_type_id"))
-//
-//
-//
-//        let url = kBASEURL + ServiceName.kcreateopportunity
-//        //
-//        //        print("============\(params)")
-//        print(url)
-//
-//        Alamofire.upload(
-//
-//                 multipartFormData: { multipartFormData in
-//
-//
-//                     for img in  filenames{
-//
-//                   ///  if let pimage = img {
-//
-//                         if let data = img?.jpegData(compressionQuality: 0.3), let imageName = img?.jpegData(compressionQuality: 0.3) as? String {
-//
-//                             multipartFormData.append(data, withName: "filenames[]", fileName: "\(imageName).jpeg", mimeType: "image/jpeg")
-//
-//                             print("==========image=========\(data)")
-//
-//                         }
-//
-//                  //   }
-//                     }
-//
-////                     let imageData:Data = filenames.fixedOrientation().jpegData(compressionQuality: 0.4) ?? Data()
-////                     debugPrint("imageData=",imageData)
-////
-////                     var cri: Data
-////
-////                     cri = imageData
-////                     if let jpegData = filenames.jpegData(compressionQuality: 0.4)
-////                     {
-////                         multipartFormData.append(jpegData, withName: "filenames[]", fileName: "\(jpegData).png", mimeType: "image/png")
-////                     }
-//
-//                     for img in  opportunity_documents
-//                     {
-//
-//                   ///  if let pimage = img {
-//
-//                if let data = img?.jpegData(compressionQuality: 0.3), let imageName = img?.jpegData(compressionQuality: 0.3) as? String {
-//
-//                             multipartFormData.append(data, withName: "opportunity_documents[]", fileName: "\(imageName).jpeg", mimeType: "image/jpeg")
-//
-//                             print("==========image=========\(data)")
-//
-//                         }
-//
-//                  //   }
-//
-//                     }
-//
-//
-//
-////                     let documentdata:Data = opportunity_documents.fixedOrientation().jpegData(compressionQuality: 0.4) ?? Data()
-////                     debugPrint("imageData=",documentdata)
-////
-////                     var doc: Data
-////
-////                     doc = documentdata
-////                     if let jpegData = opportunity_documents.jpegData(compressionQuality: 0.4)
-////                     {
-////                         multipartFormData.append(jpegData, withName: "opportunity_documents[]", fileName: "\(jpegData).png", mimeType: "image/png")
-////                     }
-//
-//
-//                     for (key, value) in params {
-//
-//                         multipartFormData.append((value).data(using: .utf8)!, withName: key)
-//
-//                         debugPrint("key.........",key)
-//
-//                     }
-//
-//
-//
-//                 },to: url,method:.post, headers: headers ,encodingCompletion: { encodingResult in
-//
-//                     switch encodingResult {
-//
-//                     case .success(let upload, _, _):
-//
-//                         upload.responseJSON { response in
-//
-//
-//
-//                             switch response.result {
-//
-//                             case .success:
-//
-//                                 if let value = response.result.value {
-//
-//                                     let json = JSON(value)
-//
-//                                     print("\(json)")
-//
-//
-//                                     guard let message = json["message"].string as String? else{
-//
-//                                         return
-//
-//                                     }
-//                                     completionBlock(0,message)
-//
-//                                 }else{
-//
-//                                     completionBlock(0,response.result.error?.localizedDescription ?? "Some thing went wrong")
-//
-//                                 }
-//
-//                             case .failure(let error):
-//
-//                                 completionBlock(0,error.localizedDescription)
-//
-//                             }
-//
-//                         }
-//
-//                     case .failure(let encodingError):
-//
-//                         print(encodingError)
-//
-//                     }
-//
-//                 })
-//
-//
-//
-//         }
-//
-//    //    parser
-//    class createOpportunityParser : NSObject{
-//
-//        let KResponsecode = "responsecode"
-//        let kStatus = "status"
-//        let kMessage = "message"
-////        let kCategories = "Categories"
-//
-//
-//
-//        var responsecode = 0
-//        var status = 0
-//        var message = ""
-//        var opportunity =  opportunityydataModel()
-//
-//        override init() {
-//            super.init()
-//        }
-//        init(json: JSON) {
-//            if let responsecode = json[KResponsecode].int as Int?{
-//                self.responsecode = responsecode
-//            }
-//            if let status = json[kStatus].int as Int?{
-//                self.status = status
-//            }
-//            if let message = json[kMessage].string as String?{
-//                self.message = message
-//            }
-////            self.opportunity = opportunityydataModel(json: json)
-//            super.init()
-//
-//        }
-//    }
-//
+    //    func createopportunity(language:String,user_id:Int,category_id:Int,sub_category:Int,title:String,opp_state:String,opp_locality:String,location_name:String,location_map:String,description:String,mobile_num:Int,whatsaap_num:Int,pricing:Int,looking_for:Int,plan:String,filenames:[UIImage?],opportunity_documents:[UIImage?],cat_type_id:Int,completionBlock: @escaping (_ success: Int, _ message: String) -> Void) {
+    //
+    //
+    //        let headers : HTTPHeaders = ["Authorization": "Bearer " + kSharedUserDefaults.getLoggedInAccessToken(), "Accept-Language": language]
+    //        debugPrint("headers......\(headers)")
+    //
+    //        var params = Dictionary<String, String>()
+    ////        params.updateValue("\(UserData.shared.id)", forKey: "user_id")
+    //////        params.updateValue(String(describing: UserData.shared.id), forKey: "user_id")
+    ////        params.updateValue("\(Int(1))", forKey: "category_id")
+    ////        params.updateValue("\(self.subcatid)", forKey: "sub_category")
+    ////        params.updateValue(String.getString(self.txtFieldTitle.text), forKey: "title")
+    ////        params.updateValue(self.lblState.text ?? "", forKey: "opp_state")
+    ////        params.updateValue(self.lblLocality.text ?? "", forKey: "opp_locality")
+    ////        params.updateValue(String.getString(self.txtFieldLocationName.text), forKey: "location_name")
+    ////        params.updateValue(String.getString(self.txtFieldLocationOnMap.text), forKey: "location_map")
+    ////        params.updateValue(String.getString(self.txtFieldTitle.text), forKey: "description")
+    ////        params.updateValue(String.getString(self.txtFieldMobileNumber.text), forKey: "mobile_num")
+    ////        params.updateValue(String.getString(self.txtFieldWhatsappNumber.text), forKey: "whatsaap_num")
+    ////        params.updateValue("\(22)", forKey: "pricing")
+    ////        params.updateValue("\(self.lookingforid)", forKey: "looking_for")
+    ////        params.updateValue("Basic", forKey: "plan")
+    ////        params.updateValue("\(0)", forKey: "cat_type_id")
+    //
+    //        params.updateValue("\(user_id)", forKey: "user_id")
+    ////        params.updateValue(String(describing: UserData.shared.id), forKey: "user_id")
+    //        params.updateValue("\(category_id)", forKey: "category_id")
+    //        params.updateValue("\(sub_category)", forKey: "sub_category")
+    //        params.updateValue(title, forKey: "title")
+    //        params.updateValue(opp_state, forKey: "opp_state")
+    //        params.updateValue(opp_locality, forKey: "opp_locality")
+    //        params.updateValue(location_name, forKey: "location_name")
+    //        params.updateValue(location_map, forKey: "location_map")
+    //        params.updateValue(description, forKey: "description")
+    //        params.updateValue("\(mobile_num)", forKey: "mobile_num")
+    //        params.updateValue("\(whatsaap_num)", forKey: "whatsaap_num")
+    //        params.updateValue("\(pricing)", forKey: "pricing")
+    //        params.updateValue("\(looking_for)", forKey: "looking_for")
+    //        params.updateValue(plan, forKey: "plan")
+    //        params.updateValue("\(cat_type_id)", forKey: "cat_type_id")
+    //
+    //
+    //        debugPrint("userid........",  params.updateValue("\(user_id)", forKey: "user_id"))
+    //        debugPrint("category_id......", params.updateValue("\(category_id)", forKey: "category_id") )
+    //        debugPrint("sub_category.......",   params.updateValue("\(sub_category)", forKey: "sub_category"))
+    //        debugPrint("title........",        params.updateValue(title, forKey: "title"))
+    //        debugPrint("opp_state......",         params.updateValue(opp_state, forKey: "opp_state"))
+    //        debugPrint("opp_locality.....",     params.updateValue(self.lblLocality.text ?? "", forKey: "opp_locality"))
+    //        debugPrint("location_name.....",      params.updateValue(String.getString(self.txtFieldLocationName.text), forKey: "location_name"))
+    //        debugPrint("location_map.......",  params.updateValue(String.getString(self.txtFieldLocationOnMap.text), forKey: "location_map"))
+    //        debugPrint("description........",      params.updateValue(String.getString(self.txtFieldTitle.text), forKey: "description"))
+    //        debugPrint("mobile_num....",    params.updateValue(String.getString(self.txtFieldMobileNumber.text), forKey: "mobile_num"))
+    //        debugPrint("whatsaap_num.....",          params.updateValue(String.getString(self.txtFieldWhatsappNumber.text), forKey: "whatsaap_num"))
+    //        debugPrint("pricing.....",    params.updateValue(String.getString(self.txtFieldPricing.text), forKey: "pricing"))
+    //        debugPrint("looking_for....." ,   params.updateValue("\(self.lookingforid)", forKey: "looking_for"))
+    //        debugPrint("plan.....",    params.updateValue(String.getString(self.txtFieldTitle.text), forKey: "title"))
+    //        debugPrint("cat_typer_id.........",params.updateValue("\(0)", forKey: "cat_type_id"))
+    //
+    ////        debugPrint("userid........", params.updateValue("\(UserData.shared.id)", forKey: "user_id"))
+    ////        debugPrint("category_id......",params.updateValue("\(1)", forKey: "category_id") )
+    ////        debugPrint("sub_category.......",  params.updateValue("\(self.subcatid)", forKey: "sub_category"))
+    ////        debugPrint("title........",    params.updateValue(String.getString(self.txtFieldTitle.text), forKey: "title"))
+    ////        debugPrint("opp_state......",    params.updateValue(self.lblState.text ?? "", forKey: "opp_state"))
+    ////        debugPrint("opp_locality.....",     params.updateValue(self.lblLocality.text ?? "", forKey: "opp_locality"))
+    ////        debugPrint("location_name.....",      params.updateValue(String.getString(self.txtFieldLocationName.text), forKey: "location_name"))
+    ////        debugPrint("location_map.......",  params.updateValue(String.getString(self.txtFieldLocationOnMap.text), forKey: "location_map"))
+    ////        debugPrint("description........",      params.updateValue(String.getString(self.txtFieldTitle.text), forKey: "description"))
+    ////        debugPrint("mobile_num....",    params.updateValue(String.getString(self.txtFieldMobileNumber.text), forKey: "mobile_num"))
+    ////        debugPrint("whatsaap_num.....",          params.updateValue(String.getString(self.txtFieldWhatsappNumber.text), forKey: "whatsaap_num"))
+    ////        debugPrint("pricing.....",    params.updateValue(String.getString(self.txtFieldPricing.text), forKey: "pricing"))
+    ////        debugPrint("looking_for....." ,   params.updateValue("\(self.lookingforid)", forKey: "looking_for"))
+    ////        debugPrint("plan.....",    params.updateValue(String.getString(self.txtFieldTitle.text), forKey: "title"))
+    ////        debugPrint("cat_typer_id.........",params.updateValue("\(0)", forKey: "cat_type_id"))
+    //
+    //
+    //
+    //        let url = kBASEURL + ServiceName.kcreateopportunity
+    //        //
+    //        //        print("============\(params)")
+    //        print(url)
+    //
+    //        Alamofire.upload(
+    //
+    //                 multipartFormData: { multipartFormData in
+    //
+    //
+    //                     for img in  filenames{
+    //
+    //                   ///  if let pimage = img {
+    //
+    //                         if let data = img?.jpegData(compressionQuality: 0.3), let imageName = img?.jpegData(compressionQuality: 0.3) as? String {
+    //
+    //                             multipartFormData.append(data, withName: "filenames[]", fileName: "\(imageName).jpeg", mimeType: "image/jpeg")
+    //
+    //                             print("==========image=========\(data)")
+    //
+    //                         }
+    //
+    //                  //   }
+    //                     }
+    //
+    ////                     let imageData:Data = filenames.fixedOrientation().jpegData(compressionQuality: 0.4) ?? Data()
+    ////                     debugPrint("imageData=",imageData)
+    ////
+    ////                     var cri: Data
+    ////
+    ////                     cri = imageData
+    ////                     if let jpegData = filenames.jpegData(compressionQuality: 0.4)
+    ////                     {
+    ////                         multipartFormData.append(jpegData, withName: "filenames[]", fileName: "\(jpegData).png", mimeType: "image/png")
+    ////                     }
+    //
+    //                     for img in  opportunity_documents
+    //                     {
+    //
+    //                   ///  if let pimage = img {
+    //
+    //                if let data = img?.jpegData(compressionQuality: 0.3), let imageName = img?.jpegData(compressionQuality: 0.3) as? String {
+    //
+    //                             multipartFormData.append(data, withName: "opportunity_documents[]", fileName: "\(imageName).jpeg", mimeType: "image/jpeg")
+    //
+    //                             print("==========image=========\(data)")
+    //
+    //                         }
+    //
+    //                  //   }
+    //
+    //                     }
+    //
+    //
+    //
+    ////                     let documentdata:Data = opportunity_documents.fixedOrientation().jpegData(compressionQuality: 0.4) ?? Data()
+    ////                     debugPrint("imageData=",documentdata)
+    ////
+    ////                     var doc: Data
+    ////
+    ////                     doc = documentdata
+    ////                     if let jpegData = opportunity_documents.jpegData(compressionQuality: 0.4)
+    ////                     {
+    ////                         multipartFormData.append(jpegData, withName: "opportunity_documents[]", fileName: "\(jpegData).png", mimeType: "image/png")
+    ////                     }
+    //
+    //
+    //                     for (key, value) in params {
+    //
+    //                         multipartFormData.append((value).data(using: .utf8)!, withName: key)
+    //
+    //                         debugPrint("key.........",key)
+    //
+    //                     }
+    //
+    //
+    //
+    //                 },to: url,method:.post, headers: headers ,encodingCompletion: { encodingResult in
+    //
+    //                     switch encodingResult {
+    //
+    //                     case .success(let upload, _, _):
+    //
+    //                         upload.responseJSON { response in
+    //
+    //
+    //
+    //                             switch response.result {
+    //
+    //                             case .success:
+    //
+    //                                 if let value = response.result.value {
+    //
+    //                                     let json = JSON(value)
+    //
+    //                                     print("\(json)")
+    //
+    //
+    //                                     guard let message = json["message"].string as String? else{
+    //
+    //                                         return
+    //
+    //                                     }
+    //                                     completionBlock(0,message)
+    //
+    //                                 }else{
+    //
+    //                                     completionBlock(0,response.result.error?.localizedDescription ?? "Some thing went wrong")
+    //
+    //                                 }
+    //
+    //                             case .failure(let error):
+    //
+    //                                 completionBlock(0,error.localizedDescription)
+    //
+    //                             }
+    //
+    //                         }
+    //
+    //                     case .failure(let encodingError):
+    //
+    //                         print(encodingError)
+    //
+    //                     }
+    //
+    //                 })
+    //
+    //
+    //
+    //         }
+    //
+    //    //    parser
+    //    class createOpportunityParser : NSObject{
+    //
+    //        let KResponsecode = "responsecode"
+    //        let kStatus = "status"
+    //        let kMessage = "message"
+    ////        let kCategories = "Categories"
+    //
+    //
+    //
+    //        var responsecode = 0
+    //        var status = 0
+    //        var message = ""
+    //        var opportunity =  opportunityydataModel()
+    //
+    //        override init() {
+    //            super.init()
+    //        }
+    //        init(json: JSON) {
+    //            if let responsecode = json[KResponsecode].int as Int?{
+    //                self.responsecode = responsecode
+    //            }
+    //            if let status = json[kStatus].int as Int?{
+    //                self.status = status
+    //            }
+    //            if let message = json[kMessage].string as String?{
+    //                self.message = message
+    //            }
+    ////            self.opportunity = opportunityydataModel(json: json)
+    //            super.init()
+    //
+    //        }
+    //    }
+    //
     
     
-//    func createopportunityapi(image:UIImage?){
-//        CommonUtils.showHud(show: true)
-//
-//        if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
-//            let endToken = kSharedUserDefaults.getLoggedInAccessToken()
-//            let septoken = endToken.components(separatedBy: " ")
-//            if septoken[0] != "Bearer"{
-//                let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
-//                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
-//            }
-//            //            headers["token"] = kSharedUserDefaults.getLoggedInAccessToken()
-//        }
-//        let params:[String : Any] = [
-//            "user_id":UserData.shared.id
-//        ]
-//
-//        let uploadimage:[String:Any] = ["profile_image":self.ImageProfile.image ?? UIImage()]
-//        TANetworkManager.sharedInstance.requestMultiPart(withServiceName:ServiceName.keditprofileimage , requestMethod: .post, requestImages: [uploadimage], requestVideos: [:], requestData:params, req : self.ImageProfile.image! )
-//        { (result:Any?, error:Error?, errortype:ErrorType?, statusCode:Int?) in
-//            CommonUtils.showHudWithNoInteraction(show: false)
-//            if errortype == .requestSuccess {
-//                debugPrint("result=====",result)
-//                let dictResult = kSharedInstance.getDictionary(result)
-//                debugPrint("dictResult====",dictResult)
-//                switch Int.getInt(statusCode) {
-//                case 200:
-//                    if Int.getInt(dictResult["status"]) == 200{
-//                        let endToken = kSharedUserDefaults.getLoggedInAccessToken()
-//                        let septoken = endToken.components(separatedBy: " ")
-//                        if septoken[0] == "Bearer"{
-//                            kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
-//                        }
-//                        let data =  kSharedInstance.getDictionary(dictResult["data"])
-//                        kSharedUserDefaults.setLoggedInUserDetails(loggedInUserDetails: data)
-//                        UserData.shared.saveData(data:data, token: String.getString(kSharedUserDefaults.getLoggedInAccessToken()))
-//
-//                        let obj = kSharedInstance.getDictionary(data["social_profile"])
-//                        self.userImage = String.getString(obj.first)
-//                    }
-//                    else if  Int.getInt(dictResult["status"]) == 401{
-//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
-//                    }
-//
-//                default:
-//                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
-//                }
-//            } else if errortype == .noNetwork {
-//                CommonUtils.showToastForInternetUnavailable()
-//            } else {
-//                CommonUtils.showToastForDefaultError()
-//            }
-//        }
-//    }
+    func createopportunityapi(image:[UIImage?],doc:[String?]){
+                CommonUtils.showHud(show: true)
+    
+                if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
+                    let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+                    let septoken = endToken.components(separatedBy: " ")
+                    if septoken[0] != "Bearer"{
+                        let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
+                        kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
+                    }
+                    //            headers["token"] = kSharedUserDefaults.getLoggedInAccessToken()
+                }
+                let params:[String : Any] = [
+                    "user_id":UserData.shared.id,
+                    "category_id":1,
+                    "sub_category":self.subcatid,
+                    "title":String.getString(self.txtFieldTitle.text),
+                    "opp_state":self.lblState.text,
+                    "opp_locality":self.lblLocality.text,
+                    "location_name":String.getString(self.txtFieldLocationName.text),
+                    "location_map":String.getString(self.txtFieldLocationOnMap.text),
+                    "description":"Dummy text",
+                    "mobile_num":String.getString(self.txtFieldMobileNumber.text),
+                    "whatsaap_num":String.getString(self.txtFieldWhatsappNumber.text),
+                    "pricing":String.getString(self.txtFieldPricing.text),
+                    "looking_for":self.lblLookingFor.text,
+                    "plan":"Basic",
+                    "cat_type_id":0
+                    
+                ]
+        debugPrint("user_id......",UserData.shared.id)
+    
+                let uploadimage:[String:Any] = ["filenames[]":self.imagearr ?? UIImage(),
+                                                "opportunity_documents[]":self.documentarr ?? ""]
+        
+        debugPrint("filenames[]......",self.imagearr)
+        debugPrint("opportunity_documents[]......",self.documentarr)
+        
+        
+        TANetworkManager.sharedInstance.requestMultiPartwithlanguage(withServiceName:ServiceName.kcreateopportunity , requestMethod: .post, requestImages: [uploadimage], requestVideos: [:], requestData:params, req: self.imagearr,req:self.documentarr)
+                { (result:Any?, error:Error?, errortype:ErrorType?, statusCode:Int?) in
+                    CommonUtils.showHudWithNoInteraction(show: false)
+                    if errortype == .requestSuccess {
+                        debugPrint("result=====",result)
+                        let dictResult = kSharedInstance.getDictionary(result)
+                        debugPrint("dictResult====",dictResult)
+                        switch Int.getInt(statusCode) {
+                        case 200:
+                            if Int.getInt(dictResult["status"]) == 200{
+                                let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+                                let septoken = endToken.components(separatedBy: " ")
+                                if septoken[0] == "Bearer"{
+                                    kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
+                                }
+                                kSharedAppDelegate?.makeRootViewController()
+                              
+                            }
+                            else if  Int.getInt(dictResult["status"]) == 400{
+                                CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                            }
+    
+                        default:
+                            CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        }
+                    } else if errortype == .noNetwork {
+                        CommonUtils.showToastForInternetUnavailable()
+                    } else {
+                        CommonUtils.showToastForDefaultError()
+                    }
+                }
+            }
 }

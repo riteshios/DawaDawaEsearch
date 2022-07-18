@@ -29,7 +29,7 @@
 
 // MARK: - LoginVC
 
-"Forgot Password" = "Forgot Password";
+"Forgot Password" = "Forgot Password?";
 "Dont's have an account" = "Dont's have an account";
 "Skip login" = "Skip login";
 
@@ -77,3 +77,12 @@
 "Saved Opportunities" = "Saved Opportunities";
 "Contact Us" = "Contact Us";
 "Log Out" = "Log Out";
+
+
+// MARK: - LogOutVC
+
+"Logout" = "Logout";
+"Do you really want to log out?" = "Do you really want to log out?";
+"Cancel" = "Cancel";
+
+

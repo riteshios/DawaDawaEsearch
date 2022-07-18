@@ -112,12 +112,12 @@ class MoreVC: UIViewController {
         if self.btnLogOut.isSelected == true{
             self.viewSetting.backgroundColor = UIColor.init(red: 255/255, green: 240/255, blue: 240/255, alpha : 1)
         }
-        if UserData.shared.isskiplogin == true{
-            self.showSimpleAlert(message: "First Create Account")
-        }
-        else{
+//        if UserData.shared.isskiplogin == true{
+//            self.showSimpleAlert(message: "First Create Account")
+//        }
+//        else{
         self.callback4?("Logout")
-        }
+//        }
     }
     
 }

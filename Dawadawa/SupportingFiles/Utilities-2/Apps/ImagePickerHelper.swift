@@ -60,30 +60,31 @@ class ImagePickerHelper: NSObject {
      * Get Image Object
      */
 //    When open camera and gallery both
-//    func showPickerController(onlyImagePicker: Bool? = false, _ handler:PickerImage) {
-//
-//        self.showActionSheet(withTitle: "Choose Option", withAlertMessage: nil, withOptions: ["Open Camera","Open Gallery"]){ ( _ selectedIndex: Int) in
-//            switch selectedIndex {
-//            case OpenMediaType.camera.rawValue:
-//                self.showCamera()
-//            case OpenMediaType.photoLibrary.rawValue:
-//                self.openGallery(onlyImagePicker: onlyImagePicker!, handler: handler)
-//            default:
-//                break
-//            }
-//        }
-//
-//        pickerCallBack = handler
-//    }
-//
     func showPickerController(onlyImagePicker: Bool? = false, _ handler:PickerImage) {
 
-        self.showActionSheet(withTitle: "", withAlertMessage: nil, withOptions: ["Open Gallery"]){ ( _ selectedIndex: Int) in
+        self.showActionSheet(withTitle: "Choose Option", withAlertMessage: nil, withOptions: ["Open Camera","Open Gallery"]){ ( _ selectedIndex: Int) in
+            switch selectedIndex {
+            case OpenMediaType.camera.rawValue:
+                self.showCamera()
+            case OpenMediaType.photoLibrary.rawValue:
                 self.openGallery(onlyImagePicker: onlyImagePicker!, handler: handler)
+            default:
+                break
+            }
         }
 
         pickerCallBack = handler
     }
+    
+// when open gallery only
+//    func showPickerController(onlyImagePicker: Bool? = false, _ handler:PickerImage) {
+//
+//        self.showActionSheet(withTitle: "", withAlertMessage: nil, withOptions: ["Open Gallery"]){ ( _ selectedIndex: Int) in
+//                self.openGallery(onlyImagePicker: onlyImagePicker!, handler: handler)
+//        }
+//
+//        pickerCallBack = handler
+//    }
 //
     
     // MARK:-  Camera

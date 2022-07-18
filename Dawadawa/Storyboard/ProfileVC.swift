@@ -141,13 +141,13 @@ class ProfileVC: UIViewController {
                     vc.modalTransitionStyle = .crossDissolve
                     vc.modalPresentationStyle = .overCurrentContext
                     vc.callbacklogout = { txt in
-                        if txt == "Cancel"{
-                            vc.dismiss(animated: false){
-                                let vc = self.storyboard?.instantiateViewController(withIdentifier: ProfileVC.getStoryboardID()) as! ProfileVC
-                                self.navigationController?.pushViewController(vc, animated: false)
-                            }
-                        }
-                        
+//                        if txt == "Cancel"{
+//                            vc.dismiss(animated: false){
+//                                let vc = self.storyboard?.instantiateViewController(withIdentifier: ProfileVC.getStoryboardID()) as! ProfileVC
+//                                self.navigationController?.pushViewController(vc, animated: false)
+//                            }
+//                        }
+//
                         if txt == "Logout"{
                             vc.dismiss(animated: false) {
                                 let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginVC") as! LoginVC

@@ -1061,6 +1061,10 @@
                     </view>
                     <connections>
                         <outlet property="btnLogOut" destination="xLs-ug-uoq" id="Piw-mT-UfC"/>
+                        <outlet property="lblCancel" destination="vTj-RZ-Hv2" id="oQK-1a-Mnm"/>
+                        <outlet property="lblLogout" destination="gQO-0z-2Wk" id="6Q2-8d-pTh"/>
+                        <outlet property="lblSecondLogout" destination="MHx-YE-K66" id="p2W-Fs-lCw"/>
+                        <outlet property="lblSubHeading" destination="1aH-vl-4NG" id="isL-oF-ATK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aQJ-5o-GoM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -4866,14 +4870,14 @@
                                                                             <rect key="frame" x="0.0" y="0.0" width="411" height="60"/>
                                                                             <subviews>
                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BRQ-gc-t9i">
-                                                                                    <rect key="frame" x="377" y="10" width="24" height="24"/>
+                                                                                    <rect key="frame" x="377" y="16" width="24" height="24"/>
                                                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                                                     <state key="normal" image="close-circle"/>
                                                                                     <connections>
                                                                                         <action selector="btnCloseTapped:" destination="HGd-kI-jdl" eventType="touchUpInside" id="3Wh-hB-G3N"/>
                                                                                     </connections>
                                                                                 </button>
-                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TdO-Fq-nwq">
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Document" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TdO-Fq-nwq">
                                                                                     <rect key="frame" x="10" y="8" width="392" height="44"/>
                                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                     <nil key="textColor"/>
@@ -4885,7 +4889,7 @@
                                                                                 <constraint firstAttribute="width" constant="411" id="0La-5M-AQX"/>
                                                                                 <constraint firstItem="TdO-Fq-nwq" firstAttribute="top" secondItem="fAW-qX-2Cu" secondAttribute="top" constant="8" id="GxV-8i-qqB"/>
                                                                                 <constraint firstAttribute="trailing" secondItem="BRQ-gc-t9i" secondAttribute="trailing" constant="10" id="HHL-aP-DJT"/>
-                                                                                <constraint firstItem="BRQ-gc-t9i" firstAttribute="top" secondItem="fAW-qX-2Cu" secondAttribute="top" constant="10" id="Jj6-ZF-JwJ"/>
+                                                                                <constraint firstItem="BRQ-gc-t9i" firstAttribute="top" secondItem="fAW-qX-2Cu" secondAttribute="top" constant="16" id="Jj6-ZF-JwJ"/>
                                                                                 <constraint firstAttribute="height" constant="60" id="Oww-iY-63I"/>
                                                                                 <constraint firstAttribute="trailing" secondItem="TdO-Fq-nwq" secondAttribute="trailing" constant="9" id="Xti-qr-NLN"/>
                                                                                 <constraint firstItem="TdO-Fq-nwq" firstAttribute="leading" secondItem="fAW-qX-2Cu" secondAttribute="leading" constant="10" id="hzp-u4-hOi"/>

@@ -31,9 +31,8 @@ class ResetPasswordVC: UIViewController {
         viewMain.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
         viewMain.addShadowWithBlurOnView(viewMain, spread: 0, blur: 10, color: .black, opacity: 0.16, OffsetX: 0, OffsetY: 1)
         self.ViewButtonResetPassword.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
-        
-        self.setTextFieldUI(textField: txtFieldNewPassword, place: "New password", floatingText: "New password")
-        self.setTextFieldUI(textField: txtFieldConfirmPassword, place: "Confirm password ", floatingText: "Confirm password ")
+        self.getlanguage()
+       
     }
     
     @IBAction func btnResetPasswordTapped(_ sender: UIButton) {
@@ -147,7 +146,9 @@ extension ResetPasswordVC{
 }
 
 extension ResetPasswordVC{
-    func resetpassword(){
+    func getlanguage(){
+        self.setTextFieldUI(textField: txtFieldNewPassword, place: "New password", floatingText: "New password")
+        self.setTextFieldUI(textField: txtFieldConfirmPassword, place: "Confirm password ", floatingText: "Confirm password ")
         lblResetPaswword.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Reset Password", comment: "")
         lblSubHeading.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Enter a new password for your account", comment: "")
         btnResetPassword.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "Reset Password", comment: ""), for: .normal)
