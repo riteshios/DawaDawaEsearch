@@ -94,6 +94,8 @@ struct ServiceName {
     static let kgetstate             =       "api/state"
     static let kgetlocality          =       "api/locality"
     static let kgetlookingfor        =       "api/looking-for"
+    static let kgetSerivetype         =      "api/services-type"
+    static let kgetbusinessminingtype   =     "api/business-mining-type"
     static let kcreateopportunity    =       "api/create-opportunities"
 }
 

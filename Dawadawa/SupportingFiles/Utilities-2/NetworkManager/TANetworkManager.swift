@@ -201,9 +201,9 @@ public class TANetworkManager {
     }
     // language in header
     func requestlangApi(withServiceName serviceName: String,
-                    requestMethod method: kHTTPMethod, requestParameters postData: Dictionary<String, Any>,
-                    withProgressHUD showProgress: Bool,
-                    completionClosure:@escaping (_ result: Any?, _ error: Error?, _ errorType: ErrorType, _ statusCode: Int?) -> ()) -> Void
+                        requestMethod method: kHTTPMethod, requestParameters postData: Dictionary<String, Any>,
+                        withProgressHUD showProgress: Bool,
+                        completionClosure:@escaping (_ result: Any?, _ error: Error?, _ errorType: ErrorType, _ statusCode: Int?) -> ()) -> Void
     {
         if NetworkReachabilityManager()?.isReachable == true
         {
@@ -549,7 +549,6 @@ public class TANetworkManager {
                 
                 
                 
-                
             }, to: serviceUrl, method: method, headers:headers, encodingCompletion: { (encodingResult: SessionManager.MultipartFormDataEncodingResult) in
                 switch encodingResult
                 {
@@ -578,9 +577,9 @@ public class TANetworkManager {
     }
     
     
-//    Multipart Api and Accept_language name in Header
+    //    Multipart Api and Accept_language name in Header
     
-    func requestMultiPartwithlanguage(withServiceName serviceName: String, requestMethod method: HTTPMethod, requestImages arrImages: [Dictionary<String, Any>], requestVideos arrVideos: Dictionary<String, Any>, requestData postData: Dictionary<String, Any>, req reqImage : [UIImage],req reqdoc:[String],completionClosure: @escaping (_ result: Any?, _ error: Error?, _ errorType: ErrorType, _ statusCode: Int?) -> ()) -> Void {
+    func requestMultiPartwithlanguage(withServiceName serviceName: String, requestMethod method: HTTPMethod, requestImages arrImages: [Dictionary<String, Any>],requestdoc arrdoc: [Dictionary<String,Any>] ,requestVideos arrVideos: Dictionary<String, Any>, requestData postData: Dictionary<String, Any>, req reqImage : [UIImage],req reqdoc:[URL],completionClosure: @escaping (_ result: Any?, _ error: Error?, _ errorType: ErrorType, _ statusCode: Int?) -> ()) -> Void {
         
         if NetworkReachabilityManager()?.isReachable == true {
             let serviceUrl = getServiceUrl(string: serviceName)
@@ -595,45 +594,59 @@ public class TANetworkManager {
             Alamofire.upload(multipartFormData:{ (multipartFormData: MultipartFormData) in
                 
                 
-
-                for img in  reqImage
-
-                              {
-
-                            ///  if let pimage = img {
-
-                    if let data = img.pngData(), let imageName = img.jpegData(compressionQuality: 0.3) as? String {
-
-                                      multipartFormData.append(data, withName: "filenames[]", fileName: "\(imageName).png", mimeType: "image/png")
-
-                                      print("==========image=========\(data)")
-
-                                  }
-
-                           //   }
-
-                }
                 
-                for doc in reqdoc{
+                for img in  reqImage
+                        
+                {
                     
-                    if doc != nil {
+                    ///  if let pimage = img {
+                    debugPrint("img.......",img)
+                    if let data = img.pngData(), let imageName = img.pngData() {
+                        
+                        multipartFormData.append(data, withName: "filenames[]", fileName: "\(imageName).png", mimeType: "image/png")
+                        
+                        print("==========image=========\(data)")
+                        
+                    }
+                    
+                    //   }
+                    
+                }
+                if reqdoc.count != 0{
+                    for doc in reqdoc{
+                        
                         
                         debugPrint("doc.......",doc)
-//                        let url = Bundle.main.url(forResource: "\(doc)", withExtension:"pdf")
-                        let url = URL(string: doc)
-                        debugPrint("url.......",url)
-                        if let data =  try? Data.init(contentsOf: url!) {
+                        //                        let url = Bundle.main.url(forResource: "\(doc)", withExtension:"pdf")
+                        // let url = URL(string: doc)
+                        //   debugPrint("url.......",url)
+                        if let data =  try? Data.init(contentsOf: doc) {
                             
-
-                                multipartFormData.append(data, withName: "opportunity_documents[]", fileName: "\(data).pdf", mimeType: "application/pdf")
-
-                                        print("==========pdf=========\(data)")
-
+                            
+                            multipartFormData.append(data, withName: "opportunity_documents[]", fileName: "data.pdf", mimeType: "application/pdf")
+                            
+                            print("==========pdf=========\(data)")
+                            
                         }
-
                     }
-
+                    
                 }
+                
+//                let documentDic     = kSharedInstance.getDictionaryArray(withDictionary: document)
+//
+//                for docs in documentDic {
+//
+//                    if let docURL = docs["document"] as? URL {
+//                        do{
+//                            let data = try Data.init(contentsOf: docURL)
+//
+//                            multipartFormData.append(data, withName: docs["documentName"] as! String, fileName: "document.pdf", mimeType: "application/pdf")
+//                        } catch(let error) {
+//                        }
+//
+//                    }
+//                }
+
                 
                 
                 for (key, value) in postData{
@@ -642,8 +655,8 @@ public class TANetworkManager {
                     
                     multipartFormData.append(String(describing:value).data(using: String.Encoding.utf8)!,withName: key)
                 }
-               
-
+                
+                
                 
                 
                 
@@ -725,13 +738,13 @@ public class TANetworkManager {
         return headers
     }
     
- 
+    
     
     private func getHeaderWithAPIAndLanguageName(serviceName: String) -> [String: String] {
         var headers:[String: String] = [:]
-        
         if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
             headers["Authorization"] = kSharedUserDefaults.getLoggedInAccessToken()
+           
         }
         else {
             headers["Authorization"] = ""
@@ -743,7 +756,7 @@ public class TANetworkManager {
         else {
             headers["Accept-Language"] = "en"
         }
-        
+    
         
         print_debug(items: "Authorization: \(headers)")
         print_debug(items: "Accept-Language: \(headers)")
@@ -759,14 +772,14 @@ public class TANetworkManager {
         }
         
         else {
-             headers["Accept-Language"] = "en"
+            headers["Accept-Language"] = "en"
         }
         
         
         print_debug(items: "Authorization: \(headers)")
         return headers
     }
-
+    
     private func getServiceUrl(string: String) -> String {
         if string.contains("http") {
             return string

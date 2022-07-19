@@ -18,5 +18,4 @@ class UploadDocumentCollectionViewCell: UICollectionViewCell {
     @IBAction func btnCloseTapped(_ sender: UIButton) {
         self.callbackclose?()
     }
-    
 }

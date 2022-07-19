@@ -157,6 +157,55 @@ class getLookingForModel:NSObject{
     }
 }
 
+// Service_Type Model
+class getserviceTypeModel:NSObject{
+    enum keys:String, CodingKey{
+        case id = "id"
+        case services_type = "services_type"
+        
+    }
+    var id:Int?
+    var services_type = ""
+    
+    override init(){
+        super.init()
+        
+    }
+    init(dictionary:[String:AnyObject]){
+        if let id = dictionary[keys.id.stringValue] as? Int{
+            self.id = id
+        }
+        if let services_type = dictionary[keys.services_type.stringValue] as? String{
+            self.services_type = services_type
+        }
+        super.init()
+    }
+}
+
+// Business_Type_Model
+class getbusinessminingTypeModel:NSObject{
+    enum keys:String, CodingKey{
+        case id = "id"
+        case business_mining_type = "business_mining_type"
+        
+    }
+    var id:Int?
+    var business_mining_type = ""
+    
+    override init(){
+        super.init()
+        
+    }
+    init(dictionary:[String:AnyObject]){
+        if let id = dictionary[keys.id.stringValue] as? Int{
+            self.id = id
+        }
+        if let business_mining_type = dictionary[keys.business_mining_type.stringValue] as? String{
+            self.business_mining_type = business_mining_type
+        }
+        super.init()
+    }
+}
 // Create Opportunity Model
 
 class opportunityydataModel:NSObject{
