@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0406774B2887FFEA0061AE70 /* ViewPostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040677492887FFEA0061AE70 /* ViewPostTableViewCell.swift */; };
+		0406774C2887FFEA0061AE70 /* ViewPostTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0406774A2887FFEA0061AE70 /* ViewPostTableViewCell.xib */; };
+		04067751288820B60061AE70 /* PremiumOppCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0406774F288820B60061AE70 /* PremiumOppCollectionViewCell.swift */; };
+		04067752288820B60061AE70 /* PremiumOppCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04067750288820B60061AE70 /* PremiumOppCollectionViewCell.xib */; };
+		04067755288831290061AE70 /* SocialPostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04067753288831290061AE70 /* SocialPostTableViewCell.swift */; };
+		04067756288831290061AE70 /* SocialPostTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04067754288831290061AE70 /* SocialPostTableViewCell.xib */; };
 		0406DB7E287D3DF700B57A0B /* TrailingOpportunityVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0406DB7D287D3DF700B57A0B /* TrailingOpportunityVC.swift */; };
 		0406DB83287D55DF00B57A0B /* MiningBusinessVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0406DB82287D55DF00B57A0B /* MiningBusinessVC.swift */; };
 		0406DB86287D5CEB00B57A0B /* MiningServiceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0406DB85287D5CEB00B57A0B /* MiningServiceVC.swift */; };
@@ -42,6 +48,7 @@
 		04F8452F286AC4E40081120F /* ChangePasswordOTPVerifyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F8452E286AC4E40081120F /* ChangePasswordOTPVerifyVC.swift */; };
 		04F84531286AC4FA0081120F /* ChangePasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F84530286AC4FA0081120F /* ChangePasswordVC.swift */; };
 		04F84533286AC52C0081120F /* PasswordChangedSuccessfullyPopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F84532286AC52C0081120F /* PasswordChangedSuccessfullyPopUpVC.swift */; };
+		04F9E2FB2887DF8700415C52 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F9E2FA2887DF8700415C52 /* HomeVC.swift */; };
 		04FD1D342860429C00BE414A /* TabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FD1D332860429C00BE414A /* TabBarVC.swift */; };
 		04FD1D37286077E800BE414A /* MoreVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FD1D36286077E800BE414A /* MoreVC.swift */; };
 		04FD1D392860794E00BE414A /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FD1D382860794E00BE414A /* ProfileVC.swift */; };
@@ -582,11 +589,16 @@
 		44C286CE2851B4B3007AF36F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44C286CC2851B4B3007AF36F /* LaunchScreen.storyboard */; };
 		44D7F8EC2853603F001554C9 /* ActivatedSuccessfullyPopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D7F8EB2853603F001554C9 /* ActivatedSuccessfullyPopUpVC.swift */; };
 		44D7F8EE285365D7001554C9 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44D7F8ED285365D7001554C9 /* Home.storyboard */; };
-		44D7F8F12853685F001554C9 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D7F8F02853685F001554C9 /* HomeVC.swift */; };
 		B342744B7D8B1C11E20A2ED3 /* Pods_Dawadawa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2522D7B03C7ACB4C435A7D51 /* Pods_Dawadawa.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		040677492887FFEA0061AE70 /* ViewPostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewPostTableViewCell.swift; sourceTree = "<group>"; };
+		0406774A2887FFEA0061AE70 /* ViewPostTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewPostTableViewCell.xib; sourceTree = "<group>"; };
+		0406774F288820B60061AE70 /* PremiumOppCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumOppCollectionViewCell.swift; sourceTree = "<group>"; };
+		04067750288820B60061AE70 /* PremiumOppCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PremiumOppCollectionViewCell.xib; sourceTree = "<group>"; };
+		04067753288831290061AE70 /* SocialPostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SocialPostTableViewCell.swift; path = Dawadawa/Storyboard/SocialPostTableViewCell.swift; sourceTree = SOURCE_ROOT; };
+		04067754288831290061AE70 /* SocialPostTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SocialPostTableViewCell.xib; path = Dawadawa/Storyboard/SocialPostTableViewCell.xib; sourceTree = SOURCE_ROOT; };
 		0406DB7D287D3DF700B57A0B /* TrailingOpportunityVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TrailingOpportunityVC.swift; path = Dawadawa/Storyboard/TrailingOpportunityVC.swift; sourceTree = SOURCE_ROOT; };
 		0406DB82287D55DF00B57A0B /* MiningBusinessVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiningBusinessVC.swift; sourceTree = "<group>"; };
 		0406DB85287D5CEB00B57A0B /* MiningServiceVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiningServiceVC.swift; sourceTree = "<group>"; };
@@ -625,6 +637,7 @@
 		04F8452E286AC4E40081120F /* ChangePasswordOTPVerifyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordOTPVerifyVC.swift; sourceTree = "<group>"; };
 		04F84530286AC4FA0081120F /* ChangePasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordVC.swift; sourceTree = "<group>"; };
 		04F84532286AC52C0081120F /* PasswordChangedSuccessfullyPopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordChangedSuccessfullyPopUpVC.swift; sourceTree = "<group>"; };
+		04F9E2FA2887DF8700415C52 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = SOURCE_ROOT; };
 		04FD1D332860429C00BE414A /* TabBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TabBarVC.swift; path = Dawadawa/Storyboard/TabBarVC.swift; sourceTree = SOURCE_ROOT; };
 		04FD1D36286077E800BE414A /* MoreVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreVC.swift; sourceTree = "<group>"; };
 		04FD1D382860794E00BE414A /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProfileVC.swift; path = Dawadawa/Storyboard/ProfileVC.swift; sourceTree = SOURCE_ROOT; };
@@ -1168,7 +1181,6 @@
 		44C286CF2851B4B3007AF36F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		44D7F8EB2853603F001554C9 /* ActivatedSuccessfullyPopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ActivatedSuccessfullyPopUpVC.swift; path = Dawadawa/Storyboard/ActivatedSuccessfullyPopUpVC.swift; sourceTree = SOURCE_ROOT; };
 		44D7F8ED285365D7001554C9 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Home.storyboard; path = Dawadawa/Controller/Registration/Home.storyboard; sourceTree = SOURCE_ROOT; };
-		44D7F8F02853685F001554C9 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		8D398D0D5C2243596DA1A647 /* Pods-Dawadawa.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dawadawa.debug.xcconfig"; path = "Target Support Files/Pods-Dawadawa/Pods-Dawadawa.debug.xcconfig"; sourceTree = "<group>"; };
 		DFE5824C40E6801FF646390C /* Pods-Dawadawa.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dawadawa.release.xcconfig"; path = "Target Support Files/Pods-Dawadawa/Pods-Dawadawa.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1185,10 +1197,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		040677482887FFB60061AE70 /* xib */ = {
+			isa = PBXGroup;
+			children = (
+				04067753288831290061AE70 /* SocialPostTableViewCell.swift */,
+				04067754288831290061AE70 /* SocialPostTableViewCell.xib */,
+				040677492887FFEA0061AE70 /* ViewPostTableViewCell.swift */,
+				0406774A2887FFEA0061AE70 /* ViewPostTableViewCell.xib */,
+				0406774F288820B60061AE70 /* PremiumOppCollectionViewCell.swift */,
+				04067750288820B60061AE70 /* PremiumOppCollectionViewCell.xib */,
+			);
+			name = xib;
+			sourceTree = "<group>";
+		};
 		0406DB7F287D3E1100B57A0B /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
-				44D7F8F02853685F001554C9 /* HomeVC.swift */,
+				040677482887FFB60061AE70 /* xib */,
+				0490F3D92876E7BF00F8A84A /* Cell */,
+				04F9E2FA2887DF8700415C52 /* HomeVC.swift */,
 				04FD1D332860429C00BE414A /* TabBarVC.swift */,
 				04FD1D382860794E00BE414A /* ProfileVC.swift */,
 			);
@@ -1256,7 +1283,6 @@
 		04A73F362876B27000A46E12 /* Select Category */ = {
 			isa = PBXGroup;
 			children = (
-				0490F3D92876E7BF00F8A84A /* Cell */,
 				04A73F412876E07300A46E12 /* RockPitOpportunity */,
 				0406DB80287D3E3900B57A0B /* TrailingOpportunity */,
 				0406DB81287D55C000B57A0B /* MiningBusiness */,
@@ -2402,6 +2428,7 @@
 				447DCDD92851CB1200C40DDD /* SI.png in Resources */,
 				447DCD0B2851CB1200C40DDD /* Portugal.png in Resources */,
 				447DCCE42851CB1100C40DDD /* Panama.png in Resources */,
+				04067756288831290061AE70 /* SocialPostTableViewCell.xib in Resources */,
 				447DCE2D2851CB1300C40DDD /* MN.png in Resources */,
 				447DCCD42851CB1100C40DDD /* Cyprus.png in Resources */,
 				447DCCF82851CB1200C40DDD /* Azerbaijan.png in Resources */,
@@ -2421,6 +2448,7 @@
 				447DCE242851CB1300C40DDD /* LK.png in Resources */,
 				447DCCE82851CB1100C40DDD /* Saint-Kitts-and-Nevis.png in Resources */,
 				447DCD912851CB1200C40DDD /* LS.png in Resources */,
+				0406774C2887FFEA0061AE70 /* ViewPostTableViewCell.xib in Resources */,
 				447DCD892851CB1200C40DDD /* BM.png in Resources */,
 				447DCDB92851CB1200C40DDD /* GG.png in Resources */,
 				447DCC982851CB1100C40DDD /* Hungary.png in Resources */,
@@ -2611,6 +2639,7 @@
 				447DCD502851CB1200C40DDD /* Mexico.png in Resources */,
 				447DCCB02851CB1100C40DDD /* Marshall-Islands.png in Resources */,
 				447DCC952851CB1100C40DDD /* Guatemala.png in Resources */,
+				04067752288820B60061AE70 /* PremiumOppCollectionViewCell.xib in Resources */,
 				447DCD932851CB1200C40DDD /* AT.png in Resources */,
 				447DCD182851CB1200C40DDD /* Bangladesh.png in Resources */,
 				447DCD4F2851CB1200C40DDD /* Chile.png in Resources */,
@@ -2806,6 +2835,7 @@
 				447DCE562851CB1300C40DDD /* MTFacebookHelper.swift in Sources */,
 				04FD1D37286077E800BE414A /* MoreVC.swift in Sources */,
 				0406DB7E287D3DF700B57A0B /* TrailingOpportunityVC.swift in Sources */,
+				04067755288831290061AE70 /* SocialPostTableViewCell.swift in Sources */,
 				042293C02869B1E2000503B7 /* VerifyNewNumberOTPVC.swift in Sources */,
 				447DCE642851CB1300C40DDD /* AppConstant.swift in Sources */,
 				447DCC642851CB1100C40DDD /* UIView+Extensions.swift in Sources */,
@@ -2825,15 +2855,16 @@
 				04B9190A286B133B009ABAE4 /* VerifyEmailOTPVC.swift in Sources */,
 				447DCC652851CB1100C40DDD /* Date+Extension.swift in Sources */,
 				447DCC8F2851CB1100C40DDD /* UITextFieldExtended.swift in Sources */,
-				44D7F8F12853685F001554C9 /* HomeVC.swift in Sources */,
 				447DCC7C2851CB1100C40DDD /* UIButtonBorderWidthAndColor.swift in Sources */,
 				447DCC8E2851CB1100C40DDD /* UITextFieldSubLayerBorderWidthAndColor.swift in Sources */,
+				04067751288820B60061AE70 /* PremiumOppCollectionViewCell.swift in Sources */,
 				447DCC842851CB1100C40DDD /* IntExtended.swift in Sources */,
 				447DCC682851CB1100C40DDD /* UIColor+Extensions.swift in Sources */,
 				447DCC8C2851CB1100C40DDD /* UITextFieldBorderWidthAndColor.swift in Sources */,
 				447DCE622851CB1300C40DDD /* CustomClass.swift in Sources */,
 				447DCE5D2851CB1300C40DDD /* ImagePickerHelper.swift in Sources */,
 				447DCC902851CB1100C40DDD /* AppsCountryPicker.swift in Sources */,
+				0406774B2887FFEA0061AE70 /* ViewPostTableViewCell.swift in Sources */,
 				447DCC5C2851CB1100C40DDD /* UPCarouselFlowLayout.swift in Sources */,
 				447DCC862851CB1100C40DDD /* DoubleExtended.swift in Sources */,
 				447DCC792851CB1100C40DDD /* UserDefaultsExtended.swift in Sources */,
@@ -2857,6 +2888,7 @@
 				447DCC622851CB1100C40DDD /* UIImageView+Extensions.swift in Sources */,
 				447DCE582851CB1300C40DDD /* MTGoogleHelper.swift in Sources */,
 				447DCC762851CB1100C40DDD /* CurrencyCell.swift in Sources */,
+				04F9E2FB2887DF8700415C52 /* HomeVC.swift in Sources */,
 				3D0B08522854B8F700590891 /* LoginVC.swift in Sources */,
 				447DCC782851CB1100C40DDD /* OtpModel.swift in Sources */,
 				447DCE602851CB1300C40DDD /* AlertView.swift in Sources */,

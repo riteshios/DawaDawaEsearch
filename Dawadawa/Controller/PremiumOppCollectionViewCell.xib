@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Product Sans Regular.ttf">
+            <string>ProductSans-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="PremiumOppCollectionViewCell" customModule="Dawadawa" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="169" height="218"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="169" height="218"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ndx-oy-1CJ">
+                        <rect key="frame" x="0.0" y="0.0" width="169" height="218"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="truck" translatesAutoresizingMaskIntoConstraints="NO" id="eYb-tz-bkP">
+                                <rect key="frame" x="0.0" y="0.0" width="169" height="135"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="135" id="WkY-Rh-EYj"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="wdxbadbxbadxbnADBxnbasdbxnbxnbasnxbbnaxnaxsdsds" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rdS-Rg-nUD">
+                                <rect key="frame" x="0.0" y="145" width="169" height="73"/>
+                                <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="eYb-tz-bkP" secondAttribute="trailing" id="2jZ-4j-d1n"/>
+                            <constraint firstItem="eYb-tz-bkP" firstAttribute="top" secondItem="Ndx-oy-1CJ" secondAttribute="top" id="ENg-Zt-G84"/>
+                            <constraint firstItem="rdS-Rg-nUD" firstAttribute="leading" secondItem="eYb-tz-bkP" secondAttribute="leading" id="HMD-3F-h83"/>
+                            <constraint firstAttribute="width" constant="169" id="WKt-7d-tCz"/>
+                            <constraint firstItem="rdS-Rg-nUD" firstAttribute="top" secondItem="eYb-tz-bkP" secondAttribute="bottom" constant="10" id="hgC-Qc-619"/>
+                            <constraint firstAttribute="bottom" secondItem="rdS-Rg-nUD" secondAttribute="bottom" id="odz-xH-RX3"/>
+                            <constraint firstItem="rdS-Rg-nUD" firstAttribute="trailing" secondItem="eYb-tz-bkP" secondAttribute="trailing" id="q1e-Ci-Pu3"/>
+                            <constraint firstAttribute="height" constant="218" id="svy-hB-U2c"/>
+                            <constraint firstItem="eYb-tz-bkP" firstAttribute="leading" secondItem="Ndx-oy-1CJ" secondAttribute="leading" id="vIz-87-DLZ"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="Ndx-oy-1CJ" secondAttribute="bottom" id="8vu-cl-uh1"/>
+                <constraint firstItem="Ndx-oy-1CJ" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Eb5-UE-MVK"/>
+                <constraint firstAttribute="trailing" secondItem="Ndx-oy-1CJ" secondAttribute="trailing" id="RwG-0p-E0y"/>
+                <constraint firstItem="Ndx-oy-1CJ" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Wro-Nh-PR8"/>
+            </constraints>
+            <size key="customSize" width="169" height="218"/>
+            <point key="canvasLocation" x="223.91304347826087" y="6.6964285714285712"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="truck" width="150" height="135"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

@@ -116,7 +116,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
                 
                 debugPrint("imagearraycount..........",self.imagearr.count)
             }
-            self.viewSelectCategoryTop.constant = 310
+            self.viewSelectCategoryTop.constant = 420  // 310
             if imagearr.count == 0{
                 btnSelectImage.isEnabled = true
             }
@@ -828,6 +828,7 @@ extension RockPitOpportunityVC{
                         if septoken[0] == "Bearer"{
                             kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
                         }
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         kSharedAppDelegate?.makeRootViewController()
                         
                     }
