@@ -28,6 +28,8 @@ class SearchVC: UIViewController {
 
 }
 extension SearchVC:UITableViewDelegate,UITableViewDataSource{
+    
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
         

@@ -563,6 +563,10 @@
                                                         <constraint firstItem="Pob-3k-BH5" firstAttribute="leading" secondItem="ERb-nT-5Wp" secondAttribute="leading" id="uwf-yh-Xal"/>
                                                     </constraints>
                                                 </view>
+                                                <connections>
+                                                    <outlet property="dataSource" destination="Z3R-ca-q5w" id="vig-WI-Nbr"/>
+                                                    <outlet property="delegate" destination="Z3R-ca-q5w" id="tNw-YJ-YEv"/>
+                                                </connections>
                                             </tableView>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -597,6 +601,13 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Profile" image="user-square" id="DDv-MC-74R"/>
                     <size key="freeformSize" width="414" height="874"/>
+                    <connections>
+                        <outlet property="ImageProfile" destination="073-Nf-4cn" id="kpS-LP-Da1"/>
+                        <outlet property="lblEmail" destination="Pob-3k-BH5" id="LyF-VZ-csT"/>
+                        <outlet property="lblFullName" destination="wih-te-q94" id="rkw-dX-dik"/>
+                        <outlet property="lblMobileNumber" destination="ERb-nT-5Wp" id="eZD-IW-mym"/>
+                        <outlet property="tblViewSocialPost" destination="J2B-ky-dOq" id="E4f-3y-imp"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DgU-jo-o5k" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -8871,7 +8882,7 @@
         <image name="edit-2" width="24" height="24"/>
         <image name="eye" width="16" height="16"/>
         <image name="eye-slash" width="16" height="16"/>
-        <image name="eye.slash" catalog="system" width="128" height="86"/>
+        <image name="eye.slash" catalog="system" width="32" height="32"/>
         <image name="home-2" width="24" height="24"/>
         <image name="info-circle" width="24" height="24"/>
         <image name="key" width="24" height="24"/>

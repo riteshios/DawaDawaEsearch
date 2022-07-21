@@ -50,6 +50,8 @@
 		04AEBC122872195C00063E51 /* GoogleService-Info-2.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04AEBC112872195C00063E51 /* GoogleService-Info-2.plist */; };
 		04B2653A2872C84000B2DF7C /* ContactUsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B265392872C83F00B2DF7C /* ContactUsVC.swift */; };
 		04B2653C28731CAE00B2DF7C /* WebViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B2653B28731CAD00B2DF7C /* WebViewVC.swift */; };
+		04B4C8F62889BAA400DB3E11 /* OpportunitypostedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B4C8F42889BAA400DB3E11 /* OpportunitypostedTableViewCell.swift */; };
+		04B4C8F72889BAA400DB3E11 /* OpportunitypostedTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B4C8F52889BAA400DB3E11 /* OpportunitypostedTableViewCell.xib */; };
 		04B9190A286B133B009ABAE4 /* VerifyEmailOTPVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B91909286B133B009ABAE4 /* VerifyEmailOTPVC.swift */; };
 		04B9190C286B1372009ABAE4 /* ChangeEmailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B9190B286B1372009ABAE4 /* ChangeEmailVC.swift */; };
 		04B91910286B13B8009ABAE4 /* EmailChangedSuccessfullyPopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B9190F286B13B8009ABAE4 /* EmailChangedSuccessfullyPopUpVC.swift */; };
@@ -651,6 +653,8 @@
 		04AEBC112872195C00063E51 /* GoogleService-Info-2.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-2.plist"; sourceTree = "<group>"; };
 		04B265392872C83F00B2DF7C /* ContactUsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ContactUsVC.swift; path = Dawadawa/Storyboard/ContactUsVC.swift; sourceTree = SOURCE_ROOT; };
 		04B2653B28731CAD00B2DF7C /* WebViewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewVC.swift; sourceTree = SOURCE_ROOT; };
+		04B4C8F42889BAA400DB3E11 /* OpportunitypostedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpportunitypostedTableViewCell.swift; sourceTree = "<group>"; };
+		04B4C8F52889BAA400DB3E11 /* OpportunitypostedTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OpportunitypostedTableViewCell.xib; sourceTree = "<group>"; };
 		04B91909286B133B009ABAE4 /* VerifyEmailOTPVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyEmailOTPVC.swift; sourceTree = "<group>"; };
 		04B9190B286B1372009ABAE4 /* ChangeEmailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeEmailVC.swift; sourceTree = "<group>"; };
 		04B9190F286B13B8009ABAE4 /* EmailChangedSuccessfullyPopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailChangedSuccessfullyPopUpVC.swift; sourceTree = "<group>"; };
@@ -1224,6 +1228,7 @@
 		040677482887FFB60061AE70 /* xib */ = {
 			isa = PBXGroup;
 			children = (
+				04B4C8F32889BA3100DB3E11 /* Profile */,
 				045C4E7F2889813800E831AA /* premiumOpportunities */,
 				045C4E7028895EFA00E831AA /* Search */,
 				045C4E6F28895EF300E831AA /* Home */,
@@ -1358,6 +1363,15 @@
 				04A73F3F2876E05C00A46E12 /* RockPitOpportunityVC.swift */,
 			);
 			name = RockPitOpportunity;
+			sourceTree = "<group>";
+		};
+		04B4C8F32889BA3100DB3E11 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				04B4C8F42889BAA400DB3E11 /* OpportunitypostedTableViewCell.swift */,
+				04B4C8F52889BAA400DB3E11 /* OpportunitypostedTableViewCell.xib */,
+			);
+			name = Profile;
 			sourceTree = "<group>";
 		};
 		04B91907286B12C4009ABAE4 /* ChangePhoneNumber */ = {
@@ -2420,6 +2434,7 @@
 				447DCD072851CB1200C40DDD /* Haiti.png in Resources */,
 				447DCD022851CB1200C40DDD /* Guinea-Bissau.png in Resources */,
 				447DCDAE2851CB1200C40DDD /* SA.png in Resources */,
+				04B4C8F72889BAA400DB3E11 /* OpportunitypostedTableViewCell.xib in Resources */,
 				447DCD1E2851CB1200C40DDD /* Kuwait.png in Resources */,
 				447DCC9A2851CB1100C40DDD /* South-Sudan.png in Resources */,
 				447DCDAF2851CB1200C40DDD /* SC.png in Resources */,
@@ -2925,6 +2940,7 @@
 				447DCC8E2851CB1100C40DDD /* UITextFieldSubLayerBorderWidthAndColor.swift in Sources */,
 				045EE014288912F600E45E79 /* SocialPostCollectionViewCell.swift in Sources */,
 				04067751288820B60061AE70 /* PremiumOppCollectionViewCell.swift in Sources */,
+				04B4C8F62889BAA400DB3E11 /* OpportunitypostedTableViewCell.swift in Sources */,
 				447DCC842851CB1100C40DDD /* IntExtended.swift in Sources */,
 				447DCC682851CB1100C40DDD /* UIColor+Extensions.swift in Sources */,
 				447DCC8C2851CB1100C40DDD /* UITextFieldBorderWidthAndColor.swift in Sources */,

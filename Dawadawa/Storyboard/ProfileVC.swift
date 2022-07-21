@@ -10,7 +10,6 @@ import UIKit
 class ProfileVC: UIViewController {
     
     @IBOutlet weak var ImageProfile: UIImageView!
-    
     @IBOutlet weak var lblFullName: UILabel!
     @IBOutlet weak var lblMobileNumber: UILabel!
     @IBOutlet weak var lblEmail: UILabel!
@@ -18,10 +17,16 @@ class ProfileVC: UIViewController {
     var isProfileImageSelected = false
     var userImage:String?
     
+    @IBOutlet weak var tblViewSocialPost: UITableView!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tblViewSocialPost.register(UINib(nibName: "OpportunitypostedTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "OpportunitypostedTableViewCell")
+        tblViewSocialPost.register(UINib(nibName: "SocialPostTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "SocialPostTableViewCell")
+
+        
         
         
         
@@ -222,3 +227,57 @@ extension ProfileVC{
     }
 }
 
+extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+        
+    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        switch section{
+        case 0:
+            return 1
+            
+        case 1:
+            return 10
+            
+ 
+
+            
+        default:
+            return 0
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        switch indexPath.section{
+        case 0:
+            let cell = self.tblViewSocialPost.dequeueReusableCell(withIdentifier: "OpportunitypostedTableViewCell") as! OpportunitypostedTableViewCell
+            return cell
+            
+        case 1:
+            let cell = self.tblViewSocialPost.dequeueReusableCell(withIdentifier: "SocialPostTableViewCell") as! SocialPostTableViewCell
+            cell.SocialPostCollectionView.tag = indexPath.section
+            return cell
+            
+            
+            
+        default:
+            return UITableViewCell()
+        }
+    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch indexPath.section{
+        case 0:
+        return 150
+            
+        case 1:
+            return UITableView.automaticDimension
+        
+        default:
+            return 0
+        }
+        
+    }
+    
+}
