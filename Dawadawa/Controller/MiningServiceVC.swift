@@ -886,7 +886,7 @@ extension MiningServiceVC{
             "whatsaap_num":String.getString(self.txtFieldWhatsappNumber.text),
             "pricing":String.getString(self.txtFieldPricing.text),
             "looking_for":self.lblLookingFor.text,
-            "plan":"basic",
+            "plan":"Basic",
             "cat_type_id":"2"
         ]
         

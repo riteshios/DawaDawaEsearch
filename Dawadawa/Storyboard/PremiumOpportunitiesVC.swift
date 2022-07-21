@@ -1,31 +1,37 @@
 //
-//  HomeVC.swift
+//  PremiumOpportunitiesVC.swift
 //  Dawadawa
 //
-//  Created by Alekh on 20/07/22.
+//  Created by Alekh on 21/07/22.
 //
 
 import UIKit
 
-class HomeVC: UIViewController{
+class PremiumOpportunitiesVC: UIViewController {
     
-
-    @IBOutlet weak var tblViewViewPost: UITableView!
+    
+    @IBOutlet weak var tblViewPremiumOpp: UITableView!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tblViewViewPost.register(UINib(nibName: "ViewPostTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "ViewPostTableViewCell")
-        tblViewViewPost.register(UINib(nibName: "SocialPostTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "SocialPostTableViewCell")
-      
+        
+        tblViewPremiumOpp.register(UINib(nibName: "PremiumTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "PremiumTableViewCell")
+        tblViewPremiumOpp.register(UINib(nibName: "SocialPostTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "SocialPostTableViewCell")
+        
+        
     }
     
-
-  
+    @IBAction func btnBackTapped(_ sender: UIButton) {
+        kSharedAppDelegate?.makeRootViewController()
+    }
+    
+    
+    
 }
 
-extension HomeVC:UITableViewDelegate,UITableViewDataSource{
-   
+extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
         
@@ -39,44 +45,38 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
         case 1:
             return 10
             
- 
-
+            
+            
             
         default:
             return 0
         }
-        
     }
     
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         switch indexPath.section{
         case 0:
-            let cell = self.tblViewViewPost.dequeueReusableCell(withIdentifier: "ViewPostTableViewCell") as! ViewPostTableViewCell
-            cell.ColllectionViewPremiumOpp.tag = indexPath.section
-            cell.callbacknavigation = {
-                let vc = self.storyboard!.instantiateViewController(withIdentifier: PremiumOpportunitiesVC.getStoryboardID()) as! PremiumOpportunitiesVC
-                self.navigationController?.pushViewController(vc, animated: true)
-                
-            }
+            let cell = self.tblViewPremiumOpp.dequeueReusableCell(withIdentifier: "PremiumTableViewCell") as! PremiumTableViewCell
             return cell
             
         case 1:
-            let cell = self.tblViewViewPost.dequeueReusableCell(withIdentifier: "SocialPostTableViewCell") as! SocialPostTableViewCell
+            let cell = self.tblViewPremiumOpp.dequeueReusableCell(withIdentifier: "SocialPostTableViewCell") as! SocialPostTableViewCell
             cell.SocialPostCollectionView.tag = indexPath.section
             return cell
-        
+            
             
             
         default:
             return UITableViewCell()
         }
-       
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section{
         case 0:
-        return 420
+        return 65
         case 1:
             return UITableView.automaticDimension
         
@@ -86,5 +86,6 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
         
     }
     
-    
 }
+
+

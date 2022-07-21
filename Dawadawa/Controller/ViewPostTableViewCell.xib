@@ -41,8 +41,11 @@
                                         <state key="normal" title="View all">
                                             <color key="titleColor" systemColor="tintColor"/>
                                         </state>
+                                        <connections>
+                                            <action selector="btnViewAll:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="tn9-iH-zgQ"/>
+                                        </connections>
                                     </button>
-                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="VWu-Sn-b7L">
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="VWu-Sn-b7L">
                                         <rect key="frame" x="16" y="53" width="383" height="218"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>

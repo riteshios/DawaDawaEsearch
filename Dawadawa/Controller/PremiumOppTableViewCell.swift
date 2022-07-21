@@ -1,38 +1,34 @@
 //
-//  ViewPostTableViewCell.swift
+//  PremiumOppTableViewCell.swift
 //  Dawadawa
 //
-//  Created by Alekh on 20/07/22.
+//  Created by Alekh on 21/07/22.
 //
 
 import UIKit
 
-class ViewPostTableViewCell: UITableViewCell{
+class PremiumOppTableViewCell: UITableViewCell {
 
     @IBOutlet weak var ColllectionViewPremiumOpp: UICollectionView!
-    var callbacknavigation:(()->())?
-    
     
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
         ColllectionViewPremiumOpp.delegate = self
         ColllectionViewPremiumOpp.dataSource = self
         ColllectionViewPremiumOpp.register(UINib(nibName: "PremiumOppCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PremiumOppCollectionViewCell")
+      
     }
-    @IBAction func btnViewAll(_ sender: UIButton) {
-        self.callbacknavigation?()
-        
-    }
-    
+
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        
+       
     }
     
 }
-extension ViewPostTableViewCell: UICollectionViewDelegate,UICollectionViewDataSource{
+extension PremiumOppTableViewCell: UICollectionViewDelegate,UICollectionViewDataSource{
     
 //    Collection View
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
