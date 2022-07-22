@@ -61,6 +61,12 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eXK-Ye-5Om">
+                                        <rect key="frame" x="75" y="44" width="26.5" height="16"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HeL-Mi-p7e">
                                         <rect key="frame" x="383.5" y="19" width="24" height="24"/>
                                         <constraints>
@@ -73,6 +79,9 @@
                                             <attributedString key="attributedTitle"/>
                                         </state>
                                         <buttonConfiguration key="configuration" style="plain" image="more" title=""/>
+                                        <connections>
+                                            <action selector="btnMoreTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="M06-D3-dfE"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -82,7 +91,9 @@
                                     <constraint firstItem="vUg-me-atb" firstAttribute="top" secondItem="N9E-Nl-Z2A" secondAttribute="top" constant="5" id="Jj3-cy-okT"/>
                                     <constraint firstAttribute="trailing" secondItem="HeL-Mi-p7e" secondAttribute="trailing" constant="7.3300000000000001" id="SU8-6V-zC3"/>
                                     <constraint firstItem="vUg-me-atb" firstAttribute="leading" secondItem="N9E-Nl-Z2A" secondAttribute="leading" constant="5" id="Ufh-tt-Vpp"/>
+                                    <constraint firstItem="eXK-Ye-5Om" firstAttribute="leading" secondItem="LgE-K4-rkL" secondAttribute="leading" id="aUm-o6-l6z"/>
                                     <constraint firstItem="HeL-Mi-p7e" firstAttribute="centerY" secondItem="LgE-K4-rkL" secondAttribute="centerY" id="aky-nF-vVA"/>
+                                    <constraint firstItem="eXK-Ye-5Om" firstAttribute="top" secondItem="LgE-K4-rkL" secondAttribute="bottom" constant="2" id="gnu-rR-ogb"/>
                                     <constraint firstAttribute="bottom" secondItem="vUg-me-atb" secondAttribute="bottom" constant="11" id="sKG-m0-rTW"/>
                                     <constraint firstItem="LgE-K4-rkL" firstAttribute="leading" secondItem="vUg-me-atb" secondAttribute="trailing" constant="20" id="ucc-cG-HUQ"/>
                                 </constraints>
@@ -425,7 +436,11 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="Imageuser" destination="FJx-Mb-Rlw" id="1Cc-yN-4LP"/>
                 <outlet property="SocialPostCollectionView" destination="wge-Dy-Mdu" id="Nzr-kY-BfP"/>
+                <outlet property="lblDescribtion" destination="c7e-ku-l4v" id="lDZ-54-A5J"/>
+                <outlet property="lblTitle" destination="eXK-Ye-5Om" id="ZJC-6a-8RK"/>
+                <outlet property="lblUserName" destination="LgE-K4-rkL" id="peM-tm-WBp"/>
             </connections>
             <point key="canvasLocation" x="206.52173913043481" y="127.90178571428571"/>
         </tableViewCell>

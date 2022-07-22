@@ -227,6 +227,8 @@ extension UserDefaults {
             return ["":""]
         }
         
+       
+        
         let unarchiver = NSKeyedUnarchiver(forReadingWith: userData)
         guard let userLoggedInDetails = unarchiver.decodeObject(forKey: kLoggedInUserDetails) as? Dictionary <String, Any> else {
             unarchiver.finishDecoding()

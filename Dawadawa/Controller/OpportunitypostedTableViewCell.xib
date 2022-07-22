@@ -133,6 +133,11 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="viewAllline" destination="H50-lI-XPl" id="wxo-wR-a1k"/>
+                <outlet property="viewFeaturedLine" destination="2Ug-7h-ueq" id="T0v-2r-rYR"/>
+                <outlet property="viewPremiumLine" destination="Zhk-3z-rrO" id="22F-nM-WYS"/>
+            </connections>
             <point key="canvasLocation" x="138.40579710144928" y="86.383928571428569"/>
         </tableViewCell>
     </objects>

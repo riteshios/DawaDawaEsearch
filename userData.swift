@@ -8,10 +8,10 @@
 import Foundation
 class UserData{
     static let shared = UserData()
-    var id:Int?
-    var name:String?
-    var last_name:String?
-    var email:String?
+    var id:Int = 0
+    var name = ""
+    var last_name = ""
+    var email = ""
     var phone:String?
     var user_country:String?
     var language:String?

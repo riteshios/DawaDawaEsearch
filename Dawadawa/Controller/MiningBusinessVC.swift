@@ -92,13 +92,13 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
         vc.modalTransitionStyle = .crossDissolve
         vc.modalPresentationStyle = .overCurrentContext
         vc.callbackquit =  { txt in
-            if txt == "Cancel"{
-                vc.dismiss(animated: false){
-                    let vc = self.storyboard?.instantiateViewController(withIdentifier: MiningBusinessVC.getStoryboardID()) as! MiningBusinessVC
-                    self.navigationController?.pushViewController(vc, animated: false)
-                }
-                
-            }
+//            if txt == "Cancel"{
+//                vc.dismiss(animated: false){
+//                    let vc = self.storyboard?.instantiateViewController(withIdentifier: MiningBusinessVC.getStoryboardID()) as! MiningBusinessVC
+//                    self.navigationController?.pushViewController(vc, animated: false)
+//                }
+//                
+//            }
             if txt == "Quit"{
                 vc.dismiss(animated: false){
                     kSharedAppDelegate?.makeRootViewController()

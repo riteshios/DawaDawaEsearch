@@ -17,7 +17,7 @@ class QuitVCViewController: UIViewController {
         
     }
     @IBAction func btnCancelTapped(_ sender: UIButton) {
-        self.callbackquit?("Cancel")
+        self.dismiss(animated: true)
         
     }
     

@@ -45,6 +45,9 @@
                 <constraint firstItem="HWh-H8-wYg" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="smd-8Q-u30"/>
             </constraints>
             <size key="customSize" width="414" height="225"/>
+            <connections>
+                <outlet property="imgOpportunity" destination="1wd-cp-YoR" id="JGC-OO-DyQ"/>
+            </connections>
             <point key="canvasLocation" x="368.11594202898556" y="109.48660714285714"/>
         </collectionViewCell>
     </objects>

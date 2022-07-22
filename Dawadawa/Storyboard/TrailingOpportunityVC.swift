@@ -99,13 +99,13 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
         vc.modalTransitionStyle = .crossDissolve
         vc.modalPresentationStyle = .overCurrentContext
         vc.callbackquit =  { txt in
-            if txt == "Cancel"{
-                vc.dismiss(animated: false){
-                    let vc = self.storyboard?.instantiateViewController(withIdentifier: TrailingOpportunityVC.getStoryboardID()) as! TrailingOpportunityVC
-                    self.navigationController?.pushViewController(vc, animated: false)
-                }
-                
-            }
+//            if txt == "Cancel"{
+////                vc.dismiss(animated: false){
+////                    let vc = self.storyboard?.instantiateViewController(withIdentifier: TrailingOpportunityVC.getStoryboardID()) as! TrailingOpportunityVC
+////                    self.navigationController?.pushViewController(vc, animated: false)
+////                }
+//
+//            }
             if txt == "Quit"{
                 vc.dismiss(animated: false){
                     kSharedAppDelegate?.makeRootViewController()

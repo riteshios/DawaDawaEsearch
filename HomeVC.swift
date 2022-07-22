@@ -63,6 +63,29 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
         case 1:
             let cell = self.tblViewViewPost.dequeueReusableCell(withIdentifier: "SocialPostTableViewCell") as! SocialPostTableViewCell
             cell.SocialPostCollectionView.tag = indexPath.section
+            cell.callbackmore = {
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: HomeSocialMoreVC.getStoryboardID()) as! HomeSocialMoreVC
+                vc.modalTransitionStyle = .crossDissolve
+                vc.modalPresentationStyle = .overCurrentContext
+                vc.callback = { txt in
+//                    if txt == "Dismiss"{
+//                        vc.dismiss(animated: false){
+//                            self.dismiss(animated: true, completion: nil)
+//                        }
+//                    }
+                    if txt == "Flag"{
+                        kSharedAppDelegate?.makeRootViewController()
+                        
+                    }
+                    
+                    if txt == "Report"{
+                        kSharedAppDelegate?.makeRootViewController()
+                        
+                    }
+                    
+                }
+                self.present(vc, animated: false)
+            }
             return cell
         
             

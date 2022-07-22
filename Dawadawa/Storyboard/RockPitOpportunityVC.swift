@@ -89,13 +89,13 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
         vc.modalTransitionStyle = .crossDissolve
         vc.modalPresentationStyle = .overCurrentContext
         vc.callbackquit =  { txt in
-            if txt == "Cancel"{
-                vc.dismiss(animated: false){
-                    let vc = self.storyboard?.instantiateViewController(withIdentifier: RockPitOpportunityVC.getStoryboardID()) as! RockPitOpportunityVC
-                    self.navigationController?.pushViewController(vc, animated: false)
-                }
-                
-            }
+//            if txt == "Cancel"{
+//                vc.dismiss(animated: false){
+//                    let vc = self.storyboard?.instantiateViewController(withIdentifier: RockPitOpportunityVC.getStoryboardID()) as! RockPitOpportunityVC
+//                    self.navigationController?.pushViewController(vc, animated: false)
+//                }
+//
+//            }
             if txt == "Quit"{
                 vc.dismiss(animated: false){
                     kSharedAppDelegate?.makeRootViewController()

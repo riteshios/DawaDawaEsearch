@@ -35,6 +35,11 @@
 		045C4E832889819900E831AA /* PremiumTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 045C4E812889819800E831AA /* PremiumTableViewCell.xib */; };
 		045EE014288912F600E45E79 /* SocialPostCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045EE012288912F600E45E79 /* SocialPostCollectionViewCell.swift */; };
 		045EE015288912F600E45E79 /* SocialPostCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 045EE013288912F600E45E79 /* SocialPostCollectionViewCell.xib */; };
+		0461E314288A76F800B7F0E7 /* ProileSocialMoreVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0461E313288A76F700B7F0E7 /* ProileSocialMoreVC.swift */; };
+		0461E317288A83DE00B7F0E7 /* DeleteOpportunityPopUPVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0461E316288A83DE00B7F0E7 /* DeleteOpportunityPopUPVC.swift */; };
+		0461E319288A852600B7F0E7 /* ClosePopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0461E318288A852600B7F0E7 /* ClosePopUpVC.swift */; };
+		0461E31B288AA29800B7F0E7 /* HomeSocialMoreVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0461E31A288AA29800B7F0E7 /* HomeSocialMoreVC.swift */; };
+		0461E31D288AB0D900B7F0E7 /* SocialPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0461E31C288AB0D800B7F0E7 /* SocialPost.swift */; };
 		04647ECC287814CB0006B8D2 /* SelectCategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04647ECB287814CB0006B8D2 /* SelectCategoryTableViewCell.swift */; };
 		04647ECE287831540006B8D2 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04647ECD287831540006B8D2 /* Category.swift */; };
 		046DEA97285C7E1300D1E1A5 /* sucess.gif in Resources */ = {isa = PBXBuildFile; fileRef = 046DEA96285C7E1300D1E1A5 /* sucess.gif */; };
@@ -635,6 +640,11 @@
 		045C4E812889819800E831AA /* PremiumTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PremiumTableViewCell.xib; sourceTree = "<group>"; };
 		045EE012288912F600E45E79 /* SocialPostCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialPostCollectionViewCell.swift; sourceTree = "<group>"; };
 		045EE013288912F600E45E79 /* SocialPostCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SocialPostCollectionViewCell.xib; sourceTree = "<group>"; };
+		0461E313288A76F700B7F0E7 /* ProileSocialMoreVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProileSocialMoreVC.swift; path = Dawadawa/Storyboard/ProileSocialMoreVC.swift; sourceTree = SOURCE_ROOT; };
+		0461E316288A83DE00B7F0E7 /* DeleteOpportunityPopUPVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DeleteOpportunityPopUPVC.swift; path = Dawadawa/Storyboard/DeleteOpportunityPopUPVC.swift; sourceTree = SOURCE_ROOT; };
+		0461E318288A852600B7F0E7 /* ClosePopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosePopUpVC.swift; sourceTree = "<group>"; };
+		0461E31A288AA29800B7F0E7 /* HomeSocialMoreVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeSocialMoreVC.swift; path = Dawadawa/Storyboard/HomeSocialMoreVC.swift; sourceTree = SOURCE_ROOT; };
+		0461E31C288AB0D800B7F0E7 /* SocialPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SocialPost.swift; path = Dawadawa/Storyboard/SocialPost.swift; sourceTree = SOURCE_ROOT; };
 		04647ECB287814CB0006B8D2 /* SelectCategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SelectCategoryTableViewCell.swift; path = Dawadawa/Storyboard/SelectCategoryTableViewCell.swift; sourceTree = SOURCE_ROOT; };
 		04647ECD287831540006B8D2 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Category.swift; path = Dawadawa/Storyboard/Category.swift; sourceTree = SOURCE_ROOT; };
 		046DEA96285C7E1300D1E1A5 /* sucess.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = sucess.gif; sourceTree = "<group>"; };
@@ -1324,6 +1334,16 @@
 				045C4E812889819800E831AA /* PremiumTableViewCell.xib */,
 			);
 			name = premiumOpportunities;
+			sourceTree = "<group>";
+		};
+		0461E315288A778400B7F0E7 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				0461E316288A83DE00B7F0E7 /* DeleteOpportunityPopUPVC.swift */,
+				0461E318288A852600B7F0E7 /* ClosePopUpVC.swift */,
+				0461E313288A76F700B7F0E7 /* ProileSocialMoreVC.swift */,
+			);
+			name = Profile;
 			sourceTree = "<group>";
 		};
 		0490F3D92876E7BF00F8A84A /* Cell */ = {
@@ -2260,6 +2280,7 @@
 			children = (
 				0432E33C286430EA00B4B40D /* userData.swift */,
 				04647ECD287831540006B8D2 /* Category.swift */,
+				0461E31C288AB0D800B7F0E7 /* SocialPost.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2279,7 +2300,9 @@
 		44D7F8EF28536826001554C9 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				0461E31A288AA29800B7F0E7 /* HomeSocialMoreVC.swift */,
 				045C4E7D28897ACB00E831AA /* PremiumOpportunitiesVC.swift */,
+				0461E315288A778400B7F0E7 /* Profile */,
 				0406DB7F287D3E1100B57A0B /* TabBar */,
 				04A73F352876B25800A46E12 /* Add */,
 				04FD1D35286077A900BE414A /* More */,
@@ -2937,6 +2960,7 @@
 				447DCC652851CB1100C40DDD /* Date+Extension.swift in Sources */,
 				447DCC8F2851CB1100C40DDD /* UITextFieldExtended.swift in Sources */,
 				447DCC7C2851CB1100C40DDD /* UIButtonBorderWidthAndColor.swift in Sources */,
+				0461E314288A76F800B7F0E7 /* ProileSocialMoreVC.swift in Sources */,
 				447DCC8E2851CB1100C40DDD /* UITextFieldSubLayerBorderWidthAndColor.swift in Sources */,
 				045EE014288912F600E45E79 /* SocialPostCollectionViewCell.swift in Sources */,
 				04067751288820B60061AE70 /* PremiumOppCollectionViewCell.swift in Sources */,
@@ -2946,6 +2970,7 @@
 				447DCC8C2851CB1100C40DDD /* UITextFieldBorderWidthAndColor.swift in Sources */,
 				447DCE622851CB1300C40DDD /* CustomClass.swift in Sources */,
 				447DCE5D2851CB1300C40DDD /* ImagePickerHelper.swift in Sources */,
+				0461E31B288AA29800B7F0E7 /* HomeSocialMoreVC.swift in Sources */,
 				447DCC902851CB1100C40DDD /* AppsCountryPicker.swift in Sources */,
 				0406774B2887FFEA0061AE70 /* ViewPostTableViewCell.swift in Sources */,
 				447DCC5C2851CB1100C40DDD /* UPCarouselFlowLayout.swift in Sources */,
@@ -2957,6 +2982,7 @@
 				447DCC672851CB1100C40DDD /* UITextView+Extensions.swift in Sources */,
 				447DCC5E2851CB1100C40DDD /* TANetworkManager.swift in Sources */,
 				447DCE5A2851CB1300C40DDD /* locationManager.swift in Sources */,
+				0461E317288A83DE00B7F0E7 /* DeleteOpportunityPopUPVC.swift in Sources */,
 				04B91910286B13B8009ABAE4 /* EmailChangedSuccessfullyPopUpVC.swift in Sources */,
 				045C4E6D28895EE800E831AA /* PopularSearchTableViewCell.swift in Sources */,
 				0432E33D286430EA00B4B40D /* userData.swift in Sources */,
@@ -3013,6 +3039,7 @@
 				447DCE662851CB1300C40DDD /* CommonUtils.swift in Sources */,
 				049D33A2287571FF004E4519 /* LocalizationClass.swift in Sources */,
 				447DCC7E2851CB1100C40DDD /* UIViewBorderWidthAndColor.swift in Sources */,
+				0461E31D288AB0D900B7F0E7 /* SocialPost.swift in Sources */,
 				446E66A328531BDE006D4692 /* ActivationCodeVC.swift in Sources */,
 				447DCC6D2851CB1100C40DDD /* Optional+Extensions.swift in Sources */,
 				447DCC5A2851CB1100C40DDD /* Carousel.swift in Sources */,
@@ -3026,6 +3053,7 @@
 				447DCE5E2851CB1300C40DDD /* AppsNetworkManager.swift in Sources */,
 				04B2653C28731CAE00B2DF7C /* WebViewVC.swift in Sources */,
 				447DCC7B2851CB1100C40DDD /* UIButtonGradiant.swift in Sources */,
+				0461E319288A852600B7F0E7 /* ClosePopUpVC.swift in Sources */,
 				447DCC722851CB1100C40DDD /* LocaleStore.swift in Sources */,
 				447DCC6A2851CB1100C40DDD /* UISearchBar+Extensions.swift in Sources */,
 				44D7F8EC2853603F001554C9 /* ActivatedSuccessfullyPopUpVC.swift in Sources */,

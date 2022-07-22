@@ -22,6 +22,7 @@ let kIsTutorialAlreadyShown     = "isTutorialAlreadyShown"
 let kIsUserLoggedIn             = "isUserLoggedIn"
 let kLoggedInAccessToken        = "token"
 let kLoggedInUserDetails        = "data"
+let kOpportunityData            = "Opportunity"
 let kLoggedInUserId             = "loggedInUserId"
 let kLocationPreferences        = "LocationPreferences"
 let kLatitude                   = "latitude"
@@ -97,6 +98,9 @@ struct ServiceName {
     static let kgetSerivetype         =      "api/services-type"
     static let kgetbusinessminingtype   =     "api/business-mining-type"
     static let kcreateopportunity    =       "api/create-opportunities"
+    
+    
+    static let klistopportunity         =       "api/list-opportunities"
 }
 
 struct Notifications {
