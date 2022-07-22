@@ -9,6 +9,7 @@ import UIKit
 
 class SocialPostTableViewCell: UITableViewCell {
     
+    @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var SocialPostCollectionView: UICollectionView!
     var callbackmore:(()->())?
  
@@ -19,9 +20,12 @@ class SocialPostTableViewCell: UITableViewCell {
     
     var img = [oppr_image](){
         didSet{
+            pageControl.isHidden = true
+            pageControl.numberOfPages = img.count
             self.SocialPostCollectionView.reloadData()
         }
     }
+    var imgUrl = ""
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -29,8 +33,13 @@ class SocialPostTableViewCell: UITableViewCell {
         SocialPostCollectionView.delegate = self
         SocialPostCollectionView.dataSource = self
         SocialPostCollectionView.register(UINib(nibName: "SocialPostCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "SocialPostCollectionViewCell")
+        pageControl.numberOfPages = img.count
+        pageControl.currentPage = 0
+      
       
     }
+    
+   
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -53,7 +62,15 @@ extension SocialPostTableViewCell: UICollectionViewDelegate,UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = SocialPostCollectionView.dequeueReusableCell(withReuseIdentifier: "SocialPostCollectionViewCell", for: indexPath) as! SocialPostCollectionViewCell
-        
+        let obj = img[indexPath.item].image
+        print("-=-img-=-\(obj)")
+        let imageurl = "\(imgUrl)\(String.getString(obj))"
+        print("-=imageurl=-=-\(imageurl)")
+        cell.imgOpportunity.downlodeImage(serviceurl: imageurl, placeHolder: nil)
         return cell
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        pageControl.currentPage = Int(scrollView.contentOffset.x) / Int(scrollView.frame.width)
     }
 }

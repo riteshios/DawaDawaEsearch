@@ -5845,6 +5845,7 @@
                     </view>
                     <size key="freeformSize" width="414" height="1567"/>
                     <connections>
+                        <outlet property="TextViewDescription" destination="56e-gJ-J7z" id="Wvy-ok-joR"/>
                         <outlet property="UploaddocumentCollectionView" destination="AeL-p1-eze" id="uyw-DM-UNy"/>
                         <outlet property="UploadimageCollectionView" destination="Edj-yg-fvo" id="Zaf-r7-n49"/>
                         <outlet property="btnLocality" destination="m7u-jM-ksz" id="YmZ-DZ-nKt"/>
@@ -7843,6 +7844,7 @@
                     </view>
                     <size key="freeformSize" width="414" height="1567"/>
                     <connections>
+                        <outlet property="TextViewDescription" destination="BYe-Xq-ptJ" id="xix-dw-kOH"/>
                         <outlet property="UploaddocumentCollectionView" destination="lJj-Re-QrF" id="CYE-1n-XpQ"/>
                         <outlet property="UploadimageCollectionView" destination="VE1-CQ-4ji" id="sv7-0S-Dvt"/>
                         <outlet property="btnLocality" destination="zOG-Hb-dYK" id="R3s-LT-Mei"/>
@@ -8820,6 +8822,7 @@
                     </view>
                     <size key="freeformSize" width="414" height="1767"/>
                     <connections>
+                        <outlet property="TextViewDescription" destination="YDg-gd-X83" id="ZgL-7p-3Z7"/>
                         <outlet property="UploaddocumentCollectionView" destination="Fp7-ec-ZJ8" id="yLe-5C-smN"/>
                         <outlet property="UploadimageCollectionView" destination="N3o-lD-YIc" id="EWD-T8-2mL"/>
                         <outlet property="btnBusinessType" destination="FXC-CJ-6he" id="3w4-np-5Ll"/>

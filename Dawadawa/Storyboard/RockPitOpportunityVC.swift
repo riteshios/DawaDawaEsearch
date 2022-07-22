@@ -19,6 +19,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
     @IBOutlet weak var txtFieldMobileNumber: SKFloatingTextField!
     @IBOutlet weak var txtFieldWhatsappNumber: SKFloatingTextField!
     @IBOutlet weak var txtFieldPricing: SKFloatingTextField!
+    @IBOutlet weak var TextViewDescription:UITextView!
     
     @IBOutlet weak var lblSubCategory: UILabel!
     @IBOutlet weak var btnSubCategory: UIButton!
@@ -31,7 +32,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
     
     
     
-    //    let testimonialArray = ["You rock", "You suck"]
+    
     @IBOutlet weak var viewCreateOpportunity: UIView!
     @IBOutlet weak var viewSelectCategoryTop: NSLayoutConstraint!
     @IBOutlet weak var btnSelectImage: UIButton!
@@ -107,7 +108,8 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
     @IBAction func btnSelectImageTapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         if self.btnSelectImage.isSelected == true{
-            if imagearr.count <= 5{
+            if imagearr.count == 0{
+                btnSelectImage.isEnabled = true
                 ImagePickerHelper.shared.showPickerController {
                     image, url in
                     self.imagearr.append(image ?? UIImage())
@@ -116,28 +118,23 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
                 
                 debugPrint("imagearraycount..........",self.imagearr.count)
             }
-            self.viewSelectCategoryTop.constant = 420  // 310
-            if imagearr.count == 0{
-                btnSelectImage.isEnabled = true
-            }
             else{
                 btnSelectImage.isEnabled = false
             }
+            self.viewSelectCategoryTop.constant = 420  // 310
         }
         
     }
     
     @IBAction func btnAddmoreImageTapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
-        if btnSelectDocument.isSelected == true{
-            if imagearr.count <= 5{
+        if self.btnSelectDocument.isSelected == true{
+         
                 ImagePickerHelper.shared.showPickerController {
                     image, url in
                     self.imagearr.append(image ?? UIImage())
                     self.UploadimageCollectionView.reloadData()
                     
-                    
-                }
             }
         }
     }
@@ -790,15 +787,15 @@ extension RockPitOpportunityVC{
             "category_id":"1",
             "sub_category":"\(String(describing: subcatid))",
             "title":String.getString(self.txtFieldTitle.text),
-            "opp_state":self.lblState.text,
-            "opp_locality":self.lblLocality.text,
+            "opp_state":String.getString(self.lblState.text),
+            "opp_locality":String.getString(self.lblLocality.text),
             "location_name":String.getString(self.txtFieldLocationName.text),
             "location_map":String.getString(self.txtFieldLocationOnMap.text),
-            "description":"Dummy text",
+            "description":String.getString(self.TextViewDescription.text),
             "mobile_num":String.getString(self.txtFieldMobileNumber.text),
             "whatsaap_num":String.getString(self.txtFieldWhatsappNumber.text),
             "pricing":String.getString(self.txtFieldPricing.text),
-            "looking_for":self.lblLookingFor.text,
+            "looking_for":String.getString(self.lblLookingFor.text),
             "plan":"Basic",
             "cat_type_id":"0"
         ]

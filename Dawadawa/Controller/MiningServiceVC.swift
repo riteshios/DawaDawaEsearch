@@ -21,6 +21,7 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
     @IBOutlet weak var txtFieldPricing: SKFloatingTextField!
     @IBOutlet weak var txtFieldBusinessName: SKFloatingTextField!
     @IBOutlet weak var txtFieldBusinessMiningBlock: SKFloatingTextField!
+    @IBOutlet weak var TextViewDescription:UITextView!
     
     @IBOutlet weak var lblSubCategory: UILabel!
     @IBOutlet weak var btnSubCategory: UIButton!
@@ -881,7 +882,7 @@ extension MiningServiceVC{
             "opp_locality":self.lblLocality.text,
             "location_name":String.getString(self.txtFieldLocationName.text),
             "location_map":String.getString(self.txtFieldLocationOnMap.text),
-            "description":"Dummy text",
+            "description":String.getString(self.TextViewDescription.text),
             "mobile_num":String.getString(self.txtFieldMobileNumber.text),
             "whatsaap_num":String.getString(self.txtFieldWhatsappNumber.text),
             "pricing":String.getString(self.txtFieldPricing.text),

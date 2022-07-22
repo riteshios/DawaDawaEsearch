@@ -205,6 +205,7 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
             cell.lblTitle.text = String.getString(obj.title)
             cell.lblDescribtion.text = String.getString(obj.description)
             cell.img = obj.oppimage
+            cell.imgUrl = self.imgUrl
 
             cell.callbackmore = {
                 let vc = self.storyboard?.instantiateViewController(withIdentifier: ProileSocialMoreVC.getStoryboardID()) as! ProileSocialMoreVC
