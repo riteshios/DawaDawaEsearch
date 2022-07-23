@@ -11,10 +11,12 @@ class HomeVC: UIViewController{
     
 
     @IBOutlet weak var tblViewViewPost: UITableView!
-    
+    var imgUrl = ""
+    var userTimeLine = [SocialPostData]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.getallopportunity()
         tblViewViewPost.register(UINib(nibName: "ViewPostTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "ViewPostTableViewCell")
         tblViewViewPost.register(UINib(nibName: "SocialPostTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "SocialPostTableViewCell")
       
@@ -37,7 +39,7 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
             return 1
             
         case 1:
-            return 10
+            return userTimeLine.count
             
  
 
@@ -62,7 +64,16 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
             
         case 1:
             let cell = self.tblViewViewPost.dequeueReusableCell(withIdentifier: "SocialPostTableViewCell") as! SocialPostTableViewCell
+            let obj = userTimeLine[indexPath.row]
+
             cell.SocialPostCollectionView.tag = indexPath.section
+            cell.lblUserName.text = String.getString(obj.userdetail.first?.name)
+            debugPrint("username.....", cell.lblUserName.text)
+            cell.lblTitle.text = String.getString(obj.title)
+            cell.lblDescribtion.text = String.getString(obj.description)
+            cell.img = obj.oppimage
+            cell.imgUrl = self.imgUrl
+            
             cell.callbackmore = {
                 let vc = self.storyboard?.instantiateViewController(withIdentifier: HomeSocialMoreVC.getStoryboardID()) as! HomeSocialMoreVC
                 vc.modalTransitionStyle = .crossDissolve
@@ -74,8 +85,8 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
 //                        }
 //                    }
                     if txt == "Flag"{
-                        kSharedAppDelegate?.makeRootViewController()
-                        
+                        let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
+                        self.flagopportunityapi(oppr_id: oppid)
                     }
                     
                     if txt == "Report"{
@@ -110,4 +121,129 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
     }
     
     
+}
+
+extension HomeVC{
+    
+// Api all opportunity
+    
+    func getallopportunity(){
+        CommonUtils.showHudWithNoInteraction(show: true)
+        
+        if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
+            let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+            let septoken = endToken.components(separatedBy: " ")
+            if septoken[0] != "Bearer"{
+                let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
+                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
+            }
+        }
+        
+        
+        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName: ServiceName.kgetallopportunity, requestMethod: .GET, requestParameters:[:], withProgressHUD: false) { (result:Any?, error:Error?, errorType:ErrorType?,statusCode:Int?) in
+            CommonUtils.showHudWithNoInteraction(show: false)
+            if errorType == .requestSuccess {
+                let dictResult = kSharedInstance.getDictionary(result)
+            
+                switch Int.getInt(statusCode) {
+                case 200:
+                    if Int.getInt(dictResult["status"]) == 200{
+                        let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+                        let septoken = endToken.components(separatedBy: " ")
+                        if septoken[0] == "Bearer"{
+                            kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
+                        }
+            
+                        self.imgUrl = String.getString(dictResult["oprbase_url"])
+                        let Opportunity = kSharedInstance.getArray(withDictionary: dictResult["Opportunity"])
+                        self.userTimeLine = Opportunity.map{SocialPostData(data: kSharedInstance.getDictionary($0))}
+                        print("Dataallpost=\(self.userTimeLine)")
+                        
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        self.tblViewViewPost.reloadData()
+                        
+                    }
+                    else if  Int.getInt(dictResult["status"]) == 400{
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    }
+                    
+                  
+                default:
+                    CommonUtils.showError(.error, String.getString(dictResult["message"]))
+                }
+            }else if errorType == .noNetwork {
+                CommonUtils.showToastForInternetUnavailable()
+                
+            } else {
+                CommonUtils.showToastForDefaultError()
+            }
+        }
+        
+    }
+    
+    func flagopportunityapi(oppr_id:Int){
+        CommonUtils.showHud(show: true)
+        
+        
+        if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
+            let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+            let septoken = endToken.components(separatedBy: " ")
+            if septoken[0] != "Bearer"{
+                let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
+                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
+            }
+        }
+        
+        
+        let params:[String : Any] = [
+            "user_id":Int.getInt(UserData.shared.id),
+            "oppr_id":oppr_id
+        ]
+        
+        debugPrint("user_id......",Int.getInt(UserData.shared.id))
+        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kflagpost, requestMethod: .POST,
+                                                   requestParameters:params, withProgressHUD: false)
+        {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
+            
+            CommonUtils.showHudWithNoInteraction(show: false)
+            
+            if errorType == .requestSuccess {
+                
+                let dictResult = kSharedInstance.getDictionary(result)
+                
+                switch Int.getInt(statusCode) {
+                case 200:
+                    
+                    if Int.getInt(dictResult["status"]) == 200{
+                        
+                        let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+                        let septoken = endToken.components(separatedBy: " ")
+                        if septoken[0] == "Bearer"{
+                            kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
+                        }
+                      
+                        
+
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                      
+                        
+                    }
+                    
+                    else if  Int.getInt(dictResult["status"]) == 400{
+                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    }
+                    
+                default:
+                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                }
+            } else if errorType == .noNetwork {
+                CommonUtils.showToastForInternetUnavailable()
+                
+            } else {
+                CommonUtils.showToastForDefaultError()
+            }
+            
+        }
+    }
 }

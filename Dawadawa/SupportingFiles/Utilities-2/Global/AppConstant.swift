@@ -97,10 +97,14 @@ struct ServiceName {
     static let kgetlookingfor        =       "api/looking-for"
     static let kgetSerivetype         =      "api/services-type"
     static let kgetbusinessminingtype   =     "api/business-mining-type"
-    static let kcreateopportunity    =       "api/create-opportunities"
     
     
-    static let klistopportunity         =       "api/list-opportunities"
+    static let kcreateopportunity       =        "api/create-opportunities"
+    static let klistopportunity         =        "api/list-opportunities"
+    static let kdeleteopportunity       =        "api/delete-opportunities"
+    static let kcloseopportunity        =        "api/close-opportunities"
+    static let kgetallopportunity       =        "api/all-opportunity"
+    static let kflagpost                =        "/api/flag-opportunity"
 }
 
 struct Notifications {

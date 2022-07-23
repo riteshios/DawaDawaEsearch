@@ -6,6 +6,8 @@
 //
 
 import Foundation
+
+// Model for all and Profile Post Opportunity
 class SocialPostData {
     
     var id:Int?
@@ -27,6 +29,7 @@ class SocialPostData {
     var opp_plan:String?
     var flag_user_post:String?
     var oppimage = [oppr_image]()
+    var userdetail = [user_detail]()
     
    
     init(data: [String: Any]) {
@@ -61,4 +64,18 @@ class oppr_image{
         self.image = String.getString(data["image"])
     }
 }
+
+class user_detail{
+    var g_id:String?
+    var name:String?
+    var social_profile:String?
+    
+    init(data:[String:Any]){
+        self.g_id = String.getString(data["g_id"])
+        self.name = String.getString(data["name"])
+        self.social_profile = String.getString(data["social_profile"])
+    }
+}
+
+
 

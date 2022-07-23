@@ -48,7 +48,7 @@
             <connections>
                 <outlet property="imgOpportunity" destination="1wd-cp-YoR" id="JGC-OO-DyQ"/>
             </connections>
-            <point key="canvasLocation" x="368.11594202898556" y="109.48660714285714"/>
+            <point key="canvasLocation" x="277" y="2"/>
         </collectionViewCell>
     </objects>
     <resources>

@@ -123,13 +123,11 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
             }
             self.viewSelectCategoryTop.constant = 420  // 310
         }
-        
     }
     
     @IBAction func btnAddmoreImageTapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         if self.btnSelectDocument.isSelected == true{
-         
                 ImagePickerHelper.shared.showPickerController {
                     image, url in
                     self.imagearr.append(image ?? UIImage())
