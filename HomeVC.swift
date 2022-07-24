@@ -13,10 +13,13 @@ class HomeVC: UIViewController{
     @IBOutlet weak var tblViewViewPost: UITableView!
     var imgUrl = ""
     var userTimeLine = [SocialPostData]()
+    var userdetail = [user_detail]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.getallopportunity()
+        
         tblViewViewPost.register(UINib(nibName: "ViewPostTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "ViewPostTableViewCell")
         tblViewViewPost.register(UINib(nibName: "SocialPostTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "SocialPostTableViewCell")
       
@@ -67,12 +70,19 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
             let obj = userTimeLine[indexPath.row]
 
             cell.SocialPostCollectionView.tag = indexPath.section
-            cell.lblUserName.text = String.getString(obj.userdetail.first?.name)
+            cell.lblUserName.text = String.getString(obj.userdetail?.name)
             debugPrint("username.....", cell.lblUserName.text)
             cell.lblTitle.text = String.getString(obj.title)
             cell.lblDescribtion.text = String.getString(obj.description)
-            cell.img = obj.oppimage
-            cell.imgUrl = self.imgUrl
+         
+           
+            let imgurl = String.getString(obj.userdetail?.social_profile)
+            debugPrint("socialprofile......",imgurl)
+         
+            cell.Imageuser.downlodeImage(serviceurl: imgurl , placeHolder: UIImage(named: "Boss"))
+            
+            
+            
             
             cell.callbackmore = {
                 let vc = self.storyboard?.instantiateViewController(withIdentifier: HomeSocialMoreVC.getStoryboardID()) as! HomeSocialMoreVC

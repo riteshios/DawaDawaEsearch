@@ -36,6 +36,17 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
     
     @IBOutlet weak var btnSelectDocument: UIButton!
     
+    @IBOutlet weak var viewBasic: UIView!
+    @IBOutlet weak var lblBasic: UILabel!
+    @IBOutlet weak var btnBasic: UIButton!
+    
+    @IBOutlet weak var viewFeature: UIView!
+    @IBOutlet weak var lblFeature: UILabel!
+    @IBOutlet weak var btnFeature: UIButton!
+    
+    @IBOutlet weak var viewPremium: UIView!
+    @IBOutlet weak var lblPremium: UILabel!
+    @IBOutlet weak var btnPremium: UIButton!
     
     
     @IBOutlet weak var viewCreateOpportunity: UIView!
@@ -191,6 +202,45 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
             self.lookingforid = id
             debugPrint("looking idddddd.....",self.lookingforid = id)
             self.getlookingforapi(id: self.lookingforid ?? 0)
+        }
+    }
+    
+    @IBAction func btnBasicTapped(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        if self.btnBasic.isSelected == true{
+            self.viewBasic.backgroundColor = UIColor(red: 21, green: 114, blue: 161)
+            self.lblBasic.textColor = .white
+            self.viewFeature.backgroundColor = .white
+            self.lblFeature.textColor = UIColor(red: 21, green: 114, blue: 161)
+            self.viewPremium.backgroundColor = .white
+            self.lblPremium.textColor =  UIColor(red: 21, green: 114, blue: 161)
+           
+        }
+    }
+    
+    @IBAction func btnFeatureTapped(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        if self.btnFeature.isSelected == true{
+            self.viewFeature.backgroundColor = UIColor(red: 21, green: 114, blue: 161)
+            self.lblFeature.textColor = .white
+            self.viewBasic.backgroundColor = .white
+            self.lblBasic.textColor = UIColor(red: 21, green: 114, blue: 161)
+            self.viewPremium.backgroundColor = .white
+            self.lblPremium.textColor =  UIColor(red: 21, green: 114, blue: 161)
+           
+        }
+    }
+    
+    @IBAction func btnPremiumTapped(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        if self.btnPremium.isSelected == true{
+            self.viewPremium.backgroundColor = UIColor(red: 21, green: 114, blue: 161)
+            self.lblPremium.textColor = .white
+            self.viewBasic.backgroundColor = .white
+            self.lblBasic.textColor = UIColor(red: 21, green: 114, blue: 161)
+            self.viewFeature.backgroundColor = .white
+            self.lblFeature.textColor =  UIColor(red: 21, green: 114, blue: 161)
+           
         }
     }
     

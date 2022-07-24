@@ -287,7 +287,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4xB-aQ-3u6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="698.55072463768124" y="605.70652173913049"/>
+            <point key="canvasLocation" x="687" y="581"/>
         </scene>
         <!--SearchVC-->
         <scene sceneID="yce-6I-dFD">
@@ -5177,6 +5177,7 @@
                                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="krC-7R-ptH">
                                                                 <rect key="frame" x="0.0" y="0.0" width="382" height="39"/>
                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                                 <connections>
                                                                     <action selector="btnAddmoreImageTapped:" destination="VA4-LP-a16" eventType="touchUpInside" id="9jB-FL-L3P"/>
@@ -5271,6 +5272,7 @@
                                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SOu-Oq-6VC">
                                                                 <rect key="frame" x="0.0" y="0.0" width="382" height="39"/>
                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                                 <connections>
                                                                     <action selector="btnAddMoreDocumentTapped:" destination="VA4-LP-a16" eventType="touchUpInside" id="UaG-PL-4Py"/>
@@ -5609,7 +5611,11 @@
                                                                     </imageView>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w4r-BM-ZHp">
                                                                         <rect key="frame" x="0.0" y="0.0" width="120.66666666666667" height="55"/>
+                                                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                        <connections>
+                                                                            <action selector="btnBasicTapped:" destination="VA4-LP-a16" eventType="touchUpInside" id="Yu9-6a-nxE"/>
+                                                                        </connections>
                                                                     </button>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Basic" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ysk-fn-UJU">
                                                                         <rect key="frame" x="51" y="18.333333333333371" width="36.666666666666657" height="19.666666666666671"/>
@@ -5647,7 +5653,11 @@
                                                                 <subviews>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fMH-UF-r34">
                                                                         <rect key="frame" x="0.0" y="0.0" width="120.66666666666667" height="55"/>
+                                                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                        <connections>
+                                                                            <action selector="btnFeatureTapped:" destination="VA4-LP-a16" eventType="touchUpInside" id="JLJ-Vn-ibK"/>
+                                                                        </connections>
                                                                     </button>
                                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Star Filled" translatesAutoresizingMaskIntoConstraints="NO" id="YMg-ge-hO9">
                                                                         <rect key="frame" x="13" y="20" width="20" height="16"/>
@@ -5697,7 +5707,11 @@
                                                                     </label>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EtU-Px-86M">
                                                                         <rect key="frame" x="0.0" y="0.0" width="120.66666666666667" height="55"/>
+                                                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                        <connections>
+                                                                            <action selector="btnPremiumTapped:" destination="VA4-LP-a16" eventType="touchUpInside" id="RGq-d7-YxA"/>
+                                                                        </connections>
                                                                     </button>
                                                                 </subviews>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -5848,14 +5862,20 @@
                         <outlet property="TextViewDescription" destination="56e-gJ-J7z" id="Wvy-ok-joR"/>
                         <outlet property="UploaddocumentCollectionView" destination="AeL-p1-eze" id="uyw-DM-UNy"/>
                         <outlet property="UploadimageCollectionView" destination="Edj-yg-fvo" id="Zaf-r7-n49"/>
+                        <outlet property="btnBasic" destination="w4r-BM-ZHp" id="iAL-Sj-QMS"/>
+                        <outlet property="btnFeature" destination="fMH-UF-r34" id="SBa-DU-v8q"/>
                         <outlet property="btnLocality" destination="m7u-jM-ksz" id="YmZ-DZ-nKt"/>
                         <outlet property="btnLookingFor" destination="Ygy-e0-TE6" id="ZCM-YK-VJu"/>
+                        <outlet property="btnPremium" destination="EtU-Px-86M" id="l4h-J5-ACw"/>
                         <outlet property="btnSelectDocument" destination="jkL-7F-j2u" id="CBe-bN-gE6"/>
                         <outlet property="btnSelectImage" destination="hfL-q6-X34" id="yTa-k9-BBx"/>
                         <outlet property="btnState" destination="2El-XU-Yko" id="a0R-f2-b0E"/>
                         <outlet property="btnSubCategory" destination="7Qx-T4-TB1" id="vTA-MS-O7p"/>
+                        <outlet property="lblBasic" destination="Ysk-fn-UJU" id="N7z-vd-1IB"/>
+                        <outlet property="lblFeature" destination="QBV-4t-ppc" id="hvL-VY-B6P"/>
                         <outlet property="lblLocality" destination="QnW-iP-wBW" id="izA-5c-uNf"/>
                         <outlet property="lblLookingFor" destination="hX5-mb-Gor" id="08t-5h-nuO"/>
+                        <outlet property="lblPremium" destination="akJ-pz-AIG" id="P6R-Fr-fS3"/>
                         <outlet property="lblState" destination="oNQ-ji-Tad" id="6AS-kK-JmK"/>
                         <outlet property="lblSubCategory" destination="BqC-nr-V4g" id="cc9-72-il6"/>
                         <outlet property="txtFieldLocationName" destination="sgG-JZ-is1" id="BaD-ob-AzL"/>
@@ -5864,14 +5884,17 @@
                         <outlet property="txtFieldPricing" destination="GXG-tS-N3D" id="DVr-d9-5QI"/>
                         <outlet property="txtFieldTitle" destination="8Rf-tZ-H60" id="HCE-w5-zjw"/>
                         <outlet property="txtFieldWhatsappNumber" destination="Sak-Np-6Ir" id="sru-bt-Jim"/>
+                        <outlet property="viewBasic" destination="6Wu-co-FkU" id="CyX-jm-7kX"/>
                         <outlet property="viewCreateOpportunity" destination="asP-U1-fes" id="LZ0-qb-J3K"/>
+                        <outlet property="viewFeature" destination="cs2-pD-ka6" id="Mna-eP-hK0"/>
+                        <outlet property="viewPremium" destination="TEr-cg-ZOl" id="etA-z0-gM5"/>
                         <outlet property="viewSelectCategoryTop" destination="Pqy-ZX-jPv" id="aFI-3s-DQR"/>
                         <outlet property="viewselectcategorybottom" destination="Nde-kW-BZc" id="nwm-87-Hbd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sDo-NA-R1t" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-523" y="1714"/>
+            <point key="canvasLocation" x="-523.1884057971015" y="1713.9945652173915"/>
         </scene>
         <!--QuitVC View Controller-->
         <scene sceneID="EdE-IM-pbF">
@@ -6659,7 +6682,11 @@
                                                                     </imageView>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RgK-y7-0wm">
                                                                         <rect key="frame" x="0.0" y="0.0" width="120.66666666666667" height="55"/>
+                                                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                        <connections>
+                                                                            <action selector="btnBasicTapped:" destination="882-1L-U3L" eventType="touchUpInside" id="0kv-0D-4HU"/>
+                                                                        </connections>
                                                                     </button>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Basic" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k5G-Ow-QM8">
                                                                         <rect key="frame" x="51" y="18.333333333333371" width="36.666666666666657" height="19.666666666666671"/>
@@ -6697,7 +6724,11 @@
                                                                 <subviews>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="611-fW-ms5">
                                                                         <rect key="frame" x="0.0" y="0.0" width="120.66666666666667" height="55"/>
+                                                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                        <connections>
+                                                                            <action selector="btnFeatureTapped:" destination="882-1L-U3L" eventType="touchUpInside" id="Eak-uQ-15I"/>
+                                                                        </connections>
                                                                     </button>
                                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Star Filled" translatesAutoresizingMaskIntoConstraints="NO" id="G5X-VP-7IX">
                                                                         <rect key="frame" x="13" y="20" width="20" height="16"/>
@@ -6747,7 +6778,11 @@
                                                                     </label>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sYi-rq-PZS">
                                                                         <rect key="frame" x="0.0" y="0.0" width="120.66666666666667" height="55"/>
+                                                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                        <connections>
+                                                                            <action selector="btnPremiumTapped:" destination="882-1L-U3L" eventType="touchUpInside" id="Fcv-jp-vYi"/>
+                                                                        </connections>
                                                                     </button>
                                                                 </subviews>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -6897,14 +6932,20 @@
                     <connections>
                         <outlet property="UploaddocumentCollectionView" destination="OxZ-Vi-e8a" id="AkH-RT-Fr2"/>
                         <outlet property="UploadimageCollectionView" destination="IxJ-qz-EH8" id="Mso-D0-Eeh"/>
+                        <outlet property="btnBasic" destination="RgK-y7-0wm" id="iP9-fh-olE"/>
+                        <outlet property="btnFeature" destination="611-fW-ms5" id="XOY-5t-Ayr"/>
                         <outlet property="btnLocality" destination="xqV-ng-OgI" id="TfP-zD-FTP"/>
                         <outlet property="btnLookingFor" destination="Qnj-RL-yl7" id="XbB-pE-lF4"/>
+                        <outlet property="btnPremium" destination="sYi-rq-PZS" id="akH-UP-12y"/>
                         <outlet property="btnSelectDocument" destination="Ftj-Br-Dgr" id="tdS-qP-i9d"/>
                         <outlet property="btnSelectImage" destination="ODI-oT-Xp7" id="24B-LR-8Ko"/>
                         <outlet property="btnState" destination="qAG-wb-v0c" id="nlU-Cy-Eyk"/>
                         <outlet property="btnSubCategory" destination="BD9-Ql-60a" id="4Ia-vr-Dea"/>
+                        <outlet property="lblBasic" destination="k5G-Ow-QM8" id="7dl-x2-g7L"/>
+                        <outlet property="lblFeature" destination="v6I-70-lx6" id="NvR-IO-viI"/>
                         <outlet property="lblLocality" destination="fuq-VK-QW2" id="7cP-K3-gha"/>
                         <outlet property="lblLookingFor" destination="YG5-Xy-SXd" id="GyL-sA-Tfx"/>
+                        <outlet property="lblPremium" destination="ZZ9-iE-1Ui" id="6wy-Dh-Egz"/>
                         <outlet property="lblState" destination="nts-dY-TDw" id="eoJ-7h-Hs6"/>
                         <outlet property="lblSubCategory" destination="fYP-bq-a4J" id="H2g-cQ-tD8"/>
                         <outlet property="txtFieldLocationName" destination="kLT-GR-n82" id="zxG-QE-K48"/>
@@ -6914,7 +6955,10 @@
                         <outlet property="txtFieldTitle" destination="dhp-wv-oik" id="ZQJ-nM-LUN"/>
                         <outlet property="txtFieldWhatsappNumber" destination="gBE-ww-i7c" id="UeV-SA-4Zj"/>
                         <outlet property="txtViewDiscription" destination="f6o-Nq-lKq" id="NNR-0A-NPq"/>
+                        <outlet property="viewBasic" destination="vTX-gM-RQy" id="5Tw-hY-rUN"/>
                         <outlet property="viewCreateOpportunity" destination="lLU-Ql-v1I" id="bVd-bL-SH9"/>
+                        <outlet property="viewFeature" destination="Xad-BE-C1P" id="3jx-gQ-TIG"/>
+                        <outlet property="viewPremium" destination="dvQ-jL-2QL" id="lqS-Az-eX9"/>
                         <outlet property="viewSelectCategoryTop" destination="q8L-iz-6TB" id="ZIv-Zt-dHD"/>
                     </connections>
                 </viewController>
@@ -7605,7 +7649,11 @@
                                                                     </imageView>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5jV-xM-kNr">
                                                                         <rect key="frame" x="0.0" y="0.0" width="120.66666666666667" height="55"/>
+                                                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                        <connections>
+                                                                            <action selector="btnBasicTapped:" destination="tce-hG-OC0" eventType="touchUpInside" id="whr-YF-pr0"/>
+                                                                        </connections>
                                                                     </button>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Basic" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i3B-la-HHr">
                                                                         <rect key="frame" x="51" y="18.333333333333258" width="36.666666666666657" height="19.666666666666671"/>
@@ -7643,7 +7691,11 @@
                                                                 <subviews>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z9d-Uq-28b">
                                                                         <rect key="frame" x="0.0" y="0.0" width="120.66666666666667" height="55"/>
+                                                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                        <connections>
+                                                                            <action selector="btnFeatureTapped:" destination="tce-hG-OC0" eventType="touchUpInside" id="NK4-05-PpL"/>
+                                                                        </connections>
                                                                     </button>
                                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Star Filled" translatesAutoresizingMaskIntoConstraints="NO" id="2HB-kv-Ddw">
                                                                         <rect key="frame" x="13" y="20" width="20" height="16"/>
@@ -7693,7 +7745,11 @@
                                                                     </label>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cnU-rJ-fXu">
                                                                         <rect key="frame" x="0.0" y="0.0" width="120.66666666666667" height="55"/>
+                                                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                        <connections>
+                                                                            <action selector="btnPremiumTapped:" destination="tce-hG-OC0" eventType="touchUpInside" id="ViB-OL-xbR"/>
+                                                                        </connections>
                                                                     </button>
                                                                 </subviews>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -7847,15 +7903,21 @@
                         <outlet property="TextViewDescription" destination="BYe-Xq-ptJ" id="xix-dw-kOH"/>
                         <outlet property="UploaddocumentCollectionView" destination="lJj-Re-QrF" id="CYE-1n-XpQ"/>
                         <outlet property="UploadimageCollectionView" destination="VE1-CQ-4ji" id="sv7-0S-Dvt"/>
+                        <outlet property="btnBasic" destination="5jV-xM-kNr" id="HZU-sE-EDf"/>
+                        <outlet property="btnFeature" destination="Z9d-Uq-28b" id="aqi-oO-1AQ"/>
                         <outlet property="btnLocality" destination="zOG-Hb-dYK" id="R3s-LT-Mei"/>
                         <outlet property="btnLookingFor" destination="yV3-ap-NSx" id="a7L-u5-Hsj"/>
+                        <outlet property="btnPremium" destination="cnU-rJ-fXu" id="Bqk-Hz-OUK"/>
                         <outlet property="btnSelectDocument" destination="gva-Vh-u4D" id="8zf-PL-GhF"/>
                         <outlet property="btnSelectImage" destination="o6p-uu-WcG" id="rW2-hW-FG4"/>
                         <outlet property="btnServiceType" destination="jCC-9o-1QK" id="r5R-xf-na1"/>
                         <outlet property="btnState" destination="bSq-MD-jUS" id="7ej-cd-vrw"/>
                         <outlet property="btnSubCategory" destination="T5j-qb-Viw" id="4oU-8M-QyY"/>
+                        <outlet property="lblBasic" destination="i3B-la-HHr" id="hj8-cX-y6d"/>
+                        <outlet property="lblFeature" destination="sIr-AR-p2x" id="4jd-ZT-EZg"/>
                         <outlet property="lblLocality" destination="oX2-mE-KyI" id="5vQ-xv-LJ9"/>
                         <outlet property="lblLookingFor" destination="BB2-5o-miU" id="d50-Cv-Eoq"/>
+                        <outlet property="lblPremium" destination="bMT-FS-LwZ" id="d3d-Hb-FiA"/>
                         <outlet property="lblServiceType" destination="Lgb-X4-L3a" id="AlU-qe-gsg"/>
                         <outlet property="lblState" destination="oVX-Nj-qxn" id="3NA-Up-UsF"/>
                         <outlet property="lblSubCategory" destination="F9F-0Z-x9M" id="3uW-ky-ZMW"/>
@@ -7865,7 +7927,10 @@
                         <outlet property="txtFieldPricing" destination="hnQ-mX-kPH" id="0fi-N9-1nT"/>
                         <outlet property="txtFieldTitle" destination="jLu-Nc-2db" id="oal-2I-J2d"/>
                         <outlet property="txtFieldWhatsappNumber" destination="DPu-yh-WPE" id="apJ-me-Gdl"/>
+                        <outlet property="viewBasic" destination="eed-ko-wha" id="ttv-YV-U75"/>
                         <outlet property="viewCreateOpportunity" destination="YyH-Fn-1u2" id="QeY-Tx-6by"/>
+                        <outlet property="viewFeature" destination="fOh-vs-uUm" id="QVy-Yd-pMs"/>
+                        <outlet property="viewPremium" destination="xGd-sG-OpT" id="Zua-mW-XF5"/>
                         <outlet property="viewSelectCategoryTop" destination="g2P-XH-kTc" id="5S8-YO-gkd"/>
                     </connections>
                 </viewController>
@@ -8577,7 +8642,11 @@
                                                                     </imageView>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="axl-te-8Ii">
                                                                         <rect key="frame" x="0.0" y="0.0" width="120.66666666666667" height="55"/>
+                                                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                        <connections>
+                                                                            <action selector="btnBasicTapped:" destination="xQB-xy-wcS" eventType="touchUpInside" id="avi-sR-uWH"/>
+                                                                        </connections>
                                                                     </button>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Basic" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HvH-3h-K1r">
                                                                         <rect key="frame" x="51" y="18.333333333333258" width="36.666666666666657" height="19.666666666666671"/>
@@ -8615,7 +8684,11 @@
                                                                 <subviews>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8GK-gg-iCN">
                                                                         <rect key="frame" x="0.0" y="0.0" width="120.66666666666667" height="55"/>
+                                                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                        <connections>
+                                                                            <action selector="btnFeatureTapped:" destination="xQB-xy-wcS" eventType="touchUpInside" id="Rpe-Do-lc8"/>
+                                                                        </connections>
                                                                     </button>
                                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Star Filled" translatesAutoresizingMaskIntoConstraints="NO" id="XLI-3k-ehc">
                                                                         <rect key="frame" x="13" y="20" width="20" height="16"/>
@@ -8665,7 +8738,11 @@
                                                                     </label>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pgc-a2-5zK">
                                                                         <rect key="frame" x="0.0" y="0.0" width="120.66666666666667" height="55"/>
+                                                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                        <connections>
+                                                                            <action selector="btnPremiumTapped:" destination="xQB-xy-wcS" eventType="touchUpInside" id="7Yq-xb-jT7"/>
+                                                                        </connections>
                                                                     </button>
                                                                 </subviews>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -8825,16 +8902,22 @@
                         <outlet property="TextViewDescription" destination="YDg-gd-X83" id="ZgL-7p-3Z7"/>
                         <outlet property="UploaddocumentCollectionView" destination="Fp7-ec-ZJ8" id="yLe-5C-smN"/>
                         <outlet property="UploadimageCollectionView" destination="N3o-lD-YIc" id="EWD-T8-2mL"/>
+                        <outlet property="btnBasic" destination="axl-te-8Ii" id="gUP-zN-g4X"/>
                         <outlet property="btnBusinessType" destination="FXC-CJ-6he" id="3w4-np-5Ll"/>
+                        <outlet property="btnFeature" destination="8GK-gg-iCN" id="w0q-Zy-CqP"/>
                         <outlet property="btnLocality" destination="VPm-7e-0re" id="NFD-ro-sQY"/>
                         <outlet property="btnLookingFor" destination="Cl2-cq-4Ij" id="aiu-wo-cig"/>
+                        <outlet property="btnPremium" destination="pgc-a2-5zK" id="X9e-eA-fQc"/>
                         <outlet property="btnSelectDocument" destination="drY-Mi-PMA" id="7JK-Tn-bcb"/>
                         <outlet property="btnSelectImage" destination="zae-SH-BgH" id="bZB-aW-Fm6"/>
                         <outlet property="btnState" destination="FAg-q5-vL6" id="sbp-8O-hBO"/>
                         <outlet property="btnSubCategory" destination="JOd-in-RS8" id="fgS-bO-3Bn"/>
+                        <outlet property="lblBasic" destination="HvH-3h-K1r" id="v4Z-RF-DbP"/>
                         <outlet property="lblBusinesstype" destination="9TI-3k-oCl" id="lht-yG-rBH"/>
+                        <outlet property="lblFeature" destination="bwM-3K-mRi" id="GsT-VB-OXo"/>
                         <outlet property="lblLocality" destination="Bnd-n6-fsr" id="UwH-oB-IL5"/>
                         <outlet property="lblLookingFor" destination="zjF-5m-D7T" id="3dL-2d-yI3"/>
+                        <outlet property="lblPremium" destination="IfF-CV-yF1" id="cWe-lM-J16"/>
                         <outlet property="lblState" destination="U7X-RT-DMx" id="4Gr-bR-vUT"/>
                         <outlet property="lblSubCategory" destination="pzf-qB-raf" id="sfu-Ad-8YN"/>
                         <outlet property="txtFieldBusinessMiningBlock" destination="Dlr-of-fye" id="QGx-Td-znq"/>
@@ -8845,7 +8928,10 @@
                         <outlet property="txtFieldPricing" destination="JKJ-A9-t0Z" id="guY-Nf-Y82"/>
                         <outlet property="txtFieldTitle" destination="aTY-EL-L3Y" id="xTd-bw-djJ"/>
                         <outlet property="txtFieldWhatsappNumber" destination="g2A-AP-Mvm" id="UjY-gd-AgI"/>
+                        <outlet property="viewBasic" destination="eRG-Mx-NgV" id="AvD-14-vAw"/>
                         <outlet property="viewCreateOpportunity" destination="gF9-bt-B5W" id="7sD-ZH-8ZL"/>
+                        <outlet property="viewFeature" destination="TkH-y6-3uW" id="8i4-zf-fyG"/>
+                        <outlet property="viewPremium" destination="w8v-5F-4sP" id="Asn-ck-d2Z"/>
                         <outlet property="viewSelectCategoryTop" destination="EP3-l3-t6j" id="NKx-6F-D8q"/>
                     </connections>
                 </viewController>
