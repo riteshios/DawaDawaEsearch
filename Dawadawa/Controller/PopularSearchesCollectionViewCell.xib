@@ -12,28 +12,32 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="PopularSearchesCollectionViewCell" customModule="Dawadawa" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="96" height="45"/>
+            <rect key="frame" x="0.0" y="0.0" width="96" height="18"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="96" height="45"/>
+                <rect key="frame" x="0.0" y="0.0" width="96" height="18"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="faF-Ve-7vy">
-                        <rect key="frame" x="0.0" y="0.0" width="96" height="45"/>
+                        <rect key="frame" x="0.0" y="2" width="96" height="16"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uhW-Y7-616">
-                                <rect key="frame" x="0.0" y="0.0" width="96" height="45"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uhW-Y7-616">
+                                <rect key="frame" x="0.0" y="0.0" width="96" height="14"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="14" id="pLZ-Mk-1m4"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstAttribute="height" constant="16" id="1Qc-Bg-tsI"/>
                             <constraint firstItem="uhW-Y7-616" firstAttribute="top" secondItem="faF-Ve-7vy" secondAttribute="top" id="2PD-XX-h29"/>
                             <constraint firstItem="uhW-Y7-616" firstAttribute="leading" secondItem="faF-Ve-7vy" secondAttribute="leading" id="8El-3Y-vVR"/>
                             <constraint firstAttribute="trailing" secondItem="uhW-Y7-616" secondAttribute="trailing" id="NGN-z2-Gwv"/>
-                            <constraint firstAttribute="bottom" secondItem="uhW-Y7-616" secondAttribute="bottom" id="OcL-ke-lvL"/>
+                            <constraint firstAttribute="bottom" secondItem="uhW-Y7-616" secondAttribute="bottom" constant="2" id="OcL-ke-lvL"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -42,14 +46,14 @@
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="faF-Ve-7vy" secondAttribute="bottom" id="Q3C-tC-gBn"/>
                 <constraint firstItem="faF-Ve-7vy" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="aHu-t7-W8E"/>
-                <constraint firstItem="faF-Ve-7vy" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="bb4-a5-Pit"/>
+                <constraint firstItem="faF-Ve-7vy" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="2" id="bb4-a5-Pit"/>
                 <constraint firstAttribute="trailing" secondItem="faF-Ve-7vy" secondAttribute="trailing" id="s8S-Yt-W4u"/>
             </constraints>
-            <size key="customSize" width="96" height="45"/>
+            <size key="customSize" width="96" height="28"/>
             <connections>
                 <outlet property="lblPopularSearch" destination="uhW-Y7-616" id="J8K-01-eE1"/>
             </connections>
-            <point key="canvasLocation" x="169.56521739130437" y="72.65625"/>
+            <point key="canvasLocation" x="178" y="108"/>
         </collectionViewCell>
     </objects>
     <resources>

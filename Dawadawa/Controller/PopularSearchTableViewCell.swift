@@ -37,7 +37,8 @@ class PopularSearchTableViewCell: UITableViewCell {
     
 }
 
-extension PopularSearchTableViewCell:UICollectionViewDelegate,UICollectionViewDataSource{
+extension PopularSearchTableViewCell:UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return titles.count
     }
@@ -48,9 +49,11 @@ extension PopularSearchTableViewCell:UICollectionViewDelegate,UICollectionViewDa
             return PopularSearchesCollectionViewCell()
         }
         cell.lblPopularSearch.text = titles[indexPath.row]
-        cell.lblPopularSearch.preferredMaxLayoutWidth = collectionView.frame.width - 16
+        cell.lblPopularSearch.preferredMaxLayoutWidth = collectionView.frame.width - 10
         return cell
     }
     
-    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: 100, height: 18)
+    }
 }

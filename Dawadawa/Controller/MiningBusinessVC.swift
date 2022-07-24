@@ -121,19 +121,34 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
     @IBAction func btnSelectImageTapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         if self.btnSelectImage.isSelected == true{
-            if imagearr.count <= 5{
+            if imagearr.count == 0{
+                btnSelectImage.isEnabled = true
                 ImagePickerHelper.shared.showPickerController {
                     image, url in
                     self.imagearr.append(image ?? UIImage())
                     self.UploadimageCollectionView.reloadData()
                 }
+                
+                debugPrint("imagearraycount..........",self.imagearr.count)
             }
-            self.viewSelectCategoryTop.constant = 420
+            else{
+                btnSelectImage.isEnabled = false
+            }
+            self.viewSelectCategoryTop.constant = 420  // 310
         }
         
     }
     
     @IBAction func btnAddmoreImageTapped(_ sender: UIButton) {
+        if self.btnSelectDocument.isSelected == true{
+            if imagearr.count != 0{
+                ImagePickerHelper.shared.showPickerController {
+                    image, url in
+                    self.imagearr.append(image ?? UIImage())
+                    self.UploadimageCollectionView.reloadData()
+            }
+        }
+    }
     }
     
     @IBAction func btnSelectDocumentTapped(_ sender: UIButton) {
@@ -141,22 +156,28 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
             showSimpleAlert(message: "First upload Image")
         }
         else{
-//            btnSelectDocument.isEnabled = true
+       
             sender.isSelected = !sender.isSelected
             if self.btnSelectDocument.isSelected == true{
-                if documentarr.count <= 5{
+                if documentarr.count == 0{
+                    btnSelectDocument.isEnabled = true
                     self.openFileBrowser()
                     self.viewSelectCategoryTop.constant = 420
                     
+                }
+                else{
+                    btnSelectDocument.isEnabled = false
                 }
             }
         }
     }
     
     @IBAction func btnAddMoreDocumentTapped(_ sender: UIButton) {
-        if documentarr.count <= 5{
-            
+        if self.btnSelectDocument.isSelected == true{
+        if documentarr.count != 0{
+            self.openFileBrowser()
         }
+    }
     }
     
  
@@ -918,7 +939,7 @@ extension MiningBusinessVC{
             "user_id":"\(String(describing: userid))",
             "category_id":"3",
             "sub_category":"\(String(describing: subcatid))",
-            "services_type":self.lblServiceType.text,
+            "services_type":String.getString(self.lblServiceType.text),
             "title":String.getString(self.txtFieldTitle.text),
             "opp_state":String.getString(self.lblState.text),
             "opp_locality":String.getString(self.lblLocality.text),

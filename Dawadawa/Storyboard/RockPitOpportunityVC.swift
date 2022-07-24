@@ -58,6 +58,8 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
     var documentarr = [URL]()
     var docummentarray = [String]()
     
+    var plan = ""
+    
     
     var getCategorylist    = [getCartegoryModel]()
     var getSubCategorylist = [getSubCartegoryModel]()
@@ -135,7 +137,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
     }
     
     @IBAction func btnAddmoreImageTapped(_ sender: UIButton) {
-        sender.isSelected = !sender.isSelected
+        
         if self.btnSelectDocument.isSelected == true{
             if imagearr.count != 0{
                 ImagePickerHelper.shared.showPickerController {
@@ -155,19 +157,25 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
        
             sender.isSelected = !sender.isSelected
             if self.btnSelectDocument.isSelected == true{
-                if documentarr.count <= 5{
+                if documentarr.count == 0{
+                    btnSelectDocument.isEnabled = true
                     self.openFileBrowser()
                     self.viewSelectCategoryTop.constant = 420
                     
+                }
+                else{
+                    btnSelectDocument.isEnabled = false
                 }
             }
         }
     }
     @IBAction func btnAddMoreDocumentTapped(_ sender: UIButton) {
-        if documentarr.count <= 5{
-            
+        if self.btnSelectDocument.isSelected == true{
+        if documentarr.count != 0{
+            self.openFileBrowser()
         }
     }
+}
     
     
     @IBAction func btnSelectSubCategoryTapped(_ sender: UIButton) {
@@ -215,19 +223,21 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
     @IBAction func btnBasicTapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         if self.btnBasic.isSelected == true{
+            self.plan = "Basic"
             self.viewBasic.backgroundColor = UIColor(red: 21, green: 114, blue: 161)
             self.lblBasic.textColor = .white
             self.viewFeature.backgroundColor = .white
             self.lblFeature.textColor = UIColor(red: 21, green: 114, blue: 161)
             self.viewPremium.backgroundColor = .white
             self.lblPremium.textColor =  UIColor(red: 21, green: 114, blue: 161)
-           
+          
         }
     }
     
     @IBAction func btnFeatureTapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         if self.btnFeature.isSelected == true{
+            self.plan = "Featured"
             self.viewFeature.backgroundColor = UIColor(red: 21, green: 114, blue: 161)
             self.lblFeature.textColor = .white
             self.viewBasic.backgroundColor = .white
@@ -241,6 +251,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
     @IBAction func btnPremiumTapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         if self.btnPremium.isSelected == true{
+            self.plan = "Premium"
             self.viewPremium.backgroundColor = UIColor(red: 21, green: 114, blue: 161)
             self.lblPremium.textColor = .white
             self.viewBasic.backgroundColor = .white
@@ -369,7 +380,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
         
         
         // self.doc = (url)
-        print("doc path=-=-=\(doc)")
+//        print("doc path=-=-=\(doc)")
         self.documentarr.append(url)
         self.docummentarray.append(url.lastPathComponent)
         print("doc documentarr=-=-=\(documentarr)")
@@ -843,7 +854,7 @@ extension RockPitOpportunityVC{
             "whatsaap_num":String.getString(self.txtFieldWhatsappNumber.text),
             "pricing":String.getString(self.txtFieldPricing.text),
             "looking_for":String.getString(self.lblLookingFor.text),
-            "plan":"Basic",
+            "plan":String.getString(plan),
             "cat_type_id":"0"
         ]
         

@@ -127,19 +127,34 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
     @IBAction func btnSelectImageTapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         if self.btnSelectImage.isSelected == true{
-            if imagearr.count <= 5{
+            if imagearr.count == 0{
+                btnSelectImage.isEnabled = true
                 ImagePickerHelper.shared.showPickerController {
                     image, url in
                     self.imagearr.append(image ?? UIImage())
                     self.UploadimageCollectionView.reloadData()
                 }
+                
+                debugPrint("imagearraycount..........",self.imagearr.count)
             }
-            self.viewSelectCategoryTop.constant = 420
+            else{
+                btnSelectImage.isEnabled = false
+            }
+            self.viewSelectCategoryTop.constant = 420  // 310
         }
         
     }
     
     @IBAction func btnAddmoreImageTapped(_ sender: UIButton) {
+        if self.btnSelectDocument.isSelected == true{
+            if imagearr.count != 0{
+                ImagePickerHelper.shared.showPickerController {
+                    image, url in
+                    self.imagearr.append(image ?? UIImage())
+                    self.UploadimageCollectionView.reloadData()
+            }
+        }
+    }
     }
     
     @IBAction func btnSelectDocumentTapped(_ sender: UIButton) {
@@ -147,17 +162,30 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
             showSimpleAlert(message: "First upload Image")
         }
         else{
-//            btnSelectDocument.isEnabled = true
+       
             sender.isSelected = !sender.isSelected
             if self.btnSelectDocument.isSelected == true{
-                if documentarr.count <= 5{
+                if documentarr.count == 0{
+                    btnSelectDocument.isEnabled = true
                     self.openFileBrowser()
                     self.viewSelectCategoryTop.constant = 420
                     
                 }
+                else{
+                    btnSelectDocument.isEnabled = false
+                }
             }
         }
     }
+    
+    @IBAction func btnAddMoreDocumentTapped(_ sender: UIButton) {
+        if self.btnSelectDocument.isSelected == true{
+        if documentarr.count != 0{
+            self.openFileBrowser()
+        }
+    }
+}
+    
     
     @IBAction func btnSelectSubCategoryTapped(_ sender: UIButton) {
         kSharedAppDelegate?.dropDown(dataSource: getSubCategorylist.map{String.getString($0.sub_cat_name)}, text: btnSubCategory) { (index, item) in
