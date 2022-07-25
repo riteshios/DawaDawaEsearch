@@ -61,6 +61,12 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
         case 1:
             let cell = self.tblViewSearchOpp.dequeueReusableCell(withIdentifier: "PremiumOppTableViewCell") as! PremiumOppTableViewCell
             cell.ColllectionViewPremiumOpp.tag = indexPath.section
+            cell.callbacknavigation = {
+                let vc = self.storyboard!.instantiateViewController(withIdentifier: PremiumOpportunitiesVC.getStoryboardID()) as! PremiumOpportunitiesVC
+                self.navigationController?.pushViewController(vc, animated: true)
+                
+                
+            }
             return cell
         
             

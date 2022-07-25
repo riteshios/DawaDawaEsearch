@@ -38,6 +38,9 @@
                                 <state key="normal" title="View all">
                                     <color key="titleColor" systemColor="tintColor"/>
                                 </state>
+                                <connections>
+                                    <action selector="btnViewAllTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="5op-Ff-i52"/>
+                                </connections>
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="WgS-nr-9IW">
                                 <rect key="frame" x="16" y="53" width="383" height="218"/>

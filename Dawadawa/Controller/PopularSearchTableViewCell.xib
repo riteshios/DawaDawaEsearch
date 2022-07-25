@@ -55,6 +55,7 @@
                             <constraint firstAttribute="trailing" secondItem="xLb-f5-xNh" secondAttribute="trailing" id="DiW-hE-nfO"/>
                             <constraint firstAttribute="trailing" secondItem="M4r-6b-Y66" secondAttribute="trailing" constant="16" id="Ml2-tg-sa6"/>
                             <constraint firstAttribute="bottom" secondItem="xLb-f5-xNh" secondAttribute="bottom" id="cRO-Ip-XKa"/>
+                            <constraint firstItem="xLb-f5-xNh" firstAttribute="top" secondItem="M4r-6b-Y66" secondAttribute="bottom" constant="20" id="jqS-lX-P2i"/>
                             <constraint firstItem="lxy-CX-Ohp" firstAttribute="top" secondItem="cbR-4V-bt2" secondAttribute="top" constant="20" id="k7r-57-EPB"/>
                             <constraint firstItem="M4r-6b-Y66" firstAttribute="leading" secondItem="cbR-4V-bt2" secondAttribute="leading" constant="16" id="ssf-vA-4H2"/>
                             <constraint firstItem="lxy-CX-Ohp" firstAttribute="leading" secondItem="cbR-4V-bt2" secondAttribute="leading" constant="16" id="yHV-cz-WFL"/>
@@ -71,6 +72,7 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="SearchCollectionView" destination="M4r-6b-Y66" id="ha6-7X-EDC"/>
+                <outlet property="lblPopularSearch" destination="lxy-CX-Ohp" id="TTH-h1-Y7v"/>
             </connections>
             <point key="canvasLocation" x="138.40579710144928" y="86.71875"/>
         </tableViewCell>

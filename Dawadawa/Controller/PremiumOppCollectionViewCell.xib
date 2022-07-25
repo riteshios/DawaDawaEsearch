@@ -31,6 +31,11 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="135" id="WkY-Rh-EYj"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius1">
+                                        <real key="value" value="15"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="wdxbadbxbadxbnADBxnbasdbxnbxnbasnxbbnaxnaxsdsds" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rdS-Rg-nUD">
                                 <rect key="frame" x="0.0" y="145" width="169" height="73"/>
@@ -62,6 +67,10 @@
                 <constraint firstItem="Ndx-oy-1CJ" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Wro-Nh-PR8"/>
             </constraints>
             <size key="customSize" width="169" height="218"/>
+            <connections>
+                <outlet property="imgPremium" destination="eYb-tz-bkP" id="lqA-cp-GnY"/>
+                <outlet property="lbltitle" destination="rdS-Rg-nUD" id="QdN-kH-bEE"/>
+            </connections>
             <point key="canvasLocation" x="223.91304347826087" y="6.6964285714285712"/>
         </collectionViewCell>
     </objects>

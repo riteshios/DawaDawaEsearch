@@ -8,14 +8,18 @@
 import UIKit
 
 class PremiumOpportunitiesVC: UIViewController {
-    
+   
     
     @IBOutlet weak var tblViewPremiumOpp: UITableView!
+    var imgUrl = ""
+    var userTimeLine = [SocialPostData]()
+    var img = [oppr_image]()
+    
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.getallpremium()
         tblViewPremiumOpp.register(UINib(nibName: "PremiumTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "PremiumTableViewCell")
         tblViewPremiumOpp.register(UINib(nibName: "SocialPostTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "SocialPostTableViewCell")
         
@@ -43,7 +47,7 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
             return 1
             
         case 1:
-            return 10
+            return self.userTimeLine.count
             
             
             
@@ -63,7 +67,19 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
             
         case 1:
             let cell = self.tblViewPremiumOpp.dequeueReusableCell(withIdentifier: "SocialPostTableViewCell") as! SocialPostTableViewCell
+            let obj = userTimeLine[indexPath.row]
             cell.SocialPostCollectionView.tag = indexPath.section
+            cell.lblUserName.text = String.getString(obj.userdetail?.name)
+            cell.lblDescribtion.text = String.getString(obj.description)
+            cell.lblTitle.text = String.getString(obj.title)
+            let imgurl = String.getString(obj.userdetail?.social_profile)
+            debugPrint("socialprofile......",imgurl)
+            cell.Imageuser.downlodeImage(serviceurl: imgurl , placeHolder: UIImage(named: "Boss"))
+            cell.img = obj.oppimage
+            cell.imgUrl = self.imgUrl
+            
+            cell.lblLikeCount.text = String.getString(obj.likes) + " " + "likes"
+            
             return cell
             
             
@@ -87,5 +103,64 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
     }
     
 }
+
+extension PremiumOpportunitiesVC{
+//    Api opportunity premium
+    func getallpremium(){
+        CommonUtils.showHudWithNoInteraction(show: true)
+        
+        if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
+            let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+            let septoken = endToken.components(separatedBy: " ")
+            if septoken[0] != "Bearer"{
+                let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
+                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
+            }
+        }
+        
+        
+        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName: ServiceName.kgetpremium, requestMethod: .GET, requestParameters:[:], withProgressHUD: false) { (result:Any?, error:Error?, errorType:ErrorType?,statusCode:Int?) in
+            CommonUtils.showHudWithNoInteraction(show: false)
+            if errorType == .requestSuccess {
+                let dictResult = kSharedInstance.getDictionary(result)
+            
+                switch Int.getInt(statusCode) {
+                case 200:
+                    if Int.getInt(dictResult["status"]) == 200{
+                        let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+                        let septoken = endToken.components(separatedBy: " ")
+                        if septoken[0] == "Bearer"{
+                            kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
+                        }
+            
+                        self.imgUrl = String.getString(dictResult["opr_base_url"])
+                        debugPrint("PreimiumImgurl=====", self.imgUrl)
+                        let Opportunity = kSharedInstance.getArray(withDictionary: dictResult["Opportunity"])
+                        self.userTimeLine = Opportunity.map{SocialPostData(data: kSharedInstance.getDictionary($0))}
+                        print("DataAllPremiumPost===\(self.userTimeLine)")
+                        
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        self.tblViewPremiumOpp.reloadData()
+                        
+                    }
+                    else if  Int.getInt(dictResult["status"]) == 400{
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    }
+                    
+                  
+                default:
+                    CommonUtils.showError(.error, String.getString(dictResult["message"]))
+                }
+            }else if errorType == .noNetwork {
+                CommonUtils.showToastForInternetUnavailable()
+                
+            } else {
+                CommonUtils.showToastForDefaultError()
+            }
+        }
+        
+    }
+}
+
 
 

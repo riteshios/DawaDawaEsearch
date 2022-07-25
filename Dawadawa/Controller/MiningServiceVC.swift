@@ -65,6 +65,8 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
     var documentarr = [URL]()
     var docummentarray = [String]()
     
+    var plan = ""
+    
    
     var getSubCategorylist = [getSubCartegoryModel]()
     var getstatelist       = [getStateModel]()
@@ -236,6 +238,7 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
     @IBAction func btnBasicTapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         if self.btnBasic.isSelected == true{
+            self.plan = "Basic"
             self.viewBasic.backgroundColor = UIColor(red: 21, green: 114, blue: 161)
             self.lblBasic.textColor = .white
             self.viewFeature.backgroundColor = .white
@@ -249,6 +252,7 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
     @IBAction func btnFeatureTapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         if self.btnFeature.isSelected == true{
+            self.plan = "Featured"
             self.viewFeature.backgroundColor = UIColor(red: 21, green: 114, blue: 161)
             self.lblFeature.textColor = .white
             self.viewBasic.backgroundColor = .white
@@ -262,6 +266,7 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
     @IBAction func btnPremiumTapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         if self.btnPremium.isSelected == true{
+            self.plan = "Premium"
             self.viewPremium.backgroundColor = UIColor(red: 21, green: 114, blue: 161)
             self.lblPremium.textColor = .white
             self.viewBasic.backgroundColor = .white
@@ -954,18 +959,18 @@ extension MiningServiceVC{
             "sub_category":"\(String(describing: subcatid))",
             "title":String.getString(self.txtFieldTitle.text),
             "business_name":String.getString(self.txtFieldBusinessName.text),
-            "business_mining_type":self.lblBusinesstype.text,
+            "business_mining_type":String.getString(self.lblBusinesstype.text),
             "business_mining_block":String.getString(self.txtFieldBusinessMiningBlock.text),
-            "opp_state":self.lblState.text,
-            "opp_locality":self.lblLocality.text,
+            "opp_state":String.getString(self.lblState.text),
+            "opp_locality":String.getString(self.lblLocality.text),
             "location_name":String.getString(self.txtFieldLocationName.text),
             "location_map":String.getString(self.txtFieldLocationOnMap.text),
             "description":String.getString(self.TextViewDescription.text),
             "mobile_num":String.getString(self.txtFieldMobileNumber.text),
             "whatsaap_num":String.getString(self.txtFieldWhatsappNumber.text),
             "pricing":String.getString(self.txtFieldPricing.text),
-            "looking_for":self.lblLookingFor.text,
-            "plan":"Basic",
+            "looking_for":String.getString(self.lblLookingFor.text),
+            "plan":String.getString(plan),
             "cat_type_id":"2"
         ]
         

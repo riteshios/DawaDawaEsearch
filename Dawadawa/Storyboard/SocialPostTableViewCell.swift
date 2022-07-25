@@ -18,6 +18,10 @@ class SocialPostTableViewCell: UITableViewCell {
     @IBOutlet weak var lblDescribtion: UILabel!
     @IBOutlet weak var Imageuser: UIImageView!
     
+    
+    @IBOutlet weak var lblLikeCount: UILabel!
+    
+    var imgUrl = ""
     var img = [oppr_image](){
         didSet{
             pageControl.isHidden = true
@@ -25,10 +29,9 @@ class SocialPostTableViewCell: UITableViewCell {
             self.SocialPostCollectionView.reloadData()
         }
     }
-    var imgUrl = ""
+    
+    
     override func awakeFromNib() {
-        super.awakeFromNib()
-        
         super.awakeFromNib()
         SocialPostCollectionView.delegate = self
         SocialPostCollectionView.dataSource = self

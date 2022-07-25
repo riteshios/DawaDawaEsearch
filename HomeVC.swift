@@ -11,13 +11,17 @@ class HomeVC: UIViewController{
     
 
     @IBOutlet weak var tblViewViewPost: UITableView!
+    
     var imgUrl = ""
     var userTimeLine = [SocialPostData]()
     var userdetail = [user_detail]()
+    @IBOutlet weak var lblUserName: UILabel!
+    @IBOutlet weak var ImgUser: UIImageView!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.fetchdata()
         self.getallopportunity()
         
         tblViewViewPost.register(UINib(nibName: "ViewPostTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "ViewPostTableViewCell")
@@ -25,6 +29,22 @@ class HomeVC: UIViewController{
       
     }
     
+    func fetchdata(){
+        self.lblUserName.text = String.getString(UserData.shared.name) + " " + String.getString(UserData.shared.last_name)
+        if let url = URL(string: "\("https://demo4app.com/dawadawa/public/admin_assets/user_profile/" + String.getString(UserData.shared.social_profile))"){
+            debugPrint("url...",  url)
+            
+            let task = URLSession.shared.dataTask(with: url) { data, response, error in
+                guard let data = data, error == nil else { return }
+                
+                DispatchQueue.main.async { /// execute on main thread
+                    self.ImgUser.image = UIImage(data: data)
+                }
+            }
+            
+            task.resume()
+    }
+}
 
   
 }
@@ -74,14 +94,15 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
             debugPrint("username.....", cell.lblUserName.text)
             cell.lblTitle.text = String.getString(obj.title)
             cell.lblDescribtion.text = String.getString(obj.description)
-         
+            cell.img = obj.oppimage
+            cell.imgUrl = self.imgUrl
            
             let imgurl = String.getString(obj.userdetail?.social_profile)
             debugPrint("socialprofile......",imgurl)
          
             cell.Imageuser.downlodeImage(serviceurl: imgurl , placeHolder: UIImage(named: "Boss"))
             
-            
+            cell.lblLikeCount.text = String.getString(obj.likes) + " " + "likes"
             
             
             cell.callbackmore = {
@@ -240,8 +261,9 @@ extension HomeVC{
                     }
                     
                     else if  Int.getInt(dictResult["status"]) == 400{
-                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        CommonUtils.showError(.info, "Success")
+                        kSharedAppDelegate?.makeRootViewController() // temporary
+//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                 default:

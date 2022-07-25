@@ -62,6 +62,8 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
     var documentarr = [URL]()
     var docummentarray = [String]()
     
+    var plan = ""
+    
     var getSubCategorylist = [getSubCartegoryModel]()
     var getstatelist       = [getStateModel]()
     var getlocalitylist    = [getLocalityModel]()
@@ -212,6 +214,7 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
     @IBAction func btnBasicTapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         if self.btnBasic.isSelected == true{
+            self.plan = "Basic"
             self.viewBasic.backgroundColor = UIColor(red: 21, green: 114, blue: 161)
             self.lblBasic.textColor = .white
             self.viewFeature.backgroundColor = .white
@@ -225,6 +228,7 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
     @IBAction func btnFeatureTapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         if self.btnFeature.isSelected == true{
+            self.plan = "Featured"
             self.viewFeature.backgroundColor = UIColor(red: 21, green: 114, blue: 161)
             self.lblFeature.textColor = .white
             self.viewBasic.backgroundColor = .white
@@ -238,6 +242,7 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
     @IBAction func btnPremiumTapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         if self.btnPremium.isSelected == true{
+            self.plan = "Premium"
             self.viewPremium.backgroundColor = UIColor(red: 21, green: 114, blue: 161)
             self.lblPremium.textColor = .white
             self.viewBasic.backgroundColor = .white
@@ -950,7 +955,7 @@ extension MiningBusinessVC{
             "whatsaap_num":String.getString(self.txtFieldWhatsappNumber.text),
             "pricing":String.getString(self.txtFieldPricing.text),
             "looking_for":String.getString(self.lblLookingFor.text),
-            "plan":"Basic",
+            "plan":String.getString(plan),
             "cat_type_id":"1"
         ]
         

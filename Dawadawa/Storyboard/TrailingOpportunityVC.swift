@@ -59,6 +59,8 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
     var docummentarray = [String]()
     
     
+    var plan = ""
+    
     
     var placeholder = "Please comment here"
     
@@ -237,6 +239,7 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
     @IBAction func btnBasicTapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         if self.btnBasic.isSelected == true{
+            self.plan = "Basic"
             self.viewBasic.backgroundColor = UIColor(red: 21, green: 114, blue: 161)
             self.lblBasic.textColor = .white
             self.viewFeature.backgroundColor = .white
@@ -250,6 +253,7 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
     @IBAction func btnFeatureTapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         if self.btnFeature.isSelected == true{
+            self.plan = "Featured"
             self.viewFeature.backgroundColor = UIColor(red: 21, green: 114, blue: 161)
             self.lblFeature.textColor = .white
             self.viewBasic.backgroundColor = .white
@@ -263,6 +267,7 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
     @IBAction func btnPremiumTapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         if self.btnPremium.isSelected == true{
+            self.plan = "Premium"
             self.viewPremium.backgroundColor = UIColor(red: 21, green: 114, blue: 161)
             self.lblPremium.textColor = .white
             self.viewBasic.backgroundColor = .white
@@ -865,7 +870,7 @@ extension TrailingOpportunityVC{
             "whatsaap_num":String.getString(self.txtFieldWhatsappNumber.text),
             "pricing":String.getString(self.txtFieldPricing.text),
             "looking_for":String.getString(self.lblLookingFor.text),
-            "plan":"Basic",
+            "plan":String.getString(plan),
             "cat_type_id":"0"
         ]
         

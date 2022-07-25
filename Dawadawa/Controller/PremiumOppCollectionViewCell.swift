@@ -8,6 +8,10 @@
 import UIKit
 
 class PremiumOppCollectionViewCell: UICollectionViewCell {
+    
+    @IBOutlet weak var imgPremium: UIImageView!
+    @IBOutlet weak var lbltitle: UILabel!
+    
 
     override func awakeFromNib() {
         super.awakeFromNib()

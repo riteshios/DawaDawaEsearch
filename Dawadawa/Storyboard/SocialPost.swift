@@ -22,6 +22,7 @@ class SocialPostData {
     var location_name:String?
     var location_map:String?
     var description:String?
+    var likes:Int?
     var mobile_num:String?
     var whatsaap_num:String?
     var pricing:String?
@@ -45,6 +46,7 @@ class SocialPostData {
         self.location_name = String.getString(data["location_name"])
         self.location_map = String.getString(data["location_map"])
         self.description = String.getString(data["description"])
+        self.likes = Int.getInt(data["likes"])
         self.mobile_num = String.getString(data["mobile_num"])
         self.whatsaap_num = String.getString(data["whatsaap_num"])
         self.pricing = String.getString(data["pricing"])
