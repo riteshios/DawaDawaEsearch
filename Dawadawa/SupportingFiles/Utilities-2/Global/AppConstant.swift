@@ -107,6 +107,7 @@ struct ServiceName {
     static let kflagpost                =        "api/flag-opportunity"
     static let kgetpremium              =        "api/opportunity-premium"
     static let kgetFeatured             =        "api/featured-opportunity"
+    static let klikeopportunity         =        "api/like_opportunity"
 }
 
 struct Notifications {

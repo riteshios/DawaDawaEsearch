@@ -43,6 +43,13 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circlecrown" translatesAutoresizingMaskIntoConstraints="NO" id="1p3-Zf-r6v">
+                                <rect key="frame" x="136" y="12" width="20" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="20" id="Abp-Ic-uAe"/>
+                                    <constraint firstAttribute="height" constant="20" id="MK3-9w-r6U"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
@@ -51,6 +58,8 @@
                             <constraint firstItem="rdS-Rg-nUD" firstAttribute="leading" secondItem="eYb-tz-bkP" secondAttribute="leading" id="HMD-3F-h83"/>
                             <constraint firstAttribute="width" constant="169" id="WKt-7d-tCz"/>
                             <constraint firstItem="rdS-Rg-nUD" firstAttribute="top" secondItem="eYb-tz-bkP" secondAttribute="bottom" constant="10" id="hgC-Qc-619"/>
+                            <constraint firstItem="1p3-Zf-r6v" firstAttribute="top" secondItem="Ndx-oy-1CJ" secondAttribute="top" constant="12" id="hqq-lg-dDu"/>
+                            <constraint firstAttribute="trailing" secondItem="1p3-Zf-r6v" secondAttribute="trailing" constant="13" id="oGv-b9-lDM"/>
                             <constraint firstAttribute="bottom" secondItem="rdS-Rg-nUD" secondAttribute="bottom" id="odz-xH-RX3"/>
                             <constraint firstItem="rdS-Rg-nUD" firstAttribute="trailing" secondItem="eYb-tz-bkP" secondAttribute="trailing" id="q1e-Ci-Pu3"/>
                             <constraint firstAttribute="height" constant="218" id="svy-hB-U2c"/>
@@ -75,6 +84,7 @@
         </collectionViewCell>
     </objects>
     <resources>
+        <image name="circlecrown" width="20" height="20"/>
         <image name="truck" width="150" height="135"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

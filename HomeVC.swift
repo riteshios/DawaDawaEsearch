@@ -104,7 +104,9 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
             
             cell.lblLikeCount.text = String.getString(obj.likes) + " " + "likes"
             
+          
             
+           
             cell.callbackmore = {
                 let vc = self.storyboard?.instantiateViewController(withIdentifier: HomeSocialMoreVC.getStoryboardID()) as! HomeSocialMoreVC
                 vc.modalTransitionStyle = .crossDissolve
@@ -211,6 +213,11 @@ extension HomeVC{
         }
         
     }
+
+    
+   
+    
+// Api flag Opportunity
     
     func flagopportunityapi(oppr_id:Int){
         CommonUtils.showHud(show: true)

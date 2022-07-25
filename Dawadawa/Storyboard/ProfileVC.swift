@@ -198,7 +198,7 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
             
             cell.callbackbtnSelect = { txt in
                 if txt == "All"{
-                  
+                    self.listoppoertunityapi()
                 }
                 if txt == "Premium"{
                     self.getallpremiumapi()
@@ -222,6 +222,17 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
             cell.lblTitle.text = String.getString(obj.title)
             cell.lblDescribtion.text = String.getString(obj.description)
             cell.Imageuser.downlodeImage(serviceurl: profilrimageurl, placeHolder: UIImage(named: "Boss"))
+            if String.getString(obj.opp_plan) == "Basic" {
+                cell.imgOpp_plan.isHidden = true
+            }
+            else  if String.getString(obj.opp_plan) == "Featured" {
+                cell.imgOpp_plan.image = UIImage(named: "Star Filled")
+                
+            }
+            else if String.getString(obj.opp_plan) == "Premium" {
+                cell.imgOpp_plan.image = UIImage(named: "Crown")
+            }
+            
           
             cell.img = obj.oppimage
             cell.imgUrl = self.imgUrl

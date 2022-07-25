@@ -140,10 +140,22 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W05-Qz-8CE">
+                                                <rect key="frame" x="0.0" y="0.0" width="96" height="30"/>
+                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <connections>
+                                                    <action selector="btnLikeTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="bZH-lT-VfN"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
+                                            <constraint firstItem="W05-Qz-8CE" firstAttribute="leading" secondItem="iwi-8K-Kcf" secondAttribute="leading" id="JYJ-Vj-m45"/>
+                                            <constraint firstAttribute="bottom" secondItem="W05-Qz-8CE" secondAttribute="bottom" id="OhC-ig-1bj"/>
                                             <constraint firstItem="70w-nw-z2Q" firstAttribute="leading" secondItem="Thv-qM-E3K" secondAttribute="trailing" constant="7" id="QsJ-kW-R7X"/>
+                                            <constraint firstAttribute="trailing" secondItem="W05-Qz-8CE" secondAttribute="trailing" id="QuE-h9-Dvc"/>
+                                            <constraint firstItem="W05-Qz-8CE" firstAttribute="top" secondItem="iwi-8K-Kcf" secondAttribute="top" id="UNn-LY-Vb8"/>
                                             <constraint firstItem="70w-nw-z2Q" firstAttribute="centerY" secondItem="Thv-qM-E3K" secondAttribute="centerY" id="YaM-Ba-RJD"/>
                                             <constraint firstItem="Thv-qM-E3K" firstAttribute="leading" secondItem="iwi-8K-Kcf" secondAttribute="leading" constant="5" id="pty-X2-RIp"/>
                                             <constraint firstItem="Thv-qM-E3K" firstAttribute="top" secondItem="iwi-8K-Kcf" secondAttribute="top" constant="5" id="tQa-g0-BMg"/>
@@ -448,6 +460,9 @@
             <connections>
                 <outlet property="Imageuser" destination="FJx-Mb-Rlw" id="1Cc-yN-4LP"/>
                 <outlet property="SocialPostCollectionView" destination="wge-Dy-Mdu" id="Nzr-kY-BfP"/>
+                <outlet property="btnlike" destination="W05-Qz-8CE" id="RoN-yl-ly8"/>
+                <outlet property="imgOpp_plan" destination="mSp-k1-hDp" id="9IR-wP-g9t"/>
+                <outlet property="imglike" destination="Thv-qM-E3K" id="dT8-Ed-Bt1"/>
                 <outlet property="lblDescribtion" destination="c7e-ku-l4v" id="lDZ-54-A5J"/>
                 <outlet property="lblLikeCount" destination="11V-Vy-LGe" id="A1A-V7-trN"/>
                 <outlet property="lblTitle" destination="eXK-Ye-5Om" id="ZJC-6a-8RK"/>
