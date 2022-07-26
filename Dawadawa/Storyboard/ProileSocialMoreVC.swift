@@ -29,8 +29,8 @@ class ProileSocialMoreVC: UIViewController {
 //    MARK: - @IBAction
     
     @IBAction func btnDismissTapped(_ sender: UIButton) {
-//        self.callback?("Dismiss")
-        self.dismiss(animated: true)
+        self.callback?("Dismiss")
+//        self.dismiss(animated: true)
     }
     
     @IBAction func btnCopyLinkTapped(_ sender: UIButton) {

@@ -425,6 +425,7 @@
                     <size key="freeformSize" width="414" height="874"/>
                     <connections>
                         <outlet property="tblViewSearchOpp" destination="Oph-YF-c3l" id="BLm-cM-Lys"/>
+                        <outlet property="txtfieldSearch" destination="BJb-1w-hxH" id="SaF-Kd-QU5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4P9-6d-6GZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

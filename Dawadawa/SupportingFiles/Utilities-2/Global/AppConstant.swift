@@ -108,6 +108,8 @@ struct ServiceName {
     static let kgetpremium              =        "api/opportunity-premium"
     static let kgetFeatured             =        "api/featured-opportunity"
     static let klikeopportunity         =        "api/like_opportunity"
+    static let ksearchopportunity       =        "api/search-opportunity"
+    static let kopportunitydetails      =        "api/opportunity-detail"
 }
 
 struct Notifications {
@@ -160,6 +162,19 @@ struct Notifications {
     static let kConfirmpassword                 = "Please Enter Confirm Password  "
     static let kconfirmMismatch                 = "Password does not match "
     static let kAllergic                        = "Please Select Allergic"
+    
+    
+    static let ktitle                           = "Please Enter the Title"
+    static let KValidtitle                      = "Please Enter valid title"
+    static let kLocationName                    = "Please Enter the Location Name"
+    static let kvalidlocationname               = "Please Enter the Valild Location Name"
+    static let kDescription                     = "Please Enter the description"
+    static let kwhatsappnumber                  = "Please Enter the whatsapp Number"
+    static let kvalidwhatsappnumber             = "Please Enter Valid Whatstapp Number"
+    static let kbusinessname                    = "Please Enter Business Name"
+    static let kbusinessBlock                   = "Please Enter Business Mining Block"
+    
+    
     
 }
 

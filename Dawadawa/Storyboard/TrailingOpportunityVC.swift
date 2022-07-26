@@ -58,6 +58,16 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
     var documentarr = [URL]()
     var docummentarray = [String]()
     
+    var isSelectimage = false
+    var isSelectDocument = false
+    var isSelectSubcategory = false
+    var isSelectState = false
+    var isSelectLocality = false
+    var isSelectLookingFor = false
+    var isSelectopp_planBasic = false
+    var isSelectopp_planPremium = false
+    var isSelectopp_planFeatured = false
+    
     
     var plan = ""
     
@@ -140,10 +150,12 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
                 
                 debugPrint("imagearraycount..........",self.imagearr.count)
             }
+            
             else{
                 btnSelectImage.isEnabled = false
             }
             self.viewSelectCategoryTop.constant = 420  // 310
+           
         }
         
     }
@@ -161,24 +173,18 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
 }
     
     @IBAction func btnSelectDocument(_ sender: UIButton) {
-        if imagearr.count == 0{
-            showSimpleAlert(message: "First upload Image")
-        }
-        else{
-       
-            sender.isSelected = !sender.isSelected
-            if self.btnSelectDocument.isSelected == true{
-                if documentarr.count == 0{
-                    btnSelectDocument.isEnabled = true
-                    self.openFileBrowser()
-                    self.viewSelectCategoryTop.constant = 420
-                    
-                }
-                else{
-                    btnSelectDocument.isEnabled = false
-                }
+        sender.isSelected = !sender.isSelected
+        if self.btnSelectDocument.isSelected == true{
+            if documentarr.count == 0{
+                btnSelectDocument.isEnabled = true
+                self.openFileBrowser()
+                self.viewSelectCategoryTop.constant = 420
+            }
+            else{
+                btnSelectDocument.isEnabled = false
             }
         }
+    self.isSelectDocument = true
     }
     
     @IBAction func btnSelectMoreDocumentTapped(_ sender: UIButton) {
@@ -195,6 +201,8 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
             let subcatid = self.getSubCategorylist[index].id
             self.subcatid = subcatid
             debugPrint("subcatid........",subcatid)
+            self.isSelectSubcategory = true
+
         }
     }
     
@@ -206,6 +214,7 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
             self.stateid = id
             debugPrint("State idddd.....btnnnnt",  self.stateid = id)
             self.getlocalityapi(id: self.stateid ?? 0 )
+            self.isSelectState = true
             
         }
         
@@ -216,6 +225,7 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
             let id = self.getstatelist[index].id
             self.stateid = id
             self.lblLocality.text = item
+            self.isSelectLocality = true
             
         }
     }
@@ -227,12 +237,15 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
             self.lookingforid = id
             debugPrint("looking idddddd.....",self.lookingforid = id)
             self.getlookingforapi(id: self.lookingforid ?? 0)
+            self.isSelectLookingFor = true
+
             
         }
     }
     
     @IBAction func btnCreateOppTapped(_ sender: UIButton) {
-        self.createopportunityapi(image: self.imagearr, doc: self.documentarr)
+        self.Validation()
+//        self.createopportunityapi(image: self.imagearr, doc: self.documentarr)
     }
     
     
@@ -246,7 +259,7 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
             self.lblFeature.textColor = UIColor(red: 21, green: 114, blue: 161)
             self.viewPremium.backgroundColor = .white
             self.lblPremium.textColor =  UIColor(red: 21, green: 114, blue: 161)
-           
+            self.isSelectopp_planBasic = true
         }
     }
     
@@ -260,6 +273,7 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
             self.lblBasic.textColor = UIColor(red: 21, green: 114, blue: 161)
             self.viewPremium.backgroundColor = .white
             self.lblPremium.textColor =  UIColor(red: 21, green: 114, blue: 161)
+            self.isSelectopp_planFeatured = true
            
         }
     }
@@ -274,13 +288,89 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
             self.lblBasic.textColor = UIColor(red: 21, green: 114, blue: 161)
             self.viewFeature.backgroundColor = .white
             self.lblFeature.textColor =  UIColor(red: 21, green: 114, blue: 161)
+            self.isSelectopp_planPremium = true
            
         }
     }
-
+    //    MARK: - Validation
+        
+        func Validation(){
+            if self.isSelectimage == false && self.imagearr.count == 0{
+                self.showSimpleAlert(message: "Please Select the image")
+                return
+            }
+            else if self.isSelectDocument == false && self.documentarr.count == 0 {
+                self.showSimpleAlert(message: "Please Select the Document")
+                return
+            }
+            else if self.isSelectSubcategory == false{
+                self.showSimpleAlert(message: "Please Select the Subcategory")
+                return
+            }
+          else if String.getString(self.txtFieldTitle.text).isEmpty
+            {
+                self.showSimpleAlert(message: Notifications.ktitle)
+                return
+            }
+            else if !String.getString(self.txtFieldTitle.text).isValidUserName()
+            {
+                self.showSimpleAlert(message: Notifications.KValidtitle)
+                return
+            }
+            else if self.isSelectState == false{
+                self.showSimpleAlert(message: "Please Select the State")
+                return
+            }
+            else if self.isSelectLocality == false{
+                self.showSimpleAlert(message: "Please Select the Locality")
+                return
+            }
+            
+            else if String.getString(self.txtFieldLocationName.text).isEmpty
+            {
+                showSimpleAlert(message: Notifications.kLocationName)
+                return
+            }
+            else if String.getString(self.txtViewDiscription.text).isEmpty{
+                showSimpleAlert(message: Notifications.kDescription)
+                return
+            }
+            else if String.getString(self.txtFieldMobileNumber.text).isEmpty
+            {
+                showSimpleAlert(message: Notifications.kEnterMobileNumber)
+                return
+            }
+            else if !String.getString(self.txtFieldMobileNumber.text).isPhoneNumber()
+            {
+                self.showSimpleAlert(message: Notifications.kEnterValidMobileNumber)
+                return
+            }
+            
+            else if String.getString(self.txtFieldWhatsappNumber.text).isEmpty
+            {
+                showSimpleAlert(message: Notifications.kwhatsappnumber)
+                return
+            }
+            else if !String.getString(self.txtFieldWhatsappNumber.text).isPhoneNumber()
+            {
+                self.showSimpleAlert(message: Notifications.kvalidwhatsappnumber)
+                return
+            }
+            else if self.isSelectLookingFor == false{
+                self.showSimpleAlert(message: "Please Select looking For")
+                return
+            }
+            else if self.isSelectopp_planBasic == false && self.isSelectopp_planPremium == false && self.isSelectopp_planFeatured == false{
+                self.showSimpleAlert(message: "Please Select Opportunity Plan")
+                return
+            }
+          
+            self.view.endEditing(true)
+            self.createopportunityapi(image: self.imagearr, doc: self.documentarr)
+        }
     
     
-    // Collection view
+// MARK: - Collection view
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch collectionView{
         case self.UploadimageCollectionView:

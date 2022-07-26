@@ -13,6 +13,7 @@ class SocialPostData {
     var id:Int?
     var title:String?
     var oppr_type:String?
+    var category_id:Int?
     var business_name:String?
     var services_type:String?
     var business_mining_type:String?
@@ -31,12 +32,14 @@ class SocialPostData {
     var flag_user_post:String?
     var oppimage = [oppr_image]() // Array of dictionary
     var userdetail:user_detail?  // Simple dictionary
+    var oppdocument = [oppr_document]()  // Array of dictionary
     
    
     init(data: [String: Any]) {
         self.id = Int.getInt(data["id"])
         self.title = String.getString(data["title"])
         self.oppr_type = String.getString(data["oppr_type"])
+        self.category_id = Int.getInt(data["category_id"])
         self.business_name = String.getString(data["business_name"])
         self.services_type = String.getString(data["services_type"])
         self.business_mining_type = String.getString(data["business_mining_type"])
@@ -80,5 +83,15 @@ class user_detail{
     }
 }
 
-
+class oppr_document{
+    var id:Int?
+    var opportunity_id:Int?
+    var oppr_document:String?
+  
+    init(data:[String:Any]){
+        self.id = Int.getInt(data["id"])
+        self.opportunity_id = Int.getInt(data["opportunity_id"])
+        self.oppr_document = String.getString(data["oppr_document"])
+    }
+}
 

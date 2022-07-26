@@ -48,16 +48,7 @@ class SocialPostTableViewCell: UITableViewCell {
     }
     
     func setup(){
-//        if String.getString(obj.opp_plan) == "Basic" {
-//            cell.imgOpp_plan.isHidden = true
-//        }
-//        else  if String.getString(obj.opp_plan) == "Featured" {
-//            cell.imgOpp_plan.image = UIImage(named: "Star Filled")
-//
-//        }
-//        else if String.getString(obj.opp_plan) == "Premium" {
-//            cell.imgOpp_plan.image = UIImage(named: "Crown")
-//        }
+    
         
     }
     

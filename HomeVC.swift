@@ -64,8 +64,6 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
         case 1:
             return userTimeLine.count
             
- 
-
             
         default:
             return 0
@@ -104,8 +102,9 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
             
             cell.lblLikeCount.text = String.getString(obj.likes) + " " + "likes"
             
+            cell.imgOpp_plan.image = obj.opp_plan == "Featured" ? UIImage(named: "Star Filled") : obj.opp_plan == "Premium" ? UIImage(named: "Crown") : UIImage(named: "")
+
           
-            
            
             cell.callbackmore = {
                 let vc = self.storyboard?.instantiateViewController(withIdentifier: HomeSocialMoreVC.getStoryboardID()) as! HomeSocialMoreVC
@@ -261,7 +260,6 @@ extension HomeVC{
                         }
                       
                         
-
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                       
                         
@@ -284,5 +282,6 @@ extension HomeVC{
             }
             
         }
-    }
+    }    
+
 }

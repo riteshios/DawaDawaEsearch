@@ -13,13 +13,13 @@ class PopularSearchTableViewCell: UITableViewCell {
     @IBOutlet weak var lblPopularSearch: UILabel!
     
    var titles = [
-        "Driver tracking",
-        "Employee tracking",
-        "Driver dispatch",
-        "Track package",
-        "Track lost device",
-        "I need a job",
-        "I need an employee",
+        "Search #01",
+        "Search #02",
+        "Search #03",
+        "Search #04",
+        "Popular Search #08",
+        "Minimng",
+        "Search #099",
         "Other"]
     
 
@@ -43,8 +43,8 @@ class PopularSearchTableViewCell: UITableViewCell {
 extension PopularSearchTableViewCell:UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return titles.count
-        return 1
+       return titles.count
+       
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -52,13 +52,15 @@ extension PopularSearchTableViewCell:UICollectionViewDelegate,UICollectionViewDa
         else {
             return PopularSearchesCollectionViewCell()
         }
-//        cell.lblPopularSearch.text = titles[indexPath.row]
-//        cell.lblPopularSearch.preferredMaxLayoutWidth = collectionView.frame.width - 10
+        cell.lblPopularSearch.text = titles[indexPath.row]
+        cell.lblPopularSearch.preferredMaxLayoutWidth = collectionView.frame.width - 10
         return cell
     }
     
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-//        return CGSize(width: 100, height: 18)
-//    }
-  
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let label = UILabel(frame: CGRect.zero)
+                label.text = titles[indexPath.item]
+                label.sizeToFit()
+                return CGSize(width: label.frame.width + 20, height: 40)
+    }
 }

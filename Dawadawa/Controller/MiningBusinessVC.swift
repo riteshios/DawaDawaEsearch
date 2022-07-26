@@ -64,6 +64,18 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
     
     var plan = ""
     
+    
+    var isSelectimage = false
+    var isSelectDocument = false
+    var isSelectSubcategory = false
+    var isSelectServiceType = false
+    var isSelectState = false
+    var isSelectLocality = false
+    var isSelectLookingFor = false
+    var isSelectopp_planBasic = false
+    var isSelectopp_planPremium = false
+    var isSelectopp_planFeatured = false
+    
     var getSubCategorylist = [getSubCartegoryModel]()
     var getstatelist       = [getStateModel]()
     var getlocalitylist    = [getLocalityModel]()
@@ -137,6 +149,7 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
                 btnSelectImage.isEnabled = false
             }
             self.viewSelectCategoryTop.constant = 420  // 310
+            self.isSelectimage = true
         }
         
     }
@@ -151,27 +164,22 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
             }
         }
     }
-    }
+}
     
     @IBAction func btnSelectDocumentTapped(_ sender: UIButton) {
-        if imagearr.count == 0{
-            showSimpleAlert(message: "First upload Image")
-        }
-        else{
-       
-            sender.isSelected = !sender.isSelected
-            if self.btnSelectDocument.isSelected == true{
-                if documentarr.count == 0{
-                    btnSelectDocument.isEnabled = true
-                    self.openFileBrowser()
-                    self.viewSelectCategoryTop.constant = 420
-                    
-                }
-                else{
-                    btnSelectDocument.isEnabled = false
-                }
+        sender.isSelected = !sender.isSelected
+        if self.btnSelectDocument.isSelected == true{
+            if documentarr.count == 0{
+                btnSelectDocument.isEnabled = true
+                self.openFileBrowser()
+                self.viewSelectCategoryTop.constant = 420
+            }
+            else{
+                btnSelectDocument.isEnabled = false
             }
         }
+         self.isSelectDocument = true
+        
     }
     
     @IBAction func btnAddMoreDocumentTapped(_ sender: UIButton) {
@@ -186,6 +194,7 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
     @IBAction func btnSelectSubCategoryTapped(_ sender: UIButton) {
         kSharedAppDelegate?.dropDown(dataSource: getSubCategorylist.map{String.getString($0.sub_cat_name)}, text: btnSubCategory) { (index, item) in
             self.lblSubCategory.text = item
+            self.isSelectSubcategory = true
         }
     }
     
@@ -197,6 +206,7 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
             self.stateid = id
             debugPrint("State idddd.....btnnnnt",  self.stateid = id)
             self.getlocalityapi(id: self.stateid ?? 0 )
+            self.isSelectState = true
            
         }
         
@@ -207,6 +217,7 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
             let id = self.getstatelist[index].id
             self.stateid = id
             self.lblLocality.text = item
+            self.isSelectLocality = true
            
         }
     }
@@ -221,6 +232,7 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
             self.lblFeature.textColor = UIColor(red: 21, green: 114, blue: 161)
             self.viewPremium.backgroundColor = .white
             self.lblPremium.textColor =  UIColor(red: 21, green: 114, blue: 161)
+            self.isSelectopp_planBasic = true
            
         }
     }
@@ -235,6 +247,7 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
             self.lblBasic.textColor = UIColor(red: 21, green: 114, blue: 161)
             self.viewPremium.backgroundColor = .white
             self.lblPremium.textColor =  UIColor(red: 21, green: 114, blue: 161)
+            self.isSelectopp_planFeatured = true
            
         }
     }
@@ -249,18 +262,21 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
             self.lblBasic.textColor = UIColor(red: 21, green: 114, blue: 161)
             self.viewFeature.backgroundColor = .white
             self.lblFeature.textColor =  UIColor(red: 21, green: 114, blue: 161)
+            self.isSelectopp_planPremium = true
            
         }
     }
 
     @IBAction func btnCreateOppTapped(_ sender: UIButton) {
-        self.createopportunityapi(image: self.imagearr, doc: self.documentarr)
+        self.Validation()
+//        self.createopportunityapi(image: self.imagearr, doc: self.documentarr)
     }
     
     @IBAction func btnServiceTypeTapped(_ sender: UIButton) {
         kSharedAppDelegate?.dropDown(dataSource: getServiceTypeList.map{String.getString($0.services_type)}, text: btnServiceType){
             (index,item) in
             self.lblServiceType.text = item
+            self.isSelectServiceType = true
         }
     }
     
@@ -273,11 +289,92 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
             self.lookingforid = id
             debugPrint("looking idddddd.....",self.lookingforid = id)
             self.getlookingforapi(id: self.lookingforid ?? 0)
+            self.isSelectLookingFor = true
             
         }
     }
+    //    MARK: - Validation
+        
+        func Validation(){
+            if self.isSelectimage == false && self.imagearr.count == 0{
+                self.showSimpleAlert(message: "Please Select the image")
+                return
+            }
+            else if self.isSelectDocument == false && self.documentarr.count == 0 {
+                self.showSimpleAlert(message: "Please Select the Document")
+                return
+            }
+            else if self.isSelectSubcategory == false{
+                self.showSimpleAlert(message: "Please Select the Subcategory")
+                return
+            }
+          else if String.getString(self.txtFieldTitle.text).isEmpty
+            {
+                self.showSimpleAlert(message: Notifications.ktitle)
+                return
+            }
+            else if !String.getString(self.txtFieldTitle.text).isValidUserName()
+            {
+                self.showSimpleAlert(message: Notifications.KValidtitle)
+                return
+            }
+            else if self.isSelectServiceType == false{
+                self.showSimpleAlert(message: "Please Select Service Type")
+                return
+            }
+            else if self.isSelectState == false{
+                self.showSimpleAlert(message: "Please Select the State")
+                return
+            }
+            else if self.isSelectLocality == false{
+                self.showSimpleAlert(message: "Please Select the Locality")
+                return
+            }
+            
+            else if String.getString(self.txtFieldLocationName.text).isEmpty
+            {
+                showSimpleAlert(message: Notifications.kLocationName)
+                return
+            }
+            else if String.getString(self.TextViewDescription.text).isEmpty{
+                showSimpleAlert(message: Notifications.kDescription)
+                return
+            }
+            else if String.getString(self.txtFieldMobileNumber.text).isEmpty
+            {
+                showSimpleAlert(message: Notifications.kEnterMobileNumber)
+                return
+            }
+            else if !String.getString(self.txtFieldMobileNumber.text).isPhoneNumber()
+            {
+                self.showSimpleAlert(message: Notifications.kEnterValidMobileNumber)
+                return
+            }
+            
+            else if String.getString(self.txtFieldWhatsappNumber.text).isEmpty
+            {
+                showSimpleAlert(message: Notifications.kwhatsappnumber)
+                return
+            }
+            else if !String.getString(self.txtFieldWhatsappNumber.text).isPhoneNumber()
+            {
+                self.showSimpleAlert(message: Notifications.kvalidwhatsappnumber)
+                return
+            }
+            else if self.isSelectLookingFor == false{
+                self.showSimpleAlert(message: "Please Select looking For")
+                return
+            }
+            else if self.isSelectopp_planBasic == false && self.isSelectopp_planPremium == false && self.isSelectopp_planFeatured == false{
+                self.showSimpleAlert(message: "Please Select Opportunity Plan")
+                return
+            }
+          
+            self.view.endEditing(true)
+            self.createopportunityapi(image: self.imagearr, doc: self.documentarr)
+        }
     
-    // Collection view
+// MARK: - Collection view
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch collectionView{
         case self.UploadimageCollectionView:

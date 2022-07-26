@@ -58,14 +58,27 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
     var documentarr = [URL]()
     var docummentarray = [String]()
     
-    var plan = ""
     
+    var isSelectimage = false
+    var isSelectDocument = false
+    var isSelectSubcategory = false
+    var isSelectState = false
+    var isSelectLocality = false
+    var isSelectLookingFor = false
+    var isSelectopp_planBasic = false
+    var isSelectopp_planPremium = false
+    var isSelectopp_planFeatured = false
+    
+    var plan = ""
+    var oppidget:Int?
     
     var getCategorylist    = [getCartegoryModel]()
     var getSubCategorylist = [getSubCartegoryModel]()
     var getstatelist       = [getStateModel]()
     var getlocalitylist    = [getLocalityModel]()
     var getlookingForList  = [getLookingForModel]()
+    
+    var userTimeLine = [SocialPostData]()
     
     // MARK: - Life Cycle
     
@@ -76,6 +89,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
         self.getlookingforapi(id: self.lookingforid ?? 0)
         
         self.setup()
+        self.fetdata()
         
     }
     
@@ -90,6 +104,9 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
         
     }
     
+    func fetdata(){
+        self.txtFieldTitle.text = self.userTimeLine.first?.title
+    }
     // MARK: - @IBActions
     
     @IBAction func btnBackTapped(_ sender: UIButton) {
@@ -129,10 +146,13 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
                 
                 debugPrint("imagearraycount..........",self.imagearr.count)
             }
+            
             else{
                 btnSelectImage.isEnabled = false
             }
             self.viewSelectCategoryTop.constant = 420  // 310
+            self.isSelectimage = true
+           
         }
     }
     
@@ -150,24 +170,19 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
 }
     
     @IBAction func btnSelectDocumentTapped(_ sender: UIButton) {
-        if imagearr.count == 0{
-            showSimpleAlert(message: "First upload Image")
-        }
-        else{
-       
             sender.isSelected = !sender.isSelected
             if self.btnSelectDocument.isSelected == true{
                 if documentarr.count == 0{
                     btnSelectDocument.isEnabled = true
                     self.openFileBrowser()
                     self.viewSelectCategoryTop.constant = 420
-                    
                 }
                 else{
                     btnSelectDocument.isEnabled = false
                 }
             }
-        }
+        self.isSelectDocument = true
+        
     }
     @IBAction func btnAddMoreDocumentTapped(_ sender: UIButton) {
         if self.btnSelectDocument.isSelected == true{
@@ -185,6 +200,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
             let subcatid = self.getSubCategorylist[index].id
             self.subcatid = subcatid
             debugPrint("subcatid........",subcatid)
+            self.isSelectSubcategory = true
         }
     }
     
@@ -196,6 +212,8 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
             self.stateid = id
             debugPrint("State idddd.....btnnnnt",  self.stateid = id)
             self.getlocalityapi(id: self.stateid ?? 0 )
+            self.isSelectState = true
+            
             
         }
         
@@ -204,6 +222,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
         kSharedAppDelegate?.dropDown(dataSource: getlocalitylist.map{String.getString($0.local_name)}, text: btnLocality){
             (index,item) in
             self.lblLocality.text = item
+            self.isSelectLocality = true
             
         }
     }
@@ -216,6 +235,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
             self.lookingforid = id
             debugPrint("looking idddddd.....",self.lookingforid = id)
             self.getlookingforapi(id: self.lookingforid ?? 0)
+            self.isSelectLookingFor = true
             
         }
     }
@@ -230,6 +250,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
             self.lblFeature.textColor = UIColor(red: 21, green: 114, blue: 161)
             self.viewPremium.backgroundColor = .white
             self.lblPremium.textColor =  UIColor(red: 21, green: 114, blue: 161)
+            self.isSelectopp_planBasic = true
           
         }
     }
@@ -244,6 +265,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
             self.lblBasic.textColor = UIColor(red: 21, green: 114, blue: 161)
             self.viewPremium.backgroundColor = .white
             self.lblPremium.textColor =  UIColor(red: 21, green: 114, blue: 161)
+            self.isSelectopp_planFeatured = true
            
         }
     }
@@ -258,15 +280,94 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
             self.lblBasic.textColor = UIColor(red: 21, green: 114, blue: 161)
             self.viewFeature.backgroundColor = .white
             self.lblFeature.textColor =  UIColor(red: 21, green: 114, blue: 161)
+            self.isSelectopp_planPremium = true
            
         }
     }
     
     @IBAction func btnCreateOppTapped(_ sender: UIButton) {
+        self.Validation()
+//        self.createopportunityapi(image: self.imagearr, doc: self.documentarr)
+    }
+    
+//    MARK: - Validation
+    
+    func Validation(){
+        if self.isSelectimage == false && self.imagearr.count == 0{
+            self.showSimpleAlert(message: "Please Select the image")
+            return
+        }
+        else if self.isSelectDocument == false && self.documentarr.count == 0 {
+            self.showSimpleAlert(message: "Please Select the Document")
+            return
+        }
+        else if self.isSelectSubcategory == false{
+            self.showSimpleAlert(message: "Please Select the Subcategory")
+            return
+        }
+      else if String.getString(self.txtFieldTitle.text).isEmpty
+        {
+            self.showSimpleAlert(message: Notifications.ktitle)
+            return
+        }
+        else if !String.getString(self.txtFieldTitle.text).isValidUserName()
+        {
+            self.showSimpleAlert(message: Notifications.KValidtitle)
+            return
+        }
+        else if self.isSelectState == false{
+            self.showSimpleAlert(message: "Please Select the State")
+            return
+        }
+        else if self.isSelectLocality == false{
+            self.showSimpleAlert(message: "Please Select the Locality")
+            return
+        }
+        
+        else if String.getString(self.txtFieldLocationName.text).isEmpty
+        {
+            showSimpleAlert(message: Notifications.kLocationName)
+            return
+        }
+        else if String.getString(self.TextViewDescription.text).isEmpty{
+            showSimpleAlert(message: Notifications.kDescription)
+            return
+        }
+        else if String.getString(self.txtFieldMobileNumber.text).isEmpty
+        {
+            showSimpleAlert(message: Notifications.kEnterMobileNumber)
+            return
+        }
+        else if !String.getString(self.txtFieldMobileNumber.text).isPhoneNumber()
+        {
+            self.showSimpleAlert(message: Notifications.kEnterValidMobileNumber)
+            return
+        }
+        
+        else if String.getString(self.txtFieldWhatsappNumber.text).isEmpty
+        {
+            showSimpleAlert(message: Notifications.kwhatsappnumber)
+            return
+        }
+        else if !String.getString(self.txtFieldWhatsappNumber.text).isPhoneNumber()
+        {
+            self.showSimpleAlert(message: Notifications.kvalidwhatsappnumber)
+            return
+        }
+        else if self.isSelectLookingFor == false{
+            self.showSimpleAlert(message: "Please Select looking For")
+            return
+        }
+        else if self.isSelectopp_planBasic == false && self.isSelectopp_planPremium == false && self.isSelectopp_planFeatured == false{
+            self.showSimpleAlert(message: "Please Select Opportunity Plan")
+            return
+        }
+      
+        self.view.endEditing(true)
         self.createopportunityapi(image: self.imagearr, doc: self.documentarr)
     }
     
-    // Collection view
+// MARK: - Collection view
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch collectionView{
@@ -888,7 +989,7 @@ extension RockPitOpportunityVC{
                         
                     }
                     else if  Int.getInt(dictResult["status"]) == 400{
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                 default:

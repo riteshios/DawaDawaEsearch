@@ -13,11 +13,11 @@ class PopularSearchesCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-//        self.layer.borderColor = UIColor.gray.cgColor
-//        self.layer.borderWidth = 1
-//        self.layer.cornerRadius = lblPopularSearch.frame.size.height / 2.0
-//        self.backgroundColor = UIColor(red: 241, green: 249, blue: 253)
-//        self.lblPopularSearch.textColor = .black
+        self.layer.borderColor = CGColor(red: 21, green: 114, blue: 161, alpha: 1)
+        self.layer.borderWidth = 1
+        self.layer.cornerRadius = lblPopularSearch.frame.size.height / 2.0
+        self.backgroundColor = UIColor(red: 21, green: 114, blue: 161)
+        self.lblPopularSearch.textColor = UIColor(red: 21, green: 114, blue: 161)
     }
 
 }

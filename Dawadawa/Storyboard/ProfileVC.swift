@@ -13,7 +13,10 @@ class ProfileVC: UIViewController {
     @IBOutlet weak var lblFullName: UILabel!
     @IBOutlet weak var lblMobileNumber: UILabel!
     @IBOutlet weak var lblEmail: UILabel!
+    
+    var oppid:Int?
     var imgUrl = ""
+    var docUrl = ""
     var isProfileImageSelected = false
     var userImage:String?
     var userTimeLine = [SocialPostData]()
@@ -222,17 +225,10 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
             cell.lblTitle.text = String.getString(obj.title)
             cell.lblDescribtion.text = String.getString(obj.description)
             cell.Imageuser.downlodeImage(serviceurl: profilrimageurl, placeHolder: UIImage(named: "Boss"))
-            if String.getString(obj.opp_plan) == "Basic" {
-                cell.imgOpp_plan.isHidden = true
-            }
-            else  if String.getString(obj.opp_plan) == "Featured" {
-                cell.imgOpp_plan.image = UIImage(named: "Star Filled")
-                
-            }
-            else if String.getString(obj.opp_plan) == "Premium" {
-                cell.imgOpp_plan.image = UIImage(named: "Crown")
-            }
+            print("-=-opp_plan=-=-\(String.getString(obj.opp_plan))")
             
+            cell.imgOpp_plan.image = obj.opp_plan == "Featured" ? UIImage(named: "Star Filled") : obj.opp_plan == "Premium" ? UIImage(named: "Crown") : UIImage(named: "")
+
           
             cell.img = obj.oppimage
             cell.imgUrl = self.imgUrl
@@ -245,7 +241,19 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                 vc.modalPresentationStyle = .overCurrentContext
                 vc.callback = { txt in
                     
+                    if txt == "Dismiss"{
+                        self.dismiss(animated: true)
+                        self.listoppoertunityapi()
+                    }
+                    
                     if txt == "Update"{
+                        if self.userTimeLine.first?.category_id == 1{
+                            let oppid = Int(self.userTimeLine.first?.id ?? 0)
+            
+                            self.oppid = oppid
+                            debugPrint("oppid+++++++",oppid)
+                            self.opportunitydetailsapi(oppr_id: oppid ?? 0)
+                        }
                         
                         
                     }
@@ -287,7 +295,7 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                                     vc.dismiss(animated: false) {
                                         let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
                                         self.closeopportunityapi(opr_id: oppid)
-                                        debugPrint("oppid......",oppid)
+                                        debugPrint("oppidclose......",oppid)
 
 //                                        let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProfileVC") as! ProfileVC
 //                                        self.navigationController?.popViewController(animated: true)
@@ -393,7 +401,7 @@ extension ProfileVC{
     
     func listoppoertunityapi(){
         
-        CommonUtils.showHud(show: true)
+        CommonUtils.showHudWithNoInteraction(show: true)
         
         
         if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
@@ -440,11 +448,13 @@ extension ProfileVC{
                         
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         self?.tblViewSocialPost.reloadData()
+                        CommonUtils.showHudWithNoInteraction(show: false)
+                        
                         
                     }
                     
                     else if  Int.getInt(dictResult["status"]) == 400{
-                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+            
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
@@ -737,5 +747,85 @@ extension ProfileVC{
             }
         }
     }
+    
+//    / Opportunity Details Api for Rock&Pit opportunities
+        
+        func opportunitydetailsapi(oppr_id:Int){
+            CommonUtils.showHud(show: true)
+
+
+            if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
+                let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+                let septoken = endToken.components(separatedBy: " ")
+                if septoken[0] != "Bearer"{
+                    let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
+                    kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
+                }
+            }
+
+
+            let params:[String : Any] = [
+                "oppr_id":oppr_id
+            ]
+
+            debugPrint("oppr_id...===...",oppr_id)
+            TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kopportunitydetails, requestMethod: .POST,
+                                                       requestParameters:params, withProgressHUD: false)
+            {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
+
+                CommonUtils.showHudWithNoInteraction(show: false)
+
+                if errorType == .requestSuccess {
+
+                    let dictResult = kSharedInstance.getDictionary(result)
+
+                    switch Int.getInt(statusCode) {
+                    case 200:
+
+                        if Int.getInt(dictResult["status"]) == 200{
+
+                            let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+                            let septoken = endToken.components(separatedBy: " ")
+                            if septoken[0] == "Bearer"{
+                                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
+                            }
+
+                            self?.imgUrl = String.getString(dictResult["opr_images"])
+                            self?.docUrl = String.getString(dictResult["opr_documents"])
+                            let Opportunity = kSharedInstance.getArray(withDictionary: dictResult["Opportunity"])
+                            self?.userTimeLine = Opportunity.map{SocialPostData(data: kSharedInstance.getDictionary($0))}
+
+                            print("DataOpportunityDetails-----====-=\(self?.userTimeLine)")
+
+                            let vc = self?.storyboard?.instantiateViewController(withIdentifier: RockPitOpportunityVC.getStoryboardID()) as! RockPitOpportunityVC
+                            vc.oppidget = self?.oppid
+                            
+                            debugPrint("oppidget=-=-=-=-=",vc.oppidget)
+                            self?.navigationController?.pushViewController(vc, animated: true)
+                            
+
+
+                            CommonUtils.showError(.info, String.getString(dictResult["message"]))
+
+
+                        }
+
+                        else if  Int.getInt(dictResult["status"]) == 400{
+
+                            CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        }
+
+                    default:
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    }
+                } else if errorType == .noNetwork {
+                    CommonUtils.showToastForInternetUnavailable()
+
+                } else {
+                    CommonUtils.showToastForDefaultError()
+                }
+
+            }
+        }
 }
 
