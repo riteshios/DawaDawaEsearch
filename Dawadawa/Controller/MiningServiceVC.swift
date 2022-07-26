@@ -386,7 +386,7 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
             }
           
             self.view.endEditing(true)
-            self.createopportunityapi(image: self.imagearr, doc: self.documentarr)
+            self.createopportunityapi()
         }
     
     // MARK: - Collection view
@@ -1038,7 +1038,7 @@ extension MiningServiceVC{
     
     //    Create Opportunity Api
     
-    func createopportunityapi(image:[UIImage?],doc:[URL?]){
+    func createopportunityapi(){
         CommonUtils.showHud(show: true)
         
         if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
@@ -1083,7 +1083,7 @@ extension MiningServiceVC{
         
         
         
-        let uploadimage:[String:Any] = ["filenames[]":self.imagearr ?? UIImage()]
+        let uploadimage:[String:Any] = ["filenames[]":self.imagearr]
         let uploaddocument:[String:Any] = ["opportunity_documents[]":self.documentarr]
         
         debugPrint("filenames[]......",self.imagearr)

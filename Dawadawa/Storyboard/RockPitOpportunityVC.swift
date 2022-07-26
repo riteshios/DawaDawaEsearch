@@ -364,7 +364,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
         }
       
         self.view.endEditing(true)
-        self.createopportunityapi(image: self.imagearr, doc: self.documentarr)
+        self.createopportunityapi()
     }
     
 // MARK: - Collection view
@@ -483,8 +483,9 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
         // self.doc = (url)
 //        print("doc path=-=-=\(doc)")
         self.documentarr.append(url)
-        self.docummentarray.append(url.lastPathComponent)
         print("doc documentarr=-=-=\(documentarr)")
+        self.docummentarray.append(url.lastPathComponent)
+        print("doc documentarr=-=-=\(documentarr.count)")
         self.UploaddocumentCollectionView.reloadData()
         
         
@@ -920,7 +921,7 @@ extension RockPitOpportunityVC{
     
     //    Create Opportunity Api
     
-    func createopportunityapi(image:[UIImage?],doc:[URL?]){
+    func createopportunityapi(){
         CommonUtils.showHud(show: true)
         
         if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
@@ -962,7 +963,7 @@ extension RockPitOpportunityVC{
         
         
         
-        let uploadimage:[String:Any] = ["filenames[]":self.imagearr ?? UIImage()]
+        let uploadimage:[String:Any] = ["filenames[]":self.imagearr]
         let uploaddocument:[String:Any] = ["opportunity_documents[]":self.documentarr]
         
         debugPrint("filenames[]......",self.imagearr)

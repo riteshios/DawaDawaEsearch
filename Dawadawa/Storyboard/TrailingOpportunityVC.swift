@@ -366,7 +366,7 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
             }
           
             self.view.endEditing(true)
-            self.createopportunityapi(image: self.imagearr, doc: self.documentarr)
+            self.createopportunityapi()
         }
     
     
@@ -925,7 +925,7 @@ extension TrailingOpportunityVC{
     
     //    Create Opportunity Api
     
-    func createopportunityapi(image:[UIImage?],doc:[URL?]){
+    func createopportunityapi(){
         CommonUtils.showHud(show: true)
         
         if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
@@ -967,7 +967,7 @@ extension TrailingOpportunityVC{
         
         
         
-        let uploadimage:[String:Any] = ["filenames[]":self.imagearr ?? UIImage()]
+        let uploadimage:[String:Any] = ["filenames[]":self.imagearr]
         let uploaddocument:[String:Any] = ["opportunity_documents[]":self.documentarr]
         
         debugPrint("filenames[]......",self.imagearr)
