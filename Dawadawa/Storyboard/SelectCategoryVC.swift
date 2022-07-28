@@ -17,9 +17,6 @@ class SelectCategoryVC: UIViewController,UITableViewDelegate,UITableViewDataSour
     //    MARK: - Properties
     
     
-
-    
-    
     @IBOutlet weak var tableviewSelectCategory: UITableView!
     
     var getCategoryarr = [getCartegoryModel]()
@@ -144,109 +141,4 @@ extension SelectCategoryVC{
                 }
             }
         }
-    
-    
-    
-//    func getcategoryapi(){
-//        CommonUtils.showHudWithNoInteraction(show: true)
-//        categoryapi(language: "en") { success, catdata, baseurl, message in
-//            CommonUtils.showHudWithNoInteraction(show: false)
-//            if success == 200{
-//                if let catdata = catdata {
-//                    self.getCategoryarr = catdata
-//                    self.imgbaseurl = "https://demo4app.com/dawadawa/public/front_assets/assets/media/category_image/"
-//                    print(self.getCategoryarr)
-//                    self.tableviewSelectCategory.reloadData()
-//                }
-//            }
-//            else{
-//                CommonUtils.showError(.error, String.getString(message))
-//            }
-//            
-//        }
-//        
-//    }
-    
 }
-//extension SelectCategoryVC{
-//    func categoryapi(language:String, completionBlock: @escaping (_ success: Int, _ catdata : [getCartegoryModel]?, _ baseurl: String,_ message: String) -> Void) {
-//
-//
-//        let headers : HTTPHeaders = ["Authorization": "Bearer " + kSharedUserDefaults.getLoggedInAccessToken(), "Accept-Language": language]
-//        debugPrint("headers......\(headers)")
-//
-//        var params = Dictionary<String, String>()
-//
-//        //
-//        let url = kBASEURL + ServiceName.kgetcategory
-//        //
-//        //        print("============\(params)")
-//        print(url)
-//
-//        Alamofire.request(url,method: .get, parameters : params, headers: headers).responseJSON { response in
-//            switch response.result {
-//            case.success:
-//                if let value = response.result.value {
-//                    let json = JSON(value)
-//
-//                    print(" team Details json is:\n\(json)")
-//
-//                    let parser = getCategoryParser(json: json)
-//
-//
-//                    completionBlock(parser.status,parser.Categories,parser.baseurl,parser.message)
-//                }else{
-//                    completionBlock(0,nil,"",response.result.error?.localizedDescription ?? "Some thing went wrong")
-//                }
-//
-//            case .failure(let error):
-//                completionBlock(0,nil,"",error.localizedDescription)
-//            }
-//
-//        }
-//    }
-//    //    parser
-//    class getCategoryParser : NSObject{
-//
-//        let KResponsecode = "responsecode"
-//        let kStatus = "status"
-//        let kMessage = "message"
-//        let kCategories = "Categories"
-//        let kbaseurl = "base_url"
-//
-//
-//        var responsecode = 0
-//        var status = 0
-//        var baseurl = ""
-//        var message = ""
-//        var Categories =  [getCartegoryModel]()
-//
-//        override init() {
-//            super.init()
-//        }
-//        init(json: JSON) {
-//            if let responsecode = json[KResponsecode].int as Int?{
-//                self.responsecode = responsecode
-//            }
-//            if let status = json[kStatus].int as Int?{
-//                self.status = status
-//            }
-//            if let message = json[kMessage].string as String?{
-//                self.message = message
-//            }
-//            if let baseurl = json[kbaseurl].string as String?{
-//                self.baseurl = baseurl
-//            }
-//
-//
-//            if let passingData = json[kCategories].arrayObject as? Array<Dictionary<String, AnyObject>>{
-//
-//                for item in passingData {
-//                    let Faq = getCartegoryModel(dictionary: item)
-//                    self.Categories.append(Faq)
-//                }
-//            }
-//            super.init()
-//        }
-//    }
-//}

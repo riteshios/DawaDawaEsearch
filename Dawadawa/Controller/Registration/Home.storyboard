@@ -11084,6 +11084,9 @@ this opportunity?</string>
         <designable name="hYJ-9L-6ep">
             <size key="intrinsicContentSize" width="-1" height="49"/>
         </designable>
+        <designable name="ybI-DQ-vGn">
+            <size key="intrinsicContentSize" width="-1" height="65"/>
+        </designable>
     </designables>
     <resources>
         <image name="Boss" width="75" height="75"/>

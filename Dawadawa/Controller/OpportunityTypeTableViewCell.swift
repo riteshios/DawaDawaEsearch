@@ -8,7 +8,9 @@
 import UIKit
 
 class OpportunityTypeTableViewCell: UITableViewCell {
+    
 
+    @IBOutlet weak var lblCategory: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
