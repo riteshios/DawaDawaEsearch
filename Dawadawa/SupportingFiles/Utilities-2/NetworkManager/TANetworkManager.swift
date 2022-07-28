@@ -579,7 +579,7 @@ public class TANetworkManager {
     
     //    Multipart Api and Accept_language name in Header
     
-    func requestMultiPartwithlanguage(withServiceName serviceName: String, requestMethod method: HTTPMethod, requestImages arrImages: [Dictionary<String, Any>],requestdoc arrdoc: [Dictionary<String,Any>] ,requestVideos arrVideos: Dictionary<String, Any>, requestData postData: Dictionary<String, Any>, req reqImage : [UIImage],req reqdoc:[URL],completionClosure: @escaping (_ result: Any?, _ error: Error?, _ errorType: ErrorType, _ statusCode: Int?) -> ()) -> Void {
+    func requestMultiPartwithlanguage(withServiceName serviceName: String, requestMethod method: HTTPMethod, requestImages arrImages: Dictionary<String, Any>,requestdoc arrdoc: Dictionary<String,Any> ,requestVideos arrVideos: Dictionary<String, Any>, requestData postData: Dictionary<String, Any>, req reqImage : [UIImage],req reqdoc:[URL],completionClosure: @escaping (_ result: Any?, _ error: Error?, _ errorType: ErrorType, _ statusCode: Int?) -> ()) -> Void {
         
         if NetworkReachabilityManager()?.isReachable == true {
             let serviceUrl = getServiceUrl(string: serviceName)
@@ -612,25 +612,72 @@ public class TANetworkManager {
                     //   }
                     
                 }
-                if reqdoc.count != 0{
-                    for doc in reqdoc{
+                
+                for doc in reqdoc{
+
+
+                    debugPrint("doc.......",doc)
+                    //                        let url = Bundle.main.url(forResource: "\(doc)", withExtension:"pdf")
+                    // let url = URL(string: doc)
+                    //   debugPrint("url.......",url)
+                    if let data =  try? Data.init(contentsOf: doc)
+{
+                        print("==========pdf=========\(data)")
+
+                        multipartFormData.append(data, withName: "opportunity_documents[]", fileName: "data.pdf", mimeType: "application/pdf")
+
                         
-                        
-                        debugPrint("doc.......",doc)
-                        //                        let url = Bundle.main.url(forResource: "\(doc)", withExtension:"pdf")
-                        // let url = URL(string: doc)
-                        //   debugPrint("url.......",url)
-                        if let data =  try? Data.init(contentsOf: doc) {
-                            
-                            
-                            multipartFormData.append(data, withName: "opportunity_documents[]", fileName: "data.pdf", mimeType: "application/pdf")
-                            
-                            print("==========pdf=========\(data)")
-                            
-                        }
+
                     }
-                    
                 }
+//                if reqdoc.count != 0{
+//
+//
+////                        debugPrint("doc.......",doc)
+//
+//                        if var firstDoc = reqdoc.first, firstDoc.startAccessingSecurityScopedResource() {
+//                                    defer {
+//                                        DispatchQueue.main.async {
+//                                            firstDoc.stopAccessingSecurityScopedResource()
+//                                        }
+//                                    }
+//                                    do {
+//                                        let data = try Data.init(contentsOf: firstDoc)
+////                                        let dest = URL(type: .doc, fileName: firstDoc.lastPathComponent)
+////                                        try data.write(to: data)
+////                                        firstDoc = dest
+//                                        multipartFormData.append(data, withName: "opportunity_documents[]", fileName: "data.pdf", mimeType: "application/pdf")
+//
+//                                        print("==========pdf=========\(data)")
+//
+//                                    } catch {
+//                                        debugPrint("Error : ", error)
+//                                    }
+//
+//                            }
+//                     }
+                 
+            //    if reqdoc.count != 0{
+          
+//                for doc in reqdoc{
+//
+//
+//                    debugPrint("doc.......",doc)
+//                    //                        let url = Bundle.main.url(forResource: "\(doc)", withExtension:"pdf")
+//                    // let url = URL(string: doc)
+//                    //   debugPrint("url.......",url)
+//                    if let data = NSData(contentsOf: doc as URL)
+//{
+//                        print("==========pdf=========\(data)")
+//
+//                        multipartFormData.append(data as Data, withName: "opportunity_documents[]", fileName: "data.pdf", mimeType: "application/pdf")
+//
+//
+//
+//                    }
+//                }
+
+              //  }
                 
 //                let documentDic     = kSharedInstance.getDictionaryArray(withDictionary: document)
 //

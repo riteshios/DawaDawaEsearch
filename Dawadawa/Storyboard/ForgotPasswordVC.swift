@@ -75,20 +75,6 @@ class ForgotPasswordVC: UIViewController {
     
     
     @IBAction func btnsendCodeTapped(_ sender: UIButton) {
-      
-//        if (self.lblSendEmail_Phone.text == "Send on email address")
-//           {
-//            self.lblSendEmail_Phone.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Send on email address", comment: "")
-//            self.fieldvalidationPhoneNumber()
-//        }
-//
-//        else if (self.lblSendEmail_Phone.text == "Send on phone number")
-//
-//        {
-//            lblSendEmail_Phone.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Send on phone number", comment: "")
-//            self.fieldvalidationEmailAdress()
-//        }
-        
         if self.lblSendEmail_Phone.text == LocalizationSystem.sharedInstance.localizedStringForKey(key: "Send on email address", comment: "")
         {
             self.fieldvalidationPhoneNumber()

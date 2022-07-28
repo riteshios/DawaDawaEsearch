@@ -99,6 +99,8 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
     }
     
     func setup(){
+        self.txtFieldMobileNumber.keyBoardType = .numberPad
+        self.txtFieldWhatsappNumber.keyBoardType = .numberPad
         self.viewCreateOpportunity.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
         self.setTextFieldUI(textField: txtFieldTitle, place: "Title", floatingText: "Title")
         self.setTextFieldUI(textField: txtFieldLocationName, place: "Location name", floatingText: "Location name")
@@ -1090,7 +1092,7 @@ extension MiningServiceVC{
         debugPrint("opportunity_documents[]......",self.documentarr)
         
         
-        TANetworkManager.sharedInstance.requestMultiPartwithlanguage(withServiceName:ServiceName.kcreateopportunity , requestMethod: .post, requestImages: [uploadimage], requestdoc: [uploaddocument],requestVideos: [:], requestData:params, req: self.imagearr, req:self.documentarr)
+        TANetworkManager.sharedInstance.requestMultiPartwithlanguage(withServiceName:ServiceName.kcreateopportunity , requestMethod: .post, requestImages: [:], requestdoc: [:],requestVideos: [:], requestData:params, req: self.imagearr, req:self.documentarr)
         { (result:Any?, error:Error?, errortype:ErrorType?, statusCode:Int?) in
             CommonUtils.showHudWithNoInteraction(show: false)
             if errortype == .requestSuccess {

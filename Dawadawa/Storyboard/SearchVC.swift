@@ -19,9 +19,18 @@ class SearchVC: UIViewController,UITextFieldDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+       
         self.setup()
     }
+    
+//    override func viewWillAppear(_ animated: Bool) {
+//        self.hidesBottomBarWhenPushed = false
+//        self.tabBarController?.tabBar.isHidden = false
+//        self.tabBarController?.hidesBottomBarWhenPushed = false
+//        self.tabBarController?.tabBar.layer.zPosition = 0
+//    }
+   
+
     
     func setup(){
         tblViewSearchOpp.register(UINib(nibName: "PopularSearchTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "PopularSearchTableViewCell")

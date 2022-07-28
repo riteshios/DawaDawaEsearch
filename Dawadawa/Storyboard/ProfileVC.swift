@@ -248,11 +248,11 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                     
                     if txt == "Update"{
                         if self.userTimeLine.first?.category_id == 1{
-                            let oppid = Int(self.userTimeLine.first?.id ?? 0)
+                            let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
             
                             self.oppid = oppid
                             debugPrint("oppid+++++++",oppid)
-                            self.opportunitydetailsapi(oppr_id: oppid ?? 0)
+                            self.opportunitydetailsapi(oppr_id: oppid)
                         }
                         
                         

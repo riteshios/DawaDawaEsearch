@@ -117,6 +117,7 @@ PODS:
   - nanopb/decode (2.30908.0)
   - nanopb/encode (2.30908.0)
   - PromisesObjC (2.0.0)
+  - RangeSeekSlider (1.8.0)
   - SDWebImage (4.4.8):
     - SDWebImage/Core (= 4.4.8)
   - SDWebImage/Core (4.4.8)
@@ -139,6 +140,7 @@ DEPENDENCIES:
   - GooglePlaces
   - GoogleSignIn
   - IQKeyboardManagerSwift
+  - RangeSeekSlider
   - SDWebImage (~> 4.0)
   - SKFloatingTextField
   - STTabbar
@@ -170,6 +172,7 @@ SPEC REPOS:
     - IQKeyboardManagerSwift
     - nanopb
     - PromisesObjC
+    - RangeSeekSlider
     - SDWebImage
     - SKFloatingTextField
     - STTabbar
@@ -200,6 +203,7 @@ SPEC CHECKSUMS:
   IQKeyboardManagerSwift: 6e839c575c4aa1078d58a596e41244e77abe918f
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
+  RangeSeekSlider: 650b11fa1edcb92e1e0ede797669d98622570fb5
   SDWebImage: 783af2c3fa36291a250030c4752ee370a9a51d13
   SKFloatingTextField: 6393b15bc7a3d8399e592e5fe50ed4a5376d8a82
   STTabbar: fe93da755010233b348b2d0147c43bb1bef290fa
@@ -208,6 +212,6 @@ SPEC CHECKSUMS:
   SwiftyGif: 6c3eafd0ce693cad58bb63d2b2fb9bacb8552780
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
 
-PODFILE CHECKSUM: 3fa2de63553fd2d77ba38bd56ac146e976231ab7
+PODFILE CHECKSUM: 31231daac0e35955a2748e058af8ef7d46b13f27
 
 COCOAPODS: 1.11.3

@@ -74,6 +74,15 @@ extension String {
         let isValid = phoneText.evaluate(with: self) as Bool
         return isValid
     }
+    func isphoneandemail() -> Bool{
+        if self.isStringEmpty(){
+            return false
+        }
+        let phoneRegex = "^\\d{8,12}|[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$"
+        let phoneText = NSPredicate(format: "SELF MATCHES %@", phoneRegex)
+        let isValid = phoneText.evaluate(with: self) as Bool
+        return isValid
+    }
     func isdob() -> Bool {
         if self.isStringEmpty() {
             return false

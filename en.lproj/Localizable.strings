@@ -30,6 +30,7 @@
 // MARK: - LoginVC
 
 "Forgot Password" = "Forgot Password?";
+"Phone number/Email address*" = "Phone number/Email address*";
 "Dont's have an account" = "Dont's have an account";
 "Skip login" = "Skip login";
 

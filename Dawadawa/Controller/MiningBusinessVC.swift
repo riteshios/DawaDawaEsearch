@@ -60,6 +60,7 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
     var doc = ""
     var imagearr = [UIImage]()
     var documentarr = [URL]()
+    var dataNS = [NSData]()
     var docummentarray = [String]()
     
     var plan = ""
@@ -96,6 +97,8 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
 //    MARK: - Life Cyclye
     
     func setup(){
+        self.txtFieldMobileNumber.keyBoardType = .numberPad
+        self.txtFieldWhatsappNumber.keyBoardType = .numberPad
         self.viewCreateOpportunity.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
         self.setTextFieldUI(textField: txtFieldTitle, place: "Title", floatingText: "Title")
         self.setTextFieldUI(textField: txtFieldLocationName, place: "Location name", floatingText: "Location name")
@@ -470,7 +473,10 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
         debugPrint("url = ",url.absoluteString)
         debugPrint("url = ",url.absoluteURL)
         
-        
+        let imageData = NSData(contentsOf: url as URL)
+        dataNS.append(imageData!)
+        print("-----imdata---\(dataNS)")
+        print("-----imdata-Count---\(dataNS.count)")
         //          self.urlAttachemnt = url
         //          if self.sizePerMB(url: url) > 500
         //          {
@@ -482,7 +488,7 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
         //          }
         
         
-        // self.doc = (url)
+      
         print("doc path=-=-=\(doc)")
         self.documentarr.append(url)
         self.docummentarray.append(url.lastPathComponent)
@@ -1066,7 +1072,7 @@ extension MiningBusinessVC{
         debugPrint("opportunity_documents[]......",self.documentarr)
         
         
-        TANetworkManager.sharedInstance.requestMultiPartwithlanguage(withServiceName:ServiceName.kcreateopportunity , requestMethod: .post, requestImages: [uploadimage], requestdoc: [uploaddocument],requestVideos: [:], requestData:params, req: self.imagearr, req:self.documentarr)
+        TANetworkManager.sharedInstance.requestMultiPartwithlanguage(withServiceName:ServiceName.kcreateopportunity , requestMethod: .post, requestImages: [:], requestdoc: [:],requestVideos: [:], requestData:params, req: self.imagearr, req:self.documentarr)
         { (result:Any?, error:Error?, errortype:ErrorType?, statusCode:Int?) in
             CommonUtils.showHudWithNoInteraction(show: false)
             if errortype == .requestSuccess {

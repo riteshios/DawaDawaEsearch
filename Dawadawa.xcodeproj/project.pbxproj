@@ -45,6 +45,13 @@
 		046DEA97285C7E1300D1E1A5 /* sucess.gif in Resources */ = {isa = PBXBuildFile; fileRef = 046DEA96285C7E1300D1E1A5 /* sucess.gif */; };
 		046DEA99285C80AF00D1E1A5 /* success.gif in Resources */ = {isa = PBXBuildFile; fileRef = 046DEA98285C80AF00D1E1A5 /* success.gif */; };
 		047374B328816FFC0033B84B /* LocalizationSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047374B228816FFC0033B84B /* LocalizationSystem.swift */; };
+		0489D1982892B12300725664 /* SubcategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0489D1962892B12300725664 /* SubcategoryTableViewCell.swift */; };
+		0489D1992892B12300725664 /* SubcategoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0489D1972892B12300725664 /* SubcategoryTableViewCell.xib */; };
+		0489D19C2892B16300725664 /* OpportunityTypeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0489D19A2892B16300725664 /* OpportunityTypeTableViewCell.swift */; };
+		0489D19D2892B16300725664 /* OpportunityTypeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0489D19B2892B16300725664 /* OpportunityTypeTableViewCell.xib */; };
+		0489D19F2892BAAB00725664 /* ServiceTypeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0489D19E2892BAAA00725664 /* ServiceTypeTableViewCell.swift */; };
+		0489D1A22892CAB200725664 /* SubCategorylabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0489D1A02892CAB100725664 /* SubCategorylabelTableViewCell.swift */; };
+		0489D1A32892CAB200725664 /* SubCategorylabelTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0489D1A12892CAB100725664 /* SubCategorylabelTableViewCell.xib */; };
 		0490F3DB2876E7E300F8A84A /* UploadImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0490F3DA2876E7E300F8A84A /* UploadImageCollectionViewCell.swift */; };
 		0494642E28646CCA0010076A /* LogOutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0494642D28646CCA0010076A /* LogOutVC.swift */; };
 		049D339D287570CA004E4519 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 049D339F287570CA004E4519 /* Localizable.strings */; };
@@ -61,6 +68,7 @@
 		04B9190C286B1372009ABAE4 /* ChangeEmailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B9190B286B1372009ABAE4 /* ChangeEmailVC.swift */; };
 		04B91910286B13B8009ABAE4 /* EmailChangedSuccessfullyPopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B9190F286B13B8009ABAE4 /* EmailChangedSuccessfullyPopUpVC.swift */; };
 		04B91912286B1553009ABAE4 /* VerifyNewEmailOTPVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B91911286B1553009ABAE4 /* VerifyNewEmailOTPVC.swift */; };
+		04BFFB68289250BA0086DCC1 /* FilterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BFFB67289250BA0086DCC1 /* FilterVC.swift */; };
 		04D0AB35287ED8B500DB0F23 /* UploadDocumentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D0AB34287ED8B400DB0F23 /* UploadDocumentCollectionViewCell.swift */; };
 		04F1AD9A28697B0D002CC167 /* EditProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F1AD9928697B0D002CC167 /* EditProfileVC.swift */; };
 		04F4D050287C402F001CC173 /* QuitVCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F4D04F287C402F001CC173 /* QuitVCViewController.swift */; };
@@ -650,6 +658,13 @@
 		046DEA96285C7E1300D1E1A5 /* sucess.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = sucess.gif; sourceTree = "<group>"; };
 		046DEA98285C80AF00D1E1A5 /* success.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = success.gif; sourceTree = "<group>"; };
 		047374B228816FFC0033B84B /* LocalizationSystem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalizationSystem.swift; sourceTree = "<group>"; };
+		0489D1962892B12300725664 /* SubcategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubcategoryTableViewCell.swift; sourceTree = "<group>"; };
+		0489D1972892B12300725664 /* SubcategoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubcategoryTableViewCell.xib; sourceTree = "<group>"; };
+		0489D19A2892B16300725664 /* OpportunityTypeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpportunityTypeTableViewCell.swift; sourceTree = "<group>"; };
+		0489D19B2892B16300725664 /* OpportunityTypeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OpportunityTypeTableViewCell.xib; sourceTree = "<group>"; };
+		0489D19E2892BAAA00725664 /* ServiceTypeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceTypeTableViewCell.swift; sourceTree = "<group>"; };
+		0489D1A02892CAB100725664 /* SubCategorylabelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SubCategorylabelTableViewCell.swift; path = Dawadawa/Storyboard/SubCategorylabelTableViewCell.swift; sourceTree = SOURCE_ROOT; };
+		0489D1A12892CAB100725664 /* SubCategorylabelTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SubCategorylabelTableViewCell.xib; path = Dawadawa/Storyboard/SubCategorylabelTableViewCell.xib; sourceTree = SOURCE_ROOT; };
 		0490F3DA2876E7E300F8A84A /* UploadImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		0494642D28646CCA0010076A /* LogOutVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LogOutVC.swift; path = Dawadawa/Storyboard/LogOutVC.swift; sourceTree = SOURCE_ROOT; };
 		049D338C28756E9A004E4519 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -669,6 +684,7 @@
 		04B9190B286B1372009ABAE4 /* ChangeEmailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeEmailVC.swift; sourceTree = "<group>"; };
 		04B9190F286B13B8009ABAE4 /* EmailChangedSuccessfullyPopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailChangedSuccessfullyPopUpVC.swift; sourceTree = "<group>"; };
 		04B91911286B1553009ABAE4 /* VerifyNewEmailOTPVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = VerifyNewEmailOTPVC.swift; path = Dawadawa/Storyboard/VerifyNewEmailOTPVC.swift; sourceTree = SOURCE_ROOT; };
+		04BFFB67289250BA0086DCC1 /* FilterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FilterVC.swift; path = Dawadawa/Storyboard/FilterVC.swift; sourceTree = SOURCE_ROOT; };
 		04D0AB34287ED8B400DB0F23 /* UploadDocumentCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UploadDocumentCollectionViewCell.swift; path = Dawadawa/Storyboard/UploadDocumentCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
 		04F1AD9928697B0D002CC167 /* EditProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileVC.swift; sourceTree = "<group>"; };
 		04F4D04F287C402F001CC173 /* QuitVCViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuitVCViewController.swift; sourceTree = "<group>"; };
@@ -1238,6 +1254,7 @@
 		040677482887FFB60061AE70 /* xib */ = {
 			isa = PBXGroup;
 			children = (
+				0489D19528929D5A00725664 /* Filter */,
 				04B4C8F32889BA3100DB3E11 /* Profile */,
 				045C4E7F2889813800E831AA /* premiumOpportunities */,
 				045C4E7028895EFA00E831AA /* Search */,
@@ -1346,9 +1363,23 @@
 			name = Profile;
 			sourceTree = "<group>";
 		};
+		0489D19528929D5A00725664 /* Filter */ = {
+			isa = PBXGroup;
+			children = (
+				0489D1A02892CAB100725664 /* SubCategorylabelTableViewCell.swift */,
+				0489D1A12892CAB100725664 /* SubCategorylabelTableViewCell.xib */,
+				0489D1962892B12300725664 /* SubcategoryTableViewCell.swift */,
+				0489D19A2892B16300725664 /* OpportunityTypeTableViewCell.swift */,
+				0489D19B2892B16300725664 /* OpportunityTypeTableViewCell.xib */,
+				0489D1972892B12300725664 /* SubcategoryTableViewCell.xib */,
+			);
+			name = Filter;
+			sourceTree = "<group>";
+		};
 		0490F3D92876E7BF00F8A84A /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				0489D19E2892BAAA00725664 /* ServiceTypeTableViewCell.swift */,
 				04D0AB34287ED8B400DB0F23 /* UploadDocumentCollectionViewCell.swift */,
 				04647ECB287814CB0006B8D2 /* SelectCategoryTableViewCell.swift */,
 				0490F3DA2876E7E300F8A84A /* UploadImageCollectionViewCell.swift */,
@@ -2300,6 +2331,7 @@
 		44D7F8EF28536826001554C9 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				04BFFB67289250BA0086DCC1 /* FilterVC.swift */,
 				0461E31A288AA29800B7F0E7 /* HomeSocialMoreVC.swift */,
 				045C4E7D28897ACB00E831AA /* PremiumOpportunitiesVC.swift */,
 				0461E315288A778400B7F0E7 /* Profile */,
@@ -2480,6 +2512,7 @@
 				447DCD292851CB1200C40DDD /* Barbados.png in Resources */,
 				447DCE1E2851CB1300C40DDD /* VE.png in Resources */,
 				447DCE432851CB1300C40DDD /* UM.png in Resources */,
+				0489D1A32892CAB200725664 /* SubCategorylabelTableViewCell.xib in Resources */,
 				447DCD8F2851CB1200C40DDD /* MW.png in Resources */,
 				447DCE4F2851CB1300C40DDD /* ZA.png in Resources */,
 				447DCDD22851CB1200C40DDD /* SD.png in Resources */,
@@ -2667,6 +2700,7 @@
 				447DCDED2851CB1200C40DDD /* FJ.png in Resources */,
 				447DCD392851CB1200C40DDD /* Croatia.png in Resources */,
 				447DCD842851CB1200C40DDD /* MC.png in Resources */,
+				0489D1992892B12300725664 /* SubcategoryTableViewCell.xib in Resources */,
 				447DCCAB2851CB1100C40DDD /* Cambodia.png in Resources */,
 				447DCD0C2851CB1200C40DDD /* Mauritius.png in Resources */,
 				447DCCE92851CB1100C40DDD /* Nigeria.png in Resources */,
@@ -2692,6 +2726,7 @@
 				447DCCEC2851CB1100C40DDD /* Bosnia-and-Herzegovina.png in Resources */,
 				447DCDFB2851CB1200C40DDD /* KI.png in Resources */,
 				447DCCB42851CB1100C40DDD /* Estonia.png in Resources */,
+				0489D19D2892B16300725664 /* OpportunityTypeTableViewCell.xib in Resources */,
 				046DEA99285C80AF00D1E1A5 /* success.gif in Resources */,
 				447DCE282851CB1300C40DDD /* CR.png in Resources */,
 				447DCD032851CB1200C40DDD /* Sudan.png in Resources */,
@@ -2937,6 +2972,7 @@
 				447DCE682851CB7D00C40DDD /* CreateAccountVC.swift in Sources */,
 				447DCE562851CB1300C40DDD /* MTFacebookHelper.swift in Sources */,
 				04FD1D37286077E800BE414A /* MoreVC.swift in Sources */,
+				0489D1982892B12300725664 /* SubcategoryTableViewCell.swift in Sources */,
 				0406DB7E287D3DF700B57A0B /* TrailingOpportunityVC.swift in Sources */,
 				04067755288831290061AE70 /* SocialPostTableViewCell.swift in Sources */,
 				042293C02869B1E2000503B7 /* VerifyNewNumberOTPVC.swift in Sources */,
@@ -2945,6 +2981,7 @@
 				447DCE5F2851CB1300C40DDD /* CoreData.swift in Sources */,
 				447DCE612851CB1300C40DDD /* NavigationController.swift in Sources */,
 				3D0C964628557FC2000384BD /* ForgotPasswordVC.swift in Sources */,
+				0489D19F2892BAAB00725664 /* ServiceTypeTableViewCell.swift in Sources */,
 				447DCC602851CB1100C40DDD /* Array+Extensions.swift in Sources */,
 				447DCC752851CB1100C40DDD /* PhoneCodeCell.swift in Sources */,
 				447DCC882851CB1100C40DDD /* NSNumberExtended.swift in Sources */,
@@ -2959,6 +2996,7 @@
 				045C4E7B28896E1C00E831AA /* PremiumOppTableViewCell.swift in Sources */,
 				447DCC652851CB1100C40DDD /* Date+Extension.swift in Sources */,
 				447DCC8F2851CB1100C40DDD /* UITextFieldExtended.swift in Sources */,
+				0489D19C2892B16300725664 /* OpportunityTypeTableViewCell.swift in Sources */,
 				447DCC7C2851CB1100C40DDD /* UIButtonBorderWidthAndColor.swift in Sources */,
 				0461E314288A76F800B7F0E7 /* ProileSocialMoreVC.swift in Sources */,
 				447DCC8E2851CB1100C40DDD /* UITextFieldSubLayerBorderWidthAndColor.swift in Sources */,
@@ -3005,6 +3043,7 @@
 				045C4E822889819900E831AA /* PremiumTableViewCell.swift in Sources */,
 				447DCE602851CB1300C40DDD /* AlertView.swift in Sources */,
 				447DCC892851CB1100C40DDD /* UIApplication.swift in Sources */,
+				0489D1A22892CAB200725664 /* SubCategorylabelTableViewCell.swift in Sources */,
 				447DCC7F2851CB1100C40DDD /* UIviewCornerRadius.swift in Sources */,
 				04B9190C286B1372009ABAE4 /* ChangeEmailVC.swift in Sources */,
 				0406DB86287D5CEB00B57A0B /* MiningServiceVC.swift in Sources */,
@@ -3045,6 +3084,7 @@
 				447DCC5A2851CB1100C40DDD /* Carousel.swift in Sources */,
 				047374B328816FFC0033B84B /* LocalizationSystem.swift in Sources */,
 				447DCC732851CB1100C40DDD /* LocaleInfo.swift in Sources */,
+				04BFFB68289250BA0086DCC1 /* FilterVC.swift in Sources */,
 				447DCC7A2851CB1100C40DDD /* UIButtonCornerRadius.swift in Sources */,
 				447DCC612851CB1100C40DDD /* UISegmentedControl+Extensions.swift in Sources */,
 				3D0C9648285581F6000384BD /* ResetPasswordVC.swift in Sources */,

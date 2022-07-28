@@ -47,14 +47,14 @@ class LoginVC: UIViewController {
     
     
     func setup(){
-        self.txtFieldPhoneNumer.keyBoardType = .numberPad
+//        self.txtFieldPhoneNumer.keyBoardType = .numberPad
         viewMain.clipsToBounds = true
         viewMain.layer.cornerRadius = 25
         viewMain.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
         viewMain.addShadowWithBlurOnView(viewMain, spread: 0, blur: 10, color: .black, opacity: 0.16, OffsetX: 0, OffsetY: 1)
         self.viewButtonLogin.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
         
-        self.setTextFieldUI(textField: txtFieldPhoneNumer, place: "Phone number", floatingText: "Phone number")
+        self.setTextFieldUI(textField: txtFieldPhoneNumer, place: "Phone number/Email address", floatingText: "Phone number/Email address")
         self.setTextFieldUI(textField: txtFieldPassword, place: "Password", floatingText: "Password")
     }
     //  MARK: - @IBAction
@@ -126,15 +126,16 @@ class LoginVC: UIViewController {
     
     
     // MARK: -validation
+    
     func validation(){
         if String.getString(self.txtFieldPhoneNumer.text).isEmpty
         {
-            self.showSimpleAlert(message: Notifications.kEnterMobileNumber)
+            self.showSimpleAlert(message: Notifications.kentermobileemail)
             return
         }
-        else if !String.getString(self.txtFieldPhoneNumer.text).isPhoneNumber()
+        else if !String.getString(self.txtFieldPhoneNumer.text).isphoneandemail()
         {
-            self.showSimpleAlert(message: Notifications.kEnterValidMobileNumber)
+            self.showSimpleAlert(message: Notifications.kentervalidphoneemail)
             return
         }
         
@@ -151,6 +152,31 @@ class LoginVC: UIViewController {
         self.view.endEditing(true)
         self.loginapi()
     }
+//    func validation(){
+//        if String.getString(self.txtFieldPhoneNumer.text).isEmpty
+//        {
+//            self.showSimpleAlert(message: Notifications.kEnterMobileNumber)
+//            return
+//        }
+//        else if !String.getString(self.txtFieldPhoneNumer.text).isPhoneNumber()
+//        {
+//            self.showSimpleAlert(message: Notifications.kEnterValidMobileNumber)
+//            return
+//        }
+//
+//        else if String.getString(self.txtFieldPassword.text).isEmpty
+//        {
+//            showSimpleAlert(message: Notifications.kPassword)
+//            return
+//        }
+//        else if !String.getString(txtFieldPassword.text).isValidPassword()
+//        {
+//            self.showSimpleAlert(message: Notifications.kValidPassword)
+//            return
+//        }
+//        self.view.endEditing(true)
+//        self.loginapi()
+//    }
 }
 extension LoginVC{
     
@@ -310,8 +336,8 @@ extension LoginVC{
         btnLogin.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "Login", comment: ""), for: .normal)
         txtFieldPassword.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Password", comment: "")
         txtFieldPassword.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Password", comment: "")
-        txtFieldPhoneNumer.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Phone number", comment: "")
-        txtFieldPhoneNumer.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Phone number", comment: "")
+        txtFieldPhoneNumer.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Phone number/Email address*", comment: "")
+        txtFieldPhoneNumer.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Phone number/Email address*", comment: "")
         
     }
 }

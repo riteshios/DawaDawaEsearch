@@ -44,9 +44,17 @@ class HomeVC: UIViewController{
             
             task.resume()
     }
-}
+  }
 
-  
+    @IBAction func btnSearchTapped(_ sender: UIButton) {
+        
+        tabBarController?.selectedIndex = 1
+        
+//        let vc = self.storyboard?.instantiateViewController(withIdentifier: SearchVC.getStoryboardID()) as! SearchVC
+//        self.navigationController?.pushViewController(vc, animated: true)
+        
+    }
+    
 }
 
 extension HomeVC:UITableViewDelegate,UITableViewDataSource{
@@ -76,10 +84,15 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
         case 0:
             let cell = self.tblViewViewPost.dequeueReusableCell(withIdentifier: "ViewPostTableViewCell") as! ViewPostTableViewCell
             cell.ColllectionViewPremiumOpp.tag = indexPath.section
-            cell.callbacknavigation = {
+            cell.callbacknavigation = { txt in
+                if txt == "ViewAll"{
                 let vc = self.storyboard!.instantiateViewController(withIdentifier: PremiumOpportunitiesVC.getStoryboardID()) as! PremiumOpportunitiesVC
                 self.navigationController?.pushViewController(vc, animated: true)
-                
+                }
+                if txt == "Filter"{
+                    let vc = self.storyboard!.instantiateViewController(withIdentifier: FilterVC.getStoryboardID()) as! FilterVC
+                    self.navigationController?.pushViewController(vc, animated: false)
+                }
             }
             return cell
             

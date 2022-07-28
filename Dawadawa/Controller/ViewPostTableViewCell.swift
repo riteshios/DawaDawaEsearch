@@ -10,7 +10,7 @@ import UIKit
 class ViewPostTableViewCell: UITableViewCell{
 
     @IBOutlet weak var ColllectionViewPremiumOpp: UICollectionView!
-    var callbacknavigation:(()->())?
+    var callbacknavigation:((String)->())?
     
     var imgUrl = ""
     var userTimeLine = [SocialPostData]()
@@ -25,8 +25,12 @@ class ViewPostTableViewCell: UITableViewCell{
         
     }
     @IBAction func btnViewAll(_ sender: UIButton) {
-        self.callbacknavigation?()
+        self.callbacknavigation?("ViewAll")
         
+    }
+    
+    @IBAction func btnFilterTapped(_ sender: UIButton) {
+        self.callbacknavigation?("Filter")
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

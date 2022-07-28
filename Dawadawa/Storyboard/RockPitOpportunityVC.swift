@@ -94,6 +94,9 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
     }
     
     func setup(){
+        
+        self.txtFieldMobileNumber.keyBoardType = .numberPad
+        self.txtFieldWhatsappNumber.keyBoardType = .numberPad
         self.viewCreateOpportunity.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
         self.setTextFieldUI(textField: txtFieldTitle, place: "Title", floatingText: "Title")
         self.setTextFieldUI(textField: txtFieldLocationName, place: "Location name", floatingText: "Location name")
@@ -105,7 +108,8 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
     }
     
     func fetdata(){
-        self.txtFieldTitle.text = self.userTimeLine.first?.title
+//        self.txtFieldTitle.text = self.userTimeLine.first?.title
+       
     }
     // MARK: - @IBActions
     
@@ -485,7 +489,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
         self.documentarr.append(url)
         print("doc documentarr=-=-=\(documentarr)")
         self.docummentarray.append(url.lastPathComponent)
-        print("doc documentarr=-=-=\(documentarr.count)")
+        print("doc documentarrCount=-=-=\(documentarr.count)")
         self.UploaddocumentCollectionView.reloadData()
         
         
@@ -970,7 +974,7 @@ extension RockPitOpportunityVC{
         debugPrint("opportunity_documents[]......",self.documentarr)
         
         
-        TANetworkManager.sharedInstance.requestMultiPartwithlanguage(withServiceName:ServiceName.kcreateopportunity , requestMethod: .post, requestImages: [uploadimage], requestdoc: [uploaddocument],requestVideos: [:], requestData:params, req: self.imagearr, req:self.documentarr)
+        TANetworkManager.sharedInstance.requestMultiPartwithlanguage(withServiceName:ServiceName.kcreateopportunity , requestMethod: .post, requestImages: [:], requestdoc: [:],requestVideos: [:], requestData:params, req: self.imagearr, req:self.documentarr)
         { (result:Any?, error:Error?, errortype:ErrorType?, statusCode:Int?) in
             CommonUtils.showHudWithNoInteraction(show: false)
             if errortype == .requestSuccess {
