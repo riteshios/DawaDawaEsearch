@@ -243,7 +243,7 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                     
                     if txt == "Dismiss"{
                         self.dismiss(animated: true)
-                        self.listoppoertunityapi()
+//                        self.listoppoertunityapi()
                     }
                     
                     if txt == "Update"{
@@ -655,8 +655,6 @@ extension ProfileVC{
                             kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
                         }
                       
-                        
-
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         self?.tblViewSocialPost.reloadData()
                         

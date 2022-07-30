@@ -71,9 +71,9 @@ struct Keys {
 }
 
 struct ServiceName {
-    static let kcreateAccount         =      "api/register"
-    static let kOtpVerify             =      "api/verify_user"
-    static let klogin                 =      "api/login"
+    static let kcreateAccount         =       "api/register"
+    static let kOtpVerify             =       "api/verify_user"
+    static let klogin                 =       "api/login"
     static let kforgotpassword        =       "api/forgot-password" // this api is also used for change password
     static let kverifyforgototp       =       "api/verify-forgot-otp"
     static let kresetpassword         =       "api/forgot-psd"
@@ -81,24 +81,25 @@ struct ServiceName {
     static let kchangepassword        =       "api/change-password"
     static let  keditprofileimage     =       "api/edit-profile-image"
     static let  kedituserdetails      =       "api/edit-user-detail"
-    static let kchangeemail           =      "api/change-email"
+    static let kchangeemail           =       "api/change-email"
     static let kgooglelogin           =       "api/google-login"
-    static let knewemailotpverify     =        "api/change-email-otp-verify"
+    static let knewemailotpverify     =       "api/change-email-otp-verify"
+    
     
     static let ktermsandcondition     =        "api/terms"
-    static let kprivacypolicy        =         "api/privacy-policy"
-    static let kAboutUs             =           "api/about"
-    static let kFaq                 =               "api/faq"
+    static let kprivacypolicy         =         "api/privacy-policy"
+    static let kAboutUs               =         "api/about"
+    static let kFaq                   =         "api/faq"
     
-    static let kgetcategory         =        "api/category"
-    static let ksubcategory         =        "api/sub-category"
-    static let kgetstate             =       "api/state"
-    static let kgetlocality          =       "api/locality"
-    static let kgetlookingfor        =       "api/looking-for"
-    static let kgetSerivetype         =      "api/services-type"
-    static let kgetbusinessminingtype   =     "api/business-mining-type"
+    static let kgetcategory           =        "api/category"
+    static let ksubcategory           =        "api/sub-category"
+    static let kgetstate              =        "api/state"
+    static let kgetlocality           =        "api/locality"
+    static let kgetlookingfor         =        "api/looking-for"
+    static let kgetSerivetype         =        "api/services-type"
+    static let kgetbusinessminingtype =        "api/business-mining-type"
     
-    
+//   Opportunity
     static let kcreateopportunity       =        "api/create-opportunities"
     static let klistopportunity         =        "api/list-opportunities"
     static let kdeleteopportunity       =        "api/delete-opportunities"
@@ -110,6 +111,10 @@ struct ServiceName {
     static let klikeopportunity         =        "api/like_opportunity"
     static let ksearchopportunity       =        "api/search-opportunity"
     static let kopportunitydetails      =        "api/opportunity-detail"
+    
+//    Filter
+    static let kfiltersubcategory      =         "api/filter-sub-category"
+    static let kfilter                 =         "api/opr-filter"
 }
 
 struct Notifications {

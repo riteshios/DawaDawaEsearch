@@ -14,6 +14,7 @@ class getCartegoryModel{
     let id: Int?
     let category_name: String?
     let cat_image: String?
+    var isselection = false
     
     init(data:[String:Any]){
         self.id = Int.getInt(data["id"])
@@ -21,6 +22,39 @@ class getCartegoryModel{
         self.cat_image = String.getString(data["cat_image"])
     }
 }
+
+class getServicetypeModel{
+    let id: Int?
+    let services_type: String?
+    
+    
+    init(data:[String:Any]){
+        self.id = Int.getInt(data["id"])
+        self.services_type = String.getString(data["services_type"])
+       
+    }
+}
+
+class getstateModel{
+    let id:Int?
+    let state_name:String?
+    
+    init(data:[String:Any]){
+        self.id = Int.getInt(data["id"])
+        self.state_name = String.getString(data["state_name"])
+    }
+}
+
+class getfiltersubcategoryModel{
+    let id:Int?
+    let sub_cat_name:String?
+    
+    init(data:[String:Any]){
+        self.id = Int.getInt(data["id"])
+        self.sub_cat_name = String.getString(data["sub_cat_name"])
+    }
+}
+
 
 // Category Model
 //class getCartegoryModel:NSObject{
@@ -113,7 +147,7 @@ class getLocalityModel:NSObject{
         case local_name = "local_name"
         
     }
-    var id = ""
+    var id:Int?
     var local_name = ""
     
     override init(){
@@ -121,7 +155,7 @@ class getLocalityModel:NSObject{
         
     }
     init(dictionary:[String:AnyObject]){
-        if let id = dictionary[keys.id.stringValue] as? String{
+        if let id = dictionary[keys.id.stringValue] as? Int{
             self.id = id
         }
         if let local_name = dictionary[keys.local_name.stringValue] as? String{
@@ -302,55 +336,3 @@ class opportunityydataModel:NSObject{
 }
 
 
-//class opportunityydataModel{
-//    static let shared = opportunityydataModel()
-////    var id:Int?
-//    var category_id:Int?
-//    var sub_category:Int?
-//    var title:String?
-//    var opp_state:String?
-//    var opp_locality:String?
-//    var location_name:String?
-//    var location_map:String?
-//    var description:String?
-//    var mobile_num:String?
-//    var whatspp_number:String?
-//    var whatsaap_num:String?
-//    var pricing:String?
-//    var looking_for:String?
-//    var plan:String?
-//    var filenames = [Any]()
-//    var opportunity_documents = [Any]()
-//    var cat_type_id:Int?
-//
-//
-//    private init(){
-//        let  data:[String:Any] = kSharedUserDefaults.getLoggedInUserDetails()
-//        saveData(data:data,token: kSharedUserDefaults.getLoggedInAccessToken())
-//    }
-//    func saveData(data:[String:Any],token:String){
-////        self.id = Int.getInt(data["id"])
-//        self.category_id = Int.getInt(data["category_id"])
-//        self.sub_category = Int.getInt(data["sub_category"])
-//        self.title = String.getString(data["title"])
-//        self.opp_state = String.getString(data["opp_state"])
-//        self.opp_locality = String.getString(data["opp_locality"])
-//        self.location_name = String.getString(data["location_name"])
-//        self.location_map = String.getString(data["location_map"])
-//        self.description = String.getString(data["description"])
-//        self.mobile_num = String.getString(data["mobile_num"])
-//        self.whatsaap_num = String.getString(data["whatsaap_num"])
-//        self.pricing = String.getString(data["pricing"])
-//        self.looking_for = String.getString(data["looking_for"])
-//        self.plan = String.getString(data["plan"])
-//        self.filenames = (data["filenames"]) as! [Any]
-//        self.opportunity_documents = (data["device_id"]) as! [Any]
-//        self.cat_type_id = Int.getInt(data["cat_type_id"])
-//
-//        kSharedUserDefaults.getLoggedInUserDetails()
-//        kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken:token)
-//
-//    }
-//
-//}
-//

@@ -550,25 +550,25 @@
                                                             </constraints>
                                                         </view>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Guest User" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wih-te-q94">
-                                                            <rect key="frame" x="112" y="20" width="88" height="22"/>
+                                                            <rect key="frame" x="112" y="20" width="90.666666666666686" height="21"/>
                                                             <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="18"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+91***********" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ERb-nT-5Wp">
-                                                            <rect key="frame" x="112" y="43" width="88" height="17"/>
+                                                            <rect key="frame" x="112" y="42" width="78.333333333333314" height="17"/>
                                                             <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="14"/>
                                                             <color key="textColor" red="0.65098039220000004" green="0.65098039220000004" blue="0.65098039220000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="example@xyz.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pob-3k-BH5">
-                                                            <rect key="frame" x="112" y="61" width="113.66666666666669" height="17"/>
+                                                            <rect key="frame" x="112" y="60" width="117" height="17"/>
                                                             <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="14"/>
                                                             <color key="textColor" red="0.65098039220000004" green="0.65098039220000004" blue="0.65098039220000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6au-Xd-nDe">
-                                                            <rect key="frame" x="382.66666666666669" y="39.666666666666664" width="24" height="24"/>
+                                                            <rect key="frame" x="382.66666666666669" y="38.666666666666664" width="24" height="24"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="24" id="qd2-OR-cBa"/>
                                                                 <constraint firstAttribute="height" constant="24" id="rxK-Px-ghu"/>
@@ -9557,14 +9557,14 @@ this opportunity?</string>
             <objects>
                 <viewController storyboardIdentifier="FilterVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="DN5-4h-VfM" customClass="FilterVC" customModule="Dawadawa" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ewJ-7W-XOe">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="2000"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="1960"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KEx-fe-vax">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="2000"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="1960"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rUi-Y6-wgW">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="2000"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1960"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wff-fQ-un3">
                                                 <rect key="frame" x="22" y="29" width="24" height="24"/>
@@ -9634,7 +9634,11 @@ this opportunity?</string>
                                                             </label>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Z5-ZL-Wef">
                                                                 <rect key="frame" x="0.0" y="0.0" width="84" height="35"/>
+                                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                <connections>
+                                                                    <action selector="btnMostLikedTapped:" destination="DN5-4h-VfM" eventType="touchUpInside" id="lGN-UK-rTi"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                         <color key="backgroundColor" red="0.94509803921568625" green="0.97647058823529409" blue="0.99215686274509807" alpha="1" colorSpace="calibratedRGB"/>
@@ -9671,7 +9675,11 @@ this opportunity?</string>
                                                             </label>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sda-dc-D6L">
                                                                 <rect key="frame" x="0.0" y="0.0" width="84" height="35"/>
+                                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                <connections>
+                                                                    <action selector="btnLeasttikedTapped:" destination="DN5-4h-VfM" eventType="touchUpInside" id="DMf-Y8-1el"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                         <color key="backgroundColor" red="0.94509803921568625" green="0.97647058823529409" blue="0.99215686274509807" alpha="1" colorSpace="calibratedRGB"/>
@@ -9739,7 +9747,11 @@ this opportunity?</string>
                                                             </label>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4fz-nW-Qd0">
                                                                 <rect key="frame" x="0.0" y="0.0" width="84" height="35"/>
+                                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                <connections>
+                                                                    <action selector="btnmostratedTapped:" destination="DN5-4h-VfM" eventType="touchUpInside" id="hC2-ED-7r9"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                         <color key="backgroundColor" red="0.94509803920000002" green="0.97647058819999999" blue="0.99215686270000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -9776,7 +9788,11 @@ this opportunity?</string>
                                                             </label>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iAu-0N-voc">
                                                                 <rect key="frame" x="0.0" y="0.0" width="84" height="35"/>
+                                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                <connections>
+                                                                    <action selector="btnleastratedTapped:" destination="DN5-4h-VfM" eventType="touchUpInside" id="muI-9G-egi"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                         <color key="backgroundColor" red="0.94509803920000002" green="0.97647058819999999" blue="0.99215686270000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -9844,7 +9860,11 @@ this opportunity?</string>
                                                             </label>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aoR-Yy-NkR">
                                                                 <rect key="frame" x="0.0" y="0.0" width="44" height="35"/>
+                                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                <connections>
+                                                                    <action selector="btnAllTapped:" destination="DN5-4h-VfM" eventType="touchUpInside" id="jx7-xp-Pwg"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                         <color key="backgroundColor" red="0.94509803920000002" green="0.97647058819999999" blue="0.99215686270000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -9881,7 +9901,11 @@ this opportunity?</string>
                                                             </label>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Qq-sW-E5m">
                                                                 <rect key="frame" x="0.0" y="0.0" width="84" height="35"/>
+                                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                <connections>
+                                                                    <action selector="btnAvailableTapped:" destination="DN5-4h-VfM" eventType="touchUpInside" id="LOz-Yh-56W"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                         <color key="backgroundColor" red="0.94509803920000002" green="0.97647058819999999" blue="0.99215686270000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -9918,7 +9942,11 @@ this opportunity?</string>
                                                             </label>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eft-mz-dS4">
                                                                 <rect key="frame" x="0.0" y="0.0" width="84" height="35"/>
+                                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                <connections>
+                                                                    <action selector="btnClosedTapped:" destination="DN5-4h-VfM" eventType="touchUpInside" id="SZb-FL-Nnt"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                         <color key="backgroundColor" red="0.94509803920000002" green="0.97647058819999999" blue="0.99215686270000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -9955,7 +9983,11 @@ this opportunity?</string>
                                                             </label>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EBa-on-cNc">
                                                                 <rect key="frame" x="0.0" y="0.0" width="64" height="35"/>
+                                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                <connections>
+                                                                    <action selector="btnSoldTapped:" destination="DN5-4h-VfM" eventType="touchUpInside" id="CsY-19-fci"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                         <color key="backgroundColor" red="0.94509803920000002" green="0.97647058819999999" blue="0.99215686270000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -10019,6 +10051,9 @@ this opportunity?</string>
                                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="bbh-Zk-kQI">
                                                         <rect key="frame" x="16" y="55.333333333333314" width="382" height="289.66666666666669"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="289.67000000000002" id="9yR-gG-NTr"/>
+                                                        </constraints>
                                                         <connections>
                                                             <outlet property="dataSource" destination="DN5-4h-VfM" id="Jx5-km-ONj"/>
                                                             <outlet property="delegate" destination="DN5-4h-VfM" id="bjm-sP-d09"/>
@@ -10027,7 +10062,6 @@ this opportunity?</string>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="350" id="17R-Vc-vC2"/>
                                                     <constraint firstItem="bbh-Zk-kQI" firstAttribute="leading" secondItem="i1f-QZ-GWb" secondAttribute="leading" id="1tG-pW-huh"/>
                                                     <constraint firstItem="dU1-VV-Qc3" firstAttribute="top" secondItem="S2g-Se-C1a" secondAttribute="top" constant="10" id="IBZ-0D-B1B"/>
                                                     <constraint firstAttribute="trailing" secondItem="i1f-QZ-GWb" secondAttribute="trailing" constant="16" id="VQx-d5-gga"/>
@@ -10352,6 +10386,7 @@ this opportunity?</string>
                                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                                         <connections>
                                                                             <action selector="btnSelectStateTapped:" destination="VA4-LP-a16" eventType="touchUpInside" id="fc6-eZ-EIq"/>
+                                                                            <action selector="btnSelectStateTapped:" destination="DN5-4h-VfM" eventType="touchUpInside" id="yMH-3P-etU"/>
                                                                         </connections>
                                                                     </button>
                                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Vector" translatesAutoresizingMaskIntoConstraints="NO" id="cdz-uk-eFR">
@@ -10401,6 +10436,7 @@ this opportunity?</string>
                                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                                         <connections>
                                                                             <action selector="btnLocalityTapped:" destination="VA4-LP-a16" eventType="touchUpInside" id="5gU-iD-DZe"/>
+                                                                            <action selector="btnLocalityTapped:" destination="DN5-4h-VfM" eventType="touchUpInside" id="jaP-6z-UHA"/>
                                                                         </connections>
                                                                     </button>
                                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Vector" translatesAutoresizingMaskIntoConstraints="NO" id="Ipe-ti-glu">
@@ -10507,7 +10543,7 @@ this opportunity?</string>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WoY-df-B1b">
-                                                <rect key="frame" x="0.0" y="1317.6666666666667" width="414" height="261"/>
+                                                <rect key="frame" x="0.0" y="1317.6666666666667" width="414" height="220"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Service type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1cu-6P-Iku">
                                                         <rect key="frame" x="15.999999999999993" y="9.9999999999999982" width="99.333333333333314" height="20.333333333333329"/>
@@ -10523,7 +10559,7 @@ this opportunity?</string>
                                                         </constraints>
                                                     </view>
                                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="fu6-Uy-VbB">
-                                                        <rect key="frame" x="16" y="55.333333333333243" width="382" height="200.66666666666663"/>
+                                                        <rect key="frame" x="16" y="55.333333333333243" width="382" height="159.66666666666663"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <prototypes>
                                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ServiceTypeTableViewCell" id="DmE-kI-YUy" customClass="ServiceTypeTableViewCell" customModule="Dawadawa" customModuleProvider="target">
@@ -10544,8 +10580,8 @@ this opportunity?</string>
                                                                                     </constraints>
                                                                                 </imageView>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price: Low to High" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pYM-9Y-4CQ">
-                                                                                    <rect key="frame" x="30" y="1.666666666666667" width="94" height="14.666666666666664"/>
-                                                                                    <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="12"/>
+                                                                                    <rect key="frame" x="29.999999999999993" y="0.0" width="117.33333333333331" height="18.333333333333332"/>
+                                                                                    <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="15"/>
                                                                                     <nil key="textColor"/>
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
@@ -10563,6 +10599,9 @@ this opportunity?</string>
                                                                         </view>
                                                                     </subviews>
                                                                 </tableViewCellContentView>
+                                                                <connections>
+                                                                    <outlet property="lblServicetype" destination="pYM-9Y-4CQ" id="HhG-IL-gi4"/>
+                                                                </connections>
                                                             </tableViewCell>
                                                         </prototypes>
                                                         <connections>
@@ -10580,13 +10619,13 @@ this opportunity?</string>
                                                     <constraint firstAttribute="bottom" secondItem="fu6-Uy-VbB" secondAttribute="bottom" constant="5" id="bYn-wR-hyP"/>
                                                     <constraint firstItem="fu6-Uy-VbB" firstAttribute="leading" secondItem="p6Z-gt-o23" secondAttribute="leading" id="gN2-WA-kLD"/>
                                                     <constraint firstAttribute="trailing" secondItem="p6Z-gt-o23" secondAttribute="trailing" constant="16" id="jVp-st-x1U"/>
-                                                    <constraint firstAttribute="height" constant="261" id="pa6-K1-Uhf"/>
+                                                    <constraint firstAttribute="height" constant="220" id="pa6-K1-Uhf"/>
                                                     <constraint firstItem="p6Z-gt-o23" firstAttribute="leading" secondItem="WoY-df-B1b" secondAttribute="leading" constant="16" id="qCQ-Ir-96s"/>
                                                     <constraint firstItem="fu6-Uy-VbB" firstAttribute="top" secondItem="p6Z-gt-o23" secondAttribute="bottom" constant="7.6666666666666856" id="s4N-Lj-RkB"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yU8-cU-bi7">
-                                                <rect key="frame" x="0.0" y="1593.6666666666667" width="414" height="261"/>
+                                                <rect key="frame" x="0.0" y="1552.6666666666667" width="414" height="261"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sort by" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="obu-p2-wU4">
                                                         <rect key="frame" x="16.000000000000004" y="9.9999999999999982" width="55.333333333333343" height="20.333333333333329"/>
@@ -10611,8 +10650,8 @@ this opportunity?</string>
                                                                 </constraints>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price: Low to High" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NuF-0r-Uy4">
-                                                                <rect key="frame" x="30" y="1.6666666666665142" width="94" height="14.666666666666664"/>
-                                                                <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="12"/>
+                                                                <rect key="frame" x="30.000000000000007" y="0.66666666666651508" width="109.66666666666669" height="17"/>
+                                                                <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="14"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
@@ -10638,8 +10677,8 @@ this opportunity?</string>
                                                                 </constraints>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Price: High to Low" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gB0-Ay-gqk">
-                                                                <rect key="frame" x="30.000000000000007" y="1.6666666666665142" width="96.666666666666686" height="14.666666666666664"/>
-                                                                <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="12"/>
+                                                                <rect key="frame" x="30.000000000000007" y="0.66666666666651508" width="112.66666666666669" height="17"/>
+                                                                <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="14"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
@@ -10665,8 +10704,8 @@ this opportunity?</string>
                                                                 </constraints>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Date: Newest to Oldest" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2lv-G1-cDa">
-                                                                <rect key="frame" x="30" y="1.6666666666665142" width="124" height="14.666666666666664"/>
-                                                                <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="12"/>
+                                                                <rect key="frame" x="30" y="0.66666666666651508" width="144.66666666666666" height="17"/>
+                                                                <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="14"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
@@ -10692,8 +10731,8 @@ this opportunity?</string>
                                                                 </constraints>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date: Oldest to Newest" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yih-Ew-gvc">
-                                                                <rect key="frame" x="29.999999999999993" y="1.6666666666665142" width="121.33333333333331" height="14.666666666666664"/>
-                                                                <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="12"/>
+                                                                <rect key="frame" x="30" y="0.66666666666651508" width="141.33333333333334" height="17"/>
+                                                                <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="14"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
@@ -10729,13 +10768,13 @@ this opportunity?</string>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Zd-49-4xr">
-                                                <rect key="frame" x="16" y="1899" width="382" height="60"/>
+                                                <rect key="frame" x="16" y="1859" width="382" height="60"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BCw-1V-pYo">
                                                         <rect key="frame" x="0.0" y="0.0" width="382" height="60"/>
                                                         <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="18"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                        <state key="normal" title="Create opportunity">
+                                                        <state key="normal" title="Apply Filter">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
                                                         <userDefinedRuntimeAttributes>
@@ -10744,6 +10783,7 @@ this opportunity?</string>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
+                                                            <action selector="btnApplyfilterTapped:" destination="DN5-4h-VfM" eventType="touchUpInside" id="NPi-Nq-Fzd"/>
                                                             <action selector="btnCreateOppTapped:" destination="VA4-LP-a16" eventType="touchUpInside" id="J3N-EZ-5Is"/>
                                                             <action selector="btnSaveTapped:" destination="6w6-lV-jYx" eventType="touchUpInside" id="5EU-Me-syd"/>
                                                         </connections>
@@ -10780,6 +10820,7 @@ this opportunity?</string>
                                             <constraint firstItem="myh-9I-Q0L" firstAttribute="top" secondItem="HlJ-X2-LEU" secondAttribute="bottom" constant="15" id="NdZ-xF-bN2"/>
                                             <constraint firstItem="ixX-jj-SNx" firstAttribute="trailing" secondItem="S2g-Se-C1a" secondAttribute="trailing" id="NjL-gI-odU"/>
                                             <constraint firstItem="WoY-df-B1b" firstAttribute="leading" secondItem="myh-9I-Q0L" secondAttribute="leading" id="OlZ-IT-5JE"/>
+                                            <constraint firstItem="2Zd-49-4xr" firstAttribute="top" secondItem="yU8-cU-bi7" secondAttribute="bottom" constant="45.329999999999998" id="PRf-KZ-TVh"/>
                                             <constraint firstItem="GXb-NB-LhR" firstAttribute="centerX" secondItem="rUi-Y6-wgW" secondAttribute="centerX" id="Q1c-Q9-smX"/>
                                             <constraint firstItem="ixX-jj-SNx" firstAttribute="top" secondItem="S2g-Se-C1a" secondAttribute="bottom" constant="15" id="Qt4-9P-J2B"/>
                                             <constraint firstItem="wff-fQ-un3" firstAttribute="leading" secondItem="rUi-Y6-wgW" secondAttribute="leading" constant="22" id="TYG-EI-qo7"/>
@@ -10788,7 +10829,6 @@ this opportunity?</string>
                                             <constraint firstAttribute="trailing" secondItem="bl4-U5-ITn" secondAttribute="trailing" id="Y5t-8H-hVe"/>
                                             <constraint firstItem="S2g-Se-C1a" firstAttribute="top" secondItem="vOB-K5-N98" secondAttribute="bottom" constant="15" id="b9j-Ib-U47"/>
                                             <constraint firstItem="S2g-Se-C1a" firstAttribute="trailing" secondItem="vOB-K5-N98" secondAttribute="trailing" id="dP6-ug-fNS"/>
-                                            <constraint firstItem="2Zd-49-4xr" firstAttribute="top" secondItem="yU8-cU-bi7" secondAttribute="bottom" constant="44.333333333333258" id="fWK-yz-13I"/>
                                             <constraint firstItem="vOB-K5-N98" firstAttribute="leading" secondItem="d3e-jX-xWC" secondAttribute="leading" id="gP2-27-ESQ"/>
                                             <constraint firstItem="ixX-jj-SNx" firstAttribute="leading" secondItem="S2g-Se-C1a" secondAttribute="leading" id="ged-lt-SKq"/>
                                             <constraint firstItem="yU8-cU-bi7" firstAttribute="trailing" secondItem="WoY-df-B1b" secondAttribute="trailing" id="kdR-6h-nnG"/>
@@ -10827,11 +10867,42 @@ this opportunity?</string>
                             <constraint firstItem="KEx-fe-vax" firstAttribute="top" secondItem="8GC-0J-NBR" secondAttribute="top" id="mmq-lR-y9R"/>
                         </constraints>
                     </view>
-                    <size key="freeformSize" width="414" height="2000"/>
+                    <size key="freeformSize" width="414" height="1960"/>
                     <connections>
                         <outlet property="PriceSlider" destination="ybI-DQ-vGn" id="6Id-U4-TA7"/>
+                        <outlet property="btnAll" destination="aoR-Yy-NkR" id="ru1-fP-i8P"/>
+                        <outlet property="btnAvailable" destination="9Qq-sW-E5m" id="VVd-Md-XDn"/>
+                        <outlet property="btnClosed" destination="eft-mz-dS4" id="Zkh-8d-gX0"/>
+                        <outlet property="btnLeastLiked" destination="Sda-dc-D6L" id="s1e-MS-wvV"/>
+                        <outlet property="btnLocality" destination="Unf-EM-e0G" id="xhq-Rc-mYi"/>
+                        <outlet property="btnMostLiked" destination="3Z5-ZL-Wef" id="xyr-7E-Da6"/>
+                        <outlet property="btnSold" destination="EBa-on-cNc" id="Ecl-tf-d29"/>
+                        <outlet property="btnState" destination="R0X-cO-7Ed" id="inj-th-VlJ"/>
+                        <outlet property="btnleastrated" destination="iAu-0N-voc" id="PxR-UY-iho"/>
+                        <outlet property="btnmostrated" destination="4fz-nW-Qd0" id="p6U-1f-Ea9"/>
+                        <outlet property="highttblviewOpportunitytype" destination="9yR-gG-NTr" id="VQn-6D-TZV"/>
+                        <outlet property="lblAll" destination="rKi-Ca-SFp" id="JCY-hE-tg9"/>
+                        <outlet property="lblAvailable" destination="LtN-uh-9Mx" id="ij5-Sb-xqv"/>
+                        <outlet property="lblClosed" destination="XAE-De-Ghe" id="dId-d8-Kl4"/>
+                        <outlet property="lblLeastLiked" destination="wHp-wf-A2C" id="oN6-YO-kIn"/>
+                        <outlet property="lblLeastrated" destination="hWQ-YO-kCS" id="FV1-Ux-e3d"/>
+                        <outlet property="lblLocality" destination="KPb-3i-ZXq" id="Zll-BZ-GPn"/>
+                        <outlet property="lblMostLiked" destination="hoq-C7-hck" id="l7T-VG-Sfg"/>
+                        <outlet property="lblMostrated" destination="4yT-KS-l57" id="uAP-3l-aWg"/>
+                        <outlet property="lblSold" destination="Jd2-it-cBg" id="QK3-B4-wsm"/>
+                        <outlet property="lblState" destination="j3T-nO-2dz" id="Zbn-sH-QwS"/>
                         <outlet property="tblViewOpportunitytype" destination="bbh-Zk-kQI" id="wST-pX-5iE"/>
                         <outlet property="tblViewServicetype" destination="fu6-Uy-VbB" id="JVC-ku-Dyq"/>
+                        <outlet property="txtfieldEndDate" destination="tTd-tX-N2E" id="xeA-iE-BMf"/>
+                        <outlet property="txtfieldStartDate" destination="9Yu-iS-kUy" id="d3I-tR-bLw"/>
+                        <outlet property="viewAll" destination="s5f-n0-Et4" id="MZy-zS-Cz3"/>
+                        <outlet property="viewAvailable" destination="3ky-gt-icg" id="svn-pW-ecB"/>
+                        <outlet property="viewClosed" destination="Lt9-3P-Q2Y" id="FKf-L2-b5A"/>
+                        <outlet property="viewLeastLiked" destination="akW-fd-WtE" id="uTm-t2-g5G"/>
+                        <outlet property="viewLeastrated" destination="Hl4-gl-D9s" id="br8-ni-nbH"/>
+                        <outlet property="viewMostLiked" destination="EkY-wM-ANA" id="rSU-OL-FcG"/>
+                        <outlet property="viewMostRated" destination="cXY-8L-KIa" id="fuy-C6-qHg"/>
+                        <outlet property="viewSold" destination="X20-9f-QqT" id="AR7-6c-CpJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9qB-E7-cAW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -11083,9 +11154,6 @@ this opportunity?</string>
     <designables>
         <designable name="hYJ-9L-6ep">
             <size key="intrinsicContentSize" width="-1" height="49"/>
-        </designable>
-        <designable name="ybI-DQ-vGn">
-            <size key="intrinsicContentSize" width="-1" height="65"/>
         </designable>
     </designables>
     <resources>

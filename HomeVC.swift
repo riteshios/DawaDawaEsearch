@@ -15,6 +15,7 @@ class HomeVC: UIViewController{
     var imgUrl = ""
     var userTimeLine = [SocialPostData]()
     var userdetail = [user_detail]()
+    var cameFrom = ""
     @IBOutlet weak var lblUserName: UILabel!
     @IBOutlet weak var ImgUser: UIImageView!
     
@@ -22,7 +23,10 @@ class HomeVC: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         self.fetchdata()
-        self.getallopportunity()
+        
+        if cameFrom != "FilterData"{
+            self.getallopportunity()
+        }
         
         tblViewViewPost.register(UINib(nibName: "ViewPostTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "ViewPostTableViewCell")
         tblViewViewPost.register(UINib(nibName: "SocialPostTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "SocialPostTableViewCell")
@@ -50,6 +54,7 @@ class HomeVC: UIViewController{
         
         tabBarController?.selectedIndex = 1
         
+      
 //        let vc = self.storyboard?.instantiateViewController(withIdentifier: SearchVC.getStoryboardID()) as! SearchVC
 //        self.navigationController?.pushViewController(vc, animated: true)
         

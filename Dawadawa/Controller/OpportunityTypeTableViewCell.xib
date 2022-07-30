@@ -38,10 +38,22 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AsK-U7-ObJ">
+                                <rect key="frame" x="0.0" y="0.0" width="415" height="35"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <connections>
+                                    <action selector="btnSelectopptypetapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="yBM-sO-phW"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="AsK-U7-ObJ" secondAttribute="bottom" id="2oh-Dq-DdE"/>
+                            <constraint firstAttribute="trailing" secondItem="AsK-U7-ObJ" secondAttribute="trailing" id="6Pn-o5-gKd"/>
                             <constraint firstItem="PvT-bq-3bZ" firstAttribute="leading" secondItem="fCy-vR-Lnq" secondAttribute="trailing" constant="12" id="OuZ-FB-ert"/>
+                            <constraint firstItem="AsK-U7-ObJ" firstAttribute="leading" secondItem="Jve-ji-Kxd" secondAttribute="leading" id="Q3Y-2n-bWV"/>
+                            <constraint firstItem="AsK-U7-ObJ" firstAttribute="top" secondItem="Jve-ji-Kxd" secondAttribute="top" id="Sen-BX-3rF"/>
                             <constraint firstAttribute="bottom" secondItem="fCy-vR-Lnq" secondAttribute="bottom" constant="7" id="kka-Ls-fxd"/>
                             <constraint firstItem="fCy-vR-Lnq" firstAttribute="leading" secondItem="Jve-ji-Kxd" secondAttribute="leading" id="ncZ-5h-gXt"/>
                             <constraint firstItem="PvT-bq-3bZ" firstAttribute="centerY" secondItem="fCy-vR-Lnq" secondAttribute="centerY" id="x4M-rK-z2f"/>
@@ -58,9 +70,11 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="btnSelectOpptype" destination="AsK-U7-ObJ" id="Fh9-8E-zFM"/>
+                <outlet property="imgradio" destination="fCy-vR-Lnq" id="IEx-0P-U9y"/>
                 <outlet property="lblCategory" destination="PvT-bq-3bZ" id="nKc-F1-HkG"/>
             </connections>
-            <point key="canvasLocation" x="137.68115942028987" y="86.383928571428569"/>
+            <point key="canvasLocation" x="136.95652173913044" y="86.049107142857139"/>
         </tableViewCell>
     </objects>
     <resources>

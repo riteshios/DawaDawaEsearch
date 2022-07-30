@@ -23,13 +23,13 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Opportunity subcategory" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8cA-JD-6Rq">
-                        <rect key="frame" x="0.0" y="2" width="155.5" height="17"/>
-                        <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="14"/>
+                        <rect key="frame" x="0.0" y="2" width="177.5" height="19.5"/>
+                        <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="16"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0ty-Yw-yg5">
-                        <rect key="frame" x="0.0" y="29" width="399" height="1"/>
+                        <rect key="frame" x="0.0" y="31.5" width="399" height="1"/>
                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="sy0-MX-3Um"/>
