@@ -27,6 +27,16 @@ class FilterVC: UIViewController {
     @IBOutlet weak var btnState: UIButton!
     @IBOutlet weak var btnLocality: UIButton!
     
+    @IBOutlet weak var btnPriceLtoH: UIButton!
+    @IBOutlet weak var btnPriceHtoL: UIButton!
+    @IBOutlet weak var btnDateNtoO: UIButton!
+    @IBOutlet weak var btnDateOtoN: UIButton!
+    
+    @IBOutlet weak var imgradiopriceLtoH: UIImageView!
+    @IBOutlet weak var imgradiopriceHtoL: UIImageView!
+    @IBOutlet weak var imgradiodateNtoO: UIImageView!
+    @IBOutlet weak var imgradiodateOtoN: UIImageView!
+    
     
     @IBOutlet weak var viewMostLiked: UIView!
     @IBOutlet weak var lblMostLiked: UILabel!
@@ -60,6 +70,22 @@ class FilterVC: UIViewController {
     @IBOutlet weak var lblSold: UILabel!
     @IBOutlet weak var btnSold: UIButton!
     
+    @IBOutlet weak var viewToday: UIView!
+    @IBOutlet weak var lblToday: UILabel!
+    @IBOutlet weak var btnToday: UIButton!
+    
+    @IBOutlet weak var viewLastweek: UIView!
+    @IBOutlet weak var lblLastweek: UILabel!
+    @IBOutlet weak var btnLastweek: UIButton!
+    
+    @IBOutlet weak var viewLastMonth: UIView!
+    @IBOutlet weak var lblLastmonth: UILabel!
+    @IBOutlet weak var btnLastmonth: UIButton!
+    
+    @IBOutlet weak var viewCustomrange: UIView!
+    @IBOutlet weak var lblCustomrange: UILabel!
+    @IBOutlet weak var btnCustomrange: UIButton!
+    
     
     var getCategoryarr         =      [getCartegoryModel]()
     var getfiltersubcatarr     =      [getfiltersubcategoryModel]()
@@ -73,6 +99,17 @@ class FilterVC: UIViewController {
     var stringcatid = ""
     var imgUrl = ""
     
+    var like = ""
+    var rating = ""
+    var oppstatus:Int?
+    var servicetype:Int?
+    var today:Int?
+    var lastweek:Int?
+    var lastmonth:Int?
+    var sortby:Int?
+    var selectedoptype = ""
+  
+
     
     
     var timePicker = UIDatePicker()
@@ -124,6 +161,7 @@ class FilterVC: UIViewController {
             self.lblMostLiked.textColor = .white
             self.viewLeastLiked.backgroundColor = UIColor(red: 241, green: 249, blue: 253)
             self.lblLeastLiked.textColor = UIColor(red: 21, green: 114, blue: 161)
+            self.like = "DESC"
             
         }
         
@@ -136,6 +174,7 @@ class FilterVC: UIViewController {
             self.lblLeastLiked.textColor = .white
             self.viewMostLiked.backgroundColor = UIColor(red: 241, green: 249, blue: 253)
             self.lblMostLiked.textColor = UIColor(red: 21, green: 114, blue: 161)
+            self.like = "ASC"
         }
     }
     
@@ -146,6 +185,7 @@ class FilterVC: UIViewController {
             self.lblMostrated.textColor = .white
             self.viewLeastrated.backgroundColor = UIColor(red: 241, green: 249, blue: 253)
             self.lblLeastrated.textColor = UIColor(red: 21, green: 114, blue: 161)
+            self.rating = "DESC"
 
         }
     }
@@ -157,6 +197,7 @@ class FilterVC: UIViewController {
             self.lblLeastrated.textColor = .white
             self.viewMostRated.backgroundColor = UIColor(red: 241, green: 249, blue: 253)
             self.lblMostrated.textColor = UIColor(red: 21, green: 114, blue: 161)
+            self.rating = "ASC"
         }
     }
     
@@ -171,12 +212,13 @@ class FilterVC: UIViewController {
             self.lblClosed.textColor = UIColor(red: 21, green: 114, blue: 161)
             self.viewSold.backgroundColor = UIColor(red: 241, green: 249, blue: 253)
             self.lblSold.textColor = UIColor(red: 21, green: 114, blue: 161)
+            self.oppstatus = 1
         }
     }
     
     @IBAction func btnAvailableTapped(_ sender: UIButton) {
         sender.isSelected  = !sender.isSelected
-        if self.btnAll.isSelected == true{
+        if self.btnAvailable.isSelected == true{
             self.viewAvailable.backgroundColor = UIColor(red: 21, green: 114, blue: 161)
             self.lblAvailable.textColor = .white
             self.viewAll.backgroundColor = UIColor(red: 241, green: 249, blue: 253)
@@ -185,13 +227,14 @@ class FilterVC: UIViewController {
             self.lblClosed.textColor = UIColor(red: 21, green: 114, blue: 161)
             self.viewSold.backgroundColor = UIColor(red: 241, green: 249, blue: 253)
             self.lblSold.textColor = UIColor(red: 21, green: 114, blue: 161)
+            self.oppstatus = 3
         }
 
     }
     
     @IBAction func btnClosedTapped(_ sender: UIButton) {
         sender.isSelected  = !sender.isSelected
-        if self.btnAll.isSelected == true{
+        if self.btnClosed.isSelected == true{
             self.viewClosed.backgroundColor = UIColor(red: 21, green: 114, blue: 161)
             self.lblClosed.textColor = .white
             self.viewAvailable.backgroundColor = UIColor(red: 241, green: 249, blue: 253)
@@ -200,13 +243,14 @@ class FilterVC: UIViewController {
             self.lblAll.textColor = UIColor(red: 21, green: 114, blue: 161)
             self.viewSold.backgroundColor = UIColor(red: 241, green: 249, blue: 253)
             self.lblSold.textColor = UIColor(red: 21, green: 114, blue: 161)
+            self.oppstatus = 2
         }
 
     }
     
     @IBAction func btnSoldTapped(_ sender: UIButton) {
         sender.isSelected  = !sender.isSelected
-        if self.btnAll.isSelected == true{
+        if self.btnSold.isSelected == true{
             self.viewSold.backgroundColor = UIColor(red: 21, green: 114, blue: 161)
             self.lblSold.textColor = .white
             self.viewAvailable.backgroundColor = UIColor(red: 241, green: 249, blue: 253)
@@ -215,10 +259,68 @@ class FilterVC: UIViewController {
             self.lblClosed.textColor = UIColor(red: 21, green: 114, blue: 161)
             self.viewAll.backgroundColor = UIColor(red: 241, green: 249, blue: 253)
             self.lblAll.textColor = UIColor(red: 21, green: 114, blue: 161)
+            self.oppstatus = 5
         }
 
     }
     
+    @IBAction func btnTodayTapped(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        if self.btnToday.isSelected == true{
+            self.viewToday.backgroundColor = UIColor(red: 21, green: 114, blue: 161)
+            self.lblToday.textColor = .white
+            self.viewLastweek.backgroundColor = UIColor(red: 241, green: 249, blue: 253)
+            self.lblLastweek.textColor = UIColor(red: 21, green: 114, blue: 161)
+            self.viewLastMonth.backgroundColor = UIColor(red: 241, green: 249, blue: 253)
+            self.lblLastmonth.textColor = UIColor(red: 21, green: 114, blue: 161)
+            self.viewCustomrange.backgroundColor = UIColor(red: 241, green: 249, blue: 253)
+            self.lblCustomrange.textColor =  UIColor(red: 21, green: 114, blue: 161)
+            self.today = 0
+        }
+    }
+    
+    @IBAction func btnLastweekTapped(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        if self.btnLastweek.isSelected == true{
+            self.viewLastweek.backgroundColor = UIColor(red: 21, green: 114, blue: 161)
+            self.lblLastweek.textColor = .white
+            self.viewToday.backgroundColor = UIColor(red: 241, green: 249, blue: 253)
+            self.lblToday.textColor = UIColor(red: 21, green: 114, blue: 161)
+            self.viewLastMonth.backgroundColor = UIColor(red: 241, green: 249, blue: 253)
+            self.lblLastmonth.textColor = UIColor(red: 21, green: 114, blue: 161)
+            self.viewCustomrange.backgroundColor = UIColor(red: 241, green: 249, blue: 253)
+            self.lblCustomrange.textColor =  UIColor(red: 21, green: 114, blue: 161)
+            self.lastweek = 1
+        }
+    }
+    @IBAction func btnLastmonthTapped(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        if self.btnLastmonth.isSelected == true{
+            self.viewLastMonth.backgroundColor = UIColor(red: 21, green: 114, blue: 161)
+            self.lblLastmonth.textColor = .white
+            self.viewLastweek.backgroundColor = UIColor(red: 241, green: 249, blue: 253)
+            self.lblLastweek.textColor = UIColor(red: 21, green: 114, blue: 161)
+            self.viewToday.backgroundColor = UIColor(red: 241, green: 249, blue: 253)
+            self.lblToday.textColor = UIColor(red: 21, green: 114, blue: 161)
+            self.viewCustomrange.backgroundColor = UIColor(red: 241, green: 249, blue: 253)
+            self.lblCustomrange.textColor =  UIColor(red: 21, green: 114, blue: 161)
+            self.lastmonth = 2
+        }
+    }
+    @IBAction func btnCustomrangeTapped(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        if self.btnCustomrange.isSelected == true{
+            self.viewCustomrange.backgroundColor = UIColor(red: 21, green: 114, blue: 161)
+            self.lblCustomrange.textColor = .white
+            self.viewLastweek.backgroundColor = UIColor(red: 241, green: 249, blue: 253)
+            self.lblLastweek.textColor = UIColor(red: 21, green: 114, blue: 161)
+            self.viewLastMonth.backgroundColor = UIColor(red: 241, green: 249, blue: 253)
+            self.lblLastmonth.textColor = UIColor(red: 21, green: 114, blue: 161)
+            self.viewToday.backgroundColor = UIColor(red: 241, green: 249, blue: 253)
+            self.lblToday.textColor =  UIColor(red: 21, green: 114, blue: 161)
+            self.showSimpleAlert(message: "Please Choose Start date to Last date")
+        }
+    }
     
     @IBAction func btnSelectStateTapped(_ sender: UIButton) {
         kSharedAppDelegate?.dropDown(dataSource: getstatelistarr.map{String.getString($0.state_name)}, text: btnState){
@@ -242,13 +344,58 @@ class FilterVC: UIViewController {
             
         }
         
+    }
+    
+    @IBAction func btnPriceLtoHTapped(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        if self.btnPriceLtoH.isSelected == true{
+            self.imgradiopriceLtoH.image = UIImage(named: "darkcircle")
+            self.imgradiopriceHtoL.image = UIImage(named: "radiouncheck")
+            self.imgradiodateNtoO.image = UIImage(named: "radiouncheck")
+            self.imgradiodateOtoN.image = UIImage(named: "radiouncheck")
+            self.sortby = 1
+        }
         
     }
+    
+    @IBAction func btnPriceHtoLTapped(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        if self.btnPriceHtoL.isSelected == true{
+            self.imgradiopriceHtoL.image = UIImage(named: "darkcircle")
+            self.imgradiopriceLtoH.image = UIImage(named: "radiouncheck")
+            self.imgradiodateNtoO.image = UIImage(named: "radiouncheck")
+            self.imgradiodateOtoN.image = UIImage(named: "radiouncheck")
+            self.sortby = 2
+        }
+    }
+    
+    
+    @IBAction func btnDateNtoOTapped(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        if self.btnDateNtoO.isSelected == true{
+            self.imgradiodateNtoO.image = UIImage(named: "darkcircle")
+            self.imgradiopriceLtoH.image = UIImage(named: "radiouncheck")
+            self.imgradiopriceHtoL.image = UIImage(named: "radiouncheck")
+            self.imgradiodateOtoN.image = UIImage(named: "radiouncheck")
+            self.sortby = 3
+        }
+    }
+    
+    @IBAction func btnDateOtoNTapped(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        if self.btnDateOtoN.isSelected == true{
+            self.imgradiodateOtoN.image = UIImage(named: "darkcircle")
+            self.imgradiopriceLtoH.image = UIImage(named: "radiouncheck")
+            self.imgradiopriceHtoL.image = UIImage(named: "radiouncheck")
+            self.imgradiodateNtoO.image = UIImage(named: "radiouncheck")
+            self.sortby = 4
+        }
+    }
+    
+    
     @IBAction func btnApplyfilterTapped(_ sender: UIButton) {
         self.filterdataapi()
     }
-    
-    
     
     //   MARK: - APICALL
     func getlocalityapi(id:Int){
@@ -287,7 +434,7 @@ extension FilterVC: UITableViewDelegate,UITableViewDataSource{
         
         switch tableView{
         case tblViewOpportunitytype:
-            self.highttblviewOpportunitytype.constant = CGFloat(60 * (self.getCategoryarr.count + self.getfiltersubcatarr.count + 1))
+            self.highttblviewOpportunitytype.constant = CGFloat(55 * (self.getCategoryarr.count + self.getfiltersubcatarr.count + 1))
             switch section{
             case 0:
                 return self.getCategoryarr.count
@@ -399,7 +546,10 @@ extension FilterVC: UITableViewDelegate,UITableViewDataSource{
             obj.isselection = true
             self.selectedIds.append(String.getString(obj.id))
             print(" selectedIds---\(self.selectedIds)")
+            
             let ids = self.selectedIds.joined(separator: ",")
+            self.selectedoptype = ids
+            
             print(" selected   -ids---\(ids)")
             self.filtersubcategoryapi(catid: ids)
             
@@ -409,7 +559,10 @@ extension FilterVC: UITableViewDelegate,UITableViewDataSource{
                     self.selectedIds.remove(at: i)
                     print(" RemoveselectedIds---\(self.selectedIds)")
                     obj.isselection = false
+                    
                     let ids = self.selectedIds.joined(separator: ",")
+                    self.selectedoptype = ids
+                    debugPrint("selectedoptype=-=-=-=", self.selectedoptype)
                     print(" selected   -ids---\(ids)")
                     self.filtersubcategoryapi(catid: ids)
                     break
@@ -418,6 +571,7 @@ extension FilterVC: UITableViewDelegate,UITableViewDataSource{
             
         }
     }
+    
     
     //    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
     //        switch tableView{
@@ -508,7 +662,7 @@ extension FilterVC{
     @objc func doneClick() {
         self.view.endEditing(true)
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-mm-dd"
+        dateFormatter.dateFormat = "yyyy-MM-dd"
         self.txtfieldStartDate.text = dateFormatter.string(from: self.timePicker.date)
         
         
@@ -567,7 +721,7 @@ extension FilterVC{
     @objc func doneClicke() {
         self.view.endEditing(true)
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-mm-dd"
+        dateFormatter.dateFormat = "yyyy-MM-dd"
         self.txtfieldEndDate.text = dateFormatter.string(from: self.timePicker.date)
         
         
@@ -918,19 +1072,20 @@ extension FilterVC{
         
         
         let params:[String : Any] = [
-            "most_like":"DESC",
-//            "rating":"1",
-//            "opr_type":"1",
-//            "opr_subtype":"1",
-//            "date":"",
-//            "lastweek":"",
-//            "lastmonth":"",
-//            "state":"\(String(describing: stateids))",
-//            "locality":"\(String(describing: localityid))",
-//            "services_type":"",
-//            "sort_by":"",
-//            "start_date":"",
-//            "end_date":"",
+            "most_like":String.getString(like),
+            "rating":String.getString(rating),
+            "opp_status":Int.getInt(oppstatus),
+            "opr_type":String.getString(selectedoptype), // to be change
+            "opr_subtype":"",
+            "date":Int.getInt(today),
+            "lastweek":Int.getInt(lastweek),
+            "lastmonth":Int.getInt(lastmonth),
+            "state":"\(String(describing: stateids))",
+            "locality":"\(String(describing: localityid))",
+            "services_type":"",
+            "sort_by":Int.getInt(sortby),
+            "start_date":String.getString(self.txtfieldStartDate.text),
+            "end_date":String.getString(self.txtfieldEndDate.text),
             
         ]
         
@@ -964,6 +1119,9 @@ extension FilterVC{
                         let vc = self?.storyboard?.instantiateViewController(withIdentifier: HomeVC.getStoryboardID()) as! HomeVC
                         vc.cameFrom = "FilterData"
                         vc.userTimeLine = self!.userTimeLine
+//                        vc.hidesBottomBarWhenPushed = false
+//                        vc.tabBarController?.hidesBottomBarWhenPushed = false
+          
                         self?.navigationController?.pushViewController(vc, animated: true)
                         
                     }

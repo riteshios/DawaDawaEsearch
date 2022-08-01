@@ -30,6 +30,7 @@ class SocialPostData {
     var looking_for:String?
     var opp_plan:String?
     var flag_user_post:String?
+    var is_user_like:String?
     var oppimage = [oppr_image]() // Array of dictionary
     var userdetail:user_detail?  // Simple dictionary
     var oppdocument = [oppr_document]()  // Array of dictionary
@@ -55,6 +56,7 @@ class SocialPostData {
         self.pricing = String.getString(data["pricing"])
         self.looking_for = String.getString(data["looking_for"])
         self.opp_plan = String.getString(data["opp_plan"])
+        self.is_user_like = String.getString(data["is_user_like"])
         let img = kSharedInstance.getArray(withDictionary: data["oppr_image"])
         self.oppimage = img.map{oppr_image(data: kSharedInstance.getDictionary($0))}
         self.userdetail = user_detail(data: kSharedInstance.getDictionary(data["user_detail"]))

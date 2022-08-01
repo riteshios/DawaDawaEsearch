@@ -21,6 +21,7 @@ class ProfileVC: UIViewController {
     var userImage:String?
     var userTimeLine = [SocialPostData]()
     
+    
     @IBOutlet weak var tblViewSocialPost: UITableView!
     
     
@@ -235,7 +236,20 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
             
             cell.lblLikeCount.text = String.getString(obj.likes) + " " + "likes"
             
-            cell.callbackmore = {
+            cell.callback = { txt in
+                if txt == "Like"{
+                if cell.btnlike.isSelected == true{
+                    let oppid = self.userTimeLine[indexPath.row].id
+                    debugPrint("oppidkkkkkkk=-=-",oppid)
+                    self.likeOpportunityapi(oppr_id: oppid ?? 0)
+        
+                    cell.imglike.image = UIImage(named: "dil")
+                    
+                
+                }
+            }
+            
+            if txt == "More" {
                 let vc = self.storyboard?.instantiateViewController(withIdentifier: ProileSocialMoreVC.getStoryboardID()) as! ProileSocialMoreVC
                 vc.modalTransitionStyle = .crossDissolve
                 vc.modalPresentationStyle = .overCurrentContext
@@ -254,8 +268,6 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                             debugPrint("oppid+++++++",oppid)
                             self.opportunitydetailsapi(oppr_id: oppid)
                         }
-                        
-                        
                     }
                     
                     
@@ -312,6 +324,7 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                 }
                 self.present(vc, animated: false)
             }
+        }
             return cell
             
             
@@ -697,7 +710,7 @@ extension ProfileVC{
         
         let params:[String : Any] = [
             "user_id":Int.getInt(UserData.shared.id),
-            "id":opr_id
+            "opr_id":opr_id
         ]
         
         debugPrint("user_id......",Int.getInt(UserData.shared.id))
@@ -730,8 +743,7 @@ extension ProfileVC{
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     else if  Int.getInt(dictResult["status"]) == 400{
-                        CommonUtils.showError(.info, "Opportunity has been closed")
-//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                 default:
@@ -824,6 +836,72 @@ extension ProfileVC{
                 }
 
             }
+        }
+    
+    //    Api like Opportunity
+        
+        func likeOpportunityapi(oppr_id:Int){
+            CommonUtils.showHud(show: true)
+            
+            
+            if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
+                let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+                let septoken = endToken.components(separatedBy: " ")
+                if septoken[0] != "Bearer"{
+                    let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
+                    kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
+                }
+            }
+            
+            
+            let params:[String : Any] = [
+                "user_id":Int.getInt(UserData.shared.id),
+                "oppr_id":oppr_id
+            ]
+            
+            debugPrint("user_id......",Int.getInt(UserData.shared.id))
+            TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.klikeopportunity, requestMethod: .POST,
+                                                       requestParameters:params, withProgressHUD: false)
+            {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
+                
+                CommonUtils.showHudWithNoInteraction(show: false)
+                
+                if errorType == .requestSuccess {
+                    
+                    let dictResult = kSharedInstance.getDictionary(result)
+                    
+                    switch Int.getInt(statusCode) {
+                    case 200:
+                        
+                        if Int.getInt(dictResult["status"]) == 200{
+                            
+                            let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+                            let septoken = endToken.components(separatedBy: " ")
+                            if septoken[0] == "Bearer"{
+                                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
+                            }
+                          
+                            CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                          
+                            
+                        }
+                        
+                        else if  Int.getInt(dictResult["status"]) == 400{
+                            CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        }
+                        
+                    default:
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    }
+                } else if errorType == .noNetwork {
+                    CommonUtils.showToastForInternetUnavailable()
+                    
+                } else {
+                    CommonUtils.showToastForDefaultError()
+                }
+                
+            }
+        
         }
 }
 

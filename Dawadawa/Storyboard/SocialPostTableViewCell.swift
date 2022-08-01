@@ -11,7 +11,8 @@ class SocialPostTableViewCell: UITableViewCell {
     
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var SocialPostCollectionView: UICollectionView!
-    var callbackmore:(()->())?
+    var callback:((String)->())?
+    
  
     @IBOutlet weak var lblUserName: UILabel!
     @IBOutlet weak var lblTitle: UILabel!
@@ -23,6 +24,7 @@ class SocialPostTableViewCell: UITableViewCell {
     
     @IBOutlet weak var imglike: UIImageView!
     @IBOutlet weak var btnlike: UIButton!
+    @IBOutlet weak var lbllike: UILabel!
     
    
     var imgUrl = ""
@@ -57,25 +59,20 @@ class SocialPostTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        
     }
     
     @IBAction func btnMoreTapped(_ sender: UIButton) {
-        self.callbackmore?()
+        self.callback?("More")
     }
     
     @IBAction func btnLikeTapped(_ sender: UIButton) {
-        
-        if self.btnlike.isSelected == true{
-            let oppid = self.userTimeLine.first?.id
-            debugPrint("oppid====",oppid)
-            self.likeOpportunityapi(oppr_id: oppid!)
-            self.imglike.image = UIImage(named: "dil")
-        }
-        
+        sender.isSelected = !sender.isSelected
+        self.callback?("Like")
     }
     
 }
+ 
+
 extension SocialPostTableViewCell: UICollectionViewDelegate,UICollectionViewDataSource{
     
 //    Collection View
@@ -89,7 +86,7 @@ extension SocialPostTableViewCell: UICollectionViewDelegate,UICollectionViewData
         print("-=-imgurl-=-\(obj)")
         let imageurl = "\(imgUrl)\(String.getString(obj))"
         print("-=imagebaseurl=-=-\(imageurl)")
-        cell.imgOpportunity.downlodeImage(serviceurl: imageurl, placeHolder: nil)
+        cell.imgOpportunity.downlodeImage(serviceurl: imageurl, placeHolder: UIImage(named: "truck"))
         return cell
     }
     
@@ -143,8 +140,6 @@ extension SocialPostTableViewCell{
                             kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
                         }
                       
-                        
-
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                       
                         

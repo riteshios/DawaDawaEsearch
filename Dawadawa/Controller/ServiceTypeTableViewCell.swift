@@ -10,6 +10,9 @@ import UIKit
 class ServiceTypeTableViewCell: UITableViewCell {
 
     @IBOutlet weak var lblServicetype: UILabel!
+    @IBOutlet weak var imgradio: UIImageView!
+    @IBOutlet weak var btnSelection: UIButton!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
