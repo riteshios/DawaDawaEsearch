@@ -86,7 +86,7 @@ extension SocialPostTableViewCell: UICollectionViewDelegate,UICollectionViewData
         print("-=-imgurl-=-\(obj)")
         let imageurl = "\(imgUrl)\(String.getString(obj))"
         print("-=imagebaseurl=-=-\(imageurl)")
-        cell.imgOpportunity.downlodeImage(serviceurl: imageurl, placeHolder: UIImage(named: "truck"))
+        cell.imgOpportunity.downlodeImage(serviceurl: imageurl, placeHolder: UIImage(named: "baba"))
         return cell
     }
     
@@ -95,70 +95,3 @@ extension SocialPostTableViewCell: UICollectionViewDelegate,UICollectionViewData
     }
 }
 
-extension SocialPostTableViewCell{
-    
-//    Api like Opportunity
-    
-    func likeOpportunityapi(oppr_id:Int){
-        CommonUtils.showHud(show: true)
-        
-        
-        if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
-            let endToken = kSharedUserDefaults.getLoggedInAccessToken()
-            let septoken = endToken.components(separatedBy: " ")
-            if septoken[0] != "Bearer"{
-                let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
-                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
-            }
-        }
-        
-        
-        let params:[String : Any] = [
-            "user_id":Int.getInt(UserData.shared.id),
-            "oppr_id":oppr_id
-        ]
-        
-        debugPrint("user_id......",Int.getInt(UserData.shared.id))
-        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.klikeopportunity, requestMethod: .POST,
-                                                   requestParameters:params, withProgressHUD: false)
-        {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
-            
-            CommonUtils.showHudWithNoInteraction(show: false)
-            
-            if errorType == .requestSuccess {
-                
-                let dictResult = kSharedInstance.getDictionary(result)
-                
-                switch Int.getInt(statusCode) {
-                case 200:
-                    
-                    if Int.getInt(dictResult["status"]) == 200{
-                        
-                        let endToken = kSharedUserDefaults.getLoggedInAccessToken()
-                        let septoken = endToken.components(separatedBy: " ")
-                        if septoken[0] == "Bearer"{
-                            kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
-                        }
-                      
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                      
-                        
-                    }
-                    
-                    else if  Int.getInt(dictResult["status"]) == 400{
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                    }
-                    
-                default:
-                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                }
-            } else if errorType == .noNetwork {
-                CommonUtils.showToastForInternetUnavailable()
-                
-            } else {
-                CommonUtils.showToastForDefaultError()
-            }
-            
-        }
-    }
-}

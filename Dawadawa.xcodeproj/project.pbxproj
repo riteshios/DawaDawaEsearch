@@ -64,6 +64,13 @@
 		04B2653C28731CAE00B2DF7C /* WebViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B2653B28731CAD00B2DF7C /* WebViewVC.swift */; };
 		04B4C8F62889BAA400DB3E11 /* OpportunitypostedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B4C8F42889BAA400DB3E11 /* OpportunitypostedTableViewCell.swift */; };
 		04B4C8F72889BAA400DB3E11 /* OpportunitypostedTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B4C8F52889BAA400DB3E11 /* OpportunitypostedTableViewCell.xib */; };
+		04B59933289908DD008366DC /* InvestorSubscriptionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B59932289908DD008366DC /* InvestorSubscriptionVC.swift */; };
+		04B5993D28993091008366DC /* PlanTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B5993B28993091008366DC /* PlanTableViewCell.swift */; };
+		04B5993E28993091008366DC /* PlanTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B5993C28993091008366DC /* PlanTableViewCell.xib */; };
+		04B59941289930B4008366DC /* PlanListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B5993F289930B4008366DC /* PlanListTableViewCell.swift */; };
+		04B59942289930B4008366DC /* PlanListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B59940289930B4008366DC /* PlanListTableViewCell.xib */; };
+		04B5994528993700008366DC /* PlanCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B5994328993700008366DC /* PlanCollectionViewCell.swift */; };
+		04B5994628993700008366DC /* PlanCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B5994428993700008366DC /* PlanCollectionViewCell.xib */; };
 		04B9190A286B133B009ABAE4 /* VerifyEmailOTPVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B91909286B133B009ABAE4 /* VerifyEmailOTPVC.swift */; };
 		04B9190C286B1372009ABAE4 /* ChangeEmailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B9190B286B1372009ABAE4 /* ChangeEmailVC.swift */; };
 		04B91910286B13B8009ABAE4 /* EmailChangedSuccessfullyPopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B9190F286B13B8009ABAE4 /* EmailChangedSuccessfullyPopUpVC.swift */; };
@@ -680,6 +687,13 @@
 		04B2653B28731CAD00B2DF7C /* WebViewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewVC.swift; sourceTree = SOURCE_ROOT; };
 		04B4C8F42889BAA400DB3E11 /* OpportunitypostedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpportunitypostedTableViewCell.swift; sourceTree = "<group>"; };
 		04B4C8F52889BAA400DB3E11 /* OpportunitypostedTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OpportunitypostedTableViewCell.xib; sourceTree = "<group>"; };
+		04B59932289908DD008366DC /* InvestorSubscriptionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvestorSubscriptionVC.swift; sourceTree = "<group>"; };
+		04B5993B28993091008366DC /* PlanTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PlanTableViewCell.swift; path = Dawadawa/Storyboard/PlanTableViewCell.swift; sourceTree = SOURCE_ROOT; };
+		04B5993C28993091008366DC /* PlanTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = PlanTableViewCell.xib; path = Dawadawa/Storyboard/PlanTableViewCell.xib; sourceTree = SOURCE_ROOT; };
+		04B5993F289930B4008366DC /* PlanListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanListTableViewCell.swift; sourceTree = "<group>"; };
+		04B59940289930B4008366DC /* PlanListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlanListTableViewCell.xib; sourceTree = "<group>"; };
+		04B5994328993700008366DC /* PlanCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PlanCollectionViewCell.swift; path = Dawadawa/Storyboard/PlanCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
+		04B5994428993700008366DC /* PlanCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = PlanCollectionViewCell.xib; path = Dawadawa/Storyboard/PlanCollectionViewCell.xib; sourceTree = SOURCE_ROOT; };
 		04B91909286B133B009ABAE4 /* VerifyEmailOTPVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyEmailOTPVC.swift; sourceTree = "<group>"; };
 		04B9190B286B1372009ABAE4 /* ChangeEmailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeEmailVC.swift; sourceTree = "<group>"; };
 		04B9190F286B13B8009ABAE4 /* EmailChangedSuccessfullyPopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailChangedSuccessfullyPopUpVC.swift; sourceTree = "<group>"; };
@@ -1367,9 +1381,9 @@
 			isa = PBXGroup;
 			children = (
 				0489D1A02892CAB100725664 /* SubCategorylabelTableViewCell.swift */,
-				0489D1A12892CAB100725664 /* SubCategorylabelTableViewCell.xib */,
 				0489D1962892B12300725664 /* SubcategoryTableViewCell.swift */,
 				0489D19A2892B16300725664 /* OpportunityTypeTableViewCell.swift */,
+				0489D1A12892CAB100725664 /* SubCategorylabelTableViewCell.xib */,
 				0489D19B2892B16300725664 /* OpportunityTypeTableViewCell.xib */,
 				0489D1972892B12300725664 /* SubcategoryTableViewCell.xib */,
 			);
@@ -1423,6 +1437,28 @@
 				04B4C8F52889BAA400DB3E11 /* OpportunitypostedTableViewCell.xib */,
 			);
 			name = Profile;
+			sourceTree = "<group>";
+		};
+		04B599312899088E008366DC /* Subscription */ = {
+			isa = PBXGroup;
+			children = (
+				04B59932289908DD008366DC /* InvestorSubscriptionVC.swift */,
+				04B5993828992E0D008366DC /* xib */,
+			);
+			name = Subscription;
+			sourceTree = "<group>";
+		};
+		04B5993828992E0D008366DC /* xib */ = {
+			isa = PBXGroup;
+			children = (
+				04B5994328993700008366DC /* PlanCollectionViewCell.swift */,
+				04B5993B28993091008366DC /* PlanTableViewCell.swift */,
+				04B5993F289930B4008366DC /* PlanListTableViewCell.swift */,
+				04B5994428993700008366DC /* PlanCollectionViewCell.xib */,
+				04B59940289930B4008366DC /* PlanListTableViewCell.xib */,
+				04B5993C28993091008366DC /* PlanTableViewCell.xib */,
+			);
+			name = xib;
 			sourceTree = "<group>";
 		};
 		04B91907286B12C4009ABAE4 /* ChangePhoneNumber */ = {
@@ -2331,6 +2367,7 @@
 		44D7F8EF28536826001554C9 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				04B599312899088E008366DC /* Subscription */,
 				04BFFB67289250BA0086DCC1 /* FilterVC.swift */,
 				0461E31A288AA29800B7F0E7 /* HomeSocialMoreVC.swift */,
 				045C4E7D28897ACB00E831AA /* PremiumOpportunitiesVC.swift */,
@@ -2449,6 +2486,7 @@
 				447DCD3D2851CB1200C40DDD /* Fiji.png in Resources */,
 				447DCDA42851CB1200C40DDD /* GR.png in Resources */,
 				447DCDD82851CB1200C40DDD /* PR.png in Resources */,
+				04B59942289930B4008366DC /* PlanListTableViewCell.xib in Resources */,
 				447DCCB52851CB1100C40DDD /* Laos.png in Resources */,
 				447DCDF02851CB1200C40DDD /* IR.png in Resources */,
 				447DCD1D2851CB1200C40DDD /* Thailand.png in Resources */,
@@ -2504,6 +2542,7 @@
 				447DCDC82851CB1200C40DDD /* SR.png in Resources */,
 				447DCE482851CB1300C40DDD /* NE.png in Resources */,
 				447DCD012851CB1200C40DDD /* Uganda.png in Resources */,
+				04B5994628993700008366DC /* PlanCollectionViewCell.xib in Resources */,
 				447DCCED2851CB1100C40DDD /* Canada.png in Resources */,
 				447DCE462851CB1300C40DDD /* ZW.png in Resources */,
 				447DCD7C2851CB1200C40DDD /* LC.png in Resources */,
@@ -2566,6 +2605,7 @@
 				447DCCF82851CB1200C40DDD /* Azerbaijan.png in Resources */,
 				447DCD542851CB1200C40DDD /* Morocco.png in Resources */,
 				447DCCCC2851CB1100C40DDD /* Seychelles.png in Resources */,
+				04B5993E28993091008366DC /* PlanTableViewCell.xib in Resources */,
 				447DCC922851CB1100C40DDD /* Kenya.png in Resources */,
 				447DCD2D2851CB1200C40DDD /* Singapore.png in Resources */,
 				447DCD302851CB1200C40DDD /* Peru.png in Resources */,
@@ -2997,6 +3037,7 @@
 				447DCC652851CB1100C40DDD /* Date+Extension.swift in Sources */,
 				447DCC8F2851CB1100C40DDD /* UITextFieldExtended.swift in Sources */,
 				0489D19C2892B16300725664 /* OpportunityTypeTableViewCell.swift in Sources */,
+				04B5993D28993091008366DC /* PlanTableViewCell.swift in Sources */,
 				447DCC7C2851CB1100C40DDD /* UIButtonBorderWidthAndColor.swift in Sources */,
 				0461E314288A76F800B7F0E7 /* ProileSocialMoreVC.swift in Sources */,
 				447DCC8E2851CB1100C40DDD /* UITextFieldSubLayerBorderWidthAndColor.swift in Sources */,
@@ -3005,6 +3046,7 @@
 				04B4C8F62889BAA400DB3E11 /* OpportunitypostedTableViewCell.swift in Sources */,
 				447DCC842851CB1100C40DDD /* IntExtended.swift in Sources */,
 				447DCC682851CB1100C40DDD /* UIColor+Extensions.swift in Sources */,
+				04B59933289908DD008366DC /* InvestorSubscriptionVC.swift in Sources */,
 				447DCC8C2851CB1100C40DDD /* UITextFieldBorderWidthAndColor.swift in Sources */,
 				447DCE622851CB1300C40DDD /* CustomClass.swift in Sources */,
 				447DCE5D2851CB1300C40DDD /* ImagePickerHelper.swift in Sources */,
@@ -3052,7 +3094,9 @@
 				04F1AD9A28697B0D002CC167 /* EditProfileVC.swift in Sources */,
 				447DCC702851CB1100C40DDD /* UITextField+Extensions.swift in Sources */,
 				045C4E772889659700E831AA /* PopularSearchesCollectionViewCell.swift in Sources */,
+				04B5994528993700008366DC /* PlanCollectionViewCell.swift in Sources */,
 				042293C22869B203000503B7 /* NumberChangedSuccessfulPopUpVC.swift in Sources */,
+				04B59941289930B4008366DC /* PlanListTableViewCell.swift in Sources */,
 				04647ECC287814CB0006B8D2 /* SelectCategoryTableViewCell.swift in Sources */,
 				045C4E6A28895DC600E831AA /* SearchVC.swift in Sources */,
 				0406DB83287D55DF00B57A0B /* MiningBusinessVC.swift in Sources */,

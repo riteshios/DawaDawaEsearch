@@ -54,7 +54,7 @@ class LoginVC: UIViewController {
         viewMain.addShadowWithBlurOnView(viewMain, spread: 0, blur: 10, color: .black, opacity: 0.16, OffsetX: 0, OffsetY: 1)
         self.viewButtonLogin.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
         
-        self.setTextFieldUI(textField: txtFieldPhoneNumer, place: "Phone number/Email address", floatingText: "Phone number/Email address")
+        self.setTextFieldUI(textField: txtFieldPhoneNumer, place: "Phone number/Email", floatingText: "Phone number/Email")
         self.setTextFieldUI(textField: txtFieldPassword, place: "Password", floatingText: "Password")
     }
     //  MARK: - @IBAction
@@ -336,8 +336,8 @@ extension LoginVC{
         btnLogin.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "Login", comment: ""), for: .normal)
         txtFieldPassword.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Password", comment: "")
         txtFieldPassword.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Password", comment: "")
-        txtFieldPhoneNumer.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Phone number/Email address*", comment: "")
-        txtFieldPhoneNumer.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Phone number/Email address*", comment: "")
+        txtFieldPhoneNumer.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Phone number/Email*", comment: "")
+        txtFieldPhoneNumer.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Phone number/Email*", comment: "")
         
     }
 }

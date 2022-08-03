@@ -15,6 +15,7 @@ class SocialPostData {
     var oppr_type:String?
     var category_id:Int?
     var business_name:String?
+    var subcategory_name:String?
     var services_type:String?
     var business_mining_type:String?
     var business_mining_block:String?
@@ -42,6 +43,7 @@ class SocialPostData {
         self.oppr_type = String.getString(data["oppr_type"])
         self.category_id = Int.getInt(data["category_id"])
         self.business_name = String.getString(data["business_name"])
+        self.subcategory_name = String.getString(data["subcategory_name"])
         self.services_type = String.getString(data["services_type"])
         self.business_mining_type = String.getString(data["business_mining_type"])
         self.business_mining_block = String.getString(data["business_mining_block"])
@@ -60,6 +62,8 @@ class SocialPostData {
         let img = kSharedInstance.getArray(withDictionary: data["oppr_image"])
         self.oppimage = img.map{oppr_image(data: kSharedInstance.getDictionary($0))}
         self.userdetail = user_detail(data: kSharedInstance.getDictionary(data["user_detail"]))
+        let doc = kSharedInstance.getArray(withDictionary: data["oppr_document"])
+        self.oppdocument = doc.map{oppr_document(data: kSharedInstance.getDictionary($0))}
         
     }
     

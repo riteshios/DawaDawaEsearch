@@ -104,7 +104,7 @@ struct ServiceName {
     static let klistopportunity         =        "api/list-opportunities"
     static let kdeleteopportunity       =        "api/delete-opportunities"
     static let kcloseopportunity        =        "api/close-opportunities"
-    static let kgetallopportunity       =        "api/all-opportunity"
+    static let kgetallopportunity       =        "api/all-opportunity/\(UserData.shared.id)"
     static let kflagpost                =        "api/flag-opportunity"
     static let kgetpremium              =        "api/opportunity-premium"
     static let kgetFeatured             =        "api/featured-opportunity"
@@ -114,7 +114,7 @@ struct ServiceName {
     
 //    Filter
     static let kfiltersubcategory      =         "api/filter-sub-category"
-    static let kfilter                 =         "api/opr-filter"
+    static let kfilter                 =         "api/opr-filter/\(UserData.shared.id)"
 }
 
 struct Notifications {

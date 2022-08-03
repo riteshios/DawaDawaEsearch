@@ -119,7 +119,7 @@ class FilterVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.slidersetup()
-        self.setup()
+        self.setuptableview()
         self.getCartListApi()
         self.getservicetypeapi()
         self.setupstartdate()
@@ -127,7 +127,7 @@ class FilterVC: UIViewController {
         self.getstateapi()
     }
     
-    private func setup(){
+    private func setuptableview(){
         tblViewOpportunitytype.register(UINib(nibName: "OpportunityTypeTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "OpportunityTypeTableViewCell")
         tblViewOpportunitytype.register(UINib(nibName: "SubCategorylabelTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "SubCategorylabelTableViewCell")
         tblViewOpportunitytype.register(UINib(nibName: "SubcategoryTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "SubcategoryTableViewCell")
@@ -148,11 +148,62 @@ class FilterVC: UIViewController {
         PriceSlider.numberFormatter.positiveSuffix = "M"
     }
     
+    private func resetsetup(){
+        self.viewMostLiked.backgroundColor = UIColor(red: 241, green: 249, blue: 253)
+        self.lblMostLiked.textColor = UIColor(red: 21, green: 114, blue: 161)
+        self.viewLeastLiked.backgroundColor = UIColor(red: 241, green: 249, blue: 253)
+        self.lblLeastLiked.textColor = UIColor(red: 21, green: 114, blue: 161)
+        self.viewMostRated.backgroundColor = UIColor(red: 241, green: 249, blue: 253)
+        self.lblMostrated.textColor = UIColor(red: 21, green: 114, blue: 161)
+        self.viewLeastrated.backgroundColor = UIColor(red: 241, green: 249, blue: 253)
+        self.lblLeastrated.textColor = UIColor(red: 21, green: 114, blue: 161)
+        self.viewAll.backgroundColor = UIColor(red: 241, green: 249, blue: 253)
+        self.lblAll.textColor = UIColor(red: 21, green: 114, blue: 161)
+        self.viewAvailable.backgroundColor = UIColor(red: 241, green: 249, blue: 253)
+        self.lblAvailable.textColor = UIColor(red: 21, green: 114, blue: 161)
+        self.viewClosed.backgroundColor = UIColor(red: 241, green: 249, blue: 253)
+        self.lblClosed.textColor = UIColor(red: 21, green: 114, blue: 161)
+        self.viewSold.backgroundColor = UIColor(red: 241, green: 249, blue: 253)
+        self.lblSold.textColor = UIColor(red: 21, green: 114, blue: 161)
+        self.viewToday.backgroundColor = UIColor(red: 241, green: 249, blue: 253)
+        self.lblToday.textColor = UIColor(red: 21, green: 114, blue: 161)
+        self.viewLastweek.backgroundColor = UIColor(red: 241, green: 249, blue: 253)
+        self.lblLastweek.textColor = UIColor(red: 21, green: 114, blue: 161)
+        self.viewLastMonth.backgroundColor = UIColor(red: 241, green: 249, blue: 253)
+        self.lblLastmonth.textColor = UIColor(red: 21, green: 114, blue: 161)
+        self.viewCustomrange.backgroundColor = UIColor(red: 241, green: 249, blue: 253)
+        self.lblCustomrange.textColor = UIColor(red: 21, green: 114, blue: 161)
+        self.imgradiopriceLtoH.image = UIImage(named: "radiouncheck")
+        self.imgradiopriceHtoL.image = UIImage(named: "radiouncheck")
+        self.imgradiodateNtoO.image = UIImage(named: "radiouncheck")
+        self.imgradiodateOtoN.image = UIImage(named: "radiouncheck")
+        self.txtfieldEndDate.text = ""
+        self.txtfieldStartDate.text = ""
+        self.lblState.text = "State"
+        self.lblLocality.text = "Locality"
+        
+        self.like = ""
+        self.rating = ""
+        self.oppstatus = Int()
+        self.servicetype = Int()
+        self.today = Int()
+        self.lastweek = Int()
+        self.lastmonth = Int()
+        self.sortby = Int()
+        self.stateid = Int()
+        self.localityid = Int()
+        
+    }
     //    MARK: - @IBActions
     
     @IBAction func btnDismissTapped(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: false)
     }
+    
+    @IBAction func btnresetTapped(_ sender: UIButton) {
+        self.resetsetup()
+    }
+    
     
     @IBAction func btnMostLikedTapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
@@ -1063,7 +1114,7 @@ extension FilterVC{
         
         
         
-        let stateids = Int(self.stateid ?? 0) // remove optional
+        let stateids = Int(self.stateid ?? 0) // For remove optional
         debugPrint("checkstateids",stateids)
         
         let localityid = Int(self.localityid ?? 0)
@@ -1088,7 +1139,7 @@ extension FilterVC{
             "end_date":String.getString(self.txtfieldEndDate.text),
             
         ]
-        
+        // Added user id in api url
         TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kfilter, requestMethod: .POST,
                                                                requestParameters:params, withProgressHUD: false)
         {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in

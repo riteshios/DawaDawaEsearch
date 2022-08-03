@@ -473,10 +473,10 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
         debugPrint("url = ",url.absoluteString)
         debugPrint("url = ",url.absoluteURL)
         
-        let imageData = NSData(contentsOf: url as URL)
-        dataNS.append(imageData!)
-        print("-----imdata---\(dataNS)")
-        print("-----imdata-Count---\(dataNS.count)")
+//        let imageData = NSData(contentsOf: url as URL)
+//        dataNS.append(imageData!)
+//        print("-----imdata---\(dataNS)")
+//        print("-----imdata-Count---\(dataNS.count)")
         //          self.urlAttachemnt = url
         //          if self.sizePerMB(url: url) > 500
         //          {
@@ -489,7 +489,7 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
         
         
       
-        print("doc path=-=-=\(doc)")
+//        print("doc path=-=-=\(doc)")
         self.documentarr.append(url)
         self.docummentarray.append(url.lastPathComponent)
         print("doc documentarr=-=-=\(documentarr)")

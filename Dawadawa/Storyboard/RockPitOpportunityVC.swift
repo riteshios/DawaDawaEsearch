@@ -29,6 +29,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
     @IBOutlet weak var btnLocality: UIButton!
     @IBOutlet weak var lblLookingFor: UILabel!
     @IBOutlet weak var btnLookingFor: UIButton!
+    @IBOutlet weak var btnCreate_UpdateOpp: UIButton!
     
     @IBOutlet weak var viewBasic: UIView!
     @IBOutlet weak var lblBasic: UILabel!
@@ -45,7 +46,10 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
     @IBOutlet weak var viewCreateOpportunity: UIView!
     @IBOutlet weak var viewSelectCategoryTop: NSLayoutConstraint!
     @IBOutlet weak var btnSelectImage: UIButton!
+    @IBOutlet weak var btnMoreImage: UIButton!
+    
     @IBOutlet weak var btnSelectDocument: UIButton!
+    @IBOutlet weak var btnMoreDocument: UIButton!
     
     @IBOutlet weak var viewselectcategorybottom: NSLayoutConstraint!
     @IBOutlet weak var UploadimageCollectionView: UICollectionView!
@@ -78,7 +82,12 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
     var getlocalitylist    = [getLocalityModel]()
     var getlookingForList  = [getLookingForModel]()
     
-    var userTimeLine = [SocialPostData]()
+    var userTimeLineoppdetails:SocialPostData?
+    var imgarray = [oppr_image]()
+    var docarray = [oppr_document]()
+    var isedit = ""
+    var imgUrl = ""
+    var docUrl = ""
     
     // MARK: - Life Cycle
     
@@ -89,7 +98,12 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
         self.getlookingforapi(id: self.lookingforid ?? 0)
         
         self.setup()
-        self.fetdata()
+        
+        if isedit == "True"{
+            self.viewSelectCategoryTop.constant = 420
+            self.fetdata()
+        }
+       
         
     }
     
@@ -108,7 +122,36 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
     }
     
     func fetdata(){
-//        self.txtFieldTitle.text = self.userTimeLine.first?.title
+      
+        self.UploadimageCollectionView.reloadData()
+        self.UploaddocumentCollectionView.reloadData()
+        self.btnCreate_UpdateOpp.setTitle("Update opportunity", for: .normal)
+        self.lblSubCategory.text = self.userTimeLineoppdetails?.subcategory_name
+        self.txtFieldTitle.text = self.userTimeLineoppdetails?.title
+        self.lblState.text = self.userTimeLineoppdetails?.opp_state
+        self.lblLocality.text = self.userTimeLineoppdetails?.opp_locality
+        self.txtFieldLocationName.text = self.userTimeLineoppdetails?.location_name
+        self.txtFieldLocationOnMap.text = self.userTimeLineoppdetails?.location_map
+        self.TextViewDescription.text = self.userTimeLineoppdetails?.description
+        self.txtFieldMobileNumber.text = self.userTimeLineoppdetails?.mobile_num
+        self.txtFieldWhatsappNumber.text = self.userTimeLineoppdetails?.whatsaap_num
+        self.txtFieldPricing.text = self.userTimeLineoppdetails?.pricing
+        self.lblLookingFor.text = self.userTimeLineoppdetails?.looking_for
+        
+        if String.getString(self.userTimeLineoppdetails?.opp_plan) == "Basic"{
+            self.viewBasic.backgroundColor = UIColor(red: 21, green: 114, blue: 161)
+            self.lblBasic.textColor = .white
+            
+        }
+        else if String.getString(self.userTimeLineoppdetails?.opp_plan) == "Featured"{
+            self.viewFeature.backgroundColor = UIColor(red: 21, green: 114, blue: 161)
+            self.lblFeature.textColor = .white
+        }
+        else if String.getString(self.userTimeLineoppdetails?.opp_plan) == "Premium"{
+            self.viewPremium.backgroundColor = UIColor(red: 21, green: 114, blue: 161)
+            self.lblPremium.textColor = .white
+        }
+
        
     }
     // MARK: - @IBActions
@@ -161,8 +204,16 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
     }
     
     @IBAction func btnAddmoreImageTapped(_ sender: UIButton) {
-        
-        if self.btnSelectDocument.isSelected == true{
+        sender.isSelected = !sender.isSelected
+        if self.btnMoreImage.isSelected == true{
+        if self.isedit == "True"{
+            ImagePickerHelper.shared.showPickerController {
+                image, url in
+                self.imagearr.append(image ?? UIImage())
+                self.UploadimageCollectionView.reloadData()
+        }
+    }
+            else{
             if imagearr.count != 0{
                 ImagePickerHelper.shared.showPickerController {
                     image, url in
@@ -170,6 +221,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
                     self.UploadimageCollectionView.reloadData()
             }
         }
+            }
     }
 }
     
@@ -189,7 +241,8 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
         
     }
     @IBAction func btnAddMoreDocumentTapped(_ sender: UIButton) {
-        if self.btnSelectDocument.isSelected == true{
+        sender.isSelected = !sender.isSelected
+        if self.btnMoreDocument.isSelected == true{
         if documentarr.count != 0{
             self.openFileBrowser()
         }
@@ -305,10 +358,10 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
             self.showSimpleAlert(message: "Please Select the Document")
             return
         }
-        else if self.isSelectSubcategory == false{
-            self.showSimpleAlert(message: "Please Select the Subcategory")
-            return
-        }
+//        else if self.isSelectSubcategory == false{
+//            self.showSimpleAlert(message: "Please Select the Subcategory")
+//            return
+//        }
       else if String.getString(self.txtFieldTitle.text).isEmpty
         {
             self.showSimpleAlert(message: Notifications.ktitle)
@@ -376,10 +429,21 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch collectionView{
         case self.UploadimageCollectionView:
-            return self.imagearr.count
+            if self.isedit == "True"{
+                return self.imgarray.count
+            }
+            else{
+                return self.imagearr.count
+            }
+           
             
         case self.UploaddocumentCollectionView:
-            return self.docummentarray.count
+            if self.isedit == "True"{
+                return self.docarray.count
+            }
+            else {
+              return self.docummentarray.count
+            }
             
             
         default: return 5
@@ -390,23 +454,54 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
         switch collectionView{
         case self.UploadimageCollectionView:
             let cell = UploadimageCollectionView.dequeueReusableCell(withReuseIdentifier: "UploadImageCollectionViewCell", for: indexPath) as! UploadImageCollectionViewCell
-            cell.image.image = imagearr[indexPath.row]
-            cell.callback = {
-                self.imagearr.remove(at: indexPath.row)
-                self.UploadimageCollectionView.reloadData()
-                //                if self.imagearr.count == 0{
-                //                    self.viewSelectCategoryTop.constant = 10
-                //                }
+            
+            if self.isedit == "True"{
+                let obj = self.imgarray[indexPath.item].image
+                print("-=-imgurl-=-\(obj)")
+                let imageurl = "\(self.imgUrl)/\(String.getString(obj))"
+                print("-=imagebaseurl=-=-\(imageurl)")
+                cell.image.downlodeImage(serviceurl: imageurl, placeHolder: UIImage(named: "baba"))
+                cell.callback = {
+                    self.imgarray.remove(at: indexPath.row)
+                    self.UploadimageCollectionView.reloadData()
+                    
+                    
+                }
+            }
+            else{
+                cell.image.image = imagearr[indexPath.row]
+                cell.callback = {
+                    self.imagearr.remove(at: indexPath.row)
+                    self.UploadimageCollectionView.reloadData()
+                    
+                    
+                }
             }
             return cell
         case self.UploaddocumentCollectionView:
             let cell = UploaddocumentCollectionView.dequeueReusableCell(withReuseIdentifier: "UploadDocumentCollectionViewCell", for: indexPath) as! UploadDocumentCollectionViewCell
+            
+            if self.isedit == "True"{
+                let obj = self.docarray[indexPath.item].oppr_document
+                print("documenbaseturl=-=-=-=\(obj)")
+                let documenturl = "\(self.docUrl)/\(String.getString(obj))"
+                print("documenturl=-=-=-\(documenturl)")
+                cell.callbackclose = {
+                    self.docarray.remove(at: indexPath.row)
+                    self.UploaddocumentCollectionView.reloadData()
+                    
+                }
+              
+            }
+            
+            else{
             cell.lbldocument.text = docummentarray[indexPath.row]
             cell.callbackclose = {
                 self.docummentarray.remove(at: indexPath.row)
                 self.UploaddocumentCollectionView.reloadData()
                 
             }
+        }
             return cell
             
         default: return UICollectionViewCell()

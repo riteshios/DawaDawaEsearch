@@ -34,7 +34,7 @@ class MoreVC: UIViewController {
     
     
     
-    var callback4:((String)->())?
+    var callback:((String)->())?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,14 +62,14 @@ class MoreVC: UIViewController {
     }
 // MARK: - @IBAction
     @IBAction func btnDismissTapped(_ sender: UIButton) {
-        self.callback4?("Dismiss")
+        self.callback?("Dismiss")
     }
     @IBAction func btnSettingTapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         if self.btnSetting.isSelected == true{
             self.viewSetting.backgroundColor = UIColor.init(red: 241/255, green: 249/255, blue: 253/255, alpha: 1)
         }
-        self.callback4?("Setting")
+        self.callback?("Setting")
     }
     
     @IBAction func btnEditProfileTapped(_ sender: UIButton) {
@@ -81,7 +81,7 @@ class MoreVC: UIViewController {
             self.showSimpleAlert(message: "First Create Account")
         }
         else{
-        self.callback4?("EditProfile")
+        self.callback?("EditProfile")
         }
     }
     
@@ -104,7 +104,7 @@ class MoreVC: UIViewController {
         if self.btnContactUs.isSelected == true{
             self.viewContactUs.backgroundColor = UIColor.init(red: 241/255, green: 249/255, blue: 253/255, alpha: 1)
         }
-        self.callback4?("ContactUs")
+        self.callback?("ContactUs")
     }
     
     @IBAction func btnLogOutTapped(_ sender: UIButton) {
@@ -116,7 +116,7 @@ class MoreVC: UIViewController {
 //            self.showSimpleAlert(message: "First Create Account")
 //        }
 //        else{
-        self.callback4?("Logout")
+        self.callback?("Logout")
 //        }
     }
     
@@ -146,7 +146,7 @@ extension MoreVC{
                 switch Int.getInt(statusCode) {
                 case 200:
                     if Int.getInt(dictResult["status"]) == 200{
-                        self?.callback4?("ChangePassword")
+                        self?.callback?("ChangePassword")
                     }
                     else if  Int.getInt(dictResult["status"]) == 400{
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))

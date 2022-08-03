@@ -7,7 +7,7 @@
 */
 // MARK: - CreateAccountVC
 
-"Create account" = "Create accout";
+"Create account" = "Create account";
 "Google" = "Google";
 "Facebook" = "Facebook";
 "Twitter" = "Twitter";
@@ -30,7 +30,7 @@
 // MARK: - LoginVC
 
 "Forgot Password" = "Forgot Password?";
-"Phone number/Email address*" = "Phone number/Email address*";
+"Phone number/Email*" = "Phone number/Email*";
 "Dont's have an account" = "Dont's have an account";
 "Skip login" = "Skip login";
 

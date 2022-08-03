@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Product Sans Regular.ttf">
+            <string>ProductSans-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="PlanListTableViewCell" customModule="Dawadawa" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NBc-w2-UMq">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Ok" translatesAutoresizingMaskIntoConstraints="NO" id="ze4-sK-PTK">
+                                <rect key="frame" x="10" y="10" width="20" height="24"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dawadawa basic plan feature#1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sQ4-Nh-pha">
+                                <rect key="frame" x="40" y="12.5" width="218.5" height="19.5"/>
+                                <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="sQ4-Nh-pha" firstAttribute="centerY" secondItem="ze4-sK-PTK" secondAttribute="centerY" id="6qQ-u6-OjU"/>
+                            <constraint firstItem="ze4-sK-PTK" firstAttribute="leading" secondItem="NBc-w2-UMq" secondAttribute="leading" constant="10" id="W9D-Hf-dJR"/>
+                            <constraint firstItem="sQ4-Nh-pha" firstAttribute="leading" secondItem="ze4-sK-PTK" secondAttribute="trailing" constant="10" id="XHY-2h-2E4"/>
+                            <constraint firstAttribute="bottom" secondItem="ze4-sK-PTK" secondAttribute="bottom" constant="10" id="nsk-hd-wF4"/>
+                            <constraint firstItem="ze4-sK-PTK" firstAttribute="top" secondItem="NBc-w2-UMq" secondAttribute="top" constant="10" id="tai-ez-pnB"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="NBc-w2-UMq" secondAttribute="trailing" id="EXf-jR-PMf"/>
+                    <constraint firstItem="NBc-w2-UMq" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Wjj-Q2-v7i"/>
+                    <constraint firstAttribute="bottom" secondItem="NBc-w2-UMq" secondAttribute="bottom" id="ZOJ-5C-9Ih"/>
+                    <constraint firstItem="NBc-w2-UMq" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="gc4-tF-IUZ"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <point key="canvasLocation" x="139" y="70"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="Ok" width="20" height="20"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

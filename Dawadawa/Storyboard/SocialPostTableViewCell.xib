@@ -98,14 +98,14 @@
                                     <constraint firstItem="LgE-K4-rkL" firstAttribute="leading" secondItem="vUg-me-atb" secondAttribute="trailing" constant="20" id="ucc-cG-HUQ"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="benrbfnbsnfbnsbfnbfbbfbsnbnsbnbsnbnsebfnbsefnbebfsbebnbnbnbsnbfnbfnbsnbnsfbbfnndbbfnbfnfnbdfhebfhfbnene" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c7e-ku-l4v">
-                                <rect key="frame" x="3" y="75" width="409" height="31.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c7e-ku-l4v">
+                                <rect key="frame" x="3" y="75" width="409" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="wge-Dy-Mdu">
-                                <rect key="frame" x="0.0" y="110.5" width="415" height="225"/>
+                                <rect key="frame" x="0.0" y="95" width="415" height="225"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="225" id="AFp-To-zbQ"/>
@@ -118,7 +118,7 @@
                                 </collectionViewFlowLayout>
                             </collectionView>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" hidesForSinglePage="YES" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="Mtw-CB-bdI">
-                                <rect key="frame" x="130" y="311" width="155.5" height="18"/>
+                                <rect key="frame" x="130" y="295.5" width="155.5" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="18" id="0sn-Vg-HXQ"/>
                                 </constraints>
@@ -126,7 +126,7 @@
                                 <color key="currentPageIndicatorTintColor" red="0.96841710810000003" green="0.80587893720000003" blue="0.2743159235" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </pageControl>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="DAG-S8-jdO">
-                                <rect key="frame" x="16" y="344" width="383" height="30"/>
+                                <rect key="frame" x="16" y="328.5" width="383" height="30"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iwi-8K-Kcf">
                                         <rect key="frame" x="0.0" y="0.0" width="96" height="30"/>
@@ -234,7 +234,7 @@
                                 </constraints>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hpx-WV-OsZ">
-                                <rect key="frame" x="16" y="377" width="383" height="45"/>
+                                <rect key="frame" x="16" y="361.5" width="383" height="45"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9py-ux-e66">
                                         <rect key="frame" x="16" y="3" width="351" height="1"/>
@@ -288,7 +288,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vMm-Lh-62y">
-                                <rect key="frame" x="16" y="437" width="383" height="55"/>
+                                <rect key="frame" x="16" y="421.5" width="383" height="55"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Boss" translatesAutoresizingMaskIntoConstraints="NO" id="UTW-6T-GtD">
                                         <rect key="frame" x="10" y="15" width="25" height="25"/>
@@ -303,7 +303,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                         <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Please type your comment here -"/>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Leave your thoughts here.."/>
                                             <userDefinedRuntimeAttribute type="color" keyPath="placeholderTextColor">
                                                 <color key="value" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </userDefinedRuntimeAttribute>
@@ -355,39 +355,39 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Boss" translatesAutoresizingMaskIntoConstraints="NO" id="BDS-nn-Ug0">
-                                <rect key="frame" x="16" y="506" width="25" height="25"/>
+                                <rect key="frame" x="16" y="490.5" width="25" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="25" id="vP5-2E-mO7"/>
                                     <constraint firstAttribute="height" constant="25" id="vq5-SB-ahT"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="business owner#234" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t6d-D8-Xjt">
-                                <rect key="frame" x="51" y="510" width="126.5" height="17"/>
+                                <rect key="frame" x="51" y="494.5" width="126.5" height="17"/>
                                 <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="what are the charges? " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lJX-Nz-Gfm">
-                                <rect key="frame" x="192.5" y="511" width="118" height="15"/>
+                                <rect key="frame" x="192.5" y="495.5" width="118" height="15"/>
                                 <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="12"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Boss" translatesAutoresizingMaskIntoConstraints="NO" id="bY9-Pd-hmO">
-                                <rect key="frame" x="51" y="555" width="25" height="25"/>
+                                <rect key="frame" x="51" y="539.5" width="25" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="2tw-xt-ZNR"/>
                                     <constraint firstAttribute="width" constant="25" id="Kjs-co-ZfB"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="business owner#234" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WAe-s6-PBM">
-                                <rect key="frame" x="86" y="559" width="133" height="17"/>
+                                <rect key="frame" x="86" y="543.5" width="133" height="17"/>
                                 <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="serivce provider #73    anafili ogist dödåst. Stenol bebedöna i serar inte blåkort. Vida ödågen, täkyktiga kroning hick. " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7mD-XP-0B2">
-                                <rect key="frame" x="229" y="559" width="174" height="44"/>
+                                <rect key="frame" x="229" y="543.5" width="174" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="174" id="VxX-3M-9d0"/>
                                     <constraint firstAttribute="height" constant="44" id="vfB-LI-4ay"/>
@@ -397,7 +397,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lIM-OK-Da6">
-                                <rect key="frame" x="86" y="615" width="39" height="30"/>
+                                <rect key="frame" x="86" y="599.5" width="39" height="61"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="Reply">
                                     <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -405,6 +405,9 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Aws-J8-KSU">
                                 <rect key="frame" x="258" y="615" width="141" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="BdX-5J-eTu"/>
+                                </constraints>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="See more comments">
                                     <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

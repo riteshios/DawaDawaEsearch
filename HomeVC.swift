@@ -23,8 +23,12 @@ class HomeVC: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if UserData.shared.isskiplogin == true{
+            print("Guest User")
+        }
+        else{
         self.fetchdata()
-        
+        }
         if cameFrom != "FilterData"{
             self.getallopportunity()
         }
@@ -32,8 +36,9 @@ class HomeVC: UIViewController{
         tblViewViewPost.register(UINib(nibName: "ViewPostTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "ViewPostTableViewCell")
         tblViewViewPost.register(UINib(nibName: "SocialPostTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "SocialPostTableViewCell")
         
-        
     }
+    
+    
     
     func fetchdata(){
         self.lblUserName.text = String.getString(UserData.shared.name) + " " + String.getString(UserData.shared.last_name)
@@ -52,19 +57,23 @@ class HomeVC: UIViewController{
     }
        
   }
-    
     override func viewWillAppear(_ animated: Bool) {
-          self.hidesBottomBarWhenPushed = false
-          self.tabBarController?.tabBar.isHidden = false
-          self.tabBarController?.hidesBottomBarWhenPushed = false
-          self.tabBarController?.tabBar.layer.zPosition = 0
-      }
+        super.viewWillDisappear(animated)
+        self.tabBarController?.tabBar.isHidden = false
+        self.tabBarController?.tabBar.layer.zPosition = 0
+    
+    }
+//    override func viewWillAppear(_ animated: Bool) {
+//          self.hidesBottomBarWhenPushed = false
+//          self.tabBarController?.tabBar.isHidden = false
+//          self.tabBarController?.hidesBottomBarWhenPushed = false
+//          self.tabBarController?.tabBar.layer.zPosition = 0
+//      }
 
     @IBAction func btnSearchTapped(_ sender: UIButton) {
         
         tabBarController?.selectedIndex = 1
         
-      
 //        let vc = self.storyboard?.instantiateViewController(withIdentifier: SearchVC.getStoryboardID()) as! SearchVC
 //        self.navigationController?.pushViewController(vc, animated: true)
         
@@ -132,7 +141,11 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
             
             cell.imgOpp_plan.image = obj.opp_plan == "Featured" ? UIImage(named: "Star Filled") : obj.opp_plan == "Premium" ? UIImage(named: "Crown") : UIImage(named: "")
 
-          
+            if String.getString(obj.is_user_like) == "1"{
+                cell.imglike.image = UIImage(named: "dil")
+                cell.lbllike.text = "Liked"
+            }
+            
             cell.callback = { txt in
                 if txt == "Like"{
                 if cell.btnlike.isSelected == true{
@@ -192,12 +205,8 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
         }
         
     }
-    
-  
-
 }
-    
-    
+
 
 
 extension HomeVC{
@@ -216,7 +225,7 @@ extension HomeVC{
             }
         }
         
-        
+//        debugPrint("\(ServiceName.kgetallopportunity)/\(UserData.shared.id)") //passing userid in api url
         TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName: ServiceName.kgetallopportunity, requestMethod: .GET, requestParameters:[:], withProgressHUD: false) { (result:Any?, error:Error?, errorType:ErrorType?,statusCode:Int?) in
             CommonUtils.showHudWithNoInteraction(show: false)
             if errorType == .requestSuccess {

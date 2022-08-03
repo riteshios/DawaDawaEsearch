@@ -30,7 +30,7 @@
 // MARK: - LoginVC
 
 "Forgot Password" = "هل نسيت كلمة السر";
-"Phone number/Email address*" = "رقم الهاتف / عنوان البريد الإلكتروني *";
+"Phone number/Email*" = "رقم الهاتف / عنوان البريد الإلكتروني *";
 "Dont's have an account" = "ليس لديك حساب";
 "Skip login" = "تخطي تسجيل الدخول";
 "Don't have Account" = "ليس لديك حساب";

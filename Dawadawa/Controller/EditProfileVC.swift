@@ -49,8 +49,8 @@ class EditProfileVC: UIViewController {
     var timePicker = UIDatePicker()
     
     
-    var dictLanguage:[String:String] = ["en" : "English", "ar":"Arabic"]
-    var selectedLanguage: String = ""
+  
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,7 +62,7 @@ class EditProfileVC: UIViewController {
             self.txtFieldLastName.placeholder = "XYZ"
             self.txtFieldPhoneNumber.placeholder = "91***********"
             self.txtFieldEmailAddress.placeholder = "examiple@.com"
-            self.txtFieldWhatsappNumber.placeholder = "+91***********"
+            self.txtFieldWhatsappNumber.placeholder = "+91**********"
             self.textfieldDATE.placeholder = "DD/MM/YYYY"
             self.lblCountry.text = "India"
             
@@ -72,14 +72,7 @@ class EditProfileVC: UIViewController {
         }
     }
     
-    override func viewWillAppear(_ animated: Bool)
-    {
-        super.viewWillAppear(animated)
-        self.selectedLanguage = dictLanguage[UserDefaults.standard.object(forKey: "Language") as! String]!
-        lblEnglish.text = AppHelper.getLocalizeString(str: "English")
-        
-        //        btnEnglish.setTitle(AppHelper.getLocalizeString(str: ""), for: .normal)
-    }
+  
     //    MARK: - Life Cycle
     
     func setup(){
@@ -161,7 +154,7 @@ class EditProfileVC: UIViewController {
             self.lblUserType.text = UserData.shared.user_type
         }
     }
-    //    Validation
+    // MARK: -   Validation
     func Validation()
     {
         
@@ -306,7 +299,21 @@ class EditProfileVC: UIViewController {
         kSharedAppDelegate?.dropDown(dataSource:dataSource1 , text: btnDropUserType)
         {(Index ,item) in
             self.lblUserType.text = item
+            if self.lblUserType.text == "Investor"{
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: InvestorSubscriptionVC.getStoryboardID()) as! InvestorSubscriptionVC
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+                else if self.lblUserType.text == "Business Owner"{
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: InvestorSubscriptionVC.getStoryboardID()) as! InvestorSubscriptionVC
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
+                else if self.lblUserType.text == "Service Provider"{
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: InvestorSubscriptionVC.getStoryboardID()) as! InvestorSubscriptionVC
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
+            
         }
+       
     }
     @IBAction func btnSelectCountryTapped(_ sender: UIButton) {
         AppsCountryPickerInstanse.sharedInstanse.showController(referense: self) { (selectedCountry) in
@@ -429,6 +436,8 @@ extension EditProfileVC{
                         }
                         UserData.shared.saveData(data: data, token: String.getString(kSharedUserDefaults.getLoggedInAccessToken()))
                         self?.navigationController?.popViewController(animated: true)
+//                        let vc = self?.storyboard?.instantiateViewController(withIdentifier: ProfileVC.getStoryboardID()) as! ProfileVC
+//                        self?.navigationController?.pushViewController(vc, animated: true)
                         
                     }
                     else if  Int.getInt(dictResult["status"]) == 400{

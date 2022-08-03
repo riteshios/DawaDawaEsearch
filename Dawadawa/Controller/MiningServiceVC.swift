@@ -310,10 +310,10 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
                 self.showSimpleAlert(message: "Please Select the Document")
                 return
             }
-            else if self.isSelectSubcategory == false{
-                self.showSimpleAlert(message: "Please Select the Subcategory")
-                return
-            }
+//            else if self.isSelectSubcategory == false{
+//                self.showSimpleAlert(message: "Please Select the Subcategory")
+//                return
+//            }
           else if String.getString(self.txtFieldTitle.text).isEmpty
             {
                 self.showSimpleAlert(message: Notifications.ktitle)
