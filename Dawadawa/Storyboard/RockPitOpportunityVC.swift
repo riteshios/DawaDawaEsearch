@@ -82,12 +82,14 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
     var getlocalitylist    = [getLocalityModel]()
     var getlookingForList  = [getLookingForModel]()
     
+    //update
     var userTimeLineoppdetails:SocialPostData?
     var imgarray = [oppr_image]()
     var docarray = [oppr_document]()
     var isedit = ""
     var imgUrl = ""
     var docUrl = ""
+    var oppid:Int?
     
     // MARK: - Life Cycle
     
@@ -104,7 +106,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
             self.fetdata()
         }
        
-        
+        self.UploadimageCollectionView.reloadData()
     }
     
     func setup(){
@@ -210,6 +212,14 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
             ImagePickerHelper.shared.showPickerController {
                 image, url in
                 self.imagearr.append(image ?? UIImage())
+                debugPrint("imagearraycount..........",self.imagearr.count)
+                
+                let obj = oppr_image(data: [:])
+                obj.imageurl = ""
+                obj.img = image
+                self.imgarray.append(obj)
+                debugPrint("imgarra=-=-=",self.imgarray.count)
+                
                 self.UploadimageCollectionView.reloadData()
         }
     }
@@ -219,10 +229,10 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
                     image, url in
                     self.imagearr.append(image ?? UIImage())
                     self.UploadimageCollectionView.reloadData()
-            }
-        }
-            }
-    }
+             }
+         }
+     }
+   }
 }
     
     @IBAction func btnSelectDocumentTapped(_ sender: UIButton) {
@@ -243,9 +253,14 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
     @IBAction func btnAddMoreDocumentTapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         if self.btnMoreDocument.isSelected == true{
+            if self.isedit == "True"{
+                self.openFileBrowser()
+            }
+            else{
         if documentarr.count != 0{
             self.openFileBrowser()
         }
+            }
     }
 }
     
@@ -343,8 +358,13 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
     }
     
     @IBAction func btnCreateOppTapped(_ sender: UIButton) {
+        if self.isedit == "True"{
+            self.updateopportunityapi()
+        }
+        else{
         self.Validation()
-//        self.createopportunityapi(image: self.imagearr, doc: self.documentarr)
+        }
+
     }
     
 //    MARK: - Validation
@@ -456,17 +476,28 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
             let cell = UploadimageCollectionView.dequeueReusableCell(withReuseIdentifier: "UploadImageCollectionViewCell", for: indexPath) as! UploadImageCollectionViewCell
             
             if self.isedit == "True"{
-                let obj = self.imgarray[indexPath.item].image
-                print("-=-imgurl-=-\(obj)")
-                let imageurl = "\(self.imgUrl)/\(String.getString(obj))"
-                print("-=imagebaseurl=-=-\(imageurl)")
+                let imgurl = self.imgarray[indexPath.item].imageurl
+                print("-=-imgurl-=-\(imgurl)")
+                
+                
+                if imgurl == ""
+                {
+                    cell.image.image = self.imgarray[indexPath.item].img
+                }
+                else{
+                let imageurl = "\(self.imgUrl)/\(String.getString(imgurl))"
+                print("-=imageurl=-=-\(imageurl)")
                 cell.image.downlodeImage(serviceurl: imageurl, placeHolder: UIImage(named: "baba"))
+                }
+                
+                
                 cell.callback = {
                     self.imgarray.remove(at: indexPath.row)
                     self.UploadimageCollectionView.reloadData()
                     
-                    
                 }
+                
+                
             }
             else{
                 cell.image.image = imagearr[indexPath.row]
@@ -483,9 +514,12 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
             
             if self.isedit == "True"{
                 let obj = self.docarray[indexPath.item].oppr_document
-                print("documenbaseturl=-=-=-=\(obj)")
+                print("documenturl=-=-=-=\(obj)")
                 let documenturl = "\(self.docUrl)/\(String.getString(obj))"
-                print("documenturl=-=-=-\(documenturl)")
+                print("fulldocumenturl=-=-=-\(documenturl)")
+                
+                cell.lbldocument.text = obj
+                
                 cell.callbackclose = {
                     self.docarray.remove(at: indexPath.row)
                     self.UploaddocumentCollectionView.reloadData()
@@ -1040,6 +1074,9 @@ extension RockPitOpportunityVC{
         let subcatid = Int(self.subcatid ?? 0)
         debugPrint("checksubcatid",subcatid)
         
+        let lookingforid = Int(self.lookingforid ?? 0)
+        debugPrint("checklookingforid",lookingforid)
+        
         
         let params:[String : Any] = [
             "user_id":"\(String(describing: userid))",
@@ -1054,7 +1091,7 @@ extension RockPitOpportunityVC{
             "mobile_num":String.getString(self.txtFieldMobileNumber.text),
             "whatsaap_num":String.getString(self.txtFieldWhatsappNumber.text),
             "pricing":String.getString(self.txtFieldPricing.text),
-            "looking_for":String.getString(self.lblLookingFor.text),
+            "looking_for":"\(String(describing: lookingforid))",
             "plan":String.getString(plan),
             "cat_type_id":"0"
         ]
@@ -1078,6 +1115,91 @@ extension RockPitOpportunityVC{
                 debugPrint("dictResult====",dictResult)
                 switch Int.getInt(statusCode) {
                 case 200:
+                    if Int.getInt(dictResult["status"]) == 200{
+                        let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+                        let septoken = endToken.components(separatedBy: " ")
+                        if septoken[0] == "Bearer"{
+                            kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
+                        }
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        kSharedAppDelegate?.makeRootViewController()
+                        
+                    }
+                    else if  Int.getInt(dictResult["status"]) == 400{
+//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    }
+                    
+                default:
+                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                }
+            } else if errortype == .noNetwork {
+                CommonUtils.showToastForInternetUnavailable()
+            } else {
+                CommonUtils.showToastForDefaultError()
+            }
+        }
+    }
+    
+// Update Opportunity Api
+    
+    func updateopportunityapi(){
+        CommonUtils.showHud(show: true)
+        
+        if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
+            let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+            let septoken = endToken.components(separatedBy: " ")
+            if septoken[0] != "Bearer"{
+                let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
+                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
+            }
+            //            headers["token"] = kSharedUserDefaults.getLoggedInAccessToken()
+        }
+        
+        let oppid = Int(self.oppid ?? 0) // For remove optional
+        debugPrint("checkoppid",oppid)
+        
+        let subcatid = Int(self.subcatid ?? 0)
+        debugPrint("checksubcatid",subcatid)
+        
+        
+        let params:[String : Any] = [
+            "oppr_id":"\(String(describing: oppid))",
+            "category_id":"1",
+            "sub_category":"\(String(describing: subcatid))",
+            "title":String.getString(self.txtFieldTitle.text),
+            "opp_state":String.getString(self.lblState.text),
+            "opp_locality":String.getString(self.lblLocality.text),
+            "location_name":String.getString(self.txtFieldLocationName.text),
+            "location_map":String.getString(self.txtFieldLocationOnMap.text),
+            "description":String.getString(self.TextViewDescription.text),
+            "mobile_num":String.getString(self.txtFieldMobileNumber.text),
+            "whatsaap_num":String.getString(self.txtFieldWhatsappNumber.text),
+            "pricing":String.getString(self.txtFieldPricing.text),
+            "looking_for":String.getString(self.lblLookingFor.text),
+            "plan":String.getString(plan),
+//            "cat_type_id":"0"
+        ]
+        
+        
+        
+        
+        let uploadimage:[String:Any] = ["filenames[]":self.imagearr]
+        let uploaddocument:[String:Any] = ["opportunity_documents[]":self.documentarr]
+        
+        debugPrint("image[]......",self.imagearr)
+        debugPrint("opportunity_documents[]......",self.documentarr)
+        
+        
+        TANetworkManager.sharedInstance.UpdatetMultiPartwithlanguage(withServiceName:ServiceName.kupdateopportunity , requestMethod: .post, requestImages: [:], requestdoc: [:],requestVideos: [:], requestData:params, req: self.imagearr, req:self.documentarr)
+        { (result:Any?, error:Error?, errortype:ErrorType?, statusCode:Int?) in
+            CommonUtils.showHudWithNoInteraction(show: false)
+            if errortype == .requestSuccess {
+                debugPrint("result=====",result)
+                let dictResult = kSharedInstance.getDictionary(result)
+                debugPrint("dictResult====",dictResult)
+                switch Int.getInt(statusCode) {
+                case 200:
+                    
                     if Int.getInt(dictResult["status"]) == 200{
                         let endToken = kSharedUserDefaults.getLoggedInAccessToken()
                         let septoken = endToken.components(separatedBy: " ")

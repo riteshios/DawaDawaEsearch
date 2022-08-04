@@ -734,6 +734,98 @@ public class TANetworkManager {
         }
     }
     
+//    Update Opportunity Multipartwith language in header
+    
+    
+    func UpdatetMultiPartwithlanguage(withServiceName serviceName: String, requestMethod method: HTTPMethod, requestImages arrImages: Dictionary<String, Any>,requestdoc arrdoc: Dictionary<String,Any> ,requestVideos arrVideos: Dictionary<String, Any>, requestData postData: Dictionary<String, Any>, req reqImage : [UIImage],req reqdoc:[URL],completionClosure: @escaping (_ result: Any?, _ error: Error?, _ errorType: ErrorType, _ statusCode: Int?) -> ()) -> Void {
+        
+        if NetworkReachabilityManager()?.isReachable == true {
+            let serviceUrl = getServiceUrl(string: serviceName)
+            let params  = getPrintableParamsFromJson(postData: postData)
+            let headers = getHeaderWithAPIAndLanguageName(serviceName: serviceName)
+            
+            debugPrint("serviceUrl=",serviceUrl)
+            debugPrint("headers=",headers)
+            debugPrint("params=",params)
+            print_debug(items: "Connecting to Host with URL \(kBASEURL)\(serviceName) with parameters: \(params)")
+            
+            Alamofire.upload(multipartFormData:{ (multipartFormData: MultipartFormData) in
+                
+                
+                
+                for img in  reqImage
+                        
+                {
+                    
+                    ///  if let pimage = img {
+                    debugPrint("img.......",img)
+                    if let data = img.pngData(), let imageName = img.pngData() {
+                        
+                        multipartFormData.append(data, withName: "image[]", fileName: "\(imageName).png", mimeType: "image/png")
+                        
+                        print("==========image=========\(data)")
+                        
+                    }
+                    
+                    //   }
+                    
+                }
+                
+                for doc in reqdoc{
+
+
+                    debugPrint("doc.......",doc)
+                    //                        let url = Bundle.main.url(forResource: "\(doc)", withExtension:"pdf")
+                    // let url = URL(string: doc)
+                    //   debugPrint("url.......",url)
+                    if let data =  try? Data.init(contentsOf: doc)
+{
+                        print("==========pdf=========\(data)")
+
+                        multipartFormData.append(data, withName: "opportunity_documents[]", fileName: "data.pdf", mimeType: "application/pdf")
+
+                        
+
+                    }
+                }
+                
+                for (key, value) in postData{
+                    debugPrint("key==",key)
+                    debugPrint("value==",value)
+                    
+                    multipartFormData.append(String(describing:value).data(using: String.Encoding.utf8)!,withName: key)
+                }
+                
+                
+                
+                
+                
+            }, to: serviceUrl, method: method, headers:headers, encodingCompletion: { (encodingResult: SessionManager.MultipartFormDataEncodingResult) in
+                switch encodingResult
+                {
+                case .success(request: let upload, streamingFromDisk: _, streamFileURL: _):
+                    upload.responseJSON(completionHandler: { (Response) in
+                        //  SVProgressHUD.dismiss()
+                        debugPrint("Response=",Response)
+                        debugPrint("Response.data=",Response.data)
+                        let response = self.getResponseDataDictionaryFromData(data: Response.data!)
+                        debugPrint("response.responseData====",response.responseData)
+                        
+                        
+                        completionClosure(response.responseData, response.error, .requestSuccess, Int.getInt(Response.response?.statusCode))
+                    })
+                case .failure(let error):
+                    //  SVProgressHUD.dismiss()
+                    completionClosure(nil, error, .requestFailed, 200)
+                }
+            })
+        }
+        else
+        {
+            
+            completionClosure(nil, nil, .noNetwork, nil)
+        }
+    }
     
     func cancelAllRequests(completionHandler: @escaping () -> ())
     {

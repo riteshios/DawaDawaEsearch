@@ -82,7 +82,7 @@ extension SocialPostTableViewCell: UICollectionViewDelegate,UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = SocialPostCollectionView.dequeueReusableCell(withReuseIdentifier: "SocialPostCollectionViewCell", for: indexPath) as! SocialPostCollectionViewCell
-        let obj = img[indexPath.item].image
+        let obj = img[indexPath.item].imageurl
         print("-=-imgurl-=-\(obj)")
         let imageurl = "\(imgUrl)\(String.getString(obj))"
         print("-=imagebaseurl=-=-\(imageurl)")

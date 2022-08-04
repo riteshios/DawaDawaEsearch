@@ -816,6 +816,8 @@ extension ProfileVC{
                                 vc.isedit = "True"
                                 vc.imgUrl = self!.imgUrl
                                 vc.docUrl = self!.docUrl
+                                vc.oppid = oppr_id
+                                debugPrint("oppid=-=-=-==-=", vc.oppid)
                                 vc.imgarray  = self?.UserTimeLineOppdetails?.oppimage ?? []
                                 vc.docarray = self?.UserTimeLineOppdetails?.oppdocument ?? []
                                 debugPrint("imgaraay=-=-=-==-=", vc.imgarray)
@@ -826,21 +828,49 @@ extension ProfileVC{
                             else if Int.getInt(self?.UserTimeLineOppdetails?.category_id) == 2{
                                 let vc = self?.storyboard?.instantiateViewController(withIdentifier: TrailingOpportunityVC.getStoryboardID()) as! TrailingOpportunityVC
                                 self?.navigationController?.pushViewController(vc, animated: true)
+                                vc.userTimeLineoppdetails = self?.UserTimeLineOppdetails
+                                vc.isedit = "True"
+                                vc.imgUrl = self!.imgUrl
+                                vc.docUrl = self!.docUrl
+                                vc.oppid = oppr_id
+                                debugPrint("oppid=-=-=-==-=", vc.oppid)
+                                vc.imgarray  = self?.UserTimeLineOppdetails?.oppimage ?? []
+                                vc.docarray = self?.UserTimeLineOppdetails?.oppdocument ?? []
+                                debugPrint("imgaraay=-=-=-==-=", vc.imgarray)
+                                
                             }
                             
                             else if Int.getInt(self?.UserTimeLineOppdetails?.category_id) == 3{
                                 let vc = self?.storyboard?.instantiateViewController(withIdentifier: MiningBusinessVC.getStoryboardID()) as! MiningBusinessVC
                                 self?.navigationController?.pushViewController(vc, animated: true)
+//                                vc.userTimeLineoppdetails = self?.UserTimeLineOppdetails
+//                                vc.isedit = "True"
+//                                vc.imgUrl = self!.imgUrl
+//                                vc.docUrl = self!.docUrl
+//                                vc.oppid = oppr_id
+//                                debugPrint("oppid=-=-=-==-=", vc.oppid)
+//                                vc.imgarray  = self?.UserTimeLineOppdetails?.oppimage ?? []
+//                                vc.docarray = self?.UserTimeLineOppdetails?.oppdocument ?? []
+//                                debugPrint("imgaraay=-=-=-==-=", vc.imgarray)
+                                
                                 
                             }
                             else if Int.getInt(self?.UserTimeLineOppdetails?.category_id) == 4{
                                 let vc = self?.storyboard?.instantiateViewController(withIdentifier: MiningServiceVC.getStoryboardID()) as! MiningServiceVC
                                 self?.navigationController?.pushViewController(vc, animated: true)
+//                                vc.userTimeLineoppdetails = self?.UserTimeLineOppdetails
+//                                vc.isedit = "True"
+//                                vc.imgUrl = self!.imgUrl
+//                                vc.docUrl = self!.docUrl
+//                                vc.oppid = oppr_id
+//                                debugPrint("oppid=-=-=-==-=", vc.oppid)
+//                                vc.imgarray  = self?.UserTimeLineOppdetails?.oppimage ?? []
+//                                vc.docarray = self?.UserTimeLineOppdetails?.oppdocument ?? []
+//                                debugPrint("imgaraay=-=-=-==-=", vc.imgarray)
+                                
                                 
                             }
-
-
-                           
+                            
                             
 
                             CommonUtils.showError(.info, String.getString(dictResult["message"]))

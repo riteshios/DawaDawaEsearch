@@ -9,7 +9,10 @@ import UIKit
 
 class SubcategoryTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var imgradio: UIImageView!
     @IBOutlet weak var lblSubcategory: UILabel!
+    @IBOutlet weak var btnSelect: UIButton!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

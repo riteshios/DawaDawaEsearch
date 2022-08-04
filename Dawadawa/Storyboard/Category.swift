@@ -26,6 +26,7 @@ class getCartegoryModel{
 class getServicetypeModel{
     let id: Int?
     let services_type: String?
+    var isselection = false
     
     
     init(data:[String:Any]){
@@ -48,6 +49,7 @@ class getstateModel{
 class getfiltersubcategoryModel{
     let id:Int?
     let sub_cat_name:String?
+    var isselection = false
     
     init(data:[String:Any]){
         self.id = Int.getInt(data["id"])

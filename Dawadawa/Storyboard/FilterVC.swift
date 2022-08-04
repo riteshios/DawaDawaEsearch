@@ -96,6 +96,8 @@ class FilterVC: UIViewController {
     
     
     var selectedIds:[String] = []
+    var selectedsubids:[String] = []
+    var selectedservicetypesids:[String] = []
     var stringcatid = ""
     var imgUrl = ""
     
@@ -108,7 +110,9 @@ class FilterVC: UIViewController {
     var lastmonth:Int?
     var sortby:Int?
     var selectedoptype = ""
-  
+    var selectedsuboptype = ""
+    var selectedservicetype = ""
+    
 
     
     
@@ -516,34 +520,27 @@ extension FilterVC: UITableViewDelegate,UITableViewDataSource{
                 let cell = self.tblViewOpportunitytype.dequeueReusableCell(withIdentifier: "OpportunityTypeTableViewCell") as! OpportunityTypeTableViewCell
                 let obj = self.getCategoryarr[indexPath.row]
                 cell.lblCategory.text = obj.category_name
-                cell.btnSelectOpptype.addTarget(self, action: #selector(buttonTappedCat), for: .touchUpInside)
+                cell.btnSelectOpptype.addTarget(self, action: #selector(buttoncategoryTapped), for: .touchUpInside)
                 cell.btnSelectOpptype.tag = indexPath.row
                 cell.imgradio.image = obj.isselection == true ? UIImage(named: "darkcircle") : UIImage(named: "radiouncheck")
                
                 
-                
-//                cell.callback = {
-//                    let catid = Int.getInt(self.getCategoryarr[indexPath.row].id)
-//                    debugPrint(" self.catid", catid)
-
-//                    debugPrint(" self.selectedIds.count", self.selectedIds.count)
-//                    debugPrint(" self.selectedIds", self.selectedIds)
-//
-//                    //                    self.filtersubcategoryapi(catid:)
-//                }
-//
-                
                 return cell
+                
                 
             case 1:
                 let cell = self.tblViewOpportunitytype.dequeueReusableCell(withIdentifier: "SubCategorylabelTableViewCell") as! SubCategorylabelTableViewCell
                 return cell
+                
                 
             case 2:
                 let cell = self.tblViewOpportunitytype.dequeueReusableCell(withIdentifier: "SubcategoryTableViewCell") as! SubcategoryTableViewCell
                 
                 let obj = self.getfiltersubcatarr[indexPath.row]
                 cell.lblSubcategory.text = obj.sub_cat_name
+                cell.btnSelect.addTarget(self, action: #selector(buttonsubcategoryTapped), for: .touchUpInside)
+                cell.btnSelect.tag = indexPath.row
+                cell.imgradio.image = obj.isselection == true ? UIImage(named: "darkcircle") : UIImage(named: "radiouncheck")
                 return cell
                 
             default:
@@ -554,6 +551,9 @@ extension FilterVC: UITableViewDelegate,UITableViewDataSource{
             let cell = self.tblViewServicetype.dequeueReusableCell(withIdentifier: "ServiceTypeTableViewCell", for: indexPath) as! ServiceTypeTableViewCell
             let obj = self.getServiceTypearr[indexPath.row]
             cell.lblServicetype.text = obj.services_type
+            cell.btnSelection.addTarget(self, action: #selector(buttonserviceTypeTapped), for: .touchUpInside)
+            cell.btnSelection.tag = indexPath.row
+            cell.imgradio.image = obj.isselection == true ? UIImage(named: "darkcircle") : UIImage(named: "radiouncheck")
             return cell
             
         default:
@@ -589,7 +589,7 @@ extension FilterVC: UITableViewDelegate,UITableViewDataSource{
     }
     
     
-    @objc func buttonTappedCat(_ sender:UIButton){
+    @objc func buttoncategoryTapped(_ sender:UIButton){
         sender.isSelected = !sender.isSelected
         
         let obj = self.getCategoryarr[sender.tag]
@@ -600,7 +600,7 @@ extension FilterVC: UITableViewDelegate,UITableViewDataSource{
             
             let ids = self.selectedIds.joined(separator: ",")
             self.selectedoptype = ids
-            
+            print("selectedoptype=-=-=\(self.selectedoptype)")
             print(" selected   -ids---\(ids)")
             self.filtersubcategoryapi(catid: ids)
             
@@ -612,8 +612,10 @@ extension FilterVC: UITableViewDelegate,UITableViewDataSource{
                     obj.isselection = false
                     
                     let ids = self.selectedIds.joined(separator: ",")
+                    
                     self.selectedoptype = ids
-                    debugPrint("selectedoptype=-=-=-=", self.selectedoptype)
+                    print("selectedoptype=-=-=\(self.selectedoptype)")
+        
                     print(" selected   -ids---\(ids)")
                     self.filtersubcategoryapi(catid: ids)
                     break
@@ -623,24 +625,80 @@ extension FilterVC: UITableViewDelegate,UITableViewDataSource{
         }
     }
     
+    @objc func buttonsubcategoryTapped(_ sender:UIButton){
+        sender.isSelected = !sender.isSelected
+        
+        let obj = self.getfiltersubcatarr[sender.tag]
+        if sender.isSelected {
+            obj.isselection = true
+            self.selectedsubids.append(String.getString(obj.id))
+            print(" selectedSubIds---\(self.selectedsubids)")
+            
+            let ids = self.selectedsubids.joined(separator: ",")
+            self.selectedsuboptype = ids
+            
+            print("selectedsuboptype=-=-=\(self.selectedsuboptype)")
+            print(" selected Sub -ids---\(ids)")
+           
+            self.tblViewOpportunitytype.reloadData()
+        }else if sender.isSelected == false{
+            for i in 0 ..< self.selectedsubids.count{
+                if String.getString(obj.id) == self.selectedsubids[i]{
+                    self.selectedsubids.remove(at: i)
+                    print(" RemoveselectedSubIds---\(self.selectedsubids)")
+                    obj.isselection = false
+                    
+                    let ids = self.selectedsubids.joined(separator: ",")
+                    self.selectedsuboptype = ids
+                    
+                    print("selectedsuboptype=-=-=\(self.selectedsuboptype)")
+                    print(" selected Sub  -ids---\(ids)")
+                    self.tblViewOpportunitytype.reloadData()
+                    break
+                }
+            }
+            
+        }
+    }
+
+    @objc func buttonserviceTypeTapped(_ sender:UIButton){
+        sender.isSelected = !sender.isSelected
+        
+        let obj = self.getServiceTypearr[sender.tag]
+        if sender.isSelected {
+            obj.isselection = true
+            self.selectedservicetypesids.append(String.getString(obj.id))
+            print(" selectedServiceIds---\(self.selectedservicetypesids)")
+            
+            let ids = self.selectedservicetypesids.joined(separator: ",")
+            self.selectedservicetype = ids
+            
+            print("selectedservicetype=-=-=\(self.selectedservicetype)")
+            print(" selected service -ids---\(ids)")
+           
+            self.tblViewServicetype.reloadData()
+        }else if sender.isSelected == false{
+            for i in 0 ..< self.selectedservicetypesids.count{
+                if String.getString(obj.id) == self.selectedservicetypesids[i]{
+                    self.selectedservicetypesids.remove(at: i)
+                    print(" RemoveselectedServiceIds---\(self.selectedservicetypesids)")
+                    obj.isselection = false
+                    
+                    let ids = self.selectedservicetypesids.joined(separator: ",")
+                    self.selectedservicetype = ids
+                    
+                    print("selectedserviceoptype=-=-=\(self.selectedservicetype)")
+                    print(" selected Service  -ids---\(ids)")
+                    self.tblViewServicetype.reloadData()
+                    break
+                }
+            }
+            
+        }
+    }
+
     
-    //    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
-    //        switch tableView{
-    //        case tblViewOpportunitytype:
-    //            switch indexPath.section{
-    //            case 0:
-    //                let catid = Int.getInt(self.getCategoryarr[indexPath.row].id)
-    //
-    //                debugPrint("catid=-=-=-=-=-=",catid)
-    //                self.filtersubcategoryapi(catid: catid)
-    //            default: break
-    //            }
-    //        default: break
-    //        }
-    //
-    //
-    //
-    //    }
+    
     
     
 }
@@ -1126,14 +1184,14 @@ extension FilterVC{
             "most_like":String.getString(like),
             "rating":String.getString(rating),
             "opp_status":Int.getInt(oppstatus),
-            "opr_type":String.getString(selectedoptype), // to be change
-            "opr_subtype":"",
+            "opr_type":selectedoptype,
+            "opr_subtype":selectedsuboptype,
             "date":Int.getInt(today),
             "lastweek":Int.getInt(lastweek),
             "lastmonth":Int.getInt(lastmonth),
             "state":"\(String(describing: stateids))",
             "locality":"\(String(describing: localityid))",
-            "services_type":"",
+            "services_type":selectedservicetype,
             "sort_by":Int.getInt(sortby),
             "start_date":String.getString(self.txtfieldStartDate.text),
             "end_date":String.getString(self.txtfieldEndDate.text),

@@ -50,7 +50,7 @@ extension PremiumOppTableViewCell: UICollectionViewDelegate,UICollectionViewData
      
         debugPrint("obj......",obj)
         cell.lbltitle.text = String.getString(obj.title)
-        cell.imgPremium.downlodeImage(serviceurl: "\(imgUrl)\(String.getString(obj.oppimage.first?.image))", placeHolder: UIImage(named: "truck"))
+        cell.imgPremium.downlodeImage(serviceurl: "\(imgUrl)\(String.getString(obj.oppimage.first?.imageurl))", placeHolder: UIImage(named: "truck"))
         return cell
     }
    

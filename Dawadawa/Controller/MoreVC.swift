@@ -78,7 +78,7 @@ class MoreVC: UIViewController {
             self.viewEditProfile.backgroundColor = UIColor.init(red: 241/255, green: 249/255, blue: 253/255, alpha: 1)
         }
         if UserData.shared.isskiplogin == true{
-            self.showSimpleAlert(message: "First Create Account")
+            self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
         }
         else{
         self.callback?("EditProfile")
@@ -92,7 +92,7 @@ class MoreVC: UIViewController {
             self.viewChangePassword.backgroundColor = UIColor.init(red: 241/255, green: 249/255, blue: 253/255, alpha: 1)
         }
         if UserData.shared.isskiplogin == true{
-            self.showSimpleAlert(message: "First Create Account")
+            self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
         }
         else{
         self.getoptapi()

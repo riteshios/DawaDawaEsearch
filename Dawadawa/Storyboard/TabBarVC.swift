@@ -19,7 +19,7 @@ class TabBarVC: UITabBarController {
                 print("Center Button Tapped")
                 
                 if UserData.shared.isskiplogin == true{
-                    self.showSimpleAlert(message: "First Create Account")
+                    self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
                 }
                 else{
                 let vc = self.storyboard!.instantiateViewController(withIdentifier: SelectCategoryVC.getStoryboardID()) as! SelectCategoryVC

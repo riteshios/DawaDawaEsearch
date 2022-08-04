@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 // Model for all and Profile Post Opportunity
 class SocialPostData {
@@ -70,10 +71,12 @@ class SocialPostData {
 }
 
 class oppr_image{
-    var image:String?
+    var imageurl:String?
+    var img:UIImage?
     
     init(data:[String:Any]){
-        self.image = String.getString(data["image"])
+        self.imageurl = String.getString(data["image"])
+        self.img = nil
     }
 }
 

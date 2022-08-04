@@ -38,14 +38,23 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y8h-3m-tst">
+                                <rect key="frame" x="0.0" y="0.0" width="415" height="23"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="QAK-Fa-1mJ" secondAttribute="bottom" id="80h-i2-GM0"/>
                             <constraint firstItem="all-DX-sfM" firstAttribute="leading" secondItem="QAK-Fa-1mJ" secondAttribute="trailing" constant="12" id="Duy-nx-5Sx"/>
                             <constraint firstItem="all-DX-sfM" firstAttribute="centerY" secondItem="QAK-Fa-1mJ" secondAttribute="centerY" id="EF6-cJ-EML"/>
+                            <constraint firstAttribute="bottom" secondItem="Y8h-3m-tst" secondAttribute="bottom" id="F6r-qG-IGr"/>
+                            <constraint firstItem="Y8h-3m-tst" firstAttribute="top" secondItem="MpQ-hj-HQf" secondAttribute="top" id="HBt-EC-h7m"/>
                             <constraint firstItem="QAK-Fa-1mJ" firstAttribute="leading" secondItem="MpQ-hj-HQf" secondAttribute="leading" id="LXU-Es-vSx"/>
                             <constraint firstItem="QAK-Fa-1mJ" firstAttribute="top" secondItem="MpQ-hj-HQf" secondAttribute="top" id="p0e-sT-dF4"/>
+                            <constraint firstItem="Y8h-3m-tst" firstAttribute="leading" secondItem="MpQ-hj-HQf" secondAttribute="leading" id="ta9-qO-nKS"/>
+                            <constraint firstAttribute="trailing" secondItem="Y8h-3m-tst" secondAttribute="trailing" id="vEJ-JP-ZXb"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -58,9 +67,11 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="btnSelect" destination="Y8h-3m-tst" id="W9p-Ck-ncF"/>
+                <outlet property="imgradio" destination="QAK-Fa-1mJ" id="ZxY-F0-JGh"/>
                 <outlet property="lblSubcategory" destination="all-DX-sfM" id="mRh-5X-LEg"/>
             </connections>
-            <point key="canvasLocation" x="139" y="87"/>
+            <point key="canvasLocation" x="138.40579710144928" y="86.383928571428569"/>
         </tableViewCell>
     </objects>
     <resources>

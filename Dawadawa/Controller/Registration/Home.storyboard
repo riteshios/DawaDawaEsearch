@@ -7138,9 +7138,12 @@
                         <outlet property="UploaddocumentCollectionView" destination="OxZ-Vi-e8a" id="AkH-RT-Fr2"/>
                         <outlet property="UploadimageCollectionView" destination="IxJ-qz-EH8" id="Mso-D0-Eeh"/>
                         <outlet property="btnBasic" destination="RgK-y7-0wm" id="iP9-fh-olE"/>
+                        <outlet property="btnCreate_UpdateOpp" destination="7Fg-BS-ZDa" id="Ihb-Ph-gir"/>
                         <outlet property="btnFeature" destination="611-fW-ms5" id="XOY-5t-Ayr"/>
                         <outlet property="btnLocality" destination="xqV-ng-OgI" id="TfP-zD-FTP"/>
                         <outlet property="btnLookingFor" destination="Qnj-RL-yl7" id="XbB-pE-lF4"/>
+                        <outlet property="btnMoreDocument" destination="kzQ-zH-M82" id="1ca-A1-jhs"/>
+                        <outlet property="btnMoreImage" destination="ix0-fO-dzQ" id="BC5-EV-Ifa"/>
                         <outlet property="btnPremium" destination="sYi-rq-PZS" id="akH-UP-12y"/>
                         <outlet property="btnSelectDocument" destination="Ftj-Br-Dgr" id="tdS-qP-i9d"/>
                         <outlet property="btnSelectImage" destination="ODI-oT-Xp7" id="24B-LR-8Ko"/>

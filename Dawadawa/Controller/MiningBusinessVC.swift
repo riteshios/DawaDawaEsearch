@@ -1042,6 +1042,8 @@ extension MiningBusinessVC{
         let subcatid = Int(self.subcatid ?? 0)
         debugPrint("checksubcatid",subcatid)
         
+        let lookingforid = Int(self.lookingforid ?? 0)
+        debugPrint("checklookingforid",lookingforid)
         
         let params:[String : Any] = [
             "user_id":"\(String(describing: userid))",
@@ -1057,7 +1059,7 @@ extension MiningBusinessVC{
             "mobile_num":String.getString(self.txtFieldMobileNumber.text),
             "whatsaap_num":String.getString(self.txtFieldWhatsappNumber.text),
             "pricing":String.getString(self.txtFieldPricing.text),
-            "looking_for":String.getString(self.lblLookingFor.text),
+            "looking_for":"\(String(describing: lookingforid))",
             "plan":String.getString(plan),
             "cat_type_id":"1"
         ]

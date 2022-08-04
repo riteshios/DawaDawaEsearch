@@ -111,10 +111,11 @@ struct ServiceName {
     static let klikeopportunity         =        "api/like_opportunity"
     static let ksearchopportunity       =        "api/search-opportunity"
     static let kopportunitydetails      =        "api/opportunity-detail"
+    static let kupdateopportunity       =        "api/update-opportunity"
     
 //    Filter
     static let kfiltersubcategory      =         "api/filter-sub-category"
-    static let kfilter                 =         "api/opr-filter/\(UserData.shared.id)"
+    static let kfilter                 =         "api/opr-filter"
 }
 
 struct Notifications {
