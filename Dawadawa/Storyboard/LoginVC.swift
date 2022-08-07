@@ -121,6 +121,7 @@ class LoginVC: UIViewController {
     }
     @IBAction func btnSkipLoginTapped(_ sender: UIButton) {
         UserData.shared.isskiplogin = true
+        cameFrom = ""
         kSharedAppDelegate?.makeRootViewController()
     }
     
@@ -249,7 +250,7 @@ extension LoginVC{
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         kSharedAppDelegate?.makeRootViewController()
                         
-                        
+                        cameFrom = ""
 //                        let vc = UIStoryboard(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "TabBarVC") as! TabBarVC
 //                        vc.navigationController?.pushViewController(vc, animated: true)
                     }
@@ -300,8 +301,9 @@ extension LoginVC{
                         if Int.getInt(dictResult["status"]) == 200{
                             let data = kSharedInstance.getDictionary(dictResult["data"])
                             kSharedUserDefaults.setLoggedInUserDetails(loggedInUserDetails: data)
-
-                            UserData.shared.saveData(data: data, token: "")
+                            kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: String.getString(dictResult[kLoggedInAccessToken]))
+                            UserData.shared.saveData(data: data, token:  String.getString(dictResult[kLoggedInAccessToken]))
+//                            UserData.shared.saveData(data: data, token: "")
                             kSharedAppDelegate?.makeRootViewController()
                         }
                         else if  Int.getInt(dictResult["status"]) == 400{

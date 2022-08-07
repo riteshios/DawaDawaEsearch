@@ -99,7 +99,7 @@ struct ServiceName {
     static let kgetSerivetype         =        "api/services-type"
     static let kgetbusinessminingtype =        "api/business-mining-type"
     
-//   Opportunity
+//    Opportunity
     static let kcreateopportunity       =        "api/create-opportunities"
     static let klistopportunity         =        "api/list-opportunities"
     static let kdeleteopportunity       =        "api/delete-opportunities"
@@ -116,6 +116,16 @@ struct ServiceName {
 //    Filter
     static let kfiltersubcategory      =         "api/filter-sub-category"
     static let kfilter                 =         "api/opr-filter"
+    
+//    Guest
+    static let kguestcategory          =          "api/guest-category"
+    static let kguestfiltersubcategory =          "api/guest-filter-sub-category"
+    static let kguestservicetype       =          "api/guest-services-type"
+    static let kgueststate             =          "api/guest-state"
+    static let kguestlocality          =          "api/guest-locality"
+    static let kguestfilter            =          "api/guest-opr-filter"
+    static let kguestgetallopportunity  =         "api/guest-all-opportunity"
+    static let kguestsearchopportunity  =         "api/guest-search-opportunity"
 }
 
 struct Notifications {

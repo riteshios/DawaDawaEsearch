@@ -57,7 +57,15 @@ class getfiltersubcategoryModel{
     }
 }
 
-
+class getlocalityModel{
+    let id:Int?
+    let local_name:String?
+    
+    init(data:[String:Any]){
+        self.id = Int.getInt(data["id"])
+        self.local_name = String.getString(data["local_name"])
+    }
+}
 // Category Model
 //class getCartegoryModel:NSObject{
 //    enum keys:String, CodingKey{

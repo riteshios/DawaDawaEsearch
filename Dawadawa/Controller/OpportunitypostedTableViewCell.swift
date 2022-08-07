@@ -20,6 +20,8 @@ class OpportunitypostedTableViewCell: UITableViewCell {
     @IBOutlet weak var btnPremium: UIButton!
     @IBOutlet weak var btnFeatured: UIButton!
     
+    @IBOutlet weak var imgOppPosted: UIImageView!
+    
     var callbackbtnSelect:((String)->())?
     
     override func awakeFromNib() {

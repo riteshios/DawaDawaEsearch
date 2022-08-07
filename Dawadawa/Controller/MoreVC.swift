@@ -3,7 +3,6 @@
 //  Dawadawa
 //
 //  Created by Alekh on 20/06/22.
-//
 
 import UIKit
 
@@ -22,6 +21,8 @@ class MoreVC: UIViewController {
     @IBOutlet weak var btnSetting: UIButton!
     @IBOutlet weak var btnEdit: UIButton!
     @IBOutlet weak var btnChangePasword: UIButton!
+    @IBOutlet weak var btnSavedOpportunities: UIButton!
+    
     @IBOutlet weak var btnContactUs: UIButton!
     @IBOutlet weak var btnLogOut: UIButton!
     
@@ -45,7 +46,7 @@ class MoreVC: UIViewController {
 // MARK: - Life Cyclye
     
     func setlanguage(){
-        lblSetting.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Setting", comment: "")
+        lblSetting.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Settings", comment: "")
         lblEditProfile.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Edit Profile", comment: "")
         lblChangePassword.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Change password", comment: "")
         lblSavedOpportunity.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Saved Opportunities", comment: "")
@@ -96,6 +97,18 @@ class MoreVC: UIViewController {
         }
         else{
         self.getoptapi()
+        }
+    }
+    @IBAction func btnSavedOppTapped(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        if self.btnSavedOpportunities.isSelected == true{
+            self.viewSavedOpportunies.backgroundColor = UIColor.init(red: 241/255, green: 249/255, blue: 253/255, alpha: 1)
+        }
+        if UserData.shared.isskiplogin == true{
+            self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+        }
+        else{
+            self.callback?("SaveOpportunity")
         }
     }
     

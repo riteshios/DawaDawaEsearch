@@ -9,36 +9,56 @@ import UIKit
 import STTabbar
 
 class HomeVC: UIViewController{
+        
     
-
+    
+    
     @IBOutlet weak var tblViewViewPost: UITableView!
     
     var imgUrl = ""
-    var userTimeLine = [SocialPostData]()
+    var count = ""
+    var statuslike:Int?
+   // var userTimeLine = [SocialPostData]()
     var userdetail = [user_detail]()
-    var cameFrom = ""
+   
     @IBOutlet weak var lblUserName: UILabel!
     @IBOutlet weak var ImgUser: UIImageView!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if UserData.shared.isskiplogin == true{
-            print("Guest User")
-        }
-        else{
-        self.fetchdata()
-        }
-        if cameFrom != "FilterData"{
-            self.getallopportunity()
-        }
         
-        tblViewViewPost.register(UINib(nibName: "ViewPostTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "ViewPostTableViewCell")
-        tblViewViewPost.register(UINib(nibName: "SocialPostTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "SocialPostTableViewCell")
+        if UserData.shared.isskiplogin == true{
+                    print("Guest User")
+            if cameFrom != "FilterData"{
+                self.guestgetallopportunity()
+                self.lblUserName.text = "Guest User"
+            }
+                   
+                }
+                else{
+                    self.fetchdata()
+                }
+        
+               
+     
+    
+        self.setup()
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        if cameFrom != "FilterData"{
+            self.getallopportunity()
+        }
+    }
+
     
+    
+    private func setup(){
+        tblViewViewPost.register(UINib(nibName: "ViewPostTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "ViewPostTableViewCell")
+        tblViewViewPost.register(UINib(nibName: "SocialPostTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "SocialPostTableViewCell")
+    }
     
     func fetchdata(){
         self.lblUserName.text = String.getString(UserData.shared.name) + " " + String.getString(UserData.shared.last_name)
@@ -54,35 +74,30 @@ class HomeVC: UIViewController{
             }
             
             task.resume()
+        }
+        
     }
-       
-  }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        self.tabBarController?.tabBar.isHidden = false
-        self.tabBarController?.tabBar.layer.zPosition = 0
-    
-    }
-//    override func viewWillAppear(_ animated: Bool) {
-//          self.hidesBottomBarWhenPushed = false
-//          self.tabBarController?.tabBar.isHidden = false
-//          self.tabBarController?.hidesBottomBarWhenPushed = false
-//          self.tabBarController?.tabBar.layer.zPosition = 0
-//      }
 
+//
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewDidAppear(animated)
+//        self.tabBarController?.tabBar.isHidden = false
+//        self.tabBarController?.tabBar.layer.zPosition = 0
+//    }
+    
     @IBAction func btnSearchTapped(_ sender: UIButton) {
         
         tabBarController?.selectedIndex = 1
         
-//        let vc = self.storyboard?.instantiateViewController(withIdentifier: SearchVC.getStoryboardID()) as! SearchVC
-//        self.navigationController?.pushViewController(vc, animated: true)
+        //        let vc = self.storyboard?.instantiateViewController(withIdentifier: SearchVC.getStoryboardID()) as! SearchVC
+        //        self.navigationController?.pushViewController(vc, animated: true)
         
     }
     
 }
 
 extension HomeVC:UITableViewDelegate,UITableViewDataSource{
-   
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
         
@@ -107,15 +122,23 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
         switch indexPath.section{
         case 0:
             let cell = self.tblViewViewPost.dequeueReusableCell(withIdentifier: "ViewPostTableViewCell") as! ViewPostTableViewCell
+            
             cell.ColllectionViewPremiumOpp.tag = indexPath.section
             cell.callbacknavigation = { txt in
                 if txt == "ViewAll"{
-                let vc = self.storyboard!.instantiateViewController(withIdentifier: PremiumOpportunitiesVC.getStoryboardID()) as! PremiumOpportunitiesVC
-                self.navigationController?.pushViewController(vc, animated: true)
+                    if UserData.shared.isskiplogin == true{
+                        self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                    }
+                    else{
+                        let vc = self.storyboard!.instantiateViewController(withIdentifier: PremiumOpportunitiesVC.getStoryboardID()) as! PremiumOpportunitiesVC
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    }
                 }
                 if txt == "Filter"{
                     let vc = self.storyboard!.instantiateViewController(withIdentifier: FilterVC.getStoryboardID()) as! FilterVC
+                  
                     self.navigationController?.pushViewController(vc, animated: false)
+                    
                 }
             }
             return cell
@@ -123,83 +146,129 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
         case 1:
             let cell = self.tblViewViewPost.dequeueReusableCell(withIdentifier: "SocialPostTableViewCell") as! SocialPostTableViewCell
             let obj = userTimeLine[indexPath.row]
-
+            
             cell.SocialPostCollectionView.tag = indexPath.section
             cell.lblUserName.text = String.getString(obj.userdetail?.name)
             debugPrint("username.....", cell.lblUserName.text)
-            cell.lblTitle.text = String.getString(obj.title)
+            
+            if Int.getInt(obj.close_opr) == 0{
+                cell.lblTitle.text = String.getString(obj.title)
+                cell.lblTitle.textColor = .black
+            }
+            else{
+                cell.lblTitle.text = "This Opprortunity has been Closed"
+                cell.lblTitle.textColor = .red
+            }
+            
             cell.lblDescribtion.text = String.getString(obj.description)
             cell.img = obj.oppimage
             cell.imgUrl = self.imgUrl
-           
+            
             let imguserurl = String.getString(obj.userdetail?.social_profile)
             debugPrint("socialprofile......",imguserurl)
-         
+            
             cell.Imageuser.downlodeImage(serviceurl: imguserurl , placeHolder: UIImage(named: "Boss"))
             
             cell.lblLikeCount.text = String.getString(obj.likes) + " " + "likes"
             
             cell.imgOpp_plan.image = obj.opp_plan == "Featured" ? UIImage(named: "Star Filled") : obj.opp_plan == "Premium" ? UIImage(named: "Crown") : UIImage(named: "")
-
+            
             if String.getString(obj.is_user_like) == "1"{
                 cell.imglike.image = UIImage(named: "dil")
                 cell.lbllike.text = "Liked"
+              
+            }
+            else{
+                cell.imglike.image = UIImage(named: "unlike")
+                cell.lbllike.text = "Like"
             }
             
             cell.callback = { txt in
+                
                 if txt == "Like"{
-                if cell.btnlike.isSelected == true{
-                    let oppid = self.userTimeLine[indexPath.row].id
-                    debugPrint("oppidkkkkkkk=-=-",oppid)
-                    self.likeOpportunityapi(oppr_id: oppid ?? 0)
-        
-                    cell.imglike.image = UIImage(named: "dil")
-                    cell.lbllike.text = "Liked"
-                    
-                }
-            }
-            
-                if txt == "More" {
-                let vc = self.storyboard?.instantiateViewController(withIdentifier: HomeSocialMoreVC.getStoryboardID()) as! HomeSocialMoreVC
-                vc.modalTransitionStyle = .crossDissolve
-                vc.modalPresentationStyle = .overCurrentContext
-                vc.callback = { txt in
-//                    if txt == "Dismiss"{
-//                        vc.dismiss(animated: false){
-//                            self.dismiss(animated: true, completion: nil)
-//                        }
-//                    }
-                    if txt == "Flag"{
-                        let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
-                        self.flagopportunityapi(oppr_id: oppid)
+                    if cell.btnlike.isSelected == true{
+                        if UserData.shared.isskiplogin == true{
+                            self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                        }
+                        else{
+                            let oppid = userTimeLine[indexPath.row].id
+                            debugPrint("oppidkkkkkkk=-=-",oppid)
+                            self.likeOpportunityapi(oppr_id: oppid ?? 0)
+                            
+                            cell.imglike.image = UIImage(named: "dil")
+                            cell.lbllike.text = "Liked"
+                            
+                            debugPrint("count=-==0-",self.count)
+//                            obj.likes! += 1
+                            let statuslikes = Int(self.statuslike ?? 0) // For remove optional
+                            debugPrint("statuslikes=-==-",statuslikes)
+                            if statuslikes == 200{
+                                cell.lblLikeCount.text = String.getString(self.count) + " " + "likes"
+                                
+//                                self.tblViewViewPost.reloadData()
+                            }
+                            
+                        }
                     }
-                    
-                    if txt == "Report"{
-                        kSharedAppDelegate?.makeRootViewController()
+                }
+                
+                if txt == "More" {
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: HomeSocialMoreVC.getStoryboardID()) as! HomeSocialMoreVC
+                    vc.modalTransitionStyle = .crossDissolve
+                    vc.modalPresentationStyle = .overCurrentContext
+                    vc.callback = { txt in
+                        //                    if txt == "Dismiss"{
+                        //                        vc.dismiss(animated: false){
+                        //                            self.dismiss(animated: true, completion: nil)
+                        //                        }
+                        //                    }
+                        if txt == "Flag"{
+                            if UserData.shared.isskiplogin == true{
+                                self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                            }
+                            else{
+                                let oppid = Int.getInt(userTimeLine[indexPath.row].id)
+                                self.flagopportunityapi(oppr_id: oppid)
+                            }
+                        }
+                        
+                        if txt == "Report"{
+                            if UserData.shared.isskiplogin == true{
+                                self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                            }
+                            else{
+                                kSharedAppDelegate?.makeRootViewController()
+                            }
+                            
+                        }
                         
                     }
-                    
+                    self.present(vc, animated: false)
                 }
-                self.present(vc, animated: false)
             }
-        }
             return cell
-        
+            
             
             
         default:
             return UITableViewCell()
         }
-       
+        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section{
         case 0:
-        return 420
+            if UserData.shared.isskiplogin == true{
+                return 420
+            }
+            else{
+                return 370
+            }
+           
         case 1:
             return UITableView.automaticDimension
-        
+            
         default:
             return 0
         }
@@ -211,7 +280,7 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
 
 extension HomeVC{
     
-// Api all opportunity
+    // Api all opportunity
     
     func getallopportunity(){
         CommonUtils.showHudWithNoInteraction(show: true)
@@ -225,12 +294,12 @@ extension HomeVC{
             }
         }
         
-//        debugPrint("\(ServiceName.kgetallopportunity)/\(UserData.shared.id)") //passing userid in api url
+        //        debugPrint("\(ServiceName.kgetallopportunity)/\(UserData.shared.id)") //passing userid in api url
         TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName: ServiceName.kgetallopportunity, requestMethod: .GET, requestParameters:[:], withProgressHUD: false) { (result:Any?, error:Error?, errorType:ErrorType?,statusCode:Int?) in
             CommonUtils.showHudWithNoInteraction(show: false)
             if errorType == .requestSuccess {
                 let dictResult = kSharedInstance.getDictionary(result)
-            
+                
                 switch Int.getInt(statusCode) {
                 case 200:
                     if Int.getInt(dictResult["status"]) == 200{
@@ -239,21 +308,21 @@ extension HomeVC{
                         if septoken[0] == "Bearer"{
                             kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
                         }
-            
+                        
                         self.imgUrl = String.getString(dictResult["oprbase_url"])
                         let Opportunity = kSharedInstance.getArray(withDictionary: dictResult["Opportunity"])
-                        self.userTimeLine = Opportunity.map{SocialPostData(data: kSharedInstance.getDictionary($0))}
-                        print("Dataallpost=\(self.userTimeLine)")
+                        userTimeLine = Opportunity.map{SocialPostData(data: kSharedInstance.getDictionary($0))}
+                        print("Dataallpost=\(userTimeLine)")
                         
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         self.tblViewViewPost.reloadData()
                         
                     }
                     else if  Int.getInt(dictResult["status"]) == 400{
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
-                  
+                    
                 default:
                     CommonUtils.showError(.error, String.getString(dictResult["message"]))
                 }
@@ -266,11 +335,11 @@ extension HomeVC{
         }
         
     }
-
     
-   
     
-// Api flag Opportunity
+    
+    
+    // Api flag Opportunity
     
     func flagopportunityapi(oppr_id:Int){
         CommonUtils.showHud(show: true)
@@ -287,13 +356,13 @@ extension HomeVC{
         
         
         let params:[String : Any] = [
-//            "user_id":Int.getInt(UserData.shared.id),
+            //            "user_id":Int.getInt(UserData.shared.id),
             "opr_id":oppr_id
         ]
         
         debugPrint("opr_id......",oppr_id)
         TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kflagpost, requestMethod: .POST,
-                                                   requestParameters:params, withProgressHUD: false)
+                                                               requestParameters:params, withProgressHUD: false)
         {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
             
             CommonUtils.showHudWithNoInteraction(show: false)
@@ -312,7 +381,7 @@ extension HomeVC{
                         if septoken[0] == "Bearer"{
                             kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
                         }
-                      
+                        
                         
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         kSharedAppDelegate?.makeRootViewController()
@@ -320,7 +389,7 @@ extension HomeVC{
                     }
                     
                     else if  Int.getInt(dictResult["status"]) == 400{
-                      
+                        
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
@@ -338,69 +407,118 @@ extension HomeVC{
     }
     
     //    Api like Opportunity
+    
+    func likeOpportunityapi(oppr_id:Int){
+        CommonUtils.showHud(show: true)
         
-        func likeOpportunityapi(oppr_id:Int){
-            CommonUtils.showHud(show: true)
-            
-            
-            if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
-                let endToken = kSharedUserDefaults.getLoggedInAccessToken()
-                let septoken = endToken.components(separatedBy: " ")
-                if septoken[0] != "Bearer"{
-                    let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
-                    kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
-                }
+        
+        if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
+            let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+            let septoken = endToken.components(separatedBy: " ")
+            if septoken[0] != "Bearer"{
+                let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
+                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
             }
+        }
+        
+        
+        let params:[String : Any] = [
+            "user_id":Int.getInt(UserData.shared.id),
+            "opr_id":oppr_id
+        ]
+        
+        debugPrint("user_id......",Int.getInt(UserData.shared.id))
+        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.klikeopportunity, requestMethod: .POST,
+                                                               requestParameters:params, withProgressHUD: false)
+        {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
             
+            CommonUtils.showHudWithNoInteraction(show: false)
             
-            let params:[String : Any] = [
-                "user_id":Int.getInt(UserData.shared.id),
-                "opr_id":oppr_id
-            ]
-            
-            debugPrint("user_id......",Int.getInt(UserData.shared.id))
-            TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.klikeopportunity, requestMethod: .POST,
-                                                       requestParameters:params, withProgressHUD: false)
-            {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
+            if errorType == .requestSuccess {
                 
-                CommonUtils.showHudWithNoInteraction(show: false)
+                let dictResult = kSharedInstance.getDictionary(result)
                 
-                if errorType == .requestSuccess {
-                    
-                    let dictResult = kSharedInstance.getDictionary(result)
-                    
-                    switch Int.getInt(statusCode) {
-                    case 200:
+                switch Int.getInt(statusCode) {
+                case 200:
+                    self?.statuslike = Int.getInt(dictResult["status"])
+                    if Int.getInt(dictResult["status"]) == 200{
                         
-                        if Int.getInt(dictResult["status"]) == 200{
-                            
-                            let endToken = kSharedUserDefaults.getLoggedInAccessToken()
-                            let septoken = endToken.components(separatedBy: " ")
-                            if septoken[0] == "Bearer"{
-                                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
-                            }
-                          
-                            CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                          
-                            
+                        
+                        let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+                        let septoken = endToken.components(separatedBy: " ")
+                        if septoken[0] == "Bearer"{
+                            kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
                         }
                         
-                        else if  Int.getInt(dictResult["status"]) == 400{
-                            CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                        }
+                        self?.count = String.getString(dictResult["count"])
+                        debugPrint("likecount=-=-=-=",self?.count)
                         
-                    default:
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        
+                        
+                    }
+                    
+                    else if  Int.getInt(dictResult["status"]) == 400{
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
-                } else if errorType == .noNetwork {
-                    CommonUtils.showToastForInternetUnavailable()
                     
-                } else {
-                    CommonUtils.showToastForDefaultError()
+                default:
+                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
                 }
+            } else if errorType == .noNetwork {
+                CommonUtils.showToastForInternetUnavailable()
                 
+            } else {
+                CommonUtils.showToastForDefaultError()
             }
-        
+            
         }
+        
+    }
+    
+    
+    //    Guest getallopportunity
+    func guestgetallopportunity(){
+        CommonUtils.showHudWithNoInteraction(show: true)
+        
+        
+        
+        TANetworkManager.sharedInstance.requestlangApi(withServiceName: ServiceName.kguestgetallopportunity, requestMethod: .GET, requestParameters:[:], withProgressHUD: false) { (result:Any?, error:Error?, errorType:ErrorType?,statusCode:Int?) in
+            CommonUtils.showHudWithNoInteraction(show: false)
+            if errorType == .requestSuccess {
+                let dictResult = kSharedInstance.getDictionary(result)
+                
+                switch Int.getInt(statusCode) {
+                case 200:
+                    if Int.getInt(dictResult["status"]) == 200{
+                        
+                        self.imgUrl = String.getString(dictResult["oprbase_url"])
+                        let Opportunity = kSharedInstance.getArray(withDictionary: dictResult["Opportunity"])
+                        userTimeLine = Opportunity.map{SocialPostData(data: kSharedInstance.getDictionary($0))}
+                        print("Dataallpost=\(userTimeLine)")
+                        
+//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        self.tblViewViewPost.reloadData()
+                        
+                    }
+                    else if  Int.getInt(dictResult["status"]) == 400{
+//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    }
+                    
+                    
+                default:
+                    CommonUtils.showError(.error, String.getString(dictResult["message"]))
+                }
+            }else if errorType == .noNetwork {
+                CommonUtils.showToastForInternetUnavailable()
+                
+            } else {
+                CommonUtils.showToastForDefaultError()
+            }
+        }
+        
+    }
+    
     
 }
+

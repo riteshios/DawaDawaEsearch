@@ -442,7 +442,8 @@ extension CreateAccountVC {
                     if Int.getInt(dictResult["status"]) == 200{
                         let data = kSharedInstance.getDictionary(dictResult["data"])
                         kSharedUserDefaults.setLoggedInUserDetails(loggedInUserDetails: data)
-                        UserData.shared.saveData(data: data, token: "")
+                        kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: String.getString(dictResult[kLoggedInAccessToken]))
+                        UserData.shared.saveData(data: data, token:  String.getString(dictResult[kLoggedInAccessToken]))
                         kSharedAppDelegate?.makeRootViewController()
                         
                     }

@@ -10,7 +10,13 @@ import RangeSeekSlider
 import Alamofire
 import SwiftyJSON
 
+var userTimeLine = [SocialPostData]()
+var cameFrom = ""
+
+
 class FilterVC: UIViewController {
+    
+   
     
     @IBOutlet weak var PriceSlider: RangeSeekSlider!
     
@@ -92,7 +98,8 @@ class FilterVC: UIViewController {
     var getServiceTypearr      =      [getServicetypeModel]()
     var getstatelistarr        =      [getstateModel]()
     var getlocalitylist        =      [getLocalityModel]()
-    var userTimeLine           =      [SocialPostData]()
+    var getguestlocalitylist   =      [getlocalityModel]()
+//    var userTimeLine           =      [SocialPostData]()
     
     
     var selectedIds:[String] = []
@@ -122,13 +129,22 @@ class FilterVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+       
+        if UserData.shared.isskiplogin == true{
+            self.guestcategory()
+            self.guestservicetype()
+            self.gueststateapi()
+        }
+        else{
+            self.getCartListApi()
+            self.getservicetypeapi()
+            self.getstateapi()
+        }
+        
         self.slidersetup()
         self.setuptableview()
-        self.getCartListApi()
-        self.getservicetypeapi()
         self.setupstartdate()
         self.setupendtdate()
-        self.getstateapi()
     }
     
     private func setuptableview(){
@@ -384,22 +400,41 @@ class FilterVC: UIViewController {
             let id = self.getstatelistarr[index].id
             self.stateid = id
             debugPrint("State idddd.....btnnnnt",  self.stateid = id)
-            self.getlocalityapi(id: self.stateid ?? 0 )
+           
+            if UserData.shared.isskiplogin == true{
+                self.guestlocalityapi(id: self.stateid ?? 0)
+            }
+            else {
+                self.getlocalityapi(id: self.stateid ?? 0 )
+            }
         }
         
     }
     
     @IBAction func btnLocalityTapped(_ sender: UIButton) {
-        kSharedAppDelegate?.dropDown(dataSource: getlocalitylist.map{String.getString($0.local_name)}, text: btnLocality){
-            (index,item) in
-            self.lblLocality.text = item
-            let id  = self.getlocalitylist[index].id
-            self.localityid = id
-            debugPrint("localityid....",self.localityid)
+        if UserData.shared.isskiplogin == true{
+           
+            kSharedAppDelegate?.dropDown(dataSource: getguestlocalitylist.map{String.getString($0.local_name)}, text: btnLocality){
+                (index,item) in
+                self.lblLocality.text = item
+                let id  = self.getguestlocalitylist[index].id
+                self.localityid = id
+                debugPrint("localityid....",self.localityid)
             
+        }
+    }
+        else{
+            kSharedAppDelegate?.dropDown(dataSource: getlocalitylist.map{String.getString($0.local_name)}, text: btnLocality){
+                (index,item) in
+                self.lblLocality.text = item
+                let id  = self.getlocalitylist[index].id
+                self.localityid = id
+                debugPrint("localityid....",self.localityid)
+                
         }
         
     }
+}
     
     @IBAction func btnPriceLtoHTapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
@@ -449,7 +484,12 @@ class FilterVC: UIViewController {
     
     
     @IBAction func btnApplyfilterTapped(_ sender: UIButton) {
-        self.filterdataapi()
+//        if UserData.shared.isskiplogin == true{
+            self.guestfilterdataapi()
+//        }
+//        else{
+//        self.filterdataapi()
+//        }
     }
     
     //   MARK: - APICALL
@@ -602,7 +642,13 @@ extension FilterVC: UITableViewDelegate,UITableViewDataSource{
             self.selectedoptype = ids
             print("selectedoptype=-=-=\(self.selectedoptype)")
             print(" selected   -ids---\(ids)")
-            self.filtersubcategoryapi(catid: ids)
+           
+            if UserData.shared.isskiplogin == true{
+                self.guestfiltersubcategoryapi(catid: ids)
+            }
+            else{
+                self.filtersubcategoryapi(catid: ids)
+            }
             
         }else if sender.isSelected == false{
             for i in 0 ..< self.selectedIds.count{
@@ -617,7 +663,12 @@ extension FilterVC: UITableViewDelegate,UITableViewDataSource{
                     print("selectedoptype=-=-=\(self.selectedoptype)")
         
                     print(" selected   -ids---\(ids)")
-                    self.filtersubcategoryapi(catid: ids)
+                    if UserData.shared.isskiplogin == true{
+                        self.guestfiltersubcategoryapi(catid: ids)
+                    }
+                    else{
+                        self.filtersubcategoryapi(catid: ids)
+                    }
                     break
                 }
             }
@@ -1221,17 +1272,23 @@ extension FilterVC{
                         
                         self?.imgUrl = String.getString(dictResult["oprbase_url"])
                         let Opportunity = kSharedInstance.getArray(withDictionary: dictResult["Opportunity"])
-                        self?.userTimeLine = Opportunity.map{SocialPostData(data: kSharedInstance.getDictionary($0))}
-                        print("DataallSearchpost=\(self?.userTimeLine)")
+                       userTimeLine = Opportunity.map{SocialPostData(data: kSharedInstance.getDictionary($0))}
+                        print("DataallSearchpost=\(userTimeLine)")
                         
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                        let vc = self?.storyboard?.instantiateViewController(withIdentifier: HomeVC.getStoryboardID()) as! HomeVC
-                        vc.cameFrom = "FilterData"
-                        vc.userTimeLine = self!.userTimeLine
-//                        vc.hidesBottomBarWhenPushed = false
-//                        vc.tabBarController?.hidesBottomBarWhenPushed = false
-          
-                        self?.navigationController?.pushViewController(vc, animated: true)
+                       
+                        
+//                        let vc = self?.storyboard?.instantiateViewController(withIdentifier: HomeVC.getStoryboardID()) as! HomeVC
+//                        vc.cameFrom = "FilterData"
+//                        vc.userTimeLine = self!.userTimeLine
+//                        self?.navigationController?.pushViewController(vc, animated: true)
+                        
+                        
+                        cameFrom = "FilterData"
+                        let vc = self?.storyboard?.instantiateViewController(withIdentifier: "TabBarVC") as! TabBarVC
+                        self?.tabBarController?.selectedIndex = 0
+                                          
+                       self?.navigationController?.pushViewController(vc, animated: true)
                         
                     }
                     
@@ -1252,8 +1309,327 @@ extension FilterVC{
             
         }
         
+    }
+    
+//    MARK: - API For Guest
+    
+//    Guest Category Api
+    
+    func guestcategory(){
+        CommonUtils.showHudWithNoInteraction(show: true)
         
         
+        TANetworkManager.sharedInstance.requestlangApi(withServiceName: ServiceName.kguestcategory, requestMethod: .GET, requestParameters:[:], withProgressHUD: false) { (result:Any?, error:Error?, errorType:ErrorType?,statusCode:Int?) in
+            CommonUtils.showHudWithNoInteraction(show: false)
+            if errorType == .requestSuccess {
+                let dictResult = kSharedInstance.getDictionary(result)
+            
+                switch Int.getInt(statusCode) {
+                case 200:
+                    if Int.getInt(dictResult["status"]) == 200{
+                        let Categories = kSharedInstance.getArray(withDictionary: dictResult["Categories"])
+                        self.getCategoryarr = Categories.map{getCartegoryModel(data: $0)}
+                        DispatchQueue.main.async {
+                            self.tblViewOpportunitytype.reloadData()
+                        }
+                        
+                    }
+                    else if  Int.getInt(dictResult["status"]) == 401{
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    }
+                    
+                    // CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                default:
+                    CommonUtils.showError(.error, String.getString(dictResult["message"]))
+                }
+            }else if errorType == .noNetwork {
+                CommonUtils.showToastForInternetUnavailable()
+                
+            } else {
+                CommonUtils.showToastForDefaultError()
+            }
+        }
+    }
+    
+// Guest Filter Sub category Api
+    
+    func guestfiltersubcategoryapi(catid:String){
+        CommonUtils.showHud(show: true)
+        
+        
+        let stateids = Int(self.stateid ?? 0) // For remove optional
+        debugPrint("checkstateids",stateids)
+        
+        let params:[String : Any] = [
+                    "category_id":catid
+        ]
+                
+       
+        TANetworkManager.sharedInstance.requestlangApi(withServiceName:ServiceName.kguestfiltersubcategory, requestMethod: .POST,
+                                                               requestParameters:params, withProgressHUD: false)
+        {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
+            
+            CommonUtils.showHudWithNoInteraction(show: false)
+            
+            if errorType == .requestSuccess {
+                
+                let dictResult = kSharedInstance.getDictionary(result)
+                
+                switch Int.getInt(statusCode) {
+                case 200:
+                    
+                    if Int.getInt(dictResult["status"]) == 200{
+                        
+                        let Categories = kSharedInstance.getArray(withDictionary: dictResult["Categories"])
+                        self?.getfiltersubcatarr = Categories.map{getfiltersubcategoryModel(data: $0)}
+                        
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        DispatchQueue.main.async {
+                            self?.tblViewOpportunitytype.reloadData()
+                        }
+                        
+                    }
+                    
+                    else if  Int.getInt(dictResult["status"]) == 400{
+                        
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    }
+                    
+                default:
+                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                }
+            } else if errorType == .noNetwork {
+                CommonUtils.showToastForInternetUnavailable()
+                
+            } else {
+                CommonUtils.showToastForDefaultError()
+            }
+            
+        }
+    }
+    
+//  Guest Service Type Api
+    
+    func guestservicetype(){
+        CommonUtils.showHudWithNoInteraction(show: true)
+        
+        
+        TANetworkManager.sharedInstance.requestlangApi(withServiceName: ServiceName.kguestservicetype, requestMethod: .GET, requestParameters:[:], withProgressHUD: false) { (result:Any?, error:Error?, errorType:ErrorType?,statusCode:Int?) in
+            CommonUtils.showHudWithNoInteraction(show: false)
+            if errorType == .requestSuccess {
+                let dictResult = kSharedInstance.getDictionary(result)
+            
+                switch Int.getInt(statusCode) {
+                case 200:
+                    if Int.getInt(dictResult["status"]) == 200{
+                        
+                        let bmy = kSharedInstance.getArray(withDictionary: dictResult["bmy"])
+                        self.getServiceTypearr = bmy.map{getServicetypeModel(data: $0)}
+                        DispatchQueue.main.async {
+                            self.tblViewServicetype.reloadData()
+                        }
+                        
+                    }
+                    else if  Int.getInt(dictResult["status"]) == 401{
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    }
+                    
+                    // CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                default:
+                    CommonUtils.showError(.error, String.getString(dictResult["message"]))
+                }
+            }else if errorType == .noNetwork {
+                CommonUtils.showToastForInternetUnavailable()
+                
+            } else {
+                CommonUtils.showToastForDefaultError()
+            }
+        }
+    }
+    
+// Guest State Api
+    
+    func gueststateapi(){
+        CommonUtils.showHudWithNoInteraction(show: true)
+        
+        
+        TANetworkManager.sharedInstance.requestlangApi(withServiceName: ServiceName.kgueststate, requestMethod: .GET, requestParameters:[:], withProgressHUD: false) { (result:Any?, error:Error?, errorType:ErrorType?,statusCode:Int?) in
+            CommonUtils.showHudWithNoInteraction(show: false)
+            if errorType == .requestSuccess {
+                let dictResult = kSharedInstance.getDictionary(result)
+            
+                switch Int.getInt(statusCode) {
+                case 200:
+                    if Int.getInt(dictResult["status"]) == 200{
+                        
+                        let state = kSharedInstance.getArray(withDictionary: dictResult["state"])
+                        self.getstatelistarr = state.map{getstateModel(data: $0)}
+                        
+                    }
+                    else if  Int.getInt(dictResult["status"]) == 401{
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    }
+                    
+                   
+                default:
+                    CommonUtils.showError(.error, String.getString(dictResult["message"]))
+                }
+            }else if errorType == .noNetwork {
+                CommonUtils.showToastForInternetUnavailable()
+                
+            } else {
+                CommonUtils.showToastForDefaultError()
+            }
+        }
+    }
+//    Guest Locality Api
+    
+    func guestlocalityapi(id:Int){
+        CommonUtils.showHud(show: true)
+        
+        
+        let stateids = Int(self.stateid ?? 0) // For remove optional
+        debugPrint("checkstateids",stateids)
+        
+        let params:[String : Any] = [
+            "localitys_id":"\(String(describing: stateids))",
+
+        ]
+        // Added user id in api url
+        TANetworkManager.sharedInstance.requestlangApi(withServiceName:ServiceName.kguestlocality, requestMethod: .POST,
+                                                               requestParameters:params, withProgressHUD: false)
+        {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
+            
+            CommonUtils.showHudWithNoInteraction(show: false)
+            
+            if errorType == .requestSuccess {
+                
+                let dictResult = kSharedInstance.getDictionary(result)
+                
+                switch Int.getInt(statusCode) {
+                case 200:
+                    
+                    if Int.getInt(dictResult["status"]) == 200{
+                        
+                        let localitys = kSharedInstance.getArray(withDictionary: dictResult["localitys"])
+                        self?.getguestlocalitylist = localitys.map{getlocalityModel(data: $0)}
+                        
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        DispatchQueue.main.async {
+                            self?.tblViewOpportunitytype.reloadData()
+                        }
+                        
+                    }
+                    
+                    else if  Int.getInt(dictResult["status"]) == 400{
+                        
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    }
+                    
+                default:
+                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                }
+            } else if errorType == .noNetwork {
+                CommonUtils.showToastForInternetUnavailable()
+                
+            } else {
+                CommonUtils.showToastForDefaultError()
+            }
+            
+        }
+    }
+    
+//    Guest Filter data Api
+    
+    func guestfilterdataapi(){
+        CommonUtils.showHud(show: true)
+        
+        
+        let stateids = Int(self.stateid ?? 0) // For remove optional
+        debugPrint("checkstateids",stateids)
+        
+        let localityid = Int(self.localityid ?? 0)
+        debugPrint("checklocalityid",localityid)
+        
+        
+        
+        let params:[String : Any] = [
+            "most_like":String.getString(like),
+            "rating":String.getString(rating),
+            "opp_status":Int.getInt(oppstatus),
+            "opr_type":selectedoptype,
+            "opr_subtype":selectedsuboptype,
+            "date":Int.getInt(today),
+            "lastweek":Int.getInt(lastweek),
+            "lastmonth":Int.getInt(lastmonth),
+            "state":"\(String(describing: stateids))",
+            "locality":"\(String(describing: localityid))",
+            "services_type":selectedservicetype,
+            "sort_by":Int.getInt(sortby),
+            "start_date":String.getString(self.txtfieldStartDate.text),
+            "end_date":String.getString(self.txtfieldEndDate.text),
+            
+        ]
+      
+        TANetworkManager.sharedInstance.requestlangApi(withServiceName:ServiceName.kguestfilter, requestMethod: .POST,
+                                                               requestParameters:params, withProgressHUD: false)
+        {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
+            
+            CommonUtils.showHudWithNoInteraction(show: false)
+            
+            if errorType == .requestSuccess {
+                
+                let dictResult = kSharedInstance.getDictionary(result)
+                
+                switch Int.getInt(statusCode) {
+                case 200:
+                    
+                    if Int.getInt(dictResult["status"]) == 200{
+                        
+                        let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+                        let septoken = endToken.components(separatedBy: " ")
+                        if septoken[0] == "Bearer"{
+                            kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
+                        }
+                        
+                        self?.imgUrl = String.getString(dictResult["oprbase_url"])
+                        let Opportunity = kSharedInstance.getArray(withDictionary: dictResult["Opportunity"])
+                        userTimeLine = Opportunity.map{SocialPostData(data: kSharedInstance.getDictionary($0))}
+                        print("DataallSearchpost=\(userTimeLine)")
+                        
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        
+//                        let vc = self?.storyboard?.instantiateViewController(withIdentifier: HomeVC.getStoryboardID()) as! HomeVC
+//                        cameFrom = "FilterData"
+//                        vc.userTimeLine = self!.userTimeLine
+//                        vc.hidesBottomBarWhenPushed = false
+//                       vc.tabBarController?.hidesBottomBarWhenPushed = false
+                        
+                        cameFrom = "FilterData"
+                        let vc = self?.storyboard?.instantiateViewController(withIdentifier: "TabBarVC") as! TabBarVC
+                        self?.tabBarController?.selectedIndex = 0
+
+                       self?.navigationController?.pushViewController(vc, animated: true)
+                        
+                        
+                    }
+                    
+                    else if  Int.getInt(dictResult["status"]) == 400{
+                        
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    }
+                    
+                default:
+                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                }
+            } else if errorType == .noNetwork {
+                CommonUtils.showToastForInternetUnavailable()
+                
+            } else {
+                CommonUtils.showToastForDefaultError()
+            }
+            
+        }
         
     }
 }

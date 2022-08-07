@@ -173,6 +173,7 @@
                 <outlet property="btnAll" destination="LBr-yP-gn8" id="hKG-WP-tL1"/>
                 <outlet property="btnFeatured" destination="RKp-Jf-MJs" id="Qzo-WG-uks"/>
                 <outlet property="btnPremium" destination="WLx-5B-Bb9" id="e8T-VG-ujV"/>
+                <outlet property="imgOppPosted" destination="pPp-Go-oiZ" id="K8s-D4-WgK"/>
                 <outlet property="lblAll" destination="pdW-WU-cwj" id="Rwk-vL-7TK"/>
                 <outlet property="lblFeatured" destination="4BX-wa-oAr" id="f83-99-Oav"/>
                 <outlet property="lblpremium" destination="d2A-dQ-Diu" id="EFH-fg-L2E"/>

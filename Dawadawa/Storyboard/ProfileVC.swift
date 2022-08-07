@@ -38,8 +38,8 @@ class ProfileVC: UIViewController {
         
         if UserData.shared.isskiplogin == true{
             print("Guest User")
-            //            self.lblFullName.text = "XYZ"
-            //            self.lblMobileNumber.text = "exnsds"
+            self.lblMobileNumber.isHidden = true
+            self.lblEmail.isHidden = true
         }
         else{
             self.fetchdata()
@@ -201,15 +201,36 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
         case 0:
             let cell = self.tblViewSocialPost.dequeueReusableCell(withIdentifier: "OpportunitypostedTableViewCell") as! OpportunitypostedTableViewCell
             
+            if UserData.shared.isskiplogin == true{
+                cell.imgOppPosted.isHidden = true
+            }
             cell.callbackbtnSelect = { txt in
                 if txt == "All"{
-                    self.listoppoertunityapi()
+                    if UserData.shared.isskiplogin == true{
+                        self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                    }
+                    else{
+                        self.listoppoertunityapi()
+                    }
+                  
                 }
                 if txt == "Premium"{
-                    self.getallpremiumapi()
+                    if UserData.shared.isskiplogin == true{
+                        self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                    }
+                    else{
+                        self.getallpremiumapi()
+                    }
+                    
                 }
                 if txt == "Featured"{
-                    self.getallFeaturedapi()
+                    if UserData.shared.isskiplogin == true{
+                        self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                    }
+                    else{
+                        self.getallFeaturedapi()
+                    }
+                   
                     
                 }
                 
@@ -259,7 +280,7 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                     
                     if txt == "Dismiss"{
                         self.dismiss(animated: true)
-                        self.listoppoertunityapi()
+//                        self.listoppoertunityapi()
                     }
                     
                     if txt == "Update"{
@@ -461,7 +482,7 @@ extension ProfileVC{
                         
                         print("DataAllPost====-=\(self?.userTimeLine)")
                         
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         self?.tblViewSocialPost.reloadData()
                         CommonUtils.showHudWithNoInteraction(show: false)
                         
@@ -470,7 +491,7 @@ extension ProfileVC{
                     
                     else if  Int.getInt(dictResult["status"]) == 400{
             
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                 default:
@@ -534,14 +555,14 @@ extension ProfileVC{
                         
                         print("DataAllPost====-=\(self?.userTimeLine)")
                         
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         self?.tblViewSocialPost.reloadData()
                         
                     }
                     
                     else if  Int.getInt(dictResult["status"]) == 400{
-                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    
+//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                 default:
@@ -605,14 +626,13 @@ extension ProfileVC{
                         
                         print("DataAllPost====-=\(self?.userTimeLine)")
                         
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         self?.tblViewSocialPost.reloadData()
                         
                     }
                     
                     else if  Int.getInt(dictResult["status"]) == 400{
-                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                 default:
@@ -843,30 +863,30 @@ extension ProfileVC{
                             else if Int.getInt(self?.UserTimeLineOppdetails?.category_id) == 3{
                                 let vc = self?.storyboard?.instantiateViewController(withIdentifier: MiningBusinessVC.getStoryboardID()) as! MiningBusinessVC
                                 self?.navigationController?.pushViewController(vc, animated: true)
-//                                vc.userTimeLineoppdetails = self?.UserTimeLineOppdetails
-//                                vc.isedit = "True"
-//                                vc.imgUrl = self!.imgUrl
-//                                vc.docUrl = self!.docUrl
-//                                vc.oppid = oppr_id
-//                                debugPrint("oppid=-=-=-==-=", vc.oppid)
-//                                vc.imgarray  = self?.UserTimeLineOppdetails?.oppimage ?? []
-//                                vc.docarray = self?.UserTimeLineOppdetails?.oppdocument ?? []
-//                                debugPrint("imgaraay=-=-=-==-=", vc.imgarray)
+                                vc.userTimeLineoppdetails = self?.UserTimeLineOppdetails
+                                vc.isedit = "True"
+                                vc.imgUrl = self!.imgUrl
+                                vc.docUrl = self!.docUrl
+                                vc.oppid = oppr_id
+                                debugPrint("oppid=-=-=-==-=", vc.oppid)
+                                vc.imgarray  = self?.UserTimeLineOppdetails?.oppimage ?? []
+                                vc.docarray = self?.UserTimeLineOppdetails?.oppdocument ?? []
+                                debugPrint("imgaraay=-=-=-==-=", vc.imgarray)
                                 
                                 
                             }
                             else if Int.getInt(self?.UserTimeLineOppdetails?.category_id) == 4{
                                 let vc = self?.storyboard?.instantiateViewController(withIdentifier: MiningServiceVC.getStoryboardID()) as! MiningServiceVC
                                 self?.navigationController?.pushViewController(vc, animated: true)
-//                                vc.userTimeLineoppdetails = self?.UserTimeLineOppdetails
-//                                vc.isedit = "True"
-//                                vc.imgUrl = self!.imgUrl
-//                                vc.docUrl = self!.docUrl
-//                                vc.oppid = oppr_id
-//                                debugPrint("oppid=-=-=-==-=", vc.oppid)
-//                                vc.imgarray  = self?.UserTimeLineOppdetails?.oppimage ?? []
-//                                vc.docarray = self?.UserTimeLineOppdetails?.oppdocument ?? []
-//                                debugPrint("imgaraay=-=-=-==-=", vc.imgarray)
+                                vc.userTimeLineoppdetails = self?.UserTimeLineOppdetails
+                                vc.isedit = "True"
+                                vc.imgUrl = self!.imgUrl
+                                vc.docUrl = self!.docUrl
+                                vc.oppid = oppr_id
+                                debugPrint("oppid=-=-=-==-=", vc.oppid)
+                                vc.imgarray  = self?.UserTimeLineOppdetails?.oppimage ?? []
+                                vc.docarray = self?.UserTimeLineOppdetails?.oppdocument ?? []
+                                debugPrint("imgaraay=-=-=-==-=", vc.imgarray)
                                 
                                 
                             }

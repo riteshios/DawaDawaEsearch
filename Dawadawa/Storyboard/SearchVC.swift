@@ -11,6 +11,7 @@ class SearchVC: UIViewController,UITextFieldDelegate{
     
     @IBOutlet weak var tblViewSearchOpp: UITableView!
     @IBOutlet weak var txtfieldSearch: UITextField!
+    @IBOutlet weak var imgNotfound: UIImageView!
     
     
     var imgUrl = ""
@@ -20,6 +21,7 @@ class SearchVC: UIViewController,UITextFieldDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
        
+        self.imgNotfound.isHidden = true
         self.setup()
     }
     
@@ -69,21 +71,30 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section{
+            
+            
         case 0:
             let cell = self.tblViewSearchOpp.dequeueReusableCell(withIdentifier: "PopularSearchTableViewCell") as! PopularSearchTableViewCell
             cell.SearchCollectionView.tag = indexPath.section
             return cell
             
+            
+            
         case 1:
             let cell = self.tblViewSearchOpp.dequeueReusableCell(withIdentifier: "PremiumOppTableViewCell") as! PremiumOppTableViewCell
             cell.ColllectionViewPremiumOpp.tag = indexPath.section
             cell.callbacknavigation = {
-                let vc = self.storyboard!.instantiateViewController(withIdentifier: PremiumOpportunitiesVC.getStoryboardID()) as! PremiumOpportunitiesVC
-                self.navigationController?.pushViewController(vc, animated: true)
-
-
+                if UserData.shared.isskiplogin == true{
+                    self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                }
+                else{
+                    let vc = self.storyboard!.instantiateViewController(withIdentifier: PremiumOpportunitiesVC.getStoryboardID()) as! PremiumOpportunitiesVC
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
             }
             return cell
+            
+            
             
         case 2:
             let cell = self.tblViewSearchOpp.dequeueReusableCell(withIdentifier: "SocialPostTableViewCell") as! SocialPostTableViewCell
@@ -137,16 +148,22 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         print(#function)
         txtfieldSearch.resignFirstResponder()
-        self.searchopportunityapi()
+        if UserData.shared.isskiplogin == true{
+            self.guestsearchopportunityapi()
+        }
+        else{
+            self.searchopportunityapi()
+        }
+        
         return true
     }
 }
 
 
 extension SearchVC{
+    
     // Search Api
-    
-    
+
     func searchopportunityapi(){
         CommonUtils.showHud(show: true)
         
@@ -194,13 +211,71 @@ extension SearchVC{
                         print("DataallSearchpost=\(self?.userTimeLine)")
                         
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        self?.imgNotfound.isHidden = true
+                        self?.tblViewSearchOpp.reloadData()
+                       
+                        
+                    }
+                    
+                    else if  Int.getInt(dictResult["status"]) == 400{
+                        self?.imgNotfound.isHidden = false
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    }
+                    
+                default:
+                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                }
+            } else if errorType == .noNetwork {
+                CommonUtils.showToastForInternetUnavailable()
+                
+            } else {
+                CommonUtils.showToastForDefaultError()
+            }
+            
+        }
+    }
+    
+//    Guest Search api
+    
+    func guestsearchopportunityapi(){
+        CommonUtils.showHud(show: true)
+        
+        
+        let params:[String : Any] = [
+            "search":String.getString(self.txtfieldSearch.text)
+        ]
+        
+        debugPrint("SearchTextfield=-=-=-=-",String.getString(self.txtfieldSearch.text))
+        TANetworkManager.sharedInstance.requestlangApi(withServiceName:ServiceName.kguestsearchopportunity, requestMethod: .POST,
+                                                               requestParameters:params, withProgressHUD: false)
+        {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
+            
+            CommonUtils.showHudWithNoInteraction(show: false)
+            
+            if errorType == .requestSuccess {
+                
+                let dictResult = kSharedInstance.getDictionary(result)
+                
+                switch Int.getInt(statusCode) {
+                case 200:
+                    
+                    if Int.getInt(dictResult["status"]) == 200{
+                        
+                        
+                        self?.imgUrl = String.getString(dictResult["oprbase_url"])
+                        let Opportunity = kSharedInstance.getArray(withDictionary: dictResult["Opportunity"])
+                        self?.userTimeLine = Opportunity.map{SocialPostData(data: kSharedInstance.getDictionary($0))}
+                        print("DataallSearchpost=\(self?.userTimeLine)")
+                        
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        self?.imgNotfound.isHidden = true
                         self?.tblViewSearchOpp.reloadData()
                         
                         
                     }
                     
                     else if  Int.getInt(dictResult["status"]) == 400{
-                        
+                        self?.imgNotfound.isHidden = false
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     

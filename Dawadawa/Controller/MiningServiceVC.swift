@@ -11,7 +11,7 @@ import Alamofire
 import SwiftyJSON
 
 class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UIDocumentPickerDelegate {
-
+    
     //   MARK: - Properties
     @IBOutlet weak var txtFieldTitle: SKFloatingTextField!
     @IBOutlet weak var txtFieldLocationName: SKFloatingTextField!
@@ -33,8 +33,9 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
     @IBOutlet weak var btnBusinessType: UIButton!
     @IBOutlet weak var lblLookingFor: UILabel!
     @IBOutlet weak var btnLookingFor: UIButton!
+    @IBOutlet weak var btnCreate_UpdateOpp: UIButton!
     
-    @IBOutlet weak var btnSelectDocument: UIButton!
+   
     
     @IBOutlet weak var viewBasic: UIView!
     @IBOutlet weak var lblBasic: UILabel!
@@ -52,7 +53,10 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
     @IBOutlet weak var viewCreateOpportunity: UIView!
     @IBOutlet weak var viewSelectCategoryTop: NSLayoutConstraint!
     @IBOutlet weak var btnSelectImage: UIButton!
-   
+    @IBOutlet weak var btnMoreImage: UIButton!
+    @IBOutlet weak var btnSelectDocument: UIButton!
+    @IBOutlet weak var btnMoreDocument: UIButton!
+    
     @IBOutlet weak var UploadimageCollectionView: UICollectionView!
     @IBOutlet weak var UploaddocumentCollectionView: UICollectionView!
     
@@ -71,19 +75,28 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
     var isSelectDocument = false
     var isSelectSubcategory = false
     var isBusinessMiningType = false
-   
+    
     var isSelectState = false
     var isSelectLocality = false
     var isSelectLookingFor = false
     var isSelectopp_planBasic = false
     var isSelectopp_planPremium = false
     var isSelectopp_planFeatured = false
-   
+    
     var getSubCategorylist = [getSubCartegoryModel]()
     var getstatelist       = [getStateModel]()
     var getlocalitylist    = [getLocalityModel]()
     var getlookingForList  = [getLookingForModel]()
     var getbusinesstypelist = [getbusinessminingTypeModel]()
+    
+    //    update
+    var userTimeLineoppdetails:SocialPostData?
+    var imgarray = [oppr_image]()
+    var docarray = [oppr_document]()
+    var isedit = ""
+    var imgUrl = ""
+    var docUrl = ""
+    var oppid:Int?
     
     // MARK: - Life Cycle
     
@@ -93,8 +106,15 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
         self.getstateapi()
         self.getbusinessminingtypeapi()
         self.getlookingforapi(id: self.lookingforid ?? 0)
-
+        
         self.setup()
+        
+        if isedit == "True"{
+            self.viewSelectCategoryTop.constant = 420
+            self.fetdata()
+        }
+        
+        self.UploadimageCollectionView.reloadData()
         
     }
     
@@ -113,6 +133,43 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
         
     }
     
+    
+    func fetdata(){
+        
+        self.UploadimageCollectionView.reloadData()
+        self.UploaddocumentCollectionView.reloadData()
+        self.btnCreate_UpdateOpp.setTitle("Update opportunity", for: .normal)
+        self.lblSubCategory.text = self.userTimeLineoppdetails?.subcategory_name
+        self.txtFieldTitle.text = self.userTimeLineoppdetails?.title
+        self.txtFieldBusinessName.text = self.userTimeLineoppdetails?.business_name
+        self.lblBusinesstype.text = self.userTimeLineoppdetails?.business_mining_type
+        self.txtFieldBusinessMiningBlock.text = self.userTimeLineoppdetails?.business_mining_block
+        self.lblState.text = self.userTimeLineoppdetails?.opp_state
+        self.lblLocality.text = self.userTimeLineoppdetails?.opp_locality
+        self.txtFieldLocationName.text = self.userTimeLineoppdetails?.location_name
+        self.txtFieldLocationOnMap.text = self.userTimeLineoppdetails?.location_map
+        self.TextViewDescription.text = self.userTimeLineoppdetails?.description
+        self.txtFieldMobileNumber.text = self.userTimeLineoppdetails?.mobile_num
+        self.txtFieldWhatsappNumber.text = self.userTimeLineoppdetails?.whatsaap_num
+        self.txtFieldPricing.text = self.userTimeLineoppdetails?.pricing
+        self.lblLookingFor.text = self.userTimeLineoppdetails?.looking_for
+        
+        if String.getString(self.userTimeLineoppdetails?.opp_plan) == "Basic"{
+            self.viewBasic.backgroundColor = UIColor(red: 21, green: 114, blue: 161)
+            self.lblBasic.textColor = .white
+            
+        }
+        else if String.getString(self.userTimeLineoppdetails?.opp_plan) == "Featured"{
+            self.viewFeature.backgroundColor = UIColor(red: 21, green: 114, blue: 161)
+            self.lblFeature.textColor = .white
+        }
+        else if String.getString(self.userTimeLineoppdetails?.opp_plan) == "Premium"{
+            self.viewPremium.backgroundColor = UIColor(red: 21, green: 114, blue: 161)
+            self.lblPremium.textColor = .white
+        }
+        
+    }
+    
     // MARK: - @IBActions
     
     @IBAction func btnBackTapped(_ sender: UIButton) {
@@ -124,13 +181,13 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
         vc.modalTransitionStyle = .crossDissolve
         vc.modalPresentationStyle = .overCurrentContext
         vc.callbackquit =  { txt in
-//            if txt == "Cancel"{
-//                vc.dismiss(animated: false){
-//                    let vc = self.storyboard?.instantiateViewController(withIdentifier: MiningServiceVC.getStoryboardID()) as! MiningServiceVC
-//                    self.navigationController?.pushViewController(vc, animated: false)
-//                }
-//
-//            }
+            //            if txt == "Cancel"{
+            //                vc.dismiss(animated: false){
+            //                    let vc = self.storyboard?.instantiateViewController(withIdentifier: MiningServiceVC.getStoryboardID()) as! MiningServiceVC
+            //                    self.navigationController?.pushViewController(vc, animated: false)
+            //                }
+            //
+            //            }
             if txt == "Quit"{
                 vc.dismiss(animated: false){
                     kSharedAppDelegate?.makeRootViewController()
@@ -162,15 +219,33 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
     }
     
     @IBAction func btnAddmoreImageTapped(_ sender: UIButton) {
-        if self.btnSelectDocument.isSelected == true{
-            if imagearr.count != 0{
+        sender.isSelected = !sender.isSelected
+        if self.btnMoreImage.isSelected == true{
+            if self.isedit == "True"{
                 ImagePickerHelper.shared.showPickerController {
                     image, url in
                     self.imagearr.append(image ?? UIImage())
+                    debugPrint("imagearraycount..........",self.imagearr.count)
+                    
+                    let obj = oppr_image(data: [:])
+                    obj.imageurl = ""
+                    obj.img = image
+                    self.imgarray.append(obj)
+                    debugPrint("imgarra=-=-=",self.imgarray.count)
+                    
                     self.UploadimageCollectionView.reloadData()
+                }
+            }
+            else{
+                if imagearr.count != 0{
+                    ImagePickerHelper.shared.showPickerController {
+                        image, url in
+                        self.imagearr.append(image ?? UIImage())
+                        self.UploadimageCollectionView.reloadData()
+                    }
+                }
             }
         }
-    }
     }
     
     @IBAction func btnSelectDocumentTapped(_ sender: UIButton) {
@@ -185,16 +260,22 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
                 btnSelectDocument.isEnabled = false
             }
         }
-         self.isSelectDocument = true
+        self.isSelectDocument = true
     }
     
     @IBAction func btnAddMoreDocumentTapped(_ sender: UIButton) {
-        if self.btnSelectDocument.isSelected == true{
-        if documentarr.count != 0{
-            self.openFileBrowser()
+        sender.isSelected = !sender.isSelected
+        if self.btnMoreDocument.isSelected == true{
+            if self.isedit == "True"{
+                self.openFileBrowser()
+            }
+            else{
+                if documentarr.count != 0{
+                    self.openFileBrowser()
+                }
+            }
         }
     }
-}
     
     
     @IBAction func btnSelectSubCategoryTapped(_ sender: UIButton) {
@@ -213,7 +294,7 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
             debugPrint("State idddd.....btnnnnt",  self.stateid = id)
             self.getlocalityapi(id: self.stateid ?? 0 )
             self.isSelectState = true
-           
+            
         }
         
     }
@@ -224,7 +305,7 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
             self.stateid = id
             self.lblLocality.text = item
             self.isSelectLocality = true
-           
+            
         }
     }
     
@@ -259,8 +340,8 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
             self.viewPremium.backgroundColor = .white
             self.lblPremium.textColor =  UIColor(red: 21, green: 114, blue: 161)
             self.isSelectopp_planBasic = true
-
-           
+            
+            
         }
     }
     
@@ -275,7 +356,7 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
             self.viewPremium.backgroundColor = .white
             self.lblPremium.textColor =  UIColor(red: 21, green: 114, blue: 161)
             self.isSelectopp_planFeatured = true
-           
+            
         }
     }
     
@@ -290,116 +371,133 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
             self.viewFeature.backgroundColor = .white
             self.lblFeature.textColor =  UIColor(red: 21, green: 114, blue: 161)
             self.isSelectopp_planPremium = true
-           
+            
         }
     }
     
     @IBAction func btnCreateOppTapped(_ sender: UIButton) {
-        self.Validation()
-//        self.createopportunityapi(image: self.imagearr, doc: self.documentarr)
-    }
-   
-    //    MARK: - Validation
-        
-        func Validation(){
-            if self.isSelectimage == false && self.imagearr.count == 0{
-                self.showSimpleAlert(message: "Please Select the image")
-                return
-            }
-            else if self.isSelectDocument == false && self.documentarr.count == 0 {
-                self.showSimpleAlert(message: "Please Select the Document")
-                return
-            }
-//            else if self.isSelectSubcategory == false{
-//                self.showSimpleAlert(message: "Please Select the Subcategory")
-//                return
-//            }
-          else if String.getString(self.txtFieldTitle.text).isEmpty
-            {
-                self.showSimpleAlert(message: Notifications.ktitle)
-                return
-            }
-            else if !String.getString(self.txtFieldTitle.text).isValidUserName()
-            {
-                self.showSimpleAlert(message: Notifications.KValidtitle)
-                return
-            }
-            else if String.getString(self.txtFieldBusinessName.text).isEmpty
-              {
-                  self.showSimpleAlert(message: Notifications.kbusinessname)
-                  return
-              }
-            else if self.isBusinessMiningType == false{
-                self.showSimpleAlert(message: "Please Select the Business Mining Type")
-                return
-            }
-            else if String.getString(self.txtFieldBusinessMiningBlock.text).isEmpty
-              {
-                  self.showSimpleAlert(message: Notifications.kbusinessBlock)
-                  return
-              }
-           
-            else if self.isSelectState == false{
-                self.showSimpleAlert(message: "Please Select the State")
-                return
-            }
-            else if self.isSelectLocality == false{
-                self.showSimpleAlert(message: "Please Select the Locality")
-                return
-            }
-            
-            else if String.getString(self.txtFieldLocationName.text).isEmpty
-            {
-                showSimpleAlert(message: Notifications.kLocationName)
-                return
-            }
-            else if String.getString(self.TextViewDescription.text).isEmpty{
-                showSimpleAlert(message: Notifications.kDescription)
-                return
-            }
-            else if String.getString(self.txtFieldMobileNumber.text).isEmpty
-            {
-                showSimpleAlert(message: Notifications.kEnterMobileNumber)
-                return
-            }
-            else if !String.getString(self.txtFieldMobileNumber.text).isPhoneNumber()
-            {
-                self.showSimpleAlert(message: Notifications.kEnterValidMobileNumber)
-                return
-            }
-            
-            else if String.getString(self.txtFieldWhatsappNumber.text).isEmpty
-            {
-                showSimpleAlert(message: Notifications.kwhatsappnumber)
-                return
-            }
-            else if !String.getString(self.txtFieldWhatsappNumber.text).isPhoneNumber()
-            {
-                self.showSimpleAlert(message: Notifications.kvalidwhatsappnumber)
-                return
-            }
-            else if self.isSelectLookingFor == false{
-                self.showSimpleAlert(message: "Please Select looking For")
-                return
-            }
-            else if self.isSelectopp_planBasic == false && self.isSelectopp_planPremium == false && self.isSelectopp_planFeatured == false{
-                self.showSimpleAlert(message: "Please Select Opportunity Plan")
-                return
-            }
-          
-            self.view.endEditing(true)
-            self.createopportunityapi()
+        if self.isedit == "True"{
+            self.updateopportunityapi()
         }
+        else{
+        self.Validation()
+        }
+        
+    }
+    
+    //    MARK: - Validation
+    
+    func Validation(){
+        if self.isSelectimage == false && self.imagearr.count == 0{
+            self.showSimpleAlert(message: "Please Select the image")
+            return
+        }
+        else if self.isSelectDocument == false && self.documentarr.count == 0 {
+            self.showSimpleAlert(message: "Please Select the Document")
+            return
+        }
+        //            else if self.isSelectSubcategory == false{
+        //                self.showSimpleAlert(message: "Please Select the Subcategory")
+        //                return
+        //            }
+        else if String.getString(self.txtFieldTitle.text).isEmpty
+        {
+            self.showSimpleAlert(message: Notifications.ktitle)
+            return
+        }
+        else if !String.getString(self.txtFieldTitle.text).isValidUserName()
+        {
+            self.showSimpleAlert(message: Notifications.KValidtitle)
+            return
+        }
+        else if String.getString(self.txtFieldBusinessName.text).isEmpty
+        {
+            self.showSimpleAlert(message: Notifications.kbusinessname)
+            return
+        }
+        else if self.isBusinessMiningType == false{
+            self.showSimpleAlert(message: "Please Select the Business Mining Type")
+            return
+        }
+        else if String.getString(self.txtFieldBusinessMiningBlock.text).isEmpty
+        {
+            self.showSimpleAlert(message: Notifications.kbusinessBlock)
+            return
+        }
+        
+        else if self.isSelectState == false{
+            self.showSimpleAlert(message: "Please Select the State")
+            return
+        }
+        else if self.isSelectLocality == false{
+            self.showSimpleAlert(message: "Please Select the Locality")
+            return
+        }
+        
+        else if String.getString(self.txtFieldLocationName.text).isEmpty
+        {
+            showSimpleAlert(message: Notifications.kLocationName)
+            return
+        }
+        else if String.getString(self.TextViewDescription.text).isEmpty{
+            showSimpleAlert(message: Notifications.kDescription)
+            return
+        }
+        else if String.getString(self.txtFieldMobileNumber.text).isEmpty
+        {
+            showSimpleAlert(message: Notifications.kEnterMobileNumber)
+            return
+        }
+        else if !String.getString(self.txtFieldMobileNumber.text).isPhoneNumber()
+        {
+            self.showSimpleAlert(message: Notifications.kEnterValidMobileNumber)
+            return
+        }
+        
+        else if String.getString(self.txtFieldWhatsappNumber.text).isEmpty
+        {
+            showSimpleAlert(message: Notifications.kwhatsappnumber)
+            return
+        }
+        else if !String.getString(self.txtFieldWhatsappNumber.text).isPhoneNumber()
+        {
+            self.showSimpleAlert(message: Notifications.kvalidwhatsappnumber)
+            return
+        }
+        else if self.isSelectLookingFor == false{
+            self.showSimpleAlert(message: "Please Select looking For")
+            return
+        }
+        else if self.isSelectopp_planBasic == false && self.isSelectopp_planPremium == false && self.isSelectopp_planFeatured == false{
+            self.showSimpleAlert(message: "Please Select Opportunity Plan")
+            return
+        }
+        
+        self.view.endEditing(true)
+        self.createopportunityapi()
+    }
     
     // MARK: - Collection view
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch collectionView{
+            
         case self.UploadimageCollectionView:
-            return self.imagearr.count
+            if self.isedit == "True"{
+                return self.imgarray.count
+            }
+            else{
+                return self.imagearr.count
+            }
+           
             
         case self.UploaddocumentCollectionView:
-            return self.docummentarray.count
+            if self.isedit == "True"{
+                return self.docarray.count
+            }
+            else {
+              return self.docummentarray.count
+            }
             
         default: return 5
         }
@@ -409,21 +507,70 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
         switch collectionView{
         case self.UploadimageCollectionView:
             let cell = UploadimageCollectionView.dequeueReusableCell(withReuseIdentifier: "UploadImageCollectionViewCell", for: indexPath) as! UploadImageCollectionViewCell
-            cell.image.image = imagearr[indexPath.row]
-            cell.callback = {
-                self.imagearr.remove(at: indexPath.row)
-                self.UploadimageCollectionView.reloadData()
+            
+            
+            if self.isedit == "True"{
+                let imgurl = self.imgarray[indexPath.item].imageurl
+                print("-=-imgurl-=-\(imgurl)")
+                
+                if imgurl == ""
+                {
+                    cell.image.image = self.imgarray[indexPath.item].img
+                }
+                else{
+                let imageurl = "\(self.imgUrl)/\(String.getString(imgurl))"
+                print("-=imageurl=-=-\(imageurl)")
+                cell.image.downlodeImage(serviceurl: imageurl, placeHolder: UIImage(named: "baba"))
+                }
+                
+                
+                cell.callback = {
+                    self.imgarray.remove(at: indexPath.row)
+                    self.UploadimageCollectionView.reloadData()
+                    
+                }
+                
             }
+            else{
+                cell.image.image = imagearr[indexPath.row]
+                cell.callback = {
+                    self.imagearr.remove(at: indexPath.row)
+                    self.UploadimageCollectionView.reloadData()
+                    
+                    
+                }
+            }
+            
             return cell
             
         case self.UploaddocumentCollectionView:
             let cell = UploaddocumentCollectionView.dequeueReusableCell(withReuseIdentifier: "UploadDocumentCollectionViewCell", for: indexPath) as! UploadDocumentCollectionViewCell
+            
+            
+            if self.isedit == "True"{
+                let obj = self.docarray[indexPath.item].oppr_document
+                print("documenturl=-=-=-=\(obj)")
+                let documenturl = "\(self.docUrl)/\(String.getString(obj))"
+                print("fulldocumenturl=-=-=-\(documenturl)")
+                
+                cell.lbldocument.text = obj
+                
+                cell.callbackclose = {
+                    self.docarray.remove(at: indexPath.row)
+                    self.UploaddocumentCollectionView.reloadData()
+                    
+                }
+              
+            }
+            
+            else{
             cell.lbldocument.text = docummentarray[indexPath.row]
             cell.callbackclose = {
                 self.docummentarray.remove(at: indexPath.row)
                 self.UploaddocumentCollectionView.reloadData()
                 
             }
+        }
             return cell
             
         default: return UICollectionViewCell()
@@ -517,7 +664,7 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
     }
     
     func updateImageViewWithExtension(_ fileExtention:String) {
-
+        
         
     }
     
@@ -629,7 +776,7 @@ extension MiningServiceVC{
             }
         }
     }
-  
+    
     
     
 }
@@ -823,7 +970,7 @@ extension MiningServiceVC{
                     
                     let parser = getlocalityParser(json: json)
                     completionBlock(parser.status,parser.local,parser.message)
-                
+                    
                 }else{
                     completionBlock(0,nil,response.result.error?.localizedDescription ?? "Some thing went wrong")
                 }
@@ -1127,5 +1274,88 @@ extension MiningServiceVC{
             }
         }
     }
+    // Update Opportunity Api
     
+    func updateopportunityapi(){
+        CommonUtils.showHud(show: true)
+        
+        if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
+            let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+            let septoken = endToken.components(separatedBy: " ")
+            if septoken[0] != "Bearer"{
+                let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
+                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
+            }
+            //            headers["token"] = kSharedUserDefaults.getLoggedInAccessToken()
+        }
+        
+        let oppid = Int(self.oppid ?? 0) // For remove optional
+        debugPrint("checkoppid",oppid)
+        
+        let subcatid = Int(self.subcatid ?? 0)
+        debugPrint("checksubcatid",subcatid)
+        
+        
+        let params:[String : Any] = [
+            "oppr_id":"\(String(describing: oppid))",
+            "category_id":"4",
+            "sub_category":"\(String(describing: subcatid))",
+            "title":String.getString(self.txtFieldTitle.text),
+            "opp_state":String.getString(self.lblState.text),
+            "opp_locality":String.getString(self.lblLocality.text),
+            "location_name":String.getString(self.txtFieldLocationName.text),
+            "location_map":String.getString(self.txtFieldLocationOnMap.text),
+            "description":String.getString(self.TextViewDescription.text),
+            "mobile_num":String.getString(self.txtFieldMobileNumber.text),
+            "whatsaap_num":String.getString(self.txtFieldWhatsappNumber.text),
+            "pricing":String.getString(self.txtFieldPricing.text),
+            "looking_for":String.getString(self.lblLookingFor.text),
+            "plan":String.getString(plan),
+            //            "cat_type_id":"0"
+        ]
+        
+        
+        
+        
+        let uploadimage:[String:Any] = ["filenames[]":self.imagearr]
+        let uploaddocument:[String:Any] = ["opportunity_documents[]":self.documentarr]
+        
+        debugPrint("image[]......",self.imagearr)
+        debugPrint("opportunity_documents[]......",self.documentarr)
+        
+        
+        TANetworkManager.sharedInstance.UpdatetMultiPartwithlanguage(withServiceName:ServiceName.kupdateopportunity , requestMethod: .post, requestImages: [:], requestdoc: [:],requestVideos: [:], requestData:params, req: self.imagearr, req:self.documentarr)
+        { (result:Any?, error:Error?, errortype:ErrorType?, statusCode:Int?) in
+            CommonUtils.showHudWithNoInteraction(show: false)
+            if errortype == .requestSuccess {
+                debugPrint("result=====",result)
+                let dictResult = kSharedInstance.getDictionary(result)
+                debugPrint("dictResult====",dictResult)
+                switch Int.getInt(statusCode) {
+                case 200:
+                    
+                    if Int.getInt(dictResult["status"]) == 200{
+                        let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+                        let septoken = endToken.components(separatedBy: " ")
+                        if septoken[0] == "Bearer"{
+                            kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
+                        }
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        kSharedAppDelegate?.makeRootViewController()
+                        
+                    }
+                    else if  Int.getInt(dictResult["status"]) == 400{
+                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    }
+                    
+                default:
+                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                }
+            } else if errortype == .noNetwork {
+                CommonUtils.showToastForInternetUnavailable()
+            } else {
+                CommonUtils.showToastForDefaultError()
+            }
+        }
+    }
 }

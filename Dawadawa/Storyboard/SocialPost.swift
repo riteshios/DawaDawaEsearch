@@ -30,6 +30,7 @@ class SocialPostData {
     var whatsaap_num:String?
     var pricing:String?
     var looking_for:String?
+    var close_opr:Int?
     var opp_plan:String?
     var flag_user_post:String?
     var is_user_like:String?
@@ -58,6 +59,7 @@ class SocialPostData {
         self.whatsaap_num = String.getString(data["whatsaap_num"])
         self.pricing = String.getString(data["pricing"])
         self.looking_for = String.getString(data["looking_for"])
+        self.close_opr = Int.getInt(data["close_opr"])
         self.opp_plan = String.getString(data["opp_plan"])
         self.is_user_like = String.getString(data["is_user_like"])
         let img = kSharedInstance.getArray(withDictionary: data["oppr_image"])

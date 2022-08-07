@@ -54,6 +54,8 @@
 		0489D1A32892CAB200725664 /* SubCategorylabelTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0489D1A12892CAB100725664 /* SubCategorylabelTableViewCell.xib */; };
 		0490F3DB2876E7E300F8A84A /* UploadImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0490F3DA2876E7E300F8A84A /* UploadImageCollectionViewCell.swift */; };
 		0494642E28646CCA0010076A /* LogOutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0494642D28646CCA0010076A /* LogOutVC.swift */; };
+		049C9950289E8A2C001BD10B /* CommentSectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049C994E289E8A2C001BD10B /* CommentSectionTableViewCell.swift */; };
+		049C9951289E8A2C001BD10B /* CommentSectionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 049C994F289E8A2C001BD10B /* CommentSectionTableViewCell.xib */; };
 		049D339D287570CA004E4519 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 049D339F287570CA004E4519 /* Localizable.strings */; };
 		049D33A2287571FF004E4519 /* LocalizationClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049D33A1287571FF004E4519 /* LocalizationClass.swift */; };
 		049D33A42875B012004E4519 /* CalendarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049D33A32875B012004E4519 /* CalendarVC.swift */; };
@@ -674,6 +676,8 @@
 		0489D1A12892CAB100725664 /* SubCategorylabelTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SubCategorylabelTableViewCell.xib; path = Dawadawa/Storyboard/SubCategorylabelTableViewCell.xib; sourceTree = SOURCE_ROOT; };
 		0490F3DA2876E7E300F8A84A /* UploadImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		0494642D28646CCA0010076A /* LogOutVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LogOutVC.swift; path = Dawadawa/Storyboard/LogOutVC.swift; sourceTree = SOURCE_ROOT; };
+		049C994E289E8A2C001BD10B /* CommentSectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentSectionTableViewCell.swift; sourceTree = "<group>"; };
+		049C994F289E8A2C001BD10B /* CommentSectionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentSectionTableViewCell.xib; sourceTree = "<group>"; };
 		049D338C28756E9A004E4519 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		049D338D28756E9A004E4519 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Main.strings; sourceTree = "<group>"; };
 		049D339E287570CA004E4519 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -1335,6 +1339,8 @@
 			children = (
 				04067753288831290061AE70 /* SocialPostTableViewCell.swift */,
 				04067754288831290061AE70 /* SocialPostTableViewCell.xib */,
+				049C994E289E8A2C001BD10B /* CommentSectionTableViewCell.swift */,
+				049C994F289E8A2C001BD10B /* CommentSectionTableViewCell.xib */,
 				045EE012288912F600E45E79 /* SocialPostCollectionViewCell.swift */,
 				045EE013288912F600E45E79 /* SocialPostCollectionViewCell.xib */,
 				040677492887FFEA0061AE70 /* ViewPostTableViewCell.swift */,
@@ -2837,6 +2843,7 @@
 				447DCE202851CB1300C40DDD /* TM.png in Resources */,
 				447DCCD32851CB1100C40DDD /* Ecuador.png in Resources */,
 				447DCD752851CB1200C40DDD /* AS.png in Resources */,
+				049C9951289E8A2C001BD10B /* CommentSectionTableViewCell.xib in Resources */,
 				447DCD3F2851CB1200C40DDD /* Saint-Vincent-and-the-Grenadines.png in Resources */,
 				447DCE0F2851CB1300C40DDD /* TN.png in Resources */,
 				447DCD3E2851CB1200C40DDD /* Egypt.png in Resources */,
@@ -3083,6 +3090,7 @@
 				3D0B08522854B8F700590891 /* LoginVC.swift in Sources */,
 				447DCC782851CB1100C40DDD /* OtpModel.swift in Sources */,
 				045C4E822889819900E831AA /* PremiumTableViewCell.swift in Sources */,
+				049C9950289E8A2C001BD10B /* CommentSectionTableViewCell.swift in Sources */,
 				447DCE602851CB1300C40DDD /* AlertView.swift in Sources */,
 				447DCC892851CB1100C40DDD /* UIApplication.swift in Sources */,
 				0489D1A22892CAB200725664 /* SubCategorylabelTableViewCell.swift in Sources */,

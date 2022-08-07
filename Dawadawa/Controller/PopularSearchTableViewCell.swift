@@ -13,14 +13,10 @@ class PopularSearchTableViewCell: UITableViewCell {
     @IBOutlet weak var lblPopularSearch: UILabel!
     
    var titles = [
-        "Search #01",
-        "Search #02",
-        "Search #03",
-        "Search #04",
-        "Popular Search #08",
-        "Minimng",
-        "Search #099",
-        "Other"]
+        "Mining Services",
+        "Extraction Services",
+        "Tailing",
+        "Premium Opportunities"]
     
 
     override func awakeFromNib() {

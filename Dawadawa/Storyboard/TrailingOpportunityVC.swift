@@ -166,7 +166,6 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
             self.lblPremium.textColor = .white
         }
         
-        
     }
     
     // MARK: - @IBActions
@@ -461,11 +460,24 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
     // MARK: - Collection view
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch collectionView{
+            
+            
         case self.UploadimageCollectionView:
-            return self.imagearr.count
+            if self.isedit == "True"{
+                return self.imgarray.count
+            }
+            else{
+                return self.imagearr.count
+            }
+           
             
         case self.UploaddocumentCollectionView:
-            return self.documentarr.count
+            if self.isedit == "True"{
+                return self.docarray.count
+            }
+            else {
+              return self.docummentarray.count
+            }
             
         default: return 5
         }
@@ -1172,7 +1184,7 @@ extension TrailingOpportunityVC{
         
         let params:[String : Any] = [
             "oppr_id":"\(String(describing: oppid))",
-            "category_id":"1",
+            "category_id":"2",
             "sub_category":"\(String(describing: subcatid))",
             "title":String.getString(self.txtFieldTitle.text),
             "opp_state":String.getString(self.lblState.text),

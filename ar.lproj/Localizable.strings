@@ -75,7 +75,7 @@
 
 // MARK: - MoreVC
 
-"Setting" = "ضبط";
+"Settings" = "ضبط";
 "Edit Profile" = "تعديل الملف الشخصي";
 "Change password" = "غير كلمة السر";
 "Saved Opportunities" = "الفرص المحفوظة";
