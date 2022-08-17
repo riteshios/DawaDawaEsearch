@@ -106,7 +106,7 @@ struct ServiceName {
     static let kcloseopportunity        =        "api/close-opportunities"
     static let kgetallopportunity       =        "api/all-opportunity/\(UserData.shared.id)"
     static let kflagpost                =        "api/flag-opportunity"
-    static let kgetpremium              =        "api/opportunity-premium"
+    static let kgetpremium              =        "api/opportunity-premium/\(UserData.shared.id)"
     static let kgetFeatured             =        "api/featured-opportunity"
     static let klikeopportunity         =        "api/like_opportunity"
     static let ksearchopportunity       =        "api/search-opportunity"
@@ -126,6 +126,11 @@ struct ServiceName {
     static let kguestfilter            =          "api/guest-opr-filter"
     static let kguestgetallopportunity  =         "api/guest-all-opportunity"
     static let kguestsearchopportunity  =         "api/guest-search-opportunity"
+    
+//   Save OPP
+    static let ksaveOpp                 =         "api/saveOpr"
+    static let kgetsaveOppList          =         "api/savedOprList/\(UserData.shared.id)"
+    static let kunsavedopp              =         "api/unsaveOpr"
 }
 
 struct Notifications {

@@ -1232,6 +1232,7 @@ extension FilterVC{
         
         
         let params:[String : Any] = [
+            "user_id":Int.getInt(UserData.shared.id),
             "most_like":String.getString(like),
             "rating":String.getString(rating),
             "opp_status":Int.getInt(oppstatus),

@@ -16,6 +16,9 @@
 		0406DB7E287D3DF700B57A0B /* TrailingOpportunityVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0406DB7D287D3DF700B57A0B /* TrailingOpportunityVC.swift */; };
 		0406DB83287D55DF00B57A0B /* MiningBusinessVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0406DB82287D55DF00B57A0B /* MiningBusinessVC.swift */; };
 		0406DB86287D5CEB00B57A0B /* MiningServiceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0406DB85287D5CEB00B57A0B /* MiningServiceVC.swift */; };
+		0411742A28A2697200846FF3 /* SavedOpportunitiesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0411742928A2697200846FF3 /* SavedOpportunitiesVC.swift */; };
+		0411742C28A279B300846FF3 /* SaveOpportunityCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0411742B28A279B300846FF3 /* SaveOpportunityCollectionViewCell.swift */; };
+		0411742E28A2861E00846FF3 /* ViewAllSavedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0411742D28A2861E00846FF3 /* ViewAllSavedVC.swift */; };
 		042293BE2869B1BC000503B7 /* ChangeNumberVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042293BD2869B1BC000503B7 /* ChangeNumberVC.swift */; };
 		042293C02869B1E2000503B7 /* VerifyNewNumberOTPVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042293BF2869B1E2000503B7 /* VerifyNewNumberOTPVC.swift */; };
 		042293C22869B203000503B7 /* NumberChangedSuccessfulPopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042293C12869B203000503B7 /* NumberChangedSuccessfulPopUpVC.swift */; };
@@ -61,6 +64,7 @@
 		049D33A42875B012004E4519 /* CalendarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049D33A32875B012004E4519 /* CalendarVC.swift */; };
 		04A73F3E2876B64E00A46E12 /* SelectCategoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A73F3D2876B64E00A46E12 /* SelectCategoryVC.swift */; };
 		04A73F402876E05C00A46E12 /* RockPitOpportunityVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A73F3F2876E05C00A46E12 /* RockPitOpportunityVC.swift */; };
+		04A9958C28A370FD00FC75C9 /* SaveOpportunityMoreVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A9958B28A370FD00FC75C9 /* SaveOpportunityMoreVC.swift */; };
 		04AEBC122872195C00063E51 /* GoogleService-Info-2.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04AEBC112872195C00063E51 /* GoogleService-Info-2.plist */; };
 		04B2653A2872C84000B2DF7C /* ContactUsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B265392872C83F00B2DF7C /* ContactUsVC.swift */; };
 		04B2653C28731CAE00B2DF7C /* WebViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B2653B28731CAD00B2DF7C /* WebViewVC.swift */; };
@@ -638,6 +642,9 @@
 		0406DB7D287D3DF700B57A0B /* TrailingOpportunityVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TrailingOpportunityVC.swift; path = Dawadawa/Storyboard/TrailingOpportunityVC.swift; sourceTree = SOURCE_ROOT; };
 		0406DB82287D55DF00B57A0B /* MiningBusinessVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiningBusinessVC.swift; sourceTree = "<group>"; };
 		0406DB85287D5CEB00B57A0B /* MiningServiceVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiningServiceVC.swift; sourceTree = "<group>"; };
+		0411742928A2697200846FF3 /* SavedOpportunitiesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedOpportunitiesVC.swift; sourceTree = "<group>"; };
+		0411742B28A279B300846FF3 /* SaveOpportunityCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveOpportunityCollectionViewCell.swift; sourceTree = "<group>"; };
+		0411742D28A2861E00846FF3 /* ViewAllSavedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewAllSavedVC.swift; path = Dawadawa/Storyboard/ViewAllSavedVC.swift; sourceTree = SOURCE_ROOT; };
 		042293BD2869B1BC000503B7 /* ChangeNumberVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeNumberVC.swift; sourceTree = "<group>"; };
 		042293BF2869B1E2000503B7 /* VerifyNewNumberOTPVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyNewNumberOTPVC.swift; sourceTree = "<group>"; };
 		042293C12869B203000503B7 /* NumberChangedSuccessfulPopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberChangedSuccessfulPopUpVC.swift; sourceTree = "<group>"; };
@@ -686,6 +693,7 @@
 		049D33A32875B012004E4519 /* CalendarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CalendarVC.swift; path = Dawadawa/Storyboard/CalendarVC.swift; sourceTree = SOURCE_ROOT; };
 		04A73F3D2876B64E00A46E12 /* SelectCategoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SelectCategoryVC.swift; path = Dawadawa/Storyboard/SelectCategoryVC.swift; sourceTree = SOURCE_ROOT; };
 		04A73F3F2876E05C00A46E12 /* RockPitOpportunityVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RockPitOpportunityVC.swift; path = Dawadawa/Storyboard/RockPitOpportunityVC.swift; sourceTree = SOURCE_ROOT; };
+		04A9958B28A370FD00FC75C9 /* SaveOpportunityMoreVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SaveOpportunityMoreVC.swift; path = Dawadawa/Storyboard/SaveOpportunityMoreVC.swift; sourceTree = SOURCE_ROOT; };
 		04AEBC112872195C00063E51 /* GoogleService-Info-2.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-2.plist"; sourceTree = "<group>"; };
 		04B265392872C83F00B2DF7C /* ContactUsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ContactUsVC.swift; path = Dawadawa/Storyboard/ContactUsVC.swift; sourceTree = SOURCE_ROOT; };
 		04B2653B28731CAD00B2DF7C /* WebViewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewVC.swift; sourceTree = SOURCE_ROOT; };
@@ -1318,6 +1326,16 @@
 			name = "Mining Service";
 			sourceTree = "<group>";
 		};
+		0411742828A2688200846FF3 /* Saved Opportunity */ = {
+			isa = PBXGroup;
+			children = (
+				04A9958B28A370FD00FC75C9 /* SaveOpportunityMoreVC.swift */,
+				0411742D28A2861E00846FF3 /* ViewAllSavedVC.swift */,
+				0411742928A2697200846FF3 /* SavedOpportunitiesVC.swift */,
+			);
+			name = "Saved Opportunity";
+			sourceTree = "<group>";
+		};
 		044D7174286198600054DAA5 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
@@ -1399,6 +1417,7 @@
 		0490F3D92876E7BF00F8A84A /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				0411742B28A279B300846FF3 /* SaveOpportunityCollectionViewCell.swift */,
 				0489D19E2892BAAA00725664 /* ServiceTypeTableViewCell.swift */,
 				04D0AB34287ED8B400DB0F23 /* UploadDocumentCollectionViewCell.swift */,
 				04647ECB287814CB0006B8D2 /* SelectCategoryTableViewCell.swift */,
@@ -1504,7 +1523,6 @@
 			isa = PBXGroup;
 			children = (
 				0494642D28646CCA0010076A /* LogOutVC.swift */,
-				044D7174286198600054DAA5 /* Setting */,
 			);
 			name = LogOut;
 			sourceTree = "<group>";
@@ -1522,9 +1540,11 @@
 		04FD1D35286077A900BE414A /* More */ = {
 			isa = PBXGroup;
 			children = (
-				04F8452D286AC4930081120F /* ChangePassword */,
-				04F8452C286AC4730081120F /* LogOut */,
+				044D7174286198600054DAA5 /* Setting */,
 				04F1AD9828697AE9002CC167 /* EditProfile */,
+				04F8452D286AC4930081120F /* ChangePassword */,
+				0411742828A2688200846FF3 /* Saved Opportunity */,
+				04F8452C286AC4730081120F /* LogOut */,
 				04FD1D36286077E800BE414A /* MoreVC.swift */,
 				04B265392872C83F00B2DF7C /* ContactUsVC.swift */,
 			);
@@ -2373,10 +2393,10 @@
 		44D7F8EF28536826001554C9 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				04B599312899088E008366DC /* Subscription */,
 				04BFFB67289250BA0086DCC1 /* FilterVC.swift */,
 				0461E31A288AA29800B7F0E7 /* HomeSocialMoreVC.swift */,
 				045C4E7D28897ACB00E831AA /* PremiumOpportunitiesVC.swift */,
+				04B599312899088E008366DC /* Subscription */,
 				0461E315288A778400B7F0E7 /* Profile */,
 				0406DB7F287D3E1100B57A0B /* TabBar */,
 				04A73F352876B25800A46E12 /* Add */,
@@ -3059,6 +3079,7 @@
 				447DCE5D2851CB1300C40DDD /* ImagePickerHelper.swift in Sources */,
 				0461E31B288AA29800B7F0E7 /* HomeSocialMoreVC.swift in Sources */,
 				447DCC902851CB1100C40DDD /* AppsCountryPicker.swift in Sources */,
+				04A9958C28A370FD00FC75C9 /* SaveOpportunityMoreVC.swift in Sources */,
 				0406774B2887FFEA0061AE70 /* ViewPostTableViewCell.swift in Sources */,
 				447DCC5C2851CB1100C40DDD /* UPCarouselFlowLayout.swift in Sources */,
 				447DCC862851CB1100C40DDD /* DoubleExtended.swift in Sources */,
@@ -3101,7 +3122,9 @@
 				447DCC802851CB1100C40DDD /* viewshadow.swift in Sources */,
 				04F1AD9A28697B0D002CC167 /* EditProfileVC.swift in Sources */,
 				447DCC702851CB1100C40DDD /* UITextField+Extensions.swift in Sources */,
+				0411742E28A2861E00846FF3 /* ViewAllSavedVC.swift in Sources */,
 				045C4E772889659700E831AA /* PopularSearchesCollectionViewCell.swift in Sources */,
+				0411742C28A279B300846FF3 /* SaveOpportunityCollectionViewCell.swift in Sources */,
 				04B5994528993700008366DC /* PlanCollectionViewCell.swift in Sources */,
 				042293C22869B203000503B7 /* NumberChangedSuccessfulPopUpVC.swift in Sources */,
 				04B59941289930B4008366DC /* PlanListTableViewCell.swift in Sources */,
@@ -3137,6 +3160,7 @@
 				047374B328816FFC0033B84B /* LocalizationSystem.swift in Sources */,
 				447DCC732851CB1100C40DDD /* LocaleInfo.swift in Sources */,
 				04BFFB68289250BA0086DCC1 /* FilterVC.swift in Sources */,
+				0411742A28A2697200846FF3 /* SavedOpportunitiesVC.swift in Sources */,
 				447DCC7A2851CB1100C40DDD /* UIButtonCornerRadius.swift in Sources */,
 				447DCC612851CB1100C40DDD /* UISegmentedControl+Extensions.swift in Sources */,
 				3D0C9648285581F6000384BD /* ResetPasswordVC.swift in Sources */,

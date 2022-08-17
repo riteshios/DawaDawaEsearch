@@ -26,9 +26,15 @@ class SocialPostTableViewCell: UITableViewCell {
     @IBOutlet weak var btnlike: UIButton!
     @IBOutlet weak var lbllike: UILabel!
     
+    @IBOutlet weak var imgsave: UIImageView!
+    @IBOutlet weak var btnSave: UIButton!
+    @IBOutlet weak var lblSave: UILabel!
+    
+    
    
     var imgUrl = ""
     var userTimeLine = [SocialPostData]()
+    var liked = 0
     var img = [oppr_image](){
         didSet{
             pageControl.isHidden = true
@@ -68,6 +74,11 @@ class SocialPostTableViewCell: UITableViewCell {
     @IBAction func btnLikeTapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         self.callback?("Like")
+    }
+    
+    @IBAction func btnSavedTapped(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        self.callback?("Save")
     }
     
 }

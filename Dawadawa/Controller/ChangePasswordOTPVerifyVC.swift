@@ -65,6 +65,7 @@ class ChangePasswordOTPVerifyVC: UIViewController {
         self.viewOtp6.borderColor = UIColor(hexString: "#FF4C4D")
     }
 // MARK: - @IBAction
+    
     @IBAction func btnVerifyOtpTaooed(_ sender: UIButton) {
         self.otp = String.getString(self.txtfieldOtp1.text) + String.getString(self.txtfieldOtp2.text) + String.getString(self.txtfieldOtp3.text) + String.getString(self.txtfieldOtp4.text) +
         String.getString(self.txtfieldOtp5.text) +
@@ -165,6 +166,8 @@ extension ChangePasswordOTPVerifyVC: UITextFieldDelegate{
 
 // MARK: - API Call
 extension ChangePasswordOTPVerifyVC{
+    
+    
     func verifyotpapi(){
         
         CommonUtils.showHud(show: true)

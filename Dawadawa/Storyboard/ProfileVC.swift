@@ -13,6 +13,7 @@ class ProfileVC: UIViewController {
     @IBOutlet weak var lblFullName: UILabel!
     @IBOutlet weak var lblMobileNumber: UILabel!
     @IBOutlet weak var lblEmail: UILabel!
+    @IBOutlet weak var imgNoOpp: UIImageView!
     
     var oppid:Int?
     var imgUrl = ""
@@ -28,18 +29,20 @@ class ProfileVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.imgNoOpp.isHidden = true
+        
         self.listoppoertunityapi()
         tblViewSocialPost.register(UINib(nibName: "OpportunitypostedTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "OpportunitypostedTableViewCell")
         tblViewSocialPost.register(UINib(nibName: "SocialPostTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "SocialPostTableViewCell")
         
-        
-        
+  
         
         
         if UserData.shared.isskiplogin == true{
             print("Guest User")
             self.lblMobileNumber.isHidden = true
             self.lblEmail.isHidden = true
+            self.imgNoOpp.isHidden = false
         }
         else{
             self.fetchdata()
@@ -140,6 +143,15 @@ class ProfileVC: UIViewController {
                     self.present(vc, animated: false)
                 }
             }
+            
+            if txt == "SaveOpportunity"{
+                vc.dismiss(animated: false){
+                    let vc = self.storyboard?.instantiateViewController(identifier: SavedOpportunitiesVC.getStoryboardID()) as! SavedOpportunitiesVC
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
+            }
+                
+                
             if txt == "ContactUs"{
                 vc.dismiss(animated: false){
                     let vc = self.storyboard?.instantiateViewController(identifier: ContactUsVC.getStoryboardID()) as! ContactUsVC
@@ -208,6 +220,7 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                 if txt == "All"{
                     if UserData.shared.isskiplogin == true{
                         self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                        self.imgNoOpp.isHidden = false
                     }
                     else{
                         self.listoppoertunityapi()
@@ -217,6 +230,7 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                 if txt == "Premium"{
                     if UserData.shared.isskiplogin == true{
                         self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                        self.imgNoOpp.isHidden = false
                     }
                     else{
                         self.getallpremiumapi()
@@ -226,6 +240,7 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                 if txt == "Featured"{
                     if UserData.shared.isskiplogin == true{
                         self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                        self.imgNoOpp.isHidden = false
                     }
                     else{
                         self.getallFeaturedapi()
@@ -485,7 +500,7 @@ extension ProfileVC{
 //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         self?.tblViewSocialPost.reloadData()
                         CommonUtils.showHudWithNoInteraction(show: false)
-                        
+                        self?.imgNoOpp.isHidden = true
                         
                     }
                     
@@ -557,6 +572,7 @@ extension ProfileVC{
                         
 //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         self?.tblViewSocialPost.reloadData()
+                        self?.imgNoOpp.isHidden = true
                         
                     }
                     
@@ -628,6 +644,7 @@ extension ProfileVC{
                         
 //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         self?.tblViewSocialPost.reloadData()
+                        self?.imgNoOpp.isHidden = true
                         
                     }
                     
@@ -780,7 +797,7 @@ extension ProfileVC{
         }
     }
     
-//    / Opportunity Details Api for Rock&Pit opportunities
+//    Opportunity Details api
         
         func opportunitydetailsapi(oppr_id:Int){
             CommonUtils.showHud(show: true)

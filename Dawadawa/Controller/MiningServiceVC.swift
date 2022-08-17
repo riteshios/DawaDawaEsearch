@@ -62,6 +62,7 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
     
     
     var stateid:Int?
+    var localityid:Int?
     var subcatid:Int?
     var lookingforid:Int?
     var doc = ""
@@ -301,9 +302,10 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
     @IBAction func btnLocalityTapped(_ sender: UIButton) {
         kSharedAppDelegate?.dropDown(dataSource: getlocalitylist.map{String.getString($0.local_name)}, text: btnLocality){
             (index,item) in
-            let id = self.getstatelist[index].id
-            self.stateid = id
             self.lblLocality.text = item
+            let id = self.getlocalitylist[index].id
+            self.localityid = id
+            debugPrint("localityid.....btnnnnt",  self.localityid = id)
             self.isSelectLocality = true
             
         }
@@ -1152,7 +1154,6 @@ extension MiningServiceVC{
         let kbmy = "bmy"
         
         
-        
         var responsecode = 0
         var status = 0
         var message = ""
@@ -1207,6 +1208,12 @@ extension MiningServiceVC{
         let subcatid = Int(self.subcatid ?? 0)
         debugPrint("checksubcatid",subcatid)
         
+        let stateid = Int(self.stateid ?? 0)
+        debugPrint("checkstateid",stateid)
+        
+        let localityid = Int(self.localityid ?? 0)
+        debugPrint("checklocalityid",localityid)
+        
         let lookingforid = Int(self.lookingforid ?? 0)
         debugPrint("checklookingforid",lookingforid)
         
@@ -1218,8 +1225,8 @@ extension MiningServiceVC{
             "business_name":String.getString(self.txtFieldBusinessName.text),
             "business_mining_type":String.getString(self.lblBusinesstype.text),
             "business_mining_block":String.getString(self.txtFieldBusinessMiningBlock.text),
-            "opp_state":String.getString(self.lblState.text),
-            "opp_locality":String.getString(self.lblLocality.text),
+            "opp_state":"\(String(describing: stateid))",
+            "opp_locality":"\(String(describing: localityid))",
             "location_name":String.getString(self.txtFieldLocationName.text),
             "location_map":String.getString(self.txtFieldLocationOnMap.text),
             "description":String.getString(self.TextViewDescription.text),
@@ -1295,21 +1302,30 @@ extension MiningServiceVC{
         let subcatid = Int(self.subcatid ?? 0)
         debugPrint("checksubcatid",subcatid)
         
+        let stateid = Int(self.stateid ?? 0)
+        debugPrint("checkstateid",stateid)
+        
+        let localityid = Int(self.localityid ?? 0)
+        debugPrint("checklocalityid",localityid)
+        
+        let lookingforid = Int(self.lookingforid ?? 0)
+        debugPrint("checklookingforid",lookingforid)
+        
         
         let params:[String : Any] = [
             "oppr_id":"\(String(describing: oppid))",
             "category_id":"4",
             "sub_category":"\(String(describing: subcatid))",
             "title":String.getString(self.txtFieldTitle.text),
-            "opp_state":String.getString(self.lblState.text),
-            "opp_locality":String.getString(self.lblLocality.text),
+            "opp_state":"\(String(describing: stateid))",
+            "opp_locality":"\(String(describing: localityid))",
             "location_name":String.getString(self.txtFieldLocationName.text),
             "location_map":String.getString(self.txtFieldLocationOnMap.text),
             "description":String.getString(self.TextViewDescription.text),
             "mobile_num":String.getString(self.txtFieldMobileNumber.text),
             "whatsaap_num":String.getString(self.txtFieldWhatsappNumber.text),
             "pricing":String.getString(self.txtFieldPricing.text),
-            "looking_for":String.getString(self.lblLookingFor.text),
+            "looking_for":"\(String(describing: lookingforid))",
             "plan":String.getString(plan),
             //            "cat_type_id":"0"
         ]
