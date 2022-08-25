@@ -38,6 +38,8 @@ class SocialPostData {
     var oppimage = [oppr_image]() // Array of dictionary
     var userdetail:user_detail?  // Simple dictionary
     var oppdocument = [oppr_document]()  // Array of dictionary
+    var usercomment = [user_comment]()
+    
     
    
     init(data: [String: Any]) {
@@ -64,11 +66,17 @@ class SocialPostData {
         self.opp_plan = String.getString(data["opp_plan"])
         self.is_user_like = String.getString(data["is_user_like"])
         self.is_saved = String.getString(data["is_saved"])
+        
         let img = kSharedInstance.getArray(withDictionary: data["oppr_image"])
         self.oppimage = img.map{oppr_image(data: kSharedInstance.getDictionary($0))}
+        
         self.userdetail = user_detail(data: kSharedInstance.getDictionary(data["user_detail"]))
+        
         let doc = kSharedInstance.getArray(withDictionary: data["oppr_document"])
         self.oppdocument = doc.map{oppr_document(data: kSharedInstance.getDictionary($0))}
+        
+        let comment = kSharedInstance.getArray(withDictionary: data["user_comment"])
+        self.usercomment = comment.map{user_comment(data: kSharedInstance.getDictionary($0))}
         
     }
     
@@ -108,3 +116,49 @@ class oppr_document{
     }
 }
 
+// Comment
+
+class user_comment{
+    var comments:String?
+    var name:String?
+    var image:String?
+    var subcomment = [sub_Comment]()
+    
+    init(data:[String:Any]){
+        self.comments = String.getString(data["comments"])
+        self.name = String.getString(data["name"])
+        self.image = String.getString(data["image"])
+        
+        let Subcomment = kSharedInstance.getArray(withDictionary: data["subcomment"])
+        self.subcomment = Subcomment.map{sub_Comment(data: kSharedInstance.getDictionary($0))}
+    }
+}
+
+// Sub-Comment
+class sub_Comment{
+    var comments:String?
+    var usersubcommentdetails:subcomment_userdetails?
+    
+    init(data:[String:Any]){
+       
+        self.comments = String.getString(data["comments"])
+        self.usersubcommentdetails = subcomment_userdetails(data: kSharedInstance.getDictionary(data["user"]))
+        
+    }
+    
+}
+
+
+class subcomment_userdetails{
+    var id:Int?
+    var name:String?
+    var last_name:String?
+    var image:String?
+    
+    init(data:[String:Any]){
+        self.id = Int.getInt(data["id"])
+        self.name = String.getString(data["name"])
+        self.last_name = String.getString(data["last_name"])
+        self.image = String.getString(data["image"])
+    }
+}

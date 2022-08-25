@@ -7,6 +7,7 @@
 
 import UIKit
 import STTabbar
+import IQKeyboardManagerSwift
 
 class HomeVC: UIViewController{
         
@@ -20,6 +21,9 @@ class HomeVC: UIViewController{
     var statuslike:Int?
    // var userTimeLine = [SocialPostData]()
     var userdetail = [user_detail]()
+    var comment = [CommentData]()
+    var txtcomment = " "
+   
    
     @IBOutlet weak var lblUserName: UILabel!
     @IBOutlet weak var ImgUser: UIImageView!
@@ -58,7 +62,7 @@ class HomeVC: UIViewController{
     private func setup(){
         tblViewViewPost.register(UINib(nibName: "ViewPostTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "ViewPostTableViewCell")
         tblViewViewPost.register(UINib(nibName: "SocialPostTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "SocialPostTableViewCell")
-        tblViewViewPost.register(UINib(nibName: "CommentSectionTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "CommentSectionTableViewCell")
+        
     }
     
     func fetchdata(){
@@ -144,8 +148,7 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
             return cell
             
         case 1:
-            if indexPath.row % 2 == 0{
-                
+    
                 let cell = self.tblViewViewPost.dequeueReusableCell(withIdentifier: "SocialPostTableViewCell") as! SocialPostTableViewCell
                 let obj = userTimeLine[indexPath.row]
                 
@@ -275,13 +278,115 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                         }
                         self.present(vc, animated: false)
                     }
+                    
+                    
+                    
+//                       COMMENT PART
+                    
+                    if txt == "ClickComment"{
+                        if cell.btnClickComment.isSelected == true{
+                            cell.viewAddComment.isHidden = false
+                            cell.heightViewAddComment.constant = 55
+                        }
+                        else{
+                            cell.viewAddComment.isHidden = true
+                            cell.heightViewAddComment.constant = 0
+//                            cell.bottomlblSubcomment.constant = 0 // 10
+                        }
+
+                    }
+                    
+                    if txt == "AddComment"{
+                        if cell.txtviewComment.text == ""{
+                            self.showSimpleAlert(message: "Please add comment ")
+                        }
+                        else{
+                            let oppid = Int.getInt(userTimeLine[indexPath.row].id)
+                            self.commentoppoertunityapi(oppr_id: oppid ?? 0) { userComment in
+                                cell.txtviewComment.text = ""
+                                cell.viewcomment.isHidden = false
+                                cell.heightViewComment.constant = 70
+                                cell.lblusernameandcomment.text = String.getString(userComment.first?.name) + " " + String.getString(userComment.first?.comments)
+                                debugPrint("lbluserName=-=-=-", cell.lblusernameandcomment.text )
+
+                                let imgcommentuserurl = String.getString(userComment.first?.image)
+                                debugPrint("commentuserprofile......",imgcommentuserurl)
+
+                                cell.imageCommentUser.downlodeImage(serviceurl: imgcommentuserurl , placeHolder: UIImage(named: "Boss"))
+                                
+                                cell.viewcomment.isHidden = false
+                                
+                                cell.imageSubcommentUser.isHidden = true
+                                cell.lblsubUserNameandComment.isHidden = true
+                                cell.verticalSpacingReply.constant = -10
+                                cell.bottomlblSubcomment.constant = 10
+                            }
+                        }
+                            
+                        
+                      
+                    }
+                    
+                    
                 }
-                return cell
+             
+
+            
+                cell.imageUser.downlodeImage(serviceurl: imguserurl , placeHolder: UIImage(named: "Boss"))
+
+            if obj.usercomment.count == 0{
+                cell.viewcomment.isHidden = true
+                cell.heightViewComment.constant  = 0
+                cell.bottomlblSubcomment.constant = -50
+
             }
             else{
-                let cell = self.tblViewViewPost.dequeueReusableCell(withIdentifier: "CommentSectionTableViewCell") as! CommentSectionTableViewCell
-                return cell
+                cell.viewcomment.isHidden = false
+               
             }
+            if obj.usercomment.first?.subcomment.count == 0 {
+                cell.imageSubcommentUser.isHidden = true
+                cell.lblsubUserNameandComment.isHidden = true
+                cell.verticalSpacingReply.constant = -10
+                cell.bottomlblSubcomment.constant = 10
+            }
+            else{
+                cell.imageSubcommentUser.isHidden = false
+                cell.lblsubUserNameandComment.isHidden = false
+                
+//                cell.verticalSpacingReply.constant = 54
+//                cell.bottomlblSubcomment.constant = 60
+            }
+        
+           
+
+//                cell.heightViewComment.constant = obj.usercomment.count == 0 ? 0 : 70
+//                cell.viewcomment.isHidden = obj.usercomment.first?.comments == "" ? true : false
+
+            cell.lblusernameandcomment.text = String.getString(obj.usercomment.first?.name)
+             + " " + String.getString(obj.usercomment.first?.comments)
+
+                let imgcommentuserurl = String.getString(obj.usercomment.first?.image)
+                debugPrint("commentuserprofile......",imgcommentuserurl)
+                cell.imageCommentUser.downlodeImage(serviceurl: imgcommentuserurl , placeHolder: UIImage(named: "Boss"))
+            
+//            Sub comment
+            cell.lblsubUserNameandComment.text = String.getString(obj.usercomment.first?.subcomment.first?.usersubcommentdetails!.name) + " " + String.getString(obj.usercomment.first?.subcomment.first?.comments)
+            let imgcommentSubuser = String.getString(obj.usercomment.first?.subcomment.first?.usersubcommentdetails?.image)
+            cell.imageSubcommentUser.downlodeImage(serviceurl: imgcommentSubuser, placeHolder: UIImage(named: "Boss"))
+
+
+
+                cell.callbacktextviewcomment = {[weak tblViewViewPost] (_) in
+
+                                self.txtcomment = cell.txtviewComment.text
+                                self.tblViewViewPost?.beginUpdates()
+                                self.tblViewViewPost?.endUpdates()
+
+                            }
+//                cell.layoutIfNeeded()
+                return cell
+            
             
         default:
             return UITableViewCell()
@@ -512,6 +617,82 @@ extension HomeVC{
         
     }
     
+//    Api comment opportunity
+    
+    func commentoppoertunityapi(oppr_id:Int,completion: @escaping(_ viewH : [CommentData])->Void){
+        CommonUtils.showHud(show: true)
+        
+        
+        if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
+            let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+            let septoken = endToken.components(separatedBy: " ")
+            if septoken[0] != "Bearer"{
+                let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
+                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
+            }
+        }
+        
+        
+        let params:[String : Any] = [
+            "user_id":Int.getInt(UserData.shared.id),
+            "opr_id":oppr_id,
+            "comment":String.getString(self.txtcomment)
+        ]
+        
+        debugPrint("user_id......",Int.getInt(UserData.shared.id))
+        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kaddcomment, requestMethod: .POST,
+                                                   requestParameters:params, withProgressHUD: false)
+        {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
+            
+            CommonUtils.showHudWithNoInteraction(show: false)
+            
+            if errorType == .requestSuccess {
+                
+                let dictResult = kSharedInstance.getDictionary(result)
+                
+                switch Int.getInt(statusCode) {
+                case 200:
+                    
+                    if Int.getInt(dictResult["status"]) == 200{
+                        
+                        let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+                        let septoken = endToken.components(separatedBy: " ")
+                        if septoken[0] == "Bearer"{
+                            kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
+                        }
+//                        let comment = kSharedInstance.getArray(withDictionary: dictResult["user_comment"])
+//                        self?.comment = comment.map{CommentData(data: kSharedInstance.getDictionary($0))}
+//                        print("Datacomment=\(self?.comment)")
+//                        self?.tblViewViewPost.reloadData()
+//                        self?.getallopportunity()
+                        let comment = kSharedInstance.getArray(withDictionary: dictResult["user_comment"])
+                        debugPrint("Commentdata=-=-=1-=",comment)
+                        self?.comment = comment.map{CommentData(data: kSharedInstance.getDictionary($0))}
+                        debugPrint("Commentdata=-=-=0-=", self?.comment[0].comments)
+                        completion(self!.comment)
+                        debugPrint("CommentData=-=-=0-=",completion(self!.comment))
+                        
+                        CommonUtils.showError(.info, String.getString(dictResult["Opportunity"]))
+                        
+                    }
+                    
+                    else if  Int.getInt(dictResult["responsecode"]) == 400{
+                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    }
+                    
+                default:
+                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                }
+            } else if errorType == .noNetwork {
+                CommonUtils.showToastForInternetUnavailable()
+                
+            } else {
+                CommonUtils.showToastForDefaultError()
+            }
+            
+        }
+    }
 //    Save Opportunity Api
     
     func saveoppoertunityapi(oppr_id:Int){

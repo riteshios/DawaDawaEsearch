@@ -127,10 +127,13 @@ struct ServiceName {
     static let kguestgetallopportunity  =         "api/guest-all-opportunity"
     static let kguestsearchopportunity  =         "api/guest-search-opportunity"
     
-//   Save OPP
+//   Save Opp
     static let ksaveOpp                 =         "api/saveOpr"
     static let kgetsaveOppList          =         "api/savedOprList/\(UserData.shared.id)"
     static let kunsavedopp              =         "api/unsaveOpr"
+    
+// Comment Opp
+    static let kaddcomment              =         "api/comment-opportunity"
 }
 
 struct Notifications {

@@ -6,12 +6,14 @@
 //
 
 import UIKit
+import IQKeyboardManagerSwift
 
-class SocialPostTableViewCell: UITableViewCell {
+class SocialPostTableViewCell: UITableViewCell,UITextViewDelegate {
     
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var SocialPostCollectionView: UICollectionView!
     var callback:((String)->())?
+    var callbacktextviewcomment: ((String) -> Void)?
     
  
     @IBOutlet weak var lblUserName: UILabel!
@@ -31,7 +33,23 @@ class SocialPostTableViewCell: UITableViewCell {
     @IBOutlet weak var lblSave: UILabel!
     
     
-   
+//    Comment Section
+    
+    @IBOutlet weak var btnClickComment: UIButton!
+    @IBOutlet weak var imageUser: UIImageView!
+    @IBOutlet weak var txtviewComment: IQTextView!
+    @IBOutlet weak var imageCommentUser: UIImageView!
+    @IBOutlet weak var lblusernameandcomment: UILabel!
+    @IBOutlet weak var imageSubcommentUser: UIImageView!
+    @IBOutlet weak var lblsubUserNameandComment: UILabel!
+    @IBOutlet weak var viewAddComment: UIView!
+    @IBOutlet weak var viewcomment: UIView!
+    @IBOutlet weak var verticalSpacingReply: NSLayoutConstraint!
+    @IBOutlet weak var bottomlblSubcomment: NSLayoutConstraint!
+    
+    @IBOutlet weak var heightViewAddComment: NSLayoutConstraint!
+    @IBOutlet weak var heightViewComment: NSLayoutConstraint!
+    
     var imgUrl = ""
     var userTimeLine = [SocialPostData]()
     var liked = 0
@@ -52,7 +70,14 @@ class SocialPostTableViewCell: UITableViewCell {
         pageControl.numberOfPages = img.count
         pageControl.currentPage = 0
       
-      
+        
+        self.txtviewComment.delegate = self
+        self.viewAddComment.isHidden = true
+        self.viewcomment.isHidden = true
+        self.heightViewAddComment.constant = 0
+        self.heightViewComment.constant = 0
+        self.imageSubcommentUser.isHidden = true
+        self.lblsubUserNameandComment.isHidden = true
     }
     
     func setup(){
@@ -67,6 +92,17 @@ class SocialPostTableViewCell: UITableViewCell {
 
     }
     
+    func textChanged(action: @escaping (String) -> Void) {
+              self.callbacktextviewcomment = action
+          }
+
+      
+      func textViewDidChange(_ textView: UITextView) {
+          callbacktextviewcomment?(textView.text)
+          }
+    
+//    MARK: - @IBAction
+    
     @IBAction func btnMoreTapped(_ sender: UIButton) {
         self.callback?("More")
     }
@@ -79,6 +115,23 @@ class SocialPostTableViewCell: UITableViewCell {
     @IBAction func btnSavedTapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         self.callback?("Save")
+    }
+    
+    @IBAction func btnClickCommentBox(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        self.callback?("ClickComment")
+    }
+    
+    @IBAction func btnAddComment(_ sender: UIButton) {
+        self.callback?("AddComment")
+    }
+    
+    @IBAction func btnreply(_ sender: UIButton) {
+        self.callback?("reply")
+    }
+    
+    @IBAction func btnSeeMoreComment(_ sender: UIButton) {
+        self.callback?("Seemorecomment")
     }
     
 }
