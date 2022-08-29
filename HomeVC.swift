@@ -44,9 +44,6 @@ class HomeVC: UIViewController{
             self.fetchdata()
         }
         
-        
-        
-        
         self.setup()
         
     }
@@ -151,8 +148,7 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
             
             let cell = self.tblViewViewPost.dequeueReusableCell(withIdentifier: "SocialPostTableViewCell") as! SocialPostTableViewCell
             let obj = userTimeLine[indexPath.row]
-            cell.viewAddComment.isHidden = obj.isComment == true ? false : true
-            cell.heightViewAddComment.constant = obj.isComment == true ? 55 : 0
+           
             cell.SocialPostCollectionView.tag = indexPath.section
             cell.lblUserName.text = String.getString(obj.userdetail?.name)
             debugPrint("username.....", cell.lblUserName.text)
@@ -272,6 +268,9 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                 
                 //                       COMMENT PART
                 
+                cell.viewAddComment.isHidden = obj.isComment == true ? false : true
+                cell.heightViewAddComment.constant = obj.isComment == true ? 55 : 0
+                
                 if txt == "reply"{
                     
                     let oppid = Int.getInt(userTimeLine[indexPath.row].id)
@@ -357,8 +356,9 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                 
             }
             
+            let imgcomment = "\("https://demo4app.com/dawadawa/public/admin_assets/user_profile/" + String.getString(UserData.shared.social_profile))"
             
-            cell.imageUser.downlodeImage(serviceurl: imguserurl , placeHolder: UIImage(named: "Boss")) // commentUserImage
+            cell.imageUser.downlodeImage(serviceurl: imgcomment , placeHolder: UIImage(named: "Boss")) // commentUserImage
             
             if obj.usercomment.count == 0{
                 cell.viewcomment.isHidden = true
@@ -430,7 +430,7 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
             }
             
             
-            //                cell.layoutIfNeeded()
+    //                cell.layoutIfNeeded()
             return cell
             
             

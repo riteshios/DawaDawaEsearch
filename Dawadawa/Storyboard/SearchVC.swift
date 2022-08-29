@@ -208,6 +208,9 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
                 
                 //                       COMMENT PART
                 
+                cell.viewAddComment.isHidden = obj.isComment == true ? false : true
+                cell.heightViewAddComment.constant = obj.isComment == true ? 55 : 0
+                
                 if txt == "reply"{
                     
                     let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
@@ -285,8 +288,9 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
                 
             }
             
+            let imgcomment = "\("https://demo4app.com/dawadawa/public/admin_assets/user_profile/" + String.getString(UserData.shared.social_profile))"
             
-            cell.imageUser.downlodeImage(serviceurl: imgurl , placeHolder: UIImage(named: "Boss")) // commentUserImage
+            cell.imageUser.downlodeImage(serviceurl: imgcomment , placeHolder: UIImage(named: "Boss")) // commentUserImage
             
             if obj.usercomment.count == 0{
                 cell.viewcomment.isHidden = true

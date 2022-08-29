@@ -87,7 +87,7 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
             cell.img = obj.oppimage
             cell.imgUrl = self.imgUrl
             
-            cell.lblLikeCount.text = String.getString(obj.likes) + " " + "likes"
+            cell.lblLikeCount.text = String.getString(obj.likes) + " " + "Likes"
             
             if Int.getInt(obj.close_opr) == 0{
                 cell.lblTitle.text = String.getString(obj.title)
@@ -169,6 +169,9 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
                 
                 //                       COMMENT PART
                 
+                cell.viewAddComment.isHidden = obj.isComment == true ? false : true
+                cell.heightViewAddComment.constant = obj.isComment == true ? 55 : 0
+                
                 if txt == "reply"{
                     
                     let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
@@ -246,8 +249,9 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
                 
             }
             
+            let imgcomment = "\("https://demo4app.com/dawadawa/public/admin_assets/user_profile/" + String.getString(UserData.shared.social_profile))"
             
-            cell.imageUser.downlodeImage(serviceurl: imgurl , placeHolder: UIImage(named: "Boss")) // commentUserImage
+            cell.imageUser.downlodeImage(serviceurl: imgcomment , placeHolder: UIImage(named: "Boss")) // commentUserImage
             
             if obj.usercomment.count == 0{
                 cell.viewcomment.isHidden = true
