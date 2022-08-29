@@ -14,8 +14,9 @@ class PremiumOpportunitiesVC: UIViewController {
     var imgUrl = ""
     var userTimeLine = [SocialPostData]()
     var img = [oppr_image]()
-    
-    
+    var comment = [user_comment]()
+    var txtcomment = " "
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -116,7 +117,7 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
             
             
             
-            cell.callback = { txt in
+            cell.callback = { txt, tapped in
                 
                 if txt == "Like"{
                    
@@ -165,7 +166,160 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
                     }
                     self.present(vc, animated: false)
                 }
+                
+                //                       COMMENT PART
+                
+                if txt == "reply"{
+                    
+                    let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
+                    debugPrint("detailsppid=-=-=",oppid)
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: DetailScreenVC.getStoryboardID()) as! DetailScreenVC
+                    
+                    vc.oppid = oppid
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
+                
+                if txt == "Seemorecomment"{
+                    let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
+                    debugPrint("detailsppid=-=-=",oppid)
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: DetailScreenVC.getStoryboardID()) as! DetailScreenVC
+                   
+                    vc.oppid = oppid
+                    self.navigationController?.pushViewController(vc, animated: true)
+                    
+                }
+                
+                
+                
+                if txt == "ClickComment"{
+                    if tapped.isSelected{
+                        obj.isComment = true
+                        self.tblViewPremiumOpp.reloadData()
+                    }
+                    else{
+                        obj.isComment = false
+                        self.tblViewPremiumOpp.reloadData()
+                    }
+                }
+                
+                if txt == "AddComment"{
+                    if cell.txtviewComment.text == ""{
+                        self.showSimpleAlert(message: "Please add comment ")
+                    }
+                    else{
+                        let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
+                        self.commentoppoertunityapi(oppr_id: oppid ?? 0) { userComment in
+                            cell.txtviewComment.text = ""
+                            cell.viewcomment.isHidden = false
+                            cell.heightViewComment.constant = 70
+                            cell.lblusernameandcomment.text = String.getString(userComment.first?.name) + " " + String.getString(userComment.first?.comments)
+                            debugPrint("lbluserName=-=-=-", cell.lblusernameandcomment.text )
+                            
+                            let imgcommentuserurl = String.getString(userComment.first?.image)
+                            debugPrint("commentuserprofile......",imgcommentuserurl)
+                            
+                            cell.imageCommentUser.downlodeImage(serviceurl: imgcommentuserurl , placeHolder: UIImage(named: "Boss"))
+                            
+                            cell.viewcomment.isHidden = false
+                            
+                            cell.imageSubcommentUser.isHidden = true
+                            cell.lblsubUserNameandComment.isHidden = true
+                            cell.verticalSpacingReply.constant = -10
+                            cell.bottomlblSubcomment.constant = 10
+                            
+                            
+                            let first = String.getString(userComment.first?.name)
+                            let second = String.getString(userComment.first?.comments)
+
+                            let attributedString: NSMutableAttributedString = NSMutableAttributedString(string: "\(first)  \(second)")
+
+                            attributedString.setColorForText(textToFind: first, withColor: UIColor.black)
+                            attributedString.setColorForText(textToFind: second, withColor: UIColor.gray)
+                
+      
+                            cell.lblusernameandcomment.attributedText = attributedString
+//                            self.view.addSubview(cell.lblusernameandcomment) // For Show in controller
+                            
+                        }
+                    }
+                }
+                
             }
+            
+            
+            cell.imageUser.downlodeImage(serviceurl: imgurl , placeHolder: UIImage(named: "Boss")) // commentUserImage
+            
+            if obj.usercomment.count == 0{
+                cell.viewcomment.isHidden = true
+                cell.heightViewComment.constant  = 0
+                cell.bottomlblSubcomment.constant = -50
+                
+            }
+            else{
+                cell.viewcomment.isHidden = false
+                
+            }
+            if obj.usercomment.first?.subcomment.count == 0 {
+                cell.imageSubcommentUser.isHidden = true
+                cell.lblsubUserNameandComment.isHidden = true
+                cell.verticalSpacingReply.constant = -10
+                cell.bottomlblSubcomment.constant = 10
+            }
+            else{
+                cell.imageSubcommentUser.isHidden = false
+                cell.lblsubUserNameandComment.isHidden = false
+                
+                //                cell.verticalSpacingReply.constant = 54
+                //                cell.bottomlblSubcomment.constant = 60
+            }
+            
+        
+            
+            cell.lblusernameandcomment.text = String.getString(obj.usercomment.first?.name)
+            + "  " + String.getString(obj.usercomment.first?.comments)
+            
+            let imgcommentuserurl = String.getString(obj.usercomment.first?.image)
+            debugPrint("commentuserprofile......",imgcommentuserurl)
+            cell.imageCommentUser.downlodeImage(serviceurl: imgcommentuserurl , placeHolder: UIImage(named: "Boss"))
+            
+         
+            cell.lblsubUserNameandComment.text = String.getString(obj.usercomment.first?.subcomment.first?.usersubcommentdetails!.name) + "             " + String.getString(obj.usercomment.first?.subcomment.first?.comments) // Sub-Comment
+            let imgcommentSubuser = String.getString(obj.usercomment.first?.subcomment.first?.usersubcommentdetails?.image)
+            cell.imageSubcommentUser.downlodeImage(serviceurl: imgcommentSubuser, placeHolder: UIImage(named: "Boss"))
+            
+            
+            
+            let first = String.getString(obj.usercomment.first?.name)
+            let second = String.getString(obj.usercomment.first?.comments)
+            
+            let thrid = String.getString(obj.usercomment.first?.subcomment.first?.usersubcommentdetails!.name)
+            let fourth = String.getString(obj.usercomment.first?.subcomment.first?.comments)
+
+            let attributedStringcomment: NSMutableAttributedString = NSMutableAttributedString(string: "\(first)  \(second)")
+            
+            let attributedStringSubcomment: NSMutableAttributedString = NSMutableAttributedString(string: "\(thrid)  \(fourth)")
+
+            attributedStringcomment.setColorForText(textToFind: first, withColor: UIColor.black)
+            attributedStringcomment.setColorForText(textToFind: second, withColor: UIColor.gray)
+            
+            attributedStringSubcomment.setColorForText(textToFind: thrid, withColor: UIColor.black)
+            attributedStringSubcomment.setColorForText(textToFind: fourth, withColor: UIColor.gray)
+
+
+            cell.lblusernameandcomment.attributedText = attributedStringcomment
+            cell.lblsubUserNameandComment.attributedText = attributedStringSubcomment
+            
+            
+            
+            cell.callbacktextviewcomment = {[weak tblViewPremiumOpp] (_) in
+                
+                self.txtcomment = cell.txtviewComment.text
+                self.tblViewPremiumOpp?.beginUpdates()
+                self.tblViewPremiumOpp?.endUpdates()
+            }
+            
+            
+            
             
             return cell
             
@@ -321,6 +475,79 @@ extension PremiumOpportunitiesVC{
             
         }
         
+    }
+    
+    //    Api comment opportunity
+    
+    func commentoppoertunityapi(oppr_id:Int,completion: @escaping(_ viewH : [user_comment])->Void){
+        CommonUtils.showHud(show: true)
+        
+        
+        if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
+            let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+            let septoken = endToken.components(separatedBy: " ")
+            if septoken[0] != "Bearer"{
+                let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
+                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
+            }
+        }
+        
+        
+        let params:[String : Any] = [
+            "user_id":Int.getInt(UserData.shared.id),
+            "opr_id":oppr_id,
+            "comment":String.getString(self.txtcomment)
+        ]
+        
+        debugPrint("user_id......",Int.getInt(UserData.shared.id))
+        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kaddcomment, requestMethod: .POST,
+                                                               requestParameters:params, withProgressHUD: false)
+        {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
+            
+            CommonUtils.showHudWithNoInteraction(show: false)
+            
+            if errorType == .requestSuccess {
+                
+                let dictResult = kSharedInstance.getDictionary(result)
+                
+                switch Int.getInt(statusCode) {
+                case 200:
+                    
+                    if Int.getInt(dictResult["status"]) == 200{
+                        
+                        let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+                        let septoken = endToken.components(separatedBy: " ")
+                        if septoken[0] == "Bearer"{
+                            kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
+                        }
+                        
+                        let comment = kSharedInstance.getArray(withDictionary: dictResult["user_comment"])
+                        debugPrint("Commentdata=-=-=1-=",comment)
+                        self?.comment = comment.map{user_comment(data: kSharedInstance.getDictionary($0))}
+                        debugPrint("Commentdata=-=-=0-=", self?.comment[0].comments)
+                        completion(self!.comment)
+                        debugPrint("CommentData=-=-=0-=",completion(self!.comment))
+                        
+                        CommonUtils.showError(.info, String.getString(dictResult["Opportunity"]))
+                        
+                    }
+                    
+                    else if  Int.getInt(dictResult["responsecode"]) == 400{
+                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    }
+                    
+                default:
+                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                }
+            } else if errorType == .noNetwork {
+                CommonUtils.showToastForInternetUnavailable()
+                
+            } else {
+                CommonUtils.showToastForDefaultError()
+            }
+            
+        }
     }
     
     //    Save Opportunity Api

@@ -9,10 +9,10 @@ import UIKit
 import STTabbar
 
 class TabBarVC: UITabBarController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         
         if let myTabbar = tabBar as? STTabbar {
             myTabbar.centerButtonActionHandler = {
@@ -22,16 +22,16 @@ class TabBarVC: UITabBarController {
                     self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
                 }
                 else{
-                let vc = self.storyboard!.instantiateViewController(withIdentifier: SelectCategoryVC.getStoryboardID()) as! SelectCategoryVC
-                self.navigationController?.pushViewController(vc, animated: true)
-                
+                    let vc = self.storyboard!.instantiateViewController(withIdentifier: SelectCategoryVC.getStoryboardID()) as! SelectCategoryVC
+                    self.navigationController?.pushViewController(vc, animated: true)
+                    
                 }
             }
         }
     }
     
-
     
     
-
+    
+    
 }

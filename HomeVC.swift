@@ -3,14 +3,14 @@
 //  Dawadawa
 //
 //  Created by Alekh on 20/07/22.
-//
+
 
 import UIKit
 import STTabbar
 import IQKeyboardManagerSwift
 
 class HomeVC: UIViewController{
-        
+    
     
     
     
@@ -19,12 +19,12 @@ class HomeVC: UIViewController{
     var imgUrl = ""
     var count = ""
     var statuslike:Int?
-   // var userTimeLine = [SocialPostData]()
+    // var userTimeLine = [SocialPostData]()
     var userdetail = [user_detail]()
-    var comment = [CommentData]()
+    var comment = [user_comment]()
     var txtcomment = " "
-   
-   
+    
+    
     @IBOutlet weak var lblUserName: UILabel!
     @IBOutlet weak var ImgUser: UIImageView!
     
@@ -33,20 +33,20 @@ class HomeVC: UIViewController{
         super.viewDidLoad()
         
         if UserData.shared.isskiplogin == true{
-                    print("Guest User")
+            print("Guest User")
             if cameFrom != "FilterData"{
                 self.guestgetallopportunity()
                 self.lblUserName.text = "Guest User"
             }
-                   
-                }
-                else{
-                    self.fetchdata()
-                }
+            
+        }
+        else{
+            self.fetchdata()
+        }
         
-               
-     
-    
+        
+        
+        
         self.setup()
         
     }
@@ -56,7 +56,7 @@ class HomeVC: UIViewController{
             self.getallopportunity()
         }
     }
-
+    
     
     
     private func setup(){
@@ -82,13 +82,13 @@ class HomeVC: UIViewController{
         }
         
     }
-
-//
-//    override func viewDidAppear(_ animated: Bool) {
-//        super.viewDidAppear(animated)
-//        self.tabBarController?.tabBar.isHidden = false
-//        self.tabBarController?.tabBar.layer.zPosition = 0
-//    }
+    
+    //
+    //    override func viewDidAppear(_ animated: Bool) {
+    //        super.viewDidAppear(animated)
+    //        self.tabBarController?.tabBar.isHidden = false
+    //        self.tabBarController?.tabBar.layer.zPosition = 0
+    //    }
     
     @IBAction func btnSearchTapped(_ sender: UIButton) {
         
@@ -116,7 +116,7 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
         case 1:
             return userTimeLine.count
             
-       
+            
         default:
             return 0
         }
@@ -148,201 +148,227 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
             return cell
             
         case 1:
-    
-                let cell = self.tblViewViewPost.dequeueReusableCell(withIdentifier: "SocialPostTableViewCell") as! SocialPostTableViewCell
-                let obj = userTimeLine[indexPath.row]
+            
+            let cell = self.tblViewViewPost.dequeueReusableCell(withIdentifier: "SocialPostTableViewCell") as! SocialPostTableViewCell
+            let obj = userTimeLine[indexPath.row]
+            cell.viewAddComment.isHidden = obj.isComment == true ? false : true
+            cell.heightViewAddComment.constant = obj.isComment == true ? 55 : 0
+            cell.SocialPostCollectionView.tag = indexPath.section
+            cell.lblUserName.text = String.getString(obj.userdetail?.name)
+            debugPrint("username.....", cell.lblUserName.text)
+            cell.lblDescribtion.text = String.getString(obj.description)
+            cell.img = obj.oppimage
+            cell.imgUrl = self.imgUrl
+            
+            let imguserurl = String.getString(obj.userdetail?.social_profile)
+            debugPrint("socialprofile......",imguserurl)
+            
+            cell.Imageuser.downlodeImage(serviceurl: imguserurl , placeHolder: UIImage(named: "Boss"))
+            
+            cell.lblLikeCount.text = String.getString(obj.likes) + " " + "Likes"
+            
+            cell.imgOpp_plan.image = obj.opp_plan == "Featured" ? UIImage(named: "Star Filled") : obj.opp_plan == "Premium" ? UIImage(named: "Crown") : UIImage(named: "")
+            
+            
+            if Int.getInt(obj.close_opr) == 0{
+                cell.lblTitle.text = String.getString(obj.title)
+                cell.lblTitle.textColor = .black
+            }
+            else{
+                cell.lblTitle.text = "This Opprortunity has been Closed"
+                cell.lblTitle.textColor = .red
+            }
+            
+            
+            if String.getString(obj.is_user_like) == "1"{
+                cell.imglike.image = UIImage(named: "dil")
+                cell.lbllike.text = "Liked"
                 
-                cell.SocialPostCollectionView.tag = indexPath.section
-                cell.lblUserName.text = String.getString(obj.userdetail?.name)
-                debugPrint("username.....", cell.lblUserName.text)
-                cell.lblDescribtion.text = String.getString(obj.description)
-                cell.img = obj.oppimage
-                cell.imgUrl = self.imgUrl
+            }
+            else{
+                cell.imglike.image = UIImage(named: "unlike")
+                cell.lbllike.text = "Like"
+            }
+            
+            if String.getString(obj.is_saved) == "1"{
+                cell.imgsave.image = UIImage(named: "saveopr")
+                cell.lblSave.text = "Saved"
+            }
+            else{
+                cell.imgsave.image = UIImage(named: "save-3")
+                cell.lblSave.text = "Save"
+            }
+            
+            
+            
+            
+            cell.callback = { txt, sender in
                 
-                let imguserurl = String.getString(obj.userdetail?.social_profile)
-                debugPrint("socialprofile......",imguserurl)
-                
-                cell.Imageuser.downlodeImage(serviceurl: imguserurl , placeHolder: UIImage(named: "Boss"))
-                
-                cell.lblLikeCount.text = String.getString(obj.likes) + " " + "likes"
-                
-                cell.imgOpp_plan.image = obj.opp_plan == "Featured" ? UIImage(named: "Star Filled") : obj.opp_plan == "Premium" ? UIImage(named: "Crown") : UIImage(named: "")
-                
-                
-                if Int.getInt(obj.close_opr) == 0{
-                    cell.lblTitle.text = String.getString(obj.title)
-                    cell.lblTitle.textColor = .black
+                if txt == "Like"{
+                    if cell.btnlike.isSelected == true{
+                        if UserData.shared.isskiplogin == true{
+                            self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                        }
+                        else{
+                            let oppid = userTimeLine[indexPath.row].id
+                            debugPrint("oppid--=-=-=-",oppid)
+                            //                            self.likeOpportunityapi(oppr_id: oppid ?? 0)
+                            self.likeOpportunityapi(oppr_id: oppid ?? 0) { countLike in
+                                obj.likes = Int.getInt(countLike)
+                                cell.lblLikeCount.text = String.getString(obj.likes) + " " + "Likes"
+                            }
+                            cell.imglike.image = UIImage(named: "dil")
+                            cell.lbllike.text = "Liked"
+                            
+                            debugPrint("count=-==0-",self.count)
+                            
+                            
+                        }
+                    }
                 }
-                else{
-                    cell.lblTitle.text = "This Opprortunity has been Closed"
-                    cell.lblTitle.textColor = .red
-                }
                 
-                
-                if String.getString(obj.is_user_like) == "1"{
-                    cell.imglike.image = UIImage(named: "dil")
-                    cell.lbllike.text = "Liked"
-                  
-                }
-                else{
-                    cell.imglike.image = UIImage(named: "unlike")
-                    cell.lbllike.text = "Like"
-                }
-                
-                if String.getString(obj.is_saved) == "1"{
+                if txt == "Save"{
+                    let oppid = Int.getInt(userTimeLine[indexPath.row].id)
+                    debugPrint("saveoppid=-=-=",oppid)
+                    self.saveoppoertunityapi(oppr_id: oppid)
                     cell.imgsave.image = UIImage(named: "saveopr")
                     cell.lblSave.text = "Saved"
                 }
-                else{
-                    cell.imgsave.image = UIImage(named: "save-3")
-                    cell.lblSave.text = "Save"
-                }
-                    
-                    
-                    
-                    
-                cell.callback = { txt in
-                    
-                    if txt == "Like"{
-                        if cell.btnlike.isSelected == true{
+                
+                
+                
+                
+                if txt == "More" {
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: HomeSocialMoreVC.getStoryboardID()) as! HomeSocialMoreVC
+                    vc.modalTransitionStyle = .crossDissolve
+                    vc.modalPresentationStyle = .overCurrentContext
+                    vc.callback = { txt in
+                        
+                        if txt == "Flag"{
                             if UserData.shared.isskiplogin == true{
                                 self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
                             }
                             else{
-                                let oppid = userTimeLine[indexPath.row].id
-                                debugPrint("oppid--=-=-=-",oppid)
-    //                            self.likeOpportunityapi(oppr_id: oppid ?? 0)
-                                self.likeOpportunityapi(oppr_id: oppid ?? 0) { countLike in
-                                    obj.likes = Int.getInt(countLike)
-                                    cell.lblLikeCount.text = String.getString(obj.likes) + " " + "likes"
-                                }
-                                cell.imglike.image = UIImage(named: "dil")
-                                cell.lbllike.text = "Liked"
-                                
-                                debugPrint("count=-==0-",self.count)
-    //                         obj.likes! += 1
-    //                            let statuslikes = Int(self.statuslike ?? 0) // For remove optional
-    //                            debugPrint("statuslikes=-==-",statuslikes)
-    //                            if statuslikes == 200{
-    //                                cell.lblLikeCount.text = String.getString(obj.likes) + " " + "likes"
-                                    
-
-    //                            }
-                                
-
+                                let oppid = Int.getInt(userTimeLine[indexPath.row].id)
+                                self.flagopportunityapi(oppr_id: oppid)
                             }
                         }
-                    }
-                    
-                    if txt == "Save"{
-                        let oppid = Int.getInt(userTimeLine[indexPath.row].id)
-                        debugPrint("saveoppid=-=-=",oppid)
-                        self.saveoppoertunityapi(oppr_id: oppid)
-                        cell.imgsave.image = UIImage(named: "saveopr")
-                        cell.lblSave.text = "Saved"
-                    }
-                    
-                    
-                    
-                    
-                    if txt == "More" {
-                        let vc = self.storyboard?.instantiateViewController(withIdentifier: HomeSocialMoreVC.getStoryboardID()) as! HomeSocialMoreVC
-                        vc.modalTransitionStyle = .crossDissolve
-                        vc.modalPresentationStyle = .overCurrentContext
-                        vc.callback = { txt in
-                            //                    if txt == "Dismiss"{
-                            //                        vc.dismiss(animated: false){
-                            //                            self.dismiss(animated: true, completion: nil)
-                            //                        }
-                            //                    }
-                            if txt == "Flag"{
-                                if UserData.shared.isskiplogin == true{
-                                    self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
-                                }
-                                else{
-                                    let oppid = Int.getInt(userTimeLine[indexPath.row].id)
-                                    self.flagopportunityapi(oppr_id: oppid)
-                                }
-                            }
-                            
-                            if txt == "Report"{
-                                if UserData.shared.isskiplogin == true{
-                                    self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
-                                }
-                                else{
-                                    kSharedAppDelegate?.makeRootViewController()
-                                }
-                                
-                            }
-                            
-                        }
-                        self.present(vc, animated: false)
-                    }
-                    
-                    
-                    
-//                       COMMENT PART
-                    
-                    if txt == "ClickComment"{
-                        if cell.btnClickComment.isSelected == true{
-                            cell.viewAddComment.isHidden = false
-                            cell.heightViewAddComment.constant = 55
-                        }
-                        else{
-                            cell.viewAddComment.isHidden = true
-                            cell.heightViewAddComment.constant = 0
-//                            cell.bottomlblSubcomment.constant = 0 // 10
-                        }
-
-                    }
-                    
-                    if txt == "AddComment"{
-                        if cell.txtviewComment.text == ""{
-                            self.showSimpleAlert(message: "Please add comment ")
-                        }
-                        else{
-                            let oppid = Int.getInt(userTimeLine[indexPath.row].id)
-                            self.commentoppoertunityapi(oppr_id: oppid ?? 0) { userComment in
-                                cell.txtviewComment.text = ""
-                                cell.viewcomment.isHidden = false
-                                cell.heightViewComment.constant = 70
-                                cell.lblusernameandcomment.text = String.getString(userComment.first?.name) + " " + String.getString(userComment.first?.comments)
-                                debugPrint("lbluserName=-=-=-", cell.lblusernameandcomment.text )
-
-                                let imgcommentuserurl = String.getString(userComment.first?.image)
-                                debugPrint("commentuserprofile......",imgcommentuserurl)
-
-                                cell.imageCommentUser.downlodeImage(serviceurl: imgcommentuserurl , placeHolder: UIImage(named: "Boss"))
-                                
-                                cell.viewcomment.isHidden = false
-                                
-                                cell.imageSubcommentUser.isHidden = true
-                                cell.lblsubUserNameandComment.isHidden = true
-                                cell.verticalSpacingReply.constant = -10
-                                cell.bottomlblSubcomment.constant = 10
-                            }
-                        }
-                            
                         
-                      
+                        if txt == "Report"{
+                            if UserData.shared.isskiplogin == true{
+                                self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                            }
+                            else{
+                                kSharedAppDelegate?.makeRootViewController()
+                            }
+                            
+                        }
+                        
                     }
+                    self.present(vc, animated: false)
+                }
+                
+                
+                
+                //                       COMMENT PART
+                
+                if txt == "reply"{
                     
+                    let oppid = Int.getInt(userTimeLine[indexPath.row].id)
+                    debugPrint("detailsppid=-=-=",oppid)
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: DetailScreenVC.getStoryboardID()) as! DetailScreenVC
+                    
+                    vc.oppid = oppid
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
+                
+                if txt == "Seemorecomment"{
+                    let oppid = Int.getInt(userTimeLine[indexPath.row].id)
+                    debugPrint("detailsppid=-=-=",oppid)
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: DetailScreenVC.getStoryboardID()) as! DetailScreenVC
+                   
+                    vc.oppid = oppid
+                    self.navigationController?.pushViewController(vc, animated: true)
                     
                 }
-             
+                
+                
+                
+                if txt == "ClickComment"{
+                    if sender.isSelected{
+                        obj.isComment = true
+                        self.tblViewViewPost.reloadData()
+                    }
+                    else{
+                        obj.isComment = false
+                        self.tblViewViewPost.reloadData()
+                    }
+//                    if obj.isComment == false{
+//                        obj.isComment = true
+//
+//                    }else{
+//                        obj.isComment = false
+//
+//                    }
+//                    self.tblViewViewPost.reloadData()
+                }
+                
+                if txt == "AddComment"{
+                    if cell.txtviewComment.text == ""{
+                        self.showSimpleAlert(message: "Please add comment ")
+                    }
+                    else{
+                        let oppid = Int.getInt(userTimeLine[indexPath.row].id)
+                        self.commentoppoertunityapi(oppr_id: oppid ?? 0) { userComment in
+                            cell.txtviewComment.text = ""
+                            cell.viewcomment.isHidden = false
+                            cell.heightViewComment.constant = 70
+                            cell.lblusernameandcomment.text = String.getString(userComment.first?.name) + " " + String.getString(userComment.first?.comments)
+                            debugPrint("lbluserName=-=-=-", cell.lblusernameandcomment.text )
+                            
+                            let imgcommentuserurl = String.getString(userComment.first?.image)
+                            debugPrint("commentuserprofile......",imgcommentuserurl)
+                            
+                            cell.imageCommentUser.downlodeImage(serviceurl: imgcommentuserurl , placeHolder: UIImage(named: "Boss"))
+                            
+                            cell.viewcomment.isHidden = false
+                            
+                            cell.imageSubcommentUser.isHidden = true
+                            cell.lblsubUserNameandComment.isHidden = true
+                            cell.verticalSpacingReply.constant = -10
+                            cell.bottomlblSubcomment.constant = 10
+                            
+                            
+                            let first = String.getString(userComment.first?.name)
+                            let second = String.getString(userComment.first?.comments)
 
+                            let attributedString: NSMutableAttributedString = NSMutableAttributedString(string: "\(first)  \(second)")
+
+                            attributedString.setColorForText(textToFind: first, withColor: UIColor.black)
+                            attributedString.setColorForText(textToFind: second, withColor: UIColor.gray)
+                
+      
+                            cell.lblusernameandcomment.attributedText = attributedString
+//                            self.view.addSubview(cell.lblusernameandcomment) // For Show in controller
+                            
+                        }
+                    }
+                }
+                
+            }
             
-                cell.imageUser.downlodeImage(serviceurl: imguserurl , placeHolder: UIImage(named: "Boss"))
-
+            
+            cell.imageUser.downlodeImage(serviceurl: imguserurl , placeHolder: UIImage(named: "Boss")) // commentUserImage
+            
             if obj.usercomment.count == 0{
                 cell.viewcomment.isHidden = true
                 cell.heightViewComment.constant  = 0
                 cell.bottomlblSubcomment.constant = -50
-
+                
             }
             else{
                 cell.viewcomment.isHidden = false
-               
+                
             }
             if obj.usercomment.first?.subcomment.count == 0 {
                 cell.imageSubcommentUser.isHidden = true
@@ -354,38 +380,58 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                 cell.imageSubcommentUser.isHidden = false
                 cell.lblsubUserNameandComment.isHidden = false
                 
-//                cell.verticalSpacingReply.constant = 54
-//                cell.bottomlblSubcomment.constant = 60
+                //                cell.verticalSpacingReply.constant = 54
+                //                cell.bottomlblSubcomment.constant = 60
             }
-        
-           
-
-//                cell.heightViewComment.constant = obj.usercomment.count == 0 ? 0 : 70
-//                cell.viewcomment.isHidden = obj.usercomment.first?.comments == "" ? true : false
-
-            cell.lblusernameandcomment.text = String.getString(obj.usercomment.first?.name)
-             + " " + String.getString(obj.usercomment.first?.comments)
-
-                let imgcommentuserurl = String.getString(obj.usercomment.first?.image)
-                debugPrint("commentuserprofile......",imgcommentuserurl)
-                cell.imageCommentUser.downlodeImage(serviceurl: imgcommentuserurl , placeHolder: UIImage(named: "Boss"))
             
-//            Sub comment
-            cell.lblsubUserNameandComment.text = String.getString(obj.usercomment.first?.subcomment.first?.usersubcommentdetails!.name) + " " + String.getString(obj.usercomment.first?.subcomment.first?.comments)
+        
+            
+            cell.lblusernameandcomment.text = String.getString(obj.usercomment.first?.name)
+            + "  " + String.getString(obj.usercomment.first?.comments)
+            
+            let imgcommentuserurl = String.getString(obj.usercomment.first?.image)
+            debugPrint("commentuserprofile......",imgcommentuserurl)
+            cell.imageCommentUser.downlodeImage(serviceurl: imgcommentuserurl , placeHolder: UIImage(named: "Boss"))
+            
+         
+            cell.lblsubUserNameandComment.text = String.getString(obj.usercomment.first?.subcomment.first?.usersubcommentdetails!.name) + "             " + String.getString(obj.usercomment.first?.subcomment.first?.comments) // Sub-Comment
             let imgcommentSubuser = String.getString(obj.usercomment.first?.subcomment.first?.usersubcommentdetails?.image)
             cell.imageSubcommentUser.downlodeImage(serviceurl: imgcommentSubuser, placeHolder: UIImage(named: "Boss"))
+            
+            
+            
+            let first = String.getString(obj.usercomment.first?.name)
+            let second = String.getString(obj.usercomment.first?.comments)
+            
+            let thrid = String.getString(obj.usercomment.first?.subcomment.first?.usersubcommentdetails!.name)
+            let fourth = String.getString(obj.usercomment.first?.subcomment.first?.comments)
+
+            let attributedStringcomment: NSMutableAttributedString = NSMutableAttributedString(string: "\(first)  \(second)")
+            
+            let attributedStringSubcomment: NSMutableAttributedString = NSMutableAttributedString(string: "\(thrid)  \(fourth)")
+
+            attributedStringcomment.setColorForText(textToFind: first, withColor: UIColor.black)
+            attributedStringcomment.setColorForText(textToFind: second, withColor: UIColor.gray)
+            
+            attributedStringSubcomment.setColorForText(textToFind: thrid, withColor: UIColor.black)
+            attributedStringSubcomment.setColorForText(textToFind: fourth, withColor: UIColor.gray)
 
 
-
-                cell.callbacktextviewcomment = {[weak tblViewViewPost] (_) in
-
-                                self.txtcomment = cell.txtviewComment.text
-                                self.tblViewViewPost?.beginUpdates()
-                                self.tblViewViewPost?.endUpdates()
-
-                            }
-//                cell.layoutIfNeeded()
-                return cell
+            cell.lblusernameandcomment.attributedText = attributedStringcomment
+            cell.lblsubUserNameandComment.attributedText = attributedStringSubcomment
+            
+            
+            
+            cell.callbacktextviewcomment = {[weak tblViewViewPost] (_) in
+                
+                self.txtcomment = cell.txtviewComment.text
+                self.tblViewViewPost?.beginUpdates()
+                self.tblViewViewPost?.endUpdates()
+            }
+            
+            
+            //                cell.layoutIfNeeded()
+            return cell
             
             
         default:
@@ -403,7 +449,7 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
             else{
                 return 370
             }
-           
+            
         case 1:
             return UITableView.automaticDimension
             
@@ -453,12 +499,12 @@ extension HomeVC{
                         userTimeLine = Opportunity.map{SocialPostData(data: kSharedInstance.getDictionary($0))}
                         print("Dataallpost=\(userTimeLine)")
                         
-//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         self.tblViewViewPost.reloadData()
                         
                     }
                     else if  Int.getInt(dictResult["status"]) == 400{
-//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                     
@@ -579,7 +625,7 @@ extension HomeVC{
                 
                 switch Int.getInt(statusCode) {
                 case 200:
-//                    self?.statuslike = Int.getInt(dictResult["status"])
+                    //                    self?.statuslike = Int.getInt(dictResult["status"])
                     if Int.getInt(dictResult["status"]) == 200{
                         
                         
@@ -589,10 +635,10 @@ extension HomeVC{
                             kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
                         }
                         
-//                        self?.count = String.getString(dictResult["count"])
+                        //                        self?.count = String.getString(dictResult["count"])
                         debugPrint("likecount=-=-=-=",self?.count)
                         completion(String.getString(dictResult["count"]))
-                       
+                        
                         
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         
@@ -617,9 +663,9 @@ extension HomeVC{
         
     }
     
-//    Api comment opportunity
+    //    Api comment opportunity
     
-    func commentoppoertunityapi(oppr_id:Int,completion: @escaping(_ viewH : [CommentData])->Void){
+    func commentoppoertunityapi(oppr_id:Int,completion: @escaping(_ viewH : [user_comment])->Void){
         CommonUtils.showHud(show: true)
         
         
@@ -641,7 +687,7 @@ extension HomeVC{
         
         debugPrint("user_id......",Int.getInt(UserData.shared.id))
         TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kaddcomment, requestMethod: .POST,
-                                                   requestParameters:params, withProgressHUD: false)
+                                                               requestParameters:params, withProgressHUD: false)
         {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
             
             CommonUtils.showHudWithNoInteraction(show: false)
@@ -660,14 +706,10 @@ extension HomeVC{
                         if septoken[0] == "Bearer"{
                             kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
                         }
-//                        let comment = kSharedInstance.getArray(withDictionary: dictResult["user_comment"])
-//                        self?.comment = comment.map{CommentData(data: kSharedInstance.getDictionary($0))}
-//                        print("Datacomment=\(self?.comment)")
-//                        self?.tblViewViewPost.reloadData()
-//                        self?.getallopportunity()
+                        
                         let comment = kSharedInstance.getArray(withDictionary: dictResult["user_comment"])
                         debugPrint("Commentdata=-=-=1-=",comment)
-                        self?.comment = comment.map{CommentData(data: kSharedInstance.getDictionary($0))}
+                        self?.comment = comment.map{user_comment(data: kSharedInstance.getDictionary($0))}
                         debugPrint("Commentdata=-=-=0-=", self?.comment[0].comments)
                         completion(self!.comment)
                         debugPrint("CommentData=-=-=0-=",completion(self!.comment))
@@ -693,7 +735,7 @@ extension HomeVC{
             
         }
     }
-//    Save Opportunity Api
+    //    Save Opportunity Api
     
     func saveoppoertunityapi(oppr_id:Int){
         CommonUtils.showHud(show: true)
@@ -716,7 +758,7 @@ extension HomeVC{
         
         debugPrint("user_id......",Int.getInt(UserData.shared.id))
         TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.ksaveOpp, requestMethod: .POST,
-                                                   requestParameters:params, withProgressHUD: false)
+                                                               requestParameters:params, withProgressHUD: false)
         {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
             
             CommonUtils.showHudWithNoInteraction(show: false)
@@ -735,7 +777,7 @@ extension HomeVC{
                         if septoken[0] == "Bearer"{
                             kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
                         }
-                      
+                        
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
@@ -777,12 +819,12 @@ extension HomeVC{
                         userTimeLine = Opportunity.map{SocialPostData(data: kSharedInstance.getDictionary($0))}
                         print("Dataallpost=\(userTimeLine)")
                         
-//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         self.tblViewViewPost.reloadData()
                         
                     }
                     else if  Int.getInt(dictResult["status"]) == 400{
-//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                     
@@ -799,6 +841,80 @@ extension HomeVC{
         
     }
     
+    //    Api Detail Opportunity
     
+    func getalldetail(oppr_id:Int){
+        CommonUtils.showHudWithNoInteraction(show: true)
+        
+        if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
+            let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+            let septoken = endToken.components(separatedBy: " ")
+            if septoken[0] != "Bearer"{
+                let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
+                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
+            }
+        }
+        
+        let params:[String : Any] = [
+            "oppr_id":oppr_id,
+            "user_id":UserData.shared.id
+            
+        ]
+        
+        debugPrint("oppr_id...===...",oppr_id)
+        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kopportunitydetails, requestMethod: .POST,
+                                                               requestParameters:params, withProgressHUD: false)
+        {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
+            
+            CommonUtils.showHudWithNoInteraction(show: false)
+            
+            if errorType == .requestSuccess {
+                
+                let dictResult = kSharedInstance.getDictionary(result)
+                
+                switch Int.getInt(statusCode) {
+                case 200:
+                    
+                    if Int.getInt(dictResult["status"]) == 200{
+                        let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+                        let septoken = endToken.components(separatedBy: " ")
+                        if septoken[0] == "Bearer"{
+                            kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
+                        }
+                        
+                        self?.imgUrl = String.getString(dictResult["opr_base_url"])
+                        
+                        let Opportunity = kSharedInstance.getArray(withDictionary: dictResult["Opportunity"])
+                        userTimeLine = Opportunity.map{SocialPostData(data: kSharedInstance.getDictionary($0))}
+                        print("DataAllPremiumPost===\(userTimeLine)")
+                        
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        
+                        
+                    }
+                    else if  Int.getInt(dictResult["status"]) == 400{
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    }
+                    
+                    
+                default:
+                    CommonUtils.showError(.error, String.getString(dictResult["message"]))
+                }
+            }else if errorType == .noNetwork {
+                CommonUtils.showToastForInternetUnavailable()
+                
+            } else {
+                CommonUtils.showToastForDefaultError()
+            }
+        }
+    }
 }
 
+extension NSMutableAttributedString {
+
+    func setColorForText(textToFind: String, withColor color: UIColor) {
+        let range: NSRange = self.mutableString.range(of: textToFind, options: .caseInsensitive)
+        self.addAttribute(NSAttributedString.Key.foregroundColor, value: color, range: range)
+    }
+
+}

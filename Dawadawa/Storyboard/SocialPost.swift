@@ -35,6 +35,7 @@ class SocialPostData {
     var flag_user_post:String?
     var is_user_like:String?
     var is_saved:String?
+    var isComment = false
     var oppimage = [oppr_image]() // Array of dictionary
     var userdetail:user_detail?  // Simple dictionary
     var oppdocument = [oppr_document]()  // Array of dictionary
@@ -96,11 +97,13 @@ class user_detail{
     var g_id:String?
     var name:String?
     var social_profile:String?
+    var image:String?// for details screen
     
     init(data:[String:Any]){
         self.g_id = String.getString(data["g_id"])
         self.name = String.getString(data["name"])
         self.social_profile = String.getString(data["social_profile"])
+        self.image = String.getString(data["image"])
     }
 }
 
@@ -119,12 +122,15 @@ class oppr_document{
 // Comment
 
 class user_comment{
+    var id:Int?
     var comments:String?
     var name:String?
     var image:String?
+    var isReply = false
     var subcomment = [sub_Comment]()
     
     init(data:[String:Any]){
+        self.id = Int.getInt(data["id"])
         self.comments = String.getString(data["comments"])
         self.name = String.getString(data["name"])
         self.image = String.getString(data["image"])
@@ -136,6 +142,7 @@ class user_comment{
 
 // Sub-Comment
 class sub_Comment{
+    
     var comments:String?
     var usersubcommentdetails:subcomment_userdetails?
     

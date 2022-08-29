@@ -12,10 +12,10 @@ class SocialPostTableViewCell: UITableViewCell,UITextViewDelegate {
     
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var SocialPostCollectionView: UICollectionView!
-    var callback:((String)->())?
+    var callback:((String, UIButton)->())?
     var callbacktextviewcomment: ((String) -> Void)?
     
- 
+    
     @IBOutlet weak var lblUserName: UILabel!
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var lblDescribtion: UILabel!
@@ -33,7 +33,7 @@ class SocialPostTableViewCell: UITableViewCell,UITextViewDelegate {
     @IBOutlet weak var lblSave: UILabel!
     
     
-//    Comment Section
+    //    Comment Section
     
     @IBOutlet weak var btnClickComment: UIButton!
     @IBOutlet weak var imageUser: UIImageView!
@@ -69,7 +69,7 @@ class SocialPostTableViewCell: UITableViewCell,UITextViewDelegate {
         SocialPostCollectionView.register(UINib(nibName: "SocialPostCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "SocialPostCollectionViewCell")
         pageControl.numberOfPages = img.count
         pageControl.currentPage = 0
-      
+        
         
         self.txtviewComment.delegate = self
         self.viewAddComment.isHidden = true
@@ -78,68 +78,70 @@ class SocialPostTableViewCell: UITableViewCell,UITextViewDelegate {
         self.heightViewComment.constant = 0
         self.imageSubcommentUser.isHidden = true
         self.lblsubUserNameandComment.isHidden = true
-    }
-    
-    func setup(){
-    
         
     }
     
-   
-
+    func setup(){
+        
+        
+    }
+    
+    
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
     }
     
     func textChanged(action: @escaping (String) -> Void) {
-              self.callbacktextviewcomment = action
-          }
-
-      
-      func textViewDidChange(_ textView: UITextView) {
-          callbacktextviewcomment?(textView.text)
-          }
+        self.callbacktextviewcomment = action
+    }
     
-//    MARK: - @IBAction
+    
+    func textViewDidChange(_ textView: UITextView) {
+        callbacktextviewcomment?(textView.text)
+    }
+    
+    //    MARK: - @IBAction
     
     @IBAction func btnMoreTapped(_ sender: UIButton) {
-        self.callback?("More")
+        self.callback?("More", sender)
     }
     
     @IBAction func btnLikeTapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
-        self.callback?("Like")
+        self.callback?("Like", sender)
     }
     
     @IBAction func btnSavedTapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
-        self.callback?("Save")
+        self.callback?("Save", sender)
     }
     
     @IBAction func btnClickCommentBox(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
-        self.callback?("ClickComment")
+        self.callback?("ClickComment",sender)
     }
     
     @IBAction func btnAddComment(_ sender: UIButton) {
-        self.callback?("AddComment")
+        self.callback?("AddComment",sender)
     }
     
     @IBAction func btnreply(_ sender: UIButton) {
-        self.callback?("reply")
+        self.callback?("reply", sender)
     }
     
     @IBAction func btnSeeMoreComment(_ sender: UIButton) {
-        self.callback?("Seemorecomment")
+        self.callback?("Seemorecomment",sender)
+        
     }
     
 }
- 
+
 
 extension SocialPostTableViewCell: UICollectionViewDelegate,UICollectionViewDataSource{
     
-//    Collection View
+    //    Collection View
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.img.count
     }
