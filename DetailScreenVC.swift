@@ -274,8 +274,7 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                             
                         }
                     }
-                   
-                   
+                
                     
                 }
                 

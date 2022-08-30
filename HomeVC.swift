@@ -368,7 +368,7 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
             }
             else{
                 cell.viewcomment.isHidden = false
-                
+                                
             }
             if obj.usercomment.first?.subcomment.count == 0 {
                 cell.imageSubcommentUser.isHidden = true
@@ -379,6 +379,8 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
             else{
                 cell.imageSubcommentUser.isHidden = false
                 cell.lblsubUserNameandComment.isHidden = false
+               
+
                 
                 //                cell.verticalSpacingReply.constant = 54
                 //                cell.bottomlblSubcomment.constant = 60
