@@ -286,6 +286,7 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                 cell.lblTitle.text = "This Opprortunity has been Closed"
                 cell.lblTitle.textColor = .red
             }
+            
             if String.getString(obj.is_user_like) == "1"{
                 cell.imglike.image = UIImage(named: "dil")
                 cell.lbllike.text = "Liked"
@@ -295,6 +296,7 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                 cell.imglike.image = UIImage(named: "unlike")
                 cell.lbllike.text = "Like"
             }
+            
             if String.getString(obj.is_saved) == "1"{
                 cell.imgsave.image = UIImage(named: "saveopr")
                 cell.lblSave.text = "Saved"
@@ -303,6 +305,13 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                 cell.imgsave.image = UIImage(named: "save-3")
                 cell.lblSave.text = "Save"
             }
+            if obj.oppimage.count == 0{
+                cell.heightSocialPostCollectionView.constant = 0
+            }
+            else{
+                cell.heightSocialPostCollectionView.constant = 225
+            }
+            
             
             
             cell.callback = { txt, tapped in
@@ -319,11 +328,29 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                     cell.lbllike.text = "Liked"
                 }
                 if txt == "Save"{
-                    let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
-                    debugPrint("saveoppid=-=-=",oppid)
-                    self.saveoppoertunityapi(oppr_id: oppid)
-                    cell.imgsave.image = UIImage(named: "saveopr")
-                    cell.lblSave.text = "Saved"
+                    if tapped.isSelected{
+                        
+                        if String.getString(obj.is_saved) == "0"{
+                            let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
+                            debugPrint("saveoppid=-=-=",oppid)
+                            self.saveoppoertunityapi(oppr_id: oppid)
+                            cell.imgsave.image = UIImage(named: "saveopr")
+                            cell.lblSave.text = "Saved"
+                        }
+                        else{
+                            let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
+                            self.unsaveoppoertunityapi(oppr_id: oppid)
+                            cell.imgsave.image = UIImage(named: "save-3")
+                            cell.lblSave.text = "Save"
+                        }
+                        
+                    }
+                    else{
+                        let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
+                        self.unsaveoppoertunityapi(oppr_id: oppid)
+                        cell.imgsave.image = UIImage(named: "save-3")
+                        cell.lblSave.text = "Save"
+                    }
                 }
                 
                 if txt == "More" {
@@ -405,8 +432,7 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                 
 //                       COMMENT PART
                 
-                cell.viewAddComment.isHidden = obj.isComment == true ? false : true
-                cell.heightViewAddComment.constant = obj.isComment == true ? 55 : 0
+                
                 
                 if txt == "reply"{
                     
@@ -464,7 +490,7 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                             cell.imageSubcommentUser.isHidden = true
                             cell.lblsubUserNameandComment.isHidden = true
                             cell.verticalSpacingReply.constant = -10
-                            cell.bottomlblSubcomment.constant = 10
+//                            cell.bottomlblSubcomment.constant = 10
                             
                             
                             let first = String.getString(userComment.first?.name)
@@ -485,35 +511,39 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                 
             }
             
-            let imgcomment = "\("https://demo4app.com/dawadawa/public/admin_assets/user_profile/" + String.getString(UserData.shared.social_profile))"
+            cell.viewAddComment.isHidden = obj.isComment == true ? false : true
+            cell.heightViewAddComment.constant = obj.isComment == true ? 55 : 0
             
-            cell.imageUser.downlodeImage(serviceurl: imgcomment , placeHolder: UIImage(named: "Boss")) // commentUserImage
             
             if obj.usercomment.count == 0{
                 cell.viewcomment.isHidden = true
                 cell.heightViewComment.constant  = 0
-                cell.bottomlblSubcomment.constant = -50
+                cell.bottomspacingReply.constant = -90
+                //                cell.bottomlblSubcomment.constant = -50
                 
             }
             else{
                 cell.viewcomment.isHidden = false
+                cell.bottomspacingReply.constant = 0
                 
             }
+            
             if obj.usercomment.first?.subcomment.count == 0 {
                 cell.imageSubcommentUser.isHidden = true
                 cell.lblsubUserNameandComment.isHidden = true
-                cell.verticalSpacingReply.constant = -10
-                cell.bottomlblSubcomment.constant = 10
+                cell.VerticalspacingSubComment.constant = 0
+                //                cell.bottomlblSubcomment.constant = 10
             }
             else{
                 cell.imageSubcommentUser.isHidden = false
                 cell.lblsubUserNameandComment.isHidden = false
+                cell.VerticalspacingSubComment.constant = 22
                 
-                //                cell.verticalSpacingReply.constant = 54
-                //                cell.bottomlblSubcomment.constant = 60
             }
             
+            let imgcomment = "\("https://demo4app.com/dawadawa/public/admin_assets/user_profile/" + String.getString(UserData.shared.social_profile))"
             
+            cell.imageUser.downlodeImage(serviceurl: imgcomment , placeHolder: UIImage(named: "Boss")) // commentUserImage
             
             cell.lblusernameandcomment.text = String.getString(obj.usercomment.first?.name)
             + "  " + String.getString(obj.usercomment.first?.comments)
@@ -995,6 +1025,70 @@ extension ProfileVC{
         }
     }
     
+    //    Unsaved Opportunity
+    
+    func unsaveoppoertunityapi(oppr_id:Int){
+        CommonUtils.showHud(show: true)
+        
+        
+        if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
+            let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+            let septoken = endToken.components(separatedBy: " ")
+            if septoken[0] != "Bearer"{
+                let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
+                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
+            }
+        }
+        
+        
+        let params:[String : Any] = [
+            "user_id":Int.getInt(UserData.shared.id),
+            "opr_id":oppr_id
+        ]
+        
+        debugPrint("user_id......",Int.getInt(UserData.shared.id))
+        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kunsavedopp, requestMethod: .POST,
+                                                               requestParameters:params, withProgressHUD: false)
+        {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
+            
+            CommonUtils.showHudWithNoInteraction(show: false)
+            
+            if errorType == .requestSuccess {
+                
+                let dictResult = kSharedInstance.getDictionary(result)
+                
+                switch Int.getInt(statusCode) {
+                case 200:
+                    
+                    if Int.getInt(dictResult["responsecode"]) == 200{
+                        
+                        let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+                        let septoken = endToken.components(separatedBy: " ")
+                        if septoken[0] == "Bearer"{
+                            kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
+                        }
+                        
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //                        self?.TblViewSavedOpp.reloadData()
+                    }
+                    
+                    else if  Int.getInt(dictResult["responsecode"]) == 400{
+                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    }
+                    
+                default:
+                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                }
+            } else if errorType == .noNetwork {
+                CommonUtils.showToastForInternetUnavailable()
+                
+            } else {
+                CommonUtils.showToastForDefaultError()
+            }
+            
+        }
+    }
     //    Api comment opportunity
     
     func commentoppoertunityapi(oppr_id:Int,completion: @escaping(_ viewH : [user_comment])->Void){

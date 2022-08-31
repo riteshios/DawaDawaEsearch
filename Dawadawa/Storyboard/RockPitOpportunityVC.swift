@@ -103,8 +103,15 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
         self.setup()
         
         if isedit == "True"{
-            self.viewSelectCategoryTop.constant = 420
-            self.fetdata()
+            if self.userTimeLineoppdetails?.oppimage.count == 0{
+                self.viewSelectCategoryTop.constant = 10
+                self.fetdata()
+                
+            }
+            else{
+                self.viewSelectCategoryTop.constant = 420
+                self.fetdata()
+            }
         }
        
         self.UploadimageCollectionView.reloadData()
@@ -120,7 +127,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
         self.setTextFieldUI(textField: txtFieldLocationOnMap, place: "Location on map ( optional )", floatingText: "Location on map ( optional )")
         self.setTextFieldUI(textField: txtFieldMobileNumber, place: "Mobile number", floatingText: "Mobile number")
         self.setTextFieldUI(textField: txtFieldWhatsappNumber, place: "WhatsApp number", floatingText: "WhatsApp number")
-        self.setTextFieldUI(textField: txtFieldPricing, place: "Pricing ( optional )", floatingText: "Pricing ( optional )")
+        self.setTextFieldUI(textField: txtFieldPricing, place: "Price in US Dollar (optional)", floatingText: "Price in US Dollar (optional)")
         
     }
     
@@ -356,6 +363,8 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
             self.lblBasic.textColor = UIColor(red: 21, green: 114, blue: 161)
             self.viewFeature.backgroundColor = .white
             self.lblFeature.textColor =  UIColor(red: 21, green: 114, blue: 161)
+            
+           
             self.isSelectopp_planPremium = true
            
         }
@@ -374,19 +383,19 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
 //    MARK: - Validation
     
     func Validation(){
-        if self.isSelectimage == false && self.imagearr.count == 0{
-            self.showSimpleAlert(message: "Please Select the image")
-            return
-        }
-        else if self.isSelectDocument == false && self.documentarr.count == 0 {
-            self.showSimpleAlert(message: "Please Select the Document")
-            return
-        }
-//        else if self.isSelectSubcategory == false{
-//            self.showSimpleAlert(message: "Please Select the Subcategory")
+//        if self.isSelectimage == false && self.imagearr.count == 0{
+//            self.showSimpleAlert(message: "Please Select the image")
 //            return
 //        }
-      else if String.getString(self.txtFieldTitle.text).isEmpty
+//        else if self.isSelectDocument == false && self.documentarr.count == 0 {
+//            self.showSimpleAlert(message: "Please Select the Document")
+//            return
+//        }
+        if self.isSelectSubcategory == false{
+            self.showSimpleAlert(message: "Please Select the Subcategory")
+            return
+        }
+     else if String.getString(self.txtFieldTitle.text).isEmpty
         {
             self.showSimpleAlert(message: Notifications.ktitle)
             return
@@ -405,11 +414,11 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
             return
         }
         
-        else if String.getString(self.txtFieldLocationName.text).isEmpty
-        {
-            showSimpleAlert(message: Notifications.kLocationName)
-            return
-        }
+//        else if String.getString(self.txtFieldLocationName.text).isEmpty
+//        {
+//            showSimpleAlert(message: Notifications.kLocationName)
+//            return
+//        }
         else if String.getString(self.TextViewDescription.text).isEmpty{
             showSimpleAlert(message: Notifications.kDescription)
             return
@@ -425,22 +434,29 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
             return
         }
         
-        else if String.getString(self.txtFieldWhatsappNumber.text).isEmpty
-        {
-            showSimpleAlert(message: Notifications.kwhatsappnumber)
-            return
-        }
-        else if !String.getString(self.txtFieldWhatsappNumber.text).isPhoneNumber()
-        {
-            self.showSimpleAlert(message: Notifications.kvalidwhatsappnumber)
-            return
-        }
+//        else if String.getString(self.txtFieldWhatsappNumber.text).isEmpty
+//        {
+//            showSimpleAlert(message: Notifications.kwhatsappnumber)
+//            return
+//        }
+//        else if !String.getString(self.txtFieldWhatsappNumber.text).isPhoneNumber()
+//        {
+//            self.showSimpleAlert(message: Notifications.kvalidwhatsappnumber)
+//            return
+//        }
         else if self.isSelectLookingFor == false{
             self.showSimpleAlert(message: "Please Select looking For")
             return
         }
         else if self.isSelectopp_planBasic == false && self.isSelectopp_planPremium == false && self.isSelectopp_planFeatured == false{
             self.showSimpleAlert(message: "Please Select Opportunity Plan")
+            return
+        }
+        else if self.isSelectopp_planPremium == true{
+            if self.isSelectimage == false && self.imagearr.count == 0{
+                self.showSimpleAlert(message: "Please add at least one opportunity photo")
+                return
+            }
             return
         }
       

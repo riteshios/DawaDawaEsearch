@@ -58,6 +58,7 @@
 		0489D1A22892CAB200725664 /* SubCategorylabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0489D1A02892CAB100725664 /* SubCategorylabelTableViewCell.swift */; };
 		0489D1A32892CAB200725664 /* SubCategorylabelTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0489D1A12892CAB100725664 /* SubCategorylabelTableViewCell.xib */; };
 		0490F3DB2876E7E300F8A84A /* UploadImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0490F3DA2876E7E300F8A84A /* UploadImageCollectionViewCell.swift */; };
+		0492B5FB28BE23BB00EDAC83 /* HomeSocialMoreSelfVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0492B5FA28BE23BB00EDAC83 /* HomeSocialMoreSelfVC.swift */; };
 		0494642E28646CCA0010076A /* LogOutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0494642D28646CCA0010076A /* LogOutVC.swift */; };
 		049D339D287570CA004E4519 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 049D339F287570CA004E4519 /* Localizable.strings */; };
 		049D33A2287571FF004E4519 /* LocalizationClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049D33A1287571FF004E4519 /* LocalizationClass.swift */; };
@@ -687,6 +688,7 @@
 		0489D1A02892CAB100725664 /* SubCategorylabelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SubCategorylabelTableViewCell.swift; path = Dawadawa/Storyboard/SubCategorylabelTableViewCell.swift; sourceTree = SOURCE_ROOT; };
 		0489D1A12892CAB100725664 /* SubCategorylabelTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SubCategorylabelTableViewCell.xib; path = Dawadawa/Storyboard/SubCategorylabelTableViewCell.xib; sourceTree = SOURCE_ROOT; };
 		0490F3DA2876E7E300F8A84A /* UploadImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		0492B5FA28BE23BB00EDAC83 /* HomeSocialMoreSelfVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeSocialMoreSelfVC.swift; path = Dawadawa/Storyboard/HomeSocialMoreSelfVC.swift; sourceTree = SOURCE_ROOT; };
 		0494642D28646CCA0010076A /* LogOutVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LogOutVC.swift; path = Dawadawa/Storyboard/LogOutVC.swift; sourceTree = SOURCE_ROOT; };
 		049D338C28756E9A004E4519 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		049D338D28756E9A004E4519 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Main.strings; sourceTree = "<group>"; };
@@ -2409,6 +2411,7 @@
 		44D7F8EF28536826001554C9 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				0492B5FA28BE23BB00EDAC83 /* HomeSocialMoreSelfVC.swift */,
 				04BFFB67289250BA0086DCC1 /* FilterVC.swift */,
 				0461E31A288AA29800B7F0E7 /* HomeSocialMoreVC.swift */,
 				045C4E7D28897ACB00E831AA /* PremiumOpportunitiesVC.swift */,
@@ -3127,6 +3130,7 @@
 				447DCC762851CB1100C40DDD /* CurrencyCell.swift in Sources */,
 				04F9E2FB2887DF8700415C52 /* HomeVC.swift in Sources */,
 				3D0B08522854B8F700590891 /* LoginVC.swift in Sources */,
+				0492B5FB28BE23BB00EDAC83 /* HomeSocialMoreSelfVC.swift in Sources */,
 				447DCC782851CB1100C40DDD /* OtpModel.swift in Sources */,
 				045C4E822889819900E831AA /* PremiumTableViewCell.swift in Sources */,
 				04C848A828B75E8200505AB0 /* DetailScreenVC.swift in Sources */,

@@ -12,6 +12,7 @@ import UIKit
 class SocialPostData {
     
     var id:Int?
+    var user_id:Int?
     var title:String?
     var oppr_type:String?
     var category_id:Int?
@@ -26,13 +27,14 @@ class SocialPostData {
     var location_map:String?
     var description:String?
     var likes:Int?
+    var is_flag:String?
     var mobile_num:String?
     var whatsaap_num:String?
     var pricing:String?
     var looking_for:String?
     var close_opr:Int?
     var opp_plan:String?
-    var flag_user_post:String?
+    var flag_user_post:Int?
     var is_user_like:String?
     var is_saved:String?
     var isComment = false
@@ -45,6 +47,7 @@ class SocialPostData {
    
     init(data: [String: Any]) {
         self.id = Int.getInt(data["id"])
+        self.user_id = Int.getInt(data["user_id"])
         self.title = String.getString(data["title"])
         self.oppr_type = String.getString(data["oppr_type"])
         self.category_id = Int.getInt(data["category_id"])
@@ -59,11 +62,13 @@ class SocialPostData {
         self.location_map = String.getString(data["location_map"])
         self.description = String.getString(data["description"])
         self.likes = Int.getInt(data["likes"])
+        self.is_flag = String.getString(data["is_flag"])
         self.mobile_num = String.getString(data["mobile_num"])
         self.whatsaap_num = String.getString(data["whatsaap_num"])
         self.pricing = String.getString(data["pricing"])
         self.looking_for = String.getString(data["looking_for"])
         self.close_opr = Int.getInt(data["close_opr"])
+        self.flag_user_post = Int.getInt(data["flag_user_post"])
         self.opp_plan = String.getString(data["opp_plan"])
         self.is_user_like = String.getString(data["is_user_like"])
         self.is_saved = String.getString(data["is_saved"])

@@ -100,6 +100,12 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                 cell.imgsave.image = UIImage(named: "save-3")
                 cell.lblSave.text = "Save"
             }
+            if Int.getInt(self.userTimeLine?.oppimage.count) == 0{
+                cell.heightSocialPostCollectionView.constant = 0
+            }
+            else{
+                cell.heightSocialPostCollectionView.constant = 225
+            }
             
             
             
@@ -192,7 +198,7 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
             }
             cell.viewcomment.isHidden = true
             cell.heightViewComment.constant = 0
-            cell.bottomlblSubcomment.constant = -55
+            cell.bottomspacingReply.constant = -90
             
             
             

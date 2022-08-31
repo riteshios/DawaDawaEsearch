@@ -32,6 +32,11 @@ class SocialPostTableViewCell: UITableViewCell,UITextViewDelegate {
     @IBOutlet weak var btnSave: UIButton!
     @IBOutlet weak var lblSave: UILabel!
     
+    @IBOutlet weak var heightSocialPostCollectionView: NSLayoutConstraint!
+    
+    @IBOutlet weak var imgOppFlag: UIImageView!
+    
+    
     
     //    Comment Section
     
@@ -45,8 +50,9 @@ class SocialPostTableViewCell: UITableViewCell,UITextViewDelegate {
     @IBOutlet weak var viewAddComment: UIView!
     @IBOutlet weak var viewcomment: UIView!
     @IBOutlet weak var verticalSpacingReply: NSLayoutConstraint!
-    @IBOutlet weak var bottomlblSubcomment: NSLayoutConstraint!
+    @IBOutlet weak var bottomspacingReply: NSLayoutConstraint!
     
+    @IBOutlet weak var VerticalspacingSubComment: NSLayoutConstraint!
     @IBOutlet weak var heightViewAddComment: NSLayoutConstraint!
     @IBOutlet weak var heightViewComment: NSLayoutConstraint!
     
@@ -64,6 +70,7 @@ class SocialPostTableViewCell: UITableViewCell,UITextViewDelegate {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
         SocialPostCollectionView.delegate = self
         SocialPostCollectionView.dataSource = self
         SocialPostCollectionView.register(UINib(nibName: "SocialPostCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "SocialPostCollectionViewCell")
@@ -78,11 +85,7 @@ class SocialPostTableViewCell: UITableViewCell,UITextViewDelegate {
         self.heightViewComment.constant = 0
         self.imageSubcommentUser.isHidden = true
         self.lblsubUserNameandComment.isHidden = true
-        
-    }
-    
-    func setup(){
-        
+        self.imgOppFlag.isHidden = true
         
     }
     
@@ -119,7 +122,7 @@ class SocialPostTableViewCell: UITableViewCell,UITextViewDelegate {
     }
     
     @IBAction func btnClickCommentBox(_ sender: UIButton) {
-        sender.isSelected = !sender.isSelected
+   sender.isSelected = !sender.isSelected
         self.callback?("ClickComment",sender)
     }
     

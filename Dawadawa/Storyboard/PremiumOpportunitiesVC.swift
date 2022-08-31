@@ -8,15 +8,17 @@
 import UIKit
 
 class PremiumOpportunitiesVC: UIViewController {
-   
+    
     
     @IBOutlet weak var tblViewPremiumOpp: UITableView!
     var imgUrl = ""
+    var docUrl = ""
     var userTimeLine = [SocialPostData]()
+    var UserTimeLineOppdetails:SocialPostData?
     var img = [oppr_image]()
     var comment = [user_comment]()
     var txtcomment = " "
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -100,7 +102,7 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
             if String.getString(obj.is_user_like) == "1"{
                 cell.imglike.image = UIImage(named: "dil")
                 cell.lbllike.text = "Liked"
-              
+                
             }
             else{
                 cell.imglike.image = UIImage(named: "unlike")
@@ -115,62 +117,127 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
                 cell.lblSave.text = "Save"
             }
             
+            if String.getString(obj.is_flag) == "1"{
+                cell.imgOppFlag.isHidden = false
+            }
+            else{
+                cell.imgOppFlag.isHidden = true
+            }
+            if obj.oppimage.count == 0{
+                cell.heightSocialPostCollectionView.constant = 0
+            }
+            else{
+                cell.heightSocialPostCollectionView.constant = 225
+            }
+            
             
             
             cell.callback = { txt, tapped in
                 
                 if txt == "Like"{
-                   
-                        
-                    let oppid = self.userTimeLine[indexPath.row].id
-                            debugPrint("oppid--=-=-=-",oppid)
-//                            self.likeOpportunityapi(oppr_id: oppid ?? 0)
-                            self.likeOpportunityapi(oppr_id: oppid ?? 0) { countLike in
-                                obj.likes = Int.getInt(countLike)
-                                cell.lblLikeCount.text = String.getString(obj.likes) + " " + "likes"
-                            }
-                            cell.imglike.image = UIImage(named: "dil")
-                            cell.lbllike.text = "Liked"
                     
+                    
+                    let oppid = self.userTimeLine[indexPath.row].id
+                    debugPrint("oppid--=-=-=-",oppid)
+                    //                            self.likeOpportunityapi(oppr_id: oppid ?? 0)
+                    self.likeOpportunityapi(oppr_id: oppid ?? 0) { countLike in
+                        obj.likes = Int.getInt(countLike)
+                        cell.lblLikeCount.text = String.getString(obj.likes) + " " + "likes"
                     }
+                    cell.imglike.image = UIImage(named: "dil")
+                    cell.lbllike.text = "Liked"
+                    
+                }
                 
                 if txt == "Save"{
-                                  let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
-                                  debugPrint("saveoppid=-=-=",oppid)
-                                  self.saveoppoertunityapi(oppr_id: oppid)
-                                  cell.imgsave.image = UIImage(named: "saveopr")
-                                  cell.lblSave.text = "Saved"
-                              }
-                
-                if txt == "More" {
-                    let vc = self.storyboard?.instantiateViewController(withIdentifier: HomeSocialMoreVC.getStoryboardID()) as! HomeSocialMoreVC
-                    vc.modalTransitionStyle = .crossDissolve
-                    vc.modalPresentationStyle = .overCurrentContext
-                    vc.callback = { txt in
-                        //                    if txt == "Dismiss"{
-                        //                        vc.dismiss(animated: false){
-                        //                            self.dismiss(animated: true, completion: nil)
-                        //                        }
-                        //                    }
-                        if txt == "Flag"{
-                           
-                                let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
-                                self.flagopportunityapi(oppr_id: oppid)
-                          
-                        }
+                    if tapped.isSelected{
                         
-                        if txt == "Report"{
-                                kSharedAppDelegate?.makeRootViewController()
+                        if String.getString(obj.is_saved) == "0"{
+                            let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
+                            debugPrint("saveoppid=-=-=",oppid)
+                            self.saveoppoertunityapi(oppr_id: oppid)
+                            cell.imgsave.image = UIImage(named: "saveopr")
+                            cell.lblSave.text = "Saved"
+                        }
+                        else{
+                            let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
+                            self.unsaveoppoertunityapi(oppr_id: oppid)
+                            cell.imgsave.image = UIImage(named: "save-3")
+                            cell.lblSave.text = "Save"
                         }
                         
                     }
-                    self.present(vc, animated: false)
+                    else{
+                        let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
+                        self.unsaveoppoertunityapi(oppr_id: oppid)
+                        cell.imgsave.image = UIImage(named: "save-3")
+                        cell.lblSave.text = "Save"
+                    }
+                }
+                
+                if txt == "More" {
+                    if UserData.shared.id == Int.getInt(obj.user_id){
+                        
+                        let vc = self.storyboard?.instantiateViewController(withIdentifier: HomeSocialMoreSelfVC.getStoryboardID()) as! HomeSocialMoreSelfVC
+                        vc.modalTransitionStyle = .crossDissolve
+                        vc.modalPresentationStyle = .overCurrentContext
+                        vc.callback = { txt in
+                            
+                            if txt == "Update"{
+                                if UserData.shared.isskiplogin == true{
+                                    self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                                }
+                                else{
+                                    let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
+                                    
+                                    debugPrint("oppid+++++++",oppid)
+                                    
+                                    self.opportunitydetailsapi(oppr_id: oppid)
+                                }
+                            }
+                            
+                        }
+                        self.present(vc, animated: false)
+                        
+                    }
+                    
+                    else{
+                        
+                        let vc = self.storyboard?.instantiateViewController(withIdentifier: HomeSocialMoreVC.getStoryboardID()) as! HomeSocialMoreVC
+                        vc.modalTransitionStyle = .crossDissolve
+                        vc.modalPresentationStyle = .overCurrentContext
+                        vc.callback = { txt in
+                            
+                            if txt == "Flag"{
+                                if UserData.shared.isskiplogin == true{
+                                    self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                                }
+                                else{
+                                    let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
+                                    self.flagopportunityapi(oppr_id: oppid)
+                                    self.dismiss(animated: true)
+                                    cell.imgOppFlag.isHidden = false
+                                }
+                            }
+                            
+                            if txt == "Report"{
+                                if UserData.shared.isskiplogin == true{
+                                    self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                                }
+                                else{
+                                    kSharedAppDelegate?.makeRootViewController()
+                                }
+                                
+                            }
+                            
+                        }
+                        self.present(vc, animated: false)
+                    }
                 }
                 
                 //                       COMMENT PART
                 
-                cell.viewAddComment.isHidden = obj.isComment == true ? false : true
-                cell.heightViewAddComment.constant = obj.isComment == true ? 55 : 0
+                
                 
                 if txt == "reply"{
                     
@@ -186,7 +253,7 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
                     let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
                     debugPrint("detailsppid=-=-=",oppid)
                     let vc = self.storyboard?.instantiateViewController(withIdentifier: DetailScreenVC.getStoryboardID()) as! DetailScreenVC
-                   
+                    
                     vc.oppid = oppid
                     self.navigationController?.pushViewController(vc, animated: true)
                     
@@ -228,20 +295,20 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
                             cell.imageSubcommentUser.isHidden = true
                             cell.lblsubUserNameandComment.isHidden = true
                             cell.verticalSpacingReply.constant = -10
-                            cell.bottomlblSubcomment.constant = 10
+                            //                            cell.bottomlblSubcomment.constant = 10
                             
                             
                             let first = String.getString(userComment.first?.name)
                             let second = String.getString(userComment.first?.comments)
-
+                            
                             let attributedString: NSMutableAttributedString = NSMutableAttributedString(string: "\(first)  \(second)")
-
+                            
                             attributedString.setColorForText(textToFind: first, withColor: UIColor.black)
                             attributedString.setColorForText(textToFind: second, withColor: UIColor.gray)
-                
-      
+                            
+                            
                             cell.lblusernameandcomment.attributedText = attributedString
-//                            self.view.addSubview(cell.lblusernameandcomment) // For Show in controller
+                            //                            self.view.addSubview(cell.lblusernameandcomment) // For Show in controller
                             
                         }
                     }
@@ -249,35 +316,41 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
                 
             }
             
-            let imgcomment = "\("https://demo4app.com/dawadawa/public/admin_assets/user_profile/" + String.getString(UserData.shared.social_profile))"
+            cell.viewAddComment.isHidden = obj.isComment == true ? false : true
+            cell.heightViewAddComment.constant = obj.isComment == true ? 55 : 0
             
-            cell.imageUser.downlodeImage(serviceurl: imgcomment , placeHolder: UIImage(named: "Boss")) // commentUserImage
             
             if obj.usercomment.count == 0{
                 cell.viewcomment.isHidden = true
                 cell.heightViewComment.constant  = 0
-                cell.bottomlblSubcomment.constant = -50
+                cell.bottomspacingReply.constant = -90
+                //                cell.bottomlblSubcomment.constant = -50
                 
             }
             else{
                 cell.viewcomment.isHidden = false
+                cell.bottomspacingReply.constant = 0
                 
             }
+            
             if obj.usercomment.first?.subcomment.count == 0 {
                 cell.imageSubcommentUser.isHidden = true
                 cell.lblsubUserNameandComment.isHidden = true
-                cell.verticalSpacingReply.constant = -10
-                cell.bottomlblSubcomment.constant = 10
+                cell.VerticalspacingSubComment.constant = 0
+                //                cell.bottomlblSubcomment.constant = 10
             }
             else{
                 cell.imageSubcommentUser.isHidden = false
                 cell.lblsubUserNameandComment.isHidden = false
+                cell.VerticalspacingSubComment.constant = 22
                 
-                //                cell.verticalSpacingReply.constant = 54
-                //                cell.bottomlblSubcomment.constant = 60
             }
             
-        
+            
+            
+            let imgcomment = "\("https://demo4app.com/dawadawa/public/admin_assets/user_profile/" + String.getString(UserData.shared.social_profile))"
+            
+            cell.imageUser.downlodeImage(serviceurl: imgcomment , placeHolder: UIImage(named: "Boss")) // commentUserImage
             
             cell.lblusernameandcomment.text = String.getString(obj.usercomment.first?.name)
             + "  " + String.getString(obj.usercomment.first?.comments)
@@ -286,7 +359,7 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
             debugPrint("commentuserprofile......",imgcommentuserurl)
             cell.imageCommentUser.downlodeImage(serviceurl: imgcommentuserurl , placeHolder: UIImage(named: "Boss"))
             
-         
+            
             cell.lblsubUserNameandComment.text = String.getString(obj.usercomment.first?.subcomment.first?.usersubcommentdetails!.name) + "             " + String.getString(obj.usercomment.first?.subcomment.first?.comments) // Sub-Comment
             let imgcommentSubuser = String.getString(obj.usercomment.first?.subcomment.first?.usersubcommentdetails?.image)
             cell.imageSubcommentUser.downlodeImage(serviceurl: imgcommentSubuser, placeHolder: UIImage(named: "Boss"))
@@ -298,18 +371,18 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
             
             let thrid = String.getString(obj.usercomment.first?.subcomment.first?.usersubcommentdetails!.name)
             let fourth = String.getString(obj.usercomment.first?.subcomment.first?.comments)
-
+            
             let attributedStringcomment: NSMutableAttributedString = NSMutableAttributedString(string: "\(first)  \(second)")
             
             let attributedStringSubcomment: NSMutableAttributedString = NSMutableAttributedString(string: "\(thrid)  \(fourth)")
-
+            
             attributedStringcomment.setColorForText(textToFind: first, withColor: UIColor.black)
             attributedStringcomment.setColorForText(textToFind: second, withColor: UIColor.gray)
             
             attributedStringSubcomment.setColorForText(textToFind: thrid, withColor: UIColor.black)
             attributedStringSubcomment.setColorForText(textToFind: fourth, withColor: UIColor.gray)
-
-
+            
+            
             cell.lblusernameandcomment.attributedText = attributedStringcomment
             cell.lblsubUserNameandComment.attributedText = attributedStringSubcomment
             
@@ -337,10 +410,10 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section{
         case 0:
-        return 65
+            return 65
         case 1:
             return UITableView.automaticDimension
-        
+            
         default:
             return 0
         }
@@ -353,7 +426,7 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
 extension PremiumOpportunitiesVC{
     
     
-//    Api opportunity premium
+    //    Api opportunity premium
     
     func getallpremium(){
         CommonUtils.showHudWithNoInteraction(show: true)
@@ -372,7 +445,7 @@ extension PremiumOpportunitiesVC{
             CommonUtils.showHudWithNoInteraction(show: false)
             if errorType == .requestSuccess {
                 let dictResult = kSharedInstance.getDictionary(result)
-            
+                
                 switch Int.getInt(statusCode) {
                 case 200:
                     if Int.getInt(dictResult["status"]) == 200{
@@ -381,7 +454,7 @@ extension PremiumOpportunitiesVC{
                         if septoken[0] == "Bearer"{
                             kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
                         }
-            
+                        
                         self.imgUrl = String.getString(dictResult["opr_base_url"])
                         debugPrint("PreimiumImgurl=====", self.imgUrl)
                         let Opportunity = kSharedInstance.getArray(withDictionary: dictResult["Opportunity"])
@@ -396,7 +469,7 @@ extension PremiumOpportunitiesVC{
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
-                  
+                    
                 default:
                     CommonUtils.showError(.error, String.getString(dictResult["message"]))
                 }
@@ -443,7 +516,7 @@ extension PremiumOpportunitiesVC{
                 
                 switch Int.getInt(statusCode) {
                 case 200:
-//                    self?.statuslike = Int.getInt(dictResult["status"])
+                    //                    self?.statuslike = Int.getInt(dictResult["status"])
                     if Int.getInt(dictResult["status"]) == 200{
                         
                         
@@ -453,10 +526,10 @@ extension PremiumOpportunitiesVC{
                             kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
                         }
                         
-//                        self?.count = String.getString(dictResult["count"])
-//                        debugPrint("likecount=-=-=-=",self?.count)
+                        //                        self?.count = String.getString(dictResult["count"])
+                        //                        debugPrint("likecount=-=-=-=",self?.count)
                         completion(String.getString(dictResult["count"]))
-                       
+                        
                         
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         
@@ -555,68 +628,134 @@ extension PremiumOpportunitiesVC{
     }
     
     //    Save Opportunity Api
+    
+    func saveoppoertunityapi(oppr_id:Int){
+        CommonUtils.showHud(show: true)
         
-        func saveoppoertunityapi(oppr_id:Int){
-            CommonUtils.showHud(show: true)
-            
-            
-            if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
-                let endToken = kSharedUserDefaults.getLoggedInAccessToken()
-                let septoken = endToken.components(separatedBy: " ")
-                if septoken[0] != "Bearer"{
-                    let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
-                    kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
-                }
-            }
-            
-            
-            let params:[String : Any] = [
-                "user_id":Int.getInt(UserData.shared.id),
-                "opr_id":oppr_id
-            ]
-            
-            debugPrint("user_id......",Int.getInt(UserData.shared.id))
-            TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.ksaveOpp, requestMethod: .POST,
-                                                       requestParameters:params, withProgressHUD: false)
-            {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
-                
-                CommonUtils.showHudWithNoInteraction(show: false)
-                
-                if errorType == .requestSuccess {
-                    
-                    let dictResult = kSharedInstance.getDictionary(result)
-                    
-                    switch Int.getInt(statusCode) {
-                    case 200:
-                        
-                        if Int.getInt(dictResult["responsecode"]) == 200{
-                            
-                            let endToken = kSharedUserDefaults.getLoggedInAccessToken()
-                            let septoken = endToken.components(separatedBy: " ")
-                            if septoken[0] == "Bearer"{
-                                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
-                            }
-                          
-                            CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                        }
-                        
-                        else if  Int.getInt(dictResult["responsecode"]) == 400{
-                            //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                            CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                        }
-                        
-                    default:
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                    }
-                } else if errorType == .noNetwork {
-                    CommonUtils.showToastForInternetUnavailable()
-                    
-                } else {
-                    CommonUtils.showToastForDefaultError()
-                }
-                
+        
+        if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
+            let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+            let septoken = endToken.components(separatedBy: " ")
+            if septoken[0] != "Bearer"{
+                let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
+                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
             }
         }
+        
+        
+        let params:[String : Any] = [
+            "user_id":Int.getInt(UserData.shared.id),
+            "opr_id":oppr_id
+        ]
+        
+        debugPrint("user_id......",Int.getInt(UserData.shared.id))
+        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.ksaveOpp, requestMethod: .POST,
+                                                               requestParameters:params, withProgressHUD: false)
+        {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
+            
+            CommonUtils.showHudWithNoInteraction(show: false)
+            
+            if errorType == .requestSuccess {
+                
+                let dictResult = kSharedInstance.getDictionary(result)
+                
+                switch Int.getInt(statusCode) {
+                case 200:
+                    
+                    if Int.getInt(dictResult["responsecode"]) == 200{
+                        
+                        let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+                        let septoken = endToken.components(separatedBy: " ")
+                        if septoken[0] == "Bearer"{
+                            kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
+                        }
+                        
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    }
+                    
+                    else if  Int.getInt(dictResult["responsecode"]) == 400{
+                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    }
+                    
+                default:
+                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                }
+            } else if errorType == .noNetwork {
+                CommonUtils.showToastForInternetUnavailable()
+                
+            } else {
+                CommonUtils.showToastForDefaultError()
+            }
+            
+        }
+    }
+    
+    //    Unsaved Opportunity
+    
+    func unsaveoppoertunityapi(oppr_id:Int){
+        CommonUtils.showHud(show: true)
+        
+        
+        if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
+            let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+            let septoken = endToken.components(separatedBy: " ")
+            if septoken[0] != "Bearer"{
+                let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
+                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
+            }
+        }
+        
+        
+        let params:[String : Any] = [
+            "user_id":Int.getInt(UserData.shared.id),
+            "opr_id":oppr_id
+        ]
+        
+        debugPrint("user_id......",Int.getInt(UserData.shared.id))
+        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kunsavedopp, requestMethod: .POST,
+                                                               requestParameters:params, withProgressHUD: false)
+        {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
+            
+            CommonUtils.showHudWithNoInteraction(show: false)
+            
+            if errorType == .requestSuccess {
+                
+                let dictResult = kSharedInstance.getDictionary(result)
+                
+                switch Int.getInt(statusCode) {
+                case 200:
+                    
+                    if Int.getInt(dictResult["responsecode"]) == 200{
+                        
+                        let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+                        let septoken = endToken.components(separatedBy: " ")
+                        if septoken[0] == "Bearer"{
+                            kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
+                        }
+                        
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //                        self?.TblViewSavedOpp.reloadData()
+                    }
+                    
+                    else if  Int.getInt(dictResult["responsecode"]) == 400{
+                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    }
+                    
+                default:
+                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                }
+            } else if errorType == .noNetwork {
+                CommonUtils.showToastForInternetUnavailable()
+                
+            } else {
+                CommonUtils.showToastForDefaultError()
+            }
+            
+        }
+    }
+    
     
     // Api flag Opportunity
     
@@ -636,11 +775,80 @@ extension PremiumOpportunitiesVC{
         
         let params:[String : Any] = [
             //            "user_id":Int.getInt(UserData.shared.id),
-            "opr_id":oppr_id
+            "opr_id":oppr_id,
+            "user_id":UserData.shared.id
         ]
         
         debugPrint("opr_id......",oppr_id)
         TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kflagpost, requestMethod: .POST,
+                                                               requestParameters:params, withProgressHUD: false)
+        {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
+            
+            CommonUtils.showHudWithNoInteraction(show: false)
+            
+            if errorType == .requestSuccess {
+                
+                let dictResult = kSharedInstance.getDictionary(result)
+                
+                switch Int.getInt(statusCode) {
+                case 200:
+                    
+                    if Int.getInt(dictResult["responsecode"]) == 200{
+                        
+                        let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+                        let septoken = endToken.components(separatedBy: " ")
+                        if septoken[0] == "Bearer"{
+                            kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
+                        }
+                        
+                        
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //                        kSharedAppDelegate?.makeRootViewController()
+                        
+                    }
+                    
+                    else if  Int.getInt(dictResult["responsecode"]) == 400{
+                        
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    }
+                    
+                default:
+                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                }
+            } else if errorType == .noNetwork {
+                CommonUtils.showToastForInternetUnavailable()
+                
+            } else {
+                CommonUtils.showToastForDefaultError()
+            }
+            
+        }
+    }
+    
+    //    Opportunity Details api
+    
+    func opportunitydetailsapi(oppr_id:Int){
+        CommonUtils.showHud(show: true)
+        
+        
+        if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
+            let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+            let septoken = endToken.components(separatedBy: " ")
+            if septoken[0] != "Bearer"{
+                let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
+                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
+            }
+        }
+        
+        
+        let params:[String : Any] = [
+            "oppr_id":oppr_id,
+            "user_id":UserData.shared.id
+            
+        ]
+        
+        debugPrint("oppr_id...===...",oppr_id)
+        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kopportunitydetails, requestMethod: .POST,
                                                                requestParameters:params, withProgressHUD: false)
         {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
             
@@ -661,9 +869,79 @@ extension PremiumOpportunitiesVC{
                             kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
                         }
                         
+                        self?.imgUrl = String.getString(dictResult["opr_images"])
+                        self?.docUrl = String.getString(dictResult["opr_documents"])
+                        let opportunity = kSharedInstance.getDictionary(dictResult["Opportunity"])
+                        self?.UserTimeLineOppdetails = SocialPostData(data: opportunity)
+                        
+                        debugPrint("OpportunityDetails=-=-===",self?.UserTimeLineOppdetails)
+                        
+                        if Int.getInt(self?.UserTimeLineOppdetails?.category_id) == 1{
+                            let vc = self?.storyboard?.instantiateViewController(withIdentifier: RockPitOpportunityVC.getStoryboardID()) as! RockPitOpportunityVC
+                            self?.navigationController?.pushViewController(vc, animated: true)
+                            vc.userTimeLineoppdetails = self?.UserTimeLineOppdetails
+                            vc.isedit = "True"
+                            vc.imgUrl = self!.imgUrl
+                            vc.docUrl = self!.docUrl
+                            vc.oppid = oppr_id
+                            debugPrint("oppid=-=-=-==-=", vc.oppid)
+                            vc.imgarray  = self?.UserTimeLineOppdetails?.oppimage ?? []
+                            vc.docarray = self?.UserTimeLineOppdetails?.oppdocument ?? []
+                            debugPrint("imgaraay=-=-=-==-=", vc.imgarray)
+                            
+                            
+                            
+                        }
+                        else if Int.getInt(self?.UserTimeLineOppdetails?.category_id) == 2{
+                            let vc = self?.storyboard?.instantiateViewController(withIdentifier: TrailingOpportunityVC.getStoryboardID()) as! TrailingOpportunityVC
+                            self?.navigationController?.pushViewController(vc, animated: true)
+                            vc.userTimeLineoppdetails = self?.UserTimeLineOppdetails
+                            vc.isedit = "True"
+                            vc.imgUrl = self!.imgUrl
+                            vc.docUrl = self!.docUrl
+                            vc.oppid = oppr_id
+                            debugPrint("oppid=-=-=-==-=", vc.oppid)
+                            vc.imgarray  = self?.UserTimeLineOppdetails?.oppimage ?? []
+                            vc.docarray = self?.UserTimeLineOppdetails?.oppdocument ?? []
+                            debugPrint("imgaraay=-=-=-==-=", vc.imgarray)
+                            
+                        }
+                        
+                        else if Int.getInt(self?.UserTimeLineOppdetails?.category_id) == 3{
+                            let vc = self?.storyboard?.instantiateViewController(withIdentifier: MiningBusinessVC.getStoryboardID()) as! MiningBusinessVC
+                            self?.navigationController?.pushViewController(vc, animated: true)
+                            vc.userTimeLineoppdetails = self?.UserTimeLineOppdetails
+                            vc.isedit = "True"
+                            vc.imgUrl = self!.imgUrl
+                            vc.docUrl = self!.docUrl
+                            vc.oppid = oppr_id
+                            debugPrint("oppid=-=-=-==-=", vc.oppid)
+                            vc.imgarray  = self?.UserTimeLineOppdetails?.oppimage ?? []
+                            vc.docarray = self?.UserTimeLineOppdetails?.oppdocument ?? []
+                            debugPrint("imgaraay=-=-=-==-=", vc.imgarray)
+                            
+                            
+                        }
+                        else if Int.getInt(self?.UserTimeLineOppdetails?.category_id) == 4{
+                            let vc = self?.storyboard?.instantiateViewController(withIdentifier: MiningServiceVC.getStoryboardID()) as! MiningServiceVC
+                            self?.navigationController?.pushViewController(vc, animated: true)
+                            vc.userTimeLineoppdetails = self?.UserTimeLineOppdetails
+                            vc.isedit = "True"
+                            vc.imgUrl = self!.imgUrl
+                            vc.docUrl = self!.docUrl
+                            vc.oppid = oppr_id
+                            debugPrint("oppid=-=-=-==-=", vc.oppid)
+                            vc.imgarray  = self?.UserTimeLineOppdetails?.oppimage ?? []
+                            vc.docarray = self?.UserTimeLineOppdetails?.oppdocument ?? []
+                            debugPrint("imgaraay=-=-=-==-=", vc.imgarray)
+                            
+                            
+                        }
+                        
+                        
                         
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                        kSharedAppDelegate?.makeRootViewController()
+                        
                         
                     }
                     
