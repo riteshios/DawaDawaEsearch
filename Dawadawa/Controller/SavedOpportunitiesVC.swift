@@ -8,16 +8,16 @@
 import UIKit
 
 class SavedOpportunitiesVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource {
-  
+    
     @IBOutlet weak var CollectionViewSave: UICollectionView!
     
     var imgUrl = ""
     var userTimeLine = [SocialPostData]()
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        
         
     }
     
@@ -25,14 +25,14 @@ class SavedOpportunitiesVC: UIViewController,UICollectionViewDelegate,UICollecti
         super.viewWillAppear(true)
         self.getallsaveopportunity()
     }
-//    MARK: - @IBAction
+    //    MARK: - @IBAction
     
     @IBAction func btnBackTapped(_ sender: UIButton) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "TabBarVC") as! TabBarVC
         self.tabBarController?.selectedIndex = 4
         self.navigationController?.pushViewController(vc, animated: true)
         
-//        self.navigationController?.popViewController(animated: true)
+        //        self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func BtnViewAllTapped(_ sender: UIButton) {
@@ -49,7 +49,7 @@ class SavedOpportunitiesVC: UIViewController,UICollectionViewDelegate,UICollecti
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = CollectionViewSave.dequeueReusableCell(withReuseIdentifier: "SaveOpportunityCollectionViewCell", for: indexPath) as! SaveOpportunityCollectionViewCell
         let obj = userTimeLine[indexPath.row]
-     
+        
         debugPrint("obj......",obj)
         cell.lblTitle.text = String.getString(obj.title)
         cell.imgsave.downlodeImage(serviceurl: "\(imgUrl)\(String.getString(obj.oppimage.first?.imageurl))", placeHolder: UIImage(named: "truck"))
@@ -61,7 +61,7 @@ class SavedOpportunitiesVC: UIViewController,UICollectionViewDelegate,UICollecti
 
 extension SavedOpportunitiesVC{
     
-//    SaveOpportunity List
+    //    SaveOpportunity List
     
     func getallsaveopportunity(){
         CommonUtils.showHudWithNoInteraction(show: true)
@@ -95,14 +95,14 @@ extension SavedOpportunitiesVC{
                         self.userTimeLine = Opportunity.map{SocialPostData(data: kSharedInstance.getDictionary($0))}
                         print("Dataallpost=\(self.userTimeLine)")
                         
-//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         self.CollectionViewSave.reloadData()
                         
                     }
                     else if  Int.getInt(dictResult["status"]) == 400{
                         self.userTimeLine.removeAll()
                         self.CollectionViewSave.reloadData()
-//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                     

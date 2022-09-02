@@ -23,7 +23,10 @@ class ProfileVC: UIViewController {
     var userTimeLine = [SocialPostData]() //Array
     var UserTimeLineOppdetails:SocialPostData? // Dictionary m hai
     var comment = [user_comment]()
-    var txtcomment = " "
+    var txtcomment = ""
+    var isbtnAllSelect = false
+    var isbtnPremiumSelect = false
+    var isbtnFeaturedSelect = false
     
     
     @IBOutlet weak var tblViewSocialPost: UITableView!
@@ -167,13 +170,7 @@ class ProfileVC: UIViewController {
                     vc.modalTransitionStyle = .crossDissolve
                     vc.modalPresentationStyle = .overCurrentContext
                     vc.callbacklogout = { txt in
-                        //                        if txt == "Cancel"{
-                        //                            vc.dismiss(animated: false){
-                        //                                let vc = self.storyboard?.instantiateViewController(withIdentifier: ProfileVC.getStoryboardID()) as! ProfileVC
-                        //                                self.navigationController?.pushViewController(vc, animated: false)
-                        //                            }
-                        //                        }
-                        //
+                       
                         if txt == "Logout"{
                             vc.dismiss(animated: false) {
                                 let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
@@ -226,6 +223,7 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                         self.imgNoOpp.isHidden = false
                     }
                     else{
+                        self.isbtnAllSelect  = true
                         self.listoppoertunityapi()
                     }
                     
@@ -236,6 +234,7 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                         self.imgNoOpp.isHidden = false
                     }
                     else{
+                        self.isbtnPremiumSelect = true
                         self.getallpremiumapi()
                     }
                     
@@ -246,6 +245,7 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                         self.imgNoOpp.isHidden = false
                     }
                     else{
+                        self.isbtnFeaturedSelect = true
                         self.getallFeaturedapi()
                     }
                     
@@ -266,6 +266,10 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
             cell.lblUserName.text = String.getString(UserData.shared.name) + " " + String.getString(UserData.shared.last_name)
             cell.lblTitle.text = String.getString(obj.title)
             cell.lblDescribtion.text = String.getString(obj.description)
+            cell.lblRating.text = String.getString(obj.opr_rating)
+            
+            
+            
             cell.Imageuser.downlodeImage(serviceurl: profilrimageurl, placeHolder: UIImage(named: "Boss"))
             print("-=-opp_plan=-=-\(String.getString(obj.opp_plan))")
             
@@ -312,6 +316,14 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                 cell.heightSocialPostCollectionView.constant = 225
             }
             
+            if String.getString(obj.opr_rating) == ""{
+                cell.WidthViewRating.constant = 35
+                cell.lblRating.isHidden = true
+            }
+            else{
+                cell.WidthViewRating.constant = 58
+                cell.lblRating.isHidden = false
+            }
             
             
             cell.callback = { txt, tapped in
@@ -327,6 +339,34 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                     cell.imglike.image = UIImage(named: "dil")
                     cell.lbllike.text = "Liked"
                 }
+                
+                if txt == "Rate"{
+                    let oppid = self.userTimeLine[indexPath.row].id
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: RateOpportunityPopUPVC.getStoryboardID()) as! RateOpportunityPopUPVC
+                    vc.modalTransitionStyle = .crossDissolve
+                    vc.modalPresentationStyle = .overCurrentContext
+                    vc.oppid = oppid ?? 0
+                    
+                    vc.callbackClosure = {
+                        
+                        if self.isbtnAllSelect == true{
+                            self.listoppoertunityapi()
+                        }
+                        else if self.isbtnPremiumSelect == true{
+                            self.getallpremiumapi()
+                        }
+                        else if self.isbtnFeaturedSelect == true{
+                            self.getallFeaturedapi()
+                        }
+                        else{
+                            self.listoppoertunityapi()
+                        }
+                       
+                    }
+                    self.present(vc, animated: false)
+                    
+                }
+                
                 if txt == "Save"{
                     if tapped.isSelected{
                         
@@ -458,12 +498,23 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                 
                 if txt == "ClickComment"{
                     if tapped.isSelected{
-                        obj.isComment = true
-                        self.tblViewSocialPost.reloadData()
-                    }
-                    else{
-                        obj.isComment = false
-                        self.tblViewSocialPost.reloadData()
+                        if obj.isComment == false{
+                            obj.isComment = true
+                            self.tblViewSocialPost.reloadData()
+                        }
+                        else{
+                            obj.isComment = false
+                            self.tblViewSocialPost.reloadData()
+                        }
+                    }else{
+                        if obj.isComment == false{
+                            obj.isComment = true
+                            self.tblViewSocialPost.reloadData()
+                        }
+                        else{
+                            obj.isComment = false
+                            self.tblViewSocialPost.reloadData()
+                        }
                     }
                 }
                 
@@ -503,8 +554,9 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                             
                             
                             cell.lblusernameandcomment.attributedText = attributedString
-                            //                            self.view.addSubview(cell.lblusernameandcomment) // For Show in controller
                             
+                                self.listoppoertunityapi()
+
                         }
                     }
                 }
@@ -794,8 +846,7 @@ extension ProfileVC{
                         self?.userTimeLine = Opportunity.map{SocialPostData(data: kSharedInstance.getDictionary($0))}
                         
                         print("DataAllPost====-=\(self?.userTimeLine)")
-                        
-                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                       
                         self?.tblViewSocialPost.reloadData()
                         self?.imgNoOpp.isHidden = true
                         
@@ -867,7 +918,7 @@ extension ProfileVC{
                         
                         print("DataAllPost====-=\(self?.userTimeLine)")
                         
-                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        
                         self?.tblViewSocialPost.reloadData()
                         self?.imgNoOpp.isHidden = true
                         

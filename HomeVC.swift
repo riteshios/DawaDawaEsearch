@@ -12,8 +12,6 @@ import IQKeyboardManagerSwift
 class HomeVC: UIViewController{
     
     
-    
-    
     @IBOutlet weak var tblViewViewPost: UITableView!
     
     var imgUrl = ""
@@ -51,11 +49,13 @@ class HomeVC: UIViewController{
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         if cameFrom != "FilterData"{
             self.getallopportunity()
         }
+        
+        
     }
-    
     
     
     private func setup(){
@@ -154,7 +154,10 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
             cell.SocialPostCollectionView.tag = indexPath.section
             cell.lblUserName.text = String.getString(obj.userdetail?.name)
             debugPrint("username.....", cell.lblUserName.text)
+            cell.lblTitle.text = String.getString(obj.title)
             cell.lblDescribtion.text = String.getString(obj.description)
+            cell.lblRating.text = String.getString(obj.opr_rating)
+            
             cell.img = obj.oppimage
             cell.imgUrl = self.imgUrl
             
@@ -211,6 +214,14 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                 cell.heightSocialPostCollectionView.constant = 225
             }
             
+            if String.getString(obj.opr_rating) == ""{
+                cell.WidthViewRating.constant = 35
+                cell.lblRating.isHidden = true
+            }
+            else{
+                cell.WidthViewRating.constant = 58
+                cell.lblRating.isHidden = false
+            }
             
             
             cell.callback = { txt, sender in
@@ -236,6 +247,20 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                             
                         }
                     }
+                }
+                
+                if txt == "Rate"{
+                    let oppid = userTimeLine[indexPath.row].id
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: RateOpportunityPopUPVC.getStoryboardID()) as! RateOpportunityPopUPVC
+                    vc.modalTransitionStyle = .crossDissolve
+                    vc.modalPresentationStyle = .overCurrentContext
+                    vc.oppid = oppid ?? 0
+            
+                    vc.callbackClosure = {
+                        self.getallopportunity()
+                    }
+                    self.present(vc, animated: false)
+                    
                 }
                 
                 if txt == "Save"{
@@ -595,8 +620,6 @@ extension HomeVC{
     }
     
     
-    
-    
     // Api flag Opportunity
     
     func flagopportunityapi(oppr_id:Int){
@@ -665,6 +688,8 @@ extension HomeVC{
             
         }
     }
+    
+    
     
     //    Api like Opportunity
     
@@ -810,6 +835,8 @@ extension HomeVC{
             
         }
     }
+    
+    
     //    Save Opportunity Api
     
     func saveoppoertunityapi(oppr_id:Int){

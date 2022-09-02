@@ -7,6 +7,7 @@ PODS:
     - AppAuth/ExternalUserAgent (= 1.4.0)
   - AppAuth/Core (1.4.0)
   - AppAuth/ExternalUserAgent (1.4.0)
+  - Cosmos (23.0.0)
   - DropDown (2.3.13)
   - Firebase/Auth (8.12.1):
     - Firebase/CoreOnly
@@ -133,6 +134,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire (~> 4.0)
   - AlamofireImage
+  - Cosmos (~> 23.0)
   - DropDown
   - Firebase/Auth
   - Firebase/Core
@@ -154,6 +156,7 @@ SPEC REPOS:
     - Alamofire
     - AlamofireImage
     - AppAuth
+    - Cosmos
     - DropDown
     - Firebase
     - FirebaseAnalytics
@@ -185,6 +188,7 @@ SPEC CHECKSUMS:
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
   AlamofireImage: be9963c6582d68b39e89191f64c82a7d7bf40fdd
   AppAuth: 31bcec809a638d7bd2f86ea8a52bd45f6e81e7c7
+  Cosmos: b5c6a9a637e28a061b54c8f8b1d8529d7d4db73f
   DropDown: 8a2116376c1981888557f72ec2ffc9a5e0e456ec
   Firebase: 580d09e8edafc3073ebf09c03fd42e4d80d35fe9
   FirebaseAnalytics: bd10d7706ba8d6e01ea2816f8fe9e9b881cb0918
@@ -212,6 +216,6 @@ SPEC CHECKSUMS:
   SwiftyGif: 6c3eafd0ce693cad58bb63d2b2fb9bacb8552780
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
 
-PODFILE CHECKSUM: 31231daac0e35955a2748e058af8ef7d46b13f27
+PODFILE CHECKSUM: c9e757f99da5de5e4c82f1f61ce465d45fd87ade
 
 COCOAPODS: 1.11.3

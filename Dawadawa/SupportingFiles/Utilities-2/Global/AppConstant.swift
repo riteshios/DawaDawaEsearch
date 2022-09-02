@@ -135,6 +135,9 @@ struct ServiceName {
 // Comment Opp
     static let kaddcomment              =         "api/comment-opportunity"
     static let kcommentreply            =         "api/commentreply-opportunity"
+    
+// Rate Opp/User
+    static let krateopp                =           "api/rateOpr"
 }
 
 struct Notifications {

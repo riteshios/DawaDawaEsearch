@@ -25,6 +25,7 @@ target 'Dawadawa' do
   pod 'DropDown'
   pod 'SwiftyJSON'
   pod 'RangeSeekSlider'
+  pod 'Cosmos', '~> 23.0'
 #  pod 'Localize-Swift', '~> 3.2'
 
 

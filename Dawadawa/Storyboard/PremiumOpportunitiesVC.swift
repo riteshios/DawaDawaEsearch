@@ -22,11 +22,17 @@ class PremiumOpportunitiesVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.getallpremium()
+        
+        
         tblViewPremiumOpp.register(UINib(nibName: "PremiumTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "PremiumTableViewCell")
         tblViewPremiumOpp.register(UINib(nibName: "SocialPostTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "SocialPostTableViewCell")
         
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.getallpremium()
     }
     
     @IBAction func btnBackTapped(_ sender: UIButton) {
@@ -80,8 +86,10 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
             
             cell.SocialPostCollectionView.tag = indexPath.section
             cell.lblUserName.text = String.getString(obj.userdetail?.name)
-            cell.lblDescribtion.text = String.getString(obj.description)
             cell.lblTitle.text = String.getString(obj.title)
+            cell.lblDescribtion.text = String.getString(obj.description)
+            
+            cell.lblRating.text = String.getString(obj.opr_rating)
             
             let imgurl = String.getString(obj.userdetail?.social_profile)
             debugPrint("socialprofile......",imgurl)
@@ -130,7 +138,14 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
                 cell.heightSocialPostCollectionView.constant = 225
             }
             
-            
+            if String.getString(obj.opr_rating) == ""{
+                cell.WidthViewRating.constant = 35
+                cell.lblRating.isHidden = true
+            }
+            else{
+                cell.WidthViewRating.constant = 58
+                cell.lblRating.isHidden = false
+            }
             
             cell.callback = { txt, tapped in
                 
@@ -146,6 +161,22 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
                     }
                     cell.imglike.image = UIImage(named: "dil")
                     cell.lbllike.text = "Liked"
+                    self.getallpremium()
+                    
+                    
+                }
+                
+                if txt == "Rate"{
+                    let oppid = self.userTimeLine[indexPath.row].id
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: RateOpportunityPopUPVC.getStoryboardID()) as! RateOpportunityPopUPVC
+                    vc.modalTransitionStyle = .crossDissolve
+                    vc.modalPresentationStyle = .overCurrentContext
+                    vc.oppid = oppid ?? 0
+            
+                    vc.callbackClosure = {
+                        self.getallpremium()
+                    }
+                    self.present(vc, animated: false)
                     
                 }
                 
@@ -263,12 +294,23 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
                 
                 if txt == "ClickComment"{
                     if tapped.isSelected{
-                        obj.isComment = true
-                        self.tblViewPremiumOpp.reloadData()
-                    }
-                    else{
-                        obj.isComment = false
-                        self.tblViewPremiumOpp.reloadData()
+                        if obj.isComment == false{
+                            obj.isComment = true
+                            self.tblViewPremiumOpp.reloadData()
+                        }
+                        else{
+                            obj.isComment = false
+                            self.tblViewPremiumOpp.reloadData()
+                        }
+                    }else{
+                        if obj.isComment == false{
+                            obj.isComment = true
+                            self.tblViewPremiumOpp.reloadData()
+                        }
+                        else{
+                            obj.isComment = false
+                            self.tblViewPremiumOpp.reloadData()
+                        }
                     }
                 }
                 
@@ -308,7 +350,7 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
                             
                             
                             cell.lblusernameandcomment.attributedText = attributedString
-                            //                            self.view.addSubview(cell.lblusernameandcomment) // For Show in controller
+                            self.getallpremium()
                             
                         }
                     }

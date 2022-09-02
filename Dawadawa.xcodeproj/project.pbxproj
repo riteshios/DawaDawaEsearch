@@ -67,6 +67,7 @@
 		04A73F402876E05C00A46E12 /* RockPitOpportunityVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A73F3F2876E05C00A46E12 /* RockPitOpportunityVC.swift */; };
 		04A9958C28A370FD00FC75C9 /* SaveOpportunityMoreVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A9958B28A370FD00FC75C9 /* SaveOpportunityMoreVC.swift */; };
 		04AEBC122872195C00063E51 /* GoogleService-Info-2.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04AEBC112872195C00063E51 /* GoogleService-Info-2.plist */; };
+		04AF23BE28C08DF90053471D /* RateOpportunityPopUPVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AF23BD28C08DF90053471D /* RateOpportunityPopUPVC.swift */; };
 		04B2653A2872C84000B2DF7C /* ContactUsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B265392872C83F00B2DF7C /* ContactUsVC.swift */; };
 		04B2653C28731CAE00B2DF7C /* WebViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B2653B28731CAD00B2DF7C /* WebViewVC.swift */; };
 		04B4C8F62889BAA400DB3E11 /* OpportunitypostedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B4C8F42889BAA400DB3E11 /* OpportunitypostedTableViewCell.swift */; };
@@ -700,6 +701,7 @@
 		04A73F3F2876E05C00A46E12 /* RockPitOpportunityVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RockPitOpportunityVC.swift; path = Dawadawa/Storyboard/RockPitOpportunityVC.swift; sourceTree = SOURCE_ROOT; };
 		04A9958B28A370FD00FC75C9 /* SaveOpportunityMoreVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SaveOpportunityMoreVC.swift; path = Dawadawa/Storyboard/SaveOpportunityMoreVC.swift; sourceTree = SOURCE_ROOT; };
 		04AEBC112872195C00063E51 /* GoogleService-Info-2.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-2.plist"; sourceTree = "<group>"; };
+		04AF23BD28C08DF90053471D /* RateOpportunityPopUPVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateOpportunityPopUPVC.swift; sourceTree = "<group>"; };
 		04B265392872C83F00B2DF7C /* ContactUsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ContactUsVC.swift; path = Dawadawa/Storyboard/ContactUsVC.swift; sourceTree = SOURCE_ROOT; };
 		04B2653B28731CAD00B2DF7C /* WebViewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewVC.swift; sourceTree = SOURCE_ROOT; };
 		04B4C8F42889BAA400DB3E11 /* OpportunitypostedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpportunitypostedTableViewCell.swift; sourceTree = "<group>"; };
@@ -1459,6 +1461,14 @@
 				04A73F3F2876E05C00A46E12 /* RockPitOpportunityVC.swift */,
 			);
 			name = RockPitOpportunity;
+			sourceTree = "<group>";
+		};
+		04AF23BC28C08DB40053471D /* RateScreen */ = {
+			isa = PBXGroup;
+			children = (
+				04AF23BD28C08DF90053471D /* RateOpportunityPopUPVC.swift */,
+			);
+			name = RateScreen;
 			sourceTree = "<group>";
 		};
 		04B4C8F32889BA3100DB3E11 /* Profile */ = {
@@ -2415,6 +2425,7 @@
 				04BFFB67289250BA0086DCC1 /* FilterVC.swift */,
 				0461E31A288AA29800B7F0E7 /* HomeSocialMoreVC.swift */,
 				045C4E7D28897ACB00E831AA /* PremiumOpportunitiesVC.swift */,
+				04AF23BC28C08DB40053471D /* RateScreen */,
 				04C848A928B7AB4100505AB0 /* DetailScreen */,
 				04B599312899088E008366DC /* Subscription */,
 				0461E315288A778400B7F0E7 /* Profile */,
@@ -3091,6 +3102,7 @@
 				447DCC8E2851CB1100C40DDD /* UITextFieldSubLayerBorderWidthAndColor.swift in Sources */,
 				045EE014288912F600E45E79 /* SocialPostCollectionViewCell.swift in Sources */,
 				04067751288820B60061AE70 /* PremiumOppCollectionViewCell.swift in Sources */,
+				04AF23BE28C08DF90053471D /* RateOpportunityPopUPVC.swift in Sources */,
 				04B4C8F62889BAA400DB3E11 /* OpportunitypostedTableViewCell.swift in Sources */,
 				447DCC842851CB1100C40DDD /* IntExtended.swift in Sources */,
 				447DCC682851CB1100C40DDD /* UIColor+Extensions.swift in Sources */,

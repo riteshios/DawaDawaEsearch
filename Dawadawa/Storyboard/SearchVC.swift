@@ -109,6 +109,7 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
             debugPrint("username.....", cell.lblUserName.text)
             cell.lblTitle.text = String.getString(obj.title)
             cell.lblDescribtion.text = String.getString(obj.description)
+            cell.lblRating.text = String.getString(obj.opr_rating)
             cell.img = obj.oppimage
             cell.imgUrl = self.imgUrl
             
@@ -167,6 +168,16 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
                 cell.heightSocialPostCollectionView.constant = 225
             }
             
+            if String.getString(obj.opr_rating) == ""{
+                cell.WidthViewRating.constant = 35
+                cell.lblRating.isHidden = true
+            }
+            else{
+                cell.WidthViewRating.constant = 58
+                cell.lblRating.isHidden = false
+            }
+            
+            
             
             cell.callback = { txt, sender in
                 
@@ -184,10 +195,24 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
                         }
                         cell.imglike.image = UIImage(named: "dil")
                         cell.lbllike.text = "Liked"
+                        self.searchopportunityapi()
                         
                     }
                 }
                 
+                if txt == "Rate"{
+                    let oppid = self.userTimeLine[indexPath.row].id
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: RateOpportunityPopUPVC.getStoryboardID()) as! RateOpportunityPopUPVC
+                    vc.modalTransitionStyle = .crossDissolve
+                    vc.modalPresentationStyle = .overCurrentContext
+                    vc.oppid = oppid ?? 0
+            
+                    vc.callbackClosure = {
+                        self.searchopportunityapi()
+                    }
+                    self.present(vc, animated: false)
+                    
+                }
                 
                 if txt == "Save"{
                     if sender.isSelected{
@@ -359,7 +384,7 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
                             
                             
                             cell.lblusernameandcomment.attributedText = attributedString
-                            //                            self.view.addSubview(cell.lblusernameandcomment) // For Show in controller
+                            self.searchopportunityapi()
                             
                         }
                     }
