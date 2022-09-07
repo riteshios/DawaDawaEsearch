@@ -15,7 +15,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
     //   MARK: - Properties
     @IBOutlet weak var txtFieldTitle: SKFloatingTextField!
     @IBOutlet weak var txtFieldLocationName: SKFloatingTextField!
-    @IBOutlet weak var txtFieldLocationOnMap: SKFloatingTextField!
+    
     @IBOutlet weak var txtFieldMobileNumber: SKFloatingTextField!
     @IBOutlet weak var txtFieldWhatsappNumber: SKFloatingTextField!
     @IBOutlet weak var txtFieldPricing: SKFloatingTextField!
@@ -26,6 +26,8 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
     @IBOutlet weak var lblState: UILabel!
     @IBOutlet weak var btnState: UIButton!
     @IBOutlet weak var lblLocality: UILabel!
+    @IBOutlet weak var lblLocationOnMap: UILabel!
+    
     @IBOutlet weak var btnLocality: UIButton!
     @IBOutlet weak var lblLookingFor: UILabel!
     @IBOutlet weak var btnLookingFor: UIButton!
@@ -92,6 +94,11 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
     var docUrl = ""
     var oppid:Int?
     
+    //    Cuurent location
+    var currentadd = ""
+    var latitude = Double()
+    var longitude = Double()
+    
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
@@ -99,6 +106,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
         self.getsubcategoryapi()
         self.getstateapi()
         self.getlookingforapi(id: self.lookingforid ?? 0)
+        
         
         self.setup()
         
@@ -113,7 +121,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
                 self.fetdata()
             }
         }
-       
+        
         self.UploadimageCollectionView.reloadData()
     }
     
@@ -124,7 +132,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
         self.viewCreateOpportunity.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
         self.setTextFieldUI(textField: txtFieldTitle, place: "Title", floatingText: "Title")
         self.setTextFieldUI(textField: txtFieldLocationName, place: "Location name", floatingText: "Location name")
-        self.setTextFieldUI(textField: txtFieldLocationOnMap, place: "Location on map ( optional )", floatingText: "Location on map ( optional )")
+        
         self.setTextFieldUI(textField: txtFieldMobileNumber, place: "Mobile number", floatingText: "Mobile number")
         self.setTextFieldUI(textField: txtFieldWhatsappNumber, place: "WhatsApp number", floatingText: "WhatsApp number")
         self.setTextFieldUI(textField: txtFieldPricing, place: "Price in US Dollar (optional)", floatingText: "Price in US Dollar (optional)")
@@ -132,7 +140,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
     }
     
     func fetdata(){
-      
+        
         self.UploadimageCollectionView.reloadData()
         self.UploaddocumentCollectionView.reloadData()
         self.btnCreate_UpdateOpp.setTitle("Update opportunity", for: .normal)
@@ -141,7 +149,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
         self.lblState.text = self.userTimeLineoppdetails?.opp_state
         self.lblLocality.text = self.userTimeLineoppdetails?.opp_locality
         self.txtFieldLocationName.text = self.userTimeLineoppdetails?.location_name
-        self.txtFieldLocationOnMap.text = self.userTimeLineoppdetails?.location_map
+        
         self.TextViewDescription.text = self.userTimeLineoppdetails?.description
         self.txtFieldMobileNumber.text = self.userTimeLineoppdetails?.mobile_num
         self.txtFieldWhatsappNumber.text = self.userTimeLineoppdetails?.whatsaap_num
@@ -161,10 +169,27 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
             self.viewPremium.backgroundColor = UIColor(red: 21, green: 114, blue: 161)
             self.lblPremium.textColor = .white
         }
-
-       
+        
+        
     }
     // MARK: - @IBActions
+    
+    @IBAction func btnpinlocationtapped(_ sender: UIButton) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: CurrentLocationVC.getStoryboardID()) as! CurrentLocationVC
+        vc.modalTransitionStyle = .crossDissolve
+        vc.modalPresentationStyle = .overFullScreen
+        
+        vc.callback = { address , latitude, longitude in
+            vc.dismiss(animated: true){
+                self.lblLocationOnMap.text = address
+                self.latitude = latitude
+                self.longitude = longitude
+                self.currentadd = address
+            }
+            
+        }
+        self.present(vc, animated: false)
+    }
     
     @IBAction func btnBackTapped(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
@@ -175,13 +200,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
         vc.modalTransitionStyle = .crossDissolve
         vc.modalPresentationStyle = .overCurrentContext
         vc.callbackquit =  { txt in
-//            if txt == "Cancel"{
-//                vc.dismiss(animated: false){
-//                    let vc = self.storyboard?.instantiateViewController(withIdentifier: RockPitOpportunityVC.getStoryboardID()) as! RockPitOpportunityVC
-//                    self.navigationController?.pushViewController(vc, animated: false)
-//                }
-//
-//            }
+            //
             if txt == "Quit"{
                 vc.dismiss(animated: false){
                     kSharedAppDelegate?.makeRootViewController()
@@ -209,52 +228,52 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
             }
             self.viewSelectCategoryTop.constant = 420  // 310
             self.isSelectimage = true
-           
+            
         }
     }
     
     @IBAction func btnAddmoreImageTapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         if self.btnMoreImage.isSelected == true{
-        if self.isedit == "True"{
-            ImagePickerHelper.shared.showPickerController {
-                image, url in
-                self.imagearr.append(image ?? UIImage())
-                debugPrint("imagearraycount..........",self.imagearr.count)
-                
-                let obj = oppr_image(data: [:])
-                obj.imageurl = ""
-                obj.img = image
-                self.imgarray.append(obj)
-                debugPrint("imgarra=-=-=",self.imgarray.count)
-                
-                self.UploadimageCollectionView.reloadData()
-        }
-    }
-            else{
-            if imagearr.count != 0{
+            if self.isedit == "True"{
                 ImagePickerHelper.shared.showPickerController {
                     image, url in
                     self.imagearr.append(image ?? UIImage())
+                    debugPrint("imagearraycount..........",self.imagearr.count)
+                    
+                    let obj = oppr_image(data: [:])
+                    obj.imageurl = ""
+                    obj.img = image
+                    self.imgarray.append(obj)
+                    debugPrint("imgarra=-=-=",self.imgarray.count)
+                    
                     self.UploadimageCollectionView.reloadData()
-             }
-         }
-     }
-   }
-}
-    
-    @IBAction func btnSelectDocumentTapped(_ sender: UIButton) {
-            sender.isSelected = !sender.isSelected
-            if self.btnSelectDocument.isSelected == true{
-                if documentarr.count == 0{
-                    btnSelectDocument.isEnabled = true
-                    self.openFileBrowser()
-                    self.viewSelectCategoryTop.constant = 420
-                }
-                else{
-                    btnSelectDocument.isEnabled = false
                 }
             }
+            else{
+                if imagearr.count != 0{
+                    ImagePickerHelper.shared.showPickerController {
+                        image, url in
+                        self.imagearr.append(image ?? UIImage())
+                        self.UploadimageCollectionView.reloadData()
+                    }
+                }
+            }
+        }
+    }
+    
+    @IBAction func btnSelectDocumentTapped(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        if self.btnSelectDocument.isSelected == true{
+            if documentarr.count == 0{
+                btnSelectDocument.isEnabled = true
+                self.openFileBrowser()
+                self.viewSelectCategoryTop.constant = 420
+            }
+            else{
+                btnSelectDocument.isEnabled = false
+            }
+        }
         self.isSelectDocument = true
         
     }
@@ -265,12 +284,12 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
                 self.openFileBrowser()
             }
             else{
-        if documentarr.count != 0{
-            self.openFileBrowser()
-        }
+                if documentarr.count != 0{
+                    self.openFileBrowser()
+                }
             }
+        }
     }
-}
     
     
     @IBAction func btnSelectSubCategoryTapped(_ sender: UIButton) {
@@ -334,7 +353,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
             self.viewPremium.backgroundColor = .white
             self.lblPremium.textColor =  UIColor(red: 21, green: 114, blue: 161)
             self.isSelectopp_planBasic = true
-          
+            
         }
     }
     
@@ -349,7 +368,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
             self.viewPremium.backgroundColor = .white
             self.lblPremium.textColor =  UIColor(red: 21, green: 114, blue: 161)
             self.isSelectopp_planFeatured = true
-           
+            
         }
     }
     
@@ -364,9 +383,9 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
             self.viewFeature.backgroundColor = .white
             self.lblFeature.textColor =  UIColor(red: 21, green: 114, blue: 161)
             
-           
+            
             self.isSelectopp_planPremium = true
-           
+            
         }
     }
     
@@ -375,27 +394,27 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
             self.updateopportunityapi()
         }
         else{
-        self.Validation()
+            self.Validation()
         }
-
+        
     }
     
-//    MARK: - Validation
+    //    MARK: - Validation
     
     func Validation(){
-//        if self.isSelectimage == false && self.imagearr.count == 0{
-//            self.showSimpleAlert(message: "Please Select the image")
-//            return
-//        }
-//        else if self.isSelectDocument == false && self.documentarr.count == 0 {
-//            self.showSimpleAlert(message: "Please Select the Document")
-//            return
-//        }
+        //        if self.isSelectimage == false && self.imagearr.count == 0{
+        //            self.showSimpleAlert(message: "Please Select the image")
+        //            return
+        //        }
+        //        else if self.isSelectDocument == false && self.documentarr.count == 0 {
+        //            self.showSimpleAlert(message: "Please Select the Document")
+        //            return
+        //        }
         if self.isSelectSubcategory == false{
             self.showSimpleAlert(message: "Please Select the Subcategory")
             return
         }
-     else if String.getString(self.txtFieldTitle.text).isEmpty
+        else if String.getString(self.txtFieldTitle.text).isEmpty
         {
             self.showSimpleAlert(message: Notifications.ktitle)
             return
@@ -414,11 +433,11 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
             return
         }
         
-//        else if String.getString(self.txtFieldLocationName.text).isEmpty
-//        {
-//            showSimpleAlert(message: Notifications.kLocationName)
-//            return
-//        }
+        //        else if String.getString(self.txtFieldLocationName.text).isEmpty
+        //        {
+        //            showSimpleAlert(message: Notifications.kLocationName)
+        //            return
+        //        }
         else if String.getString(self.TextViewDescription.text).isEmpty{
             showSimpleAlert(message: Notifications.kDescription)
             return
@@ -434,16 +453,16 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
             return
         }
         
-//        else if String.getString(self.txtFieldWhatsappNumber.text).isEmpty
-//        {
-//            showSimpleAlert(message: Notifications.kwhatsappnumber)
-//            return
-//        }
-//        else if !String.getString(self.txtFieldWhatsappNumber.text).isPhoneNumber()
-//        {
-//            self.showSimpleAlert(message: Notifications.kvalidwhatsappnumber)
-//            return
-//        }
+        //        else if String.getString(self.txtFieldWhatsappNumber.text).isEmpty
+        //        {
+        //            showSimpleAlert(message: Notifications.kwhatsappnumber)
+        //            return
+        //        }
+        //        else if !String.getString(self.txtFieldWhatsappNumber.text).isPhoneNumber()
+        //        {
+        //            self.showSimpleAlert(message: Notifications.kvalidwhatsappnumber)
+        //            return
+        //        }
         else if self.isSelectLookingFor == false{
             self.showSimpleAlert(message: "Please Select looking For")
             return
@@ -459,12 +478,12 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
             }
             return
         }
-      
+        
         self.view.endEditing(true)
         self.createopportunityapi()
     }
     
-// MARK: - Collection view
+    // MARK: - Collection view
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch collectionView{
@@ -475,14 +494,14 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
             else{
                 return self.imagearr.count
             }
-           
+            
             
         case self.UploaddocumentCollectionView:
             if self.isedit == "True"{
                 return self.docarray.count
             }
             else {
-              return self.docummentarray.count
+                return self.docummentarray.count
             }
             
             
@@ -505,9 +524,9 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
                     cell.image.image = self.imgarray[indexPath.item].img
                 }
                 else{
-                let imageurl = "\(self.imgUrl)/\(String.getString(imgurl))"
-                print("-=imageurl=-=-\(imageurl)")
-                cell.image.downlodeImage(serviceurl: imageurl, placeHolder: UIImage(named: "baba"))
+                    let imageurl = "\(self.imgUrl)/\(String.getString(imgurl))"
+                    print("-=imageurl=-=-\(imageurl)")
+                    cell.image.downlodeImage(serviceurl: imageurl, placeHolder: UIImage(named: "baba"))
                 }
                 
                 
@@ -545,17 +564,17 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
                     self.UploaddocumentCollectionView.reloadData()
                     
                 }
-              
+                
             }
             
             else{
-            cell.lbldocument.text = docummentarray[indexPath.row]
-            cell.callbackclose = {
-                self.docummentarray.remove(at: indexPath.row)
-                self.UploaddocumentCollectionView.reloadData()
-                
+                cell.lbldocument.text = docummentarray[indexPath.row]
+                cell.callbackclose = {
+                    self.docummentarray.remove(at: indexPath.row)
+                    self.UploaddocumentCollectionView.reloadData()
+                    
+                }
             }
-        }
             return cell
             
         default: return UICollectionViewCell()
@@ -634,7 +653,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
         
         
         // self.doc = (url)
-//        print("doc path=-=-=\(doc)")
+        //        print("doc path=-=-=\(doc)")
         self.documentarr.append(url)
         print("doc documentarr=-=-=\(documentarr)")
         self.docummentarray.append(url.lastPathComponent)
@@ -653,7 +672,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
     }
     
     func updateImageViewWithExtension(_ fileExtention:String) {
-
+        
         
     }
     
@@ -1112,13 +1131,15 @@ extension RockPitOpportunityVC{
             "opp_state":"\(String(describing: stateid))",
             "opp_locality":"\(String(describing: localityid))",
             "location_name":String.getString(self.txtFieldLocationName.text),
-            "location_map":String.getString(self.txtFieldLocationOnMap.text),
             "description":String.getString(self.TextViewDescription.text),
             "mobile_num":String.getString(self.txtFieldMobileNumber.text),
             "whatsaap_num":String.getString(self.txtFieldWhatsappNumber.text),
             "pricing":String.getString(self.txtFieldPricing.text),
             "looking_for":"\(String(describing: lookingforid))",
             "plan":String.getString(plan),
+            "location_map":String.getString(self.lblLocationOnMap.text),
+            "latitude":String.getString(self.latitude),
+            "longitude":String.getString(self.longitude),
             "cat_type_id":"0"
         ]
         
@@ -1152,7 +1173,7 @@ extension RockPitOpportunityVC{
                         
                     }
                     else if  Int.getInt(dictResult["status"]) == 400{
-//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                 default:
@@ -1166,7 +1187,7 @@ extension RockPitOpportunityVC{
         }
     }
     
-// Update Opportunity Api
+    // Update Opportunity Api
     
     func updateopportunityapi(){
         CommonUtils.showHud(show: true)
@@ -1205,16 +1226,16 @@ extension RockPitOpportunityVC{
             "opp_state":"\(String(describing: stateid))",
             "opp_locality":"\(String(describing: localityid))",
             "location_name":String.getString(self.txtFieldLocationName.text),
-            "location_map":String.getString(self.txtFieldLocationOnMap.text),
+            "location_map":String.getString(self.currentadd),
             "description":String.getString(self.TextViewDescription.text),
             "mobile_num":String.getString(self.txtFieldMobileNumber.text),
             "whatsaap_num":String.getString(self.txtFieldWhatsappNumber.text),
             "pricing":String.getString(self.txtFieldPricing.text),
             "looking_for":"\(String(describing: lookingforid))",
             "plan":String.getString(plan),
-//            "cat_type_id":"0"
+            "latitude":String.getString(self.latitude),
+            "longitude":String.getString(self.longitude)
         ]
-        
         
         
         
@@ -1246,7 +1267,7 @@ extension RockPitOpportunityVC{
                         
                     }
                     else if  Int.getInt(dictResult["status"]) == 400{
-//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                 default:

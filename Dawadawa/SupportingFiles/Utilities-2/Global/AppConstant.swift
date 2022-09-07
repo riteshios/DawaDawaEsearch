@@ -138,6 +138,11 @@ struct ServiceName {
     
 // Rate Opp/User
     static let krateopp                =           "api/rateOpr"
+    static let krateuser               =           "api/rateUser"
+    
+// UserData
+    static let kuserdata               =           "api/userData"
+    
 }
 
 struct Notifications {

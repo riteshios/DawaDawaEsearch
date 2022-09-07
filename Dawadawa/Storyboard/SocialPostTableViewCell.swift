@@ -42,6 +42,8 @@ class SocialPostTableViewCell: UITableViewCell,UITextViewDelegate {
     
     
     
+    
+    
     //    Comment Section
     
     @IBOutlet weak var btnClickComment: UIButton!
@@ -111,6 +113,11 @@ class SocialPostTableViewCell: UITableViewCell,UITextViewDelegate {
     
     //    MARK: - @IBAction
     
+    @IBAction func btnProfileImageTapped(_ sender: UIButton) {
+        self.callback?("Profileimage",sender)
+    }
+    
+    
     @IBAction func btnMoreTapped(_ sender: UIButton) {
         self.callback?("More", sender)
     }
@@ -131,7 +138,7 @@ class SocialPostTableViewCell: UITableViewCell,UITextViewDelegate {
     }
     
     @IBAction func btnClickCommentBox(_ sender: UIButton) {
-   sender.isSelected = !sender.isSelected
+        sender.isSelected = !sender.isSelected
         self.callback?("ClickComment",sender)
     }
     

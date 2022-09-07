@@ -25,6 +25,8 @@ class SocialPostData {
     var opp_locality:String?
     var location_name:String?
     var location_map:String?
+    var latitude:String?
+    var longitude:String?
     var description:String?
     var likes:Int?
     var opr_rating:String?
@@ -45,7 +47,7 @@ class SocialPostData {
     var usercomment = [user_comment]()
     
     
-   
+    
     init(data: [String: Any]) {
         self.id = Int.getInt(data["id"])
         self.user_id = Int.getInt(data["user_id"])
@@ -61,6 +63,8 @@ class SocialPostData {
         self.opp_locality = String.getString(data["opp_locality"])
         self.location_name = String.getString(data["location_name"])
         self.location_map = String.getString(data["location_map"])
+        self.latitude = String.getString(data["latitude"])
+        self.longitude = String.getString(data["longitude"])
         self.description = String.getString(data["description"])
         self.likes = Int.getInt(data["likes"])
         self.opr_rating = String.getString(data["opr_rating"])
@@ -118,7 +122,7 @@ class oppr_document{
     var id:Int?
     var opportunity_id:Int?
     var oppr_document:String?
-  
+    
     init(data:[String:Any]){
         self.id = Int.getInt(data["id"])
         self.opportunity_id = Int.getInt(data["opportunity_id"])
@@ -154,7 +158,7 @@ class sub_Comment{
     var usersubcommentdetails:subcomment_userdetails?
     
     init(data:[String:Any]){
-       
+        
         self.comments = String.getString(data["comments"])
         self.usersubcommentdetails = subcomment_userdetails(data: kSharedInstance.getDictionary(data["user"]))
         
@@ -173,6 +177,31 @@ class subcomment_userdetails{
         self.id = Int.getInt(data["id"])
         self.name = String.getString(data["name"])
         self.last_name = String.getString(data["last_name"])
+        self.image = String.getString(data["image"])
+    }
+}
+
+
+
+class user_Data{
+    
+    var name:String?
+    var email:String?
+    var user_status:String?
+    var phone:String?
+    var rating:String?
+    var user_type:String?
+    var about:String?
+    var image:String?
+    
+    init(data:[String:Any]){
+        self.name = String.getString(data["name"])
+        self.email = String.getString(data["email"])
+        self.user_status = String.getString(data["user_status"])
+        self.phone = String.getString(data["phone"])
+        self.rating = String.getString(data["rating"])
+        self.user_type = String.getString(data["user_type"])
+        self.about = String.getString(data["about"])
         self.image = String.getString(data["image"])
     }
 }

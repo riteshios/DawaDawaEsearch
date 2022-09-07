@@ -125,6 +125,14 @@ extension ViewAllSavedVC:UITableViewDelegate,UITableViewDataSource{
         
         cell.callback = { txt, sender in
             
+            if txt == "Profileimage"{
+                let user_id = self.userTimeLine[indexPath.row].user_id
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: UserProfileDetailsVC.getStoryboardID()) as! UserProfileDetailsVC
+                vc.userid = user_id ?? 0
+                self.navigationController?.pushViewController(vc, animated: true)
+                
+            }
+            
             if txt == "Like"{
                 if cell.btnlike.isSelected == true{
                     if UserData.shared.isskiplogin == true{

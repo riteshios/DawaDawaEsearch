@@ -50,15 +50,26 @@
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Crown" translatesAutoresizingMaskIntoConstraints="NO" id="mSp-k1-hDp">
                                                 <rect key="frame" x="42" y="36" width="20" height="20"/>
                                             </imageView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uel-i3-6NV">
+                                                <rect key="frame" x="0.0" y="0.0" width="59" height="64"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <connections>
+                                                    <action selector="btnProfileImageTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="nko-Nv-SSG"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
+                                            <constraint firstItem="uel-i3-6NV" firstAttribute="leading" secondItem="vUg-me-atb" secondAttribute="leading" id="96j-Iz-xbx"/>
+                                            <constraint firstAttribute="trailing" secondItem="uel-i3-6NV" secondAttribute="trailing" id="CLp-y0-SD0"/>
                                             <constraint firstItem="FJx-Mb-Rlw" firstAttribute="top" secondItem="vUg-me-atb" secondAttribute="top" id="DLu-ec-ujV"/>
                                             <constraint firstAttribute="bottom" secondItem="FJx-Mb-Rlw" secondAttribute="bottom" id="EHc-B7-DfG"/>
                                             <constraint firstAttribute="trailing" secondItem="FJx-Mb-Rlw" secondAttribute="trailing" id="O3K-Yj-m4n"/>
                                             <constraint firstAttribute="width" constant="59" id="OKW-zR-cRN"/>
                                             <constraint firstItem="mSp-k1-hDp" firstAttribute="leading" secondItem="vUg-me-atb" secondAttribute="leading" constant="42" id="U2J-zB-jQM"/>
                                             <constraint firstItem="FJx-Mb-Rlw" firstAttribute="leading" secondItem="vUg-me-atb" secondAttribute="leading" id="c1U-mc-Y0J"/>
+                                            <constraint firstAttribute="bottom" secondItem="uel-i3-6NV" secondAttribute="bottom" id="eUL-Jv-V2f"/>
+                                            <constraint firstItem="uel-i3-6NV" firstAttribute="top" secondItem="vUg-me-atb" secondAttribute="top" id="gIO-2d-8vc"/>
                                             <constraint firstItem="mSp-k1-hDp" firstAttribute="top" secondItem="vUg-me-atb" secondAttribute="top" constant="36" id="hnA-ws-xha"/>
                                         </constraints>
                                     </view>

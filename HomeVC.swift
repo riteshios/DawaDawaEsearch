@@ -226,6 +226,14 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
             
             cell.callback = { txt, sender in
                 
+                if txt == "Profileimage"{
+                    let user_id = userTimeLine[indexPath.row].user_id
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: UserProfileDetailsVC.getStoryboardID()) as! UserProfileDetailsVC
+                    vc.userid = user_id ?? 0
+                    self.navigationController?.pushViewController(vc, animated: true)
+                    
+                }
+                
                 if txt == "Like"{
                     if cell.btnlike.isSelected == true{
                         if UserData.shared.isskiplogin == true{
@@ -243,7 +251,7 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                             cell.lbllike.text = "Liked"
                             
                             debugPrint("count=-==0-",self.count)
-                            self.getallopportunity()
+//                            self.getallopportunity()
                             
                         }
                     }
@@ -448,7 +456,6 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
             }
             
             
-            
             let imgcomment = "\("https://demo4app.com/dawadawa/public/admin_assets/user_profile/" + String.getString(UserData.shared.social_profile))"
             
             cell.imageUser.downlodeImage(serviceurl: imgcomment , placeHolder: UIImage(named: "Boss")) // commentUserImage
@@ -577,7 +584,7 @@ extension HomeVC{
             }
         }
         
-        //        debugPrint("\(ServiceName.kgetallopportunity)/\(UserData.shared.id)") //passing userid in api url
+         //passing userid in api url
         TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName: ServiceName.kgetallopportunity, requestMethod: .GET, requestParameters:[:], withProgressHUD: false) { (result:Any?, error:Error?, errorType:ErrorType?,statusCode:Int?) in
             CommonUtils.showHudWithNoInteraction(show: false)
             if errorType == .requestSuccess {

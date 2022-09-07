@@ -12,6 +12,7 @@ import Firebase
 import AlamofireImage
 import FirebaseCore
 import GoogleSignIn
+import GoogleMaps
 
 
 @main
@@ -28,6 +29,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //        GIDSignIn.sharedInstance.clientID = "330854842489-c25b86f35mmp4ckogq99l06tn52jj4ki.apps.googleusercontent.com"
         self.setLanguage()
         
+        // API key
+        GMSServices.provideAPIKey("AIzaSyBkcC_odzMJP2PFCIB-qk0SBXyksmBze8I")
         return true
     }
     

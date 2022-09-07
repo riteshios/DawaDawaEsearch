@@ -40,5 +40,11 @@
 	<string></string>
 	<key>NSFileProviderDomainUsageDescription</key>
 	<string></string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Allow</string>
+	<key>NSLocationUsageDescription</key>
+	<string>Allow</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Allow</string>
 </dict>
 </plist>

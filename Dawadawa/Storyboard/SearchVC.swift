@@ -181,6 +181,14 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
             
             cell.callback = { txt, sender in
                 
+                if txt == "Profileimage"{
+                    let user_id = self.userTimeLine[indexPath.row].user_id
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: UserProfileDetailsVC.getStoryboardID()) as! UserProfileDetailsVC
+                    vc.userid = user_id ?? 0
+                    self.navigationController?.pushViewController(vc, animated: true)
+                    
+                }
+                
                 if txt == "Like"{
                     if UserData.shared.isskiplogin == true{
                         self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")

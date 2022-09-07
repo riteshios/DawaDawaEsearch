@@ -111,6 +111,15 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
             
             cell.callback = { txt, tapped in
                 
+                if txt == "Profileimage"{
+                    let user_id = self.userTimeLine?.user_id
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: UserProfileDetailsVC.getStoryboardID()) as! UserProfileDetailsVC
+                    vc.userid = user_id ?? 0
+                    self.navigationController?.pushViewController(vc, animated: true)
+                    
+                }
+                
+                
                 if txt == "Like"{
                     
                     //                            self.likeOpportunityapi(oppr_id: oppid ?? 0)

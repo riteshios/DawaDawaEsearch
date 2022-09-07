@@ -149,9 +149,17 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
             
             cell.callback = { txt, tapped in
                 
+                if txt == "Profileimage"{
+                    let user_id = self.userTimeLine[indexPath.row].user_id
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: UserProfileDetailsVC.getStoryboardID()) as! UserProfileDetailsVC
+                    vc.userid = user_id ?? 0
+                    self.navigationController?.pushViewController(vc, animated: true)
+                    
+                }
+
+                
                 if txt == "Like"{
-                    
-                    
+                
                     let oppid = self.userTimeLine[indexPath.row].id
                     debugPrint("oppid--=-=-=-",oppid)
                     //                            self.likeOpportunityapi(oppr_id: oppid ?? 0)

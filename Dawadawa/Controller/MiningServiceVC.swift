@@ -15,7 +15,7 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
     //   MARK: - Properties
     @IBOutlet weak var txtFieldTitle: SKFloatingTextField!
     @IBOutlet weak var txtFieldLocationName: SKFloatingTextField!
-    @IBOutlet weak var txtFieldLocationOnMap: SKFloatingTextField!
+    
     @IBOutlet weak var txtFieldMobileNumber: SKFloatingTextField!
     @IBOutlet weak var txtFieldWhatsappNumber: SKFloatingTextField!
     @IBOutlet weak var txtFieldPricing: SKFloatingTextField!
@@ -28,14 +28,14 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
     @IBOutlet weak var lblState: UILabel!
     @IBOutlet weak var btnState: UIButton!
     @IBOutlet weak var lblLocality: UILabel!
+    @IBOutlet weak var lblLocationOnMap: UILabel!
+    
     @IBOutlet weak var btnLocality: UIButton!
     @IBOutlet weak var lblBusinesstype: UILabel!
     @IBOutlet weak var btnBusinessType: UIButton!
     @IBOutlet weak var lblLookingFor: UILabel!
     @IBOutlet weak var btnLookingFor: UIButton!
     @IBOutlet weak var btnCreate_UpdateOpp: UIButton!
-    
-   
     
     @IBOutlet weak var viewBasic: UIView!
     @IBOutlet weak var lblBasic: UILabel!
@@ -99,6 +99,11 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
     var docUrl = ""
     var oppid:Int?
     
+    //    Cuurent location
+    var currentadd = ""
+    var latitude = Double()
+    var longitude = Double()
+    
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
@@ -125,7 +130,6 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
         self.viewCreateOpportunity.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
         self.setTextFieldUI(textField: txtFieldTitle, place: "Title", floatingText: "Title")
         self.setTextFieldUI(textField: txtFieldLocationName, place: "Location name", floatingText: "Location name")
-        self.setTextFieldUI(textField: txtFieldLocationOnMap, place: "Location on map ( optional )", floatingText: "Location on map ( optional )")
         self.setTextFieldUI(textField: txtFieldMobileNumber, place: "Mobile number", floatingText: "Mobile number")
         self.setTextFieldUI(textField: txtFieldWhatsappNumber, place: "WhatsApp number", floatingText: "WhatsApp number")
         self.setTextFieldUI(textField: txtFieldPricing, place: "Price in US Dollar (optional)", floatingText: "Price in US Dollar (optional)")
@@ -148,7 +152,7 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
         self.lblState.text = self.userTimeLineoppdetails?.opp_state
         self.lblLocality.text = self.userTimeLineoppdetails?.opp_locality
         self.txtFieldLocationName.text = self.userTimeLineoppdetails?.location_name
-        self.txtFieldLocationOnMap.text = self.userTimeLineoppdetails?.location_map
+        
         self.TextViewDescription.text = self.userTimeLineoppdetails?.description
         self.txtFieldMobileNumber.text = self.userTimeLineoppdetails?.mobile_num
         self.txtFieldWhatsappNumber.text = self.userTimeLineoppdetails?.whatsaap_num
@@ -172,6 +176,23 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
     }
     
     // MARK: - @IBActions
+    
+    @IBAction func btnpinlocationtapped(_ sender: UIButton) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: CurrentLocationVC.getStoryboardID()) as! CurrentLocationVC
+        vc.modalTransitionStyle = .crossDissolve
+        vc.modalPresentationStyle = .overFullScreen
+        
+        vc.callback = { address , latitude, longitude in
+            vc.dismiss(animated: true){
+                self.lblLocationOnMap.text = address
+                self.latitude = latitude
+                self.longitude = longitude
+                self.currentadd = address
+            }
+            
+        }
+        self.present(vc, animated: false)
+    }
     
     @IBAction func btnBackTapped(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
@@ -1236,13 +1257,16 @@ extension MiningServiceVC{
             "opp_state":"\(String(describing: stateid))",
             "opp_locality":"\(String(describing: localityid))",
             "location_name":String.getString(self.txtFieldLocationName.text),
-            "location_map":String.getString(self.txtFieldLocationOnMap.text),
+           
             "description":String.getString(self.TextViewDescription.text),
             "mobile_num":String.getString(self.txtFieldMobileNumber.text),
             "whatsaap_num":String.getString(self.txtFieldWhatsappNumber.text),
             "pricing":String.getString(self.txtFieldPricing.text),
             "looking_for":"\(String(describing: lookingforid))",
             "plan":String.getString(plan),
+            "location_map":String.getString(self.lblLocationOnMap.text),
+            "latitude":String.getString(self.latitude),
+            "longitude":String.getString(self.longitude),
             "cat_type_id":"2"
         ]
         
@@ -1328,13 +1352,16 @@ extension MiningServiceVC{
             "opp_state":"\(String(describing: stateid))",
             "opp_locality":"\(String(describing: localityid))",
             "location_name":String.getString(self.txtFieldLocationName.text),
-            "location_map":String.getString(self.txtFieldLocationOnMap.text),
+            
             "description":String.getString(self.TextViewDescription.text),
             "mobile_num":String.getString(self.txtFieldMobileNumber.text),
             "whatsaap_num":String.getString(self.txtFieldWhatsappNumber.text),
             "pricing":String.getString(self.txtFieldPricing.text),
             "looking_for":"\(String(describing: lookingforid))",
             "plan":String.getString(plan),
+            "location_map":String.getString(self.lblLocationOnMap.text),
+            "latitude":String.getString(self.latitude),
+            "longitude":String.getString(self.longitude)
             //            "cat_type_id":"0"
         ]
         
