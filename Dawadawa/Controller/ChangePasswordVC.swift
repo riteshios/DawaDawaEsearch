@@ -88,12 +88,11 @@ extension ChangePasswordVC : SKFlaotingTextFieldDelegate {
 // MARK: - API call
 
 extension ChangePasswordVC{
+    
     func changepasswordapi(){
         
         CommonUtils.showHud(show: true)
         
-       
-       
         if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
             let endToken = kSharedUserDefaults.getLoggedInAccessToken()
             let septoken = endToken.components(separatedBy: " ")

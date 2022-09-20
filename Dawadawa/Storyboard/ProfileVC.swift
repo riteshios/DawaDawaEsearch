@@ -273,7 +273,7 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
             cell.Imageuser.downlodeImage(serviceurl: profilrimageurl, placeHolder: UIImage(named: "Boss"))
             print("-=-opp_plan=-=-\(String.getString(obj.opp_plan))")
             
-            cell.imgOpp_plan.image = obj.opp_plan == "Featured" ? UIImage(named: "Star Filled") : obj.opp_plan == "Premium" ? UIImage(named: "Crown") : UIImage(named: "")
+            cell.imgOpp_plan.image = obj.opp_plan == "Featured" ? UIImage(named: "Star Filled") : obj.opp_plan == "Premium" ? UIImage(named: "Crown") : UIImage(named: "Folded Booklet")
             
             
             cell.img = obj.oppimage
@@ -287,8 +287,8 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                 cell.lblTitle.textColor = .black
             }
             else{
-                cell.lblTitle.text = "This Opprortunity has been Closed"
-                cell.lblTitle.textColor = .red
+                cell.imgredCircle.isHidden = false
+                cell.lblcloseOpportunity.isHidden = false
             }
             
             if String.getString(obj.is_user_like) == "1"{
@@ -1284,9 +1284,8 @@ extension ProfileVC{
             
         }
     }
+    
     //    Close opportunity api
-    
-    
     func closeopportunityapi(opr_id:Int){
         
         CommonUtils.showHud(show: true)

@@ -19,8 +19,11 @@ class SocialPostTableViewCell: UITableViewCell,UITextViewDelegate {
     @IBOutlet weak var lblUserName: UILabel!
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var lblDescribtion: UILabel!
+    @IBOutlet weak var lblcloseOpportunity: UILabel!
     @IBOutlet weak var Imageuser: UIImageView!
+    @IBOutlet weak var imgredCircle: UIImageView!
     
+    @IBOutlet weak var viewLine: UIView!
     @IBOutlet weak var imgOpp_plan: UIImageView!
     @IBOutlet weak var lblLikeCount: UILabel!
     
@@ -92,7 +95,8 @@ class SocialPostTableViewCell: UITableViewCell,UITextViewDelegate {
         self.imageSubcommentUser.isHidden = true
         self.lblsubUserNameandComment.isHidden = true
         self.imgOppFlag.isHidden = true
-        
+        self.imgredCircle.isHidden = true
+        self.lblcloseOpportunity.isHidden = true
     }
     
     

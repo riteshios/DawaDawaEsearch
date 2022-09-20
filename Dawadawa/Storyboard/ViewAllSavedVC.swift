@@ -76,8 +76,8 @@ extension ViewAllSavedVC:UITableViewDelegate,UITableViewDataSource{
             cell.lblTitle.textColor = .black
         }
         else{
-            cell.lblTitle.text = "This Opprortunity has been Closed"
-            cell.lblTitle.textColor = .red
+            cell.imgredCircle.isHidden = false
+            cell.lblcloseOpportunity.isHidden = false
         }
         
         

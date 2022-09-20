@@ -16,7 +16,6 @@ target 'Dawadawa' do
   pod 'GooglePlaces'
   pod  'Firebase/Auth'
   pod  'Firebase/Core'
-# pod 'PTCardTabBar'
   pod 'SVProgressHUD'
   pod 'SwiftyGif'
   pod 'SKFloatingTextField'
@@ -26,7 +25,7 @@ target 'Dawadawa' do
   pod 'SwiftyJSON'
   pod 'RangeSeekSlider'
   pod 'Cosmos', '~> 23.0'
-#  pod 'Localize-Swift', '~> 3.2'
+  pod 'Stripe'
 
 
 end

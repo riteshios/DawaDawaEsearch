@@ -13,6 +13,7 @@ class SearchVC: UIViewController,UITextFieldDelegate{
     @IBOutlet weak var txtfieldSearch: UITextField!
     @IBOutlet weak var imgNotfound: UIImageView!
     
+    @IBOutlet weak var viewSearch: UIView!
     
     var imgUrl = ""
     var docUrl = ""
@@ -27,6 +28,8 @@ class SearchVC: UIViewController,UITextFieldDelegate{
         
         self.imgNotfound.isHidden = true
         self.setup()
+        
+        viewSearch.addShadowWithBlurOnView(viewSearch, spread: 0, blur: 10, color: .black, opacity: 0.16, OffsetX: 0, OffsetY: 1)
     }
     
     //    override func viewWillAppear(_ animated: Bool) {
@@ -120,7 +123,7 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
             
             cell.lblLikeCount.text = String.getString(obj.likes) + " " + "Likes"
             
-            cell.imgOpp_plan.image = obj.opp_plan == "Featured" ? UIImage(named: "Star Filled") : obj.opp_plan == "Premium" ? UIImage(named: "Crown") : UIImage(named: "")
+            cell.imgOpp_plan.image = obj.opp_plan == "Featured" ? UIImage(named: "Star Filled") : obj.opp_plan == "Premium" ? UIImage(named: "Crown") : UIImage(named: "Folded Booklet")
             
             
             
@@ -129,8 +132,8 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
                 cell.lblTitle.textColor = .black
             }
             else{
-                cell.lblTitle.text = "This Opprortunity has been Closed"
-                cell.lblTitle.textColor = .red
+                cell.imgredCircle.isHidden = false
+                cell.lblcloseOpportunity.isHidden = false
             }
             
             

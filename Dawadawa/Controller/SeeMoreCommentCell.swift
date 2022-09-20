@@ -89,6 +89,7 @@ class SeeMoreCommentCell: UITableViewCell, UITableViewDelegate, UITableViewDataS
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tblviewSubComment.dequeueReusableCell(withIdentifier: "SubCommentTableViewCell") as! SubCommentTableViewCell
         
         cell.lblSubComment.text = String.getString(self.subcomment[indexPath.row].usersubcommentdetails?.name) + "   " + String.getString(self.subcomment[indexPath.row].comments)

@@ -1,7 +1,7 @@
 //
 //  HomeSocialMoreSelfVC.swift
 //  Dawadawa
-//
+//  Developer: - Ritesh Gupta
 //  Created by Alekh on 30/08/22.
 //
 
@@ -39,8 +39,8 @@ class HomeSocialMoreSelfVC: UIViewController {
         self.callback?("Update")
     }
     
-    @IBAction func btnChatuserTapped(_ sender: UIButton) {
-        self.callback?("Chat")
+    @IBAction func btnCloseTapped(_ sender: UIButton) {
+        self.callback?("Close")
     }
     
     @IBAction func btnCopyLinkTapped(_ sender: UIButton) {

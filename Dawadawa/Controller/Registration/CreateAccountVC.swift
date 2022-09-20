@@ -31,6 +31,7 @@ class CreateAccountVC: UIViewController {
     @IBOutlet weak var lblOr: UILabel!
     @IBOutlet weak var lblor: UILabel!
     @IBOutlet weak var lblIndicate: UILabel!
+    @IBOutlet weak var lblUserType: UILabel!
     
     @IBOutlet weak var lblTwitter: UILabel!
     @IBOutlet weak var txtFieldFirstName: SKFloatingTextField!
@@ -47,12 +48,14 @@ class CreateAccountVC: UIViewController {
     @IBOutlet weak var btnCreateAccount: UIButton!
     @IBOutlet weak var btnSkip: UIButton!
     @IBOutlet weak var btnTandC: UIButton!
+    @IBOutlet weak var btnDropUserType: UIButton!
     
     let webview = WKWebView()
     var isCountry = false
     var isprivacypolicy = false
     var google_id = ""
     var socialprofile = ""
+    var usertype = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -155,6 +158,17 @@ class CreateAccountVC: UIViewController {
     @IBAction func btnTermsAndCondition(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         self.isprivacypolicy = true
+    }
+    
+    @IBAction func btnDropSelectUserType(_ sender: UIButton){
+        let dataSource1 = ["Investor","Business Owner","Service Provider"]
+        kSharedAppDelegate?.dropDown(dataSource:dataSource1 , text: btnDropUserType)
+        {(Index ,item) in
+            self.lblUserType.text = item
+            self.usertype = Index
+            debugPrint("usertpe=-=-=",self.usertype)
+
+        }
     }
     
     @IBAction func btnSecurePasswordTapped(_ sender: UIButton) {
@@ -347,7 +361,8 @@ extension CreateAccountVC {
             "device_type":"1",
             "device_id":"REFw2321",
             "password":String.getString(self.txtFieldPassword.text),
-            "confirm_password":String.getString(self.txtFieldConfirmPassword.text)
+            "confirm_password":String.getString(self.txtFieldConfirmPassword.text),
+            "user_type":Int.getInt(self.usertype)
         ]
         
         TANetworkManager.sharedInstance.requestApi(withServiceName: ServiceName.kcreateAccount, requestMethod: .POST, requestParameters: params, withProgressHUD: false) { (result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in

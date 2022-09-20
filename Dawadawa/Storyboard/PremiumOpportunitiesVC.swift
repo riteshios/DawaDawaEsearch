@@ -1,7 +1,7 @@
 //
 //  PremiumOpportunitiesVC.swift
 //  Dawadawa
-//
+//  Developer: - Ritesh Gupta
 //  Created by Alekh on 21/07/22.
 //
 
@@ -104,8 +104,8 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
                 cell.lblTitle.textColor = .black
             }
             else{
-                cell.lblTitle.text = "This Opprortunity has been Closed"
-                cell.lblTitle.textColor = .red
+                cell.imgredCircle.isHidden = false
+                cell.lblcloseOpportunity.isHidden = false
             }
             if String.getString(obj.is_user_like) == "1"{
                 cell.imglike.image = UIImage(named: "dil")

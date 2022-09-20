@@ -9,6 +9,8 @@ import UIKit
 
 class PlanListTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var imgPlan: UIImageView!
+    @IBOutlet weak var lblPlan: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

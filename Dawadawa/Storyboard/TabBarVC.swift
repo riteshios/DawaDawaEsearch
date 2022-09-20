@@ -22,8 +22,13 @@ class TabBarVC: UITabBarController {
                     self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
                 }
                 else{
-                    let vc = self.storyboard!.instantiateViewController(withIdentifier: SelectCategoryVC.getStoryboardID()) as! SelectCategoryVC
-                    self.navigationController?.pushViewController(vc, animated: true)
+                    if UserData.shared.user_type == "0"{
+                        self.showSimpleAlert(message: "This feature is not available for Investor")
+                    }
+                    else{
+                        let vc = self.storyboard!.instantiateViewController(withIdentifier: SelectCategoryVC.getStoryboardID()) as! SelectCategoryVC
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    }
                     
                 }
             }

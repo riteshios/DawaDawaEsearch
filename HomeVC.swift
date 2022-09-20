@@ -168,7 +168,7 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
             
             cell.lblLikeCount.text = String.getString(obj.likes) + " " + "Likes"
             
-            cell.imgOpp_plan.image = obj.opp_plan == "Featured" ? UIImage(named: "Star Filled") : obj.opp_plan == "Premium" ? UIImage(named: "Crown") : UIImage(named: "")
+            cell.imgOpp_plan.image = obj.opp_plan == "Featured" ? UIImage(named: "Star Filled") : obj.opp_plan == "Premium" ? UIImage(named: "Crown") : UIImage(named: "Folded Booklet")
             
             
             if Int.getInt(obj.close_opr) == 0{
@@ -176,8 +176,8 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                 cell.lblTitle.textColor = .black
             }
             else{
-                cell.lblTitle.text = "This Opprortunity has been Closed"
-                cell.lblTitle.textColor = .red
+                cell.imgredCircle.isHidden = false
+                cell.lblcloseOpportunity.isHidden = false
             }
             
             
@@ -251,7 +251,7 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                             cell.lbllike.text = "Liked"
                             
                             debugPrint("count=-==0-",self.count)
-//                            self.getallopportunity()
+                            //                            self.getallopportunity()
                             
                         }
                     }
@@ -263,7 +263,7 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                     vc.modalTransitionStyle = .crossDissolve
                     vc.modalPresentationStyle = .overCurrentContext
                     vc.oppid = oppid ?? 0
-            
+                    
                     vc.callbackClosure = {
                         self.getallopportunity()
                     }
@@ -322,6 +322,29 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                                     self.opportunitydetailsapi(oppr_id: oppid)
                                 }
                             }
+                            
+                            if txt == "Close"{
+                                self.dismiss(animated: false){
+                                    let vc = self.storyboard?.instantiateViewController(withIdentifier: ClosePopUpVC.getStoryboardID()) as! ClosePopUpVC
+                                    vc.modalTransitionStyle = .crossDissolve
+                                    vc.modalPresentationStyle = .overCurrentContext
+                                    vc.callback = { txt in
+                                        
+                                        if txt == "Close"{
+                                            vc.dismiss(animated: false) {
+                                                let oppid = Int.getInt(userTimeLine[indexPath.row].id)
+                                                self.closeopportunityapi(opr_id: oppid)
+                                                debugPrint("oppidclose......",oppid)
+                                                
+                                            }
+                                            
+                                        }
+                                    }
+                                    self.present(vc, animated: false)
+                                }
+                                
+                            }
+                            
                             
                         }
                         self.present(vc, animated: false)
@@ -584,7 +607,7 @@ extension HomeVC{
             }
         }
         
-         //passing userid in api url
+        //passing userid in api url
         TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName: ServiceName.kgetallopportunity, requestMethod: .GET, requestParameters:[:], withProgressHUD: false) { (result:Any?, error:Error?, errorType:ErrorType?,statusCode:Int?) in
             CommonUtils.showHudWithNoInteraction(show: false)
             if errorType == .requestSuccess {
@@ -624,6 +647,72 @@ extension HomeVC{
             }
         }
         
+    }
+    
+    //    Close opportunity api
+    func closeopportunityapi(opr_id:Int){
+        
+        CommonUtils.showHud(show: true)
+        
+        
+        if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
+            let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+            let septoken = endToken.components(separatedBy: " ")
+            if septoken[0] != "Bearer"{
+                let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
+                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
+            }
+        }
+        
+        
+        let params:[String : Any] = [
+            "user_id":Int.getInt(UserData.shared.id),
+            "opr_id":opr_id
+        ]
+        
+        debugPrint("user_id......",Int.getInt(UserData.shared.id))
+        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kcloseopportunity, requestMethod: .POST,
+                                                               requestParameters:params, withProgressHUD: false)
+        {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
+            
+            CommonUtils.showHudWithNoInteraction(show: false)
+            
+            if errorType == .requestSuccess {
+                
+                let dictResult = kSharedInstance.getDictionary(result)
+                
+                switch Int.getInt(statusCode) {
+                case 200:
+                    
+                    if Int.getInt(dictResult["status"]) == 200{
+                        
+                        let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+                        let septoken = endToken.components(separatedBy: " ")
+                        if septoken[0] == "Bearer"{
+                            kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
+                        }
+                        
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        
+                    }
+                    
+                    else if  Int.getInt(dictResult["status"]) == 404{
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    }
+                    else if  Int.getInt(dictResult["status"]) == 400{
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    }
+                    
+                default:
+                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                }
+            } else if errorType == .noNetwork {
+                CommonUtils.showToastForInternetUnavailable()
+                
+            } else {
+                CommonUtils.showToastForDefaultError()
+            }
+        }
     }
     
     
@@ -742,8 +831,8 @@ extension HomeVC{
                             kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
                         }
                         
-                        //                        self?.count = String.getString(dictResult["count"])
-                        debugPrint("likecount=-=-=-=",self?.count)
+                        //  self?.count = String.getString(dictResult["count"])
+                        debugPrint("likecount=-=-=",self?.count)
                         completion(String.getString(dictResult["count"]))
                         
                         

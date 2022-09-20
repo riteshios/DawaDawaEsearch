@@ -59,7 +59,7 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
         case 0:
             let cell = self.tblviewDetail.dequeueReusableCell(withIdentifier: "SocialPostTableViewCell") as! SocialPostTableViewCell
             
-            
+            cell.viewLine.isHidden = true
             cell.SocialPostCollectionView.tag = indexPath.section
             cell.lblUserName.text = String.getString(self.userTimeLine?.userdetail?.name)
             cell.lblDescribtion.text = String.getString(self.userTimeLine?.description)
@@ -80,8 +80,8 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                 cell.lblTitle.textColor = .black
             }
             else{
-                cell.lblTitle.text = "This Opprortunity has been Closed"
-                cell.lblTitle.textColor = .red
+                cell.imgredCircle.isHidden = false
+                cell.lblcloseOpportunity.isHidden = false
             }
             if String.getString(self.userTimeLine?.is_user_like) == "1"{
                 cell.imglike.image = UIImage(named: "dil")
@@ -249,7 +249,7 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                 
                 
             }
-            cell.subcomment = obj?.subcomment ?? []
+            cell.subcomment = obj?.subcomment ?? []  // See more comment cell pr pass kr rhe h
             cell.reloadTable()
             print("datacount---",cell.subcomment.count)
             

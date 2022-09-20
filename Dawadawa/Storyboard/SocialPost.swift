@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import SwiftyJSON
 
 // Model for all and Profile Post Opportunity
 class SocialPostData {
@@ -44,7 +45,7 @@ class SocialPostData {
     var oppimage = [oppr_image]() // Array of dictionary
     var userdetail:user_detail?  // Simple dictionary
     var oppdocument = [oppr_document]()  // Array of dictionary
-    var usercomment = [user_comment]()
+    var usercomment = [user_comment]() // Array of dictionary
     
     
     
@@ -203,5 +204,100 @@ class user_Data{
         self.user_type = String.getString(data["user_type"])
         self.about = String.getString(data["about"])
         self.image = String.getString(data["image"])
+    }
+}
+
+
+// GetSubscriptionPlan
+
+class Subscription_data{
+    
+    var id:Int?
+    var user_type:String?
+    var type:String?
+    var title:String?
+    var price_month:String?
+    var price_year:String?
+    var cut_year_price:String?
+    var description = [description_plan]()
+    
+    
+    init(data:[String:Any]){
+        
+        self.id = Int.getInt(data["id"])
+        self.user_type = String.getString(data["user_type"])
+        self.type = String.getString(data["type"])
+        self.title = String.getString(data["title"])
+        self.price_month = String.getString(data["price_month"])
+        self.price_year = String.getString(data["price_year"])
+        self.cut_year_price = String.getString(data["cut_year_price"])
+        
+        let descri = kSharedInstance.getArray(withDictionary: data["description"])
+        self.description = descri.map{description_plan(data: kSharedInstance.getDictionary($0))}
+    }
+}
+
+
+class description_plan{
+    
+    var key:String?
+    
+    init(data:[String:Any]){
+        self.key = String.getString(data["key"])
+    }
+}
+// Active Plan
+
+class active_plan{
+    var id:Int?
+    var package_id:Int?
+    var package_name:String?
+    var end_date:String?
+    
+    init(data:[String:Any]){
+        self.id = Int.getInt(data["id"])
+        self.package_id = Int.getInt(data["package_id"])
+        self.package_name = String.getString(data["package_name"])
+        self.end_date = String.getString(data["end_date"])
+    }
+}
+
+// Get transaction History
+
+class trans_history{
+    var id:Int?
+    var amount:String?
+    var transaction_id:String?
+    var transaction_date:String?
+    var package:pac_kage?
+    
+    init(data:[String:Any]){
+        self.id = Int.getInt(data["id"])
+        self.amount = String.getString(data["amount"])
+        self.transaction_id = String.getString(data["transaction_id"])
+        self.transaction_date = String.getString(data["transaction_date"])
+        self.package = pac_kage(data: kSharedInstance.getDictionary(data["package"]))
+    }
+}
+
+class pac_kage{
+    var id:Int?
+    var title:String?
+    
+    init(data:[String:Any]){
+        self.id = Int.getInt(data["id"])
+        self.title = String.getString(data["title"])
+    }
+}
+
+// Payment
+
+struct SecretKeyParser {
+
+    var clientSecret = ""
+    
+    init(_ json: JSON) {
+        clientSecret = json["paymentIntent"].stringValue
+
     }
 }

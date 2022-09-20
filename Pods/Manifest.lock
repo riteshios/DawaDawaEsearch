@@ -123,6 +123,16 @@ PODS:
     - SDWebImage/Core (= 4.4.8)
   - SDWebImage/Core (4.4.8)
   - SKFloatingTextField (1.0.1)
+  - Stripe (21.9.1):
+    - Stripe/Stripe3DS2 (= 21.9.1)
+    - StripeCore (= 21.9.1)
+    - StripeUICore (= 21.9.1)
+  - Stripe/Stripe3DS2 (21.9.1):
+    - StripeCore (= 21.9.1)
+    - StripeUICore (= 21.9.1)
+  - StripeCore (21.9.1)
+  - StripeUICore (21.9.1):
+    - StripeCore (= 21.9.1)
   - STTabbar (0.1.0)
   - SVProgressHUD (2.2.5)
   - SwiftMessages (9.0.6):
@@ -145,6 +155,7 @@ DEPENDENCIES:
   - RangeSeekSlider
   - SDWebImage (~> 4.0)
   - SKFloatingTextField
+  - Stripe
   - STTabbar
   - SVProgressHUD
   - SwiftMessages
@@ -178,6 +189,9 @@ SPEC REPOS:
     - RangeSeekSlider
     - SDWebImage
     - SKFloatingTextField
+    - Stripe
+    - StripeCore
+    - StripeUICore
     - STTabbar
     - SVProgressHUD
     - SwiftMessages
@@ -210,12 +224,15 @@ SPEC CHECKSUMS:
   RangeSeekSlider: 650b11fa1edcb92e1e0ede797669d98622570fb5
   SDWebImage: 783af2c3fa36291a250030c4752ee370a9a51d13
   SKFloatingTextField: 6393b15bc7a3d8399e592e5fe50ed4a5376d8a82
+  Stripe: 22c1b8da5ee20a1aaf40fd198160efa72e71644a
+  StripeCore: 91ea038ac0abbb72f11014044dfd1e5d39089714
+  StripeUICore: 7edf64b24c9c178bfd97e988f2cffdbb7a7628b0
   STTabbar: fe93da755010233b348b2d0147c43bb1bef290fa
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftMessages: f0c7ef4705a570ad6c5e208b611f4333e660ed92
   SwiftyGif: 6c3eafd0ce693cad58bb63d2b2fb9bacb8552780
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
 
-PODFILE CHECKSUM: c9e757f99da5de5e4c82f1f61ce465d45fd87ade
+PODFILE CHECKSUM: 4c434334ab1018fcad94e5b469300ffecc9afd98
 
 COCOAPODS: 1.11.3

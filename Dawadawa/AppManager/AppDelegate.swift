@@ -13,6 +13,7 @@ import AlamofireImage
 import FirebaseCore
 import GoogleSignIn
 import GoogleMaps
+import GooglePlaces
 
 
 @main
@@ -29,8 +30,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //        GIDSignIn.sharedInstance.clientID = "330854842489-c25b86f35mmp4ckogq99l06tn52jj4ki.apps.googleusercontent.com"
         self.setLanguage()
         
-        // API key
-        GMSServices.provideAPIKey("AIzaSyBkcC_odzMJP2PFCIB-qk0SBXyksmBze8I")
+        // API key AIzaSyAI8WH6BIqmnjlisvSceaD3zYafhCSW2e4
+        GMSServices.provideAPIKey("AIzaSyAI8WH6BIqmnjlisvSceaD3zYafhCSW2e4")
+        GMSPlacesClient.provideAPIKey("AIzaSyBTnohiHM33y3BMxvAP_SoEnG9Vfm6-9Pg")
         return true
     }
     

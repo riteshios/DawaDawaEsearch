@@ -26,8 +26,8 @@ let kResult                     = "results"
  */
 
 
-let kImageDownloadURL         = "https://demo4app.com/dawadawa/"
-let kBASEURL                =   "https://demo4app.com/dawadawa/"
+let kImageDownloadURL         = "https://demo4esl.com/dawadawa/"
+let kBASEURL                =   "https://demo4esl.com/dawadawa/"
 let kAuthentication           = "Authentication"      // Header key of request  encrypt data
 let kEncryptionKey            = ""                    // Encryption key replace this with your projectname
 

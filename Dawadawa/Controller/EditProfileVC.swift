@@ -18,7 +18,7 @@ class EditProfileVC: UIViewController {
     @IBOutlet weak var txtFieldEmailAddress: SKFloatingTextField!
     @IBOutlet weak var txtFieldFirstName: SKFloatingTextField!
     @IBOutlet weak var txtFieldLastName: SKFloatingTextField!
-//    @IBOutlet weak var txtFieldDOB: SKFloatingTextField!
+    //    @IBOutlet weak var txtFieldDOB: SKFloatingTextField!
     @IBOutlet weak var txtFieldWhatsappNumber: SKFloatingTextField!
     
     @IBOutlet weak var ViewSaveChange: UIView!
@@ -38,7 +38,7 @@ class EditProfileVC: UIViewController {
     @IBOutlet weak var lblEnglish: UILabel!
     @IBOutlet weak var lblArabic: UILabel!
     
-    @IBOutlet weak var btnDropUserType: UIButton!
+    
     @IBOutlet weak var btnEnglish: UIButton!
     @IBOutlet weak var btnArabic: UIButton!
     
@@ -52,7 +52,7 @@ class EditProfileVC: UIViewController {
     @IBOutlet weak var btnLocality: UIButton!
     
     var getstatelistarr        =      [getstateModel]()
-    var getlocalitylistarr   =        [getlocalityModel]()
+    var getlocalitylistarr     =      [getlocalityModel]()
     var stateid:Int?
     var localityid:Int?
     
@@ -60,7 +60,7 @@ class EditProfileVC: UIViewController {
     var userdata = [UserData]()
     var timePicker = UIDatePicker()
     
-//    MARK: - Life Cycle
+    //    MARK: - Life Cycle
     
     
     override func viewDidLoad() {
@@ -84,7 +84,7 @@ class EditProfileVC: UIViewController {
         }
     }
     
-  
+    
     //    MARK: - Life Cycle
     
     func setup(){
@@ -92,7 +92,7 @@ class EditProfileVC: UIViewController {
         self.setTextFieldUI(textField: txtFieldEmailAddress, place: "", floatingText: "Email address")
         self.setTextFieldUI(textField: txtFieldFirstName, place: "", floatingText: "First name")
         self.setTextFieldUI(textField: txtFieldLastName, place: "", floatingText: "Last name")
-//        self.setTextFieldUI(textField: txtFieldDOB, place: "", floatingText: "Date of birth")
+        //        self.setTextFieldUI(textField: txtFieldDOB, place: "", floatingText: "Date of birth")
         self.setTextFieldUI(textField: txtFieldWhatsappNumber, place: "", floatingText: "Whatsapp number")
         
         self.ViewSaveChange.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
@@ -115,7 +115,7 @@ class EditProfileVC: UIViewController {
         
         self.txtFieldPhoneNumber.delegate = self
         self.txtFieldEmailAddress.delegate = self
-//        self.txtFieldDOB.delegate = self
+        //        self.txtFieldDOB.delegate = self
         self.txtFieldFirstName.delegate = self
         self.txtFieldLastName.delegate = self
         self.txtFieldWhatsappNumber.delegate = self
@@ -163,7 +163,17 @@ class EditProfileVC: UIViewController {
         }
         
         if UserData.shared.user_type != ""{
-            self.lblUserType.text = UserData.shared.user_type
+            
+            if UserData.shared.user_type == "0"{
+                self.lblUserType.text = "Investor"
+            }
+            else if UserData.shared.user_type == "1"{
+                self.lblUserType.text = "Business Owner"
+            }
+            else if UserData.shared.user_type == "2"{
+                self.lblUserType.text = "Service Provider"
+            }
+            
         }
     }
     // MARK: -   Validation
@@ -191,10 +201,10 @@ class EditProfileVC: UIViewController {
             self.showSimpleAlert(message: "Please Enter valid Whatsapp Number")
             return
         }
-//        else if !String.getString(textfieldDATE.text).isdob(){
-//            self.showSimpleAlert(message: "Please Enter your DOB")
-//            return
-//        }
+        //        else if !String.getString(textfieldDATE.text).isdob(){
+        //            self.showSimpleAlert(message: "Please Enter your DOB")
+        //            return
+        //        }
         self.view.endEditing(true)
         self.editdetailapi()
     }
@@ -226,23 +236,23 @@ class EditProfileVC: UIViewController {
         UIView.appearance().semanticContentAttribute = .forceRightToLeft
         
     }
-//    @IBAction func btnDobTapped(_ sender: UIButton) {
-//        let vc = self.storyboard?.instantiateViewController(withIdentifier: "CalendarVC") as! CalendarVC
-//
-//        vc.modalTransitionStyle = .crossDissolve
-//
-//        vc.modalPresentationStyle = .overCurrentContext
-//
-//        vc.callBack = { txt in
-//
-//            vc.dismiss(animated: true) {
-//
-//                debugPrint("tettext",txt)
-//            }
-//        }
-//
-//        self.present(vc, animated: true)
-//    }
+    //    @IBAction func btnDobTapped(_ sender: UIButton) {
+    //        let vc = self.storyboard?.instantiateViewController(withIdentifier: "CalendarVC") as! CalendarVC
+    //
+    //        vc.modalTransitionStyle = .crossDissolve
+    //
+    //        vc.modalPresentationStyle = .overCurrentContext
+    //
+    //        vc.callBack = { txt in
+    //
+    //            vc.dismiss(animated: true) {
+    //
+    //                debugPrint("tettext",txt)
+    //            }
+    //        }
+    //
+    //        self.present(vc, animated: true)
+    //    }
     
     
     @IBAction func btnSaveTapped(_ sender: UIButton) {
@@ -306,24 +316,24 @@ class EditProfileVC: UIViewController {
             let id = self.getstatelistarr[index].id
             self.stateid = id
             debugPrint("State idddd.....btnnnnt",  self.stateid = id)
-
-                self.getlocalityapi(id: self.stateid ?? 0 )
+            
+            self.getlocalityapi(id: self.stateid ?? 0 )
             
         }
         
     }
     
     @IBAction func btnLocalityTapped(_ sender: UIButton) {
-            kSharedAppDelegate?.dropDown(dataSource: getlocalitylistarr.map{String.getString($0.local_name)}, text: btnLocality){
-                (index,item) in
-                self.lblLocality.text = item
-                let id  = self.getlocalitylistarr[index].id
-                self.localityid = id
-                debugPrint("localityid....",self.localityid)
-        
+        kSharedAppDelegate?.dropDown(dataSource: getlocalitylistarr.map{String.getString($0.local_name)}, text: btnLocality){
+            (index,item) in
+            self.lblLocality.text = item
+            let id  = self.getlocalitylistarr[index].id
+            self.localityid = id
+            debugPrint("localityid....",self.localityid)
+            
+        }
     }
-}
-
+    
     @IBAction func btnDropGender(_ sender: UIButton){
         let dataSource1 = ["Male","Female"]
         kSharedAppDelegate?.dropDown(dataSource:dataSource1 , text: btnDropGender)
@@ -332,27 +342,8 @@ class EditProfileVC: UIViewController {
         }
         
     }
-    @IBAction func btnDropSelectUserType(_ sender: UIButton){
-        let dataSource1 = ["Business Owner","Service Provider","Investor"]
-        kSharedAppDelegate?.dropDown(dataSource:dataSource1 , text: btnDropUserType)
-        {(Index ,item) in
-            self.lblUserType.text = item
-            if self.lblUserType.text == "Investor"{
-                let vc = self.storyboard?.instantiateViewController(withIdentifier: InvestorSubscriptionVC.getStoryboardID()) as! InvestorSubscriptionVC
-                self.navigationController?.pushViewController(vc, animated: true)
-            }
-                else if self.lblUserType.text == "Business Owner"{
-                    let vc = self.storyboard?.instantiateViewController(withIdentifier: InvestorSubscriptionVC.getStoryboardID()) as! InvestorSubscriptionVC
-                    self.navigationController?.pushViewController(vc, animated: true)
-                }
-                else if self.lblUserType.text == "Service Provider"{
-                    let vc = self.storyboard?.instantiateViewController(withIdentifier: InvestorSubscriptionVC.getStoryboardID()) as! InvestorSubscriptionVC
-                    self.navigationController?.pushViewController(vc, animated: true)
-                }
-            
-        }
-       
-    }
+    
+    
     @IBAction func btnSelectCountryTapped(_ sender: UIButton) {
         AppsCountryPickerInstanse.sharedInstanse.showController(referense: self) { (selectedCountry) in
             
@@ -361,6 +352,7 @@ class EditProfileVC: UIViewController {
         }
     }
 }
+
 extension EditProfileVC{
     
     func setTextFieldUI(textField:SKFloatingTextField,place:String ,floatingText:String){
@@ -425,7 +417,7 @@ extension EditProfileVC: UITextFieldDelegate{
 
 
 extension EditProfileVC{
-//    Edit Api
+    //    Edit Api
     func editdetailapi(){
         CommonUtils.showHud(show: true)
         
@@ -449,8 +441,7 @@ extension EditProfileVC{
             "dob":String.getString(self.textfieldDATE.text),
             "phone":String.getString(self.txtFieldPhoneNumber.text),
             "country_detail":self.lblCountry.text,
-            "gender":self.lblGender.text,
-            "user_type":self.lblUserType.text
+            "gender":self.lblGender.text
         ]
         
         
@@ -476,7 +467,7 @@ extension EditProfileVC{
                             kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
                         }
                         UserData.shared.saveData(data: data, token: String.getString(kSharedUserDefaults.getLoggedInAccessToken()))
-
+                        
                         let vc = self?.storyboard?.instantiateViewController(withIdentifier: TabBarVC.getStoryboardID()) as! TabBarVC
                         self?.tabBarController?.selectedIndex = 4
                         self?.navigationController?.pushViewController(vc, animated: true)
@@ -640,73 +631,73 @@ extension EditProfileVC{
     }
     
     //     Locality Api
+    
+    func getlocalityapi(id:Int){
+        CommonUtils.showHud(show: true)
         
-        func getlocalityapi(id:Int){
-            CommonUtils.showHud(show: true)
-            
-            if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
-                let endToken = kSharedUserDefaults.getLoggedInAccessToken()
-                let septoken = endToken.components(separatedBy: " ")
-                if septoken[0] != "Bearer"{
-                    let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
-                    kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
-                }
-            }
-            
-            let stateids = Int(self.stateid ?? 0) // For remove optional
-            debugPrint("checkstateids",stateids)
-            
-            let params:[String : Any] = [
-                "localitys_id":"\(String(describing: stateids))",
-
-            ]
-            TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kgetlocality, requestMethod: .POST,
-                                                                   requestParameters:params, withProgressHUD: false)
-            {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
-                
-                CommonUtils.showHudWithNoInteraction(show: false)
-                
-                if errorType == .requestSuccess {
-                    
-                    let dictResult = kSharedInstance.getDictionary(result)
-                    
-                    switch Int.getInt(statusCode) {
-                    case 200:
-                        
-                        if Int.getInt(dictResult["status"]) == 200{
-                            
-                            let endToken = kSharedUserDefaults.getLoggedInAccessToken()
-                            let septoken = endToken.components(separatedBy: " ")
-                            if septoken[0] == "Bearer"{
-                                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
-                            }
-                            let localitys = kSharedInstance.getArray(withDictionary: dictResult["localitys"])
-                            self?.getlocalitylistarr = localitys.map{getlocalityModel(data: $0)}
-                            
-                            
-                            CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                         
-                            
-                            
-                        }
-                        
-                        else if  Int.getInt(dictResult["status"]) == 400{
-                            
-                            CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                        }
-                        
-                    default:
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                    }
-                } else if errorType == .noNetwork {
-                    CommonUtils.showToastForInternetUnavailable()
-                    
-                } else {
-                    CommonUtils.showToastForDefaultError()
-                }
-                
+        if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
+            let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+            let septoken = endToken.components(separatedBy: " ")
+            if septoken[0] != "Bearer"{
+                let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
+                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
             }
         }
+        
+        let stateids = Int(self.stateid ?? 0) // For remove optional
+        debugPrint("checkstateids",stateids)
+        
+        let params:[String : Any] = [
+            "localitys_id":"\(String(describing: stateids))",
+            
+        ]
+        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kgetlocality, requestMethod: .POST,
+                                                               requestParameters:params, withProgressHUD: false)
+        {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
+            
+            CommonUtils.showHudWithNoInteraction(show: false)
+            
+            if errorType == .requestSuccess {
+                
+                let dictResult = kSharedInstance.getDictionary(result)
+                
+                switch Int.getInt(statusCode) {
+                case 200:
+                    
+                    if Int.getInt(dictResult["status"]) == 200{
+                        
+                        let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+                        let septoken = endToken.components(separatedBy: " ")
+                        if septoken[0] == "Bearer"{
+                            kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
+                        }
+                        let localitys = kSharedInstance.getArray(withDictionary: dictResult["localitys"])
+                        self?.getlocalitylistarr = localitys.map{getlocalityModel(data: $0)}
+                        
+                        
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        
+                        
+                        
+                    }
+                    
+                    else if  Int.getInt(dictResult["status"]) == 400{
+                        
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    }
+                    
+                default:
+                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                }
+            } else if errorType == .noNetwork {
+                CommonUtils.showToastForInternetUnavailable()
+                
+            } else {
+                CommonUtils.showToastForDefaultError()
+            }
+            
+        }
+    }
 }
 
 // MARK: - DatePicker
@@ -720,26 +711,26 @@ extension EditProfileVC{
         self.timePicker.datePickerMode = .date
         timePicker.minuteInterval = 30
         //
-//        var components = Calendar.current.dateComponents([.hour, .minute, .month, .year, .day], from: timePicker.date)
-//        components.hour = 1
-//        components.minute = 30
-//        timePicker.setDate(Calendar.current.date(from: components)!, animated: true)
-
+        //        var components = Calendar.current.dateComponents([.hour, .minute, .month, .year, .day], from: timePicker.date)
+        //        components.hour = 1
+        //        components.minute = 30
+        //        timePicker.setDate(Calendar.current.date(from: components)!, animated: true)
         
-                        let currentDate = Date()
-                        var dateComponents = DateComponents()
-                        let calendar = Calendar.init(identifier: .gregorian)
-                        dateComponents.year = -100
-                        let minDate = calendar.date(byAdding: dateComponents, to: currentDate)
-                        dateComponents.year = 0
-                        let maxDate = calendar.date(byAdding: dateComponents, to: currentDate)
+        
+        let currentDate = Date()
+        var dateComponents = DateComponents()
+        let calendar = Calendar.init(identifier: .gregorian)
+        dateComponents.year = -100
+        let minDate = calendar.date(byAdding: dateComponents, to: currentDate)
+        dateComponents.year = 0
+        let maxDate = calendar.date(byAdding: dateComponents, to: currentDate)
         timePicker.maximumDate = maxDate
         timePicker.minimumDate = minDate
         self.textfieldDATE.inputView = self.timePicker
-       self.textfieldDATE.inputAccessoryView = self.getToolBar()
-//       self.txtFieldDOB.inputView = self.getToolBar()
+        self.textfieldDATE.inputAccessoryView = self.getToolBar()
+        //       self.txtFieldDOB.inputView = self.getToolBar()
     }
-
+    
     func getToolBar() -> UIToolbar {
         let toolBar = UIToolbar()
         toolBar.barStyle = .default
@@ -755,19 +746,19 @@ extension EditProfileVC{
         toolBar.isUserInteractionEnabled = true
         return toolBar
     }
-
+    
     @objc func doneClick() {
         self.view.endEditing(true)
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd/MM/yyyy"
         self.textfieldDATE.text = dateFormatter.string(from: self.timePicker.date)
-       
-       
-
+        
+        
+        
     }
-
+    
     @objc func cancelClick() {
         self.view.endEditing(true)
     }
-
+    
 }
