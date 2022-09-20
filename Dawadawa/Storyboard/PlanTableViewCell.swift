@@ -14,6 +14,10 @@ class PlanTableViewCell: UITableViewCell {
     @IBOutlet weak var lblPricePerMonth: UILabel!
     @IBOutlet weak var lblCutPricePerYear: UILabel!
     @IBOutlet weak var lblPricePerYear: UILabel!
+    @IBOutlet weak var lblMonth: UILabel!
+    @IBOutlet weak var lblYear: UILabel!
+    @IBOutlet weak var viewLine: UIView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
        

@@ -65,7 +65,6 @@ class RateOpportunityPopUPVC: UIViewController {
         
     }
     
-    
     private func updateRating(requiredRating: Double?) {
         var newRatingValue: Double = 0
         

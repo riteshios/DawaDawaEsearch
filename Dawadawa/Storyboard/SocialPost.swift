@@ -208,7 +208,7 @@ class user_Data{
 }
 
 
-// GetSubscriptionPlan
+// MARK: -  GetSubscriptionPlan
 
 class Subscription_data{
     
@@ -219,6 +219,8 @@ class Subscription_data{
     var price_month:String?
     var price_year:String?
     var cut_year_price:String?
+    var no_create:String?
+    var image:String
     var description = [description_plan]()
     
     
@@ -231,6 +233,8 @@ class Subscription_data{
         self.price_month = String.getString(data["price_month"])
         self.price_year = String.getString(data["price_year"])
         self.cut_year_price = String.getString(data["cut_year_price"])
+        self.no_create = String.getString(data["no_create"])
+        self.image = String.getString(data["image"])
         
         let descri = kSharedInstance.getArray(withDictionary: data["description"])
         self.description = descri.map{description_plan(data: kSharedInstance.getDictionary($0))}
@@ -253,15 +257,29 @@ class active_plan{
     var package_id:Int?
     var package_name:String?
     var end_date:String?
+    var balacedata:balance_data?
     
     init(data:[String:Any]){
         self.id = Int.getInt(data["id"])
         self.package_id = Int.getInt(data["package_id"])
         self.package_name = String.getString(data["package_name"])
         self.end_date = String.getString(data["end_date"])
+        self.balacedata = balance_data(data: kSharedInstance.getDictionary(data["balance_data"]))
+        
     }
 }
-
+// Balance_data
+class balance_data{
+    var total_no_create:String?
+    var total_no_used:String?
+    var left_bal:String?
+    
+    init(data:[String:Any]){
+        self.total_no_create = String.getString(data["total_no_create"])
+        self.total_no_used = String.getString(data["total_no_used"])
+        self.left_bal = String.getString(data["left_bal"])
+    }
+}
 // Get transaction History
 
 class trans_history{

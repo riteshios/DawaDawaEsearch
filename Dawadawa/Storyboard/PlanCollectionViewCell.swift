@@ -11,8 +11,6 @@ class PlanCollectionViewCell: UICollectionViewCell{
     
     @IBOutlet weak var PlantableView: UITableView!
     
-    
-    
     var planimage = [UIImage(named: "Ok"),UIImage(named: "Star Filled"),UIImage(named: "Crown")]
     
     var subsdata = [Subscription_data](){
@@ -75,13 +73,29 @@ extension PlanCollectionViewCell: UITableViewDelegate,UITableViewDataSource {
             
             //          cell.lblPlan.text = self.plan[cellnumber]
             let obj = self.subsdata[cellnumber]
-            
             cell.lblPlan.text = String.getString(obj.title)
-            cell.lblPricePerMonth.text = String.getString(obj.price_month)
-            cell.lblCutPricePerYear.text = String.getString(obj.cut_year_price)
-            cell.lblPricePerYear.text = String.getString(obj.price_year)
             
-            
+            if UserData.shared.user_type == "0"{
+                cell.lblPricePerMonth.text = String.getString(obj.price_month)
+                cell.lblCutPricePerYear.text = String.getString(obj.cut_year_price)
+                cell.lblPricePerYear.text = String.getString(obj.price_year)
+            }
+            else if UserData.shared.user_type == "1"{
+                cell.lblMonth.isHidden = true
+                cell.lblYear.isHidden = true
+                cell.lblPricePerYear.isHidden = true
+                cell.viewLine.isHidden = true
+                cell.lblPricePerMonth.text = "$\(String.getString(obj.price_month))"
+                cell.lblCutPricePerYear.text = "No. of create: - \(String.getString(obj.no_create))"
+            }
+            else if UserData.shared.user_type == "2"{
+                cell.lblMonth.isHidden = true
+                cell.lblYear.isHidden = true
+                cell.lblPricePerYear.isHidden = true
+                cell.viewLine.isHidden = true
+                cell.lblPricePerMonth.text = "$\(String.getString(obj.price_month))"
+                cell.lblCutPricePerYear.text = "No. of create: - \(String.getString(obj.no_create))"
+            }
             return cell
             
         case 1:
@@ -90,7 +104,8 @@ extension PlanCollectionViewCell: UITableViewDelegate,UITableViewDataSource {
             
             let obj = self.subsdata[cellnumber].description[indexPath.row]
             
-            cell.imgPlan.image = self.planimage[cellnumber]
+            let imgurl = String.getString(self.subsdata[cellnumber].image)
+//          cell.imgPlan.downlodeImage(serviceurl: imgurl , placeHolder: UIImage(named: "Boss"))
             cell.lblPlan.text = String.getString(obj.key)
             
             return cell

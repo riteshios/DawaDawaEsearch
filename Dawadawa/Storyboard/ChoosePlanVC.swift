@@ -16,18 +16,18 @@ class ChoosePlanVC: UIViewController {
     @IBOutlet weak var lblPriceMonthly: UILabel!
     @IBOutlet weak var lblPlanYearly: UILabel!
     @IBOutlet weak var lblPriceYearly: UILabel!
+    @IBOutlet weak var lblMonth: UILabel!
     
     var subsdata = [Subscription_data]()
-  
     
     var indexcount = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.getPlanApi()
         viewMonthlyPlan.addShadowWithBlurOnView(viewMonthlyPlan, spread: 0, blur: 10, color: .black, opacity: 0.16, OffsetX: 0, OffsetY: 1)
         
         viewYearlyPlan.addShadowWithBlurOnView(viewYearlyPlan, spread: 0, blur: 10, color: .black, opacity: 0.16, OffsetX: 0, OffsetY: 1)
-        
         
     }
     
@@ -36,11 +36,28 @@ class ChoosePlanVC: UIViewController {
         self.getSubcriptionPlan { plan in
             CommonUtils.showHudWithNoInteraction(show: false)
             self.subsdata = plan
-            self.lblPlanMonthly.text  = self.subsdata[self.indexcount].title
-            self.lblPlanYearly.text   = self.subsdata[self.indexcount].title
-            self.lblPriceMonthly.text = self.subsdata[self.indexcount].price_month
-            print("lblPriceMonthly",self.subsdata[self.indexcount].price_month)
-            self.lblPriceYearly.text  = self.subsdata[self.indexcount].price_year
+            
+            
+            if UserData.shared.user_type == "0"{
+                self.lblPlanMonthly.text  = self.subsdata[self.indexcount].title
+                self.lblPlanYearly.text   = self.subsdata[self.indexcount].title
+                self.lblPriceMonthly.text = self.subsdata[self.indexcount].price_month
+                print("lblPriceMonthly",self.subsdata[self.indexcount].price_month)
+                self.lblPriceYearly.text  = self.subsdata[self.indexcount].price_year
+            }
+            else if UserData.shared.user_type == "1"{
+                self.viewYearlyPlan.isHidden = true
+                self.lblMonth.isHidden = true
+                self.lblPlanMonthly.text  = self.subsdata[self.indexcount].title
+                self.lblPriceMonthly.text = "$\(String.getString(self.subsdata[self.indexcount].price_month))"
+                
+            }
+            else if UserData.shared.user_type == "2"{
+                self.viewYearlyPlan.isHidden = true
+                self.lblMonth.isHidden = true
+                self.lblPlanMonthly.text  = self.subsdata[self.indexcount].title
+                self.lblPriceMonthly.text = "$\(String.getString(self.subsdata[self.indexcount].price_month))"
+            }
         }
     }
     //    MARK: - @IBAction
