@@ -84,6 +84,8 @@ extension MysubscriptionVC{
     //    Active plan api
     
     func getactiveplan(){
+        
+        
         CommonUtils.showHudWithNoInteraction(show: true)
         
         if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
@@ -94,14 +96,19 @@ extension MysubscriptionVC{
                 kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
             }
         }
+       
+        let url = ServiceName.kgetactiveplan + "\(UserData.shared.id)/\(UserData.shared.user_type ?? "")"
+        debugPrint("urlurl==",url)
         
-        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName: ServiceName.kgetactiveplan, requestMethod: .GET, requestParameters:[:], withProgressHUD: false) { [self] (result:Any?, error:Error?, errorType:ErrorType?,statusCode:Int?) in
+        
+        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName: url, requestMethod: .GET, requestParameters:[:], withProgressHUD: false) { [self] (result:Any?, error:Error?, errorType:ErrorType?,statusCode:Int?) in
             CommonUtils.showHudWithNoInteraction(show: false)
             if errorType == .requestSuccess {
                 let dictResult = kSharedInstance.getDictionary(result)
                 
                 switch Int.getInt(statusCode) {
                 case 200:
+                    
                     if Int.getInt(dictResult["responsecodes"]) == 200{
                         let endToken = kSharedUserDefaults.getLoggedInAccessToken()
                         let septoken = endToken.components(separatedBy: " ")
@@ -166,7 +173,10 @@ extension MysubscriptionVC{
             }
         }
         
-        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName: ServiceName.kgettransactionhistory, requestMethod: .GET, requestParameters:[:], withProgressHUD: false) { [self] (result:Any?, error:Error?, errorType:ErrorType?,statusCode:Int?) in
+        let url =  ServiceName.kgettransactionhistory + "\(UserData.shared.id)"
+        debugPrint("urlhistory==",url)
+        
+        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName: url, requestMethod: .GET, requestParameters:[:], withProgressHUD: false) { [self] (result:Any?, error:Error?, errorType:ErrorType?,statusCode:Int?) in
             CommonUtils.showHudWithNoInteraction(show: false)
             if errorType == .requestSuccess {
                 let dictResult = kSharedInstance.getDictionary(result)

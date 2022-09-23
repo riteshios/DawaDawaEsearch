@@ -19,6 +19,8 @@
 		0411742A28A2697200846FF3 /* SavedOpportunitiesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0411742928A2697200846FF3 /* SavedOpportunitiesVC.swift */; };
 		0411742C28A279B300846FF3 /* SaveOpportunityCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0411742B28A279B300846FF3 /* SaveOpportunityCollectionViewCell.swift */; };
 		0411742E28A2861E00846FF3 /* ViewAllSavedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0411742D28A2861E00846FF3 /* ViewAllSavedVC.swift */; };
+		0421E86928DAE3B100CB7B38 /* DetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0421E86728DAE3B100CB7B38 /* DetailsTableViewCell.swift */; };
+		0421E86A28DAE3B100CB7B38 /* DetailsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0421E86828DAE3B100CB7B38 /* DetailsTableViewCell.xib */; };
 		042293BE2869B1BC000503B7 /* ChangeNumberVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042293BD2869B1BC000503B7 /* ChangeNumberVC.swift */; };
 		042293C02869B1E2000503B7 /* VerifyNewNumberOTPVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042293BF2869B1E2000503B7 /* VerifyNewNumberOTPVC.swift */; };
 		042293C22869B203000503B7 /* NumberChangedSuccessfulPopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042293C12869B203000503B7 /* NumberChangedSuccessfulPopUpVC.swift */; };
@@ -75,6 +77,8 @@
 		04A9958C28A370FD00FC75C9 /* SaveOpportunityMoreVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A9958B28A370FD00FC75C9 /* SaveOpportunityMoreVC.swift */; };
 		04AEBC122872195C00063E51 /* GoogleService-Info-2.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04AEBC112872195C00063E51 /* GoogleService-Info-2.plist */; };
 		04AF23BE28C08DF90053471D /* RateOpportunityPopUPVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AF23BD28C08DF90053471D /* RateOpportunityPopUPVC.swift */; };
+		04B2586C28DC68190015F5AD /* DocumentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B2586A28DC68190015F5AD /* DocumentCollectionViewCell.swift */; };
+		04B2586D28DC68190015F5AD /* DocumentCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B2586B28DC68190015F5AD /* DocumentCollectionViewCell.xib */; };
 		04B2653A2872C84000B2DF7C /* ContactUsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B265392872C83F00B2DF7C /* ContactUsVC.swift */; };
 		04B2653C28731CAE00B2DF7C /* WebViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B2653B28731CAD00B2DF7C /* WebViewVC.swift */; };
 		04B4C8F62889BAA400DB3E11 /* OpportunitypostedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B4C8F42889BAA400DB3E11 /* OpportunitypostedTableViewCell.swift */; };
@@ -658,6 +662,8 @@
 		0411742928A2697200846FF3 /* SavedOpportunitiesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedOpportunitiesVC.swift; sourceTree = "<group>"; };
 		0411742B28A279B300846FF3 /* SaveOpportunityCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveOpportunityCollectionViewCell.swift; sourceTree = "<group>"; };
 		0411742D28A2861E00846FF3 /* ViewAllSavedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewAllSavedVC.swift; path = Dawadawa/Storyboard/ViewAllSavedVC.swift; sourceTree = SOURCE_ROOT; };
+		0421E86728DAE3B100CB7B38 /* DetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsTableViewCell.swift; sourceTree = "<group>"; };
+		0421E86828DAE3B100CB7B38 /* DetailsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailsTableViewCell.xib; sourceTree = "<group>"; };
 		042293BD2869B1BC000503B7 /* ChangeNumberVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeNumberVC.swift; sourceTree = "<group>"; };
 		042293BF2869B1E2000503B7 /* VerifyNewNumberOTPVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyNewNumberOTPVC.swift; sourceTree = "<group>"; };
 		042293C12869B203000503B7 /* NumberChangedSuccessfulPopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberChangedSuccessfulPopUpVC.swift; sourceTree = "<group>"; };
@@ -717,6 +723,8 @@
 		04A9958B28A370FD00FC75C9 /* SaveOpportunityMoreVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SaveOpportunityMoreVC.swift; path = Dawadawa/Storyboard/SaveOpportunityMoreVC.swift; sourceTree = SOURCE_ROOT; };
 		04AEBC112872195C00063E51 /* GoogleService-Info-2.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-2.plist"; sourceTree = "<group>"; };
 		04AF23BD28C08DF90053471D /* RateOpportunityPopUPVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateOpportunityPopUPVC.swift; sourceTree = "<group>"; };
+		04B2586A28DC68190015F5AD /* DocumentCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentCollectionViewCell.swift; sourceTree = "<group>"; };
+		04B2586B28DC68190015F5AD /* DocumentCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DocumentCollectionViewCell.xib; sourceTree = "<group>"; };
 		04B265392872C83F00B2DF7C /* ContactUsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ContactUsVC.swift; path = Dawadawa/Storyboard/ContactUsVC.swift; sourceTree = SOURCE_ROOT; };
 		04B2653B28731CAD00B2DF7C /* WebViewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewVC.swift; sourceTree = SOURCE_ROOT; };
 		04B4C8F42889BAA400DB3E11 /* OpportunitypostedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpportunitypostedTableViewCell.swift; sourceTree = "<group>"; };
@@ -1558,6 +1566,10 @@
 		04C848A928B7AB4100505AB0 /* DetailScreen */ = {
 			isa = PBXGroup;
 			children = (
+				0421E86728DAE3B100CB7B38 /* DetailsTableViewCell.swift */,
+				04B2586A28DC68190015F5AD /* DocumentCollectionViewCell.swift */,
+				04B2586B28DC68190015F5AD /* DocumentCollectionViewCell.xib */,
+				0421E86828DAE3B100CB7B38 /* DetailsTableViewCell.xib */,
 				04C848A728B75E8200505AB0 /* DetailScreenVC.swift */,
 				04C848AA28B7ABB400505AB0 /* SeeMoreCommentCell.swift */,
 				04C848AB28B7ABB400505AB0 /* SeeMoreCommentCell.xib */,
@@ -2861,6 +2873,7 @@
 				447DCE282851CB1300C40DDD /* CR.png in Resources */,
 				447DCD032851CB1200C40DDD /* Sudan.png in Resources */,
 				447DCCF22851CB1200C40DDD /* Togo.png in Resources */,
+				0421E86A28DAE3B100CB7B38 /* DetailsTableViewCell.xib in Resources */,
 				447DCCCE2851CB1100C40DDD /* Belgium.png in Resources */,
 				447DCCAA2851CB1100C40DDD /* Zambia.png in Resources */,
 				447DCDFA2851CB1200C40DDD /* HR.png in Resources */,
@@ -2883,6 +2896,7 @@
 				447DCD082851CB1200C40DDD /* Turkmenistan.png in Resources */,
 				447DCDBF2851CB1200C40DDD /* KW.png in Resources */,
 				447DCD222851CB1200C40DDD /* Liechtenstein.png in Resources */,
+				04B2586D28DC68190015F5AD /* DocumentCollectionViewCell.xib in Resources */,
 				447DCCD02851CB1100C40DDD /* Mozambique.png in Resources */,
 				447DCCD52851CB1100C40DDD /* Gabon.png in Resources */,
 				447DCE1A2851CB1300C40DDD /* NA.png in Resources */,
@@ -3155,6 +3169,7 @@
 				447DCC832851CB1100C40DDD /* UIImageViewExtended.swift in Sources */,
 				447DCE632851CB1300C40DDD /* Api Controller.swift in Sources */,
 				447DCC672851CB1100C40DDD /* UITextView+Extensions.swift in Sources */,
+				04B2586C28DC68190015F5AD /* DocumentCollectionViewCell.swift in Sources */,
 				447DCC5E2851CB1100C40DDD /* TANetworkManager.swift in Sources */,
 				447DCE5A2851CB1300C40DDD /* locationManager.swift in Sources */,
 				0461E317288A83DE00B7F0E7 /* DeleteOpportunityPopUPVC.swift in Sources */,
@@ -3202,6 +3217,7 @@
 				045C4E6A28895DC600E831AA /* SearchVC.swift in Sources */,
 				0406DB83287D55DF00B57A0B /* MiningBusinessVC.swift in Sources */,
 				04B2653A2872C84000B2DF7C /* ContactUsVC.swift in Sources */,
+				0421E86928DAE3B100CB7B38 /* DetailsTableViewCell.swift in Sources */,
 				447DCC5F2851CB1100C40DDD /* OldTAManagerOld.swift in Sources */,
 				04B91912286B1553009ABAE4 /* VerifyNewEmailOTPVC.swift in Sources */,
 				046DCA0B28C608D600B219F4 /* CurrentLocationVC.swift in Sources */,
@@ -3428,7 +3444,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.esearchlogix.Dawadawa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = pp_dawadawa;
+				PROVISIONING_PROFILE_SPECIFIER = NewDawaDawa;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -3460,7 +3476,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.esearchlogix.Dawadawa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = pp_dawadawa;
+				PROVISIONING_PROFILE_SPECIFIER = NewDawaDawa;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

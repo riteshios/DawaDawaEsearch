@@ -186,7 +186,6 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
                 self.longitude = longitude
                 self.currentadd = address
             }
-            
         }
         self.present(vc, animated: false)
     }
@@ -453,16 +452,6 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
             return
         }
         
-        //        else if String.getString(self.txtFieldWhatsappNumber.text).isEmpty
-        //        {
-        //            showSimpleAlert(message: Notifications.kwhatsappnumber)
-        //            return
-        //        }
-        //        else if !String.getString(self.txtFieldWhatsappNumber.text).isPhoneNumber()
-        //        {
-        //            self.showSimpleAlert(message: Notifications.kvalidwhatsappnumber)
-        //            return
-        //        }
         else if self.isSelectLookingFor == false{
             self.showSimpleAlert(message: "Please Select looking For")
             return

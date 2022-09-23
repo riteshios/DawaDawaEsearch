@@ -31,9 +31,14 @@ class LogOutVC: UIViewController {
 }
   
     @IBAction func btnLogoutTapped(_ sender: UIButton) {
+        
         UserData.shared.saveData(data: [:], token: "" )
+        print("\(UserData.shared.saveData(data: [:], token: "" ))")
+        
         kSharedUserDefaults.setLoggedInUserDetails(loggedInUserDetails: [:])
         kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: "")
+        print("token---", kSharedUserDefaults.getLoggedInAccessToken())
+        print("tetaild---", kSharedUserDefaults.getLoggedInUserDetails())
         print("\(kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: ""))")
             self.callbacklogout?("Logout")
     }
@@ -47,3 +52,17 @@ extension LogOutVC{
         lblSecondLogout.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Logout", comment: "")
     }
 }
+
+//extension UIViewController{
+//    func logout(){
+//        UserData.shared.saveData(data: [:], token: "" )
+//        print("\(UserData.shared.saveData(data: [:], token: "" ))")
+//       print("id---", UserData.shared.id)
+//        kSharedUserDefaults.setLoggedInUserDetails(loggedInUserDetails: [:])
+//        kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: "")
+//        print("token---", kSharedUserDefaults.getLoggedInAccessToken())
+//        print("tetaild---", kSharedUserDefaults.getLoggedInUserDetails())
+//
+//        print("\(kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: ""))")
+//    }
+//}

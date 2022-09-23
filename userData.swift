@@ -33,6 +33,8 @@ class UserData{
         saveData(data:data,token: kSharedUserDefaults.getLoggedInAccessToken())
     }
     func saveData(data:[String:Any],token:String){
+        debugPrint("datadata==",data)
+        
         self.id = Int.getInt(data["id"])
         self.name = String.getString(data["name"])
         self.last_name = String.getString(data["last_name"])
@@ -52,9 +54,10 @@ class UserData{
         self.google_id = String.getString(data["google_id"])
         self.facebook_id = String.getString(data["facebook_id"])
         
-        kSharedUserDefaults.getLoggedInUserDetails()
+        kSharedUserDefaults.setLoggedInUserDetails(loggedInUserDetails: data)
         kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken:token)
         
+        debugPrint("self.id===",self.id)
     }
     
 }

@@ -173,7 +173,9 @@ class ProfileVC: UIViewController {
                        
                         if txt == "Logout"{
                             vc.dismiss(animated: false) {
+//                                self.logout()
                                 let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
+                                
                                 self.navigationController?.pushViewController(vc, animated: true)
                             }
                             

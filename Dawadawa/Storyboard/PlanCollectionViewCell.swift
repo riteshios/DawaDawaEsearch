@@ -104,8 +104,8 @@ extension PlanCollectionViewCell: UITableViewDelegate,UITableViewDataSource {
             
             let obj = self.subsdata[cellnumber].description[indexPath.row]
             
-            let imgurl = String.getString(self.subsdata[cellnumber].image)
-//          cell.imgPlan.downlodeImage(serviceurl: imgurl , placeHolder: UIImage(named: "Boss"))
+            
+            cell.imgPlan.image = planimage[cellnumber]
             cell.lblPlan.text = String.getString(obj.key)
             
             return cell

@@ -32,6 +32,7 @@ class SocialPostData {
     var likes:Int?
     var opr_rating:String?
     var is_flag:String?
+    var category_name:String?
     var mobile_num:String?
     var whatsaap_num:String?
     var pricing:String?
@@ -41,6 +42,7 @@ class SocialPostData {
     var flag_user_post:Int?
     var is_user_like:String?
     var is_saved:String?
+    var plan_name:String?
     var isComment = false
     var oppimage = [oppr_image]() // Array of dictionary
     var userdetail:user_detail?  // Simple dictionary
@@ -70,6 +72,7 @@ class SocialPostData {
         self.likes = Int.getInt(data["likes"])
         self.opr_rating = String.getString(data["opr_rating"])
         self.is_flag = String.getString(data["is_flag"])
+        self.category_name = String.getString(data["category_name"])
         self.mobile_num = String.getString(data["mobile_num"])
         self.whatsaap_num = String.getString(data["whatsaap_num"])
         self.pricing = String.getString(data["pricing"])
@@ -79,6 +82,7 @@ class SocialPostData {
         self.opp_plan = String.getString(data["opp_plan"])
         self.is_user_like = String.getString(data["is_user_like"])
         self.is_saved = String.getString(data["is_saved"])
+        self.plan_name = String.getString(data["plan_name"])
         
         let img = kSharedInstance.getArray(withDictionary: data["oppr_image"])
         self.oppimage = img.map{oppr_image(data: kSharedInstance.getDictionary($0))}
@@ -106,14 +110,16 @@ class oppr_image{
 }
 
 class user_detail{
-    var g_id:String?
+    var id:String?
     var name:String?
+    var email:String?
     var social_profile:String?
     var image:String?// for details screen
     
     init(data:[String:Any]){
-        self.g_id = String.getString(data["g_id"])
+        self.id = String.getString(data["id"])
         self.name = String.getString(data["name"])
+        self.email = String.getString(data["email"])
         self.social_profile = String.getString(data["social_profile"])
         self.image = String.getString(data["image"])
     }

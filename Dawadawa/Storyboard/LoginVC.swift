@@ -9,6 +9,7 @@ import UIKit
 import SKFloatingTextField
 import GoogleSignIn
 
+
 class LoginVC: UIViewController {
     
 //     MARK: - Properties
@@ -39,6 +40,7 @@ class LoginVC: UIViewController {
         self.setuplanguage()
         
     }
+    
     
     
 //    MARK: - LIfe Cyclye
@@ -247,13 +249,12 @@ extension LoginVC{
                         kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: String.getString(dictResult[kLoggedInAccessToken]))
                         UserData.shared.saveData(data: data, token: String.getString(dictResult[kLoggedInAccessToken]))
 
-//                        kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: "Bearer \(String.getString(dictResult["token"]))")
+                        
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         kSharedAppDelegate?.makeRootViewController()
                         
                         cameFrom = ""
-//                        let vc = UIStoryboard(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "TabBarVC") as! TabBarVC
-//                        vc.navigationController?.pushViewController(vc, animated: true)
+
                     }
                     else if  Int.getInt(dictResult["status"]) == 400{
 //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))

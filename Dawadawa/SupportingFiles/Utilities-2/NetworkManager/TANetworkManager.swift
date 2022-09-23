@@ -356,6 +356,9 @@ public class TANetworkManager {
                                 withProgressHUD showProgress: Bool,
                                 completionClosure:@escaping (_ result: Any?, _ error: Error?, _ errorType: ErrorType, _ statusCode: Int?) -> ()) -> Void
     {
+        
+        debugPrint("serviceName===",serviceName)
+        
         if NetworkReachabilityManager()?.isReachable == true
         {
             if showProgress

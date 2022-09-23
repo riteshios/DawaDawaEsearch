@@ -24,6 +24,7 @@ class HomeVC: UIViewController{
     var comment = [user_comment]()
     var txtcomment = " "
     
+    @IBOutlet weak var viewSearch: UIView!
     
     @IBOutlet weak var lblUserName: UILabel!
     @IBOutlet weak var ImgUser: UIImageView!
@@ -32,6 +33,8 @@ class HomeVC: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        debugPrint("nameid",UserData.shared.id)
+        debugPrint("nameid",UserData.shared.name)
         if UserData.shared.isskiplogin == true{
             print("Guest User")
             if cameFrom != "FilterData"{
@@ -45,7 +48,7 @@ class HomeVC: UIViewController{
         }
         
         self.setup()
-        
+        viewSearch.addShadowWithBlurOnView(viewSearch, spread: 0, blur: 10, color: .black, opacity: 0.16, OffsetX: 0, OffsetY: 1)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -607,8 +610,11 @@ extension HomeVC{
             }
         }
         
+        let url =  ServiceName.kgettransactionhistory + "\(UserData.shared.id)"
+        debugPrint("urlhistory==",url)
+        
         //passing userid in api url
-        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName: ServiceName.kgetallopportunity, requestMethod: .GET, requestParameters:[:], withProgressHUD: false) { (result:Any?, error:Error?, errorType:ErrorType?,statusCode:Int?) in
+        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName: url, requestMethod: .GET, requestParameters:[:], withProgressHUD: false) { (result:Any?, error:Error?, errorType:ErrorType?,statusCode:Int?) in
             CommonUtils.showHudWithNoInteraction(show: false)
             if errorType == .requestSuccess {
                 let dictResult = kSharedInstance.getDictionary(result)

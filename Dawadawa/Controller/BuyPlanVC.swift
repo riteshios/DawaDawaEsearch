@@ -49,13 +49,14 @@ class BuyPlanVC: UIViewController {
             }
         }
     }
+    
 //    MARK: - @IBAction
     
     @IBAction func btnDismissTapped(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
     }
     
-    @IBAction func btnChoosePlanTapped(_ sender: UIButton) {
+    @IBAction func btnChoosePlanTapped(_ sender: UIButton){
         let vc = self.storyboard?.instantiateViewController(withIdentifier: ChoosePlanVC.getStoryboardID()) as! ChoosePlanVC
         vc.indexcount = self.indexpathcount
         self.navigationController?.pushViewController(vc, animated: true)
@@ -73,7 +74,6 @@ extension BuyPlanVC:UICollectionViewDelegate,UICollectionViewDataSource{
         let cell = PlanCollectionView.dequeueReusableCell(withReuseIdentifier: "PlanCollectionViewCell", for: indexPath) as! PlanCollectionViewCell
         cell.subsdata = self.subsdata
         cell.cellnumbercount(num: indexPath.row)
-        
         return cell
     }
     
@@ -84,6 +84,4 @@ extension BuyPlanVC:UICollectionViewDelegate,UICollectionViewDataSource{
             self.indexpathcount = indexPath?[1] ?? 0
         }
     }
-    
 }
-

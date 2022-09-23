@@ -2,7 +2,7 @@
 //  DetailScreenVC.swift
 //  Dawadawa
 //
-//  Created by Alekh on 25/08/22.
+//  Created by Ritesh Gupta on 25/08/22.
 //
 
 import UIKit
@@ -23,7 +23,7 @@ class DetailScreenVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.getalldetail()
-        tblviewDetail.register(UINib(nibName: "SocialPostTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "SocialPostTableViewCell")
+        tblviewDetail.register(UINib(nibName: "DetailsTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "DetailsTableViewCell")
         tblviewDetail.register(UINib(nibName: "SeeMoreCommentCell", bundle: Bundle.main), forCellReuseIdentifier: "SeeMoreCommentCell")
     }
     
@@ -34,6 +34,7 @@ class DetailScreenVC: UIViewController {
 }
 
 extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
         
@@ -57,32 +58,98 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
         
         switch indexPath.section{
         case 0:
-            let cell = self.tblviewDetail.dequeueReusableCell(withIdentifier: "SocialPostTableViewCell") as! SocialPostTableViewCell
+            let cell = self.tblviewDetail.dequeueReusableCell(withIdentifier: "DetailsTableViewCell") as! DetailsTableViewCell
             
             cell.viewLine.isHidden = true
             cell.SocialPostCollectionView.tag = indexPath.section
+            cell.DocumentCollectionView.tag = indexPath.section
             cell.lblUserName.text = String.getString(self.userTimeLine?.userdetail?.name)
             cell.lblDescribtion.text = String.getString(self.userTimeLine?.description)
+            cell.lblEmail.text = String.getString(self.userTimeLine?.userdetail?.email)
             cell.lblTitle.text = String.getString(self.userTimeLine?.title)
             cell.viewAddComment.isHidden = self.userTimeLine?.isComment == false ? true : false
             cell.heightViewAddComment.constant = self.userTimeLine?.isComment == false ? 0 : 55
+            cell.lblCategory.text = String.getString(self.userTimeLine?.category_name)
+            cell.lblSub_category.text = String.getString(self.userTimeLine?.subcategory_name)
+            cell.lblBusinessName.text = String.getString(self.userTimeLine?.business_name)
+            cell.lblBusinessminingType.text = String.getString(self.userTimeLine?.business_mining_type)
+            cell.llbMobileNumber.text =  String.getString(self.userTimeLine?.mobile_num)
+            
+            if String.getString(self.userTimeLine?.looking_for) == "0"{
+                cell.lblLookingFor.text = "Looking for Investor"
+            }
+            else if String.getString(self.userTimeLine?.looking_for) == "1"{
+                cell.lblLookingFor.text = "Looking for Business Owner"
+            }
+            else if String.getString(self.userTimeLine?.looking_for) == "2"{
+                cell.lblLookingFor.text = "Looking for Service Provider"
+            }
+            
+            if String.getString(self.userTimeLine?.location_name) != ""{
+                cell.lblLocationName.text = String.getString(self.userTimeLine?.location_name)
+                cell.lblLocationName.textColor = UIColor.black
+            }
+            else{
+                cell.lblLocationName.text = "Location not available"
+                cell.lblLocationName.textColor = UIColor.gray
+            }
+            
+            if String.getString(self.userTimeLine?.location_map) != ""{
+                cell.lblLocationONMap.text = String.getString(self.userTimeLine?.location_map)
+                cell.lblLocationONMap.textColor = UIColor.black
+            }
+            else{
+                cell.lblLocationONMap.text = "Location on map not available"
+                cell.lblLocationONMap.textColor = UIColor.gray
+            }
+            
+            if String.getString(self.userTimeLine?.whatsaap_num) != ""{
+                cell.lbblWhatsappNumber.text = String.getString(self.userTimeLine?.whatsaap_num)
+                cell.lbblWhatsappNumber.textColor = UIColor.black
+            }
+            else{
+                cell.lbblWhatsappNumber.text = "Not available"
+                cell.lbblWhatsappNumber.textColor = UIColor.gray
+            }
+            
+            if String.getString(self.userTimeLine?.plan_name) == "Basic Plan"{
+                cell.lblLocationONMap.text = "Not for basic Plan"
+                cell.lblLocationONMap.textColor = UIColor.gray
+                cell.lbblWhatsappNumber.text = "Not for basic Plan"
+                cell.lbblWhatsappNumber.textColor = UIColor.gray
+                cell.llbMobileNumber.text = "Not for basic Plan"
+                cell.llbMobileNumber.textColor = UIColor.gray
+                cell.DocumentCollectionView.isHidden = true
+                cell.lblEmail.text = "Not for basic Plan"
+                cell.lblEmail.textColor = UIColor.gray
+                cell.heightDocumentcollectionview.constant = 0
+            }
+            
+            else if String.getString(self.userTimeLine?.plan_name) == "Silver Plan"{
+                cell.lblLocationONMap.text = "Not for Silver Plan"
+                cell.lblLocationONMap.textColor = UIColor.gray
+                cell.lbblWhatsappNumber.text = "Not for Silver Plan"
+                cell.lbblWhatsappNumber.textColor = UIColor.gray
+                cell.llbMobileNumber.text = "Not for Silver Plan"
+                cell.llbMobileNumber.textColor = UIColor.gray
+                cell.DocumentCollectionView.isHidden = true
+                cell.lblEmail.text = "Not forSilver Plan"
+                cell.lblEmail.textColor = UIColor.gray
+                cell.heightDocumentcollectionview.constant = 0
+            }
+            
             
             let imgurl = String.getString(self.userTimeLine?.userdetail?.image)
             debugPrint("socialprofile......",imgurl)
             cell.Imageuser.downlodeImage(serviceurl: imgurl , placeHolder: UIImage(named: "Boss"))
-            cell.img = self.userTimeLine?.oppimage ?? []
+            cell.img = self.userTimeLine?.oppimage ?? [] // Collection View k liye image pass kr rhe h
             cell.imgUrl = self.imgUrl
+            
+            cell.doc = self.userTimeLine?.oppdocument ?? [] // Pass Doc for collection view
+            
             
             cell.lblLikeCount.text = String.getString(self.userTimeLine?.likes) + " " + "Likes"
             
-            if Int.getInt(self.userTimeLine?.close_opr) == 0{
-                cell.lblTitle.text = String.getString(self.userTimeLine?.title)
-                cell.lblTitle.textColor = .black
-            }
-            else{
-                cell.imgredCircle.isHidden = false
-                cell.lblcloseOpportunity.isHidden = false
-            }
             if String.getString(self.userTimeLine?.is_user_like) == "1"{
                 cell.imglike.image = UIImage(named: "dil")
                 cell.lbllike.text = "Liked"
@@ -106,7 +173,6 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
             else{
                 cell.heightSocialPostCollectionView.constant = 225
             }
-            
             
             
             cell.callback = { txt, tapped in
@@ -180,7 +246,6 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                 cell.imageUser.downlodeImage(serviceurl: imgurl , placeHolder: UIImage(named: "Boss")) // Comment_ImageUser
                 
                 
-                
                 if txt == "AddComment"{
                     if cell.txtviewComment.text == ""{
                         self.showSimpleAlert(message: "Please add comment ")
@@ -205,9 +270,9 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                 }
                 
             }
-            cell.viewcomment.isHidden = true
-            cell.heightViewComment.constant = 0
-            cell.bottomspacingReply.constant = -90
+//            cell.viewcomment.isHidden = true
+//            cell.heightViewComment.constant = 0
+//            cell.bottomspacingReply.constant = -90
             
             
             
@@ -329,10 +394,8 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
         case 0:
             return UITableView.automaticDimension
             
-            
         case 1:
             return UITableView.automaticDimension
-            
             
         default:
             return 0
