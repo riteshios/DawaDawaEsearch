@@ -13699,14 +13699,14 @@ this opportunity?</string>
             <objects>
                 <viewController storyboardIdentifier="MysubscriptionVC" title="MysubscriptionVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="a2r-Pt-pcT" customClass="MysubscriptionVC" customModule="Dawadawa" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="TLe-Of-zbg">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="874"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="900"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7nK-J4-YOq">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="874"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="900"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ENa-et-h2L">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="874"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="900"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fEB-hB-7nL">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="202"/>
@@ -13737,31 +13737,43 @@ this opportunity?</string>
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hxe-uB-XCS">
-                                                        <rect key="frame" x="16" y="101" width="382" height="62"/>
+                                                        <rect key="frame" x="16" y="101" width="382" height="92"/>
                                                         <subviews>
-                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Star Filled" translatesAutoresizingMaskIntoConstraints="NO" id="1Rd-hI-u9c">
-                                                                <rect key="frame" x="20" y="22" width="20" height="20"/>
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Star Filled" translatesAutoresizingMaskIntoConstraints="NO" id="1Rd-hI-u9c">
+                                                                <rect key="frame" x="20" y="22" width="20" height="50"/>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No active plan" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6bc-9a-2y5">
-                                                                <rect key="frame" x="44.999999999999993" y="21.666666666666671" width="104.33333333333331" height="20.666666666666671"/>
+                                                                <rect key="frame" x="44.999999999999993" y="36.666666666666657" width="104.33333333333331" height="20.666666666666671"/>
                                                                 <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="17"/>
                                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="( expire on Sep 27, 2022)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mhN-ON-9X8">
+                                                                <rect key="frame" x="150.33333333333334" y="16.666666666666671" width="147.00000000000003" height="17"/>
+                                                                <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="14"/>
+                                                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="( expire on Sep 27, 2022)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J5f-cf-BGb">
-                                                                <rect key="frame" x="150.33333333333334" y="23.666666666666671" width="147.00000000000003" height="17"/>
+                                                                <rect key="frame" x="150.33333333333334" y="38.666666666666657" width="147.00000000000003" height="17"/>
                                                                 <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="14"/>
                                                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="( expire on Sep 27, 2022)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mOB-01-sdD">
+                                                                <rect key="frame" x="150.33333333333334" y="60.666666666666657" width="147.00000000000003" height="17"/>
+                                                                <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="14"/>
+                                                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Choose plan" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9dK-k4-8jN">
-                                                                <rect key="frame" x="292.66666666666669" y="25" width="67.333333333333314" height="14"/>
+                                                                <rect key="frame" x="292.66666666666669" y="40" width="67.333333333333314" height="14"/>
                                                                 <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="12"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2YK-NA-95b">
-                                                                <rect key="frame" x="0.0" y="0.0" width="382" height="62"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="382" height="92"/>
                                                                 <inset key="imageEdgeInsets" minX="350" minY="5" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                                 <state key="normal" image="rightarrow-1"/>
                                                             </button>
@@ -13771,15 +13783,19 @@ this opportunity?</string>
                                                             <constraint firstItem="6bc-9a-2y5" firstAttribute="centerY" secondItem="1Rd-hI-u9c" secondAttribute="centerY" id="0Lm-bz-eYQ"/>
                                                             <constraint firstItem="2YK-NA-95b" firstAttribute="top" secondItem="Hxe-uB-XCS" secondAttribute="top" id="2Ja-uI-Dh5"/>
                                                             <constraint firstItem="1Rd-hI-u9c" firstAttribute="leading" secondItem="Hxe-uB-XCS" secondAttribute="leading" constant="20" id="4GC-8A-SPD"/>
-                                                            <constraint firstAttribute="height" constant="62" id="5MP-ag-Fbg"/>
+                                                            <constraint firstAttribute="height" constant="92" id="5MP-ag-Fbg"/>
+                                                            <constraint firstItem="J5f-cf-BGb" firstAttribute="leading" secondItem="mhN-ON-9X8" secondAttribute="leading" id="6ej-vp-90U"/>
                                                             <constraint firstItem="9dK-k4-8jN" firstAttribute="centerY" secondItem="J5f-cf-BGb" secondAttribute="centerY" id="7qg-5l-HkD"/>
                                                             <constraint firstAttribute="trailing" secondItem="9dK-k4-8jN" secondAttribute="trailing" constant="22" id="Cpx-Zn-WJh"/>
                                                             <constraint firstAttribute="bottom" secondItem="1Rd-hI-u9c" secondAttribute="bottom" constant="20" id="Rpa-Ik-hgV"/>
                                                             <constraint firstAttribute="bottom" secondItem="2YK-NA-95b" secondAttribute="bottom" id="TXh-FC-quf"/>
                                                             <constraint firstItem="J5f-cf-BGb" firstAttribute="centerY" secondItem="6bc-9a-2y5" secondAttribute="centerY" id="VTu-jP-BtS"/>
                                                             <constraint firstItem="1Rd-hI-u9c" firstAttribute="top" secondItem="Hxe-uB-XCS" secondAttribute="top" constant="22" id="bv8-qv-8Eh"/>
+                                                            <constraint firstItem="mOB-01-sdD" firstAttribute="top" secondItem="J5f-cf-BGb" secondAttribute="bottom" constant="5" id="d2g-ld-1j8"/>
+                                                            <constraint firstItem="J5f-cf-BGb" firstAttribute="top" secondItem="mhN-ON-9X8" secondAttribute="bottom" constant="5" id="dPD-Qz-9Rm"/>
                                                             <constraint firstItem="6bc-9a-2y5" firstAttribute="leading" secondItem="1Rd-hI-u9c" secondAttribute="trailing" constant="5" id="eAg-ys-cra"/>
                                                             <constraint firstAttribute="trailing" secondItem="2YK-NA-95b" secondAttribute="trailing" id="luD-q3-9PV"/>
+                                                            <constraint firstItem="mOB-01-sdD" firstAttribute="leading" secondItem="J5f-cf-BGb" secondAttribute="leading" id="mfg-8U-u29"/>
                                                             <constraint firstItem="2YK-NA-95b" firstAttribute="leading" secondItem="Hxe-uB-XCS" secondAttribute="leading" id="oEH-eS-48C"/>
                                                             <constraint firstItem="J5f-cf-BGb" firstAttribute="leading" secondItem="6bc-9a-2y5" secondAttribute="trailing" constant="1" id="pgY-zj-Uxm"/>
                                                         </constraints>
@@ -13790,7 +13806,7 @@ this opportunity?</string>
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Transaction history" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NFv-FJ-WWN">
-                                                        <rect key="frame" x="16" y="188" width="131.66666666666666" height="19.666666666666657"/>
+                                                        <rect key="frame" x="16" y="218" width="131.66666666666666" height="19.666666666666657"/>
                                                         <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="16"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -13814,7 +13830,7 @@ this opportunity?</string>
                                                 </constraints>
                                             </view>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="2fb-0w-Bai">
-                                                <rect key="frame" x="0.0" y="205" width="414" height="564"/>
+                                                <rect key="frame" x="0.0" y="235" width="414" height="564"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <connections>
                                                     <outlet property="dataSource" destination="a2r-Pt-pcT" id="E7E-Jm-ciQ"/>
@@ -13841,7 +13857,7 @@ this opportunity?</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9ro-eG-FfJ">
-                                                <rect key="frame" x="16" y="779" width="382" height="60"/>
+                                                <rect key="frame" x="16" y="809" width="382" height="60"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vtR-eP-Yd3">
                                                         <rect key="frame" x="0.0" y="0.0" width="382" height="60"/>
@@ -13880,7 +13896,7 @@ this opportunity?</string>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstItem="Uce-rD-HnH" firstAttribute="top" secondItem="AHs-Nh-x7e" secondAttribute="bottom" constant="22.666666666666742" id="6wv-pv-5Me"/>
-                                            <constraint firstItem="2fb-0w-Bai" firstAttribute="top" secondItem="fEB-hB-7nL" secondAttribute="bottom" constant="3" id="KYA-mq-Jbs"/>
+                                            <constraint firstItem="2fb-0w-Bai" firstAttribute="top" secondItem="fEB-hB-7nL" secondAttribute="bottom" constant="33" id="KYA-mq-Jbs"/>
                                             <constraint firstAttribute="trailing" secondItem="9ro-eG-FfJ" secondAttribute="trailing" constant="16" id="Lpy-x2-Qn4"/>
                                             <constraint firstItem="giP-hB-5Dp" firstAttribute="top" secondItem="Uce-rD-HnH" secondAttribute="bottom" constant="5" id="SP8-Ae-wja"/>
                                             <constraint firstAttribute="trailing" secondItem="fEB-hB-7nL" secondAttribute="trailing" id="TXc-nv-HS1"/>
@@ -13892,7 +13908,7 @@ this opportunity?</string>
                                             <constraint firstItem="fEB-hB-7nL" firstAttribute="leading" secondItem="ENa-et-h2L" secondAttribute="leading" id="hIJ-Dz-dcH"/>
                                             <constraint firstItem="9ro-eG-FfJ" firstAttribute="top" secondItem="2fb-0w-Bai" secondAttribute="bottom" constant="10" id="ifg-jw-Czk"/>
                                             <constraint firstItem="fEB-hB-7nL" firstAttribute="top" secondItem="ENa-et-h2L" secondAttribute="top" id="j6m-3n-N0m"/>
-                                            <constraint firstAttribute="bottom" secondItem="9ro-eG-FfJ" secondAttribute="bottom" constant="35" id="wJo-Ge-tK5"/>
+                                            <constraint firstAttribute="bottom" secondItem="9ro-eG-FfJ" secondAttribute="bottom" constant="31" id="uiX-vK-ayk"/>
                                             <constraint firstItem="giP-hB-5Dp" firstAttribute="centerX" secondItem="ENa-et-h2L" secondAttribute="centerX" id="zHI-yS-Bxx"/>
                                             <constraint firstItem="9ro-eG-FfJ" firstAttribute="leading" secondItem="ENa-et-h2L" secondAttribute="leading" constant="16" id="zaL-sf-UqY"/>
                                         </constraints>
@@ -13920,13 +13936,16 @@ this opportunity?</string>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" tag="4" title="Profile" image="user-square" id="Hpd-Tn-upB"/>
-                    <size key="freeformSize" width="414" height="874"/>
+                    <size key="freeformSize" width="414" height="900"/>
                     <connections>
+                        <outlet property="heightViewPlanshow" destination="5MP-ag-Fbg" id="aRM-Kd-bDp"/>
                         <outlet property="imgNoTransaction" destination="AHs-Nh-x7e" id="c4A-F8-4Cp"/>
                         <outlet property="imgPlan" destination="1Rd-hI-u9c" id="Xu0-ae-Zxf"/>
                         <outlet property="lblChoosePlan" destination="9dK-k4-8jN" id="Gci-nD-Eos"/>
                         <outlet property="lblDate" destination="J5f-cf-BGb" id="wQg-8e-bjD"/>
+                        <outlet property="lblLeftbalance" destination="mOB-01-sdD" id="tCw-Se-DeD"/>
                         <outlet property="lblNoTransaction" destination="Uce-rD-HnH" id="3N2-A2-UwW"/>
+                        <outlet property="lblNumberofcreate" destination="mhN-ON-9X8" id="I0j-gh-k8G"/>
                         <outlet property="lblPlan" destination="6bc-9a-2y5" id="f4i-SI-NjE"/>
                         <outlet property="lblSubNoTransaction" destination="giP-hB-5Dp" id="WGb-ps-Mm5"/>
                         <outlet property="tblviewTransaction" destination="2fb-0w-Bai" id="4k7-LB-CPH"/>

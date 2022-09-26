@@ -22,9 +22,14 @@ class DetailScreenVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.getalldetail()
+       
         tblviewDetail.register(UINib(nibName: "DetailsTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "DetailsTableViewCell")
         tblviewDetail.register(UINib(nibName: "SeeMoreCommentCell", bundle: Bundle.main), forCellReuseIdentifier: "SeeMoreCommentCell")
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.getalldetail()
     }
     
     @IBAction func btnBackTapped(_ sender: UIButton) {
@@ -74,6 +79,7 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
             cell.lblBusinessName.text = String.getString(self.userTimeLine?.business_name)
             cell.lblBusinessminingType.text = String.getString(self.userTimeLine?.business_mining_type)
             cell.llbMobileNumber.text =  String.getString(self.userTimeLine?.mobile_num)
+            cell.lblRating.text = String.getString(self.userTimeLine?.opr_rating)
             
             if String.getString(self.userTimeLine?.looking_for) == "0"{
                 cell.lblLookingFor.text = "Looking for Investor"
@@ -198,13 +204,51 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                     
                 }
                 
-                if txt == "Save"{
+                if txt == "Rate"{
+                    let oppid = Int.getInt(self.userTimeLine?.id)
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: RateOpportunityPopUPVC.getStoryboardID()) as! RateOpportunityPopUPVC
+                    vc.modalTransitionStyle = .crossDissolve
+                    vc.modalPresentationStyle = .overCurrentContext
+                    vc.oppid = oppid ?? 0
                     
-                    self.saveoppoertunityapi(oppr_id: Int.getInt(self.userTimeLine?.id) ?? 0)
-                    cell.imgsave.image = UIImage(named: "saveopr")
-                    cell.lblSave.text = "Saved"
+                    vc.callbackClosure = {
+                        self.getalldetail()
+                    }
+                    self.present(vc, animated: false)
+                    
                 }
+                if txt == "Save"{
+                    if tapped.isSelected{
+                        
+                        if String.getString(self.userTimeLine?.is_saved) == "0"{
+                            let oppid = Int.getInt(self.userTimeLine?.id)
+                            debugPrint("saveoppid=-=-=",oppid)
+                            self.saveoppoertunityapi(oppr_id: oppid)
+                            cell.imgsave.image = UIImage(named: "saveopr")
+                            cell.lblSave.text = "Saved"
+                            self.getalldetail()
+                        }
+                        else{
+                            let oppid = Int.getInt(self.userTimeLine?.id)
+                            self.unsaveoppoertunityapi(oppr_id: oppid)
+                            cell.imgsave.image = UIImage(named: "save-3")
+                            cell.lblSave.text = "Save"
+                            self.getalldetail()
+                        }
+                        
+                    }
+                    else{
+                        let oppid = Int.getInt(self.userTimeLine?.id)
+                        self.unsaveoppoertunityapi(oppr_id: oppid)
+                        cell.imgsave.image = UIImage(named: "save-3")
+                        cell.lblSave.text = "Save"
+                        self.getalldetail()
+                    }
+                    
+                }
+
                 
+        
                 if txt == "More" {
                     let vc = self.storyboard?.instantiateViewController(withIdentifier: HomeSocialMoreVC.getStoryboardID()) as! HomeSocialMoreVC
                     vc.modalTransitionStyle = .crossDissolve
@@ -743,6 +787,71 @@ extension DetailScreenVC{
                         }
                         
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    }
+                    
+                    else if  Int.getInt(dictResult["responsecode"]) == 400{
+                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    }
+                    
+                default:
+                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                }
+            } else if errorType == .noNetwork {
+                CommonUtils.showToastForInternetUnavailable()
+                
+            } else {
+                CommonUtils.showToastForDefaultError()
+            }
+            
+        }
+    }
+    
+    //    Unsaved Opportunity
+    
+    func unsaveoppoertunityapi(oppr_id:Int){
+        CommonUtils.showHud(show: true)
+        
+        
+        if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
+            let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+            let septoken = endToken.components(separatedBy: " ")
+            if septoken[0] != "Bearer"{
+                let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
+                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
+            }
+        }
+        
+        
+        let params:[String : Any] = [
+            "user_id":Int.getInt(UserData.shared.id),
+            "opr_id":oppr_id
+        ]
+        
+        debugPrint("user_id......",Int.getInt(UserData.shared.id))
+        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kunsavedopp, requestMethod: .POST,
+                                                               requestParameters:params, withProgressHUD: false)
+        {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
+            
+            CommonUtils.showHudWithNoInteraction(show: false)
+            
+            if errorType == .requestSuccess {
+                
+                let dictResult = kSharedInstance.getDictionary(result)
+                
+                switch Int.getInt(statusCode) {
+                case 200:
+                    
+                    if Int.getInt(dictResult["responsecode"]) == 200{
+                        
+                        let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+                        let septoken = endToken.components(separatedBy: " ")
+                        if septoken[0] == "Bearer"{
+                            kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
+                        }
+                        
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //                        self?.TblViewSavedOpp.reloadData()
                     }
                     
                     else if  Int.getInt(dictResult["responsecode"]) == 400{

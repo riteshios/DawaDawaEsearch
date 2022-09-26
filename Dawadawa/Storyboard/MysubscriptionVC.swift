@@ -12,13 +12,18 @@ class MysubscriptionVC: UIViewController {
     @IBOutlet weak var tblviewTransaction: UITableView!
     @IBOutlet weak var imgPlan: UIImageView!
     @IBOutlet weak var lblPlan: UILabel!
+    
+    @IBOutlet weak var lblNumberofcreate: UILabel!
     @IBOutlet weak var lblDate: UILabel!
+    @IBOutlet weak var lblLeftbalance: UILabel!
+    
     @IBOutlet weak var lblChoosePlan: UILabel!
     @IBOutlet weak var viewPlanShow: UIView!
     @IBOutlet weak var imgNoTransaction: UIImageView!
     @IBOutlet weak var lblNoTransaction: UILabel!
     @IBOutlet weak var lblSubNoTransaction: UILabel!
     
+    @IBOutlet weak var heightViewPlanshow: NSLayoutConstraint!
     var activeplan:active_plan?
     var transaction = [trans_history]()
     
@@ -85,7 +90,6 @@ extension MysubscriptionVC{
     
     func getactiveplan(){
         
-        
         CommonUtils.showHudWithNoInteraction(show: true)
         
         if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
@@ -96,7 +100,7 @@ extension MysubscriptionVC{
                 kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
             }
         }
-       
+        
         let url = ServiceName.kgetactiveplan + "\(UserData.shared.id)/\(UserData.shared.user_type ?? "")"
         debugPrint("urlurl==",url)
         
@@ -121,13 +125,34 @@ extension MysubscriptionVC{
                         print("Dataactiveplan=\(self.activeplan)")
                         
                         self.lblPlan.text = self.activeplan?.package_name
-                        self.lblDate.text = "(expire on \(String.getString(self.activeplan?.end_date)))"
+                        
                         self.imgPlan.isHidden = false
                         self.lblDate.isHidden = false
                         self.imgNoTransaction.isHidden = true
                         self.lblNoTransaction.isHidden = true
                         self.lblSubNoTransaction.isHidden = true
                         self.lblChoosePlan.text = "Change plan"
+                        
+                        if UserData.shared.user_type == "0"{
+                            self.lblDate.text = "(expire on \(String.getString(self.activeplan?.end_date)))"
+                            self.lblNumberofcreate.isHidden = true
+                            self.lblLeftbalance.isHidden = true
+                            self.heightViewPlanshow.constant = 62
+                        }
+                        else if UserData.shared.user_type == "1"{
+                            self.lblNumberofcreate.text = "No. of Create: \(String.getString(self.activeplan?.balacedata?.total_no_create))"
+                            self.lblDate.text = "Balance Used: \(String.getString(self.activeplan?.balacedata?.total_no_used))"
+                            self.lblLeftbalance.text = "Left Balance:   \(String.getString(self.activeplan?.balacedata?.left_bal))"
+                            self.heightViewPlanshow.constant = 92
+                            
+                        }
+                        else if UserData.shared.user_type == "2"{
+                            self.lblNumberofcreate.text = "No. of Create: \(String.getString(self.activeplan?.balacedata?.total_no_create))"
+                            self.lblDate.text = "Balance Used: \(String.getString(self.activeplan?.balacedata?.total_no_used))"
+                            self.lblLeftbalance.text = "Left Balance:  \(String.getString(self.activeplan?.balacedata?.left_bal))"
+                            self.heightViewPlanshow.constant = 92
+                            
+                        }
                         
                         self.viewPlanShow.backgroundColor = UIColor(red: 1, green: 0.975, blue: 0.9, alpha: 1)
                         if String.getString(self.activeplan?.package_name) == "Basic Plan"{
@@ -192,7 +217,7 @@ extension MysubscriptionVC{
                         
                         let data = kSharedInstance.getArray(withDictionary: dictResult["data"])
                         self.transaction = data.map{trans_history(data: kSharedInstance.getDictionary($0))}
-                    
+                        
                         print("TransactionHistory=-\(self.transaction)")
                         self.tblviewTransaction.isHidden = false
                         self.imgNoTransaction.isHidden = true

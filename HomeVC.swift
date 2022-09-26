@@ -610,8 +610,8 @@ extension HomeVC{
             }
         }
         
-        let url =  ServiceName.kgettransactionhistory + "\(UserData.shared.id)"
-        debugPrint("urlhistory==",url)
+        let url =  ServiceName.kgetallopportunity + "\(UserData.shared.id)"
+        debugPrint("urlallopportunity==",url)
         
         //passing userid in api url
         TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName: url, requestMethod: .GET, requestParameters:[:], withProgressHUD: false) { (result:Any?, error:Error?, errorType:ErrorType?,statusCode:Int?) in
@@ -633,7 +633,7 @@ extension HomeVC{
                         userTimeLine = Opportunity.map{SocialPostData(data: kSharedInstance.getDictionary($0))}
                         print("Dataallpost=\(userTimeLine)")
                         
-                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //  CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         self.tblViewViewPost.reloadData()
                         
                     }

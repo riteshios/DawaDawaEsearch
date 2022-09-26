@@ -79,6 +79,7 @@ extension PlanCollectionViewCell: UITableViewDelegate,UITableViewDataSource {
                 cell.lblPricePerMonth.text = String.getString(obj.price_month)
                 cell.lblCutPricePerYear.text = String.getString(obj.cut_year_price)
                 cell.lblPricePerYear.text = String.getString(obj.price_year)
+               
             }
             else if UserData.shared.user_type == "1"{
                 cell.lblMonth.isHidden = true
@@ -206,6 +207,8 @@ extension UIViewController{
             }
         }
         
+        let url =  ServiceName.kgetsubscriptionplan + "\(UserData.shared.user_type)"
+        debugPrint("urlhistory==",url)
         
         TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName: ServiceName.kgetsubscriptionplan, requestMethod: .GET, requestParameters:[:], withProgressHUD: false) { (result:Any?, error:Error?, errorType:ErrorType?,statusCode:Int?) in
             CommonUtils.showHudWithNoInteraction(show: false)
