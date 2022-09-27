@@ -224,7 +224,9 @@ extension LoginVC{
         
         let params:[String : Any] = [
             "phone":String.getString(self.txtFieldPhoneNumer.text),
-            "password":String.getString(self.txtFieldPassword.text)
+            "password":String.getString(self.txtFieldPassword.text),
+            "device_type":"1",
+            "device_id":"1212"
         ]
 
         

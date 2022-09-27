@@ -31,6 +31,8 @@ class SocialPostTableViewCell: UITableViewCell,UITextViewDelegate {
     @IBOutlet weak var btnlike: UIButton!
     @IBOutlet weak var lbllike: UILabel!
     
+    @IBOutlet weak var btnShare: UIButton!
+    
     @IBOutlet weak var imgsave: UIImageView!
     @IBOutlet weak var btnSave: UIButton!
     @IBOutlet weak var lblSave: UILabel!
@@ -130,6 +132,11 @@ class SocialPostTableViewCell: UITableViewCell,UITextViewDelegate {
         sender.isSelected = !sender.isSelected
         self.callback?("Like", sender)
     }
+    
+    @IBAction func btnShareTapped(_ sender: UIButton) {
+        self.callback?("Share", sender)
+    }
+    
     
     @IBAction func btnRateTapped(_ sender: UIButton) {
         self.callback?("Rate",sender)

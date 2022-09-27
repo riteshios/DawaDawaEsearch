@@ -260,6 +260,15 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                     }
                 }
                 
+                if txt == "Share"{
+                    
+                    let image = UIImage(named: "baba")
+                        let imageShare = [ image! ]
+                        let activityViewController = UIActivityViewController(activityItems: imageShare , applicationActivities: nil)
+                        activityViewController.popoverPresentationController?.sourceView = self.view
+                        self.present(activityViewController, animated: true, completion: nil)
+                }
+                
                 if txt == "Rate"{
                     let oppid = userTimeLine[indexPath.row].id
                     let vc = self.storyboard?.instantiateViewController(withIdentifier: RateOpportunityPopUPVC.getStoryboardID()) as! RateOpportunityPopUPVC
@@ -347,7 +356,6 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                                 }
                                 
                             }
-                            
                             
                         }
                         self.present(vc, animated: false)
@@ -638,7 +646,7 @@ extension HomeVC{
                         
                     }
                     else if  Int.getInt(dictResult["status"]) == 400{
-                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //  CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                     

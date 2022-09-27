@@ -236,6 +236,13 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ahd-ob-mNe">
                                         <rect key="frame" x="191.5" y="0.0" width="96" height="30"/>
                                         <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9NH-Yq-NKr">
+                                                <rect key="frame" x="0.0" y="0.0" width="96" height="30"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <connections>
+                                                    <action selector="btnShareTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="k11-WU-bvt"/>
+                                                </connections>
+                                            </button>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="share-1" translatesAutoresizingMaskIntoConstraints="NO" id="LAb-VO-s8z">
                                                 <rect key="frame" x="33.5" y="5" width="20" height="20"/>
                                             </imageView>
@@ -250,7 +257,11 @@
                                         <constraints>
                                             <constraint firstItem="X6G-m3-NPr" firstAttribute="centerY" secondItem="LAb-VO-s8z" secondAttribute="centerY" id="2lY-CL-W0F"/>
                                             <constraint firstItem="LAb-VO-s8z" firstAttribute="top" secondItem="Ahd-ob-mNe" secondAttribute="top" constant="5" id="5WV-Em-pOk"/>
+                                            <constraint firstAttribute="trailing" secondItem="9NH-Yq-NKr" secondAttribute="trailing" id="6CQ-u5-KS0"/>
                                             <constraint firstItem="X6G-m3-NPr" firstAttribute="leading" secondItem="LAb-VO-s8z" secondAttribute="trailing" constant="7" id="D9D-4C-brf"/>
+                                            <constraint firstItem="9NH-Yq-NKr" firstAttribute="leading" secondItem="Ahd-ob-mNe" secondAttribute="leading" id="F7g-jb-wK9"/>
+                                            <constraint firstAttribute="bottom" secondItem="9NH-Yq-NKr" secondAttribute="bottom" id="LqI-04-Y2s"/>
+                                            <constraint firstItem="9NH-Yq-NKr" firstAttribute="top" secondItem="Ahd-ob-mNe" secondAttribute="top" id="Njp-RL-07f"/>
                                             <constraint firstAttribute="trailing" secondItem="X6G-m3-NPr" secondAttribute="trailing" constant="5" id="nVa-ih-lZS"/>
                                             <constraint firstAttribute="bottom" secondItem="LAb-VO-s8z" secondAttribute="bottom" constant="5" id="r9v-MP-eAL"/>
                                         </constraints>
@@ -616,6 +627,7 @@
                 <outlet property="bottomspacingReply" destination="iE6-ej-Bj4" id="78Y-PE-8SB"/>
                 <outlet property="btnClickComment" destination="p8M-PC-Ljt" id="q01-cC-GNx"/>
                 <outlet property="btnSave" destination="6ue-Uh-RMM" id="eLh-0h-jFf"/>
+                <outlet property="btnShare" destination="9NH-Yq-NKr" id="QuT-gG-Egd"/>
                 <outlet property="btnlike" destination="W05-Qz-8CE" id="RoN-yl-ly8"/>
                 <outlet property="heightSocialPostCollectionView" destination="AFp-To-zbQ" id="i5O-Wr-hkS"/>
                 <outlet property="heightViewAddComment" destination="0eN-mQ-aZL" id="gXd-j3-Ufz"/>

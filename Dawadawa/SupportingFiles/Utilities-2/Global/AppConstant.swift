@@ -101,7 +101,7 @@ struct ServiceName {
     static let kgetSerivetype         =        "api/services-type"
     static let kgetbusinessminingtype =        "api/business-mining-type"
     
-//    Opportunity
+    //    Opportunity
     static let kcreateopportunity       =        "api/create-opportunities"
     static let klistopportunity         =        "api/list-opportunities"
     static let kdeleteopportunity       =        "api/delete-opportunities"
@@ -115,11 +115,11 @@ struct ServiceName {
     static let kopportunitydetails      =        "api/opportunity-detail"
     static let kupdateopportunity       =        "api/update-opportunity"
     
-//    Filter
+    //    Filter
     static let kfiltersubcategory      =         "api/filter-sub-category"
     static let kfilter                 =         "api/opr-filter"
     
-//    Guest
+    //    Guest
     static let kguestcategory          =          "api/guest-category"
     static let kguestfiltersubcategory =          "api/guest-filter-sub-category"
     static let kguestservicetype       =          "api/guest-services-type"
@@ -129,23 +129,23 @@ struct ServiceName {
     static let kguestgetallopportunity  =         "api/guest-all-opportunity"
     static let kguestsearchopportunity  =         "api/guest-search-opportunity"
     
-//   Save Opp
+    //   Save Opp
     static let ksaveOpp                 =         "api/saveOpr"
     static let kgetsaveOppList          =         "api/savedOprList/\(UserData.shared.id)"
     static let kunsavedopp              =         "api/unsaveOpr"
     
-// Comment Opp
+    // Comment Opp
     static let kaddcomment              =         "api/comment-opportunity"
     static let kcommentreply            =         "api/commentreply-opportunity"
     
-// Rate Opp/User
+    // Rate Opp/User
     static let krateopp                =           "api/rateOpr"
     static let krateuser               =           "api/rateUser"
     
-// UserData
+    // UserData
     static let kuserdata               =           "api/userData"
     
-// Payment And Subscription
+    // Payment And Subscription
     static let kgetsubscriptionplan    =           "api/getSubscriptionPlan/\(user_type)"
     static let kstorepayment           =           "api/storePayment"
     static let kgetactiveplan          =           "api/investorActivePlan/"
@@ -155,67 +155,67 @@ struct ServiceName {
 
 struct Notifications {
     static let KProfileimage                    =  "Please upload the Image "
-    static let kDOB                             = "Please Enter Date of Birth"
-    static let kEnterMobileNumber                = "Please Enter Mobile Number"
-    static let kentermobileemail                = "Please Enter Your Mobile Number/Email Address"
-    static let kEnterValidMobileNumber          = "Please Enter Valid Mobile Number"
-    static let kentervalidphoneemail            = "Please Enter Valid Mobile Number/Email Address"
-    static let kcountrycode                    = "Please Select Country Code"
-    static let kEnterUserId                    =  "Please Enter User Id"
-    static let kEnterEmail                      = "Please Enter your EmailId"
-    static let kEnterValidEmail                 = "Please Enter Valid Email Id"
-    static let kName                            = "Please Enter  Name"
-    static let Kimage                             = "Please Select Image"
-    static let kPassword                        = "Please Enter Password"
-    static let kValidPassword                   = "Password should contain atleast 8 characters, one uppercase, one lowercase including digits and special characters"
-    static let kConfirmPassword                  = "Please Enter Confirm Password"
-    static let kNewPassword                     = "Please Enter Password"
+    static let kDOB                             =  "Please Enter Date of Birth"
+    static let kEnterMobileNumber               =  "Please Enter Mobile Number"
+    static let kentermobileemail                =  "Please Enter Your Mobile Number/Email Address"
+    static let kEnterValidMobileNumber          =  "Please Enter Valid Mobile Number"
+    static let kentervalidphoneemail            =  "Please Enter Valid Mobile Number/Email Address"
+    static let kcountrycode                     =  "Please Select Country Code"
+    static let kEnterUserId                     =  "Please Enter User Id"
+    static let kEnterEmail                      =  "Please Enter your EmailId"
+    static let kEnterValidEmail                 =  "Please Enter Valid Email Id"
+    static let kName                            =  "Please Enter  Name"
+    static let Kimage                           =  "Please Select Image"
+    static let kPassword                        =  "Please Enter Password"
+    static let kValidPassword                   =  "Password should contain atleast 8 characters, one uppercase, one lowercase including digits and special characters"
+    static let kConfirmPassword                 =  "Please Enter Confirm Password"
+    static let kNewPassword                     =  "Please Enter Password"
     
-    static let kvalidusername                  = "Please Enter Valid User Name"
-    static let kvalidfirsname                  = "Please Enter Valid First Name"
-    static let kvalidlastname                   = "Please Enter Valid Last Name"
-    
-    
-    static let kGender                          = "Please select your gender"
-    static let knationalid                      = "Please Enter your NationalID"
-    static let Kpassport                        = "Please Enter your Passport number"
-    static let kvehimg                          = "Please upload Your vehicle Image"
-    static let kvehreg                          = "Please Uplaod Your Vehicle registration Image"
-    static let kvehinsu                         = "Please Upload your Vehicle Insurance Image"
-    static let kvehlicence                      = "Please upload Your Vehicle Licence Image"
-    static let kMatchPassword                   = "Password & Confirm Password doesn't match"
-    static let kEnterOTP                        = "OTP Can't be Empty"
-    static let kEnterFullName                   = "Please Enter Full Name"
-    static let kvalidFullName                   = "Please Enter Valid Full Name"
-    static let kusername                        = "Please Enter user Name"
-    static let kEnterValidFirstName             = "First Name required alphabets only"
-    static let kEnterLastName                   = "Please Enter Last Name"
-    static let kEnterValidLastName              = "Last Name required alphabets only"
-    static let kEnterPassword                   = "Please Enter Password"
-    static let kReEnterPassword                 = "Please Enter Confirm Password"
-    static let kEnterValidPassword              = "Please Enter Valid Password"
-    static let kFirstName                       = "Please Enter First Name"
-    static let kLastName                        = "Please Enter Last Name"
-    static let kEnterValidEmailId               = "Please Enter Valid Email ID"
-    static let kEmailId                         = "Please Enter Email ID"
-    static let kPasswordRange                   = "Password Should be Minimum Of 8 digits"
-    static let kPasswordMatch                   = "Password & Confirm Password Should Be Same"
-    static let kAcceptCond                      = "Please Accept terms and conditions"
-    static let kcheckbutton                     = "Please Accept terms & condition"
-    static let kConfirmpassword                 = "Please Enter Confirm Password  "
-    static let kconfirmMismatch                 = "Password does not match "
-    static let kAllergic                        = "Please Select Allergic"
+    static let kvalidusername                   =  "Please Enter Valid User Name"
+    static let kvalidfirsname                   =  "Please Enter Valid First Name"
+    static let kvalidlastname                   =  "Please Enter Valid Last Name"
     
     
-    static let ktitle                           = "Please Enter the Title"
-    static let KValidtitle                      = "Please Enter valid title"
-    static let kLocationName                    = "Please Enter the Location Name"
-    static let kvalidlocationname               = "Please Enter the Valild Location Name"
-    static let kDescription                     = "Please Enter the description"
-    static let kwhatsappnumber                  = "Please Enter the whatsapp Number"
-    static let kvalidwhatsappnumber             = "Please Enter Valid Whatstapp Number"
-    static let kbusinessname                    = "Please Enter Business Name"
-    static let kbusinessBlock                   = "Please Enter Business Mining Block"
+    static let kGender                          =  "Please select your gender"
+    static let knationalid                      =  "Please Enter your NationalID"
+    static let Kpassport                        =  "Please Enter your Passport number"
+    static let kvehimg                          =  "Please upload Your vehicle Image"
+    static let kvehreg                          =  "Please Uplaod Your Vehicle registration Image"
+    static let kvehinsu                         =  "Please Upload your Vehicle Insurance Image"
+    static let kvehlicence                      =  "Please upload Your Vehicle Licence Image"
+    static let kMatchPassword                   =  "Password & Confirm Password doesn't match"
+    static let kEnterOTP                        =  "OTP Can't be Empty"
+    static let kEnterFullName                   =  "Please Enter Full Name"
+    static let kvalidFullName                   =  "Please Enter Valid Full Name"
+    static let kusername                        =  "Please Enter user Name"
+    static let kEnterValidFirstName             =  "First Name required alphabets only"
+    static let kEnterLastName                   =  "Please Enter Last Name"
+    static let kEnterValidLastName              =  "Last Name required alphabets only"
+    static let kEnterPassword                   =  "Please Enter Password"
+    static let kReEnterPassword                 =  "Please Enter Confirm Password"
+    static let kEnterValidPassword              =  "Please Enter Valid Password"
+    static let kFirstName                       =  "Please Enter First Name"
+    static let kLastName                        =  "Please Enter Last Name"
+    static let kEnterValidEmailId               =  "Please Enter Valid Email ID"
+    static let kEmailId                         =  "Please Enter Email ID"
+    static let kPasswordRange                   =  "Password Should be Minimum Of 8 digits"
+    static let kPasswordMatch                   =  "Password & Confirm Password Should Be Same"
+    static let kAcceptCond                      =  "Please Accept terms and conditions"
+    static let kcheckbutton                     =  "Please Accept terms & condition"
+    static let kConfirmpassword                 =  "Please Enter Confirm Password  "
+    static let kconfirmMismatch                 =  "Password does not match "
+    static let kAllergic                        =  "Please Select Allergic"
+    
+    
+    static let ktitle                           =  "Please Enter the Title"
+    static let KValidtitle                      =  "Please Enter valid title"
+    static let kLocationName                    =  "Please Enter the Location Name"
+    static let kvalidlocationname               =  "Please Enter the Valild Location Name"
+    static let kDescription                     =  "Please Enter the description"
+    static let kwhatsappnumber                  =  "Please Enter the whatsapp Number"
+    static let kvalidwhatsappnumber             =  "Please Enter Valid Whatstapp Number"
+    static let kbusinessname                    =  "Please Enter Business Name"
+    static let kbusinessBlock                   =  "Please Enter Business Mining Block"
     
     
     
@@ -375,7 +375,7 @@ struct Cellidentifier {
     
     static let IntroductionCell    = "IntroductionCell"
     static let SidebarMenuCell     = "SidebarMenuCell"
-
+    
 }
 
 struct OtherConstant {
