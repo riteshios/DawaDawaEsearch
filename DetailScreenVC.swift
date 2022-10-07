@@ -153,7 +153,6 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
             
             cell.doc = self.userTimeLine?.oppdocument ?? [] // Pass Doc for collection view
             
-            
             cell.lblLikeCount.text = String.getString(self.userTimeLine?.likes) + " " + "Likes"
             
             if String.getString(self.userTimeLine?.is_user_like) == "1"{
@@ -464,7 +463,6 @@ extension DetailScreenVC{
                 kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
             }
         }
-        
         
         
         let params:[String : Any] = [

@@ -55,6 +55,7 @@ class HomeVC: UIViewController{
         super.viewWillAppear(animated)
         if cameFrom != "FilterData"{
             self.getallopportunity()
+            self.fetchdata()
         }
         
         
@@ -69,7 +70,7 @@ class HomeVC: UIViewController{
     
     func fetchdata(){
         self.lblUserName.text = String.getString(UserData.shared.name) + " " + String.getString(UserData.shared.last_name)
-        if let url = URL(string: "\("https://demo4app.com/dawadawa/public/admin_assets/user_profile/" + String.getString(UserData.shared.social_profile))"){
+        if let url = URL(string: "\("https://demo4esl.com/dawadawa/public/admin_assets/user_profile/" + String.getString(UserData.shared.social_profile))"){
             debugPrint("url...",  url)
             
             let task = URLSession.shared.dataTask(with: url) { data, response, error in
@@ -254,7 +255,7 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                             cell.lbllike.text = "Liked"
                             
                             debugPrint("count=-==0-",self.count)
-                            //                            self.getallopportunity()
+                            //   self.getallopportunity()
                             
                         }
                     }
@@ -262,9 +263,10 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                 
                 if txt == "Share"{
                     
-                    let image = UIImage(named: "baba")
+                    let image = obj.share_link
+                    
                         let imageShare = [ image! ]
-                        let activityViewController = UIActivityViewController(activityItems: imageShare , applicationActivities: nil)
+                        let activityViewController = UIActivityViewController(activityItems: imageShare, applicationActivities: nil)
                         activityViewController.popoverPresentationController?.sourceView = self.view
                         self.present(activityViewController, animated: true, completion: nil)
                 }
@@ -660,7 +662,6 @@ extension HomeVC{
                 CommonUtils.showToastForDefaultError()
             }
         }
-        
     }
     
     //    Close opportunity api

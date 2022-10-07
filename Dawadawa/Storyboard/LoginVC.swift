@@ -42,7 +42,6 @@ class LoginVC: UIViewController {
     }
     
     
-    
 //    MARK: - LIfe Cyclye
     
 
@@ -62,7 +61,7 @@ class LoginVC: UIViewController {
     //  MARK: - @IBAction
     
     @IBAction func btnGoogleTapped(_ sender: UIButton) {
-        let signInConfig = GIDConfiguration.init(clientID: "330854842489-c25b86f35mmp4ckogq99l06tn52jj4ki.apps.googleusercontent.com")
+        let signInConfig = GIDConfiguration.init(clientID: "636451100488-1k8eq045hd097ar24g78743ll5ufhhsn.apps.googleusercontent.com")
         
         
         
@@ -226,7 +225,7 @@ extension LoginVC{
             "phone":String.getString(self.txtFieldPhoneNumer.text),
             "password":String.getString(self.txtFieldPassword.text),
             "device_type":"1",
-            "device_id":"1212"
+            "device_id":kSharedUserDefaults.getDeviceToken()
         ]
 
         
@@ -293,8 +292,8 @@ extension LoginVC{
             let params:[String:Any] = ["username":accountName,
                                        "email":email,
                                        "g_id":googleId,
-                                       "device_type":"IOS",
-                                       "device_id":"1212",
+                                       "device_type":"1",
+                                       "device_id":kSharedUserDefaults.getDeviceToken()
             ]
             
             TANetworkManager.sharedInstance.requestApi(withServiceName: ServiceName.kgooglelogin, requestMethod: .POST, requestParameters: params, withProgressHUD: false) { (result:Any?,error: Error?, errorType:ErrorType, statussCode:Int?) in

@@ -43,6 +43,7 @@ class SocialPostData {
     var is_user_like:String?
     var is_saved:String?
     var plan_name:String?
+    var share_link:String?
     var isComment = false
     var oppimage = [oppr_image]() // Array of dictionary
     var userdetail:user_detail?  // Simple dictionary
@@ -83,6 +84,7 @@ class SocialPostData {
         self.is_user_like = String.getString(data["is_user_like"])
         self.is_saved = String.getString(data["is_saved"])
         self.plan_name = String.getString(data["plan_name"])
+        self.share_link = String.getString(data["share_link"])
         
         let img = kSharedInstance.getArray(withDictionary: data["oppr_image"])
         self.oppimage = img.map{oppr_image(data: kSharedInstance.getDictionary($0))}
@@ -256,6 +258,29 @@ class description_plan{
         self.key = String.getString(data["key"])
     }
 }
+
+// Data dashboard
+
+class data_dashboard{
+    var expiry_date:String?
+    var plan_type:String?
+    var no_saved:String?
+    var total_create:String?
+    var total_used:String?
+    var no_view:String?
+    var no_flag:String?
+    
+    init(data:[String:Any]){
+        self.expiry_date = String.getString(data["expiry_date"])
+        self.plan_type = String.getString(data["plan_type"])
+        self.no_saved = String.getString(data["no_saved"])
+        self.total_create = String.getString(data["total_create"])
+        self.total_used = String.getString(data["total_used"])
+        self.no_view = String.getString(data["no_view"])
+        self.no_flag = String.getString(data["no_flag"])
+    }
+}
+
 // Active Plan
 
 class active_plan{

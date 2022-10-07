@@ -9,10 +9,27 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.330854842489-c25b86f35mmp4ckogq99l06tn52jj4ki</string>
+				<string>com.googleusercontent.apps.636451100488-1k8eq045hd097ar24g78743ll5ufhhsn</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.636451100488-1k8eq045hd097ar24g78743ll5ufhhsn</string>
 			</array>
 		</dict>
 	</array>
+	<key>Entitlements File</key>
+	<dict>
+		<key>APS Environment</key>
+		<string>development</string>
+		<key>Associated Domains</key>
+		<array>
+			<string>applinks:https://demo4esl.com/dawadawa</string>
+		</array>
+	</dict>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -32,19 +49,5 @@
 			</array>
 		</dict>
 	</dict>
-	<key>NSCameraUsageDescription</key>
-	<string></string>
-	<key>NSDocumentsFolderUsageDescription</key>
-	<string></string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string></string>
-	<key>NSFileProviderDomainUsageDescription</key>
-	<string></string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Allow</string>
-	<key>NSLocationUsageDescription</key>
-	<string>Allow</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Allow</string>
 </dict>
 </plist>

@@ -26,6 +26,9 @@ target 'Dawadawa' do
   pod 'RangeSeekSlider'
   pod 'Cosmos', '~> 23.0'
   pod 'Stripe'
-
+  pod 'FirebaseAuth'
+  pod 'FirebaseFirestore'
+  pod 'FirebaseAnalytics'
+  pod 'FirebaseMessaging'
 
 end

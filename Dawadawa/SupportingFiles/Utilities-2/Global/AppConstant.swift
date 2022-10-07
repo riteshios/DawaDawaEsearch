@@ -151,6 +151,9 @@ struct ServiceName {
     static let kgetactiveplan          =           "api/investorActivePlan/"
     static let kgettransactionhistory  =           "api/getTransactionHistory/"
     
+   // Dashboard
+    static let kdashboard              =           "api/dashboard"
+    
 }
 
 struct Notifications {

@@ -8,6 +8,14 @@
 import UIKit
 
 class OpportunitypostedTableViewCell: UITableViewCell {
+    
+    @IBOutlet weak var lblshowdata: UILabel!
+    @IBOutlet weak var lblshowplan: UILabel!
+    @IBOutlet weak var lblshowOpportunity: UILabel!
+    @IBOutlet weak var lblDate: UILabel!
+    @IBOutlet weak var lblPlan: UILabel!
+    @IBOutlet weak var lblOpportunity: UILabel!
+    
     @IBOutlet weak var viewAllline:UIView!
     @IBOutlet weak var viewPremiumLine:UIView!
     @IBOutlet weak var viewFeaturedLine:UIView!

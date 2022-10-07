@@ -9,6 +9,8 @@ import UIKit
 
 class ProfileVC: UIViewController {
     
+    //    MARK: - Properties
+    
     @IBOutlet weak var ImageProfile: UIImageView!
     @IBOutlet weak var lblFullName: UILabel!
     @IBOutlet weak var lblMobileNumber: UILabel!
@@ -20,6 +22,7 @@ class ProfileVC: UIViewController {
     var docUrl = ""
     var isProfileImageSelected = false
     var userImage:String?
+    var datadashboard:data_dashboard?
     var userTimeLine = [SocialPostData]() //Array
     var UserTimeLineOppdetails:SocialPostData? // Dictionary m hai
     var comment = [user_comment]()
@@ -31,6 +34,7 @@ class ProfileVC: UIViewController {
     
     @IBOutlet weak var tblViewSocialPost: UITableView!
     
+    //    MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,19 +57,22 @@ class ProfileVC: UIViewController {
             self.fetchdata()
         }
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         self.listoppoertunityapi()
+        self.dashboardapi()
         self.tabBarController?.tabBar.isHidden = false
         self.tabBarController?.tabBar.layer.zPosition = 0
     }
+    
     func fetchdata(){
         self.lblFullName.text = String.getString(UserData.shared.name) + " " + String.getString(UserData.shared.last_name)
         self.lblMobileNumber.text = UserData.shared.phone
         self.lblEmail.text = UserData.shared.email
         
         
-        if let url = URL(string: "\("https://demo4app.com/dawadawa/public/admin_assets/user_profile/" + String.getString(UserData.shared.social_profile))"){
-            debugPrint("url...",  url)
+        if let url = URL(string: "\("https://demo4esl.com/dawadawa/public/admin_assets/user_profile/" + String.getString(UserData.shared.social_profile))"){
+            debugPrint("urlimage...",  url)
             
             let task = URLSession.shared.dataTask(with: url) { data, response, error in
                 guard let data = data, error == nil else { return }
@@ -170,10 +177,10 @@ class ProfileVC: UIViewController {
                     vc.modalTransitionStyle = .crossDissolve
                     vc.modalPresentationStyle = .overCurrentContext
                     vc.callbacklogout = { txt in
-                       
+                        
                         if txt == "Logout"{
                             vc.dismiss(animated: false) {
-//                                self.logout()
+                                //                                self.logout()
                                 let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
                                 
                                 self.navigationController?.pushViewController(vc, animated: true)
@@ -218,6 +225,34 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
             if UserData.shared.isskiplogin == true{
                 cell.imgOppPosted.isHidden = true
             }
+            else{
+                if UserData.shared.user_type == "0"{
+                    cell.lblshowdata.text = String.getString(self.datadashboard?.expiry_date)
+                    cell.lblDate.text = "Expiration Date"
+                    cell.lblshowplan.text = String.getString(self.datadashboard?.plan_type)
+                    cell.lblPlan.text = "Subscription Plan"
+                    cell.lblshowOpportunity.text = String.getString(self.datadashboard?.no_saved)
+                    cell.lblOpportunity.text = "Saved Opportunity"
+                }
+                else if UserData.shared.user_type == "1"{
+                    cell.lblshowdata.text = String.getString(self.datadashboard?.total_create)
+                    cell.lblDate.text = "Total Create"
+                    cell.lblshowplan.text = String.getString(self.datadashboard?.no_view)
+                    cell.lblPlan.text = "Total views"
+                    cell.lblshowOpportunity.text = String.getString(self.datadashboard?.no_flag)
+                    cell.lblOpportunity.text = "Flagged Opportunities"
+                    
+                }
+                else if UserData.shared.user_type == "2"{
+                    cell.lblshowdata.text = String.getString(self.datadashboard?.total_create)
+                    cell.lblDate.text = "Total Create"
+                    cell.lblshowplan.text = String.getString(self.datadashboard?.no_view)
+                    cell.lblPlan.text = "Total views"
+                    cell.lblshowOpportunity.text = String.getString(self.datadashboard?.no_flag)
+                    cell.lblOpportunity.text = "Flagged Opportunities"
+                    
+                }
+            }
             cell.callbackbtnSelect = { txt in
                 if txt == "All"{
                     if UserData.shared.isskiplogin == true{
@@ -250,7 +285,6 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                         self.isbtnFeaturedSelect = true
                         self.getallFeaturedapi()
                     }
-                    
                     
                 }
                 
@@ -371,7 +405,7 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                         else{
                             self.listoppoertunityapi()
                         }
-                       
+                        
                     }
                     self.present(vc, animated: false)
                     
@@ -393,8 +427,8 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                             cell.imgsave.image = UIImage(named: "save-3")
                             cell.lblSave.text = "Save"
                         }
-                        
                     }
+                    
                     else{
                         let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
                         self.unsaveoppoertunityapi(oppr_id: oppid)
@@ -402,7 +436,7 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                         cell.lblSave.text = "Save"
                     }
                 }
-                
+                                      
                 if txt == "More" {
                     let vc = self.storyboard?.instantiateViewController(withIdentifier: ProileSocialMoreVC.getStoryboardID()) as! ProileSocialMoreVC
                     vc.modalTransitionStyle = .crossDissolve
@@ -480,7 +514,7 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                 }
                 
                 
-//                       COMMENT PART
+                //                       COMMENT PART
                 
                 
                 
@@ -551,7 +585,7 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                             cell.imageSubcommentUser.isHidden = true
                             cell.lblsubUserNameandComment.isHidden = true
                             cell.verticalSpacingReply.constant = -10
-//                            cell.bottomlblSubcomment.constant = 10
+                            //                            cell.bottomlblSubcomment.constant = 10
                             
                             
                             let first = String.getString(userComment.first?.name)
@@ -565,8 +599,8 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                             
                             cell.lblusernameandcomment.attributedText = attributedString
                             
-                                self.listoppoertunityapi()
-
+                            self.listoppoertunityapi()
+                            
                         }
                     }
                 }
@@ -734,6 +768,80 @@ extension ProfileVC{
         }
     }
     
+    // Api Dashboard
+    
+    func dashboardapi(){
+        
+        CommonUtils.showHudWithNoInteraction(show: true)
+        
+        
+        if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
+            let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+            let septoken = endToken.components(separatedBy: " ")
+            if septoken[0] != "Bearer"{
+                let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
+                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
+            }
+        }
+        
+        
+        let params:[String : Any] = [
+            "user_id":Int.getInt(UserData.shared.id),
+            "user_type":Int.getInt(String.getString(UserData.shared.user_type))
+        ]
+        
+        debugPrint("usertype......",Int.getInt(String.getString(UserData.shared.user_type)))
+        
+        TANetworkManager.sharedInstance.requestApi(withServiceName:ServiceName.kdashboard, requestMethod: .POST,
+                                                   requestParameters:params, withProgressHUD: false)
+        {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
+            
+            CommonUtils.showHudWithNoInteraction(show: false)
+            
+            if errorType == .requestSuccess {
+                
+                let dictResult = kSharedInstance.getDictionary(result)
+                
+                switch Int.getInt(statusCode) {
+                case 200:
+                    
+                    if Int.getInt(dictResult["status"]) == 200{
+                        
+                        let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+                        let septoken = endToken.components(separatedBy: " ")
+                        if septoken[0] == "Bearer"{
+                            kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
+                        }
+                        
+                        let data = kSharedInstance.getDictionary(dictResult["data"])
+                        self?.datadashboard = data_dashboard(data: data)
+                        
+                        print("Datadashboard====-=\(self?.datadashboard)")
+                        
+                        // CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        self?.tblViewSocialPost.reloadData()
+                        CommonUtils.showHudWithNoInteraction(show: false)
+                        
+                        
+                    }
+                    
+                    else if  Int.getInt(dictResult["status"]) == 400{
+                        
+                        //  CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    }
+                    
+                default:
+                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                }
+            } else if errorType == .noNetwork {
+                CommonUtils.showToastForInternetUnavailable()
+                
+            } else {
+                CommonUtils.showToastForDefaultError()
+            }
+        }
+    }
+    
     // Api All Opportunity
     
     
@@ -856,7 +964,7 @@ extension ProfileVC{
                         self?.userTimeLine = Opportunity.map{SocialPostData(data: kSharedInstance.getDictionary($0))}
                         
                         print("DataAllPost====-=\(self?.userTimeLine)")
-                       
+                        
                         self?.tblViewSocialPost.reloadData()
                         self?.imgNoOpp.isHidden = true
                         
@@ -1418,7 +1526,6 @@ extension ProfileVC{
                             debugPrint("imgaraay=-=-=-==-=", vc.imgarray)
                             
                             
-                            
                         }
                         else if Int.getInt(self?.UserTimeLineOppdetails?.category_id) == 2{
                             let vc = self?.storyboard?.instantiateViewController(withIdentifier: TrailingOpportunityVC.getStoryboardID()) as! TrailingOpportunityVC
@@ -1466,8 +1573,6 @@ extension ProfileVC{
                             
                         }
                         
-                        
-                        
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         
                         
@@ -1490,7 +1595,6 @@ extension ProfileVC{
             
         }
     }
-    
     
 }
 

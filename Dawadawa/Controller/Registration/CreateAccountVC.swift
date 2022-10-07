@@ -107,8 +107,7 @@ class CreateAccountVC: UIViewController {
     
     @IBAction func btnGoogleLoginTapped(_ sender: UIButton) {
         //        self.googleSignin()
-        let signInConfig = GIDConfiguration.init(clientID: "330854842489-c25b86f35mmp4ckogq99l06tn52jj4ki.apps.googleusercontent.com")
-        
+        let signInConfig = GIDConfiguration.init(clientID: "636451100488-1k8eq045hd097ar24g78743ll5ufhhsn.apps.googleusercontent.com")
         
         
         GIDSignIn.sharedInstance.signIn(with: signInConfig, presenting: self) { user, error in
@@ -118,10 +117,7 @@ class CreateAccountVC: UIViewController {
             guard let user = user else { return }
             
             
-            
             if let profiledata = user.profile {
-                
-                
                 
                 let userId : String = user.userID ?? ""
                 
@@ -360,7 +356,7 @@ extension CreateAccountVC {
             "user_country":self.labelCountry.text,
             "phone":String.getString(self.txtFieldPhoneNumber.text),
             "device_type":"1",
-            "device_id":"REFw2321",
+            "device_id":kSharedUserDefaults.getDeviceToken(),
             "password":String.getString(self.txtFieldPassword.text),
             "confirm_password":String.getString(self.txtFieldConfirmPassword.text),
             "user_type":Int.getInt(self.usertype)
@@ -446,8 +442,8 @@ extension CreateAccountVC {
         let params:[String:Any] = ["username":accountName,
                                    "email":email,
                                    "g_id":googleId,
-                                   "device_type":"IOS",
-                                   "device_id":"1212",
+                                   "device_type":"1",
+                                   "device_id":kSharedUserDefaults.getDeviceToken()
         ]
         
         TANetworkManager.sharedInstance.requestApi(withServiceName: ServiceName.kgooglelogin, requestMethod: .POST, requestParameters: params, withProgressHUD: false) { (result:Any?,error: Error?, errorType:ErrorType, statussCode:Int?) in
