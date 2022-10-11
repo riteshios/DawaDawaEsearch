@@ -2,7 +2,7 @@
 //  SocialPost.swift
 //  Dawadawa
 //
-//  Created by Alekh on 22/07/22.
+//  Created by Ritesh Gupta on 22/07/22.
 //
 
 import Foundation
@@ -348,5 +348,23 @@ struct SecretKeyParser {
     init(_ json: JSON) {
         clientSecret = json["paymentIntent"].stringValue
 
+    }
+}
+
+// AllNotification_data
+
+class Notification_data{
+    var id:Int?
+    var user_id:Int?
+    var title:String?
+    var body:String?
+    var read_status:String?
+    
+    init(data:[String:Any]){
+        self.id = Int.getInt(data["id"])
+        self.user_id = Int.getInt(data["user_id"])
+        self.title = String.getString(data["title"])
+        self.body = String.getString(data["body"])
+        self.read_status = String.getString(data["read_status"])
     }
 }

@@ -2,7 +2,7 @@
 //  MiningServiceVC.swift
 //  Dawadawa
 //
-//  Created by Alekh on 12/07/22.
+//  Created by Ritesh Gupta on 12/07/22.
 //
 
 import UIKit

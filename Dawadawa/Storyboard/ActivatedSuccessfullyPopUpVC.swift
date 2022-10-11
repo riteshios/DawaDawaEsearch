@@ -2,7 +2,7 @@
 //  ActivatedSuccessfullyPopUpVC.swift
 //  Dawadawa
 //
-//  Created by Alekh Verma on 10/06/22.
+//  Created by Ritesh Gupta on 10/06/22.
 //
 
 import UIKit

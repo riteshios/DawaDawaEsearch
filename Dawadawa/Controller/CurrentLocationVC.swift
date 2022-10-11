@@ -2,8 +2,7 @@
 //  CurrentLocationVC.swift
 //  Dawadawa
 //
-//  Created by Alekh on 05/09/22.
-//  Developer Name: -  Ritesh Gupta
+//  Created by Ritesh Gupta on 05/09/22.
 
 import UIKit
 import GoogleMaps

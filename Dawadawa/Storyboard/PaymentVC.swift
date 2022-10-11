@@ -1,8 +1,7 @@
 //
 //  PaymentVC.swift
 //  Dawadawa
-//  Developer: - Ritesh Gupta
-//  Created by Alekh on 12/09/22.
+//  Created by Ritesh Gupta on 12/09/22.
 
 import UIKit
 import Stripe

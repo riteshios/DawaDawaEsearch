@@ -1,8 +1,7 @@
 //
 //  FilterVC.swift
 //  Dawadawa
-//  Developer: - Ritesh Gupta
-//  Created by Alekh on 28/07/22.
+//  Created by Ritesh Gupta on 28/07/22.
 //
 
 import UIKit

@@ -2,7 +2,7 @@
 //  VerifyNewEmailOTPVC.swift
 //  Dawadawa
 //
-//  Created by Alekh on 28/06/22.
+//  Created by Ritesh Gupta on 28/06/22.
 //
 
 import UIKit

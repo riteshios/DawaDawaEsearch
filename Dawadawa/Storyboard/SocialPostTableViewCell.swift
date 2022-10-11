@@ -2,7 +2,7 @@
 //  SocialPostTableViewCell.swift
 //  Dawadawa
 //
-//  Created by Alekh on 20/07/22.
+//  Created by Ritesh Gupta on 20/07/22.
 //
 
 import UIKit

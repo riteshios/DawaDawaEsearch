@@ -2,7 +2,7 @@
 //  PremiumTableViewCell.swift
 //  Dawadawa
 //
-//  Created by Alekh on 21/07/22.
+//  Created by Ritesh Gupta on 21/07/22.
 //
 
 import UIKit

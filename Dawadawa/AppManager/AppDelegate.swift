@@ -25,8 +25,8 @@ import GooglePlaces
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
+    let navigator = Navigator()
     let gcmMessageIDKey = "gcmMessageIDKey"
-    
     
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -470,6 +470,20 @@ extension AppDelegate {
         }
         return true
     }
+    
+//    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+//
+//        guard let url = userActivity.webpageURL else{return false}
+//
+//        guard let vc = navigator.getDestination(for: url) else{
+//            application.open(url)
+//
+//            return false
+//        }
+//        window?.rootViewController = vc
+//        window?.makeKeyAndVisible()
+//        return true
+//    }
    
 
 }

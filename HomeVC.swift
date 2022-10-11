@@ -2,7 +2,7 @@
 //  HomeVC.swift
 //  Dawadawa
 //
-//  Created by Alekh on 20/07/22.
+//  Created by Ritesh Gupta on 20/07/22.
 
 
 import UIKit
@@ -29,10 +29,14 @@ class HomeVC: UIViewController{
     @IBOutlet weak var lblUserName: UILabel!
     @IBOutlet weak var ImgUser: UIImageView!
     
+    @IBOutlet weak var imgNotification: UIImageView!
+    @IBOutlet weak var lblCountNotification: UILabel!
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.imgNotification.isHidden = true
         debugPrint("nameid",UserData.shared.id)
         debugPrint("nameid",UserData.shared.name)
         if UserData.shared.isskiplogin == true{
@@ -56,6 +60,7 @@ class HomeVC: UIViewController{
         if cameFrom != "FilterData"{
             self.getallopportunity()
             self.fetchdata()
+            self.getcountnotification()
         }
         
         
@@ -97,10 +102,13 @@ class HomeVC: UIViewController{
         
         tabBarController?.selectedIndex = 1
         
-        //        let vc = self.storyboard?.instantiateViewController(withIdentifier: SearchVC.getStoryboardID()) as! SearchVC
-        //        self.navigationController?.pushViewController(vc, animated: true)
-        
     }
+    
+    @IBAction func btnNotificationTapped(_ sender: UIButton) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "NotificationsVC") as! NotificationsVC
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
     
 }
 
@@ -388,7 +396,13 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                                     self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
                                 }
                                 else{
-                                    kSharedAppDelegate?.makeRootViewController()
+                                    self.dismiss(animated: false){
+                                    let vc = self.storyboard?.instantiateViewController(withIdentifier: ReportUserPopUpVC.getStoryboardID()) as! ReportUserPopUpVC
+                                    vc.modalTransitionStyle = .crossDissolve
+                                    vc.modalPresentationStyle = .overCurrentContext
+                                    self.present(vc, animated: false)
+                                    }
+                                   
                                 }
                                 
                             }
@@ -398,7 +412,6 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                     }
                     
                 }
-                
                 
                 
                 
@@ -643,7 +656,8 @@ extension HomeVC{
                         userTimeLine = Opportunity.map{SocialPostData(data: kSharedInstance.getDictionary($0))}
                         print("Dataallpost=\(userTimeLine)")
                         
-                        //  CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        
+                        
                         self.tblViewViewPost.reloadData()
                         
                     }
@@ -1322,6 +1336,62 @@ extension HomeVC{
             
         }
     }
+    
+    //    Api count Notification
+        
+        func getcountnotification(){
+            CommonUtils.showHudWithNoInteraction(show: true)
+            
+            if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
+                let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+                let septoken = endToken.components(separatedBy: " ")
+                if septoken[0] != "Bearer"{
+                    let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
+                    kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
+                }
+            }
+            
+            //passing userid in api url
+            TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName: ServiceName.kcountNotification, requestMethod: .GET, requestParameters:[:], withProgressHUD: false) { (result:Any?, error:Error?, errorType:ErrorType?,statusCode:Int?) in
+                CommonUtils.showHudWithNoInteraction(show: false)
+                if errorType == .requestSuccess {
+                    let dictResult = kSharedInstance.getDictionary(result)
+                    
+                    switch Int.getInt(statusCode) {
+                    case 200:
+                        if Int.getInt(dictResult["status"]) == 200{
+                            let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+                            let septoken = endToken.components(separatedBy: " ")
+                            if septoken[0] == "Bearer"{
+                                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
+                            }
+                            
+                            let count = String.getString(dictResult["count"])
+                            print("count=-==\(count)")
+                        
+                            self.lblCountNotification.text = count
+                            self.imgNotification.isHidden = false
+                            //  CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                
+                        }
+                        else if  Int.getInt(dictResult["status"]) == 400{
+                            self.imgNotification.isHidden = false
+                            self.imgNotification.image = UIImage(named: "Notifi")
+                            
+                        }
+                        
+                        
+                    default:
+                        CommonUtils.showError(.error, String.getString(dictResult["message"]))
+                    }
+                }else if errorType == .noNetwork {
+                    CommonUtils.showToastForInternetUnavailable()
+                    
+                } else {
+                    CommonUtils.showToastForDefaultError()
+                }
+            }
+        }
 }
 
 extension NSMutableAttributedString {

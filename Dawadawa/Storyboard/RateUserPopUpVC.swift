@@ -2,7 +2,7 @@
 //  RateUserPopUpVC.swift
 //  Dawadawa
 //
-//  Created by Alekh on 02/09/22.
+//  Created by Ritesh Gupta on 02/09/22.
 //
 
 import UIKit

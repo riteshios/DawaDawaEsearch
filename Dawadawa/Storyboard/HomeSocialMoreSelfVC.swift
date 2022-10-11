@@ -1,8 +1,7 @@
 //
 //  HomeSocialMoreSelfVC.swift
 //  Dawadawa
-//  Developer: - Ritesh Gupta
-//  Created by Alekh on 30/08/22.
+//  Created by Ritesh Gupta on 30/08/22.
 //
 
 import UIKit
@@ -18,12 +17,12 @@ class HomeSocialMoreSelfVC: UIViewController {
         self.setup()
         
     }
+    
     func setup(){
         Viewmain.clipsToBounds = true
         Viewmain.layer.cornerRadius = 25
         Viewmain.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
         Viewmain.addShadowWithBlurOnView(Viewmain, spread: 0, blur: 10, color: .black, opacity: 0.16, OffsetX: 0, OffsetY: 1)
-        
     }
     
     //    MARK: - @IBAction

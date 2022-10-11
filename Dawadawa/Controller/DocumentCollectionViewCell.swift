@@ -2,7 +2,7 @@
 //  DocumentCollectionViewCell.swift
 //  Dawadawa
 //
-//  Created by Alekh on 22/09/22.
+//  Created by Ritesh Gupta on 22/09/22.
 //
 
 import UIKit

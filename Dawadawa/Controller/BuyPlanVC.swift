@@ -2,8 +2,8 @@
 //  BuyPlanVC.swift
 //  Dawadawa
 //
-//  Created by Alekh on 13/09/22.
-//
+//  Created by Ritesh Gupta on 13/09/22.
+
 
 import UIKit
 import SwiftUI

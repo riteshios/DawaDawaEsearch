@@ -2,7 +2,7 @@
 //  LogOutVC.swift
 //  Dawadawa
 //
-//  Created by Alekh on 23/06/22.
+//  Created by Ritesh Gupta on 23/06/22.
 //
 
 import UIKit

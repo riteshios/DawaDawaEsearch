@@ -2,7 +2,7 @@
 //  PlanCollectionViewCell.swift
 //  Dawadawa
 //
-//  Created by Alekh on 02/08/22.
+//  Created by Ritesh Gupta on 02/08/22.
 //
 
 import UIKit

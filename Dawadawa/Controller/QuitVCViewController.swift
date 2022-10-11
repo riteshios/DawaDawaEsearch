@@ -2,7 +2,7 @@
 //  QuitVCViewController.swift
 //  Dawadawa
 //
-//  Created by Alekh on 11/07/22.
+//  Created by Ritesh Gupta on 11/07/22.
 //
 
 import UIKit

@@ -2,7 +2,7 @@
 //  WebViewVC.swift
 //  Dawadawa
 //
-//  Created by Alekh on 04/07/22.
+//  Created by Ritesh Gupta on 04/07/22.
 //
 
 import UIKit
@@ -17,7 +17,7 @@ class WebViewVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       debugPrint("strurl=",strurl)
+        debugPrint("strurl=",strurl)
         debugPrint("head=",head)
         
         guard let url = URL(string: strurl) else{

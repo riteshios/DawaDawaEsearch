@@ -2,7 +2,7 @@
 //  DetailsTableViewCell.swift
 //  Dawadawa
 //
-//  Created by Alekh on 21/09/22.
+//  Created by Ritesh Gupta on 21/09/22.
 //
 
 import UIKit

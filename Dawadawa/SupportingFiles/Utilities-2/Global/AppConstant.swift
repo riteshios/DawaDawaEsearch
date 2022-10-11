@@ -154,6 +154,12 @@ struct ServiceName {
    // Dashboard
     static let kdashboard              =           "api/dashboard"
     
+  //  Notification
+    static let kcountNotification      =            "api/countNotification/\(UserData.shared.id)"
+    static let kgetallNotification     =            "api/getallNotification/\(UserData.shared.id)"
+    static let kreadNotification       =            "api/readNotification"
+    static let kmarkallread            =            "api/markall-read"
+    
 }
 
 struct Notifications {

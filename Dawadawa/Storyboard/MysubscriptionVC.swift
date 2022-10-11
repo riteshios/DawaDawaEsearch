@@ -1,9 +1,9 @@
 //
 //  MysubscriptionVC.swift
 //  Dawadawa
-//  Developer: - Ritesh Gupta
-//  Created by Alekh on 09/09/22.
-//
+
+//  Created by Ritesh Gupta on 09/09/22.
+
 
 import UIKit
 

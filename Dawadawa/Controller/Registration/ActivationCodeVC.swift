@@ -2,7 +2,7 @@
 //  ActivationCodeVC.swift
 //  Dawadawa
 //
-//  Created by Alekh Verma on 10/06/22.
+//  Created by Ritesh Gupta on 10/06/22.
 //
 
 import UIKit
@@ -226,8 +226,9 @@ extension ActivationCodeVC: UITextFieldDelegate{
 }
 // MARK: - Api call
 extension ActivationCodeVC{
+    
+    
     func verifyuserotpapi(){
-        
         CommonUtils.showHud(show: true)
         
         let params:[String : Any] = [

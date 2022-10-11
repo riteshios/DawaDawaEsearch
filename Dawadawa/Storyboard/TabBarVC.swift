@@ -2,7 +2,7 @@
 //  TabBarVC.swift
 //  Dawadawa
 //
-//  Created by Alekh on 20/06/22.
+//  Created by Ritesh Gupta on 20/06/22.
 //
 
 import UIKit
