@@ -160,6 +160,9 @@ struct ServiceName {
     static let kreadNotification       =            "api/readNotification"
     static let kmarkallread            =            "api/markall-read"
     
+//    Report Opp/User
+    static let kreportuser             =            "api/reportUser"
+    
 }
 
 struct Notifications {

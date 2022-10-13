@@ -1,7 +1,6 @@
 //
 //  CreateAccountVC.swift
 //  Dawadawa
-//
 
 //  Created by Ritesh Gupta on 09/06/22.
 //
@@ -87,6 +86,7 @@ class CreateAccountVC: UIViewController {
         
         self.txtFieldPhoneNumber.keyBoardType = .numberPad
     }
+    
     //   MARK: - @IBACtions
     
     
@@ -97,6 +97,7 @@ class CreateAccountVC: UIViewController {
 //        vc.head = "Terms and Condition"
 //        self.navigationController?.pushViewController(vc, animated: false)
     }
+    
     @IBAction func btnprivacy(_ sender: UIButton) {
         self.PrivacypolicyApi()
 //        let vc = self.storyboard?.instantiateViewController(withIdentifier: WebViewVC.getStoryboardID()) as! WebViewVC

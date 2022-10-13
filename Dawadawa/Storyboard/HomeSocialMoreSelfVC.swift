@@ -32,8 +32,6 @@ class HomeSocialMoreSelfVC: UIViewController {
         self.dismiss(animated: true)
     }
     
-    
-    
     @IBAction func btnUpdateTapped(_ sender: UIButton) {
         self.callback?("Update")
     }

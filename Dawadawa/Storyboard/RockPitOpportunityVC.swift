@@ -3,7 +3,7 @@
 //  Dawadawa
 //
 //  Created by Ritesh Gupta on 07/07/22.
-//
+
 
 import UIKit
 import SKFloatingTextField
@@ -1208,7 +1208,7 @@ extension RockPitOpportunityVC{
         debugPrint("checklookingforid",lookingforid)
         
         let params:[String : Any] = [
-            "oppr_id":"\(String(describing: oppid))",
+            "oppr_id":700,
             "category_id":"1",
             "sub_category":"\(String(describing: subcatid))",
             "title":String.getString(self.txtFieldTitle.text),
@@ -1225,8 +1225,6 @@ extension RockPitOpportunityVC{
             "latitude":String.getString(self.latitude),
             "longitude":String.getString(self.longitude)
         ]
-        
-        
         
         let uploadimage:[String:Any] = ["filenames[]":self.imagearr]
         let uploaddocument:[String:Any] = ["opportunity_documents[]":self.documentarr]
@@ -1255,8 +1253,8 @@ extension RockPitOpportunityVC{
                         kSharedAppDelegate?.makeRootViewController()
                         
                     }
-                    else if  Int.getInt(dictResult["status"]) == 400{
-                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    else if  Int.getInt(dictResult["status"]) == 401{
+                       // CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                 default:

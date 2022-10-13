@@ -109,7 +109,6 @@ class HomeVC: UIViewController{
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    
 }
 
 extension HomeVC:UITableViewDelegate,UITableViewDataSource{
@@ -150,12 +149,14 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                         self.navigationController?.pushViewController(vc, animated: true)
                     }
                 }
+                
                 if txt == "Filter"{
                     let vc = self.storyboard!.instantiateViewController(withIdentifier: FilterVC.getStoryboardID()) as! FilterVC
                     self.navigationController?.pushViewController(vc, animated: false)
                     
                 }
             }
+            
             return cell
             
         case 1:
@@ -273,10 +274,10 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                     
                     let image = obj.share_link
                     
-                        let imageShare = [ image! ]
-                        let activityViewController = UIActivityViewController(activityItems: imageShare, applicationActivities: nil)
-                        activityViewController.popoverPresentationController?.sourceView = self.view
-                        self.present(activityViewController, animated: true, completion: nil)
+                    let imageShare = [ image! ]
+                    let activityViewController = UIActivityViewController(activityItems: imageShare, applicationActivities: nil)
+                    activityViewController.popoverPresentationController?.sourceView = self.view
+                    self.present(activityViewController, animated: true, completion: nil)
                 }
                 
                 if txt == "Rate"{
@@ -320,9 +321,6 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                     
                 }
                 
-                
-                
-                
                 if txt == "More" {
                     
                     if UserData.shared.id == Int.getInt(obj.user_id){
@@ -338,9 +336,7 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                                 }
                                 else{
                                     let oppid = Int.getInt(userTimeLine[indexPath.row].id)
-                                    
                                     debugPrint("oppid+++++++",oppid)
-                                    
                                     self.opportunitydetailsapi(oppr_id: oppid)
                                 }
                             }
@@ -357,6 +353,7 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                                                 let oppid = Int.getInt(userTimeLine[indexPath.row].id)
                                                 self.closeopportunityapi(opr_id: oppid)
                                                 debugPrint("oppidclose......",oppid)
+                                                self.getallopportunity()
                                                 
                                             }
                                             
@@ -397,12 +394,14 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                                 }
                                 else{
                                     self.dismiss(animated: false){
-                                    let vc = self.storyboard?.instantiateViewController(withIdentifier: ReportUserPopUpVC.getStoryboardID()) as! ReportUserPopUpVC
-                                    vc.modalTransitionStyle = .crossDissolve
-                                    vc.modalPresentationStyle = .overCurrentContext
-                                    self.present(vc, animated: false)
+                                        let vc = self.storyboard?.instantiateViewController(withIdentifier: ReportUserPopUpVC.getStoryboardID()) as! ReportUserPopUpVC
+                                        vc.modalTransitionStyle = .crossDissolve
+                                        vc.modalPresentationStyle = .overCurrentContext
+                                        let oppid = Int.getInt(userTimeLine[indexPath.row].user_id)
+                                        vc.userid = oppid
+                                        self.present(vc, animated: false)
                                     }
-                                   
+                                    
                                 }
                                 
                             }
@@ -553,7 +552,6 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
             cell.imageSubcommentUser.downlodeImage(serviceurl: imgcommentSubuser, placeHolder: UIImage(named: "Boss"))
             
             
-            
             let first = String.getString(obj.usercomment.first?.name)
             let second = String.getString(obj.usercomment.first?.comments)
             
@@ -573,7 +571,6 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
             
             cell.lblusernameandcomment.attributedText = attributedStringcomment
             cell.lblsubUserNameandComment.attributedText = attributedStringSubcomment
-            
             
             
             cell.callbacktextviewcomment = {[weak tblViewViewPost] (_) in
@@ -683,7 +680,6 @@ extension HomeVC{
         
         CommonUtils.showHud(show: true)
         
-        
         if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
             let endToken = kSharedUserDefaults.getLoggedInAccessToken()
             let septoken = endToken.components(separatedBy: " ")
@@ -692,7 +688,6 @@ extension HomeVC{
                 kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
             }
         }
-        
         
         let params:[String : Any] = [
             "user_id":Int.getInt(UserData.shared.id),
@@ -743,6 +738,7 @@ extension HomeVC{
             }
         }
     }
+    
     
     
     // Api flag Opportunity
@@ -1265,7 +1261,6 @@ extension HomeVC{
                             debugPrint("imgaraay=-=-=-==-=", vc.imgarray)
                             
                             
-                            
                         }
                         else if Int.getInt(self?.UserTimeLineOppdetails?.category_id) == 2{
                             let vc = self?.storyboard?.instantiateViewController(withIdentifier: TrailingOpportunityVC.getStoryboardID()) as! TrailingOpportunityVC
@@ -1338,60 +1333,60 @@ extension HomeVC{
     }
     
     //    Api count Notification
+    
+    func getcountnotification(){
+        CommonUtils.showHudWithNoInteraction(show: true)
         
-        func getcountnotification(){
-            CommonUtils.showHudWithNoInteraction(show: true)
-            
-            if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
-                let endToken = kSharedUserDefaults.getLoggedInAccessToken()
-                let septoken = endToken.components(separatedBy: " ")
-                if septoken[0] != "Bearer"{
-                    let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
-                    kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
-                }
-            }
-            
-            //passing userid in api url
-            TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName: ServiceName.kcountNotification, requestMethod: .GET, requestParameters:[:], withProgressHUD: false) { (result:Any?, error:Error?, errorType:ErrorType?,statusCode:Int?) in
-                CommonUtils.showHudWithNoInteraction(show: false)
-                if errorType == .requestSuccess {
-                    let dictResult = kSharedInstance.getDictionary(result)
-                    
-                    switch Int.getInt(statusCode) {
-                    case 200:
-                        if Int.getInt(dictResult["status"]) == 200{
-                            let endToken = kSharedUserDefaults.getLoggedInAccessToken()
-                            let septoken = endToken.components(separatedBy: " ")
-                            if septoken[0] == "Bearer"{
-                                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
-                            }
-                            
-                            let count = String.getString(dictResult["count"])
-                            print("count=-==\(count)")
-                        
-                            self.lblCountNotification.text = count
-                            self.imgNotification.isHidden = false
-                            //  CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                
-                        }
-                        else if  Int.getInt(dictResult["status"]) == 400{
-                            self.imgNotification.isHidden = false
-                            self.imgNotification.image = UIImage(named: "Notifi")
-                            
-                        }
-                        
-                        
-                    default:
-                        CommonUtils.showError(.error, String.getString(dictResult["message"]))
-                    }
-                }else if errorType == .noNetwork {
-                    CommonUtils.showToastForInternetUnavailable()
-                    
-                } else {
-                    CommonUtils.showToastForDefaultError()
-                }
+        if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
+            let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+            let septoken = endToken.components(separatedBy: " ")
+            if septoken[0] != "Bearer"{
+                let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
+                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
             }
         }
+        
+        //passing userid in api url
+        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName: ServiceName.kcountNotification, requestMethod: .GET, requestParameters:[:], withProgressHUD: false) { (result:Any?, error:Error?, errorType:ErrorType?,statusCode:Int?) in
+            CommonUtils.showHudWithNoInteraction(show: false)
+            if errorType == .requestSuccess {
+                let dictResult = kSharedInstance.getDictionary(result)
+                
+                switch Int.getInt(statusCode) {
+                case 200:
+                    if Int.getInt(dictResult["status"]) == 200{
+                        let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+                        let septoken = endToken.components(separatedBy: " ")
+                        if septoken[0] == "Bearer"{
+                            kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
+                        }
+                        
+                        let count = String.getString(dictResult["count"])
+                        print("count=-==\(count)")
+                        
+                        self.lblCountNotification.text = count
+                        self.imgNotification.isHidden = false
+                        //  CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        
+                    }
+                    else if  Int.getInt(dictResult["status"]) == 400{
+                        self.imgNotification.isHidden = false
+                        self.imgNotification.image = UIImage(named: "Notifi")
+                        
+                    }
+                    
+                    
+                default:
+                    CommonUtils.showError(.error, String.getString(dictResult["message"]))
+                }
+            }else if errorType == .noNetwork {
+                CommonUtils.showToastForInternetUnavailable()
+                
+            } else {
+                CommonUtils.showToastForDefaultError()
+            }
+        }
+    }
 }
 
 extension NSMutableAttributedString {

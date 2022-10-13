@@ -35,10 +35,10 @@ class PremiumOpportunitiesVC: UIViewController {
     }
     
     @IBAction func btnBackTapped(_ sender: UIButton) {
-        kSharedAppDelegate?.makeRootViewController()
+//       kSharedAppDelegate?.makeRootViewController()
+//        tabBarController?.selectedIndex = 1
+      
     }
-    
-    
     
 }
 
