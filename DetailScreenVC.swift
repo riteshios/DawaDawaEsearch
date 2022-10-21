@@ -80,6 +80,7 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
             cell.lblBusinessminingType.text = String.getString(self.userTimeLine?.business_mining_type)
             cell.llbMobileNumber.text =  String.getString(self.userTimeLine?.mobile_num)
             cell.lblRating.text = String.getString(self.userTimeLine?.opr_rating)
+            cell.imgOpp_plan.image = self.userTimeLine?.opp_plan == "Featured" ? UIImage(named: "Star Filled") : self.userTimeLine?.opp_plan == "Premium" ? UIImage(named: "Crown") : UIImage(named: "Folded Booklet")
             
             if String.getString(self.userTimeLine?.looking_for) == "0"{
                 cell.lblLookingFor.text = "Looking for Investor"
@@ -193,7 +194,7 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                 
                 if txt == "Like"{
                     
-                    //                            self.likeOpportunityapi(oppr_id: oppid ?? 0)
+                    //  self.likeOpportunityapi(oppr_id: oppid ?? 0)
                     self.likeOpportunityapi(oppr_id: Int.getInt(self.userTimeLine?.id) ?? 0) { countLike in
                         self.userTimeLine?.likes = Int.getInt(countLike)
                         cell.lblLikeCount.text = String.getString(self.userTimeLine?.likes) + " " + "likes"
@@ -247,7 +248,6 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                 }
 
                 
-        
                 if txt == "More" {
                     let vc = self.storyboard?.instantiateViewController(withIdentifier: HomeSocialMoreVC.getStoryboardID()) as! HomeSocialMoreVC
                     vc.modalTransitionStyle = .crossDissolve

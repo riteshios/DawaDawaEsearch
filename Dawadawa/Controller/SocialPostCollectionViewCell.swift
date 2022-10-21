@@ -10,7 +10,8 @@ import UIKit
 class SocialPostCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var imgOpportunity:UIImageView!
-
+  
+    
     override func awakeFromNib() {
         super.awakeFromNib()
   

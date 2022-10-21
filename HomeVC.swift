@@ -26,6 +26,7 @@ class HomeVC: UIViewController{
     
     @IBOutlet weak var viewSearch: UIView!
     
+   
     @IBOutlet weak var lblUserName: UILabel!
     @IBOutlet weak var ImgUser: UIImageView!
     
@@ -43,7 +44,7 @@ class HomeVC: UIViewController{
             print("Guest User")
             if cameFrom != "FilterData"{
                 self.guestgetallopportunity()
-                self.lblUserName.text = "Guest User"
+              
             }
         }
         
@@ -74,6 +75,7 @@ class HomeVC: UIViewController{
     }
     
     func fetchdata(){
+
         self.lblUserName.text = String.getString(UserData.shared.name) + " " + String.getString(UserData.shared.last_name)
         if let url = URL(string: "\("https://demo4esl.com/dawadawa/public/admin_assets/user_profile/" + String.getString(UserData.shared.social_profile))"){
             debugPrint("url...",  url)
@@ -85,7 +87,6 @@ class HomeVC: UIViewController{
                     self.ImgUser.image = UIImage(data: data)
                 }
             }
-            
             task.resume()
         }
         
@@ -139,23 +140,34 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
             let cell = self.tblViewViewPost.dequeueReusableCell(withIdentifier: "ViewPostTableViewCell") as! ViewPostTableViewCell
             
             cell.ColllectionViewPremiumOpp.tag = indexPath.section
-            cell.callbacknavigation = { txt in
-                if txt == "ViewAll"{
-                    if UserData.shared.isskiplogin == true{
-                        self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
-                    }
-                    else{
-                        let vc = self.storyboard!.instantiateViewController(withIdentifier: PremiumOpportunitiesVC.getStoryboardID()) as! PremiumOpportunitiesVC
-                        self.navigationController?.pushViewController(vc, animated: true)
-                    }
+            
+            if UserData.shared.isskiplogin == true{
+                if cameFrom != "FilterData"{
+                    cell.heightMainView.constant = 100
+                    cell.heightViewCollectionview.constant = 50
+                    cell.heightCollectionView.constant = 0
                 }
-                
-                if txt == "Filter"{
-                    let vc = self.storyboard!.instantiateViewController(withIdentifier: FilterVC.getStoryboardID()) as! FilterVC
-                    self.navigationController?.pushViewController(vc, animated: false)
+            }else{
+                cell.callbacknavigation = { txt in
+                    if txt == "ViewAll"{
+                        if UserData.shared.isskiplogin == true{
+                            self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                        }
+                        else{
+                            let vc = self.storyboard!.instantiateViewController(withIdentifier: PremiumOpportunitiesVC.getStoryboardID()) as! PremiumOpportunitiesVC
+                            vc.camefrom = "home"
+                            self.navigationController?.pushViewController(vc, animated: true)
+                        }
+                    }
                     
+                    if txt == "Filter"{
+                        let vc = self.storyboard!.instantiateViewController(withIdentifier: FilterVC.getStoryboardID()) as! FilterVC
+                        self.navigationController?.pushViewController(vc, animated: false)
+                        
+                    }
                 }
             }
+         
             
             return cell
             
@@ -238,6 +250,15 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
             
             
             cell.callback = { txt, sender in
+                
+                if txt == "btnimgTapped"{
+                    let oppid = Int.getInt(userTimeLine[indexPath.row].id)
+                    debugPrint("detailsppid=-=-=",oppid)
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: DetailScreenVC.getStoryboardID()) as! DetailScreenVC
+                    
+                    vc.oppid = oppid
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
                 
                 if txt == "Profileimage"{
                     let user_id = userTimeLine[indexPath.row].user_id
@@ -439,7 +460,6 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                 }
                 
                 
-                
                 if txt == "ClickComment"{
                     if sender.isSelected{
                         if obj.isComment == false{
@@ -595,7 +615,7 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
         switch indexPath.section{
         case 0:
             if UserData.shared.isskiplogin == true{
-                return 420
+                return 150
             }
             else{
                 return 370
@@ -1108,6 +1128,8 @@ extension HomeVC{
                         
                         //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         self.tblViewViewPost.reloadData()
+                        self.lblUserName.text = String.getString("Guest User")
+                        self.ImgUser.image = UIImage(named: "Boss")
                         
                     }
                     else if  Int.getInt(dictResult["status"]) == 400{
@@ -1371,7 +1393,7 @@ extension HomeVC{
                     }
                     else if  Int.getInt(dictResult["status"]) == 400{
                         self.imgNotification.isHidden = false
-                        self.imgNotification.image = UIImage(named: "Notifi")
+                        self.imgNotification.image = UIImage(named: "notification-bing-1")
                         
                     }
                     

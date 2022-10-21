@@ -154,6 +154,13 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                             </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Yd-B9-Odc">
+                                <rect key="frame" x="0.0" y="111" width="415" height="204.5"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <connections>
+                                    <action selector="btnTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="a1J-uq-g88"/>
+                                </connections>
+                            </button>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" hidesForSinglePage="YES" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="Mtw-CB-bdI">
                                 <rect key="frame" x="130" y="315.5" width="155.5" height="18"/>
                                 <constraints>
@@ -585,6 +592,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="DAG-S8-jdO" firstAttribute="leading" secondItem="R6Y-GQ-hCc" secondAttribute="leading" constant="16" id="2bP-Fw-baN"/>
+                            <constraint firstAttribute="trailing" secondItem="6Yd-B9-Odc" secondAttribute="trailing" id="5On-ge-C2U"/>
                             <constraint firstAttribute="trailing" secondItem="N9E-Nl-Z2A" secondAttribute="trailing" id="8EX-DX-p6k"/>
                             <constraint firstItem="hpx-WV-OsZ" firstAttribute="top" secondItem="DAG-S8-jdO" secondAttribute="bottom" constant="3" id="Beq-NB-PoY"/>
                             <constraint firstItem="N9E-Nl-Z2A" firstAttribute="top" secondItem="R6Y-GQ-hCc" secondAttribute="top" id="DNC-H7-rG7"/>
@@ -594,6 +602,7 @@
                             <constraint firstItem="ZDm-h5-Grg" firstAttribute="top" secondItem="JRc-BU-8pj" secondAttribute="bottom" id="Qh4-S5-3Tt"/>
                             <constraint firstItem="hpx-WV-OsZ" firstAttribute="trailing" secondItem="DAG-S8-jdO" secondAttribute="trailing" id="S7b-i4-m7H"/>
                             <constraint firstItem="ZDm-h5-Grg" firstAttribute="leading" secondItem="R6Y-GQ-hCc" secondAttribute="leading" id="SWg-uc-Vff"/>
+                            <constraint firstItem="6Yd-B9-Odc" firstAttribute="leading" secondItem="R6Y-GQ-hCc" secondAttribute="leading" id="Spe-y0-kkK"/>
                             <constraint firstAttribute="trailing" secondItem="ZDm-h5-Grg" secondAttribute="trailing" id="Y9W-rz-yFC"/>
                             <constraint firstItem="wge-Dy-Mdu" firstAttribute="top" secondItem="c7e-ku-l4v" secondAttribute="bottom" constant="4" id="ZHS-2e-wRI"/>
                             <constraint firstItem="c7e-ku-l4v" firstAttribute="top" secondItem="N9E-Nl-Z2A" secondAttribute="bottom" id="Zz5-cJ-KEA"/>
@@ -607,6 +616,8 @@
                             <constraint firstItem="JRc-BU-8pj" firstAttribute="leading" secondItem="hpx-WV-OsZ" secondAttribute="leading" id="oNX-66-eQr"/>
                             <constraint firstItem="Mtw-CB-bdI" firstAttribute="centerX" secondItem="R6Y-GQ-hCc" secondAttribute="centerX" id="r9l-Ez-cIy"/>
                             <constraint firstItem="DAG-S8-jdO" firstAttribute="top" secondItem="Mtw-CB-bdI" secondAttribute="bottom" constant="15" id="rXz-2A-RRG"/>
+                            <constraint firstItem="Mtw-CB-bdI" firstAttribute="top" secondItem="6Yd-B9-Odc" secondAttribute="bottom" id="tPg-jm-ZEa"/>
+                            <constraint firstItem="6Yd-B9-Odc" firstAttribute="top" secondItem="c7e-ku-l4v" secondAttribute="bottom" id="ywg-7j-mce"/>
                             <constraint firstAttribute="trailing" secondItem="DAG-S8-jdO" secondAttribute="trailing" constant="16" id="yxu-Ko-LP9"/>
                         </constraints>
                     </view>

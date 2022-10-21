@@ -74,6 +74,8 @@
 		049D339D287570CA004E4519 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 049D339F287570CA004E4519 /* Localizable.strings */; };
 		049D33A2287571FF004E4519 /* LocalizationClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049D33A1287571FF004E4519 /* LocalizationClass.swift */; };
 		049D33A42875B012004E4519 /* CalendarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049D33A32875B012004E4519 /* CalendarVC.swift */; };
+		049F4A9128FFD870009AB128 /* PaymentForFeatureandPremiumPopUPVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049F4A9028FFD870009AB128 /* PaymentForFeatureandPremiumPopUPVC.swift */; };
+		049F4A9328FFFA87009AB128 /* PaymentforFeaturePremiumVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049F4A9228FFFA87009AB128 /* PaymentforFeaturePremiumVC.swift */; };
 		04A606F928F3F4AB00C980D3 /* Navigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A606F828F3F4AB00C980D3 /* Navigator.swift */; };
 		04A606FB28F4061000C980D3 /* NotificationsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A606FA28F4061000C980D3 /* NotificationsVC.swift */; };
 		04A606FE28F41B9200C980D3 /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A606FC28F41B9200C980D3 /* NotificationTableViewCell.swift */; };
@@ -728,6 +730,8 @@
 		049D33A0287570CF004E4519 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
 		049D33A1287571FF004E4519 /* LocalizationClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationClass.swift; sourceTree = SOURCE_ROOT; };
 		049D33A32875B012004E4519 /* CalendarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CalendarVC.swift; path = Dawadawa/Storyboard/CalendarVC.swift; sourceTree = SOURCE_ROOT; };
+		049F4A9028FFD870009AB128 /* PaymentForFeatureandPremiumPopUPVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PaymentForFeatureandPremiumPopUPVC.swift; path = Dawadawa/Storyboard/PaymentForFeatureandPremiumPopUPVC.swift; sourceTree = SOURCE_ROOT; };
+		049F4A9228FFFA87009AB128 /* PaymentforFeaturePremiumVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PaymentforFeaturePremiumVC.swift; path = Pods/PaymentforFeaturePremiumVC.swift; sourceTree = SOURCE_ROOT; };
 		04A606F828F3F4AB00C980D3 /* Navigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigator.swift; sourceTree = "<group>"; };
 		04A606FA28F4061000C980D3 /* NotificationsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NotificationsVC.swift; path = "Dawadawa/SupportingFiles/Utilities-2/NotificationsVC.swift"; sourceTree = SOURCE_ROOT; };
 		04A606FC28F41B9200C980D3 /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
@@ -1559,6 +1563,8 @@
 		04B599312899088E008366DC /* Subscription */ = {
 			isa = PBXGroup;
 			children = (
+				049F4A9228FFFA87009AB128 /* PaymentforFeaturePremiumVC.swift */,
+				049F4A9028FFD870009AB128 /* PaymentForFeatureandPremiumPopUPVC.swift */,
 				0432B3DD28CF567700FEF6EC /* PaymentVC.swift */,
 				047C781B28CF3AD100641646 /* ChoosePlanVC.swift */,
 				04B5478128CB425000BDCCC5 /* MysubscriptionVC.swift */,
@@ -3211,6 +3217,7 @@
 				447DCE5D2851CB1300C40DDD /* ImagePickerHelper.swift in Sources */,
 				0461E31B288AA29800B7F0E7 /* HomeSocialMoreVC.swift in Sources */,
 				447DCC902851CB1100C40DDD /* AppsCountryPicker.swift in Sources */,
+				049F4A9328FFFA87009AB128 /* PaymentforFeaturePremiumVC.swift in Sources */,
 				04A9958C28A370FD00FC75C9 /* SaveOpportunityMoreVC.swift in Sources */,
 				0406774B2887FFEA0061AE70 /* ViewPostTableViewCell.swift in Sources */,
 				447DCC5C2851CB1100C40DDD /* UPCarouselFlowLayout.swift in Sources */,
@@ -3240,6 +3247,7 @@
 				04F4D050287C402F001CC173 /* QuitVCViewController.swift in Sources */,
 				04A606FB28F4061000C980D3 /* NotificationsVC.swift in Sources */,
 				447DCC5B2851CB1100C40DDD /* CornerWithShadow.swift in Sources */,
+				049F4A9128FFD870009AB128 /* PaymentForFeatureandPremiumPopUPVC.swift in Sources */,
 				447DCC622851CB1100C40DDD /* UIImageView+Extensions.swift in Sources */,
 				447DCE582851CB1300C40DDD /* MTGoogleHelper.swift in Sources */,
 				447DCC762851CB1100C40DDD /* CurrencyCell.swift in Sources */,

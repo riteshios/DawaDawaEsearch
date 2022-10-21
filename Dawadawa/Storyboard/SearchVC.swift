@@ -96,6 +96,7 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
                 }
                 else{
                     let vc = self.storyboard!.instantiateViewController(withIdentifier: PremiumOpportunitiesVC.getStoryboardID()) as! PremiumOpportunitiesVC
+                    vc.camefrom = "search"
                     self.navigationController?.pushViewController(vc, animated: true)
                 }
             }

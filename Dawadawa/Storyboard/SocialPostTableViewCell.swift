@@ -165,6 +165,9 @@ class SocialPostTableViewCell: UITableViewCell,UITextViewDelegate {
         self.callback?("Seemorecomment",sender)
         
     }
+    @IBAction func btnTapped(_ sender: UIButton) {
+        self.callback?("btnimgTapped",sender)
+    }
     
 }
 
@@ -178,11 +181,14 @@ extension SocialPostTableViewCell: UICollectionViewDelegate,UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = SocialPostCollectionView.dequeueReusableCell(withReuseIdentifier: "SocialPostCollectionViewCell", for: indexPath) as! SocialPostCollectionViewCell
+        
         let obj = img[indexPath.item].imageurl
-        print("-=-imgurl-=-\(obj)")
+        print("imgurl-=-\(obj)")
         let imageurl = "\(imgUrl)\(String.getString(obj))"
-        print("-=imagebaseurl=-=-\(imageurl)")
+        print("imagebaseurl=-=-\(imageurl)")
         cell.imgOpportunity.downlodeImage(serviceurl: imageurl, placeHolder: UIImage(named: "baba"))
+       
+        
         return cell
     }
     

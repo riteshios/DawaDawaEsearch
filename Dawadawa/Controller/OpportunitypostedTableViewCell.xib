@@ -146,7 +146,7 @@
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="hcU-IU-N4Q">
-                                <rect key="frame" x="16" y="128.5" width="383" height="20"/>
+                                <rect key="frame" x="16" y="130" width="383" height="20"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dea-qW-epm">
                                         <rect key="frame" x="0.0" y="0.0" width="127.5" height="20"/>
@@ -161,7 +161,7 @@
                                                 <rect key="frame" x="0.0" y="19" width="127.5" height="1"/>
                                                 <color key="backgroundColor" red="0.08235294118" green="0.44705882349999998" blue="0.63137254899999995" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="1" id="gfj-CT-J6Z"/>
+                                                    <constraint firstAttribute="height" constant="1.2" id="gfj-CT-J6Z"/>
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LBr-yP-gn8">
@@ -207,7 +207,7 @@
                                                 <rect key="frame" x="0.0" y="19" width="128" height="1"/>
                                                 <color key="backgroundColor" red="0.08235294118" green="0.44705882349999998" blue="0.63137254899999995" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="1" id="2Fm-NU-wBo"/>
+                                                    <constraint firstAttribute="height" constant="1.2" id="2Fm-NU-wBo"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
@@ -245,7 +245,7 @@
                                                 <rect key="frame" x="0.0" y="19" width="127.5" height="1"/>
                                                 <color key="backgroundColor" red="0.08235294118" green="0.44705882349999998" blue="0.63137254899999995" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="1" id="b70-Vt-8Dz"/>
+                                                    <constraint firstAttribute="height" constant="1.2" id="b70-Vt-8Dz"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
@@ -274,7 +274,7 @@
                             <constraint firstItem="B7o-xm-Pxx" firstAttribute="top" secondItem="o74-GX-16g" secondAttribute="top" constant="10" id="EbY-K2-4bs"/>
                             <constraint firstAttribute="trailing" secondItem="B7o-xm-Pxx" secondAttribute="trailing" constant="16" id="Yjq-v2-BWO"/>
                             <constraint firstItem="hcU-IU-N4Q" firstAttribute="leading" secondItem="o74-GX-16g" secondAttribute="leading" constant="16" id="bpx-ST-NPV"/>
-                            <constraint firstAttribute="bottom" secondItem="hcU-IU-N4Q" secondAttribute="bottom" constant="1.5" id="jeN-OS-h2M"/>
+                            <constraint firstAttribute="bottom" secondItem="hcU-IU-N4Q" secondAttribute="bottom" id="jeN-OS-h2M"/>
                             <constraint firstItem="B7o-xm-Pxx" firstAttribute="leading" secondItem="o74-GX-16g" secondAttribute="leading" constant="16" id="wHD-El-pGs"/>
                         </constraints>
                     </view>

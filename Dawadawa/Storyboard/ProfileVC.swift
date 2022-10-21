@@ -180,7 +180,7 @@ class ProfileVC: UIViewController {
                         
                         if txt == "Logout"{
                             vc.dismiss(animated: false) {
-                                //                                self.logout()
+                                // self.logout()
                                 let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
                                 
                                 self.navigationController?.pushViewController(vc, animated: true)
@@ -223,7 +223,7 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
             let cell = self.tblViewSocialPost.dequeueReusableCell(withIdentifier: "OpportunitypostedTableViewCell") as! OpportunitypostedTableViewCell
             
             if UserData.shared.isskiplogin == true{
-                cell.imgOppPosted.isHidden = true
+//                cell.imgOppPosted.isHidden = true
             }
             else{
                 if UserData.shared.user_type == "0"{
@@ -236,7 +236,7 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                 }
                 else if UserData.shared.user_type == "1"{
                     cell.lblshowdata.text = String.getString(self.datadashboard?.total_create)
-                    cell.lblDate.text = "Total Create"
+                    cell.lblDate.text = "Total Opportunity Purchased"
                     cell.lblshowplan.text = String.getString(self.datadashboard?.no_view)
                     cell.lblPlan.text = "Total views"
                     cell.lblshowOpportunity.text = String.getString(self.datadashboard?.no_flag)
@@ -245,7 +245,7 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                 }
                 else if UserData.shared.user_type == "2"{
                     cell.lblshowdata.text = String.getString(self.datadashboard?.total_create)
-                    cell.lblDate.text = "Total Create"
+                    cell.lblDate.text = "Total Opportunity Purchased"
                     cell.lblshowplan.text = String.getString(self.datadashboard?.no_view)
                     cell.lblPlan.text = "Total views"
                     cell.lblshowOpportunity.text = String.getString(self.datadashboard?.no_flag)

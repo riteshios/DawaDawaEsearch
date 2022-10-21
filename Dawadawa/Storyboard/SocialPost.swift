@@ -100,6 +100,22 @@ class SocialPostData {
     }
     
 }
+// Plan_amount
+
+class plan_amount{
+    
+    var id:Int?
+    var opr_plan:String?
+    var amount:Int?
+    var type:String?
+    
+    init(data:[String:Any]){
+        self.id = Int.getInt(data["id"])
+        self.opr_plan = String.getString(data["opr_plan"])
+        self.amount = Int.getInt(data["amount"])
+        self.type = String.getString(data["type"])
+    }
+}
 
 class oppr_image{
     var imageurl:String?
@@ -299,6 +315,7 @@ class active_plan{
         
     }
 }
+
 // Balance_data
 class balance_data{
     var total_no_create:String?
@@ -338,6 +355,7 @@ class pac_kage{
         self.title = String.getString(data["title"])
     }
 }
+
 
 // Payment
 

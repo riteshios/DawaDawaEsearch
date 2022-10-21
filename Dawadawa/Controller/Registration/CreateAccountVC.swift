@@ -457,6 +457,7 @@ extension CreateAccountVC {
                         kSharedUserDefaults.setLoggedInUserDetails(loggedInUserDetails: data)
                         kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: String.getString(dictResult[kLoggedInAccessToken]))
                         UserData.shared.saveData(data: data, token:  String.getString(dictResult[kLoggedInAccessToken]))
+                        
                         kSharedAppDelegate?.makeRootViewController()
                         
                     }

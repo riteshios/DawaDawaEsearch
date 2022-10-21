@@ -77,6 +77,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
     var isSelectopp_planFeatured = false
     
     var plan = ""
+    var planpayment = 0
     var oppidget:Int?
     
     var getCategorylist    = [getCartegoryModel]()
@@ -99,6 +100,8 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
     var latitude = Double()
     var longitude = Double()
     
+//    Get Plan Amount
+    var planamount:plan_amount?
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
@@ -345,6 +348,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
         sender.isSelected = !sender.isSelected
         if self.btnBasic.isSelected == true{
             self.plan = "Basic"
+            self.planpayment = 0
             self.viewBasic.backgroundColor = UIColor(red: 21, green: 114, blue: 161)
             self.lblBasic.textColor = .white
             self.viewFeature.backgroundColor = .white
@@ -360,6 +364,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
         sender.isSelected = !sender.isSelected
         if self.btnFeature.isSelected == true{
             self.plan = "Featured"
+            self.planpayment = 1
             self.viewFeature.backgroundColor = UIColor(red: 21, green: 114, blue: 161)
             self.lblFeature.textColor = .white
             self.viewBasic.backgroundColor = .white
@@ -375,6 +380,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
         sender.isSelected = !sender.isSelected
         if self.btnPremium.isSelected == true{
             self.plan = "Premium"
+            self.planpayment = 2
             self.viewPremium.backgroundColor = UIColor(red: 21, green: 114, blue: 161)
             self.lblPremium.textColor = .white
             self.viewBasic.backgroundColor = .white
@@ -441,16 +447,16 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
             showSimpleAlert(message: Notifications.kDescription)
             return
         }
-        else if String.getString(self.txtFieldMobileNumber.text).isEmpty
-        {
-            showSimpleAlert(message: Notifications.kEnterMobileNumber)
-            return
-        }
-        else if !String.getString(self.txtFieldMobileNumber.text).isPhoneNumber()
-        {
-            self.showSimpleAlert(message: Notifications.kEnterValidMobileNumber)
-            return
-        }
+//        else if String.getString(self.txtFieldMobileNumber.text).isEmpty
+//        {
+//            showSimpleAlert(message: Notifications.kEnterMobileNumber)
+//            return
+//        }
+//        else if !String.getString(self.txtFieldMobileNumber.text).isPhoneNumber()
+//        {
+//            self.showSimpleAlert(message: Notifications.kEnterValidMobileNumber)
+//            return
+//        }
         
         else if self.isSelectLookingFor == false{
             self.showSimpleAlert(message: "Please Select looking For")
@@ -1143,7 +1149,7 @@ extension RockPitOpportunityVC{
         
         
         TANetworkManager.sharedInstance.requestMultiPartwithlanguage(withServiceName:ServiceName.kcreateopportunity , requestMethod: .post, requestImages: [:], requestdoc: [:],requestVideos: [:], requestData:params, req: self.imagearr, req:self.documentarr)
-        { (result:Any?, error:Error?, errortype:ErrorType?, statusCode:Int?) in
+        {(result:Any?, error:Error?, errortype:ErrorType?, statusCode:Int?) in
             CommonUtils.showHudWithNoInteraction(show: false)
             if errortype == .requestSuccess {
                 debugPrint("result=====",result)
@@ -1157,8 +1163,29 @@ extension RockPitOpportunityVC{
                         if septoken[0] == "Bearer"{
                             kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
                         }
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                        kSharedAppDelegate?.makeRootViewController()
+//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        
+                        if self.planpayment == 0{
+                            kSharedAppDelegate?.makeRootViewController()
+                        }
+                        
+                        else{
+                            let vc = self.storyboard?.instantiateViewController(withIdentifier: PaymentForFeatureandPremiumPopUPVC.getStoryboardID()) as! PaymentForFeatureandPremiumPopUPVC
+                            vc.modalTransitionStyle = .crossDissolve
+                            vc.modalPresentationStyle = .overCurrentContext
+                            vc.plan = self.planpayment
+                            vc.callback = { txt in
+                                
+                                if txt == "Pay"{
+                                    vc.dismiss(animated: false) {
+                                        let vc = UIStoryboard(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "PaymentforFeaturePremiumVC") as! PaymentforFeaturePremiumVC
+                                        self.navigationController?.pushViewController(vc, animated: true)
+                                    }
+                                }
+                            }
+                            
+                            self.present(vc, animated: false)
+                        }
                         
                     }
                     else if  Int.getInt(dictResult["status"]) == 400{

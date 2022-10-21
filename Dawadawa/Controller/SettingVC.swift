@@ -42,8 +42,6 @@ class SettingVC: UIViewController {
                 
                 self.setupUpdateView(languageCode: "en")
                 
-                
-                
                 //                       UserDefaults.standard.set("en", forKey: "Language")
                 //                       UIView.appearance().semanticContentAttribute = .forceLeftToRight
             }
@@ -52,8 +50,6 @@ class SettingVC: UIViewController {
             else if self.lblDropDownMenu.text == "Arabic"{
                 
                 self.setupUpdateView(languageCode: "ar")
-                
-                //
                 //                       UserDefaults.standard.set("ar", forKey: "Language")
                 //                       UIView.appearance().semanticContentAttribute = .forceRightToLeft
             }

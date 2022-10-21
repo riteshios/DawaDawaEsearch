@@ -450,16 +450,16 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
 //            showSimpleAlert(message: Notifications.kDescription)
 //            return
 //        }
-        else if String.getString(self.txtFieldMobileNumber.text).isEmpty
-        {
-            showSimpleAlert(message: Notifications.kEnterMobileNumber)
-            return
-        }
-        else if !String.getString(self.txtFieldMobileNumber.text).isPhoneNumber()
-        {
-            self.showSimpleAlert(message: Notifications.kEnterValidMobileNumber)
-            return
-        }
+//        else if String.getString(self.txtFieldMobileNumber.text).isEmpty
+//        {
+//            showSimpleAlert(message: Notifications.kEnterMobileNumber)
+//            return
+//        }
+//        else if !String.getString(self.txtFieldMobileNumber.text).isPhoneNumber()
+//        {
+//            self.showSimpleAlert(message: Notifications.kEnterValidMobileNumber)
+//            return
+//        }
         
 //        else if String.getString(self.txtFieldWhatsappNumber.text).isEmpty
 //        {

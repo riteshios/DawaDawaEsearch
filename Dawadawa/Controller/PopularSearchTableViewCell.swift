@@ -24,7 +24,7 @@ class PopularSearchTableViewCell: UITableViewCell {
         SearchCollectionView.delegate = self
         SearchCollectionView.dataSource = self
         SearchCollectionView.register(UINib(nibName: "PopularSearchesCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PopularSearchesCollectionViewCell")
-        self.lblPopularSearch.isHidden = true
+        self.lblPopularSearch.isHidden = false
         
     }
 

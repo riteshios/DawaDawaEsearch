@@ -28,7 +28,7 @@ class OpportunitypostedTableViewCell: UITableViewCell {
     @IBOutlet weak var btnPremium: UIButton!
     @IBOutlet weak var btnFeatured: UIButton!
     
-    @IBOutlet weak var imgOppPosted: UIImageView!
+//    @IBOutlet weak var imgOppPosted: UIImageView!
     
     var callbackbtnSelect:((String)->())?
     
@@ -44,6 +44,7 @@ class OpportunitypostedTableViewCell: UITableViewCell {
     @IBAction func btnAllTapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         if self.btnAll.isSelected == true{
+           
             self.viewAllline.isHidden = false
             self.lblAll.textColor = UIColor(red: 21, green: 114, blue: 161)
             self.viewPremiumLine.isHidden = true
@@ -59,6 +60,7 @@ class OpportunitypostedTableViewCell: UITableViewCell {
     @IBAction func btnPremiumTapped(_ sender: UIButton){
         sender.isSelected = !sender.isSelected
         if self.btnPremium.isSelected == true{
+            
             self.viewAllline.isHidden = true
             self.lblAll.textColor = .gray
             self.viewPremiumLine.isHidden = false
@@ -66,13 +68,13 @@ class OpportunitypostedTableViewCell: UITableViewCell {
             self.lblpremium.textColor = UIColor(red: 21, green: 114, blue: 161)
             self.lblFeatured.textColor = .gray
             
-         
             self.callbackbtnSelect?("Premium")
         }
     }
     @IBAction func btnFeaturedTapped(_ sender: UIButton){
         sender.isSelected = !sender.isSelected
         if self.btnFeatured.isSelected == true{
+           
             self.viewAllline.isHidden = true
             self.lblAll.textColor = .gray
             self.viewPremiumLine.isHidden = true
@@ -80,7 +82,6 @@ class OpportunitypostedTableViewCell: UITableViewCell {
             self.lblpremium.textColor = .gray
             self.lblFeatured.textColor =  UIColor(red: 21, green: 114, blue: 161)
             
-       
             self.callbackbtnSelect?("Featured")
     }
 }

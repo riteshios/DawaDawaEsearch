@@ -17,6 +17,7 @@ class PremiumOpportunitiesVC: UIViewController {
     var img = [oppr_image]()
     var comment = [user_comment]()
     var txtcomment = " "
+    var camefrom = " "
     
     
     override func viewDidLoad() {
@@ -35,8 +36,12 @@ class PremiumOpportunitiesVC: UIViewController {
     }
     
     @IBAction func btnBackTapped(_ sender: UIButton) {
-//       kSharedAppDelegate?.makeRootViewController()
-//        tabBarController?.selectedIndex = 1
+        if self.camefrom == "home"{
+            kSharedAppDelegate?.makeRootViewController()
+        }
+        else if self.camefrom == "search"{
+            self.navigationController?.popViewController(animated: true)
+        }
       
     }
     

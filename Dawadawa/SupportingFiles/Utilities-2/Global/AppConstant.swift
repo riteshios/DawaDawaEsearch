@@ -150,6 +150,7 @@ struct ServiceName {
     static let kstorepayment           =           "api/storePayment"
     static let kgetactiveplan          =           "api/investorActivePlan/"
     static let kgettransactionhistory  =           "api/getTransactionHistory/"
+    static let kgetplanamount          =           "api/plan-amount/"
     
    // Dashboard
     static let kdashboard              =           "api/dashboard"

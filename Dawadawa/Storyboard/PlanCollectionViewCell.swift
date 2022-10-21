@@ -31,9 +31,7 @@ class PlanCollectionViewCell: UICollectionViewCell{
         //        self.getsubsplanapi()
         
     }
-    
-    
-    
+
     
     func cellnumbercount(num : Int)
     {

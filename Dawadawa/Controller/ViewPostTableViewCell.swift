@@ -12,6 +12,9 @@ class ViewPostTableViewCell: UITableViewCell{
     @IBOutlet weak var ColllectionViewPremiumOpp: UICollectionView!
     var callbacknavigation:((String)->())?
     
+    @IBOutlet weak var heightMainView: NSLayoutConstraint!
+    @IBOutlet weak var heightViewCollectionview: NSLayoutConstraint!
+    @IBOutlet weak var heightCollectionView: NSLayoutConstraint!
     var imgUrl = ""
     var userTimeLine = [SocialPostData]()
     var img = [oppr_image]()

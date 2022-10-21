@@ -17,10 +17,10 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="PremiumOppCollectionViewCell" customModule="Dawadawa" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="169" height="218"/>
+            <rect key="frame" x="0.0" y="0.0" width="169" height="200"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="169" height="218"/>
+                <rect key="frame" x="0.0" y="0.0" width="169" height="200"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ndx-oy-1CJ">
@@ -54,11 +54,8 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="wdxbadbxbadxbnADBxnbasdbxnbxnbasnxbbnaxnaxsdsds" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rdS-Rg-nUD">
-                                <rect key="frame" x="0.0" y="137" width="169" height="81"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="81" id="TPy-7B-kmY"/>
-                                </constraints>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="wdxbadbxbadxbnADBxnbasdbxnbxnbasnxbbnaxnaxsdsds" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rdS-Rg-nUD">
+                                <rect key="frame" x="0.0" y="135" width="169" height="46"/>
                                 <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -80,10 +77,10 @@
                             <constraint firstItem="1p3-Zf-r6v" firstAttribute="top" secondItem="Ndx-oy-1CJ" secondAttribute="top" constant="12" id="hqq-lg-dDu"/>
                             <constraint firstItem="73O-Hj-qRM" firstAttribute="top" secondItem="Ndx-oy-1CJ" secondAttribute="top" id="iHo-Ec-xOe"/>
                             <constraint firstAttribute="trailing" secondItem="1p3-Zf-r6v" secondAttribute="trailing" constant="13" id="oGv-b9-lDM"/>
-                            <constraint firstAttribute="bottom" secondItem="rdS-Rg-nUD" secondAttribute="bottom" id="odz-xH-RX3"/>
+                            <constraint firstAttribute="bottom" secondItem="rdS-Rg-nUD" secondAttribute="bottom" constant="37" id="s8L-lU-pAk"/>
                             <constraint firstAttribute="height" constant="218" id="svy-hB-U2c"/>
                             <constraint firstItem="73O-Hj-qRM" firstAttribute="leading" secondItem="Ndx-oy-1CJ" secondAttribute="leading" id="wOK-M9-oiz"/>
-                            <constraint firstItem="rdS-Rg-nUD" firstAttribute="top" secondItem="73O-Hj-qRM" secondAttribute="bottom" constant="2" id="zAr-z3-H7a"/>
+                            <constraint firstItem="rdS-Rg-nUD" firstAttribute="top" secondItem="73O-Hj-qRM" secondAttribute="bottom" id="zAr-z3-H7a"/>
                         </constraints>
                     </view>
                 </subviews>

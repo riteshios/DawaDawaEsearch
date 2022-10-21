@@ -3,22 +3,23 @@
 //  Dawadawa
 //
 //  Created by Ritesh Gupta on 09/08/22.
-//
+
 
 import UIKit
 
 class SavedOpportunitiesVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource {
     
+    @IBOutlet weak var lblSaved:UILabel!
+    @IBOutlet weak var btnViewAll:UIButton!
     @IBOutlet weak var CollectionViewSave: UICollectionView!
-    
+    @IBOutlet weak var imgNoOpp: UIImageView!
     var imgUrl = ""
     var userTimeLine = [SocialPostData]()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
+        self.imgNoOpp.isHidden = true
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -95,14 +96,17 @@ extension SavedOpportunitiesVC{
                         self.userTimeLine = Opportunity.map{SocialPostData(data: kSharedInstance.getDictionary($0))}
                         print("Dataallpost=\(self.userTimeLine)")
                         
-                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        
+                        self.imgNoOpp.isHidden = true
                         self.CollectionViewSave.reloadData()
                         
                     }
-                    else if  Int.getInt(dictResult["status"]) == 400{
+                    else if  Int.getInt(dictResult["responsecode"]) == 400{
                         self.userTimeLine.removeAll()
                         self.CollectionViewSave.reloadData()
-                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        self.lblSaved.isHidden = true
+                        self.btnViewAll.isHidden = true
+                        self.imgNoOpp.isHidden = false
                     }
                     
                     

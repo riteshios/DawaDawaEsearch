@@ -39,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GMSServices.provideAPIKey("AIzaSyAI8WH6BIqmnjlisvSceaD3zYafhCSW2e4")
         GMSPlacesClient.provideAPIKey("AIzaSyBTnohiHM33y3BMxvAP_SoEnG9Vfm6-9Pg")
         FirebaseApp.configure()
-//        Push Notification
+        //        Push Notification
         setUpNotification()
         self.registerFCM(application: application)
         if #available(iOS 10.0, *) {
@@ -75,28 +75,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var isUniversalLinkClick: Bool = false
         if ((launchOptions?[UIApplication.LaunchOptionsKey.userActivityDictionary]) != nil) {
             let activityDictionary = launchOptions?[UIApplication.LaunchOptionsKey.userActivityDictionary] as? [AnyHashable: Any] ?? [AnyHashable: Any]()
-        let activity = activityDictionary["UIApplicationLaunchOptionsUserActivityKey"] as? NSUserActivity ?? NSUserActivity()
-        if activity != nil {
-        isUniversalLinkClick = true
-        }
+            let activity = activityDictionary["UIApplicationLaunchOptionsUserActivityKey"] as? NSUserActivity ?? NSUserActivity()
+            if activity != nil {
+                isUniversalLinkClick = true
+            }
         }
         if isUniversalLinkClick {
-        // app opened via clicking a universal link.
+            // app opened via clicking a universal link.
             let window = UIApplication.shared.windows.first
-
+            
             let storybaord = UIStoryboard(name: "Home", bundle: nil)
-
+            
             window?.rootViewController  = storybaord.instantiateViewController(withIdentifier: "DetailScreenVC")
-
+            
             window?.makeKeyAndVisible()
         } else {
-        // set the initial viewcontroller
+            // set the initial viewcontroller
             let window = UIApplication.shared.windows.first
-
+            
             let storybaord = UIStoryboard(name: "Home", bundle: nil)
-
+            
             window?.rootViewController  = storybaord.instantiateViewController(withIdentifier: "BuyPlanVC")
-
+            
             window?.makeKeyAndVisible()
         }
         return true
@@ -177,6 +177,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             completion(index,item)
         }
     }
+    func application(_ application: UIApplication,
+                     continue userActivity: NSUserActivity,
+                     restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+        
+        // 1
+        guard userActivity.activityType == NSUserActivityTypeBrowsingWeb,
+              let url = userActivity.webpageURL,
+              let components = URLComponents(url: url, resolvingAgainstBaseURL: true) else {
+                  let window = UIApplication.shared.windows.first
+                  
+                  let storybaord = UIStoryboard(name: "Home", bundle: nil)
+                  window?.rootViewController  = storybaord.instantiateViewController(withIdentifier: "DetailScreenVC")
+                  window?.makeKeyAndVisible()
+                  
+                  return false
+              }
+        
+        // 2
+        //      if let computer = ItemHandler.sharedInstance.items.filter({ $0.path == components.path}).first {
+        //        presentDetailViewController(computer)
+        //        return true
+        //      }
+        
+        // 3 rw-universal-links-final.herokuapp.com
+        if let webpageUrl = URL(string: "https://demo4esl.com/dawadawa/") {
+            application.open(webpageUrl)
+            return false
+        }
+        
+        return false
+    }
+    
 }
 
 // Push Notification
@@ -208,8 +240,6 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         
     }
     
-    
-    
     // Receive displayed notifications for iOS 10 devices.
     
     func userNotificationCenter(_ center: UNUserNotificationCenter,
@@ -227,17 +257,11 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
             
         }
         
-        
-        
         print(userInfo)
-        
-        
         
         completionHandler([[.alert, .sound]])
         
     }
-    
-    
     
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 
@@ -252,8 +276,6 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
             print("Message ID: \(messageID)")
             
         }
-        
-        
         
         //
         
@@ -451,41 +473,42 @@ extension AppDelegate: MessagingDelegate {
 // Handling Universal Link
 extension AppDelegate {
     
-    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
-        print("Continue User Activity called: ")
-
-        if userActivity.activityType == NSUserActivityTypeBrowsingWeb {
-            let url = userActivity.webpageURL!
-            print(url.absoluteString)
-
-            //handle url and open whatever page you want to open.
-            let window = UIApplication.shared.windows.first
-
-            let storybaord = UIStoryboard(name: "Home", bundle: nil)
-
-            window?.rootViewController  = storybaord.instantiateViewController(withIdentifier: "DetailScreenVC")
-
-            window?.makeKeyAndVisible()
-
-        }
-        return true
-    }
+    //    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
+    //        print("Continue User Activity called: ")
+    //
+    //        if userActivity.activityType == NSUserActivityTypeBrowsingWeb {
+    //            let url = userActivity.webpageURL!
+    //            print(url.absoluteString)
+    //
+    //            //handle url and open whatever page you want to open.
+    //
+    //            let window = UIApplication.shared.windows.first
+    //
+    //            let storybaord = UIStoryboard(name: "Home", bundle: nil)
+    //
+    //            window?.rootViewController  = storybaord.instantiateViewController(withIdentifier: "DetailScreenVC")
+    //
+    //            window?.makeKeyAndVisible()
+    //
+    //        }
+    //        return true
+    //    }
     
-//    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
-//
-//        guard let url = userActivity.webpageURL else{return false}
-//
-//        guard let vc = navigator.getDestination(for: url) else{
-//            application.open(url)
-//
-//            return false
-//        }
-//        window?.rootViewController = vc
-//        window?.makeKeyAndVisible()
-//        return true
-//    }
-   
-
+    
+    //      func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+    //
+    //        guard let url = userActivity.webpageURL else{return false}
+    //
+    //        guard let vc = navigator.getDestination(for: url) else{
+    //            application.open(url)
+    //
+    //            return false
+    //        }
+    //        window?.rootViewController = vc
+    //        window?.makeKeyAndVisible()
+    //        return true
+    //    }
+    
 }
 
 

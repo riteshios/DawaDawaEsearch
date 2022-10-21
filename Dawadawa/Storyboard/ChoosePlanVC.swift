@@ -44,13 +44,14 @@ class ChoosePlanVC: UIViewController {
                 print("lblPriceMonthly",self.subsdata[self.indexcount].price_month)
                 self.lblPriceYearly.text  = self.subsdata[self.indexcount].price_year
             }
+            
             else if UserData.shared.user_type == "1"{
                 self.viewYearlyPlan.isHidden = true
                 self.lblMonth.isHidden = true
                 self.lblPlanMonthly.text  = self.subsdata[self.indexcount].title
                 self.lblPriceMonthly.text = "$\(String.getString(self.subsdata[self.indexcount].price_month))"
-                
             }
+            
             else if UserData.shared.user_type == "2"{
                 self.viewYearlyPlan.isHidden = true
                 self.lblMonth.isHidden = true
