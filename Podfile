@@ -30,5 +30,6 @@ target 'Dawadawa' do
   pod 'FirebaseFirestore'
   pod 'FirebaseAnalytics'
   pod 'FirebaseMessaging'
+  pod 'SlackTextViewController'
 
 end

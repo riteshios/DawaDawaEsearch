@@ -15043,6 +15043,21 @@ this opportunity?</string>
             </objects>
             <point key="canvasLocation" x="10174" y="-267"/>
         </scene>
+        <!--ChatVC-->
+        <scene sceneID="wpV-Ai-mxt">
+            <objects>
+                <viewController storyboardIdentifier="ChatVC" title="ChatVC" id="2qB-Mq-UBE" customClass="ChatVC" customModule="Dawadawa" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zGF-pC-Fiz">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="FPZ-8C-qcc"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ABf-AJ-5mN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="10905" y="-270"/>
+        </scene>
     </scenes>
     <designables>
         <designable name="hYJ-9L-6ep">

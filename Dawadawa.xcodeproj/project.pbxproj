@@ -103,6 +103,7 @@
 		04B91910286B13B8009ABAE4 /* EmailChangedSuccessfullyPopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B9190F286B13B8009ABAE4 /* EmailChangedSuccessfullyPopUpVC.swift */; };
 		04B91912286B1553009ABAE4 /* VerifyNewEmailOTPVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B91911286B1553009ABAE4 /* VerifyNewEmailOTPVC.swift */; };
 		04BFFB68289250BA0086DCC1 /* FilterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BFFB67289250BA0086DCC1 /* FilterVC.swift */; };
+		04C495BA290FE0BD001F01FD /* ChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C495B9290FE0BD001F01FD /* ChatVC.swift */; };
 		04C848A828B75E8200505AB0 /* DetailScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C848A728B75E8200505AB0 /* DetailScreenVC.swift */; };
 		04C848AC28B7ABB400505AB0 /* SeeMoreCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C848AA28B7ABB400505AB0 /* SeeMoreCommentCell.swift */; };
 		04C848AD28B7ABB400505AB0 /* SeeMoreCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C848AB28B7ABB400505AB0 /* SeeMoreCommentCell.xib */; };
@@ -759,6 +760,7 @@
 		04B9190F286B13B8009ABAE4 /* EmailChangedSuccessfullyPopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailChangedSuccessfullyPopUpVC.swift; sourceTree = "<group>"; };
 		04B91911286B1553009ABAE4 /* VerifyNewEmailOTPVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = VerifyNewEmailOTPVC.swift; path = Dawadawa/Storyboard/VerifyNewEmailOTPVC.swift; sourceTree = SOURCE_ROOT; };
 		04BFFB67289250BA0086DCC1 /* FilterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FilterVC.swift; path = Dawadawa/Storyboard/FilterVC.swift; sourceTree = SOURCE_ROOT; };
+		04C495B9290FE0BD001F01FD /* ChatVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatVC.swift; sourceTree = "<group>"; };
 		04C848A728B75E8200505AB0 /* DetailScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailScreenVC.swift; sourceTree = SOURCE_ROOT; };
 		04C848AA28B7ABB400505AB0 /* SeeMoreCommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeMoreCommentCell.swift; sourceTree = "<group>"; };
 		04C848AB28B7ABB400505AB0 /* SeeMoreCommentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SeeMoreCommentCell.xib; sourceTree = "<group>"; };
@@ -1609,6 +1611,14 @@
 				04B9190F286B13B8009ABAE4 /* EmailChangedSuccessfullyPopUpVC.swift */,
 			);
 			name = ChangeEmail;
+			sourceTree = "<group>";
+		};
+		04C495B8290FE0A0001F01FD /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				04C495B9290FE0BD001F01FD /* ChatVC.swift */,
+			);
+			name = Chat;
 			sourceTree = "<group>";
 		};
 		04C848A928B7AB4100505AB0 /* DetailScreen */ = {
@@ -2519,6 +2529,7 @@
 				04BFFB67289250BA0086DCC1 /* FilterVC.swift */,
 				0461E31A288AA29800B7F0E7 /* HomeSocialMoreVC.swift */,
 				045C4E7D28897ACB00E831AA /* PremiumOpportunitiesVC.swift */,
+				04C495B8290FE0A0001F01FD /* Chat */,
 				0491A66428F54E2F00F2E115 /* NotificationScrren */,
 				046DCA0928C608A900B219F4 /* MapScreen */,
 				04AF23BC28C08DB40053471D /* RateScreen */,
@@ -3188,6 +3199,7 @@
 				447DCC882851CB1100C40DDD /* NSNumberExtended.swift in Sources */,
 				044D71762861988B0054DAA5 /* SettingVC.swift in Sources */,
 				447DCC632851CB1100C40DDD /* UIViewController+Extensions.swift in Sources */,
+				04C495BA290FE0BD001F01FD /* ChatVC.swift in Sources */,
 				042293BE2869B1BC000503B7 /* ChangeNumberVC.swift in Sources */,
 				447DCC852851CB1100C40DDD /* UIViewController.swift in Sources */,
 				447DCC662851CB1100C40DDD /* String+Extensions.swift in Sources */,
