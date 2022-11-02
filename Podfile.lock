@@ -515,7 +515,6 @@ PODS:
     - SDWebImage/Core (= 4.4.8)
   - SDWebImage/Core (4.4.8)
   - SKFloatingTextField (1.0.1)
-  - SlackTextViewController (1.9.6)
   - Stripe (21.9.1):
     - Stripe/Stripe3DS2 (= 21.9.1)
     - StripeCore (= 21.9.1)
@@ -552,7 +551,6 @@ DEPENDENCIES:
   - RangeSeekSlider
   - SDWebImage (~> 4.0)
   - SKFloatingTextField
-  - SlackTextViewController
   - Stripe
   - STTabbar
   - SVProgressHUD
@@ -594,7 +592,6 @@ SPEC REPOS:
     - RangeSeekSlider
     - SDWebImage
     - SKFloatingTextField
-    - SlackTextViewController
     - Stripe
     - StripeCore
     - StripeUICore
@@ -637,7 +634,6 @@ SPEC CHECKSUMS:
   RangeSeekSlider: 650b11fa1edcb92e1e0ede797669d98622570fb5
   SDWebImage: 783af2c3fa36291a250030c4752ee370a9a51d13
   SKFloatingTextField: 6393b15bc7a3d8399e592e5fe50ed4a5376d8a82
-  SlackTextViewController: b854e62c1c156336bc4fd409c6ca79b5773e8f9d
   Stripe: 22c1b8da5ee20a1aaf40fd198160efa72e71644a
   StripeCore: 91ea038ac0abbb72f11014044dfd1e5d39089714
   StripeUICore: 7edf64b24c9c178bfd97e988f2cffdbb7a7628b0
@@ -647,6 +643,6 @@ SPEC CHECKSUMS:
   SwiftyGif: 6c3eafd0ce693cad58bb63d2b2fb9bacb8552780
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
 
-PODFILE CHECKSUM: f9d79bb38a919ecff0b019e18f4e08fc5a3f4ddd
+PODFILE CHECKSUM: b1831996b24d731ed68976889fb20113f9ff3ec3
 
 COCOAPODS: 1.11.3

@@ -6,175 +6,255 @@
 //
 
 import UIKit
-import SlackTextViewController
+import IQKeyboardManagerSwift
 
-
-class ChatVC: SLKTextViewController {
+class ChatVC: UIViewController{
     
-    let myFirstButton = UIButton()
-        let topView = UIView()
+    @IBOutlet weak var viewTop: UIView!
+    @IBOutlet weak var tableViewChat: UITableView!
+    @IBOutlet weak var txtViewMessage: IQTextView!
+    @IBOutlet weak var imgFriend: UIImageView!
+    @IBOutlet weak var lblNameFriend: UILabel!
+    
+    
+    var friendid = 0
+    var Messagedata = [Message_data]()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView?.bounces = false
-        tableView?.indicatorStyle = .white
+        //        self.addfriendapi()
+        self.getmessageeapi()
         
-        bounces = false
+        viewTop.clipsToBounds = true
+        viewTop.layer.cornerRadius = 10
+        viewTop.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
         
-        shakeToClearEnabled = true
+        tableViewChat?.register(UINib(nibName: "ChatTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "ChatTableViewCell")
+    }
+    
+    @IBAction func btnBackTapped(_ sender: UIButton) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func btnSendTapped(_ sender: UIButton) {
         
-        isKeyboardPanningEnabled = true
-        
-        shouldScrollToBottomAfterKeyboardShows = true
-        
-        isInverted = true
-        
-        textView.placeholder = "Enter Message"
-        
-        textInputbar.autoHideRightButton = true
-        
-        textInputbar.maxCharCount = 256
-        
-        textInputbar.counterStyle = .split
-        
-        textInputbar.counterPosition = .top
-        tableView!.allowsSelection = false
-        
-        tableView!.estimatedRowHeight = 70
-        
-        tableView!.rowHeight = UITableView.automaticDimension
-        
-        tableView!.separatorStyle = .none
+        self.sendmessageapi()
     }
     
     
-    override func viewDidAppear(_ animated: Bool) {
-                    super.viewDidAppear(animated)
-                    scrollToBottom()
-                }
+}
+
+extension ChatVC:UITableViewDelegate,UITableViewDataSource {
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        topView.frame = CGRect(x: 0, y:0, width: UIScreen.main.bounds.width, height: 95)
-        topView.backgroundColor = .white
-        topView.addShadowWithBlurOnView(topView, spread: 0, blur: 2, color: .black, opacity: 0.03, OffsetX: 0, OffsetY: 2)
-        myFirstButton.setTitle("", for: .normal)
-        if let image = UIImage(named: "blueArrowBack") {
-            myFirstButton.setImage(image, for: .normal)
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return Messagedata.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = self.tableViewChat.dequeueReusableCell(withIdentifier: "ChatTableViewCell") as! ChatTableViewCell
+        let obj = Messagedata[indexPath.row]
+        
+        cell.setUser(user: obj.from, message: obj.message)
             
-        }
-        
-        myFirstButton.setTitleColor(.blue, for: .normal)
-        
-        myFirstButton.addTarget(self, action: #selector(pressed), for: .touchUpInside)
-        
-        myFirstButton.frame = CGRect(x: 5, y:32, width: 50, height: 55)
-        
-        topView.addSubview(myFirstButton)
-        
-        let nameLabel = UILabel()
-        
-        nameLabel.frame = CGRect(x: 120, y:30, width: 140, height: 55)
-        
-        nameLabel.textColor = UIColor.black
-        
-        // nameLabel.text = customerName
-        
-        topView.addSubview(nameLabel)
-        
-        let image = UIImageView()
-        
-        image.frame = CGRect(x: 60, y:33, width: 48, height: 48)
-        
-        image.cornerRadius = 24
-        
-        //  let url = NSURL(string: (customerImage))
-        
-        //  image.sd_setImage(with: url! as URL, placeholderImage: #imageLiteral(resourceName: "team"))
-        
-        topView.addSubview(image)
-        
-        //        UIWindow.key?.addSubview(topView)
-        
-        //        appDelegate.window?.addSubview(topView)
-        
-        view.addSubview(topView)
-    }
-    
-    override func viewDidLayoutSubviews() {
-                super.viewDidLayoutSubviews()
-                
-                // required for iOS 11
-                textInputbar.bringSubviewToFront(textInputbar.textView)
-                textInputbar.bringSubviewToFront(textInputbar.leftButton)
-                textInputbar.bringSubviewToFront(textInputbar.rightButton)
-                
-          }
-    
-    
-    @objc func pressed() {
-        topView.frame = CGRect(x: 15, y:50, width: 0, height: 0)
-        topView.removeFromSuperview()
-        self.navigationController?.popViewController(animated:true)
-        
-    }
-    
-    
-    override func numberOfSections(in tableView: UITableView) -> Int {
-                return 1
-            }
-        
-        override func tableView(_ tableView: UITableView, numberOfRowsInSection section: NSInteger) -> Int {
-                return 4//messages.count
-            }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell:UITableViewCell
-        let message = sortedMessages[indexPath.row]
-        
-        cell = getChatCellForTableView(tableView: tableView, forIndexPath:indexPath, message:message)
-        
-        
-        cell.transform = tableView.transform
         
         return cell
-        
     }
-    
-    func getChatCellForTableView(tableView: UITableView, forIndexPath indexPath:IndexPath, message: "") -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: MainChatViewController.TWCChatCellIdentifier, for:indexPath as IndexPath)
-        
-        let chatCell: ChatTVCell = cell as! ChatTVCell
-        let date = NSDate.dateWithISO8601String(dateString: message.dateCreated ?? "")
-        let timestamp = DateTodayFormatter().stringFromDate(date: date)
-        
-        chatCell.setUser(user: message.author ?? "[Unknown author]", message: message.body, date: timestamp ?? "[Unknown date]")
-        //            debugPrint(currentUserLogin.firstName + " " + currentUserLogin.lastName)
-        //
-        //            debugPrint(message.author)
-        
-        if currentUserLogin.firstName + " " + currentUserLogin.lastName == message.author ?? "[Unknown author]"
-            
-        {
-            //            chatCell.heightCustomerView.constant = 0
-            
-            chatCell.viewCustomer.isHidden = true
-        }
-        
-        else{
-            //            chatCell.heightUserView.constant = 0
-            
-            chatCell.viewUser.isHidden = true
-            
-        }
-        return chatCell
-        
-    }
-    
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
+    }
+    
+}
+extension ChatVC {
+    
+    //    Api call
+    
+    //    API Add friend
+    func addfriendapi(){
+        CommonUtils.showHud(show: true)
         
+        if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
+            let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+            let septoken = endToken.components(separatedBy: " ")
+            if septoken[0] != "Bearer"{
+                let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
+                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
+            }
+        }
+        debugPrint("friend_id=-=-",self.friendid)
+        
+        let params:[String : Any] = [
+            "user_id":UserData.shared.id,
+            "friend_id":friendid
+        ]
+        
+        
+        TANetworkManager.sharedInstance.requestApi(withServiceName:ServiceName.kaddfriend, requestMethod: .POST,
+                                                   requestParameters:params, withProgressHUD: false)
+        {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
+            
+            CommonUtils.showHudWithNoInteraction(show: false)
+            
+            if errorType == .requestSuccess {
+                
+                let dictResult = kSharedInstance.getDictionary(result)
+                
+                switch Int.getInt(statusCode) {
+                case 200:
+                    
+                    if Int.getInt(dictResult["status"]) == 200{
+                        
+                        let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+                        let septoken = endToken.components(separatedBy: " ")
+                        if septoken[0] == "Bearer"{
+                            kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
+                        }
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        
+                    }
+                    else if Int.getInt(dictResult["status"]) == 401{
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    }
+                    
+                default:
+                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                }
+            } else if errorType == .noNetwork {
+                CommonUtils.showToastForInternetUnavailable()
+                
+            } else {
+                CommonUtils.showToastForDefaultError()
+            }
+        }
+    }
+    
+    //    API send message
+    
+    func sendmessageapi(){
+        CommonUtils.showHud(show: true)
+        
+        if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
+            let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+            let septoken = endToken.components(separatedBy: " ")
+            if septoken[0] != "Bearer"{
+                let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
+                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
+            }
+        }
+        debugPrint("friend_id=-=-",self.friendid)
+        
+        let params:[String : Any] = [
+            "sender_id":UserData.shared.id,
+            "receiver_id":friendid,
+            "message":String.getString(self.txtViewMessage.text)
+        ]
+        
+        
+        TANetworkManager.sharedInstance.requestApi(withServiceName:ServiceName.ksendmessage, requestMethod: .POST,
+                                                   requestParameters:params, withProgressHUD: false)
+        {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
+            
+            CommonUtils.showHudWithNoInteraction(show: false)
+            
+            if errorType == .requestSuccess {
+                
+                let dictResult = kSharedInstance.getDictionary(result)
+                
+                switch Int.getInt(statusCode) {
+                case 200:
+                    
+                    if Int.getInt(dictResult["status"]) == 200{
+                        
+                        let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+                        let septoken = endToken.components(separatedBy: " ")
+                        if septoken[0] == "Bearer"{
+                            kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
+                        }
+                        self?.getmessageeapi()
+                        self?.txtViewMessage.text = ""
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        
+                    }
+                    else if Int.getInt(dictResult["status"]) == 401{
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    }
+                    
+                default:
+                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                }
+            } else if errorType == .noNetwork {
+                CommonUtils.showToastForInternetUnavailable()
+                
+            } else {
+                CommonUtils.showToastForDefaultError()
+            }
+        }
+    }
+    
+    //    API Get Messsage
+    
+    func getmessageeapi(){
+        CommonUtils.showHud(show: true)
+        
+        if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
+            let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+            let septoken = endToken.components(separatedBy: " ")
+            if septoken[0] != "Bearer"{
+                let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
+                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
+            }
+        }
+        debugPrint("friend_id=-=-",self.friendid)
+        
+        let params:[String : Any] = [
+            "my_id":UserData.shared.id,
+            "user_id":friendid
+        ]
+        
+        
+        TANetworkManager.sharedInstance.requestApi(withServiceName:ServiceName.kgetmessage, requestMethod: .POST,
+                                                   requestParameters:params, withProgressHUD: false)
+        {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
+            
+            CommonUtils.showHudWithNoInteraction(show: false)
+            
+            if errorType == .requestSuccess {
+                
+                let dictResult = kSharedInstance.getDictionary(result)
+                
+                switch Int.getInt(statusCode) {
+                case 200:
+                    
+                    if Int.getInt(dictResult["status"]) == 200{
+                        
+                        let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+                        let septoken = endToken.components(separatedBy: " ")
+                        if septoken[0] == "Bearer"{
+                            kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
+                        }
+                        
+                        let message = kSharedInstance.getArray(withDictionary: dictResult["messages"])
+                        self?.Messagedata = message.map{Message_data(data: kSharedInstance.getDictionary($0))}
+                        print("DataAllMessageData===\(self?.Messagedata)")
+                        
+                        self?.tableViewChat?.reloadData()
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        
+                    }
+                    else if Int.getInt(dictResult["status"]) == 401{
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    }
+                    
+                default:
+                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                }
+            } else if errorType == .noNetwork {
+                CommonUtils.showToastForInternetUnavailable()
+                
+            } else {
+                CommonUtils.showToastForDefaultError()
+            }
+        }
     }
     
 }

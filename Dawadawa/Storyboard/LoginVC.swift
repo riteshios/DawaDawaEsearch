@@ -249,7 +249,6 @@ extension LoginVC{
                         kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: String.getString(dictResult[kLoggedInAccessToken]))
                         UserData.shared.saveData(data: data, token: String.getString(dictResult[kLoggedInAccessToken]))
 
-                        
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         kSharedAppDelegate?.makeRootViewController()
                         

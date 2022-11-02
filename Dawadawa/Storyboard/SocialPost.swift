@@ -386,3 +386,23 @@ class Notification_data{
         self.read_status = String.getString(data["read_status"])
     }
 }
+
+// Message_data
+
+class Message_data{
+    var id:Int?
+    var from:Int?
+    var to:Int?
+    var message:String?
+    var is_read:Int?
+    var created_at:String?
+    
+    init(data:[String:Any]){
+        self.id = Int.getInt(data["id"])
+        self.from = Int.getInt(data["from"])
+        self.to = Int.getInt(data["to"])
+        self.message = String.getString(data["message"])
+        self.is_read = Int.getInt(data["is_read"])
+        self.created_at = String.getString(data["created_at"])
+    }
+}

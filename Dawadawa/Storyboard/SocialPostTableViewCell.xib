@@ -114,6 +114,14 @@
                                             <action selector="btnMoreTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="M06-D3-dfE"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gmx-ui-x0B">
+                                        <rect key="frame" x="360.5" y="20" width="20" height="22"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" image="chat"/>
+                                        <connections>
+                                            <action selector="btnChatTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="jSk-g8-Fy7"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
@@ -123,12 +131,14 @@
                                     <constraint firstItem="2JA-SH-CrE" firstAttribute="leading" secondItem="E2N-yB-oj1" secondAttribute="trailing" constant="2" id="CAb-7j-yab"/>
                                     <constraint firstItem="2JA-SH-CrE" firstAttribute="centerY" secondItem="E2N-yB-oj1" secondAttribute="centerY" id="FAZ-9n-qat"/>
                                     <constraint firstItem="vUg-me-atb" firstAttribute="top" secondItem="N9E-Nl-Z2A" secondAttribute="top" constant="20" id="Jj3-cy-okT"/>
+                                    <constraint firstItem="HeL-Mi-p7e" firstAttribute="leading" secondItem="Gmx-ui-x0B" secondAttribute="trailing" constant="3" id="L4Y-Ue-6x4"/>
                                     <constraint firstAttribute="trailing" secondItem="HeL-Mi-p7e" secondAttribute="trailing" constant="7.3300000000000001" id="SU8-6V-zC3"/>
                                     <constraint firstItem="xkw-Dz-ak3" firstAttribute="top" secondItem="N9E-Nl-Z2A" secondAttribute="top" id="TCo-f9-OeO"/>
                                     <constraint firstItem="vUg-me-atb" firstAttribute="leading" secondItem="N9E-Nl-Z2A" secondAttribute="leading" constant="20" id="Ufh-tt-Vpp"/>
                                     <constraint firstItem="E2N-yB-oj1" firstAttribute="leading" secondItem="eXK-Ye-5Om" secondAttribute="leading" id="Zhe-I8-JoL"/>
                                     <constraint firstItem="eXK-Ye-5Om" firstAttribute="leading" secondItem="LgE-K4-rkL" secondAttribute="leading" id="aUm-o6-l6z"/>
                                     <constraint firstItem="HeL-Mi-p7e" firstAttribute="centerY" secondItem="LgE-K4-rkL" secondAttribute="centerY" id="aky-nF-vVA"/>
+                                    <constraint firstItem="Gmx-ui-x0B" firstAttribute="centerY" secondItem="HeL-Mi-p7e" secondAttribute="centerY" id="gdL-8r-vTx"/>
                                     <constraint firstItem="eXK-Ye-5Om" firstAttribute="top" secondItem="LgE-K4-rkL" secondAttribute="bottom" constant="2" id="gnu-rR-ogb"/>
                                     <constraint firstItem="xkw-Dz-ak3" firstAttribute="leading" secondItem="N9E-Nl-Z2A" secondAttribute="leading" id="ncf-a7-rjS"/>
                                     <constraint firstAttribute="bottom" secondItem="vUg-me-atb" secondAttribute="bottom" constant="11" id="sKG-m0-rTW"/>
@@ -675,6 +685,7 @@
         <image name="Boss" width="75" height="75"/>
         <image name="Crown" width="20" height="20"/>
         <image name="Star Filled" width="20" height="20"/>
+        <image name="chat" width="20" height="20"/>
         <image name="comment" width="19" height="18"/>
         <image name="flagOpp" width="33" height="29"/>
         <image name="more" width="24" height="24"/>

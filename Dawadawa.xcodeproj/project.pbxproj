@@ -50,6 +50,11 @@
 		0461E31D288AB0D900B7F0E7 /* SocialPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0461E31C288AB0D800B7F0E7 /* SocialPost.swift */; };
 		04647ECC287814CB0006B8D2 /* SelectCategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04647ECB287814CB0006B8D2 /* SelectCategoryTableViewCell.swift */; };
 		04647ECE287831540006B8D2 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04647ECD287831540006B8D2 /* Category.swift */; };
+		0464E3362910F94B00EC10E3 /* MyChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464E3342910F94B00EC10E3 /* MyChatTableViewCell.swift */; };
+		0464E3372910F94B00EC10E3 /* MyChatTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0464E3352910F94B00EC10E3 /* MyChatTableViewCell.xib */; };
+		0464E3392910FD3900EC10E3 /* MyChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464E3382910FD3900EC10E3 /* MyChatVC.swift */; };
+		0464E33D291119F900EC10E3 /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464E33B291119F900EC10E3 /* ChatTableViewCell.swift */; };
+		0464E33E291119F900EC10E3 /* ChatTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0464E33C291119F900EC10E3 /* ChatTableViewCell.xib */; };
 		046DCA0B28C608D600B219F4 /* CurrentLocationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046DCA0A28C608D600B219F4 /* CurrentLocationVC.swift */; };
 		046DEA97285C7E1300D1E1A5 /* sucess.gif in Resources */ = {isa = PBXBuildFile; fileRef = 046DEA96285C7E1300D1E1A5 /* sucess.gif */; };
 		046DEA99285C80AF00D1E1A5 /* success.gif in Resources */ = {isa = PBXBuildFile; fileRef = 046DEA98285C80AF00D1E1A5 /* success.gif */; };
@@ -703,6 +708,11 @@
 		0461E31C288AB0D800B7F0E7 /* SocialPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SocialPost.swift; path = Dawadawa/Storyboard/SocialPost.swift; sourceTree = SOURCE_ROOT; };
 		04647ECB287814CB0006B8D2 /* SelectCategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SelectCategoryTableViewCell.swift; path = Dawadawa/Storyboard/SelectCategoryTableViewCell.swift; sourceTree = SOURCE_ROOT; };
 		04647ECD287831540006B8D2 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Category.swift; path = Dawadawa/Storyboard/Category.swift; sourceTree = SOURCE_ROOT; };
+		0464E3342910F94B00EC10E3 /* MyChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyChatTableViewCell.swift; sourceTree = SOURCE_ROOT; };
+		0464E3352910F94B00EC10E3 /* MyChatTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyChatTableViewCell.xib; sourceTree = SOURCE_ROOT; };
+		0464E3382910FD3900EC10E3 /* MyChatVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyChatVC.swift; sourceTree = "<group>"; };
+		0464E33B291119F900EC10E3 /* ChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
+		0464E33C291119F900EC10E3 /* ChatTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatTableViewCell.xib; sourceTree = "<group>"; };
 		046DCA0A28C608D600B219F4 /* CurrentLocationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentLocationVC.swift; sourceTree = "<group>"; };
 		046DEA96285C7E1300D1E1A5 /* sucess.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = sucess.gif; sourceTree = "<group>"; };
 		046DEA98285C80AF00D1E1A5 /* success.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = success.gif; sourceTree = "<group>"; };
@@ -1335,6 +1345,7 @@
 		040677482887FFB60061AE70 /* xib */ = {
 			isa = PBXGroup;
 			children = (
+				0464E33A291100A500EC10E3 /* Chat */,
 				0491A66328F54E1A00F2E115 /* Notification */,
 				0489D19528929D5A00725664 /* Filter */,
 				04B4C8F32889BA3100DB3E11 /* Profile */,
@@ -1453,6 +1464,17 @@
 				0461E313288A76F700B7F0E7 /* ProileSocialMoreVC.swift */,
 			);
 			name = Profile;
+			sourceTree = "<group>";
+		};
+		0464E33A291100A500EC10E3 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				0464E3352910F94B00EC10E3 /* MyChatTableViewCell.xib */,
+				0464E3342910F94B00EC10E3 /* MyChatTableViewCell.swift */,
+				0464E33C291119F900EC10E3 /* ChatTableViewCell.xib */,
+				0464E33B291119F900EC10E3 /* ChatTableViewCell.swift */,
+			);
+			name = Chat;
 			sourceTree = "<group>";
 		};
 		046DCA0928C608A900B219F4 /* MapScreen */ = {
@@ -1616,6 +1638,7 @@
 		04C495B8290FE0A0001F01FD /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				0464E3382910FD3900EC10E3 /* MyChatVC.swift */,
 				04C495B9290FE0BD001F01FD /* ChatVC.swift */,
 			);
 			name = Chat;
@@ -2801,12 +2824,14 @@
 				447DCD472851CB1200C40DDD /* Uzbekistan.png in Resources */,
 				447DCE192851CB1300C40DDD /* LI.png in Resources */,
 				447DCD6B2851CB1200C40DDD /* YT.png in Resources */,
+				0464E3372910F94B00EC10E3 /* MyChatTableViewCell.xib in Resources */,
 				447DCCF72851CB1200C40DDD /* Qatar.png in Resources */,
 				447DCD4B2851CB1200C40DDD /* Slovenia.png in Resources */,
 				447DCD972851CB1200C40DDD /* AU.png in Resources */,
 				447DCDFC2851CB1200C40DDD /* JM.png in Resources */,
 				447DCCAE2851CB1100C40DDD /* Tunisia.png in Resources */,
 				447DCE1C2851CB1300C40DDD /* TO.png in Resources */,
+				0464E33E291119F900EC10E3 /* ChatTableViewCell.xib in Resources */,
 				447DCD992851CB1200C40DDD /* MA.png in Resources */,
 				447DCD052851CB1200C40DDD /* Israel.png in Resources */,
 				44D7F8EE285365D7001554C9 /* Home.storyboard in Resources */,
@@ -3233,6 +3258,7 @@
 				04A9958C28A370FD00FC75C9 /* SaveOpportunityMoreVC.swift in Sources */,
 				0406774B2887FFEA0061AE70 /* ViewPostTableViewCell.swift in Sources */,
 				447DCC5C2851CB1100C40DDD /* UPCarouselFlowLayout.swift in Sources */,
+				0464E33D291119F900EC10E3 /* ChatTableViewCell.swift in Sources */,
 				447DCC862851CB1100C40DDD /* DoubleExtended.swift in Sources */,
 				447DCC792851CB1100C40DDD /* UserDefaultsExtended.swift in Sources */,
 				447DCE5B2851CB1300C40DDD /* VideoPickerHelper.swift in Sources */,
@@ -3268,6 +3294,7 @@
 				0492B5FB28BE23BB00EDAC83 /* HomeSocialMoreSelfVC.swift in Sources */,
 				0432B3DE28CF567700FEF6EC /* PaymentVC.swift in Sources */,
 				447DCC782851CB1100C40DDD /* OtpModel.swift in Sources */,
+				0464E3392910FD3900EC10E3 /* MyChatVC.swift in Sources */,
 				045C4E822889819900E831AA /* PremiumTableViewCell.swift in Sources */,
 				04C848A828B75E8200505AB0 /* DetailScreenVC.swift in Sources */,
 				447DCE602851CB1300C40DDD /* AlertView.swift in Sources */,
@@ -3275,6 +3302,7 @@
 				0489D1A22892CAB200725664 /* SubCategorylabelTableViewCell.swift in Sources */,
 				447DCC7F2851CB1100C40DDD /* UIviewCornerRadius.swift in Sources */,
 				04B9190C286B1372009ABAE4 /* ChangeEmailVC.swift in Sources */,
+				0464E3362910F94B00EC10E3 /* MyChatTableViewCell.swift in Sources */,
 				04A606FE28F41B9200C980D3 /* NotificationTableViewCell.swift in Sources */,
 				0406DB86287D5CEB00B57A0B /* MiningServiceVC.swift in Sources */,
 				0490F3DB2876E7E300F8A84A /* UploadImageCollectionViewCell.swift in Sources */,

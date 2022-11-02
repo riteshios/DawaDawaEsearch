@@ -164,6 +164,11 @@ struct ServiceName {
 //    Report Opp/User
     static let kreportuser             =            "api/reportUser"
     
+//    Chat
+    static let kaddfriend              =            "api/userConversion"
+    static let ksendmessage            =            "api/send-message"
+    static let kgetmessage             =            "api/getmessage"
+    
 }
 
 struct Notifications {

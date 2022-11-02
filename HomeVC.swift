@@ -251,6 +251,14 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
             
             cell.callback = { txt, sender in
                 
+                if txt == "Chat"{
+                    
+                    let userid = Int.getInt(userTimeLine[indexPath.row].user_id)
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: ChatVC.getStoryboardID()) as! ChatVC
+                    vc.friendid = userid
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
+                
                 if txt == "btnimgTapped"{
                     let oppid = Int.getInt(userTimeLine[indexPath.row].id)
                     debugPrint("detailsppid=-=-=",oppid)

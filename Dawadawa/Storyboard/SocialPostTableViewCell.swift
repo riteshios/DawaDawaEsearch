@@ -169,6 +169,10 @@ class SocialPostTableViewCell: UITableViewCell,UITextViewDelegate {
         self.callback?("btnimgTapped",sender)
     }
     
+    @IBAction func btnChatTapped(_ sender: UIButton) {
+        self.callback?("Chat",sender)
+    }
+    
 }
 
 
