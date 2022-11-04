@@ -1,9 +1,7 @@
 //
 //  ChatVC.swift
 //  Dawadawa
-//
 //  Created by Ritesh Gupta on 31/10/22.
-//
 
 import UIKit
 import IQKeyboardManagerSwift
@@ -15,16 +13,21 @@ class ChatVC: UIViewController{
     @IBOutlet weak var txtViewMessage: IQTextView!
     @IBOutlet weak var imgFriend: UIImageView!
     @IBOutlet weak var lblNameFriend: UILabel!
-    
+    @IBOutlet weak var btnSend: UIButton!
     
     var friendid = 0
+    var friendname = ""
+    var friendimage = ""
     var Messagedata = [Message_data]()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //        self.addfriendapi()
+        self.addfriendapi()
         self.getmessageeapi()
+        
+        self.lblNameFriend.text = self.friendname
+        self.imgFriend.downlodeImage(serviceurl: friendimage , placeHolder: UIImage(named: "Boss"))
         
         viewTop.clipsToBounds = true
         viewTop.layer.cornerRadius = 10
@@ -39,10 +42,26 @@ class ChatVC: UIViewController{
     
     @IBAction func btnSendTapped(_ sender: UIButton) {
         
-        self.sendmessageapi()
+        if self.txtViewMessage.text == ""{
+            self.showSimpleAlert(message: "Please Enter Your Message")
+        }
+        else{
+            self.tableViewScrollToBottom(animated: true)
+            self.sendmessageapi()
+        }
     }
     
-    
+    func tableViewScrollToBottom(animated: Bool) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300)) {
+            let numberOfSections = self.tableViewChat.numberOfSections
+            let numberOfRows = self.tableViewChat.numberOfRows(inSection: numberOfSections-1)
+
+            if numberOfRows > 0 {
+                let indexPath = IndexPath(row: numberOfRows-1, section: (numberOfSections-1))
+                self.tableViewChat.scrollToRow(at: indexPath, at: .bottom, animated: animated)
+            }
+        }
+    }
 }
 
 extension ChatVC:UITableViewDelegate,UITableViewDataSource {
@@ -55,7 +74,24 @@ extension ChatVC:UITableViewDelegate,UITableViewDataSource {
         let cell = self.tableViewChat.dequeueReusableCell(withIdentifier: "ChatTableViewCell") as! ChatTableViewCell
         let obj = Messagedata[indexPath.row]
         
-        cell.setUser(user: obj.from, message: obj.message)
+       
+        
+        var datetime = String.getString(obj.created_at)
+        datetime.removeLast(8)
+        print("datetime=-=-\(datetime)")
+        
+     // create dateFormatter with UTC time format
+        let dateFormatter = DateFormatter()
+              dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+              dateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone?
+              let date = dateFormatter.date(from: datetime)// create   date from string
+
+              // change to a readable time format and change to local time zone
+              dateFormatter.dateFormat = "EEE, MMM d, yyyy - h:mm a"
+              dateFormatter.timeZone = NSTimeZone.local
+              let timeStamp = dateFormatter.string(from: date!)
+              print("timeStamp=-=-=\(timeStamp)")
+        cell.setUser(user: obj.from, message: obj.message,date:timeStamp)
             
         
         return cell
@@ -63,8 +99,8 @@ extension ChatVC:UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
-    
 }
+
 extension ChatVC {
     
     //    Api call
@@ -128,10 +164,10 @@ extension ChatVC {
         }
     }
     
-    //    API send message
+//    API send message
     
     func sendmessageapi(){
-        CommonUtils.showHud(show: true)
+//        CommonUtils.showHud(show: true)
         
         if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
             let endToken = kSharedUserDefaults.getLoggedInAccessToken()
@@ -154,7 +190,7 @@ extension ChatVC {
                                                    requestParameters:params, withProgressHUD: false)
         {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
             
-            CommonUtils.showHudWithNoInteraction(show: false)
+//            CommonUtils.showHudWithNoInteraction(show: false)
             
             if errorType == .requestSuccess {
                 
@@ -194,7 +230,7 @@ extension ChatVC {
     //    API Get Messsage
     
     func getmessageeapi(){
-        CommonUtils.showHud(show: true)
+//        CommonUtils.showHud(show: true)
         
         if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
             let endToken = kSharedUserDefaults.getLoggedInAccessToken()
@@ -216,7 +252,7 @@ extension ChatVC {
                                                    requestParameters:params, withProgressHUD: false)
         {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
             
-            CommonUtils.showHudWithNoInteraction(show: false)
+//            CommonUtils.showHudWithNoInteraction(show: false)
             
             if errorType == .requestSuccess {
                 

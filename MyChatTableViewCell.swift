@@ -9,7 +9,10 @@ import UIKit
 
 class MyChatTableViewCell: UITableViewCell {
     
-
+    @IBOutlet weak var imgFriend: UIImageView!
+    @IBOutlet weak var lblName: UILabel!
+    var callback:((String)->())?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
        
@@ -21,4 +24,7 @@ class MyChatTableViewCell: UITableViewCell {
         
     }
     
+    @IBAction func btnChatTapped(_ sender: UIButton) {
+        self.callback?("Chat")
+    }
 }

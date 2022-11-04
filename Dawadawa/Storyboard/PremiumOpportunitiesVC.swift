@@ -153,6 +153,16 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
             
             cell.callback = { txt, tapped in
                 
+                if txt == "Chat"{
+                    
+                    let userid = Int.getInt(self.userTimeLine[indexPath.row].user_id)
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: ChatVC.getStoryboardID()) as! ChatVC
+                    vc.friendid = userid
+                    vc.friendname = String.getString(obj.userdetail?.name)
+                    vc.friendimage = imgurl
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
+                
                 if txt == "Profileimage"{
                     let user_id = self.userTimeLine[indexPath.row].user_id
                     let vc = self.storyboard?.instantiateViewController(withIdentifier: UserProfileDetailsVC.getStoryboardID()) as! UserProfileDetailsVC

@@ -44,6 +44,7 @@ class SocialPostTableViewCell: UITableViewCell,UITextViewDelegate {
     @IBOutlet weak var heightSocialPostCollectionView: NSLayoutConstraint!
     
     @IBOutlet weak var imgOppFlag: UIImageView!
+    @IBOutlet weak var btnChat: UIButton!
     
     
     

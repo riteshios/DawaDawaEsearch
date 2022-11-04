@@ -102,6 +102,8 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
     
 //    Get Plan Amount
     var planamount:plan_amount?
+    var amount = 0
+    
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
@@ -1174,11 +1176,21 @@ extension RockPitOpportunityVC{
                             vc.modalTransitionStyle = .crossDissolve
                             vc.modalPresentationStyle = .overCurrentContext
                             vc.plan = self.planpayment
+                            
+                            vc.callbackamount = { Price in
+                                self.amount = Price
+                                
+                            print("amount=-=-\(self.amount)")
+                                
+                            }
+                            
                             vc.callback = { txt in
                                 
                                 if txt == "Pay"{
                                     vc.dismiss(animated: false) {
                                         let vc = UIStoryboard(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "PaymentforFeaturePremiumVC") as! PaymentforFeaturePremiumVC
+                                        vc.price = self.amount
+                                        vc.opptype = self.planpayment
                                         self.navigationController?.pushViewController(vc, animated: true)
                                     }
                                 }
@@ -1189,7 +1201,7 @@ extension RockPitOpportunityVC{
                         
                     }
                     else if  Int.getInt(dictResult["status"]) == 400{
-                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        // CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                 default:

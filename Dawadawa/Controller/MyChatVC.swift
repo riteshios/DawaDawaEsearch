@@ -10,10 +10,11 @@ import UIKit
 class MyChatVC: UIViewController {
 
     @IBOutlet weak var tblviewMyChat: UITableView!
+    var friendlist = [user_detail]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.friendlistapi()
         tblviewMyChat.register(UINib(nibName: "MyChatTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "MyChatTableViewCell")
     }
 
@@ -23,43 +24,104 @@ class MyChatVC: UIViewController {
 }
 
 extension MyChatVC:UITableViewDelegate,UITableViewDataSource{
+    
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return NotificationData.count
-        return 10
+        return friendlist.count
     }
+    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tblviewMyChat.dequeueReusableCell(withIdentifier: "MyChatTableViewCell") as! MyChatTableViewCell
-//        let obj = self.NotificationData[indexPath.row]
-//        cell.lblHeading.text = String.getString(obj.title)
-//        cell.lblSubheading.text = String.getString(obj.body)
-//
-//
-//        if String.getString(obj.read_status) == "1"{
-//            cell.viewNotification.backgroundColor = UIColor.white
-//            cell.lblHeading.textColor = UIColor.black
-//            cell.lblSubheading.textColor = UIColor.black
-//            cell.imglogo.image = UIImage(named: "logo-1")
-//        }
-//        else if String.getString(obj.read_status) == "0"{
-//            cell.viewNotification.backgroundColor = UIColor.init(hexString: "#1572A1")
-//            cell.lblHeading.textColor = UIColor.white
-//            cell.lblSubheading.textColor = UIColor.white
-//            cell.imglogo.image = UIImage(named: "logo")
-//        }
-//
-//
-//        cell.callback = { txt, sender in
-//
-//            if txt == "Notificationdetail"{
-//                let vc = self.storyboard?.instantiateViewController(withIdentifier: "NotificationDetail") as! NotificationDetail
-//                vc.noti_id = Int.getInt(obj.id)
-//                vc.heading = String.getString(obj.title)
-//                vc.subheading = String.getString(obj.body)
-//                self.navigationController?.pushViewController(vc, animated: true)
-//            }
-//        }
+        
+        let obj = friendlist[indexPath.row]
+        let imgurl = String.getString(obj.social_profile)
+        
+        cell.lblName.text = String.getString(obj.name)
+        cell.imgFriend.downlodeImage(serviceurl: imgurl , placeHolder: UIImage(named: "Boss"))
+        cell.callback = { txt in
+            if txt == "Chat"{
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: ChatVC.getStoryboardID()) as! ChatVC
+                vc.friendid = Int.getInt(obj.id)
+                vc.friendname = String.getString(obj.name)
+                vc.friendimage = String.getString(obj.social_profile)
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+            
+        }
+       
+
         return cell
+    }
+    
+}
+
+
+extension MyChatVC {
+//    API Call
+    
+    func friendlistapi(){
+//        CommonUtils.showHud(show: true)
+        
+        if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
+            let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+            let septoken = endToken.components(separatedBy: " ")
+            if septoken[0] != "Bearer"{
+                let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
+                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
+            }
+        }
+       
+        
+        let params:[String : Any] = [
+            "user_id":UserData.shared.id,
+            "friend_id": 0
+        ]
+        
+        
+        TANetworkManager.sharedInstance.requestApi(withServiceName:ServiceName.kaddfriend, requestMethod: .POST,
+                                                   requestParameters:params, withProgressHUD: false)
+        {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
+            
+//            CommonUtils.showHudWithNoInteraction(show: false)
+            
+            if errorType == .requestSuccess {
+                
+                let dictResult = kSharedInstance.getDictionary(result)
+                
+                switch Int.getInt(statusCode) {
+                case 200:
+                    
+                    if Int.getInt(dictResult["status"]) == 200{
+                        
+                        let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+                        let septoken = endToken.components(separatedBy: " ")
+                        if septoken[0] == "Bearer"{
+                            kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
+                        }
+                        
+                        let friendlist = kSharedInstance.getArray(withDictionary: dictResult["userData"])
+                        self?.friendlist = friendlist.map{user_detail(data: kSharedInstance.getDictionary($0))}
+                        print("DataAlldfriendlist===\(self?.friendlist)")
+                        
+                        self?.tblviewMyChat?.reloadData()
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        
+                    }
+                    else if Int.getInt(dictResult["status"]) == 401{
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    }
+                    
+                default:
+                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                }
+            } else if errorType == .noNetwork {
+                CommonUtils.showToastForInternetUnavailable()
+                
+            } else {
+                CommonUtils.showToastForDefaultError()
+            }
+        }
     }
     
 }

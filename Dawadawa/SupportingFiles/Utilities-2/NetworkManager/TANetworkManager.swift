@@ -502,6 +502,161 @@ public class TANetworkManager {
         }
     }
     
+    
+//    Language and Opp Package key in Header
+    
+    func requestwithlanguageandopr_keyApi(withServiceName serviceName: String,
+                                requestMethod method: kHTTPMethod,
+                                requestParameters postData: Dictionary<String, Any>,
+                                withProgressHUD showProgress: Bool,
+                                completionClosure:@escaping (_ result: Any?, _ error: Error?, _ errorType: ErrorType, _ statusCode: Int?) -> ()) -> Void
+    {
+        
+        debugPrint("serviceName===",serviceName)
+        
+        if NetworkReachabilityManager()?.isReachable == true
+        {
+            if showProgress
+            {
+                showProgressHUD()
+            }
+            
+            let headers = getHeaderWithAPIandLanguageNameandopr_key(serviceName: serviceName)
+            
+            let serviceUrl = getServiceUrl(string: serviceName)
+            
+            let params  = getPrintableParamsFromJson(postData: postData)
+            
+            print_debug(items: "Connecting to Host with URL \(kBASEURL)\(serviceName) with parameters: \(params)")
+            
+            //NSAssert Statements
+            assert(method != .GET || method != .POST, "kHTTPMethod should be one of kHTTPMethodGET|kHTTPMethodPOST|kHTTPMethodPOSTMultiPart.");
+            
+            switch method
+            {
+            case .GET:
+                Alamofire.request(serviceUrl, method: .get, parameters: postData, encoding: URLEncoding.default, headers: headers).responseJSON(completionHandler:
+                                                                                                                                                    { (DataResponse) in
+                    SVProgressHUD.dismiss()
+                    switch DataResponse.result
+                    {
+                    case .success(let JSON):
+                        
+                        print_debug_fake(items: "Success with JSON: \(JSON)")
+                        print_debug(items: "Success with status Code: \(String(describing: DataResponse.response?.statusCode))")
+                        if DataResponse.response?.statusCode == 401 { // 401: Token Expired
+                            showAlertMessage.alert(message: AlertMessage.kSessionExpired)
+                            kSharedUserDefaults.setUserLoggedIn(userLoggedIn: false)
+                            
+                            
+                            // kSharedAppDelegate?.moveToHome()
+                        } else {
+                            let response = self.getResponseDataDictionaryFromData(data: DataResponse.data!)
+                            
+                            
+                            completionClosure(response.responseData, response.error, .requestSuccess, Int.getInt(DataResponse.response?.statusCode))
+                        }
+                        
+                    case .failure(let error):
+                        print_debug(items: "json error: \(error.localizedDescription)")
+                        if error.localizedDescription == "cancelled"
+                        {
+                            completionClosure(nil, error, .requestCancelled, Int.getInt(DataResponse.response?.statusCode))
+                        }
+                        else
+                        {
+                            completionClosure(nil, error, .requestFailed, Int.getInt(DataResponse.response?.statusCode))
+                        }
+                    }
+                })
+            case .POST:
+                Alamofire.request(serviceUrl, method: .post, parameters: postData, encoding: JSONEncoding.prettyPrinted, headers: headers).responseJSON(completionHandler:
+                                                                                                                                                            { (DataResponse) in
+                    SVProgressHUD.dismiss()
+                    switch DataResponse.result
+                    {
+                    case .success(let JSON):
+                        print_debug_fake(items: "Success with JSON: \(JSON)")
+                        print_debug(items: "Success with status Code: \(String(describing: DataResponse.response?.statusCode))")
+                        if DataResponse.response?.statusCode == 401 { // 401: Token Expired
+                            showAlertMessage.alert(message: AlertMessage.kSessionExpired)
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                                //   kSharedAppDelegate?.logout()
+                            })
+                            kSharedUserDefaults.setUserLoggedIn(userLoggedIn: false)
+                            
+                            //                                let response = self.getResponseDataDictionaryFromData(data: DataResponse.data!)
+                            //
+                            //                                completionClosure(response.responseData, response.error, .requestSuccess, Int.getInt(DataResponse.response?.statusCode))
+                            
+                        } else {
+                            let response = self.getResponseDataDictionaryFromData(data: DataResponse.data!)
+                            
+                            completionClosure(response.responseData, response.error, .requestSuccess, Int.getInt(DataResponse.response?.statusCode))
+                        }
+                    case .failure(let error):
+                        print_debug(items: "json error: \(error.localizedDescription)")
+                        completionClosure(nil, error, .requestFailed, Int.getInt(DataResponse.response?.statusCode))
+                    }
+                })
+            case .PUT:
+                Alamofire.request(serviceUrl, method: .put, parameters: postData, encoding: JSONEncoding.default, headers: headers).responseJSON(completionHandler:
+                                                                                                                                                    { (DataResponse) in
+                    SVProgressHUD.dismiss()
+                    switch DataResponse.result
+                    {
+                    case .success(let JSON):
+                        print_debug_fake(items: "Success with JSON: \(JSON)")
+                        print_debug(items: "Success with status Code: \(String(describing: DataResponse.response?.statusCode))")
+                        let response = self.getResponseDataDictionaryFromData(data: DataResponse.data!)
+                        completionClosure(response.responseData, response.error, .requestSuccess, Int.getInt(DataResponse.response?.statusCode))
+                    case .failure(let error):
+                        print_debug(items: "json error: \(error.localizedDescription)")
+                        completionClosure(nil, error, .requestFailed, Int.getInt(DataResponse.response?.statusCode))
+                    }
+                })
+            case .PATCH:
+                Alamofire.request(serviceUrl, method: .patch, parameters: postData, encoding: JSONEncoding.default, headers: headers).responseJSON(completionHandler:
+                                                                                                                                                    { (DataResponse) in
+                    SVProgressHUD.dismiss()
+                    switch DataResponse.result
+                    {
+                    case .success(let JSON):
+                        print_debug_fake(items: "Success with JSON: \(JSON)")
+                        print_debug(items: "Success with status Code: \(String(describing: DataResponse.response?.statusCode))")
+                        let response = self.getResponseDataDictionaryFromData(data: DataResponse.data!)
+                        completionClosure(response.responseData, response.error, .requestSuccess, Int.getInt(DataResponse.response?.statusCode))
+                    case .failure(let error):
+                        print_debug(items: "json error: \(error.localizedDescription)")
+                        completionClosure(nil, error, .requestFailed, Int.getInt(DataResponse.response?.statusCode))
+                    }
+                })
+                
+            case .DELETE:
+                Alamofire.request(serviceUrl, method: .delete, parameters: postData, encoding: URLEncoding.default, headers: headers).responseJSON(completionHandler:
+                                                                                                                                                    { (DataResponse) in
+                    SVProgressHUD.dismiss()
+                    switch DataResponse.result
+                    {
+                    case .success(let JSON):
+                        print_debug_fake(items: "Success with JSON: \(JSON)")
+                        print_debug(items: "Success with status Code: \(String(describing: DataResponse.response?.statusCode))")
+                        let response = self.getResponseDataDictionaryFromData(data: DataResponse.data!)
+                        completionClosure(response.responseData, response.error, .requestSuccess, Int.getInt(DataResponse.response?.statusCode))
+                    case .failure(let error):
+                        print_debug(items: "json error: \(error.localizedDescription)")
+                        completionClosure(nil, error, .requestFailed, Int.getInt(DataResponse.response?.statusCode))
+                    }
+                })
+            }
+        }
+        else
+        {
+            SVProgressHUD.dismiss()
+            completionClosure(nil, nil, .noNetwork, nil)
+        }
+    }
+
     /**
      *  Upload multiple images and videos via multipart
      *
@@ -899,13 +1054,40 @@ public class TANetworkManager {
             headers["Accept-Language"] = "en"
         }
     
-        
         print_debug(items: "Authorization: \(headers)")
         print_debug(items: "Accept-Language: \(headers)")
         
         
         return headers
     }
+    
+    private func getHeaderWithAPIandLanguageNameandopr_key(serviceName: String) -> [String: String] {
+        var headers:[String: String] = [:]
+        if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
+            headers["Authorization"] = kSharedUserDefaults.getLoggedInAccessToken()
+           
+        }
+        else {
+            headers["Authorization"] = ""
+        }
+        if (String.getString(UserData.shared.language)) != ""{
+            headers["Accept-Language"] = String.getString(UserData.shared.language)
+        }
+        
+        else {
+            headers["Accept-Language"] = "en"
+        }
+        
+        headers["opr_package_key"] = "qq"
+    
+        print_debug(items: "Authorization: \(headers)")
+        print_debug(items: "Accept-Language: \(headers)")
+        print_debug(items: "opr_package_key:\(headers)")
+        
+        
+        return headers
+    }
+    
     private func getHeaderWithtlanguageName(serviceName: String) -> [String: String] {
         var headers:[String: String] = [:]
         

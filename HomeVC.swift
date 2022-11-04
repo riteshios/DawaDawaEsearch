@@ -256,6 +256,8 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                     let userid = Int.getInt(userTimeLine[indexPath.row].user_id)
                     let vc = self.storyboard?.instantiateViewController(withIdentifier: ChatVC.getStoryboardID()) as! ChatVC
                     vc.friendid = userid
+                    vc.friendname = String.getString(obj.userdetail?.name)
+                    vc.friendimage = imguserurl
                     self.navigationController?.pushViewController(vc, animated: true)
                 }
                 

@@ -1,9 +1,8 @@
-//
 //  ChatTableViewCell.swift
 //  Dawadawa
-//
-//  Created by Alekh on 01/11/22.
-//
+
+//  Created by Ritesh Gupta on 01/11/22.
+
 
 import UIKit
 
@@ -32,19 +31,19 @@ class ChatTableViewCell: UITableViewCell {
 
     }
     
-    func setUser(user:Int!, message:String!){
+    func setUser(user:Int!, message:String!,date:String!){
       
         if UserData.shared.id == user
         {
-            lblMessageSender.text = message
-//            lblStatusSender.text = date
+            lblMessageSender .text = message
+            lblStatusSender.text = date
             lblNameSender.text = "You"
             ViewReciver.isHidden = true
             ViewSender.isHidden = false
 //            heightCustomerView.constant = 0
             
         }else{
-//            lblStatusReceiver.text = date
+            lblStatusReceiver.text = date
 //            lblNameReceiver.text = user
             lblMessageReceiver.text = message
             ViewReciver.isHidden = false

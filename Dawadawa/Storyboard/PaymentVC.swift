@@ -45,7 +45,7 @@ class PaymentVC: UIViewController {
         CommonUtils.showHudWithNoInteraction(show: true)
         let amount = Double(price)
         let currency = "USD"
-        debugPrint("priceRitesh",amount)
+        debugPrint("price0000",amount)
         self.getAuthSecretKey(amount:amount ?? 0.0, currency: currency) { receivedData in
             CommonUtils.showHudWithNoInteraction(show: false)
             self.paymentIntentClientSecret = receivedData
@@ -163,33 +163,22 @@ extension PaymentVC{
             
             if response.response != nil {
                 
-                
-                
                 if let value = response.result.value {
-                    
-                    
                     let json = JSON(value)
                     
                     print(" team List json is:\n\(json)")
                     
                     let parser = SecretKeyParser(json)
-                    
                     outputBlock(parser.clientSecret)
                     
                 }else {
-                    
                     outputBlock("Fail")
-                    
                 }
                 
             }else {
-                
                 outputBlock("Fail")
-                
             }
-            
         }
-        
     }
     
     //    Store Payment Api

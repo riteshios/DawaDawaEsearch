@@ -115,7 +115,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kOf-GN-vp0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-63.768115942028992" y="466.304347826087"/>
+            <point key="canvasLocation" x="-77" y="499"/>
         </scene>
         <!--Home-->
         <scene sceneID="CzR-Sm-FcO">
@@ -13415,7 +13415,7 @@ this opportunity?</string>
                                                         </constraints>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Rating" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9xG-2h-j9i">
-                                                        <rect key="frame" x="173.66666666666666" y="26.333333333333371" width="66.666666666666657" height="29.333333333333329"/>
+                                                        <rect key="frame" x="172.33333333333334" y="26.333333333333371" width="69.666666666666657" height="29.333333333333329"/>
                                                         <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="24"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -13435,7 +13435,7 @@ this opportunity?</string>
                                                                 <rect key="frame" x="10" y="5" width="20" height="20"/>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nxa-ZE-aPw">
-                                                                <rect key="frame" x="33.333333333333314" y="6.3333333333333712" width="32.666666666666657" height="17"/>
+                                                                <rect key="frame" x="31.666666666666689" y="6.3333333333333712" width="34.333333333333343" height="17"/>
                                                                 <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="14"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -15029,6 +15029,7 @@ this opportunity?</string>
                                                         <connections>
                                                             <action selector="btnBuyPlans:" destination="a2r-Pt-pcT" eventType="touchUpInside" id="L2V-Xs-iLc"/>
                                                             <action selector="btnCreateOppTapped:" destination="xQB-xy-wcS" eventType="touchUpInside" id="Njv-hS-F8E"/>
+                                                            <action selector="btnPayTapped:" destination="cob-6F-my1" eventType="touchUpInside" id="Wq8-e3-pVI"/>
                                                             <action selector="btnSaveTapped:" destination="6w6-lV-jYx" eventType="touchUpInside" id="9vi-49-7eu"/>
                                                         </connections>
                                                     </button>
@@ -15099,6 +15100,10 @@ this opportunity?</string>
                             <constraint firstItem="ZEE-hg-aAg" firstAttribute="leading" secondItem="e1I-1M-CI7" secondAttribute="leading" id="gnC-8L-PPh"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="txtfieldcardNumber" destination="VSf-iM-2vh" id="K8D-X7-Gx5"/>
+                        <outlet property="viewPay" destination="hBs-hH-A4f" id="xpg-ks-s7g"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XYj-lR-Yd0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -15117,7 +15122,7 @@ this opportunity?</string>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TwN-mc-cOV">
-                                        <rect key="frame" x="15" y="30" width="40" height="40"/>
+                                        <rect key="frame" x="15" y="40" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="Bca-Xb-J1F"/>
                                             <constraint firstAttribute="width" constant="40" id="WR6-6s-fFs"/>
@@ -15130,7 +15135,7 @@ this opportunity?</string>
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BJ9-tm-oev">
-                                        <rect key="frame" x="70" y="25" width="50" height="50"/>
+                                        <rect key="frame" x="70" y="35" width="50" height="50"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Boss" translatesAutoresizingMaskIntoConstraints="NO" id="gx8-zP-ddy">
                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
@@ -15152,9 +15157,9 @@ this opportunity?</string>
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tAB-3Q-1Un">
-                                        <rect key="frame" x="140" y="39" width="46.666666666666657" height="22"/>
+                                        <rect key="frame" x="140" y="49" width="46.666666666666657" height="22"/>
                                         <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="18"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -15163,13 +15168,13 @@ this opportunity?</string>
                                     <constraint firstItem="TwN-mc-cOV" firstAttribute="leading" secondItem="wyX-kV-5P7" secondAttribute="leading" constant="15" id="Phb-2l-tFW"/>
                                     <constraint firstItem="BJ9-tm-oev" firstAttribute="leading" secondItem="TwN-mc-cOV" secondAttribute="trailing" constant="15" id="TAd-5h-NLT"/>
                                     <constraint firstItem="tAB-3Q-1Un" firstAttribute="leading" secondItem="BJ9-tm-oev" secondAttribute="trailing" constant="20" id="ffN-Il-z5I"/>
-                                    <constraint firstItem="TwN-mc-cOV" firstAttribute="top" secondItem="wyX-kV-5P7" secondAttribute="top" constant="30" id="gXw-d8-syH"/>
+                                    <constraint firstItem="TwN-mc-cOV" firstAttribute="top" secondItem="wyX-kV-5P7" secondAttribute="top" constant="40" id="gXw-d8-syH"/>
                                     <constraint firstItem="tAB-3Q-1Un" firstAttribute="centerY" secondItem="gx8-zP-ddy" secondAttribute="centerY" id="uFK-0b-KDN"/>
                                     <constraint firstItem="BJ9-tm-oev" firstAttribute="centerY" secondItem="TwN-mc-cOV" secondAttribute="centerY" id="whY-Nr-Db0"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="ull-Oi-O6x">
-                                <rect key="frame" x="0.0" y="92" width="414" height="594"/>
+                                <rect key="frame" x="0.0" y="92" width="414" height="580"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <connections>
                                     <outlet property="dataSource" destination="2qB-Mq-UBE" id="KOz-uV-LmE"/>
@@ -15177,10 +15182,10 @@ this opportunity?</string>
                                 </connections>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OFO-PY-oN1">
-                                <rect key="frame" x="0.0" y="686" width="414" height="50"/>
+                                <rect key="frame" x="0.0" y="672" width="414" height="64"/>
                                 <subviews>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="hWQ-Fn-ld9" customClass="IQTextView" customModule="IQKeyboardManagerSwift">
-                                        <rect key="frame" x="2" y="2" width="372" height="46"/>
+                                        <rect key="frame" x="10" y="5" width="336" height="54"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <color key="textColor" systemColor="labelColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -15202,10 +15207,10 @@ this opportunity?</string>
                                         </userDefinedRuntimeAttributes>
                                     </textView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CaU-bZ-zcT">
-                                        <rect key="frame" x="374" y="2" width="40" height="46"/>
+                                        <rect key="frame" x="354" y="5" width="50" height="54"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HIp-6Q-yS9">
-                                                <rect key="frame" x="0.0" y="0.0" width="40" height="46"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="50" height="54"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" image="send"/>
                                                 <connections>
@@ -15219,7 +15224,7 @@ this opportunity?</string>
                                             <constraint firstAttribute="bottom" secondItem="HIp-6Q-yS9" secondAttribute="bottom" id="JWX-jm-RdP"/>
                                             <constraint firstAttribute="trailing" secondItem="HIp-6Q-yS9" secondAttribute="trailing" id="Nig-tj-BmP"/>
                                             <constraint firstItem="HIp-6Q-yS9" firstAttribute="top" secondItem="CaU-bZ-zcT" secondAttribute="top" id="g9g-aI-GJA"/>
-                                            <constraint firstAttribute="width" constant="40" id="ls7-td-2iV"/>
+                                            <constraint firstAttribute="width" constant="50" id="ls7-td-2iV"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius1">
@@ -15236,21 +15241,21 @@ this opportunity?</string>
                                 </subviews>
                                 <color key="backgroundColor" red="0.08235294118" green="0.44705882349999998" blue="0.63137254899999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="CaU-bZ-zcT" firstAttribute="leading" secondItem="hWQ-Fn-ld9" secondAttribute="trailing" id="0R9-Vm-5WI"/>
-                                    <constraint firstAttribute="bottom" secondItem="hWQ-Fn-ld9" secondAttribute="bottom" constant="2" id="FyH-Ks-7aH"/>
-                                    <constraint firstAttribute="height" constant="50" id="SkX-Fg-QDA"/>
-                                    <constraint firstItem="hWQ-Fn-ld9" firstAttribute="top" secondItem="OFO-PY-oN1" secondAttribute="top" constant="2" id="acS-bp-soV"/>
-                                    <constraint firstAttribute="bottom" secondItem="CaU-bZ-zcT" secondAttribute="bottom" constant="2" id="ad4-Ys-QlB"/>
-                                    <constraint firstItem="hWQ-Fn-ld9" firstAttribute="leading" secondItem="OFO-PY-oN1" secondAttribute="leading" constant="2" id="bF2-va-R4b"/>
-                                    <constraint firstAttribute="trailing" secondItem="CaU-bZ-zcT" secondAttribute="trailing" id="qlq-75-Vbx"/>
-                                    <constraint firstItem="CaU-bZ-zcT" firstAttribute="top" secondItem="OFO-PY-oN1" secondAttribute="top" constant="2" id="vd4-Sl-o2u"/>
+                                    <constraint firstItem="CaU-bZ-zcT" firstAttribute="leading" secondItem="hWQ-Fn-ld9" secondAttribute="trailing" constant="8" symbolic="YES" id="0R9-Vm-5WI"/>
+                                    <constraint firstAttribute="bottom" secondItem="hWQ-Fn-ld9" secondAttribute="bottom" constant="5" id="FyH-Ks-7aH"/>
+                                    <constraint firstAttribute="height" constant="64" id="SkX-Fg-QDA"/>
+                                    <constraint firstItem="hWQ-Fn-ld9" firstAttribute="top" secondItem="OFO-PY-oN1" secondAttribute="top" constant="5" id="acS-bp-soV"/>
+                                    <constraint firstAttribute="bottom" secondItem="CaU-bZ-zcT" secondAttribute="bottom" constant="5" id="ad4-Ys-QlB"/>
+                                    <constraint firstItem="hWQ-Fn-ld9" firstAttribute="leading" secondItem="OFO-PY-oN1" secondAttribute="leading" constant="10" id="bF2-va-R4b"/>
+                                    <constraint firstAttribute="trailing" secondItem="CaU-bZ-zcT" secondAttribute="trailing" constant="10" id="qlq-75-Vbx"/>
+                                    <constraint firstItem="CaU-bZ-zcT" firstAttribute="top" secondItem="OFO-PY-oN1" secondAttribute="top" constant="5" id="vd4-Sl-o2u"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="FPZ-8C-qcc"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="FPZ-8C-qcc" firstAttribute="bottom" secondItem="ull-Oi-O6x" secondAttribute="bottom" constant="50" id="0tc-BA-SWG"/>
+                            <constraint firstItem="FPZ-8C-qcc" firstAttribute="bottom" secondItem="ull-Oi-O6x" secondAttribute="bottom" constant="64" id="0tc-BA-SWG"/>
                             <constraint firstItem="OFO-PY-oN1" firstAttribute="leading" secondItem="FPZ-8C-qcc" secondAttribute="leading" id="Jfh-hD-IeP"/>
                             <constraint firstItem="FPZ-8C-qcc" firstAttribute="trailing" secondItem="OFO-PY-oN1" secondAttribute="trailing" id="OwD-OJ-Ax3"/>
                             <constraint firstAttribute="bottom" secondItem="OFO-PY-oN1" secondAttribute="bottom" id="Sfs-tM-R1q"/>
@@ -15260,6 +15265,7 @@ this opportunity?</string>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="btnSend" destination="HIp-6Q-yS9" id="rwT-Do-5jH"/>
                         <outlet property="imgFriend" destination="gx8-zP-ddy" id="phe-zk-DLj"/>
                         <outlet property="lblNameFriend" destination="tAB-3Q-1Un" id="epo-bd-YLJ"/>
                         <outlet property="tableViewChat" destination="ull-Oi-O6x" id="U3Q-3h-swm"/>
@@ -15273,20 +15279,8 @@ this opportunity?</string>
         </scene>
     </scenes>
     <designables>
-        <designable name="Au9-O0-cbA">
-            <size key="intrinsicContentSize" width="120" height="20"/>
-        </designable>
-        <designable name="VSf-iM-2vh">
-            <size key="intrinsicContentSize" width="259" height="44"/>
-        </designable>
         <designable name="hYJ-9L-6ep">
             <size key="intrinsicContentSize" width="-1" height="49"/>
-        </designable>
-        <designable name="r55-Lk-l5f">
-            <size key="intrinsicContentSize" width="259" height="44"/>
-        </designable>
-        <designable name="ybI-DQ-vGn">
-            <size key="intrinsicContentSize" width="-1" height="65"/>
         </designable>
     </designables>
     <resources>

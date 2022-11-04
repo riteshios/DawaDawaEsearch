@@ -295,6 +295,8 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
             let cell = self.tblViewSocialPost.dequeueReusableCell(withIdentifier: "SocialPostTableViewCell") as! SocialPostTableViewCell
             cell.SocialPostCollectionView.tag = indexPath.section
             
+            cell.btnChat.isHidden = true
+            
             let profilrimageurl = "\("https://demo4app.com/dawadawa/public/admin_assets/user_profile/" + String.getString(UserData.shared.social_profile))"
             
             let obj = userTimeLine[indexPath.row]
@@ -363,6 +365,7 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
             
             
             cell.callback = { txt, tapped in
+                
                 
                 if txt == "Profileimage"{
                     let user_id = self.userTimeLine[indexPath.row].user_id

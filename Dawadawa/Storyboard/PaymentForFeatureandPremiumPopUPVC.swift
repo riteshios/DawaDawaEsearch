@@ -10,8 +10,11 @@ import UIKit
 class PaymentForFeatureandPremiumPopUPVC: UIViewController {
     
     var callback:((String)->())?
+    var callbackamount:((Int)->())?
     var plan = 0
     var planamount:plan_amount?
+    
+    
     
     @IBOutlet weak var lblAmount: UILabel!
     
@@ -32,8 +35,8 @@ class PaymentForFeatureandPremiumPopUPVC: UIViewController {
 }
 
 extension PaymentForFeatureandPremiumPopUPVC {
-    //     Api call
     
+//    Global APi
     func getplan_amountyapi(){
         CommonUtils.showHudWithNoInteraction(show: true)
 
@@ -68,6 +71,9 @@ extension PaymentForFeatureandPremiumPopUPVC {
                         print("Dataplanamount=\(self.planamount)")
 
                         self.lblAmount.text = String.getString("Payment: - $\(Int((self.planamount?.amount) ?? 0))")
+                      
+                        self.callbackamount?(Int((self.planamount?.amount ?? 0)))
+                        
                         
                     }
 
