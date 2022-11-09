@@ -14,6 +14,7 @@ class ReportUserPopUpVC: UIViewController {
     @IBOutlet weak var TextViewReportIssue:UITextView!
     
     var userid = 0
+    var reportcheck = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,23 +36,31 @@ class ReportUserPopUpVC: UIViewController {
     
     @IBAction func btnReason1Tapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
+        self.reportcheck.append("one")
     }
     @IBAction func btnReason2Tapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
+        self.reportcheck.append(",two")
     }
     
     @IBAction func btnReason3Tapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
+        self.reportcheck.append(",three")
     }
     
     @IBAction func btnReason4Tapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
+        self.reportcheck.append(",four")
     }
     
     @IBAction func btnReportTapped(_ sender: UIButton){
-        self.reportuserapi()
-        self.dismiss(animated: true)
-        
+        if self.TextViewReportIssue.text == ""{
+            self.showSimpleAlert(message: "The report issue field is required.")
+        }
+        else{
+            self.reportuserapi()
+            self.dismiss(animated: true)
+        }
     }
     
 }
@@ -76,11 +85,11 @@ extension ReportUserPopUpVC{
             let params:[String : Any] = [
                 "user_id":Int.getInt(UserData.shared.id),
                 "report_user_id":userid,
-                "report_check":"One",
+                "report_check":self.reportcheck,
                 "report_issue":String.getString(self.TextViewReportIssue.text)
             ]
             
-            debugPrint("user_id......",Int.getInt(UserData.shared.id))
+            debugPrint("report_check.....",self.reportcheck)
             TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kreportuser, requestMethod: .POST,
                                                                    requestParameters:params, withProgressHUD: false)
             {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in

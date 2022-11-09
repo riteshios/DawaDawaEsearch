@@ -44,9 +44,6 @@ class ProfileVC: UIViewController {
         tblViewSocialPost.register(UINib(nibName: "OpportunitypostedTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "OpportunitypostedTableViewCell")
         tblViewSocialPost.register(UINib(nibName: "SocialPostTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "SocialPostTableViewCell")
         
-        
-        
-        
         if UserData.shared.isskiplogin == true{
             print("Guest User")
             self.lblMobileNumber.isHidden = true
@@ -476,7 +473,7 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                                             self.deletepostoppoertunityapi(oppr_id: oppid)
                                             debugPrint("oppid......",oppid)
                                             
-                                            //                                        let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProfileVC") as! ProfileVC
+                                            //     let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProfileVC") as! ProfileVC
                                             //                                        self.navigationController?.popViewController(animated: true)
                                         }
                                         

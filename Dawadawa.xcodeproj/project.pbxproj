@@ -108,6 +108,7 @@
 		04B91910286B13B8009ABAE4 /* EmailChangedSuccessfullyPopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B9190F286B13B8009ABAE4 /* EmailChangedSuccessfullyPopUpVC.swift */; };
 		04B91912286B1553009ABAE4 /* VerifyNewEmailOTPVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B91911286B1553009ABAE4 /* VerifyNewEmailOTPVC.swift */; };
 		04BFFB68289250BA0086DCC1 /* FilterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BFFB67289250BA0086DCC1 /* FilterVC.swift */; };
+		04C19DE1291A55F80024CD04 /* FlagPostPopUPVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C19DE0291A55F80024CD04 /* FlagPostPopUPVC.swift */; };
 		04C495BA290FE0BD001F01FD /* ChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C495B9290FE0BD001F01FD /* ChatVC.swift */; };
 		04C848A828B75E8200505AB0 /* DetailScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C848A728B75E8200505AB0 /* DetailScreenVC.swift */; };
 		04C848AC28B7ABB400505AB0 /* SeeMoreCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C848AA28B7ABB400505AB0 /* SeeMoreCommentCell.swift */; };
@@ -770,6 +771,7 @@
 		04B9190F286B13B8009ABAE4 /* EmailChangedSuccessfullyPopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailChangedSuccessfullyPopUpVC.swift; sourceTree = "<group>"; };
 		04B91911286B1553009ABAE4 /* VerifyNewEmailOTPVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = VerifyNewEmailOTPVC.swift; path = Dawadawa/Storyboard/VerifyNewEmailOTPVC.swift; sourceTree = SOURCE_ROOT; };
 		04BFFB67289250BA0086DCC1 /* FilterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FilterVC.swift; path = Dawadawa/Storyboard/FilterVC.swift; sourceTree = SOURCE_ROOT; };
+		04C19DE0291A55F80024CD04 /* FlagPostPopUPVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FlagPostPopUPVC.swift; path = Dawadawa/Storyboard/FlagPostPopUPVC.swift; sourceTree = SOURCE_ROOT; };
 		04C495B9290FE0BD001F01FD /* ChatVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatVC.swift; sourceTree = "<group>"; };
 		04C848A728B75E8200505AB0 /* DetailScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailScreenVC.swift; sourceTree = SOURCE_ROOT; };
 		04C848AA28B7ABB400505AB0 /* SeeMoreCommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeMoreCommentCell.swift; sourceTree = "<group>"; };
@@ -1531,6 +1533,7 @@
 		0491A66728F57ED100F2E115 /* ReportScreen */ = {
 			isa = PBXGroup;
 			children = (
+				04C19DE0291A55F80024CD04 /* FlagPostPopUPVC.swift */,
 				0491A66828F57F2E00F2E115 /* ReportUserPopUpVC.swift */,
 			);
 			name = ReportScreen;
@@ -3254,6 +3257,7 @@
 				447DCE5D2851CB1300C40DDD /* ImagePickerHelper.swift in Sources */,
 				0461E31B288AA29800B7F0E7 /* HomeSocialMoreVC.swift in Sources */,
 				447DCC902851CB1100C40DDD /* AppsCountryPicker.swift in Sources */,
+				04C19DE1291A55F80024CD04 /* FlagPostPopUPVC.swift in Sources */,
 				049F4A9328FFFA87009AB128 /* PaymentforFeaturePremiumVC.swift in Sources */,
 				04A9958C28A370FD00FC75C9 /* SaveOpportunityMoreVC.swift in Sources */,
 				0406774B2887FFEA0061AE70 /* ViewPostTableViewCell.swift in Sources */,

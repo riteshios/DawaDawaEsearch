@@ -26,7 +26,7 @@ class HomeVC: UIViewController{
     
     @IBOutlet weak var viewSearch: UIView!
     
-   
+    
     @IBOutlet weak var lblUserName: UILabel!
     @IBOutlet weak var ImgUser: UIImageView!
     
@@ -44,7 +44,7 @@ class HomeVC: UIViewController{
             print("Guest User")
             if cameFrom != "FilterData"{
                 self.guestgetallopportunity()
-              
+                
             }
         }
         
@@ -75,7 +75,7 @@ class HomeVC: UIViewController{
     }
     
     func fetchdata(){
-
+        
         self.lblUserName.text = String.getString(UserData.shared.name) + " " + String.getString(UserData.shared.last_name)
         if let url = URL(string: "\("https://demo4esl.com/dawadawa/public/admin_assets/user_profile/" + String.getString(UserData.shared.social_profile))"){
             debugPrint("url...",  url)
@@ -143,7 +143,7 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
             
             if UserData.shared.isskiplogin == true{
                 if cameFrom != "FilterData"{
-                    cell.heightMainView.constant = 100
+                    //                    cell.heightMainView.constant = 100
                     cell.heightViewCollectionview.constant = 50
                     cell.heightCollectionView.constant = 0
                 }
@@ -167,7 +167,7 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                     }
                 }
             }
-         
+            
             
             return cell
             
@@ -261,14 +261,6 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                     self.navigationController?.pushViewController(vc, animated: true)
                 }
                 
-                if txt == "btnimgTapped"{
-                    let oppid = Int.getInt(userTimeLine[indexPath.row].id)
-                    debugPrint("detailsppid=-=-=",oppid)
-                    let vc = self.storyboard?.instantiateViewController(withIdentifier: DetailScreenVC.getStoryboardID()) as! DetailScreenVC
-                    
-                    vc.oppid = oppid
-                    self.navigationController?.pushViewController(vc, animated: true)
-                }
                 
                 if txt == "Profileimage"{
                     let user_id = userTimeLine[indexPath.row].user_id
@@ -395,6 +387,14 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                                 
                             }
                             
+                            if txt == "viewdetails" {
+                                let oppid = Int.getInt(userTimeLine[indexPath.row].id)
+                                debugPrint("detailsppid=-=-=",oppid)
+                                let vc = self.storyboard?.instantiateViewController(withIdentifier: DetailScreenVC.getStoryboardID()) as! DetailScreenVC
+                                
+                                vc.oppid = oppid
+                                self.navigationController?.pushViewController(vc, animated: true)
+                            }
                         }
                         self.present(vc, animated: false)
                         
@@ -412,10 +412,15 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                                     self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
                                 }
                                 else{
-                                    let oppid = Int.getInt(userTimeLine[indexPath.row].id)
-                                    self.flagopportunityapi(oppr_id: oppid)
-                                    self.dismiss(animated: true)
-                                    cell.imgOppFlag.isHidden = false
+                                    self.dismiss(animated: false){
+                                        let vc = self.storyboard?.instantiateViewController(withIdentifier: FlagPostPopUPVC.getStoryboardID()) as! FlagPostPopUPVC
+                                        vc.modalTransitionStyle = .crossDissolve
+                                        vc.modalPresentationStyle = .overCurrentContext
+                                        let oppid = Int.getInt(userTimeLine[indexPath.row].id)
+                                        vc.oppid = oppid
+                                        self.present(vc, animated: false)
+                                        cell.imgOppFlag.isHidden = false
+                                    }
                                 }
                             }
                             
@@ -432,7 +437,6 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                                         vc.userid = oppid
                                         self.present(vc, animated: false)
                                     }
-                                    
                                 }
                                 
                             }
@@ -442,8 +446,6 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                     }
                     
                 }
-                
-                
                 
                 //                       COMMENT PART
                 
@@ -768,79 +770,6 @@ extension HomeVC{
             }
         }
     }
-    
-    
-    
-    // Api flag Opportunity
-    
-    func flagopportunityapi(oppr_id:Int){
-        CommonUtils.showHud(show: true)
-        
-        
-        if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
-            let endToken = kSharedUserDefaults.getLoggedInAccessToken()
-            let septoken = endToken.components(separatedBy: " ")
-            if septoken[0] != "Bearer"{
-                let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
-                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
-            }
-        }
-        
-        
-        let params:[String : Any] = [
-            //            "user_id":Int.getInt(UserData.shared.id),
-            "opr_id":oppr_id,
-            "user_id":UserData.shared.id
-        ]
-        
-        debugPrint("opr_id......",oppr_id)
-        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kflagpost, requestMethod: .POST,
-                                                               requestParameters:params, withProgressHUD: false)
-        {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
-            
-            CommonUtils.showHudWithNoInteraction(show: false)
-            
-            if errorType == .requestSuccess {
-                
-                let dictResult = kSharedInstance.getDictionary(result)
-                
-                switch Int.getInt(statusCode) {
-                case 200:
-                    
-                    if Int.getInt(dictResult["responsecode"]) == 200{
-                        
-                        let endToken = kSharedUserDefaults.getLoggedInAccessToken()
-                        let septoken = endToken.components(separatedBy: " ")
-                        if septoken[0] == "Bearer"{
-                            kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
-                        }
-                        
-                        
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                        //                        kSharedAppDelegate?.makeRootViewController()
-                        
-                    }
-                    
-                    else if  Int.getInt(dictResult["responsecode"]) == 400{
-                        
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                        //                        kSharedAppDelegate?.makeRootViewController()
-                    }
-                    
-                default:
-                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                }
-            } else if errorType == .noNetwork {
-                CommonUtils.showToastForInternetUnavailable()
-                
-            } else {
-                CommonUtils.showToastForDefaultError()
-            }
-            
-        }
-    }
-    
-    
     
     //    Api like Opportunity
     

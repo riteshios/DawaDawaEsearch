@@ -45,15 +45,7 @@ class MoreVC: UIViewController {
     
 // MARK: - Life Cyclye
     
-    func setlanguage(){
-        lblSetting.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Settings", comment: "")
-        lblEditProfile.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Edit Profile", comment: "")
-        lblChangePassword.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Change password", comment: "")
-        lblSavedOpportunity.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Saved Opportunities", comment: "")
-        lblContactUs.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Contact Us", comment: "")
-        lblLogout.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Log Out", comment: "")
-    }
-    
+
     func setup(){
         ViewMain.clipsToBounds = true
         ViewMain.layer.cornerRadius = 25
@@ -179,6 +171,17 @@ extension MoreVC{
                 CommonUtils.showToastForDefaultError()
             }
         }
+    }
+}
+
+extension MoreVC{
+    func setlanguage(){
+        lblSetting.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Settings", comment: "")
+        lblEditProfile.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Edit Profile", comment: "")
+        lblChangePassword.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Change password", comment: "")
+        lblSavedOpportunity.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Saved Opportunities", comment: "")
+        lblContactUs.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Contact Us", comment: "")
+        lblLogout.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Log Out", comment: "")
     }
 }
 

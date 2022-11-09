@@ -15,7 +15,7 @@ class RateOpportunityPopUPVC: UIViewController {
     @IBOutlet weak var Viewmain: UIView!
     @IBOutlet weak var viewSubmit: UIView!
     @IBOutlet weak var lblRating: UILabel!
-    
+    @IBOutlet weak var viewBG:UIView!
     @IBOutlet weak var viewRating: CosmosView!
     @IBOutlet weak var RatingSlider: UISlider!
     private let startRating: Float = 3.7
@@ -27,14 +27,27 @@ class RateOpportunityPopUPVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setup()
         
+    //    MARK: -------- view controller lifecycle ----------
+        
+        self.setup()
+        viewRating.settings.starSize = 30
+        viewRating.settings.starMargin = 4
+        viewRating.settings.fillMode = .precise
         // Register touch handlers
         viewRating?.didTouchCosmos = didTouchCosmos
         viewRating?.didFinishTouchingCosmos = didFinishTouchingCosmos
         //update with initial data
         RatingSlider?.value = startRating
         updateRating(requiredRating: nil)
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if let touch = touches.first{
+            if viewBG == touch.view{
+                self.dismiss(animated: true)
+            }
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -47,7 +60,7 @@ class RateOpportunityPopUPVC: UIViewController {
         Viewmain?.layer.cornerRadius = 25
         Viewmain?.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
         Viewmain?.addShadowWithBlurOnView(Viewmain, spread: 0, blur: 10, color: .black, opacity: 0.16, OffsetX: 0, OffsetY: 1)
-        self.viewSubmit?.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
+//        self.viewSubmit?.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
         
     }
     

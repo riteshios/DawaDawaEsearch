@@ -2,7 +2,7 @@
   Localizable.string.strings
   Dawadawa
 
-  Created by Alekh on 15/06/22.
+  Created by Ritesh Gupta on 15/06/22.
 
 */
 // MARK: - CreateAccountVC
@@ -87,3 +87,11 @@
 "Logout" = "تسجيل خروج";
 "Do you really want to log out?" = "هل تريد حقًا تسجيل الخروج؟";
 "Cancel" = "يلغي";
+
+// MARK: - SettingVC
+
+"About Us" = "معلومات عنا";
+"Subscriptions" = "الاشتراكات";
+"Terms & Conditions" = "البنود و الظروف";
+"Privacy Policy" = "سياسة الخصوصية";
+"FAQ’s" = "الأسئلة الشائعة";

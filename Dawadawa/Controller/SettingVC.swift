@@ -6,10 +6,6 @@
 //
 
 import UIKit
-
-
-
-
 class SettingVC: UIViewController {
     
     //    MARK: - Properties
@@ -18,9 +14,17 @@ class SettingVC: UIViewController {
     @IBOutlet weak var imgDropDownMenu: UIImageView!
     @IBOutlet weak var btndrop: UIButton!
     
+    @IBOutlet weak var lblAboutus: UILabel!
+    @IBOutlet weak var lblSubscription: UILabel!
+    @IBOutlet weak var lbltermsamdcondition: UILabel!
+    @IBOutlet weak var lblprivacypolicy: UILabel!
+    @IBOutlet weak var lblFaq: UILabel!
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setuplanguage()
     }
     
     //    MARK: - @IBActions
@@ -30,26 +34,22 @@ class SettingVC: UIViewController {
     }
     
     @IBAction func btnDropTapped(_ sender: UIButton) {
-        let dataSource1 = ["English-IND","Arabic"]
+        let dataSource1 = ["English-US","Arabic"]
         kSharedAppDelegate?.dropDown(dataSource:dataSource1 , text: btndrop)
         {(Index ,item) in
             self.lblDropDownMenu.text = item
             self.imgDropDownMenu.image = item == "English-IND" ? UIImage(named: "IND") : UIImage(named: "sudan")
             
-            
-            
             if self.lblDropDownMenu.text == "English-IND"{
-                
                 self.setupUpdateView(languageCode: "en")
-                
+              
                 //                       UserDefaults.standard.set("en", forKey: "Language")
                 //                       UIView.appearance().semanticContentAttribute = .forceLeftToRight
             }
             
-            
             else if self.lblDropDownMenu.text == "Arabic"{
-                
                 self.setupUpdateView(languageCode: "ar")
+                
                 //                       UserDefaults.standard.set("ar", forKey: "Language")
                 //                       UIView.appearance().semanticContentAttribute = .forceRightToLeft
             }
@@ -269,4 +269,16 @@ extension SettingVC{
             }
         }
     }
+}
+
+extension SettingVC{
+    func setuplanguage(){
+        lblAboutus.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "About Us", comment: "")
+        lblSubscription.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Subscriptions", comment: "")
+        lbltermsamdcondition.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Terms & Conditions", comment: "")
+        lblprivacypolicy.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Privacy Policy", comment: "")
+        lblFaq.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "FAQ’s", comment: "")
+        
+    }
+
 }

@@ -7,17 +7,17 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "D3797334-E5A5-4160-BCBD-781EE2842908"
+            uuid = "87E7EE5F-D33C-493B-AC62-34920E076BD7"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Dawadawa/Storyboard/SocialPost.swift"
+            filePath = "Dawadawa/Storyboard/HomeSocialMoreSelfVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "362"
-            endingLineNumber = "362"
-            landmarkName = "SecretKeyParser"
-            landmarkType = "14">
+            startingLineNumber = "46"
+            endingLineNumber = "46"
+            landmarkName = "HomeSocialMoreSelfVC"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

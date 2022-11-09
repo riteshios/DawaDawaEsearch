@@ -12,10 +12,39 @@ import SwiftyJSON
 var userTimeLine = [SocialPostData]()
 var cameFrom = ""
 
-
+Reset
+Filter
+Likes
+Most liked
+Least liked
+Rating
+Most rated
+Least rated
+Opportunity status
+All
+Available
+Closed
+Sold
+Opportunity type
+Date
+Today
+Last week
+Last month
+Custom range
+Opportunity status
+State
+Locality
+Price
+Service type
+Sort by
+Price: Low to High
+Price: High to Low
+Date: Newest to Oldest
+Date: Oldest to Newest
+Apply Filter
 class FilterVC: UIViewController {
     
-   
+    
     
     @IBOutlet weak var PriceSlider: RangeSeekSlider!
     
@@ -91,6 +120,13 @@ class FilterVC: UIViewController {
     @IBOutlet weak var lblCustomrange: UILabel!
     @IBOutlet weak var btnCustomrange: UIButton!
     
+    @IBOutlet weak var lblFilter: UILabel!
+    @IBOutlet weak var lblLikes: UILabel!
+    @IBOutlet weak var lblRating: UILabel!
+    @IBOutlet weak var lblOpportunitystatus: UILabel!
+    @IBOutlet weak var lblOpportunitytype: UILabel!
+    @IBOutlet weak var lblDate: UILabel!
+    
     
     var getCategoryarr         =      [getCartegoryModel]()
     var getfiltersubcatarr     =      [getfiltersubcategoryModel]()
@@ -98,7 +134,7 @@ class FilterVC: UIViewController {
     var getstatelistarr        =      [getstateModel]()
     var getlocalitylist        =      [getLocalityModel]()
     var getguestlocalitylist   =      [getlocalityModel]()
-//    var userTimeLine           =      [SocialPostData]()
+    //    var userTimeLine           =      [SocialPostData]()
     
     
     var selectedIds:[String] = []
@@ -119,7 +155,7 @@ class FilterVC: UIViewController {
     var selectedsuboptype = ""
     var selectedservicetype = ""
     
-
+    
     
     
     var timePicker = UIDatePicker()
@@ -128,7 +164,7 @@ class FilterVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        
         if UserData.shared.isskiplogin == true{
             self.guestcategory()
             self.guestservicetype()
@@ -256,7 +292,7 @@ class FilterVC: UIViewController {
             self.viewLeastrated.backgroundColor = UIColor(red: 241, green: 249, blue: 253)
             self.lblLeastrated.textColor = UIColor(red: 21, green: 114, blue: 161)
             self.rating = "DESC"
-
+            
         }
     }
     
@@ -299,7 +335,7 @@ class FilterVC: UIViewController {
             self.lblSold.textColor = UIColor(red: 21, green: 114, blue: 161)
             self.oppstatus = 3
         }
-
+        
     }
     
     @IBAction func btnClosedTapped(_ sender: UIButton) {
@@ -315,7 +351,7 @@ class FilterVC: UIViewController {
             self.lblSold.textColor = UIColor(red: 21, green: 114, blue: 161)
             self.oppstatus = 2
         }
-
+        
     }
     
     @IBAction func btnSoldTapped(_ sender: UIButton) {
@@ -331,7 +367,7 @@ class FilterVC: UIViewController {
             self.lblAll.textColor = UIColor(red: 21, green: 114, blue: 161)
             self.oppstatus = 5
         }
-
+        
     }
     
     @IBAction func btnTodayTapped(_ sender: UIButton) {
@@ -399,7 +435,7 @@ class FilterVC: UIViewController {
             let id = self.getstatelistarr[index].id
             self.stateid = id
             debugPrint("State idddd.....btnnnnt",  self.stateid = id)
-           
+            
             if UserData.shared.isskiplogin == true{
                 self.guestlocalityapi(id: self.stateid ?? 0)
             }
@@ -412,16 +448,16 @@ class FilterVC: UIViewController {
     
     @IBAction func btnLocalityTapped(_ sender: UIButton) {
         if UserData.shared.isskiplogin == true{
-           
+            
             kSharedAppDelegate?.dropDown(dataSource: getguestlocalitylist.map{String.getString($0.local_name)}, text: btnLocality){
                 (index,item) in
                 self.lblLocality.text = item
                 let id  = self.getguestlocalitylist[index].id
                 self.localityid = id
                 debugPrint("localityid....",self.localityid)
-            
+                
+            }
         }
-    }
         else{
             kSharedAppDelegate?.dropDown(dataSource: getlocalitylist.map{String.getString($0.local_name)}, text: btnLocality){
                 (index,item) in
@@ -430,10 +466,10 @@ class FilterVC: UIViewController {
                 self.localityid = id
                 debugPrint("localityid....",self.localityid)
                 
+            }
+            
         }
-        
     }
-}
     
     @IBAction func btnPriceLtoHTapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
@@ -483,12 +519,12 @@ class FilterVC: UIViewController {
     
     
     @IBAction func btnApplyfilterTapped(_ sender: UIButton) {
-//        if UserData.shared.isskiplogin == true{
-            self.guestfilterdataapi()
-//        }
-//        else{
-//        self.filterdataapi()
-//        }
+        //        if UserData.shared.isskiplogin == true{
+        self.guestfilterdataapi()
+        //        }
+        //        else{
+        //        self.filterdataapi()
+        //        }
     }
     
     //   MARK: - APICALL
@@ -538,8 +574,7 @@ extension FilterVC: UITableViewDelegate,UITableViewDataSource{
                 
             case 2:
                 return self.getfiltersubcatarr.count
-                
-                
+            
             default:
                 return 0
             }
@@ -562,10 +597,8 @@ extension FilterVC: UITableViewDelegate,UITableViewDataSource{
                 cell.btnSelectOpptype.addTarget(self, action: #selector(buttoncategoryTapped), for: .touchUpInside)
                 cell.btnSelectOpptype.tag = indexPath.row
                 cell.imgradio.image = obj.isselection == true ? UIImage(named: "darkcircle") : UIImage(named: "radiouncheck")
-               
                 
                 return cell
-                
                 
             case 1:
                 let cell = self.tblViewOpportunitytype.dequeueReusableCell(withIdentifier: "SubCategorylabelTableViewCell") as! SubCategorylabelTableViewCell
@@ -641,7 +674,7 @@ extension FilterVC: UITableViewDelegate,UITableViewDataSource{
             self.selectedoptype = ids
             print("selectedoptype=-=-=\(self.selectedoptype)")
             print(" selected   -ids---\(ids)")
-           
+            
             if UserData.shared.isskiplogin == true{
                 self.guestfiltersubcategoryapi(catid: ids)
             }
@@ -657,10 +690,9 @@ extension FilterVC: UITableViewDelegate,UITableViewDataSource{
                     obj.isselection = false
                     
                     let ids = self.selectedIds.joined(separator: ",")
-                    
                     self.selectedoptype = ids
                     print("selectedoptype=-=-=\(self.selectedoptype)")
-        
+                    
                     print(" selected   -ids---\(ids)")
                     if UserData.shared.isskiplogin == true{
                         self.guestfiltersubcategoryapi(catid: ids)
@@ -689,7 +721,7 @@ extension FilterVC: UITableViewDelegate,UITableViewDataSource{
             
             print("selectedsuboptype=-=-=\(self.selectedsuboptype)")
             print(" selected Sub -ids---\(ids)")
-           
+            
             self.tblViewOpportunitytype.reloadData()
         }else if sender.isSelected == false{
             for i in 0 ..< self.selectedsubids.count{
@@ -710,7 +742,7 @@ extension FilterVC: UITableViewDelegate,UITableViewDataSource{
             
         }
     }
-
+    
     @objc func buttonserviceTypeTapped(_ sender:UIButton){
         sender.isSelected = !sender.isSelected
         
@@ -725,7 +757,7 @@ extension FilterVC: UITableViewDelegate,UITableViewDataSource{
             
             print("selectedservicetype=-=-=\(self.selectedservicetype)")
             print(" selected service -ids---\(ids)")
-           
+            
             self.tblViewServicetype.reloadData()
         }else if sender.isSelected == false{
             for i in 0 ..< self.selectedservicetypesids.count{
@@ -746,7 +778,7 @@ extension FilterVC: UITableViewDelegate,UITableViewDataSource{
             
         }
     }
-
+    
     
     
     
@@ -1272,23 +1304,23 @@ extension FilterVC{
                         
                         self?.imgUrl = String.getString(dictResult["oprbase_url"])
                         let Opportunity = kSharedInstance.getArray(withDictionary: dictResult["Opportunity"])
-                       userTimeLine = Opportunity.map{SocialPostData(data: kSharedInstance.getDictionary($0))}
+                        userTimeLine = Opportunity.map{SocialPostData(data: kSharedInstance.getDictionary($0))}
                         print("DataallSearchpost=\(userTimeLine)")
                         
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                       
                         
-//                        let vc = self?.storyboard?.instantiateViewController(withIdentifier: HomeVC.getStoryboardID()) as! HomeVC
-//                        vc.cameFrom = "FilterData"
-//                        vc.userTimeLine = self!.userTimeLine
-//                        self?.navigationController?.pushViewController(vc, animated: true)
+                        
+                        //                        let vc = self?.storyboard?.instantiateViewController(withIdentifier: HomeVC.getStoryboardID()) as! HomeVC
+                        //                        vc.cameFrom = "FilterData"
+                        //                        vc.userTimeLine = self!.userTimeLine
+                        //                        self?.navigationController?.pushViewController(vc, animated: true)
                         
                         
                         cameFrom = "FilterData"
                         let vc = self?.storyboard?.instantiateViewController(withIdentifier: "TabBarVC") as! TabBarVC
                         self?.tabBarController?.selectedIndex = 0
-                                          
-                       self?.navigationController?.pushViewController(vc, animated: true)
+                        
+                        self?.navigationController?.pushViewController(vc, animated: true)
                         
                     }
                     
@@ -1311,9 +1343,9 @@ extension FilterVC{
         
     }
     
-//    MARK: - API For Guest
+    //    MARK: - API For Guest
     
-//    Guest Category Api
+    //    Guest Category Api
     
     func guestcategory(){
         CommonUtils.showHudWithNoInteraction(show: true)
@@ -1323,7 +1355,7 @@ extension FilterVC{
             CommonUtils.showHudWithNoInteraction(show: false)
             if errorType == .requestSuccess {
                 let dictResult = kSharedInstance.getDictionary(result)
-            
+                
                 switch Int.getInt(statusCode) {
                 case 200:
                     if Int.getInt(dictResult["status"]) == 200{
@@ -1351,7 +1383,7 @@ extension FilterVC{
         }
     }
     
-// Guest Filter Sub category Api
+    // Guest Filter Sub category Api
     
     func guestfiltersubcategoryapi(catid:String){
         CommonUtils.showHud(show: true)
@@ -1361,12 +1393,12 @@ extension FilterVC{
         debugPrint("checkstateids",stateids)
         
         let params:[String : Any] = [
-                    "category_id":catid
+            "category_id":catid
         ]
-                
-       
+        
+        
         TANetworkManager.sharedInstance.requestlangApi(withServiceName:ServiceName.kguestfiltersubcategory, requestMethod: .POST,
-                                                               requestParameters:params, withProgressHUD: false)
+                                                       requestParameters:params, withProgressHUD: false)
         {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
             
             CommonUtils.showHudWithNoInteraction(show: false)
@@ -1408,7 +1440,7 @@ extension FilterVC{
         }
     }
     
-//  Guest Service Type Api
+    //  Guest Service Type Api
     
     func guestservicetype(){
         CommonUtils.showHudWithNoInteraction(show: true)
@@ -1418,7 +1450,7 @@ extension FilterVC{
             CommonUtils.showHudWithNoInteraction(show: false)
             if errorType == .requestSuccess {
                 let dictResult = kSharedInstance.getDictionary(result)
-            
+                
                 switch Int.getInt(statusCode) {
                 case 200:
                     if Int.getInt(dictResult["status"]) == 200{
@@ -1447,7 +1479,7 @@ extension FilterVC{
         }
     }
     
-// Guest State Api
+    // Guest State Api
     
     func gueststateapi(){
         CommonUtils.showHudWithNoInteraction(show: true)
@@ -1457,7 +1489,7 @@ extension FilterVC{
             CommonUtils.showHudWithNoInteraction(show: false)
             if errorType == .requestSuccess {
                 let dictResult = kSharedInstance.getDictionary(result)
-            
+                
                 switch Int.getInt(statusCode) {
                 case 200:
                     if Int.getInt(dictResult["status"]) == 200{
@@ -1470,7 +1502,7 @@ extension FilterVC{
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
-                   
+                    
                 default:
                     CommonUtils.showError(.error, String.getString(dictResult["message"]))
                 }
@@ -1482,7 +1514,7 @@ extension FilterVC{
             }
         }
     }
-//    Guest Locality Api
+    //    Guest Locality Api
     
     func guestlocalityapi(id:Int){
         CommonUtils.showHud(show: true)
@@ -1493,11 +1525,11 @@ extension FilterVC{
         
         let params:[String : Any] = [
             "localitys_id":"\(String(describing: stateids))",
-
+            
         ]
         // Added user id in api url
         TANetworkManager.sharedInstance.requestlangApi(withServiceName:ServiceName.kguestlocality, requestMethod: .POST,
-                                                               requestParameters:params, withProgressHUD: false)
+                                                       requestParameters:params, withProgressHUD: false)
         {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
             
             CommonUtils.showHudWithNoInteraction(show: false)
@@ -1539,7 +1571,7 @@ extension FilterVC{
         }
     }
     
-//    Guest Filter data Api
+    //    Guest Filter data Api
     
     func guestfilterdataapi(){
         CommonUtils.showHud(show: true)
@@ -1570,9 +1602,9 @@ extension FilterVC{
             "end_date":String.getString(self.txtfieldEndDate.text),
             
         ]
-      
+        
         TANetworkManager.sharedInstance.requestlangApi(withServiceName:ServiceName.kguestfilter, requestMethod: .POST,
-                                                               requestParameters:params, withProgressHUD: false)
+                                                       requestParameters:params, withProgressHUD: false)
         {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
             
             CommonUtils.showHudWithNoInteraction(show: false)
@@ -1599,17 +1631,17 @@ extension FilterVC{
                         
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         
-//                        let vc = self?.storyboard?.instantiateViewController(withIdentifier: HomeVC.getStoryboardID()) as! HomeVC
-//                        cameFrom = "FilterData"
-//                        vc.userTimeLine = self!.userTimeLine
-//                        vc.hidesBottomBarWhenPushed = false
-//                       vc.tabBarController?.hidesBottomBarWhenPushed = false
+                        //                        let vc = self?.storyboard?.instantiateViewController(withIdentifier: HomeVC.getStoryboardID()) as! HomeVC
+                        //                        cameFrom = "FilterData"
+                        //                        vc.userTimeLine = self!.userTimeLine
+                        //                        vc.hidesBottomBarWhenPushed = false
+                        //                       vc.tabBarController?.hidesBottomBarWhenPushed = false
                         
                         cameFrom = "FilterData"
                         let vc = self?.storyboard?.instantiateViewController(withIdentifier: "TabBarVC") as! TabBarVC
                         self?.tabBarController?.selectedIndex = 0
-
-                       self?.navigationController?.pushViewController(vc, animated: true)
+                        
+                        self?.navigationController?.pushViewController(vc, animated: true)
                         
                         
                     }

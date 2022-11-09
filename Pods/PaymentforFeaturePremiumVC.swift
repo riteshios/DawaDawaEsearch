@@ -206,16 +206,15 @@ extension PaymentforFeaturePremiumVC{
             "funding":"funding",
             "paymentMethodId":message.paymentMethodId,
             "paymentMethodTypes":"card",
-            "status":"succeeded",
+            "status":"Succeeded",
             "created":"2022-09-16",// Thread
             "canceledAt":message.canceledAt ?? 0,
-            "oppType":self.opptype,
-            "package_id":4
+            "oppType":self.opptype
         ]
         
         print("oppType=-=-\(self.opptype)")
         
-        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kstorepayment, requestMethod: .POST, requestParameters:params, withProgressHUD: false)
+        TANetworkManager.sharedInstance.requestwithlanguageandopr_keyApi(withServiceName:ServiceName.kstorepayment, requestMethod: .POST, requestParameters:params, withProgressHUD: false)
         {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
             
             CommonUtils.showHudWithNoInteraction(show: false)

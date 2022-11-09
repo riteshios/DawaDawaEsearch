@@ -105,6 +105,8 @@ struct ServiceName {
     static let kcreateopportunity       =        "api/create-opportunities"
     static let klistopportunity         =        "api/list-opportunities"
     static let kdeleteopportunity       =        "api/delete-opportunities"
+    static let kdeleteoppimage          =        "api/delete-oppr-image"
+    static let kdeleteoppdoc            =        "api/delete-oppr-document"
     static let kcloseopportunity        =        "api/close-opportunities"
     static let kgetallopportunity       =        "api/all-opportunity/"
     static let kflagpost                =        "api/flag-opportunity"

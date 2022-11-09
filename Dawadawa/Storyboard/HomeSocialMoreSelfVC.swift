@@ -44,4 +44,7 @@ class HomeSocialMoreSelfVC: UIViewController {
         
     }
     
+    @IBAction func btnvViewDetailsTapped(_ sender: UIButton) {
+        self.callback?("viewdetails")
+    }
 }

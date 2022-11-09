@@ -118,10 +118,12 @@ class plan_amount{
 }
 
 class oppr_image{
+    var id:Int?
     var imageurl:String?
     var img:UIImage?
     
     init(data:[String:Any]){
+        self.id = Int.getInt(data["id"])
         self.imageurl = String.getString(data["image"])
         self.img = nil
     }

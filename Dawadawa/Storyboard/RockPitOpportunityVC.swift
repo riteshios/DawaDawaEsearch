@@ -56,6 +56,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
     @IBOutlet weak var viewselectcategorybottom: NSLayoutConstraint!
     @IBOutlet weak var UploadimageCollectionView: UICollectionView!
     @IBOutlet weak var UploaddocumentCollectionView: UICollectionView!
+    
     var stateid:Int?
     var localityid:Int?
     var subcatid:Int?
@@ -116,6 +117,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
         self.setup()
         
         if isedit == "True"{
+            
             if self.userTimeLineoppdetails?.oppimage.count == 0{
                 self.viewSelectCategoryTop.constant = 10
                 self.fetdata()
@@ -125,6 +127,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
                 self.viewSelectCategoryTop.constant = 420
                 self.fetdata()
             }
+           
         }
         
         self.UploadimageCollectionView.reloadData()
@@ -151,8 +154,8 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
         self.btnCreate_UpdateOpp.setTitle("Update opportunity", for: .normal)
         self.lblSubCategory.text = self.userTimeLineoppdetails?.subcategory_name
         self.txtFieldTitle.text = self.userTimeLineoppdetails?.title
-        self.lblState.text = self.userTimeLineoppdetails?.opp_state
-        self.lblLocality.text = self.userTimeLineoppdetails?.opp_locality
+       // self.lblState.text = self.userTimeLineoppdetails?.opp_state
+       // self.lblLocality.text = self.userTimeLineoppdetails?.opp_locality
         self.txtFieldLocationName.text = self.userTimeLineoppdetails?.location_name
         
         self.TextViewDescription.text = self.userTimeLineoppdetails?.description
@@ -160,7 +163,8 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
         self.txtFieldWhatsappNumber.text = self.userTimeLineoppdetails?.whatsaap_num
         self.txtFieldPricing.text = self.userTimeLineoppdetails?.pricing
         self.lblLookingFor.text = self.userTimeLineoppdetails?.looking_for
-        
+        self.stateid = Int.getInt(self.userTimeLineoppdetails?.opp_state)
+        self.getlocalityapi(id: Int.getInt(self.stateid))
         if String.getString(self.userTimeLineoppdetails?.opp_plan) == "Basic"{
             self.viewBasic.backgroundColor = UIColor(red: 21, green: 114, blue: 161)
             self.lblBasic.textColor = .white
@@ -529,19 +533,18 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
                 
                 cell.callback = {
                     self.imgarray.remove(at: indexPath.row)
+                    let imgid = Int.getInt(self.userTimeLineoppdetails?.oppimage[indexPath.row].id)
+                    self.deleteimageapi(imageid: imgid)
                     self.UploadimageCollectionView.reloadData()
                     
                 }
-                
-                
             }
+            
             else{
                 cell.image.image = imagearr[indexPath.row]
                 cell.callback = {
                     self.imagearr.remove(at: indexPath.row)
                     self.UploadimageCollectionView.reloadData()
-                    
-                    
                 }
             }
             return cell
@@ -733,6 +736,15 @@ extension RockPitOpportunityVC{
             if sucess == 200 {
                 if let statedata = statedata {
                     self.getstatelist = statedata
+                    if self.isedit == "True"{
+                        for i in 0 ..< self.getstatelist.count - 1{
+                            if String.getString(self.userTimeLineoppdetails?.opp_state) == String.getString(self.getstatelist[i].id){
+                                self.lblState.text = String.getString(self.getstatelist[i].state_name)
+                                return
+                                
+                            }
+                        }
+                    }
                 }
             }
             else {
@@ -748,6 +760,14 @@ extension RockPitOpportunityVC{
             if sucess == 200 {
                 if let localdata = localdata {
                     self.getlocalitylist = localdata
+                    if self.isedit == "True"{
+                        for i in 0 ..< self.getlocalitylist.count - 1{
+                            if String.getString(self.userTimeLineoppdetails?.opp_locality) == String.getString(self.getlocalitylist[i].id){
+                                self.lblLocality.text = String.getString(self.getlocalitylist[i].local_name)
+                                return
+                            }
+                        }
+                    }
                 }
             }
             else{
@@ -1140,9 +1160,6 @@ extension RockPitOpportunityVC{
             "cat_type_id":"0"
         ]
         
-        
-        
-        
         let uploadimage:[String:Any] = ["filenames[]":self.imagearr]
         let uploaddocument:[String:Any] = ["opportunity_documents[]":self.documentarr]
         
@@ -1306,4 +1323,67 @@ extension RockPitOpportunityVC{
             }
         }
     }
+    
+//    Delete image Api
+    
+    func deleteimageapi(imageid:Int){
+        CommonUtils.showHud(show: true)
+        
+        if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
+            let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+            let septoken = endToken.components(separatedBy: " ")
+            if septoken[0] != "Bearer"{
+                let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
+                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
+            }
+        }
+        
+        let params:[String : Any] = [
+            "oppr_id":imageid  // its image id
+        ]
+        
+        debugPrint("imageid......",imageid)
+        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kdeleteoppimage, requestMethod: .POST,requestParameters:params, withProgressHUD: false)
+        {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
+            
+            CommonUtils.showHudWithNoInteraction(show: false)
+            
+            if errorType == .requestSuccess {
+                
+                let dictResult = kSharedInstance.getDictionary(result)
+                
+                switch Int.getInt(statusCode) {
+                case 200:
+                    
+                    if Int.getInt(dictResult["status"]) == 200{
+                        
+                        let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+                        let septoken = endToken.components(separatedBy: " ")
+                        if septoken[0] == "Bearer"{
+                            kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
+                        }
+
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        
+                    }
+                    
+                    else if  Int.getInt(dictResult["status"]) == 404{
+                        
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+//                        kSharedAppDelegate?.makeRootViewController()
+                    }
+                    
+                default:
+                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                }
+            } else if errorType == .noNetwork {
+                CommonUtils.showToastForInternetUnavailable()
+                
+            } else {
+                CommonUtils.showToastForDefaultError()
+            }
+            
+        }
+    }
+    
 }
