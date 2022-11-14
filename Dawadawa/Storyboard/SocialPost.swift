@@ -129,12 +129,13 @@ class oppr_image{
     }
 }
 
-class user_detail{
+class user_detail{ // Also use for MYChat List
     var id:String?
     var name:String?
     var email:String?
     var social_profile:String?
     var image:String?// for details screen
+    var unread:Int?
     
     init(data:[String:Any]){
         self.id = String.getString(data["id"])
@@ -142,6 +143,7 @@ class user_detail{
         self.email = String.getString(data["email"])
         self.social_profile = String.getString(data["social_profile"])
         self.image = String.getString(data["image"])
+        self.unread = Int.getInt(data["unread"])
     }
 }
 

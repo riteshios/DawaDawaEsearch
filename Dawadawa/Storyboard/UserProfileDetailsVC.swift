@@ -1,9 +1,7 @@
-//
 //  UserProfileDetailsVC.swift
 //  Dawadawa
 //
 //  Created by Ritesh Gupta on 02/09/22.
-//
 
 import UIKit
 
@@ -16,15 +14,21 @@ class UserProfileDetailsVC: UIViewController {
     @IBOutlet weak var lblmail: UILabel!
     
     @IBOutlet weak var ViewRateUser: UIView!
-    @IBOutlet weak var lblAboutUserName: UILabel!
+    @IBOutlet weak var lblUserName: UILabel!
     @IBOutlet weak var lblAboutDescription: UILabel!
     @IBOutlet weak var lblRating: UILabel!
+    
+    @IBOutlet weak var lblUserProfile: UILabel!
+    @IBOutlet weak var lblAbout: UILabel!
+    @IBOutlet weak var btnRateUser: UIButton!
+    
     var userid = 0
     var userdata:user_Data?
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setuplanguage()
         
         if UserData.shared.id == self.userid{
             self.ViewRateUser.isHidden = true
@@ -32,7 +36,6 @@ class UserProfileDetailsVC: UIViewController {
         else{
             self.ViewRateUser.isHidden = false
         }
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -45,7 +48,7 @@ class UserProfileDetailsVC: UIViewController {
         self.lblMobile.text = String.getString(self.userdata?.phone)
         self.lblmail.text = String.getString(self.userdata?.email)
         self.lblRating.text = String.getString(self.userdata?.rating)
-        self.lblAboutUserName.text = "About" + " " + String.getString(self.userdata?.name)
+        self.lblUserName.text = String.getString(self.userdata?.name)
         self.lblAboutDescription.text = String.getString(self.userdata?.about)
         
         if let url = URL(string: String.getString(self.userdata?.image)){
@@ -144,6 +147,12 @@ extension UserProfileDetailsVC{
         }
         
     }
-    
-    
+}
+
+extension UserProfileDetailsVC {
+    func setuplanguage(){
+        lblUserProfile.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "User Profile", comment: "")
+        lblAbout.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "About", comment: "")
+        btnRateUser.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "Rate user", comment: ""), for: .normal)
+    }
 }

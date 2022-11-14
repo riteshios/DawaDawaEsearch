@@ -15,17 +15,18 @@ class ChatVC: UIViewController{
     @IBOutlet weak var lblNameFriend: UILabel!
     @IBOutlet weak var btnSend: UIButton!
     
+   
     var friendid = 0
     var friendname = ""
     var friendimage = ""
     var Messagedata = [Message_data]()
-    
+    var timer = Timer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.addfriendapi()
         self.getmessageeapi()
-        
+        self.timer = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(self.update), userInfo: nil, repeats: true)
         self.lblNameFriend.text = self.friendname
         self.imgFriend.downlodeImage(serviceurl: friendimage , placeHolder: UIImage(named: "Boss"))
         
@@ -35,9 +36,37 @@ class ChatVC: UIViewController{
         
         tableViewChat?.register(UINib(nibName: "ChatTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "ChatTableViewCell")
     }
+    @objc func update(){
+        self.getmessageeapi()
+    }
     
     @IBAction func btnBackTapped(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func btnOpenUserProfieTapped(_ sender: UIButton) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: UserProfileDetailsVC.getStoryboardID()) as! UserProfileDetailsVC
+        vc.userid = self.friendid ?? 0
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @IBAction func btnMoreTapped(_ sender: UIButton) {
+        
+//        let vc = self.storyboard?.instantiateViewController(withIdentifier: DeleteChatPopUPVC.getStoryboardID()) as! DeleteChatPopUPVC
+//        vc.modalTransitionStyle = .crossDissolve
+//        vc.modalPresentationStyle = .overCurrentContext
+//        vc.callback = { txt in
+//
+//            if txt == "Dismiss"{
+//                self.dismiss(animated: true)
+//            }
+//            if txt == "DeleteChat"{
+//                self.deleteChatapi()
+//                self.dismiss(animated: true)
+//            }
+//        }
+//
+//        self.present(vc, animated: false)
     }
     
     @IBAction func btnSendTapped(_ sender: UIButton) {
@@ -46,7 +75,7 @@ class ChatVC: UIViewController{
             self.showSimpleAlert(message: "Please Enter Your Message")
         }
         else{
-            self.tableViewScrollToBottom(animated: true)
+            //self.tableViewScrollToBottom(animated: true)
             self.sendmessageapi()
         }
     }
@@ -55,7 +84,7 @@ class ChatVC: UIViewController{
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300)) {
             let numberOfSections = self.tableViewChat.numberOfSections
             let numberOfRows = self.tableViewChat.numberOfRows(inSection: numberOfSections-1)
-
+            
             if numberOfRows > 0 {
                 let indexPath = IndexPath(row: numberOfRows-1, section: (numberOfSections-1))
                 self.tableViewChat.scrollToRow(at: indexPath, at: .bottom, animated: animated)
@@ -74,25 +103,25 @@ extension ChatVC:UITableViewDelegate,UITableViewDataSource {
         let cell = self.tableViewChat.dequeueReusableCell(withIdentifier: "ChatTableViewCell") as! ChatTableViewCell
         let obj = Messagedata[indexPath.row]
         
-       
+        
         
         var datetime = String.getString(obj.created_at)
         datetime.removeLast(8)
         print("datetime=-=-\(datetime)")
         
-     // create dateFormatter with UTC time format
+        // create dateFormatter with UTC time format
         let dateFormatter = DateFormatter()
-              dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-              dateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone?
-              let date = dateFormatter.date(from: datetime)// create   date from string
-
-              // change to a readable time format and change to local time zone
-              dateFormatter.dateFormat = "EEE, MMM d, yyyy - h:mm a"
-              dateFormatter.timeZone = NSTimeZone.local
-              let timeStamp = dateFormatter.string(from: date!)
-              print("timeStamp=-=-=\(timeStamp)")
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        dateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone?
+        let date = dateFormatter.date(from: datetime)// create   date from string
+        
+        // change to a readable time format and change to local time zone
+        dateFormatter.dateFormat = "EEE, MMM d, yyyy - h:mm a"
+        dateFormatter.timeZone = NSTimeZone.local
+        let timeStamp = dateFormatter.string(from: date!)
+        print("timeStamp=-=-=\(timeStamp)")
         cell.setUser(user: obj.from, message: obj.message,date:timeStamp)
-            
+        
         
         return cell
     }
@@ -102,7 +131,6 @@ extension ChatVC:UITableViewDelegate,UITableViewDataSource {
 }
 
 extension ChatVC {
-    
     //    Api call
     
     //    API Add friend
@@ -145,11 +173,11 @@ extension ChatVC {
                         if septoken[0] == "Bearer"{
                             kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
                         }
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         
                     }
                     else if Int.getInt(dictResult["status"]) == 401{
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                 default:
@@ -164,10 +192,10 @@ extension ChatVC {
         }
     }
     
-//    API send message
+    //    API send message
     
     func sendmessageapi(){
-//        CommonUtils.showHud(show: true)
+        //        CommonUtils.showHud(show: true)
         
         if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
             let endToken = kSharedUserDefaults.getLoggedInAccessToken()
@@ -190,7 +218,7 @@ extension ChatVC {
                                                    requestParameters:params, withProgressHUD: false)
         {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
             
-//            CommonUtils.showHudWithNoInteraction(show: false)
+            //            CommonUtils.showHudWithNoInteraction(show: false)
             
             if errorType == .requestSuccess {
                 
@@ -208,11 +236,11 @@ extension ChatVC {
                         }
                         self?.getmessageeapi()
                         self?.txtViewMessage.text = ""
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         
                     }
                     else if Int.getInt(dictResult["status"]) == 401{
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                 default:
@@ -230,7 +258,7 @@ extension ChatVC {
     //    API Get Messsage
     
     func getmessageeapi(){
-//        CommonUtils.showHud(show: true)
+        //        CommonUtils.showHud(show: true)
         
         if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
             let endToken = kSharedUserDefaults.getLoggedInAccessToken()
@@ -252,7 +280,7 @@ extension ChatVC {
                                                    requestParameters:params, withProgressHUD: false)
         {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
             
-//            CommonUtils.showHudWithNoInteraction(show: false)
+            //            CommonUtils.showHudWithNoInteraction(show: false)
             
             if errorType == .requestSuccess {
                 
@@ -273,12 +301,88 @@ extension ChatVC {
                         self?.Messagedata = message.map{Message_data(data: kSharedInstance.getDictionary($0))}
                         print("DataAllMessageData===\(self?.Messagedata)")
                         
-                        self?.tableViewChat?.reloadData()
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        self?.msg = self?.Messagedata.last?.message ?? ""
+                        print("message",self?.msg)
+                        var counter = 0
+                        counter  = counter + 1
+                        print("counter", counter)
+                        if self?.msg != self?.Messagedata.last?.message{
+                            self?.tableViewChat?.reloadData()
+                            self?.tableViewScrollToBottom(animated: true)
+                           
+                            
+                        }else if counter == 1{
+                            self?.tableViewChat?.reloadData()
+                            self?.tableViewScrollToBottom(animated: true)
+                            
+                        }else{
+                            return
+                        }
+                       
+                        // CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         
                     }
                     else if Int.getInt(dictResult["status"]) == 401{
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //  CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    }
+                    
+                default:
+                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                }
+            } else if errorType == .noNetwork {
+                CommonUtils.showToastForInternetUnavailable()
+                
+            } else {
+                CommonUtils.showToastForDefaultError()
+            }
+        }
+    }
+    
+    //    API Delete Chat
+    func deleteChatapi(){
+        CommonUtils.showHud(show: true)
+        
+        if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
+            let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+            let septoken = endToken.components(separatedBy: " ")
+            if septoken[0] != "Bearer"{
+                let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
+                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
+            }
+        }
+        debugPrint("friend_id=-=-",self.friendid)
+        
+        let params:[String : Any] = [
+            "delete_id":friendid,
+            "login_user_id":UserData.shared.id
+        ]
+        
+        TANetworkManager.sharedInstance.requestApi(withServiceName:ServiceName.kdeleteUsermessage, requestMethod: .POST,
+                                                   requestParameters:params, withProgressHUD: false)
+        {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
+            
+            CommonUtils.showHudWithNoInteraction(show: false)
+            
+            if errorType == .requestSuccess {
+                
+                let dictResult = kSharedInstance.getDictionary(result)
+                
+                switch Int.getInt(statusCode) {
+                case 200:
+                    
+                    if Int.getInt(dictResult["status"]) == 200{
+                        
+                        let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+                        let septoken = endToken.components(separatedBy: " ")
+                        if septoken[0] == "Bearer"{
+                            kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
+                        }
+                        CommonUtils.showError(.info, String.getString(dictResult["messages"]))
+                        self?.tableViewChat.reloadData()
+                        
+                    }
+                    else if Int.getInt(dictResult["status"]) == 400{
+                        CommonUtils.showError(.info, String.getString(dictResult["messages"]))
                     }
                     
                 default:

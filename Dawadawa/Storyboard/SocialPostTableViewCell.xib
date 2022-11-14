@@ -37,13 +37,13 @@
                                         </constraints>
                                     </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vUg-me-atb">
-                                        <rect key="frame" x="20" y="20" width="59" height="64"/>
+                                        <rect key="frame" x="20" y="20" width="60" height="60"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Boss" translatesAutoresizingMaskIntoConstraints="NO" id="FJx-Mb-Rlw">
-                                                <rect key="frame" x="0.0" y="0.0" width="59" height="64"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius1">
-                                                        <real key="value" value="29.5"/>
+                                                        <real key="value" value="30"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </imageView>
@@ -51,7 +51,7 @@
                                                 <rect key="frame" x="42" y="36" width="20" height="20"/>
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uel-i3-6NV">
-                                                <rect key="frame" x="0.0" y="0.0" width="59" height="64"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <connections>
                                                     <action selector="btnProfileImageTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="nko-Nv-SSG"/>
@@ -61,11 +61,12 @@
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstItem="uel-i3-6NV" firstAttribute="leading" secondItem="vUg-me-atb" secondAttribute="leading" id="96j-Iz-xbx"/>
+                                            <constraint firstAttribute="height" constant="60" id="ATD-as-M2O"/>
                                             <constraint firstAttribute="trailing" secondItem="uel-i3-6NV" secondAttribute="trailing" id="CLp-y0-SD0"/>
                                             <constraint firstItem="FJx-Mb-Rlw" firstAttribute="top" secondItem="vUg-me-atb" secondAttribute="top" id="DLu-ec-ujV"/>
                                             <constraint firstAttribute="bottom" secondItem="FJx-Mb-Rlw" secondAttribute="bottom" id="EHc-B7-DfG"/>
                                             <constraint firstAttribute="trailing" secondItem="FJx-Mb-Rlw" secondAttribute="trailing" id="O3K-Yj-m4n"/>
-                                            <constraint firstAttribute="width" constant="59" id="OKW-zR-cRN"/>
+                                            <constraint firstAttribute="width" constant="60" id="OKW-zR-cRN"/>
                                             <constraint firstItem="mSp-k1-hDp" firstAttribute="leading" secondItem="vUg-me-atb" secondAttribute="leading" constant="42" id="U2J-zB-jQM"/>
                                             <constraint firstItem="FJx-Mb-Rlw" firstAttribute="leading" secondItem="vUg-me-atb" secondAttribute="leading" id="c1U-mc-Y0J"/>
                                             <constraint firstAttribute="bottom" secondItem="uel-i3-6NV" secondAttribute="bottom" id="eUL-Jv-V2f"/>
@@ -74,26 +75,26 @@
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Owner abdjnadc" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LgE-K4-rkL">
-                                        <rect key="frame" x="99" y="20" width="130.5" height="22"/>
+                                        <rect key="frame" x="100" y="20" width="130.5" height="22"/>
                                         <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="18"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eXK-Ye-5Om">
-                                        <rect key="frame" x="99" y="44" width="296" height="16"/>
+                                        <rect key="frame" x="100" y="44" width="295" height="16"/>
                                         <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="13"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="redcircle" translatesAutoresizingMaskIntoConstraints="NO" id="E2N-yB-oj1">
-                                        <rect key="frame" x="99" y="68" width="6" height="6"/>
+                                        <rect key="frame" x="100" y="68" width="6" height="6"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="6" id="93R-WP-V8H"/>
                                             <constraint firstAttribute="height" constant="6" id="A7V-7Q-aGY"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This opportunity has been closed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2JA-SH-CrE">
-                                        <rect key="frame" x="107" y="63" width="186.5" height="16"/>
+                                        <rect key="frame" x="108" y="63" width="186.5" height="16"/>
                                         <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="13"/>
                                         <color key="textColor" systemColor="systemRedColor"/>
                                         <nil key="highlightedColor"/>
@@ -142,11 +143,11 @@
                                     <constraint firstItem="Gmx-ui-x0B" firstAttribute="centerY" secondItem="HeL-Mi-p7e" secondAttribute="centerY" id="gdL-8r-vTx"/>
                                     <constraint firstItem="eXK-Ye-5Om" firstAttribute="top" secondItem="LgE-K4-rkL" secondAttribute="bottom" constant="2" id="gnu-rR-ogb"/>
                                     <constraint firstItem="xkw-Dz-ak3" firstAttribute="leading" secondItem="N9E-Nl-Z2A" secondAttribute="leading" id="ncf-a7-rjS"/>
-                                    <constraint firstAttribute="bottom" secondItem="vUg-me-atb" secondAttribute="bottom" constant="11" id="sKG-m0-rTW"/>
+                                    <constraint firstAttribute="bottom" secondItem="vUg-me-atb" secondAttribute="bottom" constant="15" id="sKG-m0-rTW"/>
                                     <constraint firstItem="LgE-K4-rkL" firstAttribute="leading" secondItem="vUg-me-atb" secondAttribute="trailing" constant="20" id="ucc-cG-HUQ"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c7e-ku-l4v">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c7e-ku-l4v">
                                 <rect key="frame" x="16" y="95" width="396" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <nil key="textColor"/>

@@ -1,9 +1,8 @@
 //
 //  SearchVC.swift
 //  Dawadawa
-//
+
 //  Created by Ritesh Gupta on 21/07/22.
-//
 
 import UIKit
 
@@ -25,7 +24,7 @@ class SearchVC: UIViewController,UITextFieldDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.setuplanguage()
         self.imgNotfound.isHidden = true
         self.setup()
         
@@ -117,10 +116,10 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
             cell.img = obj.oppimage
             cell.imgUrl = self.imgUrl
             
-            let imgurl = String.getString(obj.userdetail?.social_profile)
-            debugPrint("socialprofile......",imgurl)
+            let imguserurl = String.getString(obj.userdetail?.social_profile)
+            debugPrint("socialprofile......",imguserurl)
             
-            cell.Imageuser.downlodeImage(serviceurl: imgurl , placeHolder: UIImage(named: "Boss"))
+            cell.Imageuser.downlodeImage(serviceurl: imguserurl , placeHolder: UIImage(named: "Boss"))
             
             cell.lblLikeCount.text = String.getString(obj.likes) + " " + "Likes"
             
@@ -180,8 +179,12 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
                 cell.WidthViewRating.constant = 58
                 cell.lblRating.isHidden = false
             }
-            
-            
+            if UserData.shared.id == Int.getInt(obj.user_id){
+                cell.btnChat.isHidden = true
+            }
+            else{
+                cell.btnChat.isHidden = false
+            }
             
             cell.callback = { txt, sender in
                 
@@ -191,7 +194,7 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
                     let vc = self.storyboard?.instantiateViewController(withIdentifier: ChatVC.getStoryboardID()) as! ChatVC
                     vc.friendid = userid
                     vc.friendname = String.getString(obj.userdetail?.name)
-                    vc.friendimage = imgurl
+                    vc.friendimage = imguserurl
                     self.navigationController?.pushViewController(vc, animated: true)
                 }
                 
@@ -210,7 +213,7 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
                     else{
                         let oppid = self.userTimeLine[indexPath.row].id
                         debugPrint("oppid--=-=-=-",oppid)
-                        //                            self.likeOpportunityapi(oppr_id: oppid ?? 0)
+                        // self.likeOpportunityapi(oppr_id: oppid ?? 0)
                         self.likeOpportunityapi(oppr_id: oppid ?? 0) { countLike in
                             obj.likes = Int.getInt(countLike)
                             cell.lblLikeCount.text = String.getString(obj.likes) + " " + "likes"
@@ -218,7 +221,6 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
                         cell.imglike.image = UIImage(named: "dil")
                         cell.lbllike.text = "Liked"
                         self.searchopportunityapi()
-                        
                     }
                 }
                 
@@ -295,6 +297,18 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
                         vc.modalTransitionStyle = .crossDissolve
                         vc.modalPresentationStyle = .overCurrentContext
                         vc.callback = { txt in
+                            
+                            if txt == "Chatwithuser"{
+                                
+                                let userid = Int.getInt(self.userTimeLine[indexPath.row].user_id)
+                                let vc = self.storyboard?.instantiateViewController(withIdentifier: ChatVC.getStoryboardID()) as! ChatVC
+                                vc.friendid = userid
+                                vc.friendname = String.getString(obj.userdetail?.name)
+                                vc.friendimage = imguserurl
+                                self.navigationController?.pushViewController(vc, animated: true)
+                                self.dismiss(animated: true)
+                            }
+
                             
                             if txt == "Flag"{
                                 if UserData.shared.isskiplogin == true{
@@ -1148,5 +1162,11 @@ extension SearchVC{
             }
             
         }
+    }
+}
+
+extension SearchVC{
+    func setuplanguage(){
+        txtfieldSearch.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Search opportunities", comment: "")
     }
 }

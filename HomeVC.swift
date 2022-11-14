@@ -1,7 +1,7 @@
 //
 //  HomeVC.swift
 //  Dawadawa
-//
+
 //  Created by Ritesh Gupta on 20/07/22.
 
 
@@ -32,11 +32,11 @@ class HomeVC: UIViewController{
     
     @IBOutlet weak var imgNotification: UIImageView!
     @IBOutlet weak var lblCountNotification: UILabel!
-    
-    
+    @IBOutlet weak var lblHello: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setuplanguage()
         self.imgNotification.isHidden = true
         debugPrint("nameid",UserData.shared.id)
         debugPrint("nameid",UserData.shared.name)
@@ -63,10 +63,7 @@ class HomeVC: UIViewController{
             self.fetchdata()
             self.getcountnotification()
         }
-        
-        
     }
-    
     
     private func setup(){
         tblViewViewPost.register(UINib(nibName: "ViewPostTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "ViewPostTableViewCell")
@@ -187,9 +184,12 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
             cell.imgUrl = self.imgUrl
             
             let imguserurl = String.getString(obj.userdetail?.social_profile)
-            debugPrint("socialprofile......",imguserurl)
+            //            debugPrint("socialprofile......",imguserurl)
+            //            cell.Imageuser.downlodeImage(serviceurl: imguserurl , placeHolder: UIImage(named: "Boss"))
             
-            cell.Imageuser.downlodeImage(serviceurl: imguserurl , placeHolder: UIImage(named: "Boss"))
+            let userUrl = URL(string: imguserurl)
+            cell.Imageuser.sd_setImage(with: userUrl, placeholderImage:UIImage(named: "Boss") )
+            
             
             cell.lblLikeCount.text = String.getString(obj.likes) + " " + "Likes"
             
@@ -248,7 +248,12 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                 cell.lblRating.isHidden = false
             }
             
-            
+            if UserData.shared.id == Int.getInt(obj.user_id){
+                cell.btnChat.isHidden = true
+            }
+            else{
+                cell.btnChat.isHidden = false
+            }
             cell.callback = { txt, sender in
                 
                 if txt == "Chat"{
@@ -260,7 +265,6 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                     vc.friendimage = imguserurl
                     self.navigationController?.pushViewController(vc, animated: true)
                 }
-                
                 
                 if txt == "Profileimage"{
                     let user_id = userTimeLine[indexPath.row].user_id
@@ -341,7 +345,6 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                         cell.imgsave.image = UIImage(named: "save-3")
                         cell.lblSave.text = "Save"
                     }
-                    
                 }
                 
                 if txt == "More" {
@@ -377,14 +380,11 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                                                 self.closeopportunityapi(opr_id: oppid)
                                                 debugPrint("oppidclose......",oppid)
                                                 self.getallopportunity()
-                                                
                                             }
-                                            
                                         }
                                     }
                                     self.present(vc, animated: false)
                                 }
-                                
                             }
                             
                             if txt == "viewdetails" {
@@ -406,6 +406,17 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                         vc.modalTransitionStyle = .crossDissolve
                         vc.modalPresentationStyle = .overCurrentContext
                         vc.callback = { txt in
+                            
+                            if txt == "Chatwithuser"{
+                                
+                                let userid = Int.getInt(userTimeLine[indexPath.row].user_id)
+                                let vc = self.storyboard?.instantiateViewController(withIdentifier: ChatVC.getStoryboardID()) as! ChatVC
+                                vc.friendid = userid
+                                vc.friendname = String.getString(obj.userdetail?.name)
+                                vc.friendimage = imguserurl
+                                self.navigationController?.pushViewController(vc, animated: true)
+                                self.dismiss(animated: true)
+                            }
                             
                             if txt == "Flag"{
                                 if UserData.shared.isskiplogin == true{
@@ -438,7 +449,15 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                                         self.present(vc, animated: false)
                                     }
                                 }
+                            }
+                            
+                            if txt == "viewdetails"{
+                                let oppid = Int.getInt(userTimeLine[indexPath.row].id)
+                                debugPrint("detailsppid=-=-=",oppid)
+                                let vc = self.storyboard?.instantiateViewController(withIdentifier: DetailScreenVC.getStoryboardID()) as! DetailScreenVC
                                 
+                                vc.oppid = oppid
+                                self.navigationController?.pushViewController(vc, animated: true)
                             }
                             
                         }
@@ -1268,9 +1287,6 @@ extension HomeVC{
                             
                             
                         }
-                        
-                        
-                        
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         
                     }
@@ -1335,8 +1351,7 @@ extension HomeVC{
                         self.imgNotification.image = UIImage(named: "notification-bing-1")
                         
                     }
-                    
-                    
+
                 default:
                     CommonUtils.showError(.error, String.getString(dictResult["message"]))
                 }
@@ -1356,5 +1371,10 @@ extension NSMutableAttributedString {
         let range: NSRange = self.mutableString.range(of: textToFind, options: .caseInsensitive)
         self.addAttribute(NSAttributedString.Key.foregroundColor, value: color, range: range)
     }
-    
+}
+
+extension HomeVC{
+    func setuplanguage(){
+        lblHello.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Hello", comment: "")
+    }
 }

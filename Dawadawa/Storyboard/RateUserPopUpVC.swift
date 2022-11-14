@@ -3,7 +3,7 @@
 //  Dawadawa
 //
 //  Created by Ritesh Gupta on 02/09/22.
-//
+
 
 import UIKit
 import Cosmos
@@ -18,8 +18,11 @@ class RateUserPopUpVC: UIViewController {
 
     @IBOutlet weak var viewRating: CosmosView!
     @IBOutlet weak var RatingSlider: UISlider!
+    
+    @IBOutlet weak var lblRatingatheading: UILabel!
+    @IBOutlet weak var btnSubmit: UIButton!
+    
     private let startRating: Float = 3.7
-
     var callbackClosure:(()->())?
 
     var rateuserid = 0
@@ -27,7 +30,7 @@ class RateUserPopUpVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setup()
-
+        self.setuplanguage()
         // Register touch handlers
         viewRating?.didTouchCosmos = didTouchCosmos
         viewRating?.didFinishTouchingCosmos = didFinishTouchingCosmos
@@ -168,6 +171,12 @@ extension RateUserPopUpVC{
             
         }
     }
-    
-    
+}
+
+extension RateUserPopUpVC{
+    func setuplanguage(){
+        lblRatingatheading.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Rating", comment: "")
+        btnSubmit.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "Submit", comment: ""), for: .normal)
+        
+    }
 }

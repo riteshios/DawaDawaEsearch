@@ -9,14 +9,18 @@ import UIKit
 class HomeSocialMoreSelfVC: UIViewController {
     
     var callback:((String)->())?
-    
     @IBOutlet weak var Viewmain: UIView!
+    
+    @IBOutlet weak var lblupdate: UILabel!
+    @IBOutlet weak var lblClose: UILabel!
+    @IBOutlet weak var lblCopylink: UILabel!
+    @IBOutlet weak var lblViewDetails: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setup()
-        
     }
+    
     
     func setup(){
         Viewmain.clipsToBounds = true
@@ -47,4 +51,14 @@ class HomeSocialMoreSelfVC: UIViewController {
     @IBAction func btnvViewDetailsTapped(_ sender: UIButton) {
         self.callback?("viewdetails")
     }
+}
+
+extension HomeSocialMoreSelfVC{
+    func setuplanguage(){
+        lblupdate.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Update", comment: "")
+        lblClose.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Close", comment: "")
+        lblCopylink.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Copy Link", comment: "")
+        lblViewDetails.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "View Details", comment: "")
+    }
+    
 }

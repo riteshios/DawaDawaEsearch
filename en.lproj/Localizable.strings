@@ -94,4 +94,103 @@
 "Privacy Policy" = "Privacy Policy";
 "FAQ’s" = "FAQ’s";
 
+// MARK: - FilterVC
+
+"Filter" = "Filter";
+"Likes" = "Likes";
+"Most liked" = "Most liked";
+"Least liked" = "Least liked";
+"Rating" = "Rating";
+"Most rated" = "Most rated";
+"Least rated" = "Least rated";
+"Opportunity status" = "Opportunity status";
+"All" = "All";
+"Available" = "Available";
+"Closed" = "Closed";
+"Sold" = "Sold";
+"Opportunity type" = "Opportunity type";
+"Date" = "Date";
+"Today" = "Today";
+"Last week" = "Last week";
+"Last month" = "Last month";
+"Custom range" = "Custom range";
+"Opportunity status" = "Opportunity status";
+"State" = "State";
+"Locality" = "Locality";
+"Sort by" = "Sort by";
+"Price" = "Price";
+"Price: High to Low" = "Price: High to Low";
+"Price: Low to High" = "Price: Low to High";
+"Date: Newest to Oldest" = "Date: Newest to Oldest";
+"Date: Oldest to Newest" = "Date: Oldest to Newest";
+"Start date" = "Start date";
+"End date" = "End date";
+"Reset" = "Reset";
+"Apply Filter" = "Apply Filter";
+
+// MARK: - RateOpportunityPopUPVC
+
+"Rating" = "Rating";
+"Submit" = "Submit";
+
+// MARk: - UserProfileDetailsVC
+
+"User Profile" = "User Profile";
+"About" = "About";
+"Rate user" = "Rate user";
+
+// MARK: - HomeSocialMoreSelfVC
+
+"Update" = "Update";
+"Close" = "Close";
+"Copy Link" = "Copy Link";
+"View Details" = "View Details";
+
+// MARK: - HomeSocialMoreVC
+
+"Chat with user" = "Chat with user";
+"Copy link" = "Copy link";
+"Flag post" = "Flag post";
+"Report user" = "Report user";
+
+// MARK: - FlagPostPopUPVC
+
+"Reason to flag" = "Reason to flag";
+"Report" = "Report";
+
+// MARK: - ReportUserPopUpVC
+
+"Report User" = "Report User";
+
+// MARK: - DeleteOpportunityPopUPVC
+
+"Delete Opportunity" = "Delete Opportunity";
+"Do you really want to delete this opportunity?" = "Do you really want to delete this opportunity?";
+"Cancel" = "Cancel";
+"Delete" = "Delete";
+
+// MARK: - ClosePopUpVC
+
+"Close Opportunity" = "Close Opportunity";
+"Do you really want to close this opportunity?" = "Do you really want to close this opportunity?";
+
+// MARK: - PremiumOpportunitiesVC
+
+"Premium Opportunities" = "فرص مميزة";
+
+// MARK: - HomeVC
+
+"Hello" = "Hello";
+
+// MARK: - SearchVC
+
+"Search opportunities" = "Search opportunities";
+
+
+
+
+
+
+
+
 

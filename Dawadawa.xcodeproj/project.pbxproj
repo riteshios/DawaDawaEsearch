@@ -19,6 +19,7 @@
 		0411742A28A2697200846FF3 /* SavedOpportunitiesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0411742928A2697200846FF3 /* SavedOpportunitiesVC.swift */; };
 		0411742C28A279B300846FF3 /* SaveOpportunityCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0411742B28A279B300846FF3 /* SaveOpportunityCollectionViewCell.swift */; };
 		0411742E28A2861E00846FF3 /* ViewAllSavedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0411742D28A2861E00846FF3 /* ViewAllSavedVC.swift */; };
+		0411EDD5291E7F1D0055AD30 /* DeleteChatPopUPVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0411EDD4291E7F1B0055AD30 /* DeleteChatPopUPVC.swift */; };
 		0421E86928DAE3B100CB7B38 /* DetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0421E86728DAE3B100CB7B38 /* DetailsTableViewCell.swift */; };
 		0421E86A28DAE3B100CB7B38 /* DetailsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0421E86828DAE3B100CB7B38 /* DetailsTableViewCell.xib */; };
 		042293BE2869B1BC000503B7 /* ChangeNumberVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042293BD2869B1BC000503B7 /* ChangeNumberVC.swift */; };
@@ -678,6 +679,7 @@
 		0411742928A2697200846FF3 /* SavedOpportunitiesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedOpportunitiesVC.swift; sourceTree = "<group>"; };
 		0411742B28A279B300846FF3 /* SaveOpportunityCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveOpportunityCollectionViewCell.swift; sourceTree = "<group>"; };
 		0411742D28A2861E00846FF3 /* ViewAllSavedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewAllSavedVC.swift; path = Dawadawa/Storyboard/ViewAllSavedVC.swift; sourceTree = SOURCE_ROOT; };
+		0411EDD4291E7F1B0055AD30 /* DeleteChatPopUPVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteChatPopUPVC.swift; sourceTree = "<group>"; };
 		0421E86728DAE3B100CB7B38 /* DetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsTableViewCell.swift; sourceTree = "<group>"; };
 		0421E86828DAE3B100CB7B38 /* DetailsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailsTableViewCell.xib; sourceTree = "<group>"; };
 		042293BD2869B1BC000503B7 /* ChangeNumberVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeNumberVC.swift; sourceTree = "<group>"; };
@@ -1643,6 +1645,7 @@
 			children = (
 				0464E3382910FD3900EC10E3 /* MyChatVC.swift */,
 				04C495B9290FE0BD001F01FD /* ChatVC.swift */,
+				0411EDD4291E7F1B0055AD30 /* DeleteChatPopUPVC.swift */,
 			);
 			name = Chat;
 			sourceTree = "<group>";
@@ -3240,6 +3243,7 @@
 				447DCC652851CB1100C40DDD /* Date+Extension.swift in Sources */,
 				447DCC8F2851CB1100C40DDD /* UITextFieldExtended.swift in Sources */,
 				0489D19C2892B16300725664 /* OpportunityTypeTableViewCell.swift in Sources */,
+				0411EDD5291E7F1D0055AD30 /* DeleteChatPopUPVC.swift in Sources */,
 				04B5993D28993091008366DC /* PlanTableViewCell.swift in Sources */,
 				447DCC7C2851CB1100C40DDD /* UIButtonBorderWidthAndColor.swift in Sources */,
 				0461E314288A76F800B7F0E7 /* ProileSocialMoreVC.swift in Sources */,

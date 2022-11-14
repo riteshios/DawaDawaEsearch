@@ -2,7 +2,7 @@
 //  FilterVC.swift
 //  Dawadawa
 //  Created by Ritesh Gupta on 28/07/22.
-//
+
 
 import UIKit
 import RangeSeekSlider
@@ -12,36 +12,7 @@ import SwiftyJSON
 var userTimeLine = [SocialPostData]()
 var cameFrom = ""
 
-Reset
-Filter
-Likes
-Most liked
-Least liked
-Rating
-Most rated
-Least rated
-Opportunity status
-All
-Available
-Closed
-Sold
-Opportunity type
-Date
-Today
-Last week
-Last month
-Custom range
-Opportunity status
-State
-Locality
-Price
-Service type
-Sort by
-Price: Low to High
-Price: High to Low
-Date: Newest to Oldest
-Date: Oldest to Newest
-Apply Filter
+
 class FilterVC: UIViewController {
     
     
@@ -120,12 +91,23 @@ class FilterVC: UIViewController {
     @IBOutlet weak var lblCustomrange: UILabel!
     @IBOutlet weak var btnCustomrange: UIButton!
     
+    @IBOutlet weak var btnReset: UIButton!
+    @IBOutlet weak var btnApplyfilter:UIButton!
+    
     @IBOutlet weak var lblFilter: UILabel!
     @IBOutlet weak var lblLikes: UILabel!
     @IBOutlet weak var lblRating: UILabel!
     @IBOutlet weak var lblOpportunitystatus: UILabel!
     @IBOutlet weak var lblOpportunitytype: UILabel!
     @IBOutlet weak var lblDate: UILabel!
+    @IBOutlet weak var lblOpportunityStatus:UILabel!
+    @IBOutlet weak var lblPrice: UILabel!
+    @IBOutlet weak var lblServicetype:UILabel!
+    @IBOutlet weak var lblSortby:UILabel!
+    @IBOutlet weak var lblPricelowtohigh: UILabel!
+    @IBOutlet weak var lblpricehightolow: UILabel!
+    @IBOutlet weak var lbldateNewesttooldest: UILabel!
+    @IBOutlet weak var lblDateoldesttonewest: UILabel!
     
     
     var getCategoryarr         =      [getCartegoryModel]()
@@ -155,15 +137,13 @@ class FilterVC: UIViewController {
     var selectedsuboptype = ""
     var selectedservicetype = ""
     
-    
-    
-    
     var timePicker = UIDatePicker()
     var stateid:Int?
     var localityid:Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setuplanguage()
         
         if UserData.shared.isskiplogin == true{
             self.guestcategory()
@@ -1666,4 +1646,41 @@ extension FilterVC{
     }
 }
 
-
+extension FilterVC{
+    
+    func setuplanguage(){
+        lblFilter.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Filter", comment: "")
+        lblLikes.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Likes", comment: "")
+        lblMostLiked.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Most liked", comment: "")
+        lblLeastLiked.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Least liked", comment: "")
+        lblRating.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Rating", comment: "")
+        lblMostrated.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Most rated", comment: "")
+        lblLeastrated.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Least rated", comment: "")
+        lblOpportunitystatus.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Opportunity status", comment: "")
+        lblAll.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "All", comment: "")
+        lblAvailable.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Available", comment: "")
+        lblClosed.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Closed", comment: "")
+        lblSold.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Sold", comment: "")
+        lblOpportunitytype.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Opportunity type", comment: "")
+        lblDate.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Date", comment: "")
+        lblToday.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Today", comment: "")
+        lblLastweek.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Last week", comment: "")
+        lblLastmonth.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Last month", comment: "")
+        lblCustomrange.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Custom range", comment: "")
+        
+        lblOpportunityStatus.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Opportunity status", comment: "")
+        lblState.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "State", comment: "")
+        lblLocality.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Locality", comment: "")
+        lblSortby.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Sort by", comment: "")
+        lblPrice.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Price", comment: "")
+        lblpricehightolow.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Price: High to Low", comment: "")
+        lblPricelowtohigh.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Price: Low to High", comment: "")
+        lbldateNewesttooldest.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Date: Newest to Oldest", comment: "")
+        lblDateoldesttonewest.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Date: Oldest to Newest", comment: "")
+        txtfieldStartDate.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Start date", comment: "")
+        txtfieldEndDate.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "End date", comment: "")
+        btnReset.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "Reset", comment: ""), for: .normal)
+        btnApplyfilter.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "Apply Filter", comment: ""), for: .normal)
+        
+    }
+}

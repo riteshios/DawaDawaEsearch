@@ -95,3 +95,94 @@
 "Terms & Conditions" = "البنود و الظروف";
 "Privacy Policy" = "سياسة الخصوصية";
 "FAQ’s" = "الأسئلة الشائعة";
+
+// MARK: - FilterVC
+
+"Filter" = "منقي";
+"Likes" = "الإعجابات";
+"Most liked" = "الأكثر إعجابا";
+"Least liked" = "الأقل إعجابًا";
+"Rating" = "تقييم";
+"Most rated" = "الأكثر تقييما";
+"Least rated" = "الأقل تصنيفًا";
+"Opportunity status" = "حالة الفرصة";
+"All" = "الجميع";
+"Available" = "متوفرة";
+"Closed" = "مغلق";
+"Sold" = "مُباع";
+"Opportunity type" = "نوع الفرصة";
+"Date" = "تاريخ";
+"Today" = "اليوم";
+"Last week" = "الأسبوع الماضي";
+"Last month" = "الشهر الماضي";
+"Custom range" = "نطاق مخصص";
+"State" = "حالة";
+"Locality" = "المنطقة";
+"Sort by" = "صنف حسب";
+"Price" = "سعر";
+"Price: High to Low" = "السعر الاعلى الى الادنى";
+"Price: Low to High" = "السعر من الارخص للاعلى";
+"Date: Newest to Oldest" = "التاريخ: من الأحدث إلى الأقدم";
+"Date: Oldest to Newest" = "التاريخ: من الأقدم إلى الأحدث";
+"Start date" = "تاريخ البدء";
+"End date" = "تاريخ الانتهاء";
+"Reset" = "إعادة ضبط";
+"Apply Filter" = "تطبيق عامل التصفية";
+
+// MARK: - RateOpportunityPopUPVC
+
+"Rating" = "تقييم";
+"Submit" = "يُقدِّم";
+
+// MARk: - UserProfileDetailsVC
+
+"User Profile" = "ملف تعريفي للمستخدم";
+"About" = "حول";
+"Rate user" = "قيم المستخدم";
+
+// MARK: - HomeSocialMoreSelfVC
+
+"Update" = "تحديث";
+"Close" = "قريب";
+"Copy Link" = "انسخ الرابط";
+"View Details" = "عرض التفاصيل";
+
+// MARK: - HomeSocialMoreVC
+
+"Chat with user" = "الدردشة مع المستخدم";
+"Copy Link" = "انسخ الرابط";
+"Flag Post" = "وضع علامة على المشاركة";
+"Report User" = "أبلغ عن مستخدم";
+
+// MARK: - FlagPostPopUPVC
+
+"Reason to flag" = "سبب العلم";
+"Report" = "تقرير";
+
+// MARK: - ReportUserPopUpVC
+
+"Report User" = "أبلغ عن مستخدم";
+
+// MARK: - DeleteOpportunityPopUPVC
+
+"Delete Opportunity" = "احذف الفرصة";
+"Do you really want to delete this opportunity?" = "هل تريد حقًا حذف هذه الفرصة؟";
+"Cancel" = "يلغي";
+"Delete" = "حذف";
+
+// MARK: - ClosePopUpVC
+
+"Close Opportunity" = "فرصة قريبة";
+"Do you really want to close this opportunity?" = "هل تريد حقًا إغلاق هذه الفرصة؟";
+
+// MARK: - PremiumOpportunitiesVC
+
+"Premium Opportunities" = "Premium Opportunities";
+
+// MARK: - HomeVC
+
+"Hello" = "مرحبًا";
+
+// MARK: - SearchVC
+
+"Search opportunities" = "فرص البحث";

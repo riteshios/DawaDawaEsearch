@@ -12,11 +12,14 @@ class FlagPostPopUPVC: UIViewController {
 
     @IBOutlet weak var viewMain: UIView!
     @IBOutlet weak var textviewReason: IQTextView!
+    @IBOutlet weak var lblReasontoFlag: UILabel!
+    @IBOutlet weak var btnReport: UIButton!
+    
     var oppid = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.setuplanguage()
         viewMain.clipsToBounds = true
         viewMain.layer.cornerRadius = 25
         viewMain.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
@@ -110,5 +113,12 @@ class FlagPostPopUPVC: UIViewController {
             }
             
         }
+    }
+}
+
+extension FlagPostPopUPVC{
+    func setuplanguage(){
+        lblReasontoFlag.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Reason to flag", comment: "")
+        btnReport.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "Report", comment: ""), for: .normal)
     }
 }

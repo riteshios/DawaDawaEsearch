@@ -170,7 +170,7 @@ struct ServiceName {
     static let kaddfriend              =            "api/userConversion"
     static let ksendmessage            =            "api/send-message"
     static let kgetmessage             =            "api/getmessage"
-    
+    static let kdeleteUsermessage      =            "api/delete-user-message"
 }
 
 struct Notifications {
@@ -236,8 +236,6 @@ struct Notifications {
     static let kvalidwhatsappnumber             =  "Please Enter Valid Whatstapp Number"
     static let kbusinessname                    =  "Please Enter Business Name"
     static let kbusinessBlock                   =  "Please Enter Business Mining Block"
-    
-    
     
 }
 

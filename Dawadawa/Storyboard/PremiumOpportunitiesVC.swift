@@ -19,15 +19,13 @@ class PremiumOpportunitiesVC: UIViewController {
     var txtcomment = " "
     var camefrom = " "
     
+    @IBOutlet weak var lblPremium: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
+        self.setuplanguage()
         tblViewPremiumOpp.register(UINib(nibName: "PremiumTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "PremiumTableViewCell")
         tblViewPremiumOpp.register(UINib(nibName: "SocialPostTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "SocialPostTableViewCell")
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -95,9 +93,9 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
             
             cell.lblRating.text = String.getString(obj.opr_rating)
             
-            let imgurl = String.getString(obj.userdetail?.social_profile)
-            debugPrint("socialprofile......",imgurl)
-            cell.Imageuser.downlodeImage(serviceurl: imgurl , placeHolder: UIImage(named: "Boss"))
+            let imguserurl = String.getString(obj.userdetail?.social_profile)
+            debugPrint("socialprofile......",imguserurl)
+            cell.Imageuser.downlodeImage(serviceurl: imguserurl , placeHolder: UIImage(named: "Boss"))
             cell.img = obj.oppimage
             cell.imgUrl = self.imgUrl
             
@@ -159,7 +157,7 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
                     let vc = self.storyboard?.instantiateViewController(withIdentifier: ChatVC.getStoryboardID()) as! ChatVC
                     vc.friendid = userid
                     vc.friendname = String.getString(obj.userdetail?.name)
-                    vc.friendimage = imgurl
+                    vc.friendimage = imguserurl
                     self.navigationController?.pushViewController(vc, animated: true)
                 }
                 
@@ -260,6 +258,18 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
                         vc.modalTransitionStyle = .crossDissolve
                         vc.modalPresentationStyle = .overCurrentContext
                         vc.callback = { txt in
+                            
+                            if txt == "Chatwithuser"{
+                                
+                                let userid = Int.getInt(self.userTimeLine[indexPath.row].user_id)
+                                let vc = self.storyboard?.instantiateViewController(withIdentifier: ChatVC.getStoryboardID()) as! ChatVC
+                                vc.friendid = userid
+                                vc.friendname = String.getString(obj.userdetail?.name)
+                                vc.friendimage = imguserurl
+                                self.navigationController?.pushViewController(vc, animated: true)
+                                self.dismiss(animated: true)
+                            }
+
                             
                             if txt == "Flag"{
                                 if UserData.shared.isskiplogin == true{
@@ -1028,5 +1038,9 @@ extension PremiumOpportunitiesVC{
     }
 }
 
-
+extension PremiumOpportunitiesVC{
+    func setuplanguage(){
+        lblPremium.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Premium Opportunities", comment: "")
+    }
+}
 

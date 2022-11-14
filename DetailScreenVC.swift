@@ -42,7 +42,7 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
-        
+    
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -190,7 +190,6 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                     self.navigationController?.pushViewController(vc, animated: true)
                     
                 }
-                
                 
                 if txt == "Like"{
                     
@@ -344,7 +343,6 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
             cell.btnReply.isHidden = obj?.isReply == true ? true : false
             cell.heightReply.constant = obj?.isReply == true ? -25 : 0
             
-            
             cell.lblNameandComment.text = String.getString(obj?.name) + "   " + String.getString(obj?.comments)
             let imgcommentuser = String.getString(obj?.image)
             cell.imgCommentUser.downlodeImage(serviceurl: imgcommentuser, placeHolder: UIImage(named: "Boss"))
@@ -354,14 +352,11 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
             }else{
                 cell.heightTableView.constant = CGFloat(35 * (obj?.subcomment.count)!)
                 //               cell.tblviewSubComment.estimatedRowHeight = 35
-                
-                
             }
+            
             cell.subcomment = obj?.subcomment ?? []  // See more comment cell pr pass kr rhe h
             cell.reloadTable()
             print("datacount---",cell.subcomment.count)
-            
-            
             
             cell.callback = { txt in
                 
@@ -397,8 +392,6 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                             
                         }
                     }
-                
-                    
                 }
                 
             }
@@ -412,7 +405,6 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                 
             }
             
-            
             let first = String.getString(obj?.name)
             let second = String.getString(obj?.comments)
 
@@ -425,12 +417,10 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
             
             return cell
             
-            
         default:
             return UITableViewCell()
         }
     }
-    
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section{

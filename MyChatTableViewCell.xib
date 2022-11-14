@@ -5,6 +5,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -52,15 +53,40 @@
                                     <action selector="btnChatTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="yOy-3q-Gei"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Sh-BH-vhy">
+                                <rect key="frame" x="299" y="26.5" width="22" height="22"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nTo-zQ-8yt">
+                                        <rect key="frame" x="8" y="1.5" width="6.5" height="19.5"/>
+                                        <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="16"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="22" id="3gn-8e-6XJ"/>
+                                    <constraint firstAttribute="width" constant="22" id="47p-mF-WWe"/>
+                                    <constraint firstItem="nTo-zQ-8yt" firstAttribute="centerY" secondItem="0Sh-BH-vhy" secondAttribute="centerY" id="IlL-vo-Xhj"/>
+                                    <constraint firstItem="nTo-zQ-8yt" firstAttribute="centerX" secondItem="0Sh-BH-vhy" secondAttribute="centerX" id="rJJ-2B-gaE"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius1">
+                                        <real key="value" value="11"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.08235294118" green="0.44705882349999998" blue="0.63137254899999995" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="0Sh-BH-vhy" firstAttribute="centerY" secondItem="Nm4-tA-uIh" secondAttribute="centerY" id="12I-V0-uS0"/>
                             <constraint firstItem="TY3-lH-rbl" firstAttribute="top" secondItem="u40-iR-CcH" secondAttribute="top" constant="20" id="CR1-j5-8Vt"/>
                             <constraint firstAttribute="trailing" secondItem="mUd-hI-n6L" secondAttribute="trailing" id="D3Y-aR-3PV"/>
                             <constraint firstItem="mUd-hI-n6L" firstAttribute="top" secondItem="u40-iR-CcH" secondAttribute="top" id="MZW-la-0gM"/>
                             <constraint firstItem="TY3-lH-rbl" firstAttribute="leading" secondItem="u40-iR-CcH" secondAttribute="leading" constant="16" id="Mpx-SD-TTL"/>
                             <constraint firstItem="Nm4-tA-uIh" firstAttribute="centerY" secondItem="TY3-lH-rbl" secondAttribute="centerY" id="Ntm-BG-VSH"/>
                             <constraint firstAttribute="bottom" secondItem="TY3-lH-rbl" secondAttribute="bottom" constant="20" id="R9e-zU-YJ0"/>
+                            <constraint firstAttribute="trailing" secondItem="0Sh-BH-vhy" secondAttribute="trailing" constant="29" id="WN7-HD-J7c"/>
                             <constraint firstItem="Nm4-tA-uIh" firstAttribute="leading" secondItem="TY3-lH-rbl" secondAttribute="trailing" constant="15" id="ZPN-Cf-euK"/>
                             <constraint firstItem="mUd-hI-n6L" firstAttribute="leading" secondItem="u40-iR-CcH" secondAttribute="leading" id="bZO-tB-zZj"/>
                             <constraint firstAttribute="bottom" secondItem="mUd-hI-n6L" secondAttribute="bottom" id="okQ-Ua-wTz"/>
@@ -91,11 +117,16 @@
             <connections>
                 <outlet property="imgFriend" destination="TY3-lH-rbl" id="xtq-ld-73j"/>
                 <outlet property="lblName" destination="Nm4-tA-uIh" id="0Qf-5f-PeT"/>
+                <outlet property="lblcountmessage" destination="nTo-zQ-8yt" id="u7T-aR-bfy"/>
+                <outlet property="viewCountMessage" destination="0Sh-BH-vhy" id="2HI-MB-mjb"/>
             </connections>
             <point key="canvasLocation" x="159.42028985507247" y="90.736607142857139"/>
         </tableViewCell>
     </objects>
     <resources>
         <image name="Boss" width="75" height="75"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

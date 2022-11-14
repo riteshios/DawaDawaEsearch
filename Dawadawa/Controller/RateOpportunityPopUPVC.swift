@@ -18,8 +18,11 @@ class RateOpportunityPopUPVC: UIViewController {
     @IBOutlet weak var viewBG:UIView!
     @IBOutlet weak var viewRating: CosmosView!
     @IBOutlet weak var RatingSlider: UISlider!
-    private let startRating: Float = 3.7
     
+    @IBOutlet weak var lblRatingatheading: UILabel!
+    @IBOutlet weak var btnSubmit: UIButton!
+    
+    private let startRating: Float = 3.7
     var callbackClosure:(()->())?
     
     
@@ -31,6 +34,7 @@ class RateOpportunityPopUPVC: UIViewController {
     //    MARK: -------- view controller lifecycle ----------
         
         self.setup()
+        self.setuplanguage()
         viewRating.settings.starSize = 30
         viewRating.settings.starMargin = 4
         viewRating.settings.fillMode = .precise
@@ -182,6 +186,12 @@ extension RateOpportunityPopUPVC{
             
         }
     }
+}
+
+extension RateOpportunityPopUPVC{
     
-    
+    func setuplanguage(){
+        lblRatingatheading.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Rating", comment: "")
+        btnSubmit.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "Submit", comment: ""), for: .normal)
+    }
 }

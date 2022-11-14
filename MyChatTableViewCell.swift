@@ -11,6 +11,9 @@ class MyChatTableViewCell: UITableViewCell {
     
     @IBOutlet weak var imgFriend: UIImageView!
     @IBOutlet weak var lblName: UILabel!
+    @IBOutlet weak var lblcountmessage:UILabel!
+    @IBOutlet weak var viewCountMessage:UIView!
+    
     var callback:((String)->())?
     
     override func awakeFromNib() {

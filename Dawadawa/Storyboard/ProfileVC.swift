@@ -457,8 +457,6 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                             self.opportunitydetailsapi(oppr_id: oppid)
                             
                         }
-                        
-                        
                         if txt == "Delete"{
                             self.dismiss(animated: false){
                                 let vc = self.storyboard?.instantiateViewController(withIdentifier: DeleteOpportunityPopUPVC.getStoryboardID()) as! DeleteOpportunityPopUPVC
@@ -481,7 +479,6 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                                 }
                                 self.present(vc, animated: false)
                             }
-                            
                         }
                         
                         if txt == "Close"{
