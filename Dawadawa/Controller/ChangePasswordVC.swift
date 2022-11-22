@@ -1,9 +1,8 @@
 //
 //  ChangePasswordVC.swift
 //  Dawadawa
-//
 //  Created by Ritesh Gupta on 28/06/22.
-//
+
 
 import UIKit
 import SKFloatingTextField
@@ -12,9 +11,14 @@ class ChangePasswordVC: UIViewController {
     
     var callbackchangepassword:(()->())?
     
+    @IBOutlet weak var lblChangePassword: UILabel!
+    @IBOutlet weak var lblEnternew: UILabel!
+    @IBOutlet weak var btnChangePassword: UIButton!
     @IBOutlet weak var txtFieldNewPassword: SKFloatingTextField!
     @IBOutlet weak var txtFieldConfirmPassword: SKFloatingTextField!
     @IBOutlet weak var viewBtnChangePassword: UIView!
+    
+    //     MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,31 +28,31 @@ class ChangePasswordVC: UIViewController {
     }
     
     @IBAction func btnChangePasswordTapped(_ sender: UIButton) {
-//        self.callbackchangepassword?()
+        //        self.callbackchangepassword?()
         self.fieldValidations()
     }
     
-//   MARK: - Validation
+    //   MARK: - Validation
     
     func fieldValidations(){
-    if String.getString(self.txtFieldNewPassword.text).isEmpty{
-        self.showSimpleAlert(message: "Please Enter New Password")
-        return
-    }else if !String.getString(self.txtFieldNewPassword.text).isPasswordValidate(){
-        self.showSimpleAlert(message: Notifications.kValidPassword)
-        return
-    }else if String.getString(txtFieldConfirmPassword.text).isEmpty {
-        self.showSimpleAlert(message: Notifications.kConfirmpassword)
-        return
-}else if(txtFieldNewPassword.text != self.txtFieldConfirmPassword.text){
-    self.showSimpleAlert(message: Notifications.kconfirmMismatch)
-    return
-}
+        if String.getString(self.txtFieldNewPassword.text).isEmpty{
+            self.showSimpleAlert(message: "Please Enter New Password")
+            return
+        }else if !String.getString(self.txtFieldNewPassword.text).isPasswordValidate(){
+            self.showSimpleAlert(message: Notifications.kValidPassword)
+            return
+        }else if String.getString(txtFieldConfirmPassword.text).isEmpty {
+            self.showSimpleAlert(message: Notifications.kConfirmpassword)
+            return
+        }else if(txtFieldNewPassword.text != self.txtFieldConfirmPassword.text){
+            self.showSimpleAlert(message: Notifications.kconfirmMismatch)
+            return
+        }
         self.view.endEditing(true)
         self.changepasswordapi()
-//        self.callback2?()
+        //        self.callback2?()
     }
-
+    
 }
 
 
@@ -100,15 +104,15 @@ extension ChangePasswordVC{
                 let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
                 kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
             }
-//            headers["token"] = kSharedUserDefaults.getLoggedInAccessToken()
+            //            headers["token"] = kSharedUserDefaults.getLoggedInAccessToken()
         }
-
+        
         let params:[String : Any] = [
             "id":UserData.shared.id,
             "new_password":String.getString(self.txtFieldNewPassword.text),
             "confirm_password":String.getString(self.txtFieldConfirmPassword.text)
         ]
-
+        
         
         TANetworkManager.sharedInstance.requestApi(withServiceName:ServiceName.kchangepassword, requestMethod: .POST,
                                                    requestParameters:params, withProgressHUD: false)
@@ -136,8 +140,8 @@ extension ChangePasswordVC{
                     else if Int.getInt(dictResult["status"]) == 401{
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
-
-                   
+                    
+                    
                 default:
                     CommonUtils.showError(.info, String.getString(dictResult["message"]))
                 }
@@ -152,3 +156,17 @@ extension ChangePasswordVC{
 }
 
 
+
+                      
+                        
+extension ChangePasswordVC{
+    func setuplanguage(){
+        lblChangePassword.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Change Password", comment: "")
+        lblEnternew.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Enter new password for your account", comment: "")
+        txtFieldNewPassword.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "New password", comment: "")
+        txtFieldNewPassword.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "New password", comment: "")
+        txtFieldConfirmPassword.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Confirm password", comment: "")
+        txtFieldConfirmPassword.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Confirm password", comment: "")
+        btnChangePassword.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "Change Password", comment: ""), for: .normal)
+        }
+    }

@@ -1,9 +1,6 @@
-//
 //  SettingVC.swift
 //  Dawadawa
-//
 //  Created by Ritesh Gupta on 21/06/22.
-//
 
 import UIKit
 class SettingVC: UIViewController {
@@ -20,8 +17,6 @@ class SettingVC: UIViewController {
     @IBOutlet weak var lblprivacypolicy: UILabel!
     @IBOutlet weak var lblFaq: UILabel!
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setuplanguage()
@@ -34,7 +29,7 @@ class SettingVC: UIViewController {
     }
     
     @IBAction func btnDropTapped(_ sender: UIButton) {
-        let dataSource1 = ["English-US","Arabic"]
+        let dataSource1 = ["English-IND","Arabic"]
         kSharedAppDelegate?.dropDown(dataSource:dataSource1 , text: btndrop)
         {(Index ,item) in
             self.lblDropDownMenu.text = item
@@ -42,14 +37,16 @@ class SettingVC: UIViewController {
             
             if self.lblDropDownMenu.text == "English-IND"{
                 self.setupUpdateView(languageCode: "en")
-              
+                kSharedUserDefaults.setLanguage(language: "en")
+                self.setuplanguage()
                 //                       UserDefaults.standard.set("en", forKey: "Language")
                 //                       UIView.appearance().semanticContentAttribute = .forceLeftToRight
             }
             
             else if self.lblDropDownMenu.text == "Arabic"{
                 self.setupUpdateView(languageCode: "ar")
-                
+                kSharedUserDefaults.setLanguage(language: "ar")
+                self.setuplanguage()
                 //                       UserDefaults.standard.set("ar", forKey: "Language")
                 //                       UIView.appearance().semanticContentAttribute = .forceRightToLeft
             }
@@ -63,7 +60,6 @@ class SettingVC: UIViewController {
     }
     
     @IBAction func btnAboutUs(_ sender: UIButton) {
-        
         self.AboutusApi()
         //        guard let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WebViewVC") as? WebViewVC else
         //        {return}
@@ -76,7 +72,6 @@ class SettingVC: UIViewController {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: MysubscriptionVC.getStoryboardID()) as! MysubscriptionVC
         self.navigationController?.pushViewController(vc, animated: true)
     }
-    
     
     @IBAction func btntermsandCondition(_ sender: UIButton) {
         self.TermsAndConditionAPi()
@@ -100,15 +95,12 @@ class SettingVC: UIViewController {
         //        self.navigationController?.pushViewController(vc, animated: false)
     }
 }
-
-
 extension SettingVC{
     
     //   AboutUsAPi
     
     func AboutusApi(){
         CommonUtils.showHudWithNoInteraction(show: true)
-        
         
         TANetworkManager.sharedInstance.requestlangApi(withServiceName: ServiceName.kAboutUs, requestMethod: .GET, requestParameters:[:], withProgressHUD: false) { (result:Any?, error:Error?, errorType:ErrorType?,statusCode:Int?) in
             CommonUtils.showHudWithNoInteraction(show: false)
@@ -132,7 +124,6 @@ extension SettingVC{
                     else if  Int.getInt(dictResult["status"]) == 401{
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
-                    
                     // CommonUtils.showError(.info, String.getString(dictResult["message"]))
                 default:
                     CommonUtils.showError(.error, String.getString(dictResult["message"]))
@@ -191,7 +182,6 @@ extension SettingVC{
     
     func PrivacyPolicyApi(){
         CommonUtils.showHudWithNoInteraction(show: true)
-        
         
         TANetworkManager.sharedInstance.requestlangApi(withServiceName: ServiceName.kprivacypolicy, requestMethod: .GET, requestParameters:[:], withProgressHUD: false) { (result:Any?, error:Error?, errorType:ErrorType?,statusCode:Int?) in
             CommonUtils.showHudWithNoInteraction(show: false)

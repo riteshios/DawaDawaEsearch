@@ -15,12 +15,13 @@ class ChatVC: UIViewController{
     @IBOutlet weak var lblNameFriend: UILabel!
     @IBOutlet weak var btnSend: UIButton!
     
-   
+    
     var friendid = 0
     var friendname = ""
     var friendimage = ""
     var Messagedata = [Message_data]()
     var timer = Timer()
+    var isNewDataLoading = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +37,7 @@ class ChatVC: UIViewController{
         
         tableViewChat?.register(UINib(nibName: "ChatTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "ChatTableViewCell")
     }
+    
     @objc func update(){
         self.getmessageeapi()
     }
@@ -52,30 +54,30 @@ class ChatVC: UIViewController{
     
     @IBAction func btnMoreTapped(_ sender: UIButton) {
         
-//        let vc = self.storyboard?.instantiateViewController(withIdentifier: DeleteChatPopUPVC.getStoryboardID()) as! DeleteChatPopUPVC
-//        vc.modalTransitionStyle = .crossDissolve
-//        vc.modalPresentationStyle = .overCurrentContext
-//        vc.callback = { txt in
-//
-//            if txt == "Dismiss"{
-//                self.dismiss(animated: true)
-//            }
-//            if txt == "DeleteChat"{
-//                self.deleteChatapi()
-//                self.dismiss(animated: true)
-//            }
-//        }
-//
-//        self.present(vc, animated: false)
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: DeleteChatPopUPVC.getStoryboardID()) as! DeleteChatPopUPVC
+        vc.modalTransitionStyle = .crossDissolve
+        vc.modalPresentationStyle = .overCurrentContext
+        vc.callback = { txt in
+            
+            if txt == "Dismiss"{
+                self.dismiss(animated: true)
+            }
+            if txt == "DeleteChat"{
+                self.deleteChatapi()
+                self.dismiss(animated: true)
+            }
+        }
+        
+        self.present(vc, animated: false)
     }
     
     @IBAction func btnSendTapped(_ sender: UIButton) {
-        
         if self.txtViewMessage.text == ""{
             self.showSimpleAlert(message: "Please Enter Your Message")
         }
         else{
-            //self.tableViewScrollToBottom(animated: true)
+            //   self.tableViewScrollToBottom(animated: true)
+            self.isNewDataLoading = true
             self.sendmessageapi()
         }
     }
@@ -91,6 +93,21 @@ class ChatVC: UIViewController{
             }
         }
     }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if scrollView == tableViewChat{
+            if ((scrollView.contentOffset.y + scrollView.frame.size.height) >= (scrollView.contentSize.height)){
+                if !isNewDataLoading{
+                    isNewDataLoading = true
+                    print("isNewDataLoading", self.isNewDataLoading)
+                    //  self.getmessageeapi()
+                }
+            }else{
+                isNewDataLoading = false
+                print("isNewDataLoading", self.isNewDataLoading)
+            }
+        }
+    }
 }
 
 extension ChatVC:UITableViewDelegate,UITableViewDataSource {
@@ -102,8 +119,6 @@ extension ChatVC:UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableViewChat.dequeueReusableCell(withIdentifier: "ChatTableViewCell") as! ChatTableViewCell
         let obj = Messagedata[indexPath.row]
-        
-        
         
         var datetime = String.getString(obj.created_at)
         datetime.removeLast(8)
@@ -121,7 +136,6 @@ extension ChatVC:UITableViewDelegate,UITableViewDataSource {
         let timeStamp = dateFormatter.string(from: date!)
         print("timeStamp=-=-=\(timeStamp)")
         cell.setUser(user: obj.from, message: obj.message,date:timeStamp)
-        
         
         return cell
     }
@@ -152,7 +166,6 @@ extension ChatVC {
             "friend_id":friendid
         ]
         
-        
         TANetworkManager.sharedInstance.requestApi(withServiceName:ServiceName.kaddfriend, requestMethod: .POST,
                                                    requestParameters:params, withProgressHUD: false)
         {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
@@ -173,11 +186,11 @@ extension ChatVC {
                         if septoken[0] == "Bearer"{
                             kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
                         }
-                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        // CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         
                     }
                     else if Int.getInt(dictResult["status"]) == 401{
-                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        // CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                 default:
@@ -191,11 +204,10 @@ extension ChatVC {
             }
         }
     }
-    
     //    API send message
     
     func sendmessageapi(){
-        //        CommonUtils.showHud(show: true)
+        //   CommonUtils.showHud(show: true)
         
         if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
             let endToken = kSharedUserDefaults.getLoggedInAccessToken()
@@ -236,11 +248,11 @@ extension ChatVC {
                         }
                         self?.getmessageeapi()
                         self?.txtViewMessage.text = ""
-                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        // CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         
                     }
                     else if Int.getInt(dictResult["status"]) == 401{
-                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        // CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                 default:
@@ -300,28 +312,14 @@ extension ChatVC {
                         let message = kSharedInstance.getArray(withDictionary: dictResult["messages"])
                         self?.Messagedata = message.map{Message_data(data: kSharedInstance.getDictionary($0))}
                         print("DataAllMessageData===\(self?.Messagedata)")
-                        
-                        self?.msg = self?.Messagedata.last?.message ?? ""
-                        print("message",self?.msg)
-                        var counter = 0
-                        counter  = counter + 1
-                        print("counter", counter)
-                        if self?.msg != self?.Messagedata.last?.message{
-                            self?.tableViewChat?.reloadData()
+                        if self?.isNewDataLoading == true{
+                            self?.tableViewChat.reloadData()
                             self?.tableViewScrollToBottom(animated: true)
-                           
-                            
-                        }else if counter == 1{
-                            self?.tableViewChat?.reloadData()
-                            self?.tableViewScrollToBottom(animated: true)
-                            
-                        }else{
-                            return
                         }
-                       
                         // CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         
                     }
+                    
                     else if Int.getInt(dictResult["status"]) == 401{
                         //  CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
@@ -378,7 +376,7 @@ extension ChatVC {
                             kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
                         }
                         CommonUtils.showError(.info, String.getString(dictResult["messages"]))
-                        self?.tableViewChat.reloadData()
+                        self?.getmessageeapi()
                         
                     }
                     else if Int.getInt(dictResult["status"]) == 400{
@@ -396,5 +394,4 @@ extension ChatVC {
             }
         }
     }
-    
 }

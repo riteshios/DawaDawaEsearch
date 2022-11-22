@@ -1,17 +1,17 @@
 //  UserProfileDetailsVC.swift
 //  Dawadawa
-//
 //  Created by Ritesh Gupta on 02/09/22.
 
 import UIKit
+import Cosmos
 
 class UserProfileDetailsVC: UIViewController {
-    
     
     @IBOutlet weak var ImgUser: UIImageView!
     @IBOutlet weak var lblName: UILabel!
     @IBOutlet weak var lblMobile: UILabel!
     @IBOutlet weak var lblmail: UILabel!
+    @IBOutlet weak var viewRating:CosmosView!
     
     @IBOutlet weak var ViewRateUser: UIView!
     @IBOutlet weak var lblUserName: UILabel!
@@ -25,9 +25,13 @@ class UserProfileDetailsVC: UIViewController {
     var userid = 0
     var userdata:user_Data?
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewRating.settings.starSize = 27
+        viewRating.settings.starMargin = 4
+        viewRating.settings.fillMode = .half
+        viewRating?.didTouchCosmos = .none
+        viewRating?.didFinishTouchingCosmos = .none
         self.setuplanguage()
         
         if UserData.shared.id == self.userid{
@@ -50,6 +54,9 @@ class UserProfileDetailsVC: UIViewController {
         self.lblRating.text = String.getString(self.userdata?.rating)
         self.lblUserName.text = String.getString(self.userdata?.name)
         self.lblAboutDescription.text = String.getString(self.userdata?.about)
+        let newRatingValue = Double.getDouble(userdata?.rating)
+        self.viewRating.rating = newRatingValue
+        self.lblRating.text = String.getString(newRatingValue)
         
         if let url = URL(string: String.getString(self.userdata?.image)){
             debugPrint("url...",  url)
@@ -64,16 +71,12 @@ class UserProfileDetailsVC: UIViewController {
             
             task.resume()
         }
-        
-        
     }
-    
     //  MARK: - @IBAction
     
     @IBAction func btnBackTapped(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: false)
     }
-    
     
     @IBAction func btnRateUserTapped(_ sender: UIButton) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: RateUserPopUpVC.getStoryboardID()) as! RateUserPopUpVC
@@ -86,10 +89,7 @@ class UserProfileDetailsVC: UIViewController {
         
         self.present(vc, animated: false)
     }
-    
 }
-
-
 
 //    MARK: - API Call
 extension UserProfileDetailsVC{
@@ -107,8 +107,6 @@ extension UserProfileDetailsVC{
                 kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
             }
         }
-        
-        
         TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName: "api/userData/\(self.userid)", requestMethod: .GET, requestParameters:[:], withProgressHUD: false) { (result:Any?, error:Error?, errorType:ErrorType?,statusCode:Int?) in
             CommonUtils.showHudWithNoInteraction(show: false)
             if errorType == .requestSuccess {
@@ -133,8 +131,6 @@ extension UserProfileDetailsVC{
                     else if  Int.getInt(dictResult["status"]) == 401{
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
-                    
-                    
                 default:
                     CommonUtils.showError(.error, String.getString(dictResult["message"]))
                 }
@@ -145,7 +141,6 @@ extension UserProfileDetailsVC{
                 CommonUtils.showToastForDefaultError()
             }
         }
-        
     }
 }
 

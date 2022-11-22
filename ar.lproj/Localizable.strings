@@ -186,3 +186,123 @@
 // MARK: - SearchVC
 
 "Search opportunities" = "فرص البحث";
+
+// MARK: - CurrentLocationVC
+
+"Current Location" = "الموقع الحالي";
+"Use this location" = "استخدم هذا الموقع";
+
+// MARK: - BuyPlanVC
+
+"Investor" = "المستثمر";
+"Business Owner" = "صاحب العمل";
+"Service Provider"= "مقدم الخدمة";
+"Choose this plan"="اختر هذه الخطة";
+
+// MARK: - ChoosePlanVC
+
+"Choose plan" = "اختر الخطة";
+
+// MARK: - PaymentVC
+
+"Pay" = "يدفع";
+
+// MARK: - NumberChangedSuccessfulPopUpVC
+
+"Number changed successfully"="تم تغيير الرقم بنجاح";
+"Your mobile number changed successfully"="تم تغيير رقم هاتفك المحمول بنجاح";
+"Close"="قريب";
+
+// MARK: - ChangePasswordOTPVerifyVC
+
+"Verify Account" = "التحقق من الحساب";
+"Password change code is sent on your email address" = "يتم إرسال رمز تغيير كلمة المرور على عنوان بريدك الإلكتروني";
+"Wrong code entered!" = "تم إدخال رمز خاطئ!";
+"Resend code" = "أعد إرسال الرمز";
+"Verify" = "يؤكد";
+
+// MARK: - ChangePasswordVC
+
+"Change Password" = "غير كلمة السر";
+"Enter new password for your account" = "أدخل كلمة مرور جديدة لحسابك";
+"New password" = "كلمة السر الجديدة";
+"Confirm password" = "تأكيد كلمة المرور";
+
+// MARK: - PasswordChangedSuccessfullyPopUpVC
+
+"Password changed successfully" = "تم تغيير الرقم السري بنجاح";
+"Your password changed successfully, now you can loggin to your account" = "تم تغيير كلمة المرور الخاصة بك بنجاح ، يمكنك الآن تسجيل الدخول إلى حسابك";
+"Close" = "قريب";
+
+// MARK: - VerifyEmailOTPVC
+
+"Verify it’s you" = "إثبات هويتك";
+"Phone number verification code is sent on your email" = "يتم إرسال رمز التحقق من رقم الهاتف على بريدك الإلكتروني";
+"Wrong code entered!" = "تم إدخال رمز خاطئ!";
+"Resend code" = "أعد إرسال الرمز";
+"Verify" = "يؤكد";
+
+// MARK: - ChangeEmailVC
+
+"Change Email" = "تغيير الايميل";
+"Enter new email address for your account" = "أدخل عنوان البريد الإلكتروني الجديد لحسابك";
+"Enter new email address" = "أدخل عنوان البريد الإلكتروني الجديد";
+"Send code" = "أرسل الرمز";
+
+// MARK: - VerifyNewEmailOTPVC
+
+"Verify new email address" = "تحقق من عنوان البريد الإلكتروني الجديد";
+"Email verification code is sent on your email address" = "يتم إرسال رمز التحقق من البريد الإلكتروني على عنوان بريدك الإلكتروني";
+"Wrong code entered!" = "تم إدخال رمز خاطئ!";
+"Resend code" = "أعد إرسال الرمز";
+
+// MARK: - EmailChangedSuccessfullyPopUpVC
+
+"Email changed successfully" = "تم تغيير البريد الإلكتروني بنجاح";
+"Your email address changed successfully" = "تم تغيير عنوان بريدك الإلكتروني بنجاح";
+"Close" = "قريب";
+
+// MARK: - EditProfileVC
+
+"Edit profile" = "تعديل الملف الشخصي";
+"Phone number" = "رقم الهاتف";
+"Change" = "يتغيرون";
+"Email address" = "عنوان البريد الالكترونى";
+"First name" = "الاسم الاول";
+"Last name" = "اللقب";
+"Date of birth" = "تاريخ الولادة";
+"State" = "حالة";
+"Locality" = "المنطقة";
+"Select gender" = "حدد نوع الجنس";
+"Select user type*" = "حدد نوع المستخدم *";
+"Whatsapp number" = "رقم الواتس اب";
+"Save changes" = "احفظ التغييرات";
+
+// MARK: - ContactUsVC
+
+"Contact Us" = "اتصل بنا";
+"Do you have anything to say? Connect with us!" = "هل لديك شيء لتقوله؟ اتصل بنا!";
+"Select query type" = "حدد نوع الاستعلام";
+"Send" = "إرسال";
+
+// MARK: - SelectCategoryVC
+
+"Select Category" = "اختر الفئة";
+
+// MARK: - RockPitOpportunityVC
+
+"Select images" = "حدد الصور";
+"Select documents" = "حدد المستندات";
+"Select subcategory" = "حدد فئة فرعية";
+"Title" = "عنوان";
+"State" = "حالة";
+"Locality" = "المنطقة";
+"Location name" = "اسم الموقع";
+"Whatsapp number" = "رقم الواتس اب";
+"Price in US Dollar (optional)" = "السعر بالدولار الأمريكي (اختياري)";
+"Pin Location on map(optional)" = "تثبيت الموقع على الخريطة (اختياري)";
+"Looking for" = "البحث عن";
+"Basic" = "أساسي";
+"Featured" = "";
+"Premium" = "الممتازة";
+"Create opportunity" = "خلق فرصة";

@@ -1,9 +1,6 @@
-//
 //  RateOpportunityPopUPVC.swift
 //  Dawadawa
-//
 //  Created by Ritesh Gupta on 01/09/22.
-//
 
 import UIKit
 import Cosmos
@@ -58,13 +55,12 @@ class RateOpportunityPopUPVC: UIViewController {
         callbackClosure?()
     }
     
-    
     func setup(){
         Viewmain?.clipsToBounds = true
         Viewmain?.layer.cornerRadius = 25
         Viewmain?.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
         Viewmain?.addShadowWithBlurOnView(Viewmain, spread: 0, blur: 10, color: .black, opacity: 0.16, OffsetX: 0, OffsetY: 1)
-//        self.viewSubmit?.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
+        self.viewSubmit?.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
         
     }
     
@@ -72,7 +68,7 @@ class RateOpportunityPopUPVC: UIViewController {
     
     
     @IBAction func btnDismissTapped(_ sender: UIButton) {
-        //        self.callback?("Dismiss")
+//        self.callback?("Dismiss")
         self.dismiss(animated: true)
     }
     
@@ -112,7 +108,6 @@ class RateOpportunityPopUPVC: UIViewController {
         self.lblRating?.text = RateOpportunityPopUPVC.formatValue(rating)
         lblRating?.textColor = UIColor(red: 183/255, green: 186/255, blue: 204/255, alpha: 1)
     }
-    
 }
 
 extension RateOpportunityPopUPVC{

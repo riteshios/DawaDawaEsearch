@@ -1,18 +1,15 @@
-//
 //  LoginVC.swift
 //  Dawadawa
-//
+
 //  Created by Ritesh Gupta on 11/06/22.
-//
 
 import UIKit
 import SKFloatingTextField
 import GoogleSignIn
 
-
 class LoginVC: UIViewController {
     
-//     MARK: - Properties
+    //     MARK: - Properties
     
     @IBOutlet weak var viewMain: UIView!
     @IBOutlet weak var viewButtonLogin: UIView!
@@ -38,17 +35,12 @@ class LoginVC: UIViewController {
         super.viewDidLoad()
         self.setup()
         self.setuplanguage()
-        
+        txtFieldPassword.isSecureTextInput = true
     }
-    
-    
-//    MARK: - LIfe Cyclye
-    
-
-    
+    //    MARK: - LIfe Cycle
     
     func setup(){
-//        self.txtFieldPhoneNumer.keyBoardType = .numberPad
+        //        self.txtFieldPhoneNumer.keyBoardType = .numberPad
         viewMain.clipsToBounds = true
         viewMain.layer.cornerRadius = 25
         viewMain.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
@@ -63,37 +55,19 @@ class LoginVC: UIViewController {
     @IBAction func btnGoogleTapped(_ sender: UIButton) {
         let signInConfig = GIDConfiguration.init(clientID: "636451100488-1k8eq045hd097ar24g78743ll5ufhhsn.apps.googleusercontent.com")
         
-        
-        
         GIDSignIn.sharedInstance.signIn(with: signInConfig, presenting: self) { user, error in
-            
             guard error == nil else { return }
-            
             guard let user = user else { return }
-            
-            
-            
             if let profiledata = user.profile {
-                
-                
-                
                 let userId : String = user.userID ?? ""
-                
                 let username : String = profiledata.givenName ?? ""
-                
                 let email : String = profiledata.email
-                
-                
-                
                 if let imgurl = user.profile?.imageURL(withDimension: 100) {
-                    
                     let absoluteurl : String = imgurl.absoluteString
-                    
                     //HERE CALL YOUR SERVER APP
                 }
                 self.googleSigninApi(accountName: username, email: email, googleId: userId)
-                //                           self.googleloginApi(accountName: givenName, email: email, googleId: userId)
-                
+                //   self.googleloginApi(accountName: givenName, email: email, googleId: userId)
             }
         }
     }
@@ -126,7 +100,6 @@ class LoginVC: UIViewController {
         kSharedAppDelegate?.makeRootViewController()
     }
     
-    
     // MARK: -validation
     
     func validation(){
@@ -154,31 +127,31 @@ class LoginVC: UIViewController {
         self.view.endEditing(true)
         self.loginapi()
     }
-//    func validation(){
-//        if String.getString(self.txtFieldPhoneNumer.text).isEmpty
-//        {
-//            self.showSimpleAlert(message: Notifications.kEnterMobileNumber)
-//            return
-//        }
-//        else if !String.getString(self.txtFieldPhoneNumer.text).isPhoneNumber()
-//        {
-//            self.showSimpleAlert(message: Notifications.kEnterValidMobileNumber)
-//            return
-//        }
-//
-//        else if String.getString(self.txtFieldPassword.text).isEmpty
-//        {
-//            showSimpleAlert(message: Notifications.kPassword)
-//            return
-//        }
-//        else if !String.getString(txtFieldPassword.text).isValidPassword()
-//        {
-//            self.showSimpleAlert(message: Notifications.kValidPassword)
-//            return
-//        }
-//        self.view.endEditing(true)
-//        self.loginapi()
-//    }
+    //    func validation(){
+    //        if String.getString(self.txtFieldPhoneNumer.text).isEmpty
+    //        {
+    //            self.showSimpleAlert(message: Notifications.kEnterMobileNumber)
+    //            return
+    //        }
+    //        else if !String.getString(self.txtFieldPhoneNumer.text).isPhoneNumber()
+    //        {
+    //            self.showSimpleAlert(message: Notifications.kEnterValidMobileNumber)
+    //            return
+    //        }
+    //
+    //        else if String.getString(self.txtFieldPassword.text).isEmpty
+    //        {
+    //            showSimpleAlert(message: Notifications.kPassword)
+    //            return
+    //        }
+    //        else if !String.getString(txtFieldPassword.text).isValidPassword()
+    //        {
+    //            self.showSimpleAlert(message: Notifications.kValidPassword)
+    //            return
+    //        }
+    //        self.view.endEditing(true)
+    //        self.loginapi()
+    //    }
 }
 extension LoginVC{
     
@@ -191,7 +164,7 @@ extension LoginVC{
         //floatingTextField.setRectTFUI()
         //floatingTextField.setRoundTFUI()
         //floatingTextField.setOnlyBottomBorderTFUI()
-        //        textField.setCircularTFUI()
+//                textField.setCircularTFUI()
         textField.setRoundTFUI()
         textField.delegate = self
         //floatingTextField.errorLabelText = "Error"
@@ -217,9 +190,7 @@ extension LoginVC : SKFlaotingTextFieldDelegate {
 // Login Api
 extension LoginVC{
     func loginapi(){
-        
         CommonUtils.showHud(show: true)
-        
         
         let params:[String : Any] = [
             "phone":String.getString(self.txtFieldPhoneNumer.text),
@@ -227,36 +198,32 @@ extension LoginVC{
             "device_type":"1",
             "device_id":kSharedUserDefaults.getDeviceToken()
         ]
-
+        
         TANetworkManager.sharedInstance.requestApi(withServiceName:ServiceName.klogin, requestMethod: .POST,
                                                    requestParameters:params, withProgressHUD: false)
         {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
             
             CommonUtils.showHudWithNoInteraction(show: false)
-            
             if errorType == .requestSuccess {
-                
                 let dictResult = kSharedInstance.getDictionary(result)
-                
                 switch Int.getInt(statusCode) {
                 case 200:
-                   
                     if Int.getInt(dictResult["status"]) == 200{
                         UserData.shared.isskiplogin = false
-                       
+                        
                         let data = kSharedInstance.getDictionary(dictResult["data"])
                         kSharedUserDefaults.setLoggedInUserDetails(loggedInUserDetails: data)
                         kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: String.getString(dictResult[kLoggedInAccessToken]))
                         UserData.shared.saveData(data: data, token: String.getString(dictResult[kLoggedInAccessToken]))
-
+                        
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         kSharedAppDelegate?.makeRootViewController()
                         
                         cameFrom = ""
-
+                        
                     }
                     else if  Int.getInt(dictResult["status"]) == 400{
-//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     else if Int.getInt(dictResult["status"]) == 401{
@@ -274,55 +241,54 @@ extension LoginVC{
         }
     }
     //    GoogleLoginApi
-        func googleSigninApi(accountName: String, email: String, googleId: String){
-            CommonUtils.showHudWithNoInteraction(show: true)
-            
-            if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
-                let endToken = kSharedUserDefaults.getLoggedInAccessToken()
-                let septoken = endToken.components(separatedBy: " ")
-                if septoken[0] != "Bearer"{
-                    let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
-                    kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
-                }
-                //            headers["token"] = kSharedUserDefaults.getLoggedInAccessToken()
+    func googleSigninApi(accountName: String, email: String, googleId: String){
+        CommonUtils.showHudWithNoInteraction(show: true)
+        
+        if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
+            let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+            let septoken = endToken.components(separatedBy: " ")
+            if septoken[0] != "Bearer"{
+                let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
+                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
             }
-            
-            let params:[String:Any] = ["username":accountName,
-                                       "email":email,
-                                       "g_id":googleId,
-                                       "device_type":"1",
-                                       "device_id":kSharedUserDefaults.getDeviceToken()
-            ]
-            
-            TANetworkManager.sharedInstance.requestApi(withServiceName: ServiceName.kgooglelogin, requestMethod: .POST, requestParameters: params, withProgressHUD: false) { (result:Any?,error: Error?, errorType:ErrorType, statussCode:Int?) in
-                if errorType == .requestSuccess{
-                    let dictResult = kSharedInstance.getDictionary(result)
-                    switch Int.getInt(statussCode) {
-                    case 200:
-                        if Int.getInt(dictResult["status"]) == 200{
-                            let data = kSharedInstance.getDictionary(dictResult["data"])
-                            kSharedUserDefaults.setLoggedInUserDetails(loggedInUserDetails: data)
-                            kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: String.getString(dictResult[kLoggedInAccessToken]))
-                            UserData.shared.saveData(data: data, token:  String.getString(dictResult[kLoggedInAccessToken]))
-//                            UserData.shared.saveData(data: data, token: "")
-                            kSharedAppDelegate?.makeRootViewController()
-                        }
-                        else if  Int.getInt(dictResult["status"]) == 400{
-                            CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                        }
-                    default:
+            //            headers["token"] = kSharedUserDefaults.getLoggedInAccessToken()
+        }
+        
+        let params:[String:Any] = ["username":accountName,
+                                   "email":email,
+                                   "g_id":googleId,
+                                   "device_type":"1",
+                                   "device_id":kSharedUserDefaults.getDeviceToken()
+        ]
+        
+        TANetworkManager.sharedInstance.requestApi(withServiceName: ServiceName.kgooglelogin, requestMethod: .POST, requestParameters: params, withProgressHUD: false) { (result:Any?,error: Error?, errorType:ErrorType, statussCode:Int?) in
+            if errorType == .requestSuccess{
+                let dictResult = kSharedInstance.getDictionary(result)
+                switch Int.getInt(statussCode) {
+                case 200:
+                    if Int.getInt(dictResult["status"]) == 200{
+                        let data = kSharedInstance.getDictionary(dictResult["data"])
+                        kSharedUserDefaults.setLoggedInUserDetails(loggedInUserDetails: data)
+                        kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: String.getString(dictResult[kLoggedInAccessToken]))
+                        UserData.shared.saveData(data: data, token:  String.getString(dictResult[kLoggedInAccessToken]))
+                        //                            UserData.shared.saveData(data: data, token: "")
+                        kSharedAppDelegate?.makeRootViewController()
+                    }
+                    else if  Int.getInt(dictResult["status"]) == 400{
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
-                }else if errorType == .noNetwork {
-                    CommonUtils.showToastForInternetUnavailable()
-                    
-                } else {
-                    CommonUtils.showToastForDefaultError()
+                default:
+                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
                 }
+            }else if errorType == .noNetwork {
+                CommonUtils.showToastForInternetUnavailable()
+                
+            } else {
+                CommonUtils.showToastForDefaultError()
             }
         }
-
     }
+}
 extension LoginVC{
     
     func setuplanguage(){
@@ -341,8 +307,5 @@ extension LoginVC{
         txtFieldPassword.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Password", comment: "")
         txtFieldPhoneNumer.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Phone number/Email*", comment: "")
         txtFieldPhoneNumer.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Phone number/Email*", comment: "")
-        
     }
 }
-
-

@@ -10,6 +10,7 @@ import UIKit
 class OpportunitypostedTableViewCell: UITableViewCell {
     
     @IBOutlet weak var lblshowdata: UILabel!
+    @IBOutlet weak var lbltotalused: UILabel!
     @IBOutlet weak var lblshowplan: UILabel!
     @IBOutlet weak var lblshowOpportunity: UILabel!
     @IBOutlet weak var lblDate: UILabel!
@@ -60,17 +61,16 @@ class OpportunitypostedTableViewCell: UITableViewCell {
     @IBAction func btnPremiumTapped(_ sender: UIButton){
         sender.isSelected = !sender.isSelected
         if self.btnPremium.isSelected == true{
-            
             self.viewAllline.isHidden = true
             self.lblAll.textColor = .gray
             self.viewPremiumLine.isHidden = false
             self.viewFeaturedLine.isHidden = true
             self.lblpremium.textColor = UIColor(red: 21, green: 114, blue: 161)
             self.lblFeatured.textColor = .gray
-            
             self.callbackbtnSelect?("Premium")
         }
     }
+    
     @IBAction func btnFeaturedTapped(_ sender: UIButton){
         sender.isSelected = !sender.isSelected
         if self.btnFeatured.isSelected == true{

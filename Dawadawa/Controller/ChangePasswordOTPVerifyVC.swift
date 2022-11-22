@@ -1,9 +1,6 @@
-//
 //  ChangePasswordOTPVerifyVC.swift
 //  Dawadawa
-//
 //  Created by Ritesh Gupta on 28/06/22.
-//
 
 import UIKit
 
@@ -26,18 +23,26 @@ class ChangePasswordOTPVerifyVC: UIViewController {
     @IBOutlet weak var viewOtp6: UIView!
     
     @IBOutlet weak var viewVerify: UIView!
+    @IBOutlet weak var lblVerifyAccount: UILabel!
+    @IBOutlet weak var lblPasswordChange: UILabel!
+    @IBOutlet weak var lblWrongCode: UILabel!
+    @IBOutlet weak var btnResendCode: UIButton!
+    @IBOutlet weak var btnVerify: UIButton!
+    
+    
+    
     
     var callbackotp:(()->())?
-    
     var otp = ""
-    
-    
+
+   
+//     MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setuplanguage()
         self.setup()
-        
     }
-//     MARK: - Life Cycle
+    
     func setup(){
         self.txtfieldOtp1.delegate = self
         self.txtfieldOtp2.delegate = self
@@ -251,5 +256,15 @@ extension ChangePasswordOTPVerifyVC{
             }
         }
     }
+}
 
+// MARK: - Localization
+extension ChangePasswordOTPVerifyVC{
+    func setuplanguage(){
+        lblVerifyAccount.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Verify Account", comment: "")
+        lblPasswordChange.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Password change code is sent on your email address", comment: "")
+        lblWrongOtp.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Wrong code entered!", comment: "")
+        btnResendCode.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "Resend code", comment: ""), for: .normal)
+        btnVerify.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "Verify", comment: ""), for: .normal)
+    }
 }

@@ -1,7 +1,5 @@
-//
 //  RockPitOpportunityVC.swift
 //  Dawadawa
-//
 //  Created by Ritesh Gupta on 07/07/22.
 
 
@@ -9,6 +7,7 @@ import UIKit
 import SKFloatingTextField
 import Alamofire
 import SwiftyJSON
+import MobileCoreServices
 
 class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout, UIDocumentPickerDelegate{
     
@@ -57,6 +56,12 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
     @IBOutlet weak var UploadimageCollectionView: UICollectionView!
     @IBOutlet weak var UploaddocumentCollectionView: UICollectionView!
     
+    @IBOutlet weak var viewSelectImage: UIView!
+    @IBOutlet weak var lblSelectImages: UILabel!
+    @IBOutlet weak var viewSelectDocument: UIView!
+    @IBOutlet weak var lblSelectdocuments: UILabel!
+    @IBOutlet weak var btnCreateOpp: UIButton!
+    
     var stateid:Int?
     var localityid:Int?
     var subcatid:Int?
@@ -65,7 +70,6 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
     var imagearr = [UIImage]()
     var documentarr = [URL]()
     var docummentarray = [String]()
-    
     
     var isSelectimage = false
     var isSelectDocument = false
@@ -101,7 +105,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
     var latitude = Double()
     var longitude = Double()
     
-//    Get Plan Amount
+    //    Get Plan Amount
     var planamount:plan_amount?
     var amount = 0
     
@@ -109,10 +113,10 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setuplanguage()
         self.getsubcategoryapi()
         self.getstateapi()
         self.getlookingforapi(id: self.lookingforid ?? 0)
-        
         
         self.setup()
         
@@ -127,9 +131,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
                 self.viewSelectCategoryTop.constant = 420
                 self.fetdata()
             }
-           
         }
-        
         self.UploadimageCollectionView.reloadData()
     }
     
@@ -137,14 +139,14 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
         
         self.txtFieldMobileNumber.keyBoardType = .numberPad
         self.txtFieldWhatsappNumber.keyBoardType = .numberPad
+        self.viewSelectImage.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
+        self.viewSelectDocument.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
         self.viewCreateOpportunity.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
         self.setTextFieldUI(textField: txtFieldTitle, place: "Title", floatingText: "Title")
         self.setTextFieldUI(textField: txtFieldLocationName, place: "Location name", floatingText: "Location name")
-        
         self.setTextFieldUI(textField: txtFieldMobileNumber, place: "Mobile number", floatingText: "Mobile number")
         self.setTextFieldUI(textField: txtFieldWhatsappNumber, place: "WhatsApp number", floatingText: "WhatsApp number")
         self.setTextFieldUI(textField: txtFieldPricing, place: "Price in US Dollar (optional)", floatingText: "Price in US Dollar (optional)")
-        
     }
     
     func fetdata(){
@@ -154,8 +156,8 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
         self.btnCreate_UpdateOpp.setTitle("Update opportunity", for: .normal)
         self.lblSubCategory.text = self.userTimeLineoppdetails?.subcategory_name
         self.txtFieldTitle.text = self.userTimeLineoppdetails?.title
-       // self.lblState.text = self.userTimeLineoppdetails?.opp_state
-       // self.lblLocality.text = self.userTimeLineoppdetails?.opp_locality
+        // self.lblState.text = self.userTimeLineoppdetails?.opp_state
+        // self.lblLocality.text = self.userTimeLineoppdetails?.opp_locality
         self.txtFieldLocationName.text = self.userTimeLineoppdetails?.location_name
         
         self.TextViewDescription.text = self.userTimeLineoppdetails?.description
@@ -178,8 +180,6 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
             self.viewPremium.backgroundColor = UIColor(red: 21, green: 114, blue: 161)
             self.lblPremium.textColor = .white
         }
-        
-        
     }
     // MARK: - @IBActions
     
@@ -299,7 +299,6 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
         }
     }
     
-    
     @IBAction func btnSelectSubCategoryTapped(_ sender: UIButton) {
         
         kSharedAppDelegate?.dropDown(dataSource: getSubCategorylist.map{String.getString($0.sub_cat_name)}, text: btnSubCategory) { (index, item) in
@@ -320,8 +319,6 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
             debugPrint("State idddd.....btnnnnt",  self.stateid = id)
             self.getlocalityapi(id: self.stateid ?? 0 )
             self.isSelectState = true
-            
-            
         }
         
     }
@@ -394,9 +391,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
             self.viewFeature.backgroundColor = .white
             self.lblFeature.textColor =  UIColor(red: 21, green: 114, blue: 161)
             
-            
             self.isSelectopp_planPremium = true
-            
         }
     }
     
@@ -407,7 +402,6 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
         else{
             self.Validation()
         }
-        
     }
     
     //    MARK: - Validation
@@ -453,16 +447,16 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
             showSimpleAlert(message: Notifications.kDescription)
             return
         }
-//        else if String.getString(self.txtFieldMobileNumber.text).isEmpty
-//        {
-//            showSimpleAlert(message: Notifications.kEnterMobileNumber)
-//            return
-//        }
-//        else if !String.getString(self.txtFieldMobileNumber.text).isPhoneNumber()
-//        {
-//            self.showSimpleAlert(message: Notifications.kEnterValidMobileNumber)
-//            return
-//        }
+        //        else if String.getString(self.txtFieldMobileNumber.text).isEmpty
+        //        {
+        //            showSimpleAlert(message: Notifications.kEnterMobileNumber)
+        //            return
+        //        }
+        //        else if !String.getString(self.txtFieldMobileNumber.text).isPhoneNumber()
+        //        {
+        //            self.showSimpleAlert(message: Notifications.kEnterValidMobileNumber)
+        //            return
+        //        }
         
         else if self.isSelectLookingFor == false{
             self.showSimpleAlert(message: "Please Select looking For")
@@ -472,17 +466,14 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
             self.showSimpleAlert(message: "Please Select Opportunity Plan")
             return
         }
-        else if self.isSelectopp_planPremium == true{
-            if self.isSelectimage == false && self.imagearr.count == 0{
-                self.showSimpleAlert(message: "Please add at least one opportunity photo")
-                return
-            }
+        else if self.isSelectopp_planPremium == true && self.isSelectimage == false && self.imagearr.count == 0{
+            self.showSimpleAlert(message: "Please add at least one opportunity photo")
             return
         }
-        
         self.view.endEditing(true)
         self.createopportunityapi()
     }
+    
     
     // MARK: - Collection view
     
@@ -496,7 +487,6 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
                 return self.imagearr.count
             }
             
-            
         case self.UploaddocumentCollectionView:
             if self.isedit == "True"{
                 return self.docarray.count
@@ -504,9 +494,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
             else {
                 return self.docummentarray.count
             }
-            
-            
-        default: return 5
+            default: return 5
         }
     }
     
@@ -518,7 +506,6 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
             if self.isedit == "True"{
                 let imgurl = self.imgarray[indexPath.item].imageurl
                 print("-=-imgurl-=-\(imgurl)")
-                
                 
                 if imgurl == ""
                 {
@@ -572,7 +559,6 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
                 cell.callbackclose = {
                     self.docummentarray.remove(at: indexPath.row)
                     self.UploaddocumentCollectionView.reloadData()
-                    
                 }
             }
             return cell
@@ -580,10 +566,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
         default: return UICollectionViewCell()
             
         }
-        
     }
-    
-    
     //  MARK: - Document Picker
     
     
@@ -614,20 +597,17 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
             self.present(alert, animated: true, completion: nil)
         }
         
+//        let documentPicker = UIDocumentPickerViewController(documentTypes: ["com.apple.iwork.pages.pages", "com.apple.iwork.numbers.numbers", "com.apple.iwork.keynote.key","public.image", "com.apple.application", "public.item","public.data", "public.content", "public.audiovisual-content", "public.movie", "public.audiovisual-content", "public.video", "public.audio", "public.text", "public.data", "public.zip-archive", "com.pkware.zip-archive", "public.composite-content", "public.text"], in: .import)
         
-        let documentPicker = UIDocumentPickerViewController(documentTypes: ["com.apple.iwork.pages.pages", "com.apple.iwork.numbers.numbers", "com.apple.iwork.keynote.key","public.image", "com.apple.application", "public.item","public.data", "public.content", "public.audiovisual-content", "public.movie", "public.audiovisual-content", "public.video", "public.audio", "public.text", "public.data", "public.zip-archive", "com.pkware.zip-archive", "public.composite-content", "public.text"], in: .import)
-        
-        let documentTypes =  ["public.image", "com.apple.application", "public.item","public.data", "public.content", "public.audiovisual-content", "public.movie", "public.audiovisual-content", "public.video", "public.audio", "public.text", "public.data", "public.composite-content", "public.text"]
-        
+//        let documentTypes =  ["public.image", "com.apple.application", "public.item","public.data", "public.content", "public.audiovisual-content", "public.movie", "public.audiovisual-content", "public.video", "public.audio", "public.text", "public.data", "public.composite-content", "public.text"]
+        let documentType = [kUTTypePDF as String]
         //[String(kUTTypeText),String(kUTTypeContent),String(kUTTypeItem),String(kUTTypeData)
-        let documentsPicker = UIDocumentPickerViewController(documentTypes: documentTypes, in: .import)
+        let documentsPicker = UIDocumentPickerViewController(documentTypes: documentType, in: .import)
         //Call Delegate
         documentsPicker.delegate = self
         self.present(documentsPicker, animated: true)
         
     }
-    
-    
     
     func documentMenu(_ documentMenu: UIDocumentMenuViewController, didPickDocumentPicker documentPicker: UIDocumentPickerViewController) {
         documentPicker.delegate = self
@@ -665,18 +645,15 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
     func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
         self.dismiss(animated: true, completion: nil)
     }
-    
-    
     func savePdf(url:URL, fileName:String) {
         
     }
     
     func updateImageViewWithExtension(_ fileExtention:String) {
         
-        
     }
-    
 }
+
 
 extension RockPitOpportunityVC{
     
@@ -711,6 +688,7 @@ extension RockPitOpportunityVC : SKFlaotingTextFieldDelegate {
     }
 }
 
+
 //MARK: - API Call
 extension RockPitOpportunityVC{
     //
@@ -741,7 +719,6 @@ extension RockPitOpportunityVC{
                             if String.getString(self.userTimeLineoppdetails?.opp_state) == String.getString(self.getstatelist[i].id){
                                 self.lblState.text = String.getString(self.getstatelist[i].state_name)
                                 return
-                                
                             }
                         }
                     }
@@ -1182,7 +1159,7 @@ extension RockPitOpportunityVC{
                         if septoken[0] == "Bearer"{
                             kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
                         }
-//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         
                         if self.planpayment == 0{
                             kSharedAppDelegate?.makeRootViewController()
@@ -1197,7 +1174,7 @@ extension RockPitOpportunityVC{
                             vc.callbackamount = { Price in
                                 self.amount = Price
                                 
-                            print("amount=-=-\(self.amount)")
+                                print("amount=-=-\(self.amount)")
                                 
                             }
                             
@@ -1310,7 +1287,7 @@ extension RockPitOpportunityVC{
                         
                     }
                     else if  Int.getInt(dictResult["status"]) == 401{
-                       // CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        // CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                 default:
@@ -1324,7 +1301,7 @@ extension RockPitOpportunityVC{
         }
     }
     
-//    Delete image Api
+    //    Delete image Api
     
     func deleteimageapi(imageid:Int){
         CommonUtils.showHud(show: true)
@@ -1362,7 +1339,7 @@ extension RockPitOpportunityVC{
                         if septoken[0] == "Bearer"{
                             kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
                         }
-
+                        
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         
                     }
@@ -1370,7 +1347,7 @@ extension RockPitOpportunityVC{
                     else if  Int.getInt(dictResult["status"]) == 404{
                         
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
-//                        kSharedAppDelegate?.makeRootViewController()
+                        //                        kSharedAppDelegate?.makeRootViewController()
                     }
                     
                 default:
@@ -1382,8 +1359,41 @@ extension RockPitOpportunityVC{
             } else {
                 CommonUtils.showToastForDefaultError()
             }
-            
         }
     }
-    
+}
+
+
+
+
+
+
+
+
+// MARK: - Localisation
+extension RockPitOpportunityVC{
+    func setuplanguage(){
+        lblSelectImages.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Select images", comment: "")
+        lblSelectdocuments.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Select documents", comment: "")
+        lblSubCategory.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Select subcategory", comment: "")
+        txtFieldTitle.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Title", comment: "")
+        txtFieldTitle.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Title", comment: "")
+        lblState.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "State", comment: "")
+        lblLocality.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Locality", comment: "")
+        txtFieldLocationName.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Location name", comment: "")
+        txtFieldLocationName.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Location name", comment: "")
+        txtFieldMobileNumber.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Mobile number", comment: "")
+        txtFieldMobileNumber.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Mobile number", comment: "")
+        txtFieldWhatsappNumber.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Whatsapp number", comment: "")
+        txtFieldWhatsappNumber.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Whatsapp number", comment: "")
+        txtFieldPricing.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Price in US Dollar (optional)", comment: "")
+        txtFieldPricing.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Price in US Dollar (optional)", comment: "")
+        
+        lblLocationOnMap.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Pin Location on map(optional)", comment: "")
+        lblLookingFor.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Looking for", comment: "")
+        lblBasic.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Basic", comment: "")
+        lblFeature.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Featured", comment: "")
+        lblPremium.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Premium", comment: "")
+        btnCreateOpp.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "Create opportunity", comment: ""), for: .normal)
+    }
 }

@@ -3,7 +3,6 @@
 //  Dawadawa
 //
 //  Created by Ritesh Gupta on 25/08/22.
-//
 
 import UIKit
 
@@ -22,7 +21,7 @@ class DetailScreenVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        
         tblviewDetail.register(UINib(nibName: "DetailsTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "DetailsTableViewCell")
         tblviewDetail.register(UINib(nibName: "SeeMoreCommentCell", bundle: Bundle.main), forCellReuseIdentifier: "SeeMoreCommentCell")
     }
@@ -35,14 +34,12 @@ class DetailScreenVC: UIViewController {
     @IBAction func btnBackTapped(_ sender: UIButton) {
         kSharedAppDelegate?.makeRootViewController()
     }
-    
 }
 
 extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
-    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
-    
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -76,8 +73,21 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
             cell.heightViewAddComment.constant = self.userTimeLine?.isComment == false ? 0 : 55
             cell.lblCategory.text = String.getString(self.userTimeLine?.category_name)
             cell.lblSub_category.text = String.getString(self.userTimeLine?.subcategory_name)
-            cell.lblBusinessName.text = String.getString(self.userTimeLine?.business_name)
-            cell.lblBusinessminingType.text = String.getString(self.userTimeLine?.business_mining_type)
+            
+            if String.getString(self.userTimeLine?.business_name) == "Null"{
+                cell.heightViewBusinessName.constant = 0
+                cell.ViewBusinessName.isHidden = true
+            }
+            else{
+                cell.lblBusinessName.text = String.getString(self.userTimeLine?.business_name)
+            }
+            if String.getString(self.userTimeLine?.business_mining_type) == "Null"{
+                cell.heightviewBusinessminingtype.constant = 0
+                cell.viewBusinessminingType.isHidden = true
+            }
+            else{
+                cell.lblBusinessminingType.text = String.getString(self.userTimeLine?.business_mining_type)
+            }
             cell.llbMobileNumber.text =  String.getString(self.userTimeLine?.mobile_num)
             cell.lblRating.text = String.getString(self.userTimeLine?.opr_rating)
             cell.imgOpp_plan.image = self.userTimeLine?.opp_plan == "Featured" ? UIImage(named: "Star Filled") : self.userTimeLine?.opp_plan == "Premium" ? UIImage(named: "Crown") : UIImage(named: "Folded Booklet")
@@ -145,15 +155,12 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                 cell.heightDocumentcollectionview.constant = 0
             }
             
-            
-            let imgurl = String.getString(self.userTimeLine?.userdetail?.image)
-            debugPrint("socialprofile......",imgurl)
-            cell.Imageuser.downlodeImage(serviceurl: imgurl , placeHolder: UIImage(named: "Boss"))
+            let imguserurl = String.getString(self.userTimeLine?.userdetail?.image)
+            debugPrint("socialprofile......",imguserurl)
+            cell.Imageuser.downlodeImage(serviceurl: imguserurl , placeHolder: UIImage(named: "Boss"))
             cell.img = self.userTimeLine?.oppimage ?? [] // Collection View k liye image pass kr rhe h
             cell.imgUrl = self.imgUrl
-            
             cell.doc = self.userTimeLine?.oppdocument ?? [] // Pass Doc for collection view
-            
             cell.lblLikeCount.text = String.getString(self.userTimeLine?.likes) + " " + "Likes"
             
             if String.getString(self.userTimeLine?.is_user_like) == "1"{
@@ -180,7 +187,6 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                 cell.heightSocialPostCollectionView.constant = 225
             }
             
-            
             cell.callback = { txt, tapped in
                 
                 if txt == "Profileimage"{
@@ -188,11 +194,8 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                     let vc = self.storyboard?.instantiateViewController(withIdentifier: UserProfileDetailsVC.getStoryboardID()) as! UserProfileDetailsVC
                     vc.userid = user_id ?? 0
                     self.navigationController?.pushViewController(vc, animated: true)
-                    
                 }
-                
                 if txt == "Like"{
-                    
                     //  self.likeOpportunityapi(oppr_id: oppid ?? 0)
                     self.likeOpportunityapi(oppr_id: Int.getInt(self.userTimeLine?.id) ?? 0) { countLike in
                         self.userTimeLine?.likes = Int.getInt(countLike)
@@ -200,7 +203,6 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                     }
                     cell.imglike.image = UIImage(named: "dil")
                     cell.lbllike.text = "Liked"
-                    
                 }
                 
                 if txt == "Rate"{
@@ -234,7 +236,6 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                             cell.lblSave.text = "Save"
                             self.getalldetail()
                         }
-                        
                     }
                     else{
                         let oppid = Int.getInt(self.userTimeLine?.id)
@@ -243,22 +244,32 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                         cell.lblSave.text = "Save"
                         self.getalldetail()
                     }
-                    
                 }
-
                 
                 if txt == "More" {
                     let vc = self.storyboard?.instantiateViewController(withIdentifier: HomeSocialMoreVC.getStoryboardID()) as! HomeSocialMoreVC
                     vc.modalTransitionStyle = .crossDissolve
                     vc.modalPresentationStyle = .overCurrentContext
+                    vc.hascamefrom = "DetailPage"
                     vc.callback = { txt in
-                        //                    if txt == "Dismiss"{
-                        //                        vc.dismiss(animated: false){
-                        //                            self.dismiss(animated: true, completion: nil)
-                        //                        }
-                        //                    }
+                        
+                        if txt == "Chatwithuser"{
+                            let userid = Int.getInt(self.userTimeLine?.user_id)
+                            let vc = self.storyboard?.instantiateViewController(withIdentifier: ChatVC.getStoryboardID()) as! ChatVC
+                            vc.friendid = userid
+                            vc.friendname = String.getString(self.userTimeLine?.userdetail?.name)
+                            vc.friendimage = imguserurl
+                            self.navigationController?.pushViewController(vc, animated: true)
+                            self.dismiss(animated: true)
+                        }
+                        
+                        if txt == "MarkasInterested"{
+                            let oppid = Int.getInt(self.userTimeLine?.id)
+                            self.markinterestedapi(oppr_id: oppid)
+                            self.dismiss(animated: true)
+                        }
+                        
                         if txt == "Flag"{
-                            
                             //                                let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
                             self.flagopportunityapi(oppr_id: Int.getInt(self.userTimeLine?.id) ?? 0)
                             
@@ -267,11 +278,9 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                         if txt == "Report"{
                             kSharedAppDelegate?.makeRootViewController()
                         }
-                        
                     }
                     self.present(vc, animated: false)
                 }
-                
                 
                 //                Comment Part
                 
@@ -285,8 +294,7 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                     }
                 }
                 
-                cell.imageUser.downlodeImage(serviceurl: imgurl , placeHolder: UIImage(named: "Boss")) // Comment_ImageUser
-                
+                cell.imageUser.downlodeImage(serviceurl: imguserurl , placeHolder: UIImage(named: "Boss")) // Comment_ImageUser
                 
                 if txt == "AddComment"{
                     if cell.txtviewComment.text == ""{
@@ -312,22 +320,16 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                 }
                 
             }
-//            cell.viewcomment.isHidden = true
-//            cell.heightViewComment.constant = 0
-//            cell.bottomspacingReply.constant = -90
-            
-            
-            
+            //            cell.viewcomment.isHidden = true
+            //            cell.heightViewComment.constant = 0
+            //            cell.bottomspacingReply.constant = -90
             cell.callbacktextviewcomment = {[weak tblviewDetail] (_) in
                 
                 self.txtcomment = cell.txtviewComment.text
                 debugPrint("txtcomment=-=-=-=",self.txtcomment)
                 self.tblviewDetail?.beginUpdates()
                 self.tblviewDetail?.endUpdates()
-                
             }
-            
-            
             return cell
             
         case 1:
@@ -376,7 +378,7 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                     }
                     else{
                         self.commentreplyapi(oppr_id: Int.getInt(self.userTimeLine?.id) ?? 0, commentid:Int.getInt(self.userTimeLine?.usercomment[indexPath.row].id)) { usersubComment in
-
+                            
                             
                             cell.txtviewsubComment.text = ""
                             cell.lblNameandComment.text = String.getString(usersubComment.first?.usersubcommentdetails?.name) + " " + String.getString(usersubComment.first?.comments)
@@ -393,7 +395,6 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                         }
                     }
                 }
-                
             }
             
             cell.callbacktxtviewsubcomment = {[weak tblviewDetail] (_) in
@@ -407,12 +408,12 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
             
             let first = String.getString(obj?.name)
             let second = String.getString(obj?.comments)
-
+            
             let attributedStringcomment: NSMutableAttributedString = NSMutableAttributedString(string: "\(first)  \(second)")
-
+            
             attributedStringcomment.setColorForText(textToFind: first, withColor: UIColor.black)
             attributedStringcomment.setColorForText(textToFind: second, withColor: UIColor.gray)
-
+            
             cell.lblNameandComment.attributedText = attributedStringcomment
             
             return cell
@@ -453,8 +454,6 @@ extension DetailScreenVC{
                 kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
             }
         }
-        
-        
         let params:[String : Any] = [
             "oppr_id":self.oppid,
             "user_id":UserData.shared.id
@@ -462,16 +461,12 @@ extension DetailScreenVC{
         ]
         
         debugPrint("oppr_id...===...",oppid)
-        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kopportunitydetails, requestMethod: .POST,
-                                                               requestParameters:params, withProgressHUD: false)
+        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kopportunitydetails, requestMethod: .POST, requestParameters:params, withProgressHUD: false)
         {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
             
             CommonUtils.showHudWithNoInteraction(show: false)
-            
             if errorType == .requestSuccess {
-                
                 let dictResult = kSharedInstance.getDictionary(result)
-                
                 switch Int.getInt(statusCode) {
                 case 200:
                     
@@ -490,14 +485,11 @@ extension DetailScreenVC{
                         print("DataAlldetails===\(self?.userTimeLine)")
                         
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                        
                         self?.tblviewDetail.reloadData()
                     }
                     else if  Int.getInt(dictResult["status"]) == 400{
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
-                    
-                    
                 default:
                     CommonUtils.showError(.error, String.getString(dictResult["message"]))
                 }
@@ -509,12 +501,10 @@ extension DetailScreenVC{
             }
         }
     }
-    
     //    Api comment opportunity
     
     func commentoppoertunityapi(oppr_id:Int,completion: @escaping(_ viewH : [user_comment])->Void){
         CommonUtils.showHud(show: true)
-        
         
         if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
             let endToken = kSharedUserDefaults.getLoggedInAccessToken()
@@ -524,7 +514,6 @@ extension DetailScreenVC{
                 kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
             }
         }
-        
         
         let params:[String : Any] = [
             "user_id":Int.getInt(UserData.shared.id),
@@ -560,12 +549,10 @@ extension DetailScreenVC{
                         debugPrint("Commentdata=-=-=0-=", self?.comment[0].comments)
                         completion(self!.comment)
                         debugPrint("CommentData=-=-=0-=",completion(self!.comment))
-                        
-                        
+            
                         CommonUtils.showError(.info, String.getString(dictResult["Opportunity"]))
                         
                     }
-                    
                     else if  Int.getInt(dictResult["responsecode"]) == 400{
                         //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
@@ -580,7 +567,6 @@ extension DetailScreenVC{
             } else {
                 CommonUtils.showToastForDefaultError()
             }
-            
         }
     }
     
@@ -588,8 +574,7 @@ extension DetailScreenVC{
     
     func commentreplyapi(oppr_id:Int,commentid:Int,completion: @escaping(_ viewH : [sub_Comment])->Void){
         CommonUtils.showHud(show: true)
-        
-        
+    
         if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
             let endToken = kSharedUserDefaults.getLoggedInAccessToken()
             let septoken = endToken.components(separatedBy: " ")
@@ -598,16 +583,12 @@ extension DetailScreenVC{
                 kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
             }
         }
-        
-       
-        
         let params:[String : Any] = [
             "comment_id":commentid,
             "user_id":Int.getInt(UserData.shared.id),
             "opr_id":oppr_id,
             "comment":String.getString(self.txtcomment)
         ]
-        
         
         debugPrint("user_id......",Int.getInt(UserData.shared.id))
         TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kcommentreply, requestMethod: .POST,
@@ -634,7 +615,7 @@ extension DetailScreenVC{
                         let sub_comment = kSharedInstance.getArray(withDictionary: dictResult["user_comment"])
                         debugPrint("Commentdata=-=-=1-=",sub_comment)
                         self?.subcomment = sub_comment.map{sub_Comment(data: kSharedInstance.getDictionary($0))}
-//                        debugPrint("Commentdata=-=-=0-=", self?.subcomment.comments)
+                        //                        debugPrint("Commentdata=-=-=0-=", self?.subcomment.comments)
                         completion(self!.subcomment)
                         debugPrint("CommentData=-=-=0-=",completion(self!.subcomment))
                         
@@ -674,8 +655,6 @@ extension DetailScreenVC{
                 kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
             }
         }
-        
-        
         let params:[String : Any] = [
             "user_id":Int.getInt(UserData.shared.id),
             "opr_id":oppr_id
@@ -696,8 +675,6 @@ extension DetailScreenVC{
                 case 200:
                     //                    self?.statuslike = Int.getInt(dictResult["status"])
                     if Int.getInt(dictResult["status"]) == 200{
-                        
-                        
                         let endToken = kSharedUserDefaults.getLoggedInAccessToken()
                         let septoken = endToken.components(separatedBy: " ")
                         if septoken[0] == "Bearer"{
@@ -708,10 +685,8 @@ extension DetailScreenVC{
                         //                        debugPrint("likecount=-=-=-=",self?.count)
                         completion(String.getString(dictResult["count"]))
                         
-                        
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                        
-                        
+                    
                     }
                     
                     else if  Int.getInt(dictResult["status"]) == 400{
@@ -727,9 +702,7 @@ extension DetailScreenVC{
             } else {
                 CommonUtils.showToastForDefaultError()
             }
-            
         }
-        
     }
     //    Save Opportunity Api
     
@@ -745,8 +718,6 @@ extension DetailScreenVC{
                 kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
             }
         }
-        
-        
         let params:[String : Any] = [
             "user_id":Int.getInt(UserData.shared.id),
             "opr_id":oppr_id
@@ -791,7 +762,6 @@ extension DetailScreenVC{
             } else {
                 CommonUtils.showToastForDefaultError()
             }
-            
         }
     }
     
@@ -856,7 +826,65 @@ extension DetailScreenVC{
             } else {
                 CommonUtils.showToastForDefaultError()
             }
+        }
+    }
+    
+    //    Markinterestedapi
+    
+    func markinterestedapi(oppr_id:Int){
+        CommonUtils.showHud(show: true)
+        
+        if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
+            let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+            let septoken = endToken.components(separatedBy: " ")
+            if septoken[0] != "Bearer"{
+                let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
+                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
+            }
+        }
+        let params:[String : Any] = [
+            "user_id":Int.getInt(UserData.shared.id),
+            "opr_id":oppr_id
+        ]
+        
+        debugPrint("user_id......",Int.getInt(UserData.shared.id))
+        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kmarkinterested, requestMethod: .POST,requestParameters:params, withProgressHUD: false)
+        {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
             
+            CommonUtils.showHudWithNoInteraction(show: false)
+            
+            if errorType == .requestSuccess {
+                
+                let dictResult = kSharedInstance.getDictionary(result)
+                
+                switch Int.getInt(statusCode) {
+                case 200:
+                    
+                    if Int.getInt(dictResult["status"]) == 200{
+                        
+                        let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+                        let septoken = endToken.components(separatedBy: " ")
+                        if septoken[0] == "Bearer"{
+                            kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
+                        }
+                        
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    }
+                    
+                    else if  Int.getInt(dictResult["status"]) == 201{
+                        //  CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    }
+                    
+                default:
+                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                }
+            } else if errorType == .noNetwork {
+                CommonUtils.showToastForInternetUnavailable()
+                
+            } else {
+                CommonUtils.showToastForDefaultError()
+            }
         }
     }
     // Api flag Opportunity
@@ -874,9 +902,8 @@ extension DetailScreenVC{
             }
         }
         
-        
         let params:[String : Any] = [
-            //            "user_id":Int.getInt(UserData.shared.id),
+//            "user_id":Int.getInt(UserData.shared.id),
             "opr_id":oppr_id
         ]
         
@@ -922,7 +949,6 @@ extension DetailScreenVC{
             } else {
                 CommonUtils.showToastForDefaultError()
             }
-            
         }
     }
 }

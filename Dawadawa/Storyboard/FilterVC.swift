@@ -1,4 +1,3 @@
-//
 //  FilterVC.swift
 //  Dawadawa
 //  Created by Ritesh Gupta on 28/07/22.
@@ -12,10 +11,7 @@ import SwiftyJSON
 var userTimeLine = [SocialPostData]()
 var cameFrom = ""
 
-
 class FilterVC: UIViewController {
-    
-    
     
     @IBOutlet weak var PriceSlider: RangeSeekSlider!
     
@@ -239,7 +235,6 @@ class FilterVC: UIViewController {
         self.resetsetup()
     }
     
-    
     @IBAction func btnMostLikedTapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         if btnMostLiked.isSelected == true{
@@ -248,9 +243,7 @@ class FilterVC: UIViewController {
             self.viewLeastLiked.backgroundColor = UIColor(red: 241, green: 249, blue: 253)
             self.lblLeastLiked.textColor = UIColor(red: 21, green: 114, blue: 161)
             self.like = "DESC"
-            
         }
-        
     }
     
     @IBAction func btnLeasttikedTapped(_ sender: UIButton) {
@@ -447,7 +440,6 @@ class FilterVC: UIViewController {
                 debugPrint("localityid....",self.localityid)
                 
             }
-            
         }
     }
     
@@ -460,7 +452,6 @@ class FilterVC: UIViewController {
             self.imgradiodateOtoN.image = UIImage(named: "radiouncheck")
             self.sortby = 1
         }
-        
     }
     
     @IBAction func btnPriceHtoLTapped(_ sender: UIButton) {
@@ -473,7 +464,6 @@ class FilterVC: UIViewController {
             self.sortby = 2
         }
     }
-    
     
     @IBAction func btnDateNtoOTapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
@@ -496,7 +486,6 @@ class FilterVC: UIViewController {
             self.sortby = 4
         }
     }
-    
     
     @IBAction func btnApplyfilterTapped(_ sender: UIButton) {
         //        if UserData.shared.isskiplogin == true{
@@ -522,7 +511,6 @@ class FilterVC: UIViewController {
             }
         }
     }
-    
 }
 
 // MARK: - Table View Delegate
@@ -544,7 +532,7 @@ extension FilterVC: UITableViewDelegate,UITableViewDataSource{
         
         switch tableView{
         case tblViewOpportunitytype:
-            self.highttblviewOpportunitytype.constant = CGFloat(55 * (self.getCategoryarr.count + self.getfiltersubcatarr.count + 1))
+            self.highttblviewOpportunitytype.constant = CGFloat(60 * (self.getCategoryarr.count + self.getfiltersubcatarr.count + 1))
             switch section{
             case 0:
                 return self.getCategoryarr.count
@@ -618,14 +606,10 @@ extension FilterVC: UITableViewDelegate,UITableViewDataSource{
         case tblViewOpportunitytype:
             switch indexPath.section{
                 
-            case 0:
+            case 0, 1, 2:
                 return 60
                 
-            case 1:
-                return 60
-                
-            case 2:
-                return 60
+          
                 
             default:
                 return 0

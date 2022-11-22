@@ -12,11 +12,10 @@ import CoreLocation
 
 class CurrentLocationVC: UIViewController{
     
-    
-    
     var locationManager = CLLocationManager()
     @IBOutlet weak var Mapview: GMSMapView!
     @IBOutlet weak var lblcurrentLocation: UILabel!
+    @IBOutlet weak var btnUsethisLocation: UIButton!
     
     var Currentaddress : String! = ""
     var latitude = Double()
@@ -31,14 +30,14 @@ class CurrentLocationVC: UIViewController{
     var resultsViewController: GMSAutocompleteResultsViewController?
     var searchController: UISearchController?
     var resultView: UITextView?
-    
-    
-    
+
     var callback:((String,Double,Double)->())?
     
-    
+//    MARK: - Life Cycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setuplanguage()
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         
@@ -69,9 +68,7 @@ class CurrentLocationVC: UIViewController{
         // this view controller, not one further up the chain.
         definesPresentationContext = true
     }
-    
-    
-    
+
     //    MARK: - @IBAction
     
     @IBAction func btnDismissTapped(_ sender: UIButton) {
@@ -344,3 +341,10 @@ extension CurrentLocationVC: CLLocationManagerDelegate,GMSMapViewDelegate,GMSAut
     }
 }
 
+// MARK: - Localization
+extension CurrentLocationVC{
+    func setuplanguage(){
+        lblcurrentLocation.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Current Location", comment: "")
+        btnUsethisLocation.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "Use this location", comment: ""), for: .normal)
+    }
+}

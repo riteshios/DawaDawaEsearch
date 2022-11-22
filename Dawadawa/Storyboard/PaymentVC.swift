@@ -10,7 +10,9 @@ import Alamofire
 
 class PaymentVC: UIViewController {
     
+    @IBOutlet weak var lblPay: UILabel!
     @IBOutlet weak var viewPay: UIView!
+    @IBOutlet weak var btnPay: UIButton!
     @IBOutlet weak var txtfieldcardNumber: STPPaymentCardTextField!
     var paymentIntentClientSecret = ""
     var price = ""
@@ -22,7 +24,7 @@ class PaymentVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.setuplanguage()
         self.getPlanApi()
         self.getSecretKey()
         self.viewPay.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
@@ -262,3 +264,15 @@ extension PaymentVC{
         }
     }
 }
+
+// MARK: - Localisation
+
+extension PaymentVC{
+    
+    func setuplanguage(){
+        lblPay.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Pay", comment: "")
+        btnPay.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "Pay", comment: ""), for: .normal)
+    }
+}
+
+

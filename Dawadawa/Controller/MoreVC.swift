@@ -15,6 +15,7 @@ class MoreVC: UIViewController {
     @IBOutlet weak var viewEditProfile: UIView!
     @IBOutlet weak var viewChangePassword: UIView!
     @IBOutlet weak var viewSavedOpportunies: UIView!
+    @IBOutlet weak var viewInterestedOpportunities: UIView!
     @IBOutlet weak var viewContactUs: UIView!
     @IBOutlet weak var viewLogOut: UIView!
     
@@ -22,6 +23,7 @@ class MoreVC: UIViewController {
     @IBOutlet weak var btnEdit: UIButton!
     @IBOutlet weak var btnChangePasword: UIButton!
     @IBOutlet weak var btnSavedOpportunities: UIButton!
+    @IBOutlet weak var btnInterestedOpportunities: UIButton!
     
     @IBOutlet weak var btnContactUs: UIButton!
     @IBOutlet weak var btnLogOut: UIButton!
@@ -32,8 +34,6 @@ class MoreVC: UIViewController {
     @IBOutlet weak var lblSavedOpportunity: UILabel!
     @IBOutlet weak var lblContactUs: UILabel!
     @IBOutlet weak var lblLogout: UILabel!
-    
-    
     
     var callback:((String)->())?
     
@@ -51,8 +51,8 @@ class MoreVC: UIViewController {
         ViewMain.layer.cornerRadius = 25
         ViewMain.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
         ViewMain.addShadowWithBlurOnView(ViewMain, spread: 0, blur: 10, color: .black, opacity: 0.16, OffsetX: 0, OffsetY: 1)
-       
     }
+    
 // MARK: - @IBAction
     @IBAction func btnDismissTapped(_ sender: UIButton) {
         self.callback?("Dismiss")
@@ -104,6 +104,19 @@ class MoreVC: UIViewController {
         }
     }
     
+    @IBAction func btnInterestedOppTapped(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        if self.btnInterestedOpportunities.isSelected == true{
+            self.viewInterestedOpportunities.backgroundColor = UIColor.init(red: 241/255, green: 249/255, blue: 253/255, alpha: 1)
+        }
+        if UserData.shared.isskiplogin == true{
+            self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+        }
+        else{
+            self.callback?("InterestedOpportunities")
+        }
+    }
+    
     @IBAction func btnContactUs(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         if self.btnContactUs.isSelected == true{
@@ -124,8 +137,8 @@ class MoreVC: UIViewController {
         self.callback?("Logout")
 //        }
     }
-    
 }
+
 // MARK: - Api call
 
 extension MoreVC{

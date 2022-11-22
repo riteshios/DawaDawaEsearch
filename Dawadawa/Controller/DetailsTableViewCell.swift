@@ -54,9 +54,16 @@ class DetailsTableViewCell: UITableViewCell,UITextViewDelegate {
     @IBOutlet weak var lbblWhatsappNumber: UILabel!
     @IBOutlet weak var lblEmail: UILabel!
     
+    @IBOutlet weak var ViewBusinessName: UIView!
+    @IBOutlet weak var viewBusinessminingType: UIView!
+    
+    
     @IBOutlet weak var heightSocialPostCollectionView: NSLayoutConstraint!
     
     @IBOutlet weak var heightDocumentcollectionview: NSLayoutConstraint!
+    
+    @IBOutlet weak var heightViewBusinessName: NSLayoutConstraint!
+    @IBOutlet weak var heightviewBusinessminingtype: NSLayoutConstraint!
     @IBOutlet weak var imgOppFlag: UIImageView!
     
     
@@ -171,7 +178,7 @@ class DetailsTableViewCell: UITableViewCell,UITextViewDelegate {
 }
 
 
-extension DetailsTableViewCell: UICollectionViewDelegate,UICollectionViewDataSource{
+extension DetailsTableViewCell: UICollectionViewDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     
     //    Collection View
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -198,23 +205,40 @@ extension DetailsTableViewCell: UICollectionViewDelegate,UICollectionViewDataSou
         case 0:
             let cell = SocialPostCollectionView.dequeueReusableCell(withReuseIdentifier: "SocialPostCollectionViewCell", for: indexPath) as! SocialPostCollectionViewCell
             let obj = img[indexPath.item].imageurl
-            print("-=-imgurl-=-\(obj)")
+            print("-=-imgurl-=-\(String(describing: obj))")
             let imageurl = "\(imgUrl)\(String.getString(obj))"
             print("-=imagebaseurl=-=-\(imageurl)")
             cell.imgOpportunity.downlodeImage(serviceurl: imageurl, placeHolder: UIImage(named: "baba"))
+            cell.imgOpportunity.seeFullImage()
             return cell
             
         case 1:
             
             let cell = DocumentCollectionView.dequeueReusableCell(withReuseIdentifier: "DocumentCollectionViewCell", for: indexPath) as! DocumentCollectionViewCell
-            
             let obj = doc[indexPath.item].oppr_document
             cell.lblDocument.text = String.getString(obj)
+            
             return cell
             
         default:
             return UICollectionViewCell()
 
+        }
+        
+        
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        switch indexPath.section{
+        case 0:
+            return CGSize(width: SocialPostCollectionView.frame.size.width, height: 225)
+         
+        case 1:
+            return CGSize(width: SocialPostCollectionView.frame.size.width, height: 60)
+            
+        default:
+            return CGSize()
         }
     }
     

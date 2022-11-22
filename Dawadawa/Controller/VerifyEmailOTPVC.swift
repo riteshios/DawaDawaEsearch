@@ -1,9 +1,6 @@
-//
 //  VerifyEmailOTPVC.swift
 //  Dawadawa
-//
 //  Created by Ritesh Gupta on 28/06/22.
-//
 
 import UIKit
 
@@ -27,15 +24,22 @@ class VerifyEmailOTPVC: UIViewController {
     @IBOutlet weak var viewOtp5: UIView!
     @IBOutlet weak var viewVerify: UIView!
     
+    
+    @IBOutlet weak var lblVerifyYou: UILabel!
+    @IBOutlet weak var btnVerify: UIButton!
+    @IBOutlet weak var btnResendcode: UIButton!
+    
     var callbackOTP1:(()->())?
     var otp = ""
     var email = ""
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.setup()
-    }
+    
     
     // MARK: -Life Cycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.setuplanguage()
+        self.setup()
+    }
     
     func setup(){
         self.lblWrongCode.isHidden = true
@@ -257,5 +261,14 @@ extension VerifyEmailOTPVC{
                 CommonUtils.showToastForDefaultError()
             }
         }
+    }
+}
+extension VerifyEmailOTPVC{
+    func setuplanguage(){
+        lblVerifyYou.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Verify it’s you", comment: "")
+        lblSubHeading.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Phone number verification code is sent on your email", comment: "")
+        lblWrongCode.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Wrong code entered!", comment: "")
+        btnResendcode.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "Resend code", comment: ""), for: .normal)
+        btnVerify.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "Verify", comment: ""), for: .normal)
     }
 }

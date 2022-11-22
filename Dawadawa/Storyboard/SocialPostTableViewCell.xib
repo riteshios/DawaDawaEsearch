@@ -159,7 +159,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="225" id="AFp-To-zbQ"/>
                                 </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="7V6-ig-Epn">
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="7V6-ig-Epn">
                                     <size key="itemSize" width="415" height="225"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -529,7 +529,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TeG-Qk-02U">
-                                                <rect key="frame" x="30" y="75.5" width="37" height="29"/>
+                                                <rect key="frame" x="38" y="75.5" width="37" height="29"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="29" id="CRC-pN-YDm"/>
                                                 </constraints>
@@ -556,7 +556,7 @@
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstItem="TeG-Qk-02U" firstAttribute="leading" secondItem="Iix-9L-Y1Z" secondAttribute="leading" id="9nk-CT-zHf"/>
+                                            <constraint firstItem="TeG-Qk-02U" firstAttribute="leading" secondItem="Iix-9L-Y1Z" secondAttribute="leading" constant="8" id="9nk-CT-zHf"/>
                                             <constraint firstItem="Iix-9L-Y1Z" firstAttribute="top" secondItem="MrB-ll-bmv" secondAttribute="top" id="E1d-N2-t1g"/>
                                             <constraint firstItem="cVQ-Bv-ltZ" firstAttribute="leading" secondItem="q8Y-UB-V1p" secondAttribute="leading" id="Kx9-Qb-qWm"/>
                                             <constraint firstAttribute="trailing" secondItem="MrB-ll-bmv" secondAttribute="trailing" constant="5" id="L6I-vM-8iK"/>

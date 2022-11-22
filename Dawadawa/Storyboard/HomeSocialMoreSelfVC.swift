@@ -10,7 +10,7 @@ class HomeSocialMoreSelfVC: UIViewController {
     
     var callback:((String)->())?
     @IBOutlet weak var Viewmain: UIView!
-    
+    @IBOutlet weak var viewBG:UIView!
     @IBOutlet weak var lblupdate: UILabel!
     @IBOutlet weak var lblClose: UILabel!
     @IBOutlet weak var lblCopylink: UILabel!
@@ -21,6 +21,13 @@ class HomeSocialMoreSelfVC: UIViewController {
         self.setup()
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if let touch = touches.first{
+            if viewBG == touch.view{
+                self.dismiss(animated: true)
+            }
+        }
+    }
     
     func setup(){
         Viewmain.clipsToBounds = true

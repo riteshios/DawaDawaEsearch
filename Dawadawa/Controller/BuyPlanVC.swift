@@ -1,7 +1,5 @@
-//
 //  BuyPlanVC.swift
 //  Dawadawa
-//
 //  Created by Ritesh Gupta on 13/09/22.
 
 
@@ -14,6 +12,7 @@ class BuyPlanVC: UIViewController {
     
     @IBOutlet weak var PlanCollectionView: UICollectionView!
     @IBOutlet weak var lblUsertype: UILabel!
+    @IBOutlet weak var btnChoosethisPlan: UIButton!
     
     var indexpathcount = 0
     var subsdata = [Subscription_data]()
@@ -21,6 +20,7 @@ class BuyPlanVC: UIViewController {
 //    MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setuplanguage()
         self.getPlanApi()
         self.fetdata()
     }
@@ -30,12 +30,15 @@ class BuyPlanVC: UIViewController {
         
         if UserData.shared.user_type == "0"{
             self.lblUsertype.text = "Investor"
+            lblUsertype.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Investor", comment: "")
         }
         else if UserData.shared.user_type == "1"{
             self.lblUsertype.text = "Business Owner"
+            lblUsertype.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Business Owner", comment: "")
         }
         else if UserData.shared.user_type == "2"{
             self.lblUsertype.text = "Service Provider"
+            lblUsertype.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Service Provider", comment: "")
         }
     }
     
@@ -83,5 +86,12 @@ extension BuyPlanVC:UICollectionViewDelegate,UICollectionViewDataSource{
             debugPrint("indexPath=-=-",indexPath)
             self.indexpathcount = indexPath?[1] ?? 0
         }
+    }
+}
+
+extension BuyPlanVC{
+    
+    func setuplanguage(){
+        btnChoosethisPlan.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "Choose this plan", comment: ""), for: .normal)
     }
 }

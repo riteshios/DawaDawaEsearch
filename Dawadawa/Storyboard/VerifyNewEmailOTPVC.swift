@@ -1,19 +1,17 @@
-//
 //  VerifyNewEmailOTPVC.swift
 //  Dawadawa
-//
 //  Created by Ritesh Gupta on 28/06/22.
-//
 
 import UIKit
 
 class VerifyNewEmailOTPVC: UIViewController {
     //    MARK: - Properties
+    @IBOutlet weak var lblVerifyNewEmail: UILabel!
     @IBOutlet weak var lblWrongCode: UILabel!
+    @IBOutlet weak var lblSubHeading: UILabel!
     @IBOutlet weak var txtfieldOtp1: UITextField!
     @IBOutlet weak var txtfieldOtp2: UITextField!
     @IBOutlet weak var txtfieldOtp4: UITextField!
-    @IBOutlet weak var lblSubHeading: UILabel!
     @IBOutlet weak var txtfieldOtp3: UITextField!
     @IBOutlet weak var txtfieldOtp5: UITextField!
     @IBOutlet weak var txtfieldOtp6: UITextField!
@@ -26,17 +24,17 @@ class VerifyNewEmailOTPVC: UIViewController {
     @IBOutlet weak var viewOtp6: UIView!
     
     @IBOutlet weak var viewVerify: UIView!
-    
-    
-    
+    @IBOutlet weak var btnResenCode: UIButton!
     var callbackOTP2:(()->())?
     var email:String?
     var otp = ""
+    
+    // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setuplanguage()
         self.setup()
     }
-    // MARK: - Life Cycle
     func setup(){
         self.lblWrongCode.isHidden = true
         self.lblSubHeading.text = "Phone number verification code is sent on your email \(String.getString(UserData.shared.email))"
@@ -226,5 +224,14 @@ extension VerifyNewEmailOTPVC{
                 }
             }
         }
+    }
+}
+extension VerifyNewEmailOTPVC{
+    
+    func setuplanguage(){
+        lblVerifyNewEmail.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Verify new email address", comment: "")
+        lblSubHeading.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Email verification code is sent on your email address", comment: "")
+        lblWrongCode.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Wrong code entered!", comment: "")
+        btnResenCode.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "Resend code", comment: ""), for: .normal)
     }
 }

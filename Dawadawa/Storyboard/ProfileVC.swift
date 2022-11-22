@@ -1,9 +1,6 @@
-//
 //  ProfileVC.swift
 //  Dawadawa
-//
 //  Created by Ritesh Gupta on 20/06/22.
-//
 
 import UIKit
 
@@ -141,7 +138,6 @@ class ProfileVC: UIViewController {
                                             let vc = self.storyboard?.instantiateViewController(withIdentifier:ProfileVC.getStoryboardID()) as! ProfileVC
                                             self.navigationController?.pushViewController(vc, animated: false)
                                         }
-                                        
                                     }
                                     self.present(vc, animated: false)
                                 }
@@ -161,6 +157,12 @@ class ProfileVC: UIViewController {
                 }
             }
             
+            if txt == "InterestedOpportunities"{
+                vc.dismiss(animated: false){
+                    let vc = self.storyboard?.instantiateViewController(identifier: SavedOpportunitiesVC.getStoryboardID()) as! SavedOpportunitiesVC
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
+            }
             
             if txt == "ContactUs"{
                 vc.dismiss(animated: false){
@@ -208,7 +210,6 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
         case 1:
             return userTimeLine.count
             
-            
         default:
             return 0
         }
@@ -233,16 +234,16 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                 }
                 else if UserData.shared.user_type == "1"{
                     cell.lblshowdata.text = String.getString(self.datadashboard?.total_create)
-                    cell.lblDate.text = "Total Opportunity Purchased"
+                    cell.lbltotalused.text = String.getString(self.datadashboard?.total_used) + "/"
+                    cell.lblDate.text = "Total Create"
                     cell.lblshowplan.text = String.getString(self.datadashboard?.no_view)
                     cell.lblPlan.text = "Total views"
                     cell.lblshowOpportunity.text = String.getString(self.datadashboard?.no_flag)
                     cell.lblOpportunity.text = "Flagged Opportunities"
-                    
                 }
                 else if UserData.shared.user_type == "2"{
                     cell.lblshowdata.text = String.getString(self.datadashboard?.total_create)
-                    cell.lblDate.text = "Total Opportunity Purchased"
+                    cell.lblDate.text = "Total Create"
                     cell.lblshowplan.text = String.getString(self.datadashboard?.no_view)
                     cell.lblPlan.text = "Total views"
                     cell.lblshowOpportunity.text = String.getString(self.datadashboard?.no_flag)
@@ -700,9 +701,7 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
         default:
             return 0
         }
-        
     }
-    
 }
 
 // MARK: -API call
@@ -770,8 +769,6 @@ extension ProfileVC{
     func dashboardapi(){
         
         CommonUtils.showHudWithNoInteraction(show: true)
-        
-        
         if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
             let endToken = kSharedUserDefaults.getLoggedInAccessToken()
             let septoken = endToken.components(separatedBy: " ")
@@ -780,8 +777,6 @@ extension ProfileVC{
                 kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
             }
         }
-        
-        
         let params:[String : Any] = [
             "user_id":Int.getInt(UserData.shared.id),
             "user_type":Int.getInt(String.getString(UserData.shared.user_type))
@@ -801,7 +796,7 @@ extension ProfileVC{
                 
                 switch Int.getInt(statusCode) {
                 case 200:
-                    
+            
                     if Int.getInt(dictResult["status"]) == 200{
                         
                         let endToken = kSharedUserDefaults.getLoggedInAccessToken()
@@ -814,12 +809,10 @@ extension ProfileVC{
                         self?.datadashboard = data_dashboard(data: data)
                         
                         print("Datadashboard====-=\(self?.datadashboard)")
-                        
-                        // CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         self?.tblViewSocialPost.reloadData()
+                        // CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        
                         CommonUtils.showHudWithNoInteraction(show: false)
-                        
-                        
                     }
                     
                     else if  Int.getInt(dictResult["status"]) == 400{
@@ -841,11 +834,9 @@ extension ProfileVC{
     
     // Api All Opportunity
     
-    
     func listoppoertunityapi(){
         
         CommonUtils.showHudWithNoInteraction(show: true)
-        
         
         if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
             let endToken = kSharedUserDefaults.getLoggedInAccessToken()
@@ -855,16 +846,14 @@ extension ProfileVC{
                 kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
             }
         }
-        
-        
+    
         let params:[String : Any] = [
             "user_id":Int.getInt(UserData.shared.id),
             "id":1
         ]
         
         debugPrint("user_id......",Int.getInt(UserData.shared.id))
-        TANetworkManager.sharedInstance.requestApi(withServiceName:ServiceName.klistopportunity, requestMethod: .POST,
-                                                   requestParameters:params, withProgressHUD: false)
+        TANetworkManager.sharedInstance.requestApi(withServiceName:ServiceName.klistopportunity, requestMethod: .POST, requestParameters:params, withProgressHUD: false)
         {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
             
             CommonUtils.showHudWithNoInteraction(show: false)
@@ -1567,12 +1556,9 @@ extension ProfileVC{
                             vc.docarray = self?.UserTimeLineOppdetails?.oppdocument ?? []
                             debugPrint("imgaraay=-=-=-==-=", vc.imgarray)
                             
-                            
                         }
                         
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                        
-                        
                     }
                     
                     else if  Int.getInt(dictResult["status"]) == 400{

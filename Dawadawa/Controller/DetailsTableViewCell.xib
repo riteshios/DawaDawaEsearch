@@ -73,8 +73,8 @@
                                             <constraint firstAttribute="trailing" secondItem="1sg-5N-mUn" secondAttribute="trailing" id="yiM-B5-zwR"/>
                                         </constraints>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Owner abdjnadc" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XS8-nq-hSi">
-                                        <rect key="frame" x="99" y="40" width="130.5" height="22"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Owner Ritesh" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XS8-nq-hSi">
+                                        <rect key="frame" x="99" y="40" width="106.5" height="22"/>
                                         <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="18"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -390,7 +390,7 @@
                             <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7oL-f3-hmP">
                                 <rect key="frame" x="16" y="547" width="180" height="55"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Business name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fOc-ru-XuX">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Business name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fOc-ru-XuX">
                                         <rect key="frame" x="20" y="10" width="140" height="35"/>
                                         <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="18"/>
                                         <color key="textColor" red="0.08235294118" green="0.44705882349999998" blue="0.63137254899999995" alpha="1" colorSpace="calibratedRGB"/>
@@ -400,6 +400,7 @@
                                 <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="fOc-ru-XuX" firstAttribute="leading" secondItem="7oL-f3-hmP" secondAttribute="leading" constant="20" id="GOP-xO-SwG"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="55" id="bdj-ld-5vr"/>
                                     <constraint firstAttribute="width" constant="180" id="gkU-8v-foV"/>
                                     <constraint firstItem="fOc-ru-XuX" firstAttribute="top" secondItem="7oL-f3-hmP" secondAttribute="top" constant="10" id="iB4-BE-Ku7"/>
                                     <constraint firstAttribute="bottom" secondItem="fOc-ru-XuX" secondAttribute="bottom" constant="10" id="jjk-t7-eJf"/>
@@ -425,6 +426,7 @@
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="ivo-kZ-wEa" secondAttribute="bottom" constant="10" id="42u-gk-jiE"/>
                                     <constraint firstAttribute="trailing" secondItem="ivo-kZ-wEa" secondAttribute="trailing" constant="20" id="Ge5-d0-I2Z"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="55" id="HfF-D3-FmQ"/>
                                     <constraint firstItem="ivo-kZ-wEa" firstAttribute="top" secondItem="SKx-qc-nmT" secondAttribute="top" constant="10" id="VFk-jP-Y2w"/>
                                     <constraint firstItem="ivo-kZ-wEa" firstAttribute="leading" secondItem="SKx-qc-nmT" secondAttribute="leading" constant="20" id="hhG-Y9-q38"/>
                                     <constraint firstAttribute="width" constant="180" id="vTL-Yy-A98"/>
@@ -746,6 +748,7 @@
                 <outlet property="DocumentCollectionView" destination="aao-Xp-ZWM" id="ND3-Cb-bt8"/>
                 <outlet property="Imageuser" destination="1sg-5N-mUn" id="GG4-qc-Cvd"/>
                 <outlet property="SocialPostCollectionView" destination="q87-SG-ow9" id="RaQ-5m-r1y"/>
+                <outlet property="ViewBusinessName" destination="7oL-f3-hmP" id="hRd-h0-IeS"/>
                 <outlet property="WidthViewRating" destination="lEj-f7-fR6" id="7aP-QN-9sY"/>
                 <outlet property="btnClickComment" destination="mo5-5B-x48" id="uRi-U4-xGB"/>
                 <outlet property="btnSave" destination="hue-ns-8FR" id="NTb-KA-oD0"/>
@@ -753,6 +756,8 @@
                 <outlet property="heightDocumentcollectionview" destination="efJ-RY-4sK" id="vjW-0n-vB0"/>
                 <outlet property="heightSocialPostCollectionView" destination="kS4-X3-BAd" id="0G7-qv-bFU"/>
                 <outlet property="heightViewAddComment" destination="4mP-8K-3Tl" id="fVI-ed-cyB"/>
+                <outlet property="heightViewBusinessName" destination="bdj-ld-5vr" id="fgJ-M0-zZt"/>
+                <outlet property="heightviewBusinessminingtype" destination="HfF-D3-FmQ" id="9Gc-qL-geI"/>
                 <outlet property="imageUser" destination="TZK-gS-fet" id="UBm-dW-ost"/>
                 <outlet property="imgOppFlag" destination="acY-sk-TPy" id="3Cx-IP-Kkc"/>
                 <outlet property="imgOpp_plan" destination="dJE-Ma-gvW" id="oH5-W5-msa"/>
@@ -778,6 +783,7 @@
                 <outlet property="pageControl" destination="2n8-x9-bsG" id="ciK-RW-lBL"/>
                 <outlet property="txtviewComment" destination="TQo-M4-qcn" id="bu7-zp-tSS"/>
                 <outlet property="viewAddComment" destination="qrp-pL-te1" id="DlX-me-VlK"/>
+                <outlet property="viewBusinessminingType" destination="SKx-qc-nmT" id="UzA-9i-IQd"/>
                 <outlet property="viewLine" destination="24q-Uf-Jtl" id="DRf-YW-YAJ"/>
             </connections>
             <point key="canvasLocation" x="138.40579710144928" y="69.642857142857139"/>

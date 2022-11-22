@@ -1,13 +1,10 @@
-//
 //  EditProfileVC.swift
 //  Dawadawa
-//
 //  Created by Ritesh Gupta on 27/06/22.
-//
 
 import UIKit
 import SKFloatingTextField
-
+import IQKeyboardManagerSwift
 
 class EditProfileVC: UIViewController {
     
@@ -20,6 +17,7 @@ class EditProfileVC: UIViewController {
     @IBOutlet weak var txtFieldLastName: SKFloatingTextField!
     //    @IBOutlet weak var txtFieldDOB: SKFloatingTextField!
     @IBOutlet weak var txtFieldWhatsappNumber: SKFloatingTextField!
+    @IBOutlet weak var txtfieldEnterAbout: IQTextView!
     
     @IBOutlet weak var ViewSaveChange: UIView!
     @IBOutlet weak var viewEnglish: UIView!
@@ -32,12 +30,7 @@ class EditProfileVC: UIViewController {
     @IBOutlet weak var viewWhatsappNumber: UIView!
     @IBOutlet weak var viewDOB: UIView!
     
-    @IBOutlet weak var lblGender: UILabel!
     @IBOutlet weak var btnDropGender: UIButton!
-    @IBOutlet weak var lblUserType: UILabel!
-    @IBOutlet weak var lblEnglish: UILabel!
-    @IBOutlet weak var lblArabic: UILabel!
-    
     
     @IBOutlet weak var btnEnglish: UIButton!
     @IBOutlet weak var btnArabic: UIButton!
@@ -46,25 +39,41 @@ class EditProfileVC: UIViewController {
     @IBOutlet weak var lblCountry: UILabel!
     @IBOutlet weak var btnSelectCountry: UIButton!
     
-    @IBOutlet weak var lblState: UILabel!
-    @IBOutlet weak var lblLocality: UILabel!
     @IBOutlet weak var btnState: UIButton!
     @IBOutlet weak var btnLocality: UIButton!
+    
+    @IBOutlet weak var lblEditProfile: UILabel!
+    @IBOutlet weak var lblPhone: UILabel!
+    @IBOutlet weak var lblChangePhone: UILabel!
+    @IBOutlet weak var lblChangeEmail: UILabel!
+    @IBOutlet weak var lblEmailaddress: UILabel!
+    @IBOutlet weak var lblFirstName: UILabel!
+    @IBOutlet weak var lblLastName: UILabel!
+    @IBOutlet weak var lblDOB: UILabel!
+    @IBOutlet weak var lblheadingCountry: UILabel!
+    @IBOutlet weak var lblState: UILabel!
+    @IBOutlet weak var lblLocality: UILabel!
+    @IBOutlet weak var lblGender: UILabel!
+    @IBOutlet weak var lblUserType: UILabel!
+    @IBOutlet weak var lblEnglish: UILabel!
+    @IBOutlet weak var lblArabic: UILabel!
+    @IBOutlet weak var lblWhatsNumber: UILabel!
+    @IBOutlet weak var btnSaveChanges: UIButton!
+ 
     
     var getstatelistarr        =      [getstateModel]()
     var getlocalitylistarr     =      [getlocalityModel]()
     var stateid:Int?
     var localityid:Int?
     
-    
     var userdata = [UserData]()
     var timePicker = UIDatePicker()
     
     //    MARK: - Life Cycle
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setuplanguage()
         self.setupdate()
         self.setup()
         if UserData.shared.isskiplogin == true{
@@ -76,14 +85,12 @@ class EditProfileVC: UIViewController {
             self.txtFieldWhatsappNumber.placeholder = "+91**********"
             self.textfieldDATE.placeholder = "DD/MM/YYYY"
             self.lblCountry.text = "India"
-            
         }
         else{
             self.fetchdata()
             self.getstateapi()
         }
     }
-    
     
     //    MARK: - Life Cycle
     
@@ -132,7 +139,6 @@ class EditProfileVC: UIViewController {
         
     }
     
-    
     func fetchdata(){
         self.txtFieldFirstName.text  = UserData.shared.name
         self.txtFieldLastName.text = UserData.shared.last_name
@@ -173,7 +179,9 @@ class EditProfileVC: UIViewController {
             else if UserData.shared.user_type == "2"{
                 self.lblUserType.text = "Service Provider"
             }
-            
+        }
+        if UserData.shared.about != ""{
+            self.txtfieldEnterAbout.text = UserData.shared.about
         }
     }
     // MARK: -   Validation
@@ -254,16 +262,14 @@ class EditProfileVC: UIViewController {
     //        self.present(vc, animated: true)
     //    }
     
-    
     @IBAction func btnSaveTapped(_ sender: UIButton) {
-        //        self.editdetailapi()
+        //  self.editdetailapi()
         self.Validation()
         
     }
     @IBAction func btnBackTapped(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
     }
-    
     
     @IBAction func btnChangePhoneNumberTapped(_ sender: UIButton) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: VerifyNumberOTPVC.getStoryboardID()) as! VerifyNumberOTPVC
@@ -308,7 +314,6 @@ class EditProfileVC: UIViewController {
         self.verifyemail()
     }
     
-    
     @IBAction func btnSelectStateTapped(_ sender: UIButton) {
         kSharedAppDelegate?.dropDown(dataSource: getstatelistarr.map{String.getString($0.state_name)}, text: btnState){
             (index,item) in
@@ -318,9 +323,7 @@ class EditProfileVC: UIViewController {
             debugPrint("State idddd.....btnnnnt",  self.stateid = id)
             
             self.getlocalityapi(id: self.stateid ?? 0 )
-            
         }
-        
     }
     
     @IBAction func btnLocalityTapped(_ sender: UIButton) {
@@ -421,7 +424,6 @@ extension EditProfileVC{
     func editdetailapi(){
         CommonUtils.showHud(show: true)
         
-        
         if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
             let endToken = kSharedUserDefaults.getLoggedInAccessToken()
             let septoken = endToken.components(separatedBy: " ")
@@ -429,9 +431,8 @@ extension EditProfileVC{
                 let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
                 kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
             }
-            //            headers["token"] = kSharedUserDefaults.getLoggedInAccessToken()
+            //  headers["token"] = kSharedUserDefaults.getLoggedInAccessToken()
         }
-        
         
         let params:[String : Any] = [
             "user_id":UserData.shared.id,
@@ -441,9 +442,10 @@ extension EditProfileVC{
             "dob":String.getString(self.textfieldDATE.text),
             "phone":String.getString(self.txtFieldPhoneNumber.text),
             "country_detail":self.lblCountry.text,
-            "gender":self.lblGender.text
+            "user_type":UserData.shared.user_type,
+            "gender":self.lblGender.text,
+            "about":self.txtfieldEnterAbout.text
         ]
-        
         
         TANetworkManager.sharedInstance.requestApi(withServiceName:ServiceName.kedituserdetails, requestMethod: .POST,
                                                    requestParameters:params, withProgressHUD: false)
@@ -498,11 +500,9 @@ extension EditProfileVC{
         CommonUtils.showHud(show: true)
         let accessToken = kSharedUserDefaults.getLoggedInAccessToken()
         
-        
         let params:[String : Any] = [
             "email":String.getString(self.txtFieldEmailAddress.text),
         ]
-        
         
         TANetworkManager.sharedInstance.requestApi(withServiceName:ServiceName.kforgotpassword, requestMethod: .POST,
                                                    requestParameters:params, withProgressHUD: false)
@@ -594,8 +594,7 @@ extension EditProfileVC{
                 kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
             }
         }
-        
-        
+    
         TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName: ServiceName.kgetstate, requestMethod: .GET, requestParameters:[:], withProgressHUD: false) { (result:Any?, error:Error?, errorType:ErrorType?,statusCode:Int?) in
             CommonUtils.showHudWithNoInteraction(show: false)
             if errorType == .requestSuccess {
@@ -649,8 +648,8 @@ extension EditProfileVC{
         
         let params:[String : Any] = [
             "localitys_id":"\(String(describing: stateids))",
-            
         ]
+        
         TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kgetlocality, requestMethod: .POST,
                                                                requestParameters:params, withProgressHUD: false)
         {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
@@ -658,9 +657,7 @@ extension EditProfileVC{
             CommonUtils.showHudWithNoInteraction(show: false)
             
             if errorType == .requestSuccess {
-                
                 let dictResult = kSharedInstance.getDictionary(result)
-                
                 switch Int.getInt(statusCode) {
                 case 200:
                     
@@ -673,12 +670,7 @@ extension EditProfileVC{
                         }
                         let localitys = kSharedInstance.getArray(withDictionary: dictResult["localitys"])
                         self?.getlocalitylistarr = localitys.map{getlocalityModel(data: $0)}
-                        
-                        
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                        
-                        
-                        
                     }
                     
                     else if  Int.getInt(dictResult["status"]) == 400{
@@ -695,7 +687,6 @@ extension EditProfileVC{
             } else {
                 CommonUtils.showToastForDefaultError()
             }
-            
         }
     }
 }
@@ -715,7 +706,6 @@ extension EditProfileVC{
         //        components.hour = 1
         //        components.minute = 30
         //        timePicker.setDate(Calendar.current.date(from: components)!, animated: true)
-        
         
         let currentDate = Date()
         var dateComponents = DateComponents()
@@ -752,13 +742,33 @@ extension EditProfileVC{
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd/MM/yyyy"
         self.textfieldDATE.text = dateFormatter.string(from: self.timePicker.date)
-        
-        
-        
     }
     
     @objc func cancelClick() {
         self.view.endEditing(true)
     }
-    
 }
+
+// MARK: - Localisation
+
+extension EditProfileVC{
+    
+    func setuplanguage(){
+        lblEditProfile.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Edit profile", comment: "")
+        lblPhone.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Phone number", comment: "")
+        lblChangePhone.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Change", comment: "")
+        lblEmailaddress.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Email address", comment: "")
+        lblChangeEmail.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Change", comment: "")
+        lblFirstName.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "First name", comment: "")
+        lblLastName.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Last name", comment: "")
+        lblDOB.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Date of birth", comment: "")
+        lblheadingCountry.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Country", comment: "")
+        lblState.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "State", comment: "")
+        lblLocality.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Locality", comment: "")
+        lblGender.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Select gender", comment: "")
+        lblUserType.text  = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Select user type*", comment: "")
+        lblWhatsNumber.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Whatsapp number", comment: "")
+        btnSaveChanges.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "Save changes", comment: ""), for: .normal)
+    }
+}
+

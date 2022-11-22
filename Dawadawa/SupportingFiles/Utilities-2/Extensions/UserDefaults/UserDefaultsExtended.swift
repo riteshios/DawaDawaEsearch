@@ -1,7 +1,6 @@
 //
 //  UserDefaultsExtended.swift
 //  OneClickWash
-//
 //  Copyright © 2016 Appslure. All rights reserved.
 //
 
@@ -9,12 +8,12 @@ import Foundation
 
 extension UserDefaults {
     func setFavoriteStatus(status: Bool) {
-            self.set(status, forKey:"favoriteStatus")
-            self.synchronize()
-        }
+        self.set(status, forKey:"favoriteStatus")
+        self.synchronize()
+    }
     func getFavoriteStatus() -> Bool {
-            return self.bool(forKey: "favoriteStatus")
-        }
+        return self.bool(forKey: "favoriteStatus")
+    }
     func isTutorialShown() -> Bool {
         return self.bool(forKey: kIsTutorialAlreadyShown)
     }
@@ -51,62 +50,62 @@ extension UserDefaults {
         self.set(loggedInUserId, forKey: kLoginUserID)
         self.synchronize()
     }
-//    func updateSavedSuggestions(suggestions: [SavedLocationsModel]) {
-//        do {
-//                        UserDefaults.standard.set(try PropertyListEncoder().encode(suggestions), forKey: kSuggestions)
-//
-//
-//
-//            self.synchronize()}
-//        catch
-//                {
-//                    print(error.localizedDescription)
-//                }
-//    }
-//    func setAppLocation(location: SavedLocationsModel) {
-//        do {
-//                        UserDefaults.standard.set(try PropertyListEncoder().encode(location), forKey: kAppLocation)
-//
-//
-//
-//            self.synchronize()}
-//        catch
-//                {
-//                    print(error.localizedDescription)
-//                }
-//    }
-//    func getSavedSuggestions() -> [SavedLocationsModel] {
-//        var data:[SavedLocationsModel] = []
-//        if let storedObject: Data = UserDefaults.standard.data(forKey: kSuggestions)
-//                {
-//                    do
-//                    {
-//                        data = try PropertyListDecoder().decode([SavedLocationsModel].self, from: storedObject)
-//
-//                    }
-//                    catch
-//                    {
-//                        print(error.localizedDescription)
-//                    }
-//                }
-//
-//        return data
-//    }
-//    func getAppLocation() -> SavedLocationsModel {
-//        if let storedObject: Data = UserDefaults.standard.data(forKey: kAppLocation)
-//                {
-//                    do
-//                    {
-//                         return try PropertyListDecoder().decode(SavedLocationsModel.self, from: storedObject)
-//
-//                    }
-//                    catch
-//                    {
-//                        print(error.localizedDescription)
-//                    }
-//                }
-//        return SavedLocationsModel()
-//    }
+    //    func updateSavedSuggestions(suggestions: [SavedLocationsModel]) {
+    //        do {
+    //                        UserDefaults.standard.set(try PropertyListEncoder().encode(suggestions), forKey: kSuggestions)
+    //
+    //
+    //
+    //            self.synchronize()}
+    //        catch
+    //                {
+    //                    print(error.localizedDescription)
+    //                }
+    //    }
+    //    func setAppLocation(location: SavedLocationsModel) {
+    //        do {
+    //                        UserDefaults.standard.set(try PropertyListEncoder().encode(location), forKey: kAppLocation)
+    //
+    //
+    //
+    //            self.synchronize()}
+    //        catch
+    //                {
+    //                    print(error.localizedDescription)
+    //                }
+    //    }
+    //    func getSavedSuggestions() -> [SavedLocationsModel] {
+    //        var data:[SavedLocationsModel] = []
+    //        if let storedObject: Data = UserDefaults.standard.data(forKey: kSuggestions)
+    //                {
+    //                    do
+    //                    {
+    //                        data = try PropertyListDecoder().decode([SavedLocationsModel].self, from: storedObject)
+    //
+    //                    }
+    //                    catch
+    //                    {
+    //                        print(error.localizedDescription)
+    //                    }
+    //                }
+    //
+    //        return data
+    //    }
+    //    func getAppLocation() -> SavedLocationsModel {
+    //        if let storedObject: Data = UserDefaults.standard.data(forKey: kAppLocation)
+    //                {
+    //                    do
+    //                    {
+    //                         return try PropertyListDecoder().decode(SavedLocationsModel.self, from: storedObject)
+    //
+    //                    }
+    //                    catch
+    //                    {
+    //                        print(error.localizedDescription)
+    //                    }
+    //                }
+    //        return SavedLocationsModel()
+    //    }
     
     
     func setLoggedInAccessToken(loggedInAccessToken: String) {
@@ -120,6 +119,7 @@ extension UserDefaults {
     func getAcceptlanguage() -> String {
         return String.getString(self.string(forKey:kacceptlanguage))
     }
+    
     func getdefaultlanguage() -> String{
         return String.getString(self.string(forKey:kdefaultlanguage))
     }
@@ -227,7 +227,7 @@ extension UserDefaults {
             return ["":""]
         }
         
-       
+        
         
         let unarchiver = NSKeyedUnarchiver(forReadingWith: userData)
         guard let userLoggedInDetails = unarchiver.decodeObject(forKey: kLoggedInUserDetails) as? Dictionary <String, Any> else {
@@ -262,65 +262,72 @@ extension UserDefaults {
     func getDeviceToken() -> String {
         return String.getString(self.string(forKey: kDeviceToken))
     }
+    func setLanguage(language: String) {
+        self.set(language, forKey: kLanguage)
+        self.synchronize()
+    }
+    func getlanguage() -> String {
+        return String.getString(self.string(forKey:kLanguage))
+    }
     //For audio/video call
-//    func setChennalName(chennalName: String)
-//    {
-//        self.set(chennalName, forKey:CallIdentifiers.kChannelName)
-//        self.synchronize()
-//    }
-//    
-//    func getChennalName() -> String
-//    {
-//        return String.getString(self.string(forKey: CallIdentifiers.kChannelName))
-//    }
-//    
-//    func setCallerId(name: String) {
-//        self.set(name, forKey:CallIdentifiers.kCallerId)
-//        self.synchronize()
-//    }
-//    
-//    func getCallerId() -> String {
-//        return String.getString(self.string(forKey:CallIdentifiers.kCallerId))
-//    }
-//    
-//    func setAppointmentId(name: String) {
-//        self.set(name, forKey:CallIdentifiers.bookingID)
-//        self.synchronize()
-//    }
-//    
-//    func getAppointmentId() -> String {
-//        return String.getString(self.string(forKey:CallIdentifiers.bookingID))
-//    }
-//    
-//    func setCallId(name: String) {
-//        self.set(name, forKey:CallIdentifiers.kCallId)
-//        self.synchronize()
-//    }
-//    
-//    func getCallId() -> String {
-//        return String.getString(self.string(forKey:CallIdentifiers.kCallId))
-//    }
-//    
-//    func setCallerName(name: String)
-//    {
-//        self.set(name, forKey:CallIdentifiers.kCallerName)
-//        self.synchronize()
-//    }
-//    
-//    func getCallerName() -> String
-//    {
-//        return String.getString(self.string(forKey: CallIdentifiers.kCallerName))
-//    }
-//    
-//    func setProfileImg(name: String)
-//    {
-//        self.set(name, forKey:CallIdentifiers.kProfileImg)
-//        self.synchronize()
-//    }
-//    
-//    func getProfileImg() -> String
-//    {
-//        return String.getString(self.string(forKey: CallIdentifiers.kProfileImg))
-//    }
+    //    func setChennalName(chennalName: String)
+    //    {
+    //        self.set(chennalName, forKey:CallIdentifiers.kChannelName)
+    //        self.synchronize()
+    //    }
+    //
+    //    func getChennalName() -> String
+    //    {
+    //        return String.getString(self.string(forKey: CallIdentifiers.kChannelName))
+    //    }
+    //
+    //    func setCallerId(name: String) {
+    //        self.set(name, forKey:CallIdentifiers.kCallerId)
+    //        self.synchronize()
+    //    }
+    //
+    //    func getCallerId() -> String {
+    //        return String.getString(self.string(forKey:CallIdentifiers.kCallerId))
+    //    }
+    //
+    //    func setAppointmentId(name: String) {
+    //        self.set(name, forKey:CallIdentifiers.bookingID)
+    //        self.synchronize()
+    //    }
+    //
+    //    func getAppointmentId() -> String {
+    //        return String.getString(self.string(forKey:CallIdentifiers.bookingID))
+    //    }
+    //
+    //    func setCallId(name: String) {
+    //        self.set(name, forKey:CallIdentifiers.kCallId)
+    //        self.synchronize()
+    //    }
+    //
+    //    func getCallId() -> String {
+    //        return String.getString(self.string(forKey:CallIdentifiers.kCallId))
+    //    }
+    //
+    //    func setCallerName(name: String)
+    //    {
+    //        self.set(name, forKey:CallIdentifiers.kCallerName)
+    //        self.synchronize()
+    //    }
+    //
+    //    func getCallerName() -> String
+    //    {
+    //        return String.getString(self.string(forKey: CallIdentifiers.kCallerName))
+    //    }
+    //
+    //    func setProfileImg(name: String)
+    //    {
+    //        self.set(name, forKey:CallIdentifiers.kProfileImg)
+    //        self.synchronize()
+    //    }
+    //
+    //    func getProfileImg() -> String
+    //    {
+    //        return String.getString(self.string(forKey: CallIdentifiers.kProfileImg))
+    //    }
     
 }

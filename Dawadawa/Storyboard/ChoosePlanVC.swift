@@ -11,6 +11,7 @@ class ChoosePlanVC: UIViewController {
     @IBOutlet weak var viewMonthlyPlan: UIView!
     @IBOutlet weak var viewYearlyPlan: UIView!
     
+    @IBOutlet weak var lblChooseplan: UILabel!
     @IBOutlet weak var lblPlanMonthly: UILabel!
     @IBOutlet weak var lblPriceMonthly: UILabel!
     @IBOutlet weak var lblPlanYearly: UILabel!
@@ -18,11 +19,13 @@ class ChoosePlanVC: UIViewController {
     @IBOutlet weak var lblMonth: UILabel!
     
     var subsdata = [Subscription_data]()
-    
     var indexcount = 0
+    
+//   MARK: - Life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setuplanguage()
         self.getPlanApi()
         viewMonthlyPlan.addShadowWithBlurOnView(viewMonthlyPlan, spread: 0, blur: 10, color: .black, opacity: 0.16, OffsetX: 0, OffsetY: 1)
         
@@ -81,6 +84,12 @@ class ChoosePlanVC: UIViewController {
         vc.payment_terms = 2
         self.navigationController?.pushViewController(vc, animated: true)
     }
+}
+
+extension ChoosePlanVC{
     
+    func setuplanguage(){
+        lblChooseplan.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Choose plan", comment: "")
+    }
 }
 

@@ -1,15 +1,11 @@
-//
 //  CreateAccountVC.swift
 //  Dawadawa
-
 //  Created by Ritesh Gupta on 09/06/22.
-
 
 import UIKit
 import SKFloatingTextField
 import WebKit
 import GoogleSignIn
-
 
 class CreateAccountVC: UIViewController {
     
@@ -109,32 +105,20 @@ class CreateAccountVC: UIViewController {
     @IBAction func btnGoogleLoginTapped(_ sender: UIButton) {
         //        self.googleSignin()
         let signInConfig = GIDConfiguration.init(clientID: "636451100488-1k8eq045hd097ar24g78743ll5ufhhsn.apps.googleusercontent.com")
-        
-        
         GIDSignIn.sharedInstance.signIn(with: signInConfig, presenting: self) { user, error in
             
             guard error == nil else { return }
-            
             guard let user = user else { return }
             
-            
             if let profiledata = user.profile {
-                
                 let userId : String = user.userID ?? ""
-                
                 let username : String = profiledata.givenName ?? ""
-                
                 let email : String = profiledata.email
-                
-                
                 if let imgurl = user.profile?.imageURL(withDimension: 100) {
-                    
                     let absoluteurl : String = imgurl.absoluteString
-                    
                     //HERE CALL YOUR SERVER APP
                 }
                 self.googleSigninApi(accountName: username, email: email, googleId: userId)
-                
             }
         }
     }
@@ -164,7 +148,6 @@ class CreateAccountVC: UIViewController {
             self.lblUserType.text = item
             self.usertype = Index
             debugPrint("usertpe=-=-=",self.usertype)
-
         }
     }
     
@@ -189,8 +172,6 @@ class CreateAccountVC: UIViewController {
         UserData.shared.isskiplogin = true
         kSharedAppDelegate?.makeRootViewController()
     }
-    
-    
     
     // MARK: - Validation
     
@@ -412,7 +393,6 @@ extension CreateAccountVC {
                         }
                         //let msg = kSharedInstance.getStringArray(response["phone"])
                         // CommonUtils.showError(.info, msg[0])// msg is on 0th index
-                        
                     }
                     
                 default:
@@ -515,14 +495,12 @@ extension CreateAccountVC {
                 CommonUtils.showToastForDefaultError()
             }
         }
-        
     }
     
 //    Privacy policy api
     
     func PrivacypolicyApi(){
         CommonUtils.showHudWithNoInteraction(show: true)
-        
         
         TANetworkManager.sharedInstance.requestlangApi(withServiceName: ServiceName.kprivacypolicy, requestMethod: .GET, requestParameters:[:], withProgressHUD: false) { (result:Any?, error:Error?, errorType:ErrorType?,statusCode:Int?) in
             CommonUtils.showHudWithNoInteraction(show: false)
@@ -558,7 +536,6 @@ extension CreateAccountVC {
             }
         }
     }
-    
 }
 
 extension CreateAccountVC{

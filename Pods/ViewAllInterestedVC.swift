@@ -1,22 +1,20 @@
 //
-//  ViewAllSavedVC.swift
+//  ViewAllInterestedVC.swift
 //  Dawadawa
-//
-//  Created by Ritesh Gupta on 09/08/22.
-//
+//  Created by Ritesh Gupta on 17/11/22.
+
 
 import UIKit
 
-class ViewAllSavedVC: UIViewController {
-    
-    @IBOutlet weak var TblViewSavedOpp: UITableView!
+class ViewAllInterestedVC: UIViewController {
+
+    @IBOutlet weak var TblViewInterestedOpp: UITableView!
     var imgUrl = ""
     var docUrl = ""
     var userTimeLine = [SocialPostData]()
     var UserTimeLineOppdetails:SocialPostData?
     var comment = [user_comment]()
     var txtcomment = " "
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,31 +24,27 @@ class ViewAllSavedVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.getallsaveopportunity()
+        self.getallinterestedapi()
     }
     
     private func setup(){
-        TblViewSavedOpp.register(UINib(nibName: "SocialPostTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "SocialPostTableViewCell")
+        TblViewInterestedOpp.register(UINib(nibName: "SocialPostTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "SocialPostTableViewCell")
     }
     
     @IBAction func btnBackTapped(_ sender: UIButton) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: SavedOpportunitiesVC.getStoryboardID()) as! SavedOpportunitiesVC
         self.navigationController?.pushViewController(vc, animated: false)
         //        self.navigationController?.popViewController(animated: true)
-        
-        
     }
-    
-    
 }
 
-extension ViewAllSavedVC:UITableViewDelegate,UITableViewDataSource{
+extension ViewAllInterestedVC:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return userTimeLine.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = self.TblViewSavedOpp.dequeueReusableCell(withIdentifier: "SocialPostTableViewCell") as! SocialPostTableViewCell
+        let cell = self.TblViewInterestedOpp.dequeueReusableCell(withIdentifier: "SocialPostTableViewCell") as! SocialPostTableViewCell
         let obj = userTimeLine[indexPath.row]
         
         cell.SocialPostCollectionView.tag = indexPath.section
@@ -70,7 +64,6 @@ extension ViewAllSavedVC:UITableViewDelegate,UITableViewDataSource{
         
         cell.imgOpp_plan.image = obj.opp_plan == "Featured" ? UIImage(named: "Star Filled") : obj.opp_plan == "Premium" ? UIImage(named: "Crown") : UIImage(named: "")
         
-        
         if Int.getInt(obj.close_opr) == 0{
             cell.lblTitle.text = String.getString(obj.title)
             cell.lblTitle.textColor = .black
@@ -79,7 +72,6 @@ extension ViewAllSavedVC:UITableViewDelegate,UITableViewDataSource{
             cell.imgredCircle.isHidden = false
             cell.lblcloseOpportunity.isHidden = false
         }
-        
         
         if String.getString(obj.is_user_like) == "1"{
             cell.imglike.image = UIImage(named: "dil")
@@ -148,7 +140,7 @@ extension ViewAllSavedVC:UITableViewDelegate,UITableViewDataSource{
                         }
                         cell.imglike.image = UIImage(named: "dil")
                         cell.lbllike.text = "Liked"
-                        self.getallsaveopportunity()
+                        self.getallinterestedapi()
                         
                     }
                 }
@@ -162,12 +154,11 @@ extension ViewAllSavedVC:UITableViewDelegate,UITableViewDataSource{
                 vc.oppid = oppid ?? 0
                 
                 vc.callbackClosure = {
-                    self.getallsaveopportunity()
+                    self.getallinterestedapi()
                 }
                 self.present(vc, animated: false)
                 
             }
-            
             
             if txt == "Save"{
                 if sender.isSelected{
@@ -195,7 +186,6 @@ extension ViewAllSavedVC:UITableViewDelegate,UITableViewDataSource{
                 }
             }
             
-            
             if txt == "More" {
                 if UserData.shared.id == Int.getInt(obj.user_id){
                     
@@ -214,13 +204,10 @@ extension ViewAllSavedVC:UITableViewDelegate,UITableViewDataSource{
                                 debugPrint("oppid+++++++",oppid)
                                 
                                 self.opportunitydetailsapi(oppr_id: oppid)
-                                
                             }
                         }
-                        
                     }
                     self.present(vc, animated: false)
-                    
                 }
                 
                 else{
@@ -249,14 +236,11 @@ extension ViewAllSavedVC:UITableViewDelegate,UITableViewDataSource{
                             else{
                                 kSharedAppDelegate?.makeRootViewController()
                             }
-                            
                         }
-                        
                     }
                     self.present(vc, animated: false)
                 }
             }
-            
             
             //                       COMMENT PART
             
@@ -284,20 +268,20 @@ extension ViewAllSavedVC:UITableViewDelegate,UITableViewDataSource{
                 if sender.isSelected{
                     if obj.isComment == false{
                         obj.isComment = true
-                        self.TblViewSavedOpp.reloadData()
+                        self.TblViewInterestedOpp.reloadData()
                     }
                     else{
                         obj.isComment = false
-                        self.TblViewSavedOpp.reloadData()
+                        self.TblViewInterestedOpp.reloadData()
                     }
                 }else{
                     if obj.isComment == false{
                         obj.isComment = true
-                        self.TblViewSavedOpp.reloadData()
+                        self.TblViewInterestedOpp.reloadData()
                     }
                     else{
                         obj.isComment = false
-                        self.TblViewSavedOpp.reloadData()
+                        self.TblViewInterestedOpp.reloadData()
                     }
                 }
             }
@@ -325,7 +309,7 @@ extension ViewAllSavedVC:UITableViewDelegate,UITableViewDataSource{
                         cell.imageSubcommentUser.isHidden = true
                         cell.lblsubUserNameandComment.isHidden = true
                         cell.verticalSpacingReply.constant = -10
-                        //                        cell.bottomlblSubcomment.constant = 10
+                        // cell.bottomlblSubcomment.constant = 10
                         
                         
                         let first = String.getString(userComment.first?.name)
@@ -338,7 +322,7 @@ extension ViewAllSavedVC:UITableViewDelegate,UITableViewDataSource{
                         
                         
                         cell.lblusernameandcomment.attributedText = attributedString
-                        self.getallsaveopportunity()
+                        self.getallinterestedapi()
                         
                     }
                 }
@@ -409,11 +393,11 @@ extension ViewAllSavedVC:UITableViewDelegate,UITableViewDataSource{
         cell.lblusernameandcomment.attributedText = attributedStringcomment
         cell.lblsubUserNameandComment.attributedText = attributedStringSubcomment
         
-        cell.callbacktextviewcomment = {[weak TblViewSavedOpp] (_) in
+        cell.callbacktextviewcomment = {[weak TblViewInterestedOpp] (_) in
             
             self.txtcomment = cell.txtviewComment.text
-            self.TblViewSavedOpp?.beginUpdates()
-            self.TblViewSavedOpp?.endUpdates()
+            self.TblViewInterestedOpp?.beginUpdates()
+            self.TblViewInterestedOpp?.endUpdates()
         }
         return cell
     }
@@ -423,13 +407,13 @@ extension ViewAllSavedVC:UITableViewDelegate,UITableViewDataSource{
     }
 }
 
-extension ViewAllSavedVC{
+extension ViewAllInterestedVC{
     
     // MARK: -    API CALL
     
-    //    SaveOpportunity List
+    //    MarkInterested List
     
-    func getallsaveopportunity(){
+    func getallinterestedapi(){
         CommonUtils.showHudWithNoInteraction(show: true)
         
         if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
@@ -442,7 +426,7 @@ extension ViewAllSavedVC{
         }
         
         //        debugPrint("\(ServiceName.kgetallopportunity)/\(UserData.shared.id)") //passing userid in api url
-        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName: ServiceName.kgetsaveOppList, requestMethod: .GET, requestParameters:[:], withProgressHUD: false) { [self] (result:Any?, error:Error?, errorType:ErrorType?,statusCode:Int?) in
+        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName: ServiceName.kgetinterestedOppList, requestMethod: .GET, requestParameters:[:], withProgressHUD: false) { [self] (result:Any?, error:Error?, errorType:ErrorType?,statusCode:Int?) in
             CommonUtils.showHudWithNoInteraction(show: false)
             if errorType == .requestSuccess {
                 let dictResult = kSharedInstance.getDictionary(result)
@@ -462,7 +446,7 @@ extension ViewAllSavedVC{
                         print("Dataallpost=\(self.userTimeLine)")
                         
                         //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                        self.TblViewSavedOpp.reloadData()
+                        self.TblViewInterestedOpp.reloadData()
                         
                     }
                     else if  Int.getInt(dictResult["status"]) == 400{
@@ -499,7 +483,6 @@ extension ViewAllSavedVC{
                 kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
             }
         }
-        
         
         let params:[String : Any] = [
             //            "user_id":Int.getInt(UserData.shared.id),
@@ -675,7 +658,7 @@ extension ViewAllSavedVC{
                         debugPrint("CommentData=-=-=0-=",completion(self!.comment))
                         
                         CommonUtils.showError(.info, String.getString(dictResult["Opportunity"]))
-                        self?.TblViewSavedOpp.reloadData()
+                        self?.TblViewInterestedOpp.reloadData()
                     }
                     
                     else if  Int.getInt(dictResult["responsecode"]) == 400{
@@ -953,4 +936,5 @@ extension ViewAllSavedVC{
             
         }
     }
+    
 }

@@ -186,6 +186,132 @@
 
 "Search opportunities" = "Search opportunities";
 
+// MARK: - CurrentLocationVC
+
+"Current Location" = "Current Location";
+"Use this location" = "Use this location";
+
+// MARK: - BuyPlanVC
+
+"Investor" = "Investor";
+"Business Owner" = "Business Owner";
+"Service Provider" = "Service Provider";
+"Choose this plan" = "Choose this plan";
+
+// MARK: - ChoosePlanVC
+
+"Choose plan" = "Choose plan";
+
+// MARK: - PaymentVC
+
+"Pay" = "Pay";
+
+// MARK: - NumberChangedSuccessfulPopUpVC
+
+"Number changed successfully" = "Number changed successfully";
+"Your mobile number changed successfully" = "Your mobile number changed successfully";
+"Close" = "Close";
+
+// MARK: - ChangePasswordOTPVerifyVC
+
+"Verify Account" = "Verify Account";
+"Password change code is sent on your email address" = "Password change code is sent on your email address";
+"Wrong code entered!" = "Wrong code entered!";
+"Resend code" = "Resend code";
+"Verify" = "Verify";
+
+// MARK: - ChangePasswordVC
+
+"Change Password" = "Change Password";
+"Enter new password for your account" = "Enter new password for your account";
+"New password" = "New password";
+"Confirm password" = "Confirm password";
+
+// MARK: - PasswordChangedSuccessfullyPopUpVC
+
+"Password changed successfully" = "Password changed successfully";
+"Your password changed successfully, now you can loggin to your account" = "Your password changed successfully, now you can loggin to your account";
+"Close" = "Close";
+
+// MARK: - VerifyEmailOTPVC
+
+"Verify it’s you" = "Verify it’s you";
+"Phone number verification code is sent on your email" = "Phone number verification code is sent on your email";
+"Wrong code entered!" = "Wrong code entered!";
+"Resend code" = "Resend code";
+"Verify" = "Verify";
+
+// MARK: - ChangeEmailVC
+
+"Change Email" = "Change Email";
+"Enter new email address for your account" = "Enter new email address for your account";
+"Enter new email address" = "Enter new email address";
+"Send code" = "Send code";
+
+// MARK: - VerifyNewEmailOTPVC
+
+"Verify new email address" = "Verify new email address";
+"Email verification code is sent on your email address" = "Email verification code is sent on your email address";
+"Wrong code entered!" = "Wrong code entered!";
+"Resend code" = "Resend code";
+
+// MARK: - EmailChangedSuccessfullyPopUpVC
+
+"Email changed successfully" = "Email changed successfully";
+"Your email address changed successfully" = "Your email address changed successfully";
+"Close" = "Close";
+
+// MARK: - EditProfileVC
+
+"Edit profile" = "Edit profile";
+"Phone number" = "Phone number";
+"Change" = "Change";
+"Email address" = "Email address";
+"First name" = "First name";
+"Last name" = "Last name";
+"Date of birth" = "Date of birth";
+"State" = "State";
+"Locality" = "Locality";
+"Select gender" = "Select gender";
+"Select user type*" = "Select user type*";
+"Whatsapp number" = "Whatsapp number";
+"Save changes" = "Save changes";
+
+// MARK: - ContactUsVC
+
+"Contact Us" = "Contact Us";
+"Do you have anything to say? Connect with us!" = "Do you have anything to say? Connect with us!";
+"Select query type" = "Select query type";
+"Send" = "Send";
+
+// MARK: - SelectCategoryVC
+
+"Select Category" = "Select Category";
+
+// MARK: - RockPitOpportunityVC
+
+"Select images" = "Select images";
+"Select documents" = "Select documents";
+"Select subcategory" = "Select subcategory";
+"Title" = "Title";
+"State" = "State";
+"Locality" = "Locality";
+"Location name" = "Location name";
+"Whatsapp number" = "Whatsapp number";
+"Price in US Dollar (optional)" = "Price in US Dollar (optional)";
+"Pin Location on map(optional)" = "Pin Location on map(optional)";
+"Looking for" = "Looking for";
+"Basic" = "Basic";
+"Featured" = "Featured";
+"Premium" = "Premium";
+"Create opportunity" = "Create opportunity";
+
+
+
+
+
+
+
 
 
 

@@ -1041,22 +1041,20 @@ public class TANetworkManager {
         var headers:[String: String] = [:]
         if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
             headers["Authorization"] = kSharedUserDefaults.getLoggedInAccessToken()
-           
         }
         else {
             headers["Authorization"] = ""
         }
-        if (String.getString(UserData.shared.language)) != ""{
-            headers["Accept-Language"] = String.getString(UserData.shared.language)
+        if String.getString(kSharedUserDefaults.getlanguage) != ""{
+            headers["Accept-Language"] = String.getString(kSharedUserDefaults.getlanguage)
         }
         
         else {
-            headers["Accept-Language"] = "en"
+            headers["Accept-Language"] = String.getString(kSharedUserDefaults.getlanguage)
         }
     
         print_debug(items: "Authorization: \(headers)")
         print_debug(items: "Accept-Language: \(headers)")
-        
         
         return headers
     }
@@ -1070,12 +1068,12 @@ public class TANetworkManager {
         else {
             headers["Authorization"] = ""
         }
-        if (String.getString(UserData.shared.language)) != ""{
-            headers["Accept-Language"] = String.getString(UserData.shared.language)
+        if String.getString(kSharedUserDefaults.getlanguage) != ""{
+            headers["Accept-Language"] = String.getString(kSharedUserDefaults.getlanguage)
         }
         
         else {
-            headers["Accept-Language"] = "en"
+            headers["Accept-Language"] = String.getString(kSharedUserDefaults.getlanguage)
         }
         
         headers["opr_package_key"] = "qq"
@@ -1089,20 +1087,16 @@ public class TANetworkManager {
     }
     
     private func getHeaderWithtlanguageName(serviceName: String) -> [String: String] {
-        var headers:[String: String] = [:]
-        
-        if (String.getString(UserData.shared.language)) != ""{
-            headers["Accept-Language"] = String.getString(UserData.shared.language)
+            var headers:[String: String] = [:]
+            if String.getString(kSharedUserDefaults.getlanguage()) != ""{
+                headers["Accept-Language"] = String.getString(kSharedUserDefaults.getlanguage())
+            }
+            else {
+                headers["Accept-Language"] = String.getString(kSharedUserDefaults.getlanguage())
+            }
+            print_debug(items: "Authorization: \(headers)")
+            return headers
         }
-        
-        else {
-            headers["Accept-Language"] = "en"
-        }
-        
-        
-        print_debug(items: "Authorization: \(headers)")
-        return headers
-    }
     
     private func getServiceUrl(string: String) -> String {
         if string.contains("http") {

@@ -120,15 +120,11 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
         switch section{
         case 0:
             return 1
-            
         case 1:
             return userTimeLine.count
-            
-            
         default:
             return 0
         }
-        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -140,7 +136,7 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
             
             if UserData.shared.isskiplogin == true{
                 if cameFrom != "FilterData"{
-                    //                    cell.heightMainView.constant = 100
+                    // cell.heightMainView.constant = 100
                     cell.heightViewCollectionview.constant = 50
                     cell.heightCollectionView.constant = 0
                 }
@@ -164,8 +160,7 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                     }
                 }
             }
-            
-            
+        
             return cell
             
         case 1:
@@ -337,7 +332,6 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                             cell.imgsave.image = UIImage(named: "save-3")
                             cell.lblSave.text = "Save"
                         }
-                        
                     }
                     else{
                         let oppid = Int.getInt(userTimeLine[indexPath.row].id)
@@ -397,7 +391,6 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                             }
                         }
                         self.present(vc, animated: false)
-                        
                     }
                     
                     else{
@@ -415,6 +408,12 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                                 vc.friendname = String.getString(obj.userdetail?.name)
                                 vc.friendimage = imguserurl
                                 self.navigationController?.pushViewController(vc, animated: true)
+                                self.dismiss(animated: true)
+                            }
+                            
+                            if txt == "MarkasInterested"{
+                                let oppid = Int.getInt(userTimeLine[indexPath.row].id)
+                                self.markinterestedapi(oppr_id: oppid)
                                 self.dismiss(animated: true)
                             }
                             
@@ -467,8 +466,6 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                 }
                 
                 //                       COMMENT PART
-                
-                
                 
                 if txt == "reply"{
                     
@@ -1064,11 +1061,69 @@ extension HomeVC{
         }
     }
     
+//    Markinterestedapi
+    
+    func markinterestedapi(oppr_id:Int){
+        CommonUtils.showHud(show: true)
+        
+        if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
+            let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+            let septoken = endToken.components(separatedBy: " ")
+            if septoken[0] != "Bearer"{
+                let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
+                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
+            }
+        }
+        
+        let params:[String : Any] = [
+            "user_id":Int.getInt(UserData.shared.id),
+            "opr_id":oppr_id
+        ]
+        
+        debugPrint("user_id......",Int.getInt(UserData.shared.id))
+        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kmarkinterested, requestMethod: .POST,requestParameters:params, withProgressHUD: false)
+        {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
+            
+            CommonUtils.showHudWithNoInteraction(show: false)
+            
+            if errorType == .requestSuccess {
+                
+                let dictResult = kSharedInstance.getDictionary(result)
+                
+                switch Int.getInt(statusCode) {
+                case 200:
+                    
+                    if Int.getInt(dictResult["status"]) == 200{
+                        
+                        let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+                        let septoken = endToken.components(separatedBy: " ")
+                        if septoken[0] == "Bearer"{
+                            kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
+                        }
+                        
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    }
+                    
+                    else if  Int.getInt(dictResult["status"]) == 201{
+                        //  CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    }
+                    
+                default:
+                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                }
+            } else if errorType == .noNetwork {
+                CommonUtils.showToastForInternetUnavailable()
+                
+            } else {
+                CommonUtils.showToastForDefaultError()
+            }
+        }
+    }
+    
     //    Guest getallopportunity
     func guestgetallopportunity(){
         CommonUtils.showHudWithNoInteraction(show: true)
-        
-        
         
         TANetworkManager.sharedInstance.requestlangApi(withServiceName: ServiceName.kguestgetallopportunity, requestMethod: .GET, requestParameters:[:], withProgressHUD: false) { (result:Any?, error:Error?, errorType:ErrorType?,statusCode:Int?) in
             CommonUtils.showHudWithNoInteraction(show: false)

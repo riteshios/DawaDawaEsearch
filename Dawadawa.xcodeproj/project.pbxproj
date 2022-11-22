@@ -82,6 +82,7 @@
 		049D33A42875B012004E4519 /* CalendarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049D33A32875B012004E4519 /* CalendarVC.swift */; };
 		049F4A9128FFD870009AB128 /* PaymentForFeatureandPremiumPopUPVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049F4A9028FFD870009AB128 /* PaymentForFeatureandPremiumPopUPVC.swift */; };
 		049F4A9328FFFA87009AB128 /* PaymentforFeaturePremiumVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049F4A9228FFFA87009AB128 /* PaymentforFeaturePremiumVC.swift */; };
+		04A064B7292621FC00DC0F96 /* ViewAllInterestedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A064B6292621FC00DC0F96 /* ViewAllInterestedVC.swift */; };
 		04A606F928F3F4AB00C980D3 /* Navigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A606F828F3F4AB00C980D3 /* Navigator.swift */; };
 		04A606FB28F4061000C980D3 /* NotificationsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A606FA28F4061000C980D3 /* NotificationsVC.swift */; };
 		04A606FE28F41B9200C980D3 /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A606FC28F41B9200C980D3 /* NotificationTableViewCell.swift */; };
@@ -746,6 +747,7 @@
 		049D33A32875B012004E4519 /* CalendarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CalendarVC.swift; path = Dawadawa/Storyboard/CalendarVC.swift; sourceTree = SOURCE_ROOT; };
 		049F4A9028FFD870009AB128 /* PaymentForFeatureandPremiumPopUPVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PaymentForFeatureandPremiumPopUPVC.swift; path = Dawadawa/Storyboard/PaymentForFeatureandPremiumPopUPVC.swift; sourceTree = SOURCE_ROOT; };
 		049F4A9228FFFA87009AB128 /* PaymentforFeaturePremiumVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PaymentforFeaturePremiumVC.swift; path = Pods/PaymentforFeaturePremiumVC.swift; sourceTree = SOURCE_ROOT; };
+		04A064B6292621FC00DC0F96 /* ViewAllInterestedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewAllInterestedVC.swift; path = Pods/ViewAllInterestedVC.swift; sourceTree = SOURCE_ROOT; };
 		04A606F828F3F4AB00C980D3 /* Navigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigator.swift; sourceTree = "<group>"; };
 		04A606FA28F4061000C980D3 /* NotificationsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NotificationsVC.swift; path = "Dawadawa/SupportingFiles/Utilities-2/NotificationsVC.swift"; sourceTree = SOURCE_ROOT; };
 		04A606FC28F41B9200C980D3 /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
@@ -1541,6 +1543,14 @@
 			name = ReportScreen;
 			sourceTree = "<group>";
 		};
+		04A064B82926366B00DC0F96 /* Interested Opportunity */ = {
+			isa = PBXGroup;
+			children = (
+				04A064B6292621FC00DC0F96 /* ViewAllInterestedVC.swift */,
+			);
+			name = "Interested Opportunity";
+			sourceTree = "<group>";
+		};
 		04A73F352876B25800A46E12 /* Add */ = {
 			isa = PBXGroup;
 			children = (
@@ -1702,6 +1712,7 @@
 				04F1AD9828697AE9002CC167 /* EditProfile */,
 				04F8452D286AC4930081120F /* ChangePassword */,
 				0411742828A2688200846FF3 /* Saved Opportunity */,
+				04A064B82926366B00DC0F96 /* Interested Opportunity */,
 				04F8452C286AC4730081120F /* LogOut */,
 				04FD1D36286077E800BE414A /* MoreVC.swift */,
 				04B265392872C83F00B2DF7C /* ContactUsVC.swift */,
@@ -3347,6 +3358,7 @@
 				04FD1D342860429C00BE414A /* TabBarVC.swift in Sources */,
 				0494642E28646CCA0010076A /* LogOutVC.swift in Sources */,
 				04A73F3E2876B64E00A46E12 /* SelectCategoryVC.swift in Sources */,
+				04A064B7292621FC00DC0F96 /* ViewAllInterestedVC.swift in Sources */,
 				04FD1D392860794E00BE414A /* ProfileVC.swift in Sources */,
 				447DCE662851CB1300C40DDD /* CommonUtils.swift in Sources */,
 				049D33A2287571FF004E4519 /* LocalizationClass.swift in Sources */,

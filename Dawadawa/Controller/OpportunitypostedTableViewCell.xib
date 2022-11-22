@@ -32,12 +32,23 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z84-mv-rLu">
                                         <rect key="frame" x="0.0" y="0.0" width="121" height="80"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BoU-i9-hfI">
-                                                <rect key="frame" x="10" y="10" width="101" height="19.5"/>
-                                                <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="16"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="0dA-uu-fOa">
+                                                <rect key="frame" x="23" y="10" width="75" height="19.5"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ciD-AT-kni">
+                                                        <rect key="frame" x="0.0" y="0.0" width="37.5" height="19.5"/>
+                                                        <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="16"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BoU-i9-hfI">
+                                                        <rect key="frame" x="37.5" y="0.0" width="37.5" height="19.5"/>
+                                                        <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="16"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8zO-Lf-ngc">
                                                 <rect key="frame" x="10" y="34.5" width="101" height="19.5"/>
                                                 <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="16"/>
@@ -47,12 +58,11 @@
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstItem="8zO-Lf-ngc" firstAttribute="top" secondItem="BoU-i9-hfI" secondAttribute="bottom" constant="5" id="Rzl-uJ-iOI"/>
-                                            <constraint firstAttribute="trailing" secondItem="BoU-i9-hfI" secondAttribute="trailing" constant="10" id="TFf-yM-FFN"/>
-                                            <constraint firstItem="BoU-i9-hfI" firstAttribute="leading" secondItem="z84-mv-rLu" secondAttribute="leading" constant="10" id="a26-fm-iKw"/>
-                                            <constraint firstItem="BoU-i9-hfI" firstAttribute="top" secondItem="z84-mv-rLu" secondAttribute="top" constant="10" id="bDH-v1-NTd"/>
                                             <constraint firstAttribute="trailing" secondItem="8zO-Lf-ngc" secondAttribute="trailing" constant="10" id="bYL-tz-Hum"/>
+                                            <constraint firstItem="0dA-uu-fOa" firstAttribute="centerX" secondItem="z84-mv-rLu" secondAttribute="centerX" id="e2a-h8-KMx"/>
+                                            <constraint firstItem="8zO-Lf-ngc" firstAttribute="top" secondItem="0dA-uu-fOa" secondAttribute="bottom" constant="5" id="eWX-zq-Ku7"/>
                                             <constraint firstItem="8zO-Lf-ngc" firstAttribute="leading" secondItem="z84-mv-rLu" secondAttribute="leading" constant="10" id="tQP-QV-IKW"/>
+                                            <constraint firstItem="0dA-uu-fOa" firstAttribute="top" secondItem="z84-mv-rLu" secondAttribute="top" constant="10" id="zt1-1C-pmv"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius1">
@@ -300,6 +310,7 @@
                 <outlet property="lblshowOpportunity" destination="5D5-JR-fk9" id="LgZ-Rb-h9d"/>
                 <outlet property="lblshowdata" destination="BoU-i9-hfI" id="6cq-Gs-ssu"/>
                 <outlet property="lblshowplan" destination="u8m-pf-F37" id="pN4-tl-YxI"/>
+                <outlet property="lbltotalused" destination="ciD-AT-kni" id="Tq4-Jo-O9n"/>
                 <outlet property="viewAllline" destination="H50-lI-XPl" id="wxo-wR-a1k"/>
                 <outlet property="viewFeaturedLine" destination="2Ug-7h-ueq" id="T0v-2r-rYR"/>
                 <outlet property="viewPremiumLine" destination="Zhk-3z-rrO" id="22F-nM-WYS"/>

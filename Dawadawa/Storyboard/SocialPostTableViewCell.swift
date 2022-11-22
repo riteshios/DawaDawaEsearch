@@ -1,7 +1,5 @@
-//
 //  SocialPostTableViewCell.swift
 //  Dawadawa
-//
 //  Created by Ritesh Gupta on 20/07/22.
 
 
@@ -40,15 +38,10 @@ class SocialPostTableViewCell: UITableViewCell,UITextViewDelegate {
     @IBOutlet weak var lblRating: UILabel!
     @IBOutlet weak var WidthViewRating: NSLayoutConstraint!
     
-    
     @IBOutlet weak var heightSocialPostCollectionView: NSLayoutConstraint!
     
     @IBOutlet weak var imgOppFlag: UIImageView!
     @IBOutlet weak var btnChat: UIButton!
-    
-    
-    
-    
     
     //    Comment Section
     
@@ -79,7 +72,6 @@ class SocialPostTableViewCell: UITableViewCell,UITextViewDelegate {
         }
     }
     
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -88,7 +80,6 @@ class SocialPostTableViewCell: UITableViewCell,UITextViewDelegate {
         SocialPostCollectionView.register(UINib(nibName: "SocialPostCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "SocialPostCollectionViewCell")
         pageControl.numberOfPages = img.count
         pageControl.currentPage = 0
-        
         
         self.txtviewComment.delegate = self
         self.viewAddComment.isHidden = true
@@ -102,17 +93,13 @@ class SocialPostTableViewCell: UITableViewCell,UITextViewDelegate {
         self.lblcloseOpportunity.isHidden = true
     }
     
-    
-    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
     }
     
     func textChanged(action: @escaping (String) -> Void) {
         self.callbacktextviewcomment = action
     }
-    
     
     func textViewDidChange(_ textView: UITextView) {
         callbacktextviewcomment?(textView.text)
@@ -120,10 +107,10 @@ class SocialPostTableViewCell: UITableViewCell,UITextViewDelegate {
     
     //    MARK: - @IBAction
     
+    
     @IBAction func btnProfileImageTapped(_ sender: UIButton) {
         self.callback?("Profileimage",sender)
     }
-    
     
     @IBAction func btnMoreTapped(_ sender: UIButton) {
         self.callback?("More", sender)
@@ -142,7 +129,6 @@ class SocialPostTableViewCell: UITableViewCell,UITextViewDelegate {
     @IBAction func btnRateTapped(_ sender: UIButton) {
         self.callback?("Rate",sender)
     }
-    
     
     @IBAction func btnSavedTapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
@@ -173,11 +159,9 @@ class SocialPostTableViewCell: UITableViewCell,UITextViewDelegate {
     @IBAction func btnChatTapped(_ sender: UIButton) {
         self.callback?("Chat",sender)
     }
-    
 }
 
-
-extension SocialPostTableViewCell: UICollectionViewDelegate,UICollectionViewDataSource{
+extension SocialPostTableViewCell: UICollectionViewDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     
     //    Collection View
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -193,9 +177,14 @@ extension SocialPostTableViewCell: UICollectionViewDelegate,UICollectionViewData
         print("imagebaseurl=-=-\(imageurl)")
         let userUrl = URL(string: imageurl)
         cell.imgOpportunity.sd_setImage(with: userUrl, placeholderImage:UIImage(named: "baba") )
-//        cell.imgOpportunity.downlodeImage(serviceurl: imageurl, placeHolder: UIImage(named: "baba"))
-       
+        cell.imgOpportunity.seeFullImage()
+        //        cell.imgOpportunity.downlodeImage(serviceurl: imageurl, placeHolder: UIImage(named: "baba"))
+        
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: self.SocialPostCollectionView.frame.size.width, height: 225)
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {

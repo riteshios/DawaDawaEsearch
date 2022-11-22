@@ -11,17 +11,34 @@ class HomeSocialMoreVC: UIViewController {
     
     var callback:((String)->())?
     @IBOutlet weak var Viewmain: UIView!
-    
+    @IBOutlet weak var viewBG:UIView!
     @IBOutlet weak var lblChatwithuser: UILabel!
     @IBOutlet weak var lblCopylink: UILabel!
     @IBOutlet weak var lblFlag: UILabel!
     @IBOutlet weak var lblReportUSer: UILabel!
     @IBOutlet weak var lblViewDetails: UILabel!
     
+    @IBOutlet weak var viewViewDetails: UIView!
+    @IBOutlet weak var HeightviewMain: NSLayoutConstraint!
+    var hascamefrom = ""
+    
+//    MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setuplanguage()
         self.setup()
+        if hascamefrom == "DetailPage"{
+            self.viewViewDetails.isHidden = true
+//            self.HeightviewMain.constant = 380
+        }
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if let touch = touches.first{
+            if viewBG == touch.view{
+                self.dismiss(animated: true)
+            }
+        }
     }
     
     func setup(){
@@ -45,8 +62,13 @@ class HomeSocialMoreVC: UIViewController {
     }
     
     @IBAction func btnCopyLinkTapped(_ sender: UIButton) {
+    }
+    
+    @IBAction func btnMarkasinterestedTapped(_ sender: UIButton){
+        self.callback?("MarkasInterested")
         
     }
+    
     
     @IBAction func btnFlagPostTapped(_ sender: UIButton) {
         self.callback?("Flag")

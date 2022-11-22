@@ -136,6 +136,10 @@ struct ServiceName {
     static let kgetsaveOppList          =         "api/savedOprList/\(UserData.shared.id)"
     static let kunsavedopp              =         "api/unsaveOpr"
     
+    //   Mark Interested
+    static let kmarkinterested          =          "api/mark-opportunity"
+    static let kgetinterestedOppList    =          "api/markOprList/\(UserData.shared.id)"
+    
     // Comment Opp
     static let kaddcomment              =         "api/comment-opportunity"
     static let kcommentreply            =         "api/commentreply-opportunity"
