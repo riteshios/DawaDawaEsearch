@@ -1,13 +1,11 @@
-//
 //  DetailScreenVC.swift
 //  Dawadawa
-//
 //  Created by Ritesh Gupta on 25/08/22.
 
 import UIKit
 
-class DetailScreenVC: UIViewController {
-    
+class DetailScreenVC: UIViewController, subCommentCellDelegate {
+   
     @IBOutlet weak var tblviewDetail: UITableView!
     var imgUrl = ""
     var userTimeLine: SocialPostData?
@@ -39,7 +37,6 @@ class DetailScreenVC: UIViewController {
 extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
-        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -270,7 +267,7 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                         }
                         
                         if txt == "Flag"{
-                            //                                let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
+//                            let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
                             self.flagopportunityapi(oppr_id: Int.getInt(self.userTimeLine?.id) ?? 0)
                             
                         }
@@ -305,20 +302,21 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                             cell.txtviewComment.text = ""
                             
                             let cell = self.tblviewDetail.dequeueReusableCell(withIdentifier: "SeeMoreCommentCell") as! SeeMoreCommentCell
+                            
                             cell.lblNameandComment.text = String.getString(userComment.first?.name) + " " + String.getString(userComment.first?.comments)
-                            debugPrint("lblcommentName=-=-=-", cell.lblNameandComment.text )
+                            
+                            debugPrint("lblcommentName====-", cell.lblNameandComment.text )
                             
                             let imgcommentuserurl = String.getString(userComment.first?.image)
+                            
                             debugPrint("commentuserprofile......",imgcommentuserurl)
                             
                             cell.imgCommentUser.downlodeImage(serviceurl: imgcommentuserurl , placeHolder: UIImage(named: "Boss"))
                             
                             self.getalldetail()
-                            
                         }
                     }
                 }
-                
             }
             //            cell.viewcomment.isHidden = true
             //            cell.heightViewComment.constant = 0
@@ -337,6 +335,7 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
             let cell = self.tblviewDetail.dequeueReusableCell(withIdentifier: "SeeMoreCommentCell") as! SeeMoreCommentCell
             
             let obj = self.userTimeLine?.usercomment[indexPath.row]
+            cell.celldelegate = self
             cell.topsubTableview.constant = obj?.subcomment.count == 0 ? 0 : 10
             cell.bottomSubtableview.constant = obj?.subcomment.count == 0 ? 0 : 10
             cell.viewPostComment.isHidden = obj?.subcomment.count == 0 ? false : true
@@ -391,11 +390,25 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                             
                             cell.viewPostComment.isHidden = true
                             self.getalldetail()
-                            
                         }
                     }
                 }
+                
+                if txt == "IconComment"{
+                    let userid = Int.getInt(self.userTimeLine?.usercomment[indexPath.row].user_id) ?? 0
+                    if UserData.shared.id == userid{
+                        print("SelfICON")
+                    }
+                    else{
+                        let vc = self.storyboard?.instantiateViewController(withIdentifier: UserProfileDetailsVC.getStoryboardID()) as! UserProfileDetailsVC
+                        vc.userid = userid
+                        vc.friendname = String.getString(self.userTimeLine?.usercomment[indexPath.row].name)
+                        vc.friendimage = String.getString(self.userTimeLine?.usercomment[indexPath.row].image)
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    }
+                }
             }
+            
             
             cell.callbacktxtviewsubcomment = {[weak tblviewDetail] (_) in
                 
@@ -403,7 +416,6 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                 debugPrint("txtSubcomment=-=-=-=",self.txtcomment)
                 self.tblviewDetail?.beginUpdates()
                 self.tblviewDetail?.endUpdates()
-                
             }
             
             let first = String.getString(obj?.name)
@@ -423,6 +435,13 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
         }
     }
     
+    func tableView(tblView: SubCommentTableViewCell?, index: Int, result: String, didTappedInTableViewCell: SeeMoreCommentCell) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: UserProfileDetailsVC.getStoryboardID()) as! UserProfileDetailsVC
+        vc.userid = Int.getInt(result)
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section{
         case 0:
@@ -434,7 +453,6 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
         default:
             return 0
         }
-        
     }
 }
 
@@ -457,7 +475,6 @@ extension DetailScreenVC{
         let params:[String : Any] = [
             "oppr_id":self.oppid,
             "user_id":UserData.shared.id
-            
         ]
         
         debugPrint("oppr_id...===...",oppid)
@@ -549,7 +566,7 @@ extension DetailScreenVC{
                         debugPrint("Commentdata=-=-=0-=", self?.comment[0].comments)
                         completion(self!.comment)
                         debugPrint("CommentData=-=-=0-=",completion(self!.comment))
-            
+                        
                         CommonUtils.showError(.info, String.getString(dictResult["Opportunity"]))
                         
                     }
@@ -574,7 +591,7 @@ extension DetailScreenVC{
     
     func commentreplyapi(oppr_id:Int,commentid:Int,completion: @escaping(_ viewH : [sub_Comment])->Void){
         CommonUtils.showHud(show: true)
-    
+        
         if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
             let endToken = kSharedUserDefaults.getLoggedInAccessToken()
             let septoken = endToken.components(separatedBy: " ")
@@ -686,7 +703,7 @@ extension DetailScreenVC{
                         completion(String.getString(dictResult["count"]))
                         
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                    
+                        
                     }
                     
                     else if  Int.getInt(dictResult["status"]) == 400{
@@ -903,7 +920,7 @@ extension DetailScreenVC{
         }
         
         let params:[String : Any] = [
-//            "user_id":Int.getInt(UserData.shared.id),
+            //            "user_id":Int.getInt(UserData.shared.id),
             "opr_id":oppr_id
         ]
         

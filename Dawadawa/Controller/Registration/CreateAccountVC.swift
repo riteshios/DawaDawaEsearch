@@ -85,7 +85,6 @@ class CreateAccountVC: UIViewController {
     
     //   MARK: - @IBACtions
     
-    
     @IBAction func btnTerms(_ sender: UIButton) {
         self.termsandConditionApi()
 //        let vc = self.storyboard?.instantiateViewController(withIdentifier: WebViewVC.getStoryboardID()) as! WebViewVC
@@ -327,7 +326,6 @@ extension CreateAccountVC : SKFlaotingTextFieldDelegate {
 
 // Create Account
 extension CreateAccountVC {
-    
     func createAccountapi(){
         
         CommonUtils.showHud(show: true)

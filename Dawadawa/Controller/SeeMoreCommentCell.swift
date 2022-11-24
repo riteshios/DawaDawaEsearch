@@ -1,17 +1,19 @@
-//
 //  SeeMoreCommentCell.swift
 //  Dawadawa
-//
 //  Created by Ritesh Gupta on 25/08/22.
-//
 
 import UIKit
 import IQKeyboardManagerSwift
 
-class SeeMoreCommentCell: UITableViewCell, UITableViewDelegate, UITableViewDataSource,UITextViewDelegate  {
+
+protocol subCommentCellDelegate: AnyObject {
+    func tableView(tblView: SubCommentTableViewCell?, index: Int,result:String ,didTappedInTableViewCell: SeeMoreCommentCell)
+}
+
+class SeeMoreCommentCell: UITableViewCell, UITableViewDelegate, UITableViewDataSource,UITextViewDelegate{
     
     //    MARK: - Properties
-    
+    weak var celldelegate: subCommentCellDelegate?
     @IBOutlet weak var topsubTableview: NSLayoutConstraint!
     @IBOutlet weak var tblviewSubComment: UITableView!
     
@@ -28,19 +30,16 @@ class SeeMoreCommentCell: UITableViewCell, UITableViewDelegate, UITableViewDataS
     @IBOutlet weak var viewPostComment: UIView!
     
     var callback:((String)->())?
+    var subcommenticon = ""
     var callbacktxtviewsubcomment: ((String) -> Void)?
     
     var subcomment = [sub_Comment]()
-    
-    
-    
     
     //    MARK: - Life Cycle
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        
+        self.callback?(self.subcommenticon)
         tblviewSubComment.register(UINib(nibName: "SubCommentTableViewCell", bundle: nil), forCellReuseIdentifier: "SubCommentTableViewCell")
         self.tblviewSubComment.delegate = self
         self.tblviewSubComment.dataSource = self
@@ -48,11 +47,9 @@ class SeeMoreCommentCell: UITableViewCell, UITableViewDelegate, UITableViewDataS
         self.txtviewsubComment.delegate = self
         
     }
-    
-    
+
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
         
     }
     
@@ -69,6 +66,11 @@ class SeeMoreCommentCell: UITableViewCell, UITableViewDelegate, UITableViewDataS
         tblviewSubComment.reloadData()
     }
     
+    // Delegate Method
+//    func sendDataSeemoreCommentCell(myData: String) {
+//        self.subcommenticon = myData
+//    }
+
     
     // MARK: - @IBACtion
     
@@ -81,16 +83,20 @@ class SeeMoreCommentCell: UITableViewCell, UITableViewDelegate, UITableViewDataS
     @IBAction func btnReplyTapped(_ sender: UIButton) {
         self.callback?("Reply")
     }
+    @IBAction func btniconCommentTapped(_ sender: UIButton){
+        self.callback?("IconComment")
+    }
     //    MARK: - Table View
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.subcomment.count
-        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tblviewSubComment.dequeueReusableCell(withIdentifier: "SubCommentTableViewCell") as! SubCommentTableViewCell
+       
         
         cell.lblSubComment.text = String.getString(self.subcomment[indexPath.row].usersubcommentdetails?.name) + "   " + String.getString(self.subcomment[indexPath.row].comments)
         print("data-------",String.getString(self.subcomment[indexPath.row].usersubcommentdetails?.name) + "   " + String.getString(self.subcomment[indexPath.row].comments))
@@ -98,9 +104,12 @@ class SeeMoreCommentCell: UITableViewCell, UITableViewDelegate, UITableViewDataS
         print("Its reloading")
         print("visibleLine  ---",cell.lblSubComment.numberOfVisibleLines)
         
+        cell.callback = { txt in
+            self.celldelegate?.tableView(tblView: cell, index: indexPath.row, result: txt, didTappedInTableViewCell: self)
+        }
+        
         let imgsubcomment = String.getString(self.subcomment[indexPath.row].usersubcommentdetails?.image)
         cell.imgSubCommentUser.downlodeImage(serviceurl: imgsubcomment, placeHolder: UIImage(named: "Boss"))
-        
         
         let first = String.getString(self.subcomment[indexPath.row].usersubcommentdetails?.name)
         let second = String.getString(self.subcomment[indexPath.row].comments)
@@ -117,4 +126,10 @@ class SeeMoreCommentCell: UITableViewCell, UITableViewDelegate, UITableViewDataS
         return UITableView.automaticDimension
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tblviewSubComment.cellForRow(at: indexPath) as! SubCommentTableViewCell
+        let obj = subcomment[indexPath.row]
+        self.celldelegate?.tableView(tblView: cell, index: indexPath.row, result: String.getString(obj.usersubcommentdetails?.id), didTappedInTableViewCell: self)
+    }
 }
+

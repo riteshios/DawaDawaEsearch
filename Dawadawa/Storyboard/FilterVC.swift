@@ -8,6 +8,7 @@ import RangeSeekSlider
 import Alamofire
 import SwiftyJSON
 
+var filteredArray:[String] = []
 var userTimeLine = [SocialPostData]()
 var cameFrom = ""
 
@@ -243,6 +244,13 @@ class FilterVC: UIViewController {
             self.viewLeastLiked.backgroundColor = UIColor(red: 241, green: 249, blue: 253)
             self.lblLeastLiked.textColor = UIColor(red: 21, green: 114, blue: 161)
             self.like = "DESC"
+            filteredArray.append("Most liked")
+            for i in 0 ..< filteredArray.count - 1{
+                if filteredArray[i] == "Least liked"{
+                    filteredArray.remove(at: i)
+                    break
+                }
+            }
         }
     }
     
@@ -254,6 +262,14 @@ class FilterVC: UIViewController {
             self.viewMostLiked.backgroundColor = UIColor(red: 241, green: 249, blue: 253)
             self.lblMostLiked.textColor = UIColor(red: 21, green: 114, blue: 161)
             self.like = "ASC"
+            
+            filteredArray.append("Least liked")
+            for i in 0 ..< filteredArray.count - 1{
+                if filteredArray[i] == "Most liked"{
+                    filteredArray.remove(at: i)
+                    break
+                }
+            }
         }
     }
     
@@ -265,6 +281,13 @@ class FilterVC: UIViewController {
             self.viewLeastrated.backgroundColor = UIColor(red: 241, green: 249, blue: 253)
             self.lblLeastrated.textColor = UIColor(red: 21, green: 114, blue: 161)
             self.rating = "DESC"
+            filteredArray.append("Most rated")
+            for i in 0 ..< filteredArray.count - 1{
+                if filteredArray[i] == "Least rated"{
+                    filteredArray.remove(at: i)
+                    break
+                }
+            }
             
         }
     }
@@ -277,6 +300,13 @@ class FilterVC: UIViewController {
             self.viewMostRated.backgroundColor = UIColor(red: 241, green: 249, blue: 253)
             self.lblMostrated.textColor = UIColor(red: 21, green: 114, blue: 161)
             self.rating = "ASC"
+            filteredArray.append("Least rated")
+            for i in 0 ..< filteredArray.count - 1{
+                if filteredArray[i] == "Most rated"{
+                    filteredArray.remove(at: i)
+                    break
+                }
+            }
         }
     }
     
@@ -292,6 +322,19 @@ class FilterVC: UIViewController {
             self.viewSold.backgroundColor = UIColor(red: 241, green: 249, blue: 253)
             self.lblSold.textColor = UIColor(red: 21, green: 114, blue: 161)
             self.oppstatus = 1
+            filteredArray.append("All")
+            for i in 0 ..< filteredArray.count - 1{
+                if filteredArray[i] == "Available"{
+                    filteredArray.remove(at: i)
+                    break
+                }
+            }
+            for i in 0 ..< filteredArray.count - 1{
+                if filteredArray[i] == "Closed"{
+                    filteredArray.remove(at: i)
+                    break
+                }
+            }
         }
     }
     
@@ -307,6 +350,19 @@ class FilterVC: UIViewController {
             self.viewSold.backgroundColor = UIColor(red: 241, green: 249, blue: 253)
             self.lblSold.textColor = UIColor(red: 21, green: 114, blue: 161)
             self.oppstatus = 3
+            filteredArray.append("Available")
+              for i in 0 ..< filteredArray.count - 1{
+                        if filteredArray[i] == "All"{
+                              filteredArray.remove(at: i)
+                                        break
+                                    }
+                            }
+              for i in 0 ..< filteredArray.count - 1{
+                          if filteredArray[i] == "Closed"{
+                                filteredArray.remove(at: i)
+                                        break
+                                    }
+                         }
         }
         
     }
@@ -323,6 +379,20 @@ class FilterVC: UIViewController {
             self.viewSold.backgroundColor = UIColor(red: 241, green: 249, blue: 253)
             self.lblSold.textColor = UIColor(red: 21, green: 114, blue: 161)
             self.oppstatus = 2
+            filteredArray.append("Closed")
+            for i in 0 ..< filteredArray.count - 1{
+                if filteredArray[i] == "All"{
+                    filteredArray.remove(at: i)
+                    break
+                }
+            }
+            for i in 0 ..< filteredArray.count - 1{
+                if filteredArray[i] == "Available"{
+                    filteredArray.remove(at: i)
+                    break
+                }
+            }
+            
         }
         
     }
@@ -355,6 +425,25 @@ class FilterVC: UIViewController {
             self.viewCustomrange.backgroundColor = UIColor(red: 241, green: 249, blue: 253)
             self.lblCustomrange.textColor =  UIColor(red: 21, green: 114, blue: 161)
             self.today = 0
+            filteredArray.append("Today")
+            for i in 0 ..< filteredArray.count - 1{
+                if filteredArray[i] == "Last week"{
+                    filteredArray.remove(at: i)
+                    break
+                }
+            }
+            for i in 0 ..< filteredArray.count - 1{
+                if filteredArray[i] == "Last month"{
+                    filteredArray.remove(at: i)
+                    break
+                }
+            }
+            for i in 0 ..< filteredArray.count - 1{
+                if filteredArray[i] == "Custom range"{
+                    filteredArray.remove(at: i)
+                    break
+                }
+            }
         }
     }
     
@@ -370,6 +459,26 @@ class FilterVC: UIViewController {
             self.viewCustomrange.backgroundColor = UIColor(red: 241, green: 249, blue: 253)
             self.lblCustomrange.textColor =  UIColor(red: 21, green: 114, blue: 161)
             self.lastweek = 1
+            filteredArray.append("Last week")
+            for i in 0 ..< filteredArray.count - 1{
+                if filteredArray[i] == "Today"{
+                    filteredArray.remove(at: i)
+                    break
+                }
+            }
+            for i in 0 ..< filteredArray.count - 1{
+                if filteredArray[i] == "Last month"{
+                    filteredArray.remove(at: i)
+                    break
+                }
+            }
+            
+            for i in 0 ..< filteredArray.count - 1{
+                if filteredArray[i] == "Custom range"{
+                    filteredArray.remove(at: i)
+                    break
+                }
+            }
         }
     }
     @IBAction func btnLastmonthTapped(_ sender: UIButton) {
@@ -384,6 +493,25 @@ class FilterVC: UIViewController {
             self.viewCustomrange.backgroundColor = UIColor(red: 241, green: 249, blue: 253)
             self.lblCustomrange.textColor =  UIColor(red: 21, green: 114, blue: 161)
             self.lastmonth = 2
+            filteredArray.append("Last month")
+            for i in 0 ..< filteredArray.count - 1{
+                if filteredArray[i] == "Last week"{
+                    filteredArray.remove(at: i)
+                    break
+                }
+            }
+            for i in 0 ..< filteredArray.count - 1{
+                if filteredArray[i] == "Today"{
+                    filteredArray.remove(at: i)
+                    break
+                }
+            }
+            for i in 0 ..< filteredArray.count - 1{
+                if filteredArray[i] == "Custom range"{
+                    filteredArray.remove(at: i)
+                    break
+                }
+            }
         }
     }
     @IBAction func btnCustomrangeTapped(_ sender: UIButton) {
@@ -398,6 +526,25 @@ class FilterVC: UIViewController {
             self.viewToday.backgroundColor = UIColor(red: 241, green: 249, blue: 253)
             self.lblToday.textColor =  UIColor(red: 21, green: 114, blue: 161)
             self.showSimpleAlert(message: "Please Choose Start date to Last date")
+            filteredArray.append("Custom range")
+            for i in 0 ..< filteredArray.count - 1{
+                if filteredArray[i] == "Last week"{
+                    filteredArray.remove(at: i)
+                    break
+                }
+            }
+            for i in 0 ..< filteredArray.count - 1{
+                if filteredArray[i] == "Last month"{
+                    filteredArray.remove(at: i)
+                    break
+                }
+            }
+            for i in 0 ..< filteredArray.count - 1{
+                if filteredArray[i] == "Today"{
+                    filteredArray.remove(at: i)
+                    break
+                }
+            }
         }
     }
     
@@ -542,7 +689,7 @@ extension FilterVC: UITableViewDelegate,UITableViewDataSource{
                 
             case 2:
                 return self.getfiltersubcatarr.count
-            
+                
             default:
                 return 0
             }
@@ -608,8 +755,6 @@ extension FilterVC: UITableViewDelegate,UITableViewDataSource{
                 
             case 0, 1, 2:
                 return 60
-                
-          
                 
             default:
                 return 0

@@ -24,16 +24,27 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bys-JU-mud">
                                 <rect key="frame" x="16" y="0.0" width="25" height="25"/>
                                 <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pyJ-JX-0rU">
+                                        <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <connections>
+                                            <action selector="btniconCommentTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="8je-FY-wsq"/>
+                                        </connections>
+                                    </button>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Boss" translatesAutoresizingMaskIntoConstraints="NO" id="za8-jp-knt">
                                         <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="pyJ-JX-0rU" secondAttribute="trailing" id="FpD-si-w16"/>
                                     <constraint firstAttribute="trailing" secondItem="za8-jp-knt" secondAttribute="trailing" id="GZL-o2-1Do"/>
                                     <constraint firstAttribute="bottom" secondItem="za8-jp-knt" secondAttribute="bottom" id="P0l-Q4-HGT"/>
                                     <constraint firstItem="za8-jp-knt" firstAttribute="top" secondItem="bys-JU-mud" secondAttribute="top" id="PtJ-Cu-AtR"/>
+                                    <constraint firstAttribute="bottom" secondItem="pyJ-JX-0rU" secondAttribute="bottom" id="RrX-NN-fTQ"/>
+                                    <constraint firstItem="pyJ-JX-0rU" firstAttribute="leading" secondItem="bys-JU-mud" secondAttribute="leading" id="YtU-dQ-l38"/>
                                     <constraint firstAttribute="width" constant="25" id="aH1-Ic-QTG"/>
+                                    <constraint firstItem="pyJ-JX-0rU" firstAttribute="top" secondItem="bys-JU-mud" secondAttribute="top" id="geZ-kv-T9e"/>
                                     <constraint firstItem="za8-jp-knt" firstAttribute="leading" secondItem="bys-JU-mud" secondAttribute="leading" id="kbI-Ov-hOD"/>
                                     <constraint firstAttribute="height" constant="25" id="qH3-V2-R2c"/>
                                 </constraints>
@@ -49,12 +60,13 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="zIA-nW-szV">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="zIA-nW-szV">
                                 <rect key="frame" x="4" y="113" width="407" height="1"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="Z5L-sC-Cet"/>
                                 </constraints>
+                                <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="dataSource" destination="KGk-i7-Jjw" id="Zeb-ML-9h8"/>
                                     <outlet property="delegate" destination="KGk-i7-Jjw" id="OGe-8x-vQx"/>

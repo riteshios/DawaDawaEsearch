@@ -1,9 +1,6 @@
-//
 //  ViewPostTableViewCell.swift
 //  Dawadawa
-//
 //  Created by Ritesh Gupta on 20/07/22.
-//
 
 import UIKit
 
@@ -43,7 +40,7 @@ class ViewPostTableViewCell: UITableViewCell{
     }
     
 }
-extension ViewPostTableViewCell: UICollectionViewDelegate,UICollectionViewDataSource{
+extension ViewPostTableViewCell: UICollectionViewDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     
 //    Collection View
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -63,7 +60,9 @@ extension ViewPostTableViewCell: UICollectionViewDelegate,UICollectionViewDataSo
         return cell
     }
    
-
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 185, height: 205)
+    }
   
 }
 

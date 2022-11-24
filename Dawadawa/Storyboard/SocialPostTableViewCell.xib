@@ -116,11 +116,27 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gmx-ui-x0B">
-                                        <rect key="frame" x="360.5" y="20" width="20" height="22"/>
+                                        <rect key="frame" x="358.5" y="20" width="22" height="22"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="22" id="d4a-cA-cNM"/>
+                                            <constraint firstAttribute="height" constant="22" id="sgP-HW-kg6"/>
+                                        </constraints>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" image="chat"/>
+                                        <state key="normal" image="viewdetails-1"/>
                                         <connections>
-                                            <action selector="btnChatTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="jSk-g8-Fy7"/>
+                                            <action selector="btnViewDetailsTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="zAh-QG-OYw"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YaD-9S-ZSR">
+                                        <rect key="frame" x="320.5" y="20" width="22" height="22"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="22" id="Ko8-PA-eZH"/>
+                                            <constraint firstAttribute="height" constant="22" id="kuP-Qs-kx3"/>
+                                        </constraints>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" image="message-circle"/>
+                                        <connections>
+                                            <action selector="btnChatTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="VN0-fM-ulQ"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -134,12 +150,14 @@
                                     <constraint firstAttribute="trailing" secondItem="eXK-Ye-5Om" secondAttribute="trailing" constant="20" id="FHB-08-ceO"/>
                                     <constraint firstItem="vUg-me-atb" firstAttribute="top" secondItem="N9E-Nl-Z2A" secondAttribute="top" constant="20" id="Jj3-cy-okT"/>
                                     <constraint firstItem="HeL-Mi-p7e" firstAttribute="leading" secondItem="Gmx-ui-x0B" secondAttribute="trailing" constant="3" id="L4Y-Ue-6x4"/>
+                                    <constraint firstItem="Gmx-ui-x0B" firstAttribute="leading" secondItem="YaD-9S-ZSR" secondAttribute="trailing" constant="16" id="R4q-i2-2qz"/>
                                     <constraint firstAttribute="trailing" secondItem="HeL-Mi-p7e" secondAttribute="trailing" constant="7.3300000000000001" id="SU8-6V-zC3"/>
                                     <constraint firstItem="xkw-Dz-ak3" firstAttribute="top" secondItem="N9E-Nl-Z2A" secondAttribute="top" id="TCo-f9-OeO"/>
                                     <constraint firstItem="vUg-me-atb" firstAttribute="leading" secondItem="N9E-Nl-Z2A" secondAttribute="leading" constant="20" id="Ufh-tt-Vpp"/>
                                     <constraint firstItem="E2N-yB-oj1" firstAttribute="leading" secondItem="eXK-Ye-5Om" secondAttribute="leading" id="Zhe-I8-JoL"/>
                                     <constraint firstItem="eXK-Ye-5Om" firstAttribute="leading" secondItem="LgE-K4-rkL" secondAttribute="leading" id="aUm-o6-l6z"/>
                                     <constraint firstItem="HeL-Mi-p7e" firstAttribute="centerY" secondItem="LgE-K4-rkL" secondAttribute="centerY" id="aky-nF-vVA"/>
+                                    <constraint firstItem="Gmx-ui-x0B" firstAttribute="centerY" secondItem="YaD-9S-ZSR" secondAttribute="centerY" id="b4v-mS-S33"/>
                                     <constraint firstItem="Gmx-ui-x0B" firstAttribute="centerY" secondItem="HeL-Mi-p7e" secondAttribute="centerY" id="gdL-8r-vTx"/>
                                     <constraint firstItem="eXK-Ye-5Om" firstAttribute="top" secondItem="LgE-K4-rkL" secondAttribute="bottom" constant="2" id="gnu-rR-ogb"/>
                                     <constraint firstItem="xkw-Dz-ak3" firstAttribute="leading" secondItem="N9E-Nl-Z2A" secondAttribute="leading" id="ncf-a7-rjS"/>
@@ -475,17 +493,28 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cVQ-Bv-ltZ">
                                                 <rect key="frame" x="0.0" y="3" width="25" height="25"/>
                                                 <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MKx-lc-ozd">
+                                                        <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <connections>
+                                                            <action selector="btnUserComment:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="ixb-EX-Qdn"/>
+                                                        </connections>
+                                                    </button>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Boss" translatesAutoresizingMaskIntoConstraints="NO" id="3yB-ce-Hgu">
                                                         <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
                                                     </imageView>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
+                                                    <constraint firstItem="MKx-lc-ozd" firstAttribute="leading" secondItem="cVQ-Bv-ltZ" secondAttribute="leading" id="2Fe-wk-DQp"/>
+                                                    <constraint firstItem="MKx-lc-ozd" firstAttribute="top" secondItem="cVQ-Bv-ltZ" secondAttribute="top" id="6Fm-yb-QLQ"/>
                                                     <constraint firstAttribute="width" constant="25" id="Grz-eU-t44"/>
                                                     <constraint firstItem="3yB-ce-Hgu" firstAttribute="top" secondItem="cVQ-Bv-ltZ" secondAttribute="top" id="OVc-aK-k8M"/>
                                                     <constraint firstAttribute="height" constant="25" id="PNh-eV-rgX"/>
                                                     <constraint firstItem="3yB-ce-Hgu" firstAttribute="leading" secondItem="cVQ-Bv-ltZ" secondAttribute="leading" id="Q3I-1i-2N7"/>
                                                     <constraint firstAttribute="bottom" secondItem="3yB-ce-Hgu" secondAttribute="bottom" id="Qd3-8u-2ao"/>
+                                                    <constraint firstAttribute="trailing" secondItem="MKx-lc-ozd" secondAttribute="trailing" id="knP-27-A61"/>
+                                                    <constraint firstAttribute="bottom" secondItem="MKx-lc-ozd" secondAttribute="bottom" id="ulc-Qf-QuX"/>
                                                     <constraint firstAttribute="trailing" secondItem="3yB-ce-Hgu" secondAttribute="trailing" id="xFt-1D-72P"/>
                                                 </constraints>
                                                 <userDefinedRuntimeAttributes>
@@ -503,17 +532,28 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Iix-9L-Y1Z">
                                                 <rect key="frame" x="30" y="42" width="25" height="25"/>
                                                 <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Gx-M6-Qy1">
+                                                        <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <connections>
+                                                            <action selector="btnUserSubComment:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="4pz-0U-lqR"/>
+                                                        </connections>
+                                                    </button>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Boss" translatesAutoresizingMaskIntoConstraints="NO" id="XC0-3d-csi">
                                                         <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
                                                     </imageView>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="9Gx-M6-Qy1" secondAttribute="trailing" id="IDA-AK-Wou"/>
                                                     <constraint firstItem="XC0-3d-csi" firstAttribute="top" secondItem="Iix-9L-Y1Z" secondAttribute="top" id="Jyc-L9-Z83"/>
+                                                    <constraint firstItem="9Gx-M6-Qy1" firstAttribute="leading" secondItem="Iix-9L-Y1Z" secondAttribute="leading" id="NgH-Ln-hxc"/>
+                                                    <constraint firstAttribute="bottom" secondItem="9Gx-M6-Qy1" secondAttribute="bottom" id="fXg-eA-aPT"/>
                                                     <constraint firstAttribute="width" constant="25" id="hri-iC-0L6"/>
                                                     <constraint firstItem="XC0-3d-csi" firstAttribute="leading" secondItem="Iix-9L-Y1Z" secondAttribute="leading" id="ioV-Md-Qoe"/>
                                                     <constraint firstAttribute="bottom" secondItem="XC0-3d-csi" secondAttribute="bottom" id="n6W-jc-8El"/>
                                                     <constraint firstAttribute="height" constant="25" id="orV-Rh-eFI"/>
+                                                    <constraint firstItem="9Gx-M6-Qy1" firstAttribute="top" secondItem="Iix-9L-Y1Z" secondAttribute="top" id="xoc-eW-3u9"/>
                                                     <constraint firstAttribute="trailing" secondItem="XC0-3d-csi" secondAttribute="trailing" id="xub-sq-gUK"/>
                                                 </constraints>
                                                 <userDefinedRuntimeAttributes>
@@ -637,11 +677,12 @@
                 <outlet property="VerticalspacingSubComment" destination="rm1-lM-5z7" id="CVJ-3Q-Ho8"/>
                 <outlet property="WidthViewRating" destination="ks3-tu-py5" id="JhL-Mz-3dA"/>
                 <outlet property="bottomspacingReply" destination="iE6-ej-Bj4" id="78Y-PE-8SB"/>
-                <outlet property="btnChat" destination="Gmx-ui-x0B" id="GUr-1k-zFS"/>
+                <outlet property="btnChat" destination="YaD-9S-ZSR" id="cI2-ZQ-DyN"/>
                 <outlet property="btnClickComment" destination="p8M-PC-Ljt" id="q01-cC-GNx"/>
                 <outlet property="btnSave" destination="6ue-Uh-RMM" id="eLh-0h-jFf"/>
                 <outlet property="btnShare" destination="9NH-Yq-NKr" id="QuT-gG-Egd"/>
                 <outlet property="btnlike" destination="W05-Qz-8CE" id="RoN-yl-ly8"/>
+                <outlet property="btnviewDetails" destination="Gmx-ui-x0B" id="H97-cB-2yX"/>
                 <outlet property="heightSocialPostCollectionView" destination="AFp-To-zbQ" id="i5O-Wr-hkS"/>
                 <outlet property="heightViewAddComment" destination="0eN-mQ-aZL" id="gXd-j3-Ufz"/>
                 <outlet property="heightViewComment" destination="zxb-DG-1KO" id="GfP-yj-9VM"/>
@@ -668,6 +709,7 @@
                 <outlet property="verticalSpacingReply" destination="aTK-tg-g90" id="eMZ-AH-pvd"/>
                 <outlet property="viewAddComment" destination="TRo-EL-epD" id="DFN-Xn-FL3"/>
                 <outlet property="viewLine" destination="9py-ux-e66" id="a0s-xV-Q2u"/>
+                <outlet property="viewSave" destination="zAD-b6-yeR" id="UBW-J5-DNa"/>
                 <outlet property="viewcomment" destination="q8Y-UB-V1p" id="gXy-sU-oLv"/>
             </connections>
             <point key="canvasLocation" x="206.52173913043481" y="126.22767857142857"/>
@@ -677,15 +719,16 @@
         <image name="Boss" width="75" height="75"/>
         <image name="Crown" width="20" height="20"/>
         <image name="Star Filled" width="20" height="20"/>
-        <image name="chat" width="20" height="20"/>
         <image name="comment" width="19" height="18"/>
         <image name="flagOpp" width="33" height="29"/>
+        <image name="message-circle" width="24" height="24"/>
         <image name="more" width="24" height="24"/>
         <image name="redcircle" width="5" height="5"/>
         <image name="save-3" width="20" height="20"/>
         <image name="send" width="18" height="18"/>
         <image name="share-1" width="20" height="20"/>
         <image name="unlike" width="19" height="17"/>
+        <image name="viewdetails-1" width="20" height="19.5"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

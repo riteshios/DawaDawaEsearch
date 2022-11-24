@@ -1116,7 +1116,6 @@ extension RockPitOpportunityVC{
         let localityid = Int(self.localityid ?? 0)
         debugPrint("checklocalityid",localityid)
         
-        
         let params:[String : Any] = [
             "user_id":"\(String(describing: userid))",
             "category_id":"1",

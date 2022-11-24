@@ -125,6 +125,22 @@ extension ViewAllSavedVC:UITableViewDelegate,UITableViewDataSource{
         
         cell.callback = { txt, sender in
             
+            if txt == "Chat"{
+                let userid = Int.getInt(self.userTimeLine[indexPath.row].user_id)
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: ChatVC.getStoryboardID()) as! ChatVC
+                vc.friendid = userid
+                vc.friendname = String.getString(obj.userdetail?.name)
+                vc.friendimage = imguserurl
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+            if txt == "viewDetails"{
+                let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
+                debugPrint("detailsppid=-=-=",oppid)
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: DetailScreenVC.getStoryboardID()) as! DetailScreenVC
+                vc.oppid = oppid
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+            
             if txt == "Profileimage"{
                 let user_id = self.userTimeLine[indexPath.row].user_id
                 let vc = self.storyboard?.instantiateViewController(withIdentifier: UserProfileDetailsVC.getStoryboardID()) as! UserProfileDetailsVC
@@ -341,6 +357,35 @@ extension ViewAllSavedVC:UITableViewDelegate,UITableViewDataSource{
                         self.getallsaveopportunity()
                         
                     }
+                }
+            }
+            if txt == "Iconusercomment" {
+                let userid = Int.getInt(self.userTimeLine[indexPath.row].usercomment.first?.user_id) ?? 0
+                print("SelfICON\(userid)")
+                print("selfuserid\(UserData.shared.id)")
+                
+                if UserData.shared.id == userid{
+                    print("Self")
+                }
+                else{
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: UserProfileDetailsVC.getStoryboardID()) as! UserProfileDetailsVC
+                    vc.userid = userid
+                    vc.friendname = String.getString(self.userTimeLine[indexPath.row].usercomment.first?.name)
+                    vc.friendimage = String.getString(self.userTimeLine[indexPath.row].usercomment.first?.image)
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
+            }
+            if txt == "IconuserSubcomment"{
+                let userid = Int.getInt(self.userTimeLine[indexPath.row].usercomment.first?.subcomment.first?.usersubcommentdetails?.id) ?? 0
+                if UserData.shared.id == userid{
+                    print("Self")
+                }
+                else{
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: UserProfileDetailsVC.getStoryboardID()) as! UserProfileDetailsVC
+                    vc.userid = userid
+                    vc.friendname = String.getString(self.userTimeLine[indexPath.row].usercomment.first?.subcomment.first?.usersubcommentdetails?.name)
+                    vc.friendimage = String.getString(obj.usercomment.first?.subcomment.first?.usersubcommentdetails?.image)
+                    self.navigationController?.pushViewController(vc, animated: true)
                 }
             }
         }

@@ -1,8 +1,6 @@
-//
 //  PremiumOpportunitiesVC.swift
 //  Dawadawa
 //  Created by Ritesh Gupta on 21/07/22.
-//
 
 import UIKit
 
@@ -161,6 +159,14 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
                     self.navigationController?.pushViewController(vc, animated: true)
                 }
                 
+                if txt == "viewDetails"{
+                    let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
+                    debugPrint("detailsppid=-=-=",oppid)
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: DetailScreenVC.getStoryboardID()) as! DetailScreenVC
+                    vc.oppid = oppid
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
+                
                 if txt == "Profileimage"{
                     let user_id = self.userTimeLine[indexPath.row].user_id
                     let vc = self.storyboard?.instantiateViewController(withIdentifier: UserProfileDetailsVC.getStoryboardID()) as! UserProfileDetailsVC
@@ -168,7 +174,6 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
                     self.navigationController?.pushViewController(vc, animated: true)
                     
                 }
-
                 
                 if txt == "Like"{
                 
@@ -183,7 +188,6 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
                     cell.lbllike.text = "Liked"
                     self.getallpremium()
                     
-                    
                 }
                 
                 if txt == "Rate"{
@@ -197,7 +201,6 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
                         self.getallpremium()
                     }
                     self.present(vc, animated: false)
-                    
                 }
                 
                 if txt == "Save"{
@@ -392,7 +395,35 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
                         }
                     }
                 }
-                
+                if txt == "Iconusercomment" {
+                    let userid = Int.getInt(self.userTimeLine[indexPath.row].usercomment.first?.user_id) ?? 0
+                    print("SelfICON\(userid)")
+                    print("selfuserid\(UserData.shared.id)")
+                    
+                    if UserData.shared.id == userid{
+                        print("Self")
+                    }
+                    else{
+                        let vc = self.storyboard?.instantiateViewController(withIdentifier: UserProfileDetailsVC.getStoryboardID()) as! UserProfileDetailsVC
+                        vc.userid = userid
+                        vc.friendname = String.getString(self.userTimeLine[indexPath.row].usercomment.first?.name)
+                        vc.friendimage = String.getString(self.userTimeLine[indexPath.row].usercomment.first?.image)
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    }
+                }
+                if txt == "IconuserSubcomment"{
+                    let userid = Int.getInt(self.userTimeLine[indexPath.row].usercomment.first?.subcomment.first?.usersubcommentdetails?.id) ?? 0
+                    if UserData.shared.id == userid{
+                        print("Self")
+                    }
+                    else{
+                        let vc = self.storyboard?.instantiateViewController(withIdentifier: UserProfileDetailsVC.getStoryboardID()) as! UserProfileDetailsVC
+                        vc.userid = userid
+                        vc.friendname = String.getString(self.userTimeLine[indexPath.row].usercomment.first?.subcomment.first?.usersubcommentdetails?.name)
+                        vc.friendimage = String.getString(obj.usercomment.first?.subcomment.first?.usersubcommentdetails?.image)
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    }
+                }
             }
             
             cell.viewAddComment.isHidden = obj.isComment == true ? false : true

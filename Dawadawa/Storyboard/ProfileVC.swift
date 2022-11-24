@@ -294,6 +294,7 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
             cell.SocialPostCollectionView.tag = indexPath.section
             
             cell.btnChat.isHidden = true
+            cell.viewSave.isHidden = true
             
             let profilrimageurl = "\("https://demo4app.com/dawadawa/public/admin_assets/user_profile/" + String.getString(UserData.shared.social_profile))"
             
@@ -304,13 +305,10 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
             cell.lblDescribtion.text = String.getString(obj.description)
             cell.lblRating.text = String.getString(obj.opr_rating)
             
-            
-            
             cell.Imageuser.downlodeImage(serviceurl: profilrimageurl, placeHolder: UIImage(named: "Boss"))
             print("-=-opp_plan=-=-\(String.getString(obj.opp_plan))")
             
             cell.imgOpp_plan.image = obj.opp_plan == "Featured" ? UIImage(named: "Star Filled") : obj.opp_plan == "Premium" ? UIImage(named: "Crown") : UIImage(named: "Folded Booklet")
-            
             
             cell.img = obj.oppimage
             cell.imgUrl = self.imgUrl
@@ -371,6 +369,14 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                     vc.userid = user_id ?? 0
                     self.navigationController?.pushViewController(vc, animated: true)
                     
+                }
+                
+                if txt == "viewDetails"{
+                    let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
+                    debugPrint("detailsppid=-=-=",oppid)
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: DetailScreenVC.getStoryboardID()) as! DetailScreenVC
+                    vc.oppid = oppid
+                    self.navigationController?.pushViewController(vc, animated: true)
                 }
                 
                 if txt == "Like"{
@@ -600,6 +606,36 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                             self.listoppoertunityapi()
                             
                         }
+                    }
+                }
+                
+                if txt == "Iconusercomment" {
+                    let userid = Int.getInt(self.userTimeLine[indexPath.row].usercomment.first?.user_id) ?? 0
+                    print("SelfICON\(userid)")
+                    print("selfuserid\(UserData.shared.id)")
+                    
+                    if UserData.shared.id == userid{
+                        print("Self")
+                    }
+                    else{
+                        let vc = self.storyboard?.instantiateViewController(withIdentifier: UserProfileDetailsVC.getStoryboardID()) as! UserProfileDetailsVC
+                        vc.userid = userid
+                        vc.friendname = String.getString(self.userTimeLine[indexPath.row].usercomment.first?.name)
+                        vc.friendimage = String.getString(self.userTimeLine[indexPath.row].usercomment.first?.image)
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    }
+                }
+                if txt == "IconuserSubcomment"{
+                    let userid = Int.getInt(self.userTimeLine[indexPath.row].usercomment.first?.subcomment.first?.usersubcommentdetails?.id) ?? 0
+                    if UserData.shared.id == userid{
+                        print("Self")
+                    }
+                    else{
+                        let vc = self.storyboard?.instantiateViewController(withIdentifier: UserProfileDetailsVC.getStoryboardID()) as! UserProfileDetailsVC
+                        vc.userid = userid
+                        vc.friendname = String.getString(self.userTimeLine[indexPath.row].usercomment.first?.subcomment.first?.usersubcommentdetails?.name)
+                        vc.friendimage = String.getString(obj.usercomment.first?.subcomment.first?.usersubcommentdetails?.image)
+                        self.navigationController?.pushViewController(vc, animated: true)
                     }
                 }
                 

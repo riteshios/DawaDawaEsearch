@@ -1,7 +1,5 @@
-//
 //  HomeVC.swift
 //  Dawadawa
-
 //  Created by Ritesh Gupta on 20/07/22.
 
 
@@ -68,6 +66,7 @@ class HomeVC: UIViewController{
     private func setup(){
         tblViewViewPost.register(UINib(nibName: "ViewPostTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "ViewPostTableViewCell")
         tblViewViewPost.register(UINib(nibName: "SocialPostTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "SocialPostTableViewCell")
+        tblViewViewPost.register(UINib(nibName: "FilterTVCell", bundle: Bundle.main), forCellReuseIdentifier: "FilterTVCell")
         
     }
     
@@ -112,7 +111,7 @@ class HomeVC: UIViewController{
 extension HomeVC:UITableViewDelegate,UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 3
         
     }
     
@@ -121,15 +120,25 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
         case 0:
             return 1
         case 1:
+            return 1
+        case 2:
             return userTimeLine.count
         default:
             return 0
         }
     }
     
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section{
         case 0:
+            let cell = self.tblViewViewPost.dequeueReusableCell(withIdentifier: "FilterTVCell") as! FilterTVCell
+            cell.textArray = filteredArray
+            cell.buttonFilter.addTarget(self, action: #selector(buttonTappedFilter), for: .touchUpInside)
+            cell.buttonClear.addTarget(self, action: #selector(buttonTappedClear), for: .touchUpInside)
+            return cell
+            
+        case 1:
             let cell = self.tblViewViewPost.dequeueReusableCell(withIdentifier: "ViewPostTableViewCell") as! ViewPostTableViewCell
             
             cell.ColllectionViewPremiumOpp.tag = indexPath.section
@@ -160,10 +169,9 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                     }
                 }
             }
-        
             return cell
             
-        case 1:
+        case 2:
             
             let cell = self.tblViewViewPost.dequeueReusableCell(withIdentifier: "SocialPostTableViewCell") as! SocialPostTableViewCell
             let obj = userTimeLine[indexPath.row]
@@ -245,14 +253,15 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
             
             if UserData.shared.id == Int.getInt(obj.user_id){
                 cell.btnChat.isHidden = true
+                //                cell.btnviewDetails.isHidden = true
             }
             else{
                 cell.btnChat.isHidden = false
+                //                cell.btnviewDetails.isHidden = false
             }
             cell.callback = { txt, sender in
                 
                 if txt == "Chat"{
-                    
                     let userid = Int.getInt(userTimeLine[indexPath.row].user_id)
                     let vc = self.storyboard?.instantiateViewController(withIdentifier: ChatVC.getStoryboardID()) as! ChatVC
                     vc.friendid = userid
@@ -261,12 +270,21 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                     self.navigationController?.pushViewController(vc, animated: true)
                 }
                 
+                if txt == "viewDetails"{
+                    let oppid = Int.getInt(userTimeLine[indexPath.row].id)
+                    debugPrint("detailsppid=-=-=",oppid)
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: DetailScreenVC.getStoryboardID()) as! DetailScreenVC
+                    vc.oppid = oppid
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
+                
                 if txt == "Profileimage"{
                     let user_id = userTimeLine[indexPath.row].user_id
                     let vc = self.storyboard?.instantiateViewController(withIdentifier: UserProfileDetailsVC.getStoryboardID()) as! UserProfileDetailsVC
                     vc.userid = user_id ?? 0
+                    vc.friendname = String.getString(obj.userdetail?.name)
+                    vc.friendimage = imguserurl
                     self.navigationController?.pushViewController(vc, animated: true)
-                    
                 }
                 
                 if txt == "Like"{
@@ -462,7 +480,6 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                         }
                         self.present(vc, animated: false)
                     }
-                    
                 }
                 
                 //                       COMMENT PART
@@ -484,9 +501,7 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                     
                     vc.oppid = oppid
                     self.navigationController?.pushViewController(vc, animated: true)
-                    
                 }
-                
                 
                 if txt == "ClickComment"{
                     if sender.isSelected{
@@ -528,11 +543,8 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                             
                             cell.imageCommentUser.downlodeImage(serviceurl: imgcommentuserurl , placeHolder: UIImage(named: "Boss"))
                             
-                            
-                            
                             cell.imageSubcommentUser.isHidden = true
                             cell.lblsubUserNameandComment.isHidden = true
-                            
                             
                             let first = String.getString(userComment.first?.name)
                             let second = String.getString(userComment.first?.comments)
@@ -549,8 +561,36 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                     }
                 }
                 
+                if txt == "Iconusercomment" {
+                    let userid = Int.getInt(userTimeLine[indexPath.row].usercomment.first?.user_id) ?? 0
+                    print("SelfICON\(userid)")
+                    print("selfuserid\(UserData.shared.id)")
+                    
+                    if UserData.shared.id == userid{
+                        print("Self")
+                    }
+                    else{
+                        let vc = self.storyboard?.instantiateViewController(withIdentifier: UserProfileDetailsVC.getStoryboardID()) as! UserProfileDetailsVC
+                        vc.userid = userid
+                        vc.friendname = String.getString(userTimeLine[indexPath.row].usercomment.first?.name)
+                        vc.friendimage = String.getString(userTimeLine[indexPath.row].usercomment.first?.image)
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    }
+                }
+                if txt == "IconuserSubcomment"{
+                    let userid = Int.getInt(userTimeLine[indexPath.row].usercomment.first?.subcomment.first?.usersubcommentdetails?.id) ?? 0
+                    if UserData.shared.id == userid{
+                        print("Self")
+                    }
+                    else{
+                        let vc = self.storyboard?.instantiateViewController(withIdentifier: UserProfileDetailsVC.getStoryboardID()) as! UserProfileDetailsVC
+                        vc.userid = userid
+                        vc.friendname = String.getString(userTimeLine[indexPath.row].usercomment.first?.subcomment.first?.usersubcommentdetails?.name)
+                        vc.friendimage = String.getString(obj.usercomment.first?.subcomment.first?.usersubcommentdetails?.image)
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    }
+                }
             }
-            
             
             let imgcomment = "\("https://demo4app.com/dawadawa/public/admin_assets/user_profile/" + String.getString(UserData.shared.social_profile))"
             
@@ -585,8 +625,6 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                 
             }
             
-            
-            
             cell.lblusernameandcomment.text = String.getString(obj.usercomment.first?.name)
             + "  " + String.getString(obj.usercomment.first?.comments)
             
@@ -594,11 +632,9 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
             debugPrint("commentuserprofile......",imgcommentuserurl)
             cell.imageCommentUser.downlodeImage(serviceurl: imgcommentuserurl , placeHolder: UIImage(named: "Boss"))
             
-            
             cell.lblsubUserNameandComment.text = String.getString(obj.usercomment.first?.subcomment.first?.usersubcommentdetails!.name) + "             " + String.getString(obj.usercomment.first?.subcomment.first?.comments) // Sub-Comment
             let imgcommentSubuser = String.getString(obj.usercomment.first?.subcomment.first?.usersubcommentdetails?.image)
             cell.imageSubcommentUser.downlodeImage(serviceurl: imgcommentSubuser, placeHolder: UIImage(named: "Boss"))
-            
             
             let first = String.getString(obj.usercomment.first?.name)
             let second = String.getString(obj.usercomment.first?.comments)
@@ -616,10 +652,8 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
             attributedStringSubcomment.setColorForText(textToFind: thrid, withColor: UIColor.black)
             attributedStringSubcomment.setColorForText(textToFind: fourth, withColor: UIColor.gray)
             
-            
             cell.lblusernameandcomment.attributedText = attributedStringcomment
             cell.lblsubUserNameandComment.attributedText = attributedStringSubcomment
-            
             
             cell.callbacktextviewcomment = {[weak tblViewViewPost] (_) in
                 
@@ -628,44 +662,48 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                 self.tblViewViewPost?.endUpdates()
             }
             
-            
             //                cell.layoutIfNeeded()
             return cell
-            
-            
         default:
             return UITableViewCell()
         }
-        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section{
         case 0:
-            if UserData.shared.isskiplogin == true{
-                return 150
-            }
-            else{
-                return 370
-            }
+            return 70
             
         case 1:
+            if UserData.shared.isskiplogin == true{
+                return 90
+            }
+            else{
+                return 300
+            }
+        case 2:
             return UITableView.automaticDimension
-            
             
         default:
             return 0
         }
         
     }
+    
+    @objc func buttonTappedFilter(_ sender:UIButton){
+                let vc = self.storyboard!.instantiateViewController(withIdentifier: FilterVC.getStoryboardID()) as! FilterVC
+                filteredArray.removeAll()
+                self.navigationController?.pushViewController(vc, animated: false)
+            }
+        
+    @objc func buttonTappedClear(_ sender:UIButton){
+              filteredArray.removeAll()
+              self.getallopportunity()
+         }
 }
 
-
-
 extension HomeVC{
-    
     // Api all opportunity
-    
     func getallopportunity(){
         CommonUtils.showHudWithNoInteraction(show: true)
         
@@ -802,15 +840,13 @@ extension HomeVC{
             }
         }
         
-        
         let params:[String : Any] = [
             "user_id":Int.getInt(UserData.shared.id),
             "opr_id":oppr_id
         ]
         
         debugPrint("user_id......",Int.getInt(UserData.shared.id))
-        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.klikeopportunity, requestMethod: .POST,
-                                                               requestParameters:params, withProgressHUD: false)
+        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.klikeopportunity, requestMethod: .POST,requestParameters:params, withProgressHUD: false)
         {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
             
             CommonUtils.showHudWithNoInteraction(show: false)
@@ -818,12 +854,10 @@ extension HomeVC{
             if errorType == .requestSuccess {
                 
                 let dictResult = kSharedInstance.getDictionary(result)
-                
                 switch Int.getInt(statusCode) {
                 case 200:
                     //                    self?.statuslike = Int.getInt(dictResult["status"])
                     if Int.getInt(dictResult["status"]) == 200{
-                        
                         
                         let endToken = kSharedUserDefaults.getLoggedInAccessToken()
                         let septoken = endToken.components(separatedBy: " ")
@@ -835,9 +869,7 @@ extension HomeVC{
                         debugPrint("likecount=-=-=",self?.count)
                         completion(String.getString(dictResult["count"]))
                         
-                        
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                        
                         
                     }
                     
@@ -854,9 +886,7 @@ extension HomeVC{
             } else {
                 CommonUtils.showToastForDefaultError()
             }
-            
         }
-        
     }
     
     //    Api comment opportunity
@@ -915,7 +945,7 @@ extension HomeVC{
                     }
                     
                     else if  Int.getInt(dictResult["responsecode"]) == 400{
-                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //  CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
@@ -1061,7 +1091,7 @@ extension HomeVC{
         }
     }
     
-//    Markinterestedapi
+    //    Markinterestedapi
     
     func markinterestedapi(oppr_id:Int){
         CommonUtils.showHud(show: true)
@@ -1406,7 +1436,7 @@ extension HomeVC{
                         self.imgNotification.image = UIImage(named: "notification-bing-1")
                         
                     }
-
+                    
                 default:
                     CommonUtils.showError(.error, String.getString(dictResult["message"]))
                 }
@@ -1433,3 +1463,4 @@ extension HomeVC{
         lblHello.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Hello", comment: "")
     }
 }
+

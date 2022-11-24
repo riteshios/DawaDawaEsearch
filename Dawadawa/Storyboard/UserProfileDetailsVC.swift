@@ -22,11 +22,18 @@ class UserProfileDetailsVC: UIViewController {
     @IBOutlet weak var lblAbout: UILabel!
     @IBOutlet weak var btnRateUser: UIButton!
     
+    @IBOutlet weak var viewChatwithuser: UIView!
+    
     var userid = 0
+    var friendname = ""
+    var friendimage = ""
     var userdata:user_Data?
+    
+//    MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.viewChatwithuser.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
         viewRating.settings.starSize = 27
         viewRating.settings.starMargin = 4
         viewRating.settings.fillMode = .half
@@ -68,7 +75,6 @@ class UserProfileDetailsVC: UIViewController {
                     self.ImgUser.image = UIImage(data: data)
                 }
             }
-            
             task.resume()
         }
     }
@@ -88,6 +94,13 @@ class UserProfileDetailsVC: UIViewController {
         }
         
         self.present(vc, animated: false)
+    }
+    @IBAction func btnChatwithUserTapped(_ seneder: UIButton){
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: ChatVC.getStoryboardID()) as! ChatVC
+        vc.friendid = self.userid
+        vc.friendname = String.getString(self.userdata?.name)
+        vc.friendimage = String.getString(self.userdata?.image)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 

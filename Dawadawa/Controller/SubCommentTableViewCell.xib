@@ -27,15 +27,26 @@
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Boss" translatesAutoresizingMaskIntoConstraints="NO" id="xs1-PC-C6h">
                                         <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
                                     </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="at9-cZ-nwj">
+                                        <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <connections>
+                                            <action selector="btniconSubCommentTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="oNo-Hn-Sk5"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="xs1-PC-C6h" secondAttribute="trailing" id="0tj-TV-7ms"/>
                                     <constraint firstAttribute="height" constant="25" id="46q-Fu-O1K"/>
+                                    <constraint firstItem="at9-cZ-nwj" firstAttribute="leading" secondItem="Mh3-Pl-fPl" secondAttribute="leading" id="5Dh-Rl-7jy"/>
+                                    <constraint firstAttribute="trailing" secondItem="at9-cZ-nwj" secondAttribute="trailing" id="5hq-Ck-paf"/>
                                     <constraint firstItem="xs1-PC-C6h" firstAttribute="leading" secondItem="Mh3-Pl-fPl" secondAttribute="leading" id="Ift-VN-gsw"/>
                                     <constraint firstItem="xs1-PC-C6h" firstAttribute="top" secondItem="Mh3-Pl-fPl" secondAttribute="top" id="KJ4-k5-j2n"/>
                                     <constraint firstAttribute="width" constant="25" id="ao1-4a-gSg"/>
                                     <constraint firstAttribute="bottom" secondItem="xs1-PC-C6h" secondAttribute="bottom" id="daK-85-FtO"/>
+                                    <constraint firstAttribute="bottom" secondItem="at9-cZ-nwj" secondAttribute="bottom" id="gie-G3-wBq"/>
+                                    <constraint firstItem="at9-cZ-nwj" firstAttribute="top" secondItem="Mh3-Pl-fPl" secondAttribute="top" id="wei-Sj-b7e"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius1">

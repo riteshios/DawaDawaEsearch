@@ -163,6 +163,7 @@ class oppr_document{
 
 class user_comment{
     var id:Int?
+    var user_id:Int?
     var comments:String?
     var name:String?
     var image:String?
@@ -171,6 +172,7 @@ class user_comment{
     
     init(data:[String:Any]){
         self.id = Int.getInt(data["id"])
+        self.user_id = Int.getInt(data["user_id"])
         self.comments = String.getString(data["comments"])
         self.name = String.getString(data["name"])
         self.image = String.getString(data["image"])

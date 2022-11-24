@@ -63,6 +63,10 @@
 		0478E73E28B7E63700EE7EFE /* SubCommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0478E73C28B7E63700EE7EFE /* SubCommentTableViewCell.swift */; };
 		0478E73F28B7E63700EE7EFE /* SubCommentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0478E73D28B7E63700EE7EFE /* SubCommentTableViewCell.xib */; };
 		047C781C28CF3AD100641646 /* ChoosePlanVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047C781B28CF3AD100641646 /* ChoosePlanVC.swift */; };
+		048204AE292F716100863713 /* FilterDataCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048204AD292F716100863713 /* FilterDataCVCell.swift */; };
+		048204B0292F716D00863713 /* FilterDataCVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 048204AF292F716D00863713 /* FilterDataCVCell.xib */; };
+		048204B2292F717900863713 /* FilterTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048204B1292F717800863713 /* FilterTVCell.swift */; };
+		048204B4292F718000863713 /* FilterTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 048204B3292F718000863713 /* FilterTVCell.xib */; };
 		0489D1982892B12300725664 /* SubcategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0489D1962892B12300725664 /* SubcategoryTableViewCell.swift */; };
 		0489D1992892B12300725664 /* SubcategoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0489D1972892B12300725664 /* SubcategoryTableViewCell.xib */; };
 		0489D19C2892B16300725664 /* OpportunityTypeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0489D19A2892B16300725664 /* OpportunityTypeTableViewCell.swift */; };
@@ -725,6 +729,10 @@
 		0478E73D28B7E63700EE7EFE /* SubCommentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubCommentTableViewCell.xib; sourceTree = "<group>"; };
 		047C781B28CF3AD100641646 /* ChoosePlanVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChoosePlanVC.swift; path = Dawadawa/Storyboard/ChoosePlanVC.swift; sourceTree = SOURCE_ROOT; };
 		047ED00728E5ADE800D13A20 /* Dawadawa.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Dawadawa.entitlements; sourceTree = "<group>"; };
+		048204AD292F716100863713 /* FilterDataCVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterDataCVCell.swift; sourceTree = "<group>"; };
+		048204AF292F716D00863713 /* FilterDataCVCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FilterDataCVCell.xib; sourceTree = "<group>"; };
+		048204B1292F717800863713 /* FilterTVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterTVCell.swift; sourceTree = "<group>"; };
+		048204B3292F718000863713 /* FilterTVCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FilterTVCell.xib; sourceTree = "<group>"; };
 		0489D1962892B12300725664 /* SubcategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubcategoryTableViewCell.swift; sourceTree = "<group>"; };
 		0489D1972892B12300725664 /* SubcategoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubcategoryTableViewCell.xib; sourceTree = "<group>"; };
 		0489D19A2892B16300725664 /* OpportunityTypeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpportunityTypeTableViewCell.swift; sourceTree = "<group>"; };
@@ -1489,6 +1497,18 @@
 				046DCA0A28C608D600B219F4 /* CurrentLocationVC.swift */,
 			);
 			name = MapScreen;
+			sourceTree = "<group>";
+		};
+		048204AB292F708500863713 /* Ffilter */ = {
+			isa = PBXGroup;
+			children = (
+				048204B3292F718000863713 /* FilterTVCell.xib */,
+				048204B1292F717800863713 /* FilterTVCell.swift */,
+				048204AF292F716D00863713 /* FilterDataCVCell.xib */,
+				048204AD292F716100863713 /* FilterDataCVCell.swift */,
+				04BFFB67289250BA0086DCC1 /* FilterVC.swift */,
+			);
+			name = Ffilter;
 			sourceTree = "<group>";
 		};
 		0489D19528929D5A00725664 /* Filter */ = {
@@ -2565,8 +2585,8 @@
 		44D7F8EF28536826001554C9 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				048204AB292F708500863713 /* Ffilter */,
 				0492B5FA28BE23BB00EDAC83 /* HomeSocialMoreSelfVC.swift */,
-				04BFFB67289250BA0086DCC1 /* FilterVC.swift */,
 				0461E31A288AA29800B7F0E7 /* HomeSocialMoreVC.swift */,
 				045C4E7D28897ACB00E831AA /* PremiumOpportunitiesVC.swift */,
 				04C495B8290FE0A0001F01FD /* Chat */,
@@ -2987,6 +3007,7 @@
 				447DCCAA2851CB1100C40DDD /* Zambia.png in Resources */,
 				447DCDFA2851CB1200C40DDD /* HR.png in Resources */,
 				447DCCF42851CB1200C40DDD /* Solomon-Islands.png in Resources */,
+				048204B0292F716D00863713 /* FilterDataCVCell.xib in Resources */,
 				447DCCF02851CB1200C40DDD /* Yemen.png in Resources */,
 				447DCCCF2851CB1100C40DDD /* Brazil.png in Resources */,
 				447DCE4E2851CB1300C40DDD /* MH.png in Resources */,
@@ -3115,6 +3136,7 @@
 				447DCD422851CB1200C40DDD /* Vietnam.png in Resources */,
 				447DCDE22851CB1200C40DDD /* HU.png in Resources */,
 				447DCCBA2851CB1100C40DDD /* Algeria.png in Resources */,
+				048204B4292F718000863713 /* FilterTVCell.xib in Resources */,
 				447DCDD32851CB1200C40DDD /* RW.png in Resources */,
 				447DCDD62851CB1200C40DDD /* QA.png in Resources */,
 				447DCDDE2851CB1200C40DDD /* ER.png in Resources */,
@@ -3256,6 +3278,7 @@
 				0489D19C2892B16300725664 /* OpportunityTypeTableViewCell.swift in Sources */,
 				0411EDD5291E7F1D0055AD30 /* DeleteChatPopUPVC.swift in Sources */,
 				04B5993D28993091008366DC /* PlanTableViewCell.swift in Sources */,
+				048204AE292F716100863713 /* FilterDataCVCell.swift in Sources */,
 				447DCC7C2851CB1100C40DDD /* UIButtonBorderWidthAndColor.swift in Sources */,
 				0461E314288A76F800B7F0E7 /* ProileSocialMoreVC.swift in Sources */,
 				447DCC8E2851CB1100C40DDD /* UITextFieldSubLayerBorderWidthAndColor.swift in Sources */,
@@ -3371,6 +3394,7 @@
 				447DCC732851CB1100C40DDD /* LocaleInfo.swift in Sources */,
 				04BFFB68289250BA0086DCC1 /* FilterVC.swift in Sources */,
 				0411742A28A2697200846FF3 /* SavedOpportunitiesVC.swift in Sources */,
+				048204B2292F717900863713 /* FilterTVCell.swift in Sources */,
 				0478E73E28B7E63700EE7EFE /* SubCommentTableViewCell.swift in Sources */,
 				447DCC7A2851CB1100C40DDD /* UIButtonCornerRadius.swift in Sources */,
 				447DCC612851CB1100C40DDD /* UISegmentedControl+Extensions.swift in Sources */,

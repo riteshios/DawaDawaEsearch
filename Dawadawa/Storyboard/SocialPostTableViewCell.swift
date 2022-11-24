@@ -42,7 +42,9 @@ class SocialPostTableViewCell: UITableViewCell,UITextViewDelegate {
     
     @IBOutlet weak var imgOppFlag: UIImageView!
     @IBOutlet weak var btnChat: UIButton!
+    @IBOutlet weak var btnviewDetails: UIButton!
     
+    @IBOutlet weak var viewSave: UIView!
     //    Comment Section
     
     @IBOutlet weak var btnClickComment: UIButton!
@@ -60,6 +62,8 @@ class SocialPostTableViewCell: UITableViewCell,UITextViewDelegate {
     @IBOutlet weak var VerticalspacingSubComment: NSLayoutConstraint!
     @IBOutlet weak var heightViewAddComment: NSLayoutConstraint!
     @IBOutlet weak var heightViewComment: NSLayoutConstraint!
+    @IBOutlet weak var btnUserComment: UIButton!
+    @IBOutlet weak var btnUserSubComment: UIButton!
     
     var imgUrl = ""
     var userTimeLine = [SocialPostData]()
@@ -125,7 +129,6 @@ class SocialPostTableViewCell: UITableViewCell,UITextViewDelegate {
         self.callback?("Share", sender)
     }
     
-    
     @IBAction func btnRateTapped(_ sender: UIButton) {
         self.callback?("Rate",sender)
     }
@@ -158,6 +161,20 @@ class SocialPostTableViewCell: UITableViewCell,UITextViewDelegate {
     
     @IBAction func btnChatTapped(_ sender: UIButton) {
         self.callback?("Chat",sender)
+    }
+    
+    @IBAction func btnViewDetailsTapped(_ sender: UIButton){
+        self.callback?("viewDetails",sender)
+    }
+    
+    @IBAction func btnUserComment(_ sender: UIButton){
+        self.callback?("Iconusercomment",sender)
+        
+    }
+    
+    @IBAction func btnUserSubComment(_ sender: UIButton){
+        self.callback?("IconuserSubcomment",sender)
+        
     }
 }
 

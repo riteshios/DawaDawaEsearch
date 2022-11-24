@@ -1,20 +1,24 @@
-//
 //  SubCommentTableViewCell.swift
 //  Dawadawa
-//
 //  Created by Ritesh Gupta on 25/08/22.
-//
 
 import UIKit
+
+//protocol MyDataSendingDelegateProtocol {
+//    func sendData(myData: String)
+//}
 
 class SubCommentTableViewCell: UITableViewCell {
 
     @IBOutlet weak var imgSubCommentUser: UIImageView!
     @IBOutlet weak var lblSubComment: UILabel!
     
+    var callback:((String)->())?
+    
+   
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-       
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -22,6 +26,10 @@ class SubCommentTableViewCell: UITableViewCell {
 
     }
     
+    @IBAction func btniconSubCommentTapped(_ sender: UIButton){
+      
+        self.callback?("IconSubComment")
+    }
 }
 
 extension UILabel {
@@ -32,5 +40,3 @@ extension UILabel {
         return Int(ceil(textHeight / lineHeight))
     }
 }
-
-
