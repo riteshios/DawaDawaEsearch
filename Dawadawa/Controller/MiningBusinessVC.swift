@@ -1,18 +1,13 @@
-//
 //  MiningBusinessVC.swift
 //  Dawadawa
-//
 //  Created by Ritesh Gupta on 12/07/22.
-//
 
 import UIKit
 import SKFloatingTextField
 import Alamofire
 import SwiftyJSON
 
-
 class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UIDocumentPickerDelegate{
-    
     
     @IBOutlet weak var txtFieldTitle: SKFloatingTextField!
     @IBOutlet weak var txtFieldLocationName: SKFloatingTextField!
@@ -116,9 +111,7 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
             self.viewSelectCategoryTop.constant = 420
             self.fetdata()
         }
-        
         self.UploadimageCollectionView.reloadData()
-        
     }
     
     //    MARK: - Life Cyclye
@@ -133,7 +126,6 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
         self.setTextFieldUI(textField: txtFieldMobileNumber, place: "Mobile number", floatingText: "Mobile number")
         self.setTextFieldUI(textField: txtFieldWhatsappNumber, place: "WhatsApp number", floatingText: "WhatsApp number")
         self.setTextFieldUI(textField: txtFieldPricing, place: "Price in US Dollar (optional)", floatingText: "Price in US Dollar (optional)")
-        
     }
     
     func fetdata(){
@@ -166,7 +158,6 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
             self.viewPremium.backgroundColor = UIColor(red: 21, green: 114, blue: 161)
             self.lblPremium.textColor = .white
         }
-        
     }
     
     // MARK: - @IBActions
@@ -183,7 +174,6 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
                 self.longitude = longitude
                 self.currentadd = address
             }
-            
         }
         self.present(vc, animated: false)
     }
@@ -295,7 +285,6 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
 
     }
     
-    
     @IBAction func btnSelectSubCategoryTapped(_ sender: UIButton) {
         kSharedAppDelegate?.dropDown(dataSource: getSubCategorylist.map{String.getString($0.sub_cat_name)}, text: btnSubCategory) { (index, item) in
             self.lblSubCategory.text = item
@@ -312,7 +301,6 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
             debugPrint("State idddd.....btnnnnt",  self.stateid = id)
             self.getlocalityapi(id: self.stateid ?? 0 )
             self.isSelectState = true
-            
         }
         
     }
@@ -339,7 +327,6 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
             self.viewPremium.backgroundColor = .white
             self.lblPremium.textColor =  UIColor(red: 21, green: 114, blue: 161)
             self.isSelectopp_planBasic = true
-            
         }
     }
     
@@ -354,7 +341,6 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
             self.viewPremium.backgroundColor = .white
             self.lblPremium.textColor =  UIColor(red: 21, green: 114, blue: 161)
             self.isSelectopp_planFeatured = true
-            
         }
     }
     
@@ -369,7 +355,6 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
             self.viewFeature.backgroundColor = .white
             self.lblFeature.textColor =  UIColor(red: 21, green: 114, blue: 161)
             self.isSelectopp_planPremium = true
-            
         }
     }
     
@@ -389,7 +374,6 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
             self.isSelectServiceType = true
         }
     }
-    
     
     @IBAction func btnLookingForTapped(_ sender: UIButton) {
         kSharedAppDelegate?.dropDown(dataSource: getlookingForList.map{String.getString($0.looking_for)}, text: btnLookingFor){
@@ -1247,9 +1231,6 @@ extension MiningBusinessVC{
             "longitude":String.getString(self.longitude),
             "cat_type_id":"1"
         ]
-        
-        
-        
         
         let uploadimage:[String:Any] = ["filenames[]":self.imagearr]
         let uploaddocument:[String:Any] = ["opportunity_documents[]":self.documentarr]

@@ -5,7 +5,7 @@
 import UIKit
 
 class ViewPostTableViewCell: UITableViewCell{
-
+    
     @IBOutlet weak var ColllectionViewPremiumOpp: UICollectionView!
     var callbacknavigation:((String)->())?
     
@@ -35,40 +35,38 @@ class ViewPostTableViewCell: UITableViewCell{
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        
     }
     
 }
 extension ViewPostTableViewCell: UICollectionViewDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     
-//    Collection View
+    //    Collection View
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.userTimeLine.count
-      
+        
         debugPrint("premiumcount======",self.userTimeLine.count)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = ColllectionViewPremiumOpp.dequeueReusableCell(withReuseIdentifier: "PremiumOppCollectionViewCell", for: indexPath) as! PremiumOppCollectionViewCell
         let obj = userTimeLine[indexPath.row]
-     
+        
         debugPrint("obj......",obj)
         cell.lbltitle.text = String.getString(obj.title)
         cell.imgPremium.downlodeImage(serviceurl: "\(imgUrl)\(String.getString(obj.oppimage.first?.imageurl))", placeHolder: UIImage(named: "truck"))
         
         return cell
     }
-   
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 185, height: 205)
     }
-  
+    
 }
 
 
 extension ViewPostTableViewCell{
-//    Api opportunity premium
+    //    Api opportunity premium
     func getallpremium(){
         CommonUtils.showHudWithNoInteraction(show: true)
         
@@ -86,7 +84,7 @@ extension ViewPostTableViewCell{
             CommonUtils.showHudWithNoInteraction(show: false)
             if errorType == .requestSuccess {
                 let dictResult = kSharedInstance.getDictionary(result)
-            
+                
                 switch Int.getInt(statusCode) {
                 case 200:
                     if Int.getInt(dictResult["status"]) == 200{
@@ -95,7 +93,7 @@ extension ViewPostTableViewCell{
                         if septoken[0] == "Bearer"{
                             kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
                         }
-            
+                        
                         self.imgUrl = String.getString(dictResult["opr_base_url"])
                         debugPrint("PreimiumImgurl=====", self.imgUrl)
                         let Opportunity = kSharedInstance.getArray(withDictionary: dictResult["Opportunity"])
@@ -110,7 +108,6 @@ extension ViewPostTableViewCell{
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
-                  
                 default:
                     CommonUtils.showError(.error, String.getString(dictResult["message"]))
                 }

@@ -1100,7 +1100,6 @@ extension RockPitOpportunityVC{
             //            headers["token"] = kSharedUserDefaults.getLoggedInAccessToken()
         }
         
-        
         let userid = Int(UserData.shared.id ?? 0)  // For Remove Optional
         debugPrint("checkuserid",userid)
         
@@ -1234,7 +1233,6 @@ extension RockPitOpportunityVC{
         
         let localityid = Int(self.localityid ?? 0)
         debugPrint("checklocalityid",localityid)
-        
         
         let lookingforid = Int(self.lookingforid ?? 0)
         debugPrint("checklookingforid",lookingforid)

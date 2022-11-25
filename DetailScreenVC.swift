@@ -62,14 +62,23 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
             cell.viewLine.isHidden = true
             cell.SocialPostCollectionView.tag = indexPath.section
             cell.DocumentCollectionView.tag = indexPath.section
+            
             cell.lblUserName.text = String.getString(self.userTimeLine?.userdetail?.name)
             cell.lblDescribtion.text = String.getString(self.userTimeLine?.description)
             cell.lblEmail.text = String.getString(self.userTimeLine?.userdetail?.email)
             cell.lblTitle.text = String.getString(self.userTimeLine?.title)
             cell.viewAddComment.isHidden = self.userTimeLine?.isComment == false ? true : false
-            cell.heightViewAddComment.constant = self.userTimeLine?.isComment == false ? 0 : 55
+            cell.heightAddComment.constant = self.userTimeLine?.isComment == false ? 0 : 55
+//            cell.heightViewAddComment.constant = self.userTimeLine?.isComment == false ? 0 : 55
             cell.lblCategory.text = String.getString(self.userTimeLine?.category_name)
             cell.lblSub_category.text = String.getString(self.userTimeLine?.subcategory_name)
+            
+            if UserData.shared.id == self.userTimeLine?.user_id{
+                cell.btnChat.isHidden = true
+            }
+            else{
+                cell.btnChat.isHidden = false
+            }
             
             if String.getString(self.userTimeLine?.business_name) == "Null"{
                 cell.heightViewBusinessName.constant = 0
@@ -159,6 +168,7 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
             cell.imgUrl = self.imgUrl
             cell.doc = self.userTimeLine?.oppdocument ?? [] // Pass Doc for collection view
             cell.lblLikeCount.text = String.getString(self.userTimeLine?.likes) + " " + "Likes"
+            cell.heightDocumentcollectionview.constant = self.userTimeLine?.oppdocument.count == 0 ? 0 : 60
             
             if String.getString(self.userTimeLine?.is_user_like) == "1"{
                 cell.imglike.image = UIImage(named: "dil")
@@ -183,13 +193,20 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
             else{
                 cell.heightSocialPostCollectionView.constant = 225
             }
-            
             cell.callback = { txt, tapped in
                 
                 if txt == "Profileimage"{
                     let user_id = self.userTimeLine?.user_id
                     let vc = self.storyboard?.instantiateViewController(withIdentifier: UserProfileDetailsVC.getStoryboardID()) as! UserProfileDetailsVC
                     vc.userid = user_id ?? 0
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
+                if txt == "Chat"{
+                    let userid = Int.getInt(self.userTimeLine?.user_id)
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: ChatVC.getStoryboardID()) as! ChatVC
+                    vc.friendid = userid
+                    vc.friendname = String.getString(self.userTimeLine?.userdetail?.name)
+                    vc.friendimage = imguserurl
                     self.navigationController?.pushViewController(vc, animated: true)
                 }
                 if txt == "Like"{
@@ -269,7 +286,6 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                         if txt == "Flag"{
 //                            let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
                             self.flagopportunityapi(oppr_id: Int.getInt(self.userTimeLine?.id) ?? 0)
-                            
                         }
                         
                         if txt == "Report"{
@@ -337,12 +353,14 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
             let obj = self.userTimeLine?.usercomment[indexPath.row]
             cell.celldelegate = self
             cell.topsubTableview.constant = obj?.subcomment.count == 0 ? 0 : 10
-            cell.bottomSubtableview.constant = obj?.subcomment.count == 0 ? 0 : 10
+//            cell.bottomSubtableview.constant = obj?.subcomment.count == 0 ? 0 : 10
             cell.viewPostComment.isHidden = obj?.subcomment.count == 0 ? false : true
+            cell.heightAddPost.constant = obj?.isReply == true ? 40 : 0
             cell.heightViewPostComment.constant = obj?.isReply == true ? 70 : 0
             cell.viewPostComment.isHidden = obj?.isReply == true ? false : true
             cell.btnReply.isHidden = obj?.isReply == true ? true : false
-            cell.heightReply.constant = obj?.isReply == true ? -25 : 0
+//            cell.heightReply.constant = obj?.isReply == true ? -25 : 0
+            cell.heightbuttonReply.constant = obj?.isReply == true ? 0 : 30
             
             cell.lblNameandComment.text = String.getString(obj?.name) + "   " + String.getString(obj?.comments)
             let imgcommentuser = String.getString(obj?.image)
@@ -351,8 +369,8 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
             if obj?.subcomment.count == 0{
                 cell.heightTableView.constant = 2
             }else{
-                cell.heightTableView.constant = CGFloat(35 * (obj?.subcomment.count)!)
-                //               cell.tblviewSubComment.estimatedRowHeight = 35
+                cell.heightTableView.constant = CGFloat(32 * (obj?.subcomment.count)!)
+                // cell.tblviewSubComment.estimatedRowHeight = 35
             }
             
             cell.subcomment = obj?.subcomment ?? []  // See more comment cell pr pass kr rhe h
@@ -440,7 +458,6 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
         vc.userid = Int.getInt(result)
         self.navigationController?.pushViewController(vc, animated: true)
     }
-    
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section{

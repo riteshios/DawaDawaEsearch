@@ -64,6 +64,7 @@ class SocialPostTableViewCell: UITableViewCell,UITextViewDelegate {
     @IBOutlet weak var heightViewComment: NSLayoutConstraint!
     @IBOutlet weak var btnUserComment: UIButton!
     @IBOutlet weak var btnUserSubComment: UIButton!
+    @IBOutlet weak var btnDescription: UIButton!
     
     var imgUrl = ""
     var userTimeLine = [SocialPostData]()
@@ -176,6 +177,11 @@ class SocialPostTableViewCell: UITableViewCell,UITextViewDelegate {
         self.callback?("IconuserSubcomment",sender)
         
     }
+    
+    @IBAction func btnDescriptiontapped(_ sender: UIButton){
+        self.callback?("Description",sender)
+    }
+    
 }
 
 extension SocialPostTableViewCell: UICollectionViewDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{

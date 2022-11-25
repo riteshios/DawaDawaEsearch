@@ -1,9 +1,6 @@
-//
 //  DetailsTableViewCell.swift
 //  Dawadawa
-//
 //  Created by Ritesh Gupta on 21/09/22.
-//
 
 import UIKit
 import IQKeyboardManagerSwift
@@ -20,6 +17,7 @@ class DetailsTableViewCell: UITableViewCell,UITextViewDelegate {
     var callback:((String, UIButton)->())?
     var callbacktextviewcomment: ((String) -> Void)?
     
+    @IBOutlet weak var heightAddComment: NSLayoutConstraint!
     
     @IBOutlet weak var lblUserName: UILabel!
     @IBOutlet weak var lblTitle: UILabel!
@@ -65,6 +63,7 @@ class DetailsTableViewCell: UITableViewCell,UITextViewDelegate {
     @IBOutlet weak var heightViewBusinessName: NSLayoutConstraint!
     @IBOutlet weak var heightviewBusinessminingtype: NSLayoutConstraint!
     @IBOutlet weak var imgOppFlag: UIImageView!
+    @IBOutlet weak var btnChat: UIButton!
     
     
     //    Comment Section
@@ -109,7 +108,7 @@ class DetailsTableViewCell: UITableViewCell,UITextViewDelegate {
         
         self.txtviewComment.delegate = self
         self.viewAddComment.isHidden = true
-        self.heightViewAddComment.constant = 0
+     //   self.heightViewAddComment.constant = 0
         self.imgOppFlag.isHidden = true
 //        self.imgredCircle.isHidden = true
 //        self.lblcloseOpportunity.isHidden = true
@@ -135,6 +134,11 @@ class DetailsTableViewCell: UITableViewCell,UITextViewDelegate {
     
     @IBAction func btnProfileImageTapped(_ sender: UIButton) {
         self.callback?("Profileimage",sender)
+    }
+    
+    @IBAction func btnChattapped(_ sender: UIButton){
+        self.callback?("Chat",sender)
+        
     }
     
     
@@ -207,8 +211,10 @@ extension DetailsTableViewCell: UICollectionViewDelegate,UICollectionViewDataSou
             let obj = img[indexPath.item].imageurl
             print("-=-imgurl-=-\(String(describing: obj))")
             let imageurl = "\(imgUrl)\(String.getString(obj))"
+            let imgUrl = URL(string: "\(imgUrl)\(String.getString(obj))")
             print("-=imagebaseurl=-=-\(imageurl)")
-            cell.imgOpportunity.downlodeImage(serviceurl: imageurl, placeHolder: UIImage(named: "baba"))
+            cell.imgOpportunity.sd_setImage(with: imgUrl, placeholderImage: UIImage(named: "baba"))
+           // cell.imgOpportunity.downlodeImage(serviceurl: imageurl, placeHolder: UIImage(named: "baba"))
             cell.imgOpportunity.seeFullImage()
             return cell
             
@@ -235,7 +241,7 @@ extension DetailsTableViewCell: UICollectionViewDelegate,UICollectionViewDataSou
             return CGSize(width: SocialPostCollectionView.frame.size.width, height: 225)
          
         case 1:
-            return CGSize(width: SocialPostCollectionView.frame.size.width, height: 60)
+            return CGSize(width: SocialPostCollectionView.frame.size.width , height: 60)
             
         default:
             return CGSize()
@@ -246,4 +252,5 @@ extension DetailsTableViewCell: UICollectionViewDelegate,UICollectionViewDataSou
         pageControl.currentPage = Int(scrollView.contentOffset.x) / Int(scrollView.frame.width)
     }
 }
+
 

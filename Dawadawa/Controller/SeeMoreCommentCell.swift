@@ -5,7 +5,6 @@
 import UIKit
 import IQKeyboardManagerSwift
 
-
 protocol subCommentCellDelegate: AnyObject {
     func tableView(tblView: SubCommentTableViewCell?, index: Int,result:String ,didTappedInTableViewCell: SeeMoreCommentCell)
 }
@@ -17,6 +16,7 @@ class SeeMoreCommentCell: UITableViewCell, UITableViewDelegate, UITableViewDataS
     @IBOutlet weak var topsubTableview: NSLayoutConstraint!
     @IBOutlet weak var tblviewSubComment: UITableView!
     
+    @IBOutlet weak var heightAddPost: NSLayoutConstraint!
     @IBOutlet weak var imgCommentUser: UIImageView!
     @IBOutlet weak var lblNameandComment: UILabel!
     @IBOutlet weak var btnReply: UIButton!

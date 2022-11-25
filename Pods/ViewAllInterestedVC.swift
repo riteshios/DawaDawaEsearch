@@ -132,7 +132,13 @@ extension ViewAllInterestedVC:UITableViewDelegate,UITableViewDataSource{
                 vc.oppid = oppid
                 self.navigationController?.pushViewController(vc, animated: true)
             }
-            
+            if txt == "Description"{
+                let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
+                debugPrint("detailsppid=-=-=",oppid)
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: DetailScreenVC.getStoryboardID()) as! DetailScreenVC
+                vc.oppid = oppid
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
             if txt == "Profileimage"{
                 let user_id = self.userTimeLine[indexPath.row].user_id
                 let vc = self.storyboard?.instantiateViewController(withIdentifier: UserProfileDetailsVC.getStoryboardID()) as! UserProfileDetailsVC

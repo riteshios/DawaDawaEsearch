@@ -128,7 +128,6 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
         }
     }
     
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section{
         case 0:
@@ -147,7 +146,7 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                 if cameFrom != "FilterData"{
                     // cell.heightMainView.constant = 100
                     cell.heightViewCollectionview.constant = 50
-                    cell.heightCollectionView.constant = 0
+//                    cell.heightCollectionView.constant = 0
                 }
             }else{
                 cell.callbacknavigation = { txt in
@@ -165,7 +164,6 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                     if txt == "Filter"{
                         let vc = self.storyboard!.instantiateViewController(withIdentifier: FilterVC.getStoryboardID()) as! FilterVC
                         self.navigationController?.pushViewController(vc, animated: false)
-                        
                     }
                 }
             }
@@ -284,6 +282,14 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                     vc.userid = user_id ?? 0
                     vc.friendname = String.getString(obj.userdetail?.name)
                     vc.friendimage = imguserurl
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
+                
+                if txt == "Description"{
+                    let oppid = Int.getInt(userTimeLine[indexPath.row].id)
+                    debugPrint("detailsppid=-=-=",oppid)
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: DetailScreenVC.getStoryboardID()) as! DetailScreenVC
+                    vc.oppid = oppid
                     self.navigationController?.pushViewController(vc, animated: true)
                 }
                 

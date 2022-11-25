@@ -1,9 +1,6 @@
-//
 //  FilterDataCVCell.swift
 //  Dawadawa
-//
-//  Created by ESEARCH05 on 24/11/22.
-//
+//  Created by Ritesh Gupta on 24/11/22.
 
 import UIKit
 

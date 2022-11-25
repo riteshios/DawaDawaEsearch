@@ -1,4 +1,3 @@
-//
 //  ChatVC.swift
 //  Dawadawa
 //  Created by Ritesh Gupta on 31/10/22.
@@ -22,6 +21,7 @@ class ChatVC: UIViewController{
     var Messagedata = [Message_data]()
     var timer = Timer()
     var isNewDataLoading = true
+    var isOnScreen = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,8 +38,16 @@ class ChatVC: UIViewController{
         tableViewChat?.register(UINib(nibName: "ChatTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "ChatTableViewCell")
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.isOnScreen = false
+        
+    }
+    
     @objc func update(){
-        self.getmessageeapi()
+        if self.isOnScreen == true{
+            self.getmessageeapi()
+        }
     }
     
     @IBAction func btnBackTapped(_ sender: UIButton) {

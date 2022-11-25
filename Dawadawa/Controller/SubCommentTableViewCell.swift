@@ -4,10 +4,6 @@
 
 import UIKit
 
-//protocol MyDataSendingDelegateProtocol {
-//    func sendData(myData: String)
-//}
-
 class SubCommentTableViewCell: UITableViewCell {
 
     @IBOutlet weak var imgSubCommentUser: UIImageView!
@@ -40,3 +36,4 @@ extension UILabel {
         return Int(ceil(textHeight / lineHeight))
     }
 }
+

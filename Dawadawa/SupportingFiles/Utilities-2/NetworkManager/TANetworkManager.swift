@@ -1050,7 +1050,7 @@ public class TANetworkManager {
         }
         
         else {
-            headers["Accept-Language"] = String.getString(kSharedUserDefaults.getlanguage)
+            headers["Accept-Language"] = "en"
         }
     
         print_debug(items: "Authorization: \(headers)")
@@ -1073,7 +1073,7 @@ public class TANetworkManager {
         }
         
         else {
-            headers["Accept-Language"] = String.getString(kSharedUserDefaults.getlanguage)
+            headers["Accept-Language"] = "en"
         }
         
         headers["opr_package_key"] = "qq"
