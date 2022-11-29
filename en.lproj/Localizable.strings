@@ -180,7 +180,7 @@
 
 // MARK: - HomeVC
 
-"Hello" = "Hello";
+"Hello," = "Hello,";
 
 // MARK: - SearchVC
 
@@ -305,6 +305,18 @@
 "Featured" = "Featured";
 "Premium" = "Premium";
 "Create opportunity" = "Create opportunity";
+"Business name" = "Business name";
+"Business mining BLOCK" = "Business mining BLOCK";
+
+// MARK: - QuitVCViewController
+
+"Quit" = "Quit";
+"Do you really want to quit now?" = "Do you really want to quit now?";
+"Cancel" = "Cancel";
+"Quit" = "Quit";
+
+
+
 
 
 

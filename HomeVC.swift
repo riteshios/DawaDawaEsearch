@@ -2,13 +2,11 @@
 //  Dawadawa
 //  Created by Ritesh Gupta on 20/07/22.
 
-
 import UIKit
 import STTabbar
 import IQKeyboardManagerSwift
 
 class HomeVC: UIViewController{
-    
     
     @IBOutlet weak var tblViewViewPost: UITableView!
     
@@ -23,7 +21,6 @@ class HomeVC: UIViewController{
     var txtcomment = " "
     
     @IBOutlet weak var viewSearch: UIView!
-    
     
     @IBOutlet weak var lblUserName: UILabel!
     @IBOutlet weak var ImgUser: UIImageView!
@@ -42,10 +39,10 @@ class HomeVC: UIViewController{
             print("Guest User")
             if cameFrom != "FilterData"{
                 self.guestgetallopportunity()
-                
+                self.lblUserName.text = "Guest User"
+                self.ImgUser.image = UIImage(named: "baba")
             }
         }
-        
         else{
             self.fetchdata()
         }
@@ -61,13 +58,16 @@ class HomeVC: UIViewController{
             self.fetchdata()
             self.getcountnotification()
         }
+//        if UserData.shared.isskiplogin == true{
+//            self.lblUserName.text = "Guest User"
+//            self.ImgUser.image = UIImage(named: "")
+//        }
     }
     
     private func setup(){
         tblViewViewPost.register(UINib(nibName: "ViewPostTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "ViewPostTableViewCell")
         tblViewViewPost.register(UINib(nibName: "SocialPostTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "SocialPostTableViewCell")
         tblViewViewPost.register(UINib(nibName: "FilterTVCell", bundle: Bundle.main), forCellReuseIdentifier: "FilterTVCell")
-        
     }
     
     func fetchdata(){
@@ -85,10 +85,8 @@ class HomeVC: UIViewController{
             }
             task.resume()
         }
-        
     }
     
-    //
     //    override func viewDidAppear(_ animated: Bool) {
     //        super.viewDidAppear(animated)
     //        self.tabBarController?.tabBar.isHidden = false
@@ -98,21 +96,18 @@ class HomeVC: UIViewController{
     @IBAction func btnSearchTapped(_ sender: UIButton) {
         
         tabBarController?.selectedIndex = 1
-        
     }
     
     @IBAction func btnNotificationTapped(_ sender: UIButton) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "NotificationsVC") as! NotificationsVC
         self.navigationController?.pushViewController(vc, animated: true)
     }
-    
 }
 
 extension HomeVC:UITableViewDelegate,UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 3
-        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -185,12 +180,11 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
             cell.imgUrl = self.imgUrl
             
             let imguserurl = String.getString(obj.userdetail?.social_profile)
-            //            debugPrint("socialprofile......",imguserurl)
-            //            cell.Imageuser.downlodeImage(serviceurl: imguserurl , placeHolder: UIImage(named: "Boss"))
+            //     debugPrint("socialprofile......",imguserurl)
+            //     cell.Imageuser.downlodeImage(serviceurl: imguserurl , placeHolder: UIImage(named: "Boss"))
             
             let userUrl = URL(string: imguserurl)
             cell.Imageuser.sd_setImage(with: userUrl, placeholderImage:UIImage(named: "Boss") )
-            
             
             cell.lblLikeCount.text = String.getString(obj.likes) + " " + "Likes"
             
@@ -260,37 +254,57 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
             cell.callback = { txt, sender in
                 
                 if txt == "Chat"{
-                    let userid = Int.getInt(userTimeLine[indexPath.row].user_id)
-                    let vc = self.storyboard?.instantiateViewController(withIdentifier: ChatVC.getStoryboardID()) as! ChatVC
-                    vc.friendid = userid
-                    vc.friendname = String.getString(obj.userdetail?.name)
-                    vc.friendimage = imguserurl
-                    self.navigationController?.pushViewController(vc, animated: true)
+                    if UserData.shared.isskiplogin == true{
+                        self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                    }
+                    else{
+                        let userid = Int.getInt(userTimeLine[indexPath.row].user_id)
+                        let vc = self.storyboard?.instantiateViewController(withIdentifier: ChatVC.getStoryboardID()) as! ChatVC
+                        vc.friendid = userid
+                        vc.friendname = String.getString(obj.userdetail?.name)
+                        vc.friendimage = imguserurl
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    }
                 }
                 
                 if txt == "viewDetails"{
-                    let oppid = Int.getInt(userTimeLine[indexPath.row].id)
-                    debugPrint("detailsppid=-=-=",oppid)
-                    let vc = self.storyboard?.instantiateViewController(withIdentifier: DetailScreenVC.getStoryboardID()) as! DetailScreenVC
-                    vc.oppid = oppid
-                    self.navigationController?.pushViewController(vc, animated: true)
+                    if UserData.shared.isskiplogin == true{
+                        self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                    }
+                    else{
+                        let oppid = Int.getInt(userTimeLine[indexPath.row].id)
+                        debugPrint("detailsppid=-=-=",oppid)
+                        let vc = self.storyboard?.instantiateViewController(withIdentifier: DetailScreenVC.getStoryboardID()) as! DetailScreenVC
+                        vc.oppid = oppid
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    }
                 }
                 
                 if txt == "Profileimage"{
-                    let user_id = userTimeLine[indexPath.row].user_id
-                    let vc = self.storyboard?.instantiateViewController(withIdentifier: UserProfileDetailsVC.getStoryboardID()) as! UserProfileDetailsVC
-                    vc.userid = user_id ?? 0
-                    vc.friendname = String.getString(obj.userdetail?.name)
-                    vc.friendimage = imguserurl
-                    self.navigationController?.pushViewController(vc, animated: true)
+                    if UserData.shared.isskiplogin == true{
+                        cell.btnProfileimage.isHidden = true
+                    }
+                    else{
+                        let user_id = userTimeLine[indexPath.row].user_id
+                        let vc = self.storyboard?.instantiateViewController(withIdentifier: UserProfileDetailsVC.getStoryboardID()) as! UserProfileDetailsVC
+                        vc.userid = user_id ?? 0
+                        vc.friendname = String.getString(obj.userdetail?.name)
+                        vc.friendimage = imguserurl
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    }
                 }
                 
                 if txt == "Description"{
-                    let oppid = Int.getInt(userTimeLine[indexPath.row].id)
-                    debugPrint("detailsppid=-=-=",oppid)
-                    let vc = self.storyboard?.instantiateViewController(withIdentifier: DetailScreenVC.getStoryboardID()) as! DetailScreenVC
-                    vc.oppid = oppid
-                    self.navigationController?.pushViewController(vc, animated: true)
+                    if UserData.shared.isskiplogin == true{
+                        cell.btnDescription.isHidden = true
+                    }
+                    else{
+                        let oppid = Int.getInt(userTimeLine[indexPath.row].id)
+                        debugPrint("detailsppid=-=-=",oppid)
+                        let vc = self.storyboard?.instantiateViewController(withIdentifier: DetailScreenVC.getStoryboardID()) as! DetailScreenVC
+                        vc.oppid = oppid
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    }
                 }
                 
                 if txt == "Like"{
@@ -317,38 +331,54 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                 }
                 
                 if txt == "Share"{
-                    
-                    let image = obj.share_link
-                    
-                    let imageShare = [ image! ]
-                    let activityViewController = UIActivityViewController(activityItems: imageShare, applicationActivities: nil)
-                    activityViewController.popoverPresentationController?.sourceView = self.view
-                    self.present(activityViewController, animated: true, completion: nil)
+                    if UserData.shared.isskiplogin == true{
+                        self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                    }
+                    else{
+                        let image = obj.share_link
+                        let imageShare = [ image! ]
+                        let activityViewController = UIActivityViewController(activityItems: imageShare, applicationActivities: nil)
+                        activityViewController.popoverPresentationController?.sourceView = self.view
+                        self.present(activityViewController, animated: true, completion: nil)
+                    }
                 }
                 
                 if txt == "Rate"{
-                    let oppid = userTimeLine[indexPath.row].id
-                    let vc = self.storyboard?.instantiateViewController(withIdentifier: RateOpportunityPopUPVC.getStoryboardID()) as! RateOpportunityPopUPVC
-                    vc.modalTransitionStyle = .crossDissolve
-                    vc.modalPresentationStyle = .overCurrentContext
-                    vc.oppid = oppid ?? 0
-                    
-                    vc.callbackClosure = {
-                        self.getallopportunity()
+                    if UserData.shared.isskiplogin == true{
+                        self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
                     }
-                    self.present(vc, animated: false)
-                    
+                    else{
+                        let oppid = userTimeLine[indexPath.row].id
+                        let vc = self.storyboard?.instantiateViewController(withIdentifier: RateOpportunityPopUPVC.getStoryboardID()) as! RateOpportunityPopUPVC
+                        vc.modalTransitionStyle = .crossDissolve
+                        vc.modalPresentationStyle = .overCurrentContext
+                        vc.oppid = oppid ?? 0
+                        
+                        vc.callbackClosure = {
+                            self.getallopportunity()
+                        }
+                        self.present(vc, animated: false)
+                    }
                 }
                 
                 if txt == "Save"{
-                    if sender.isSelected{
-                        
-                        if String.getString(obj.is_saved) == "0"{
-                            let oppid = Int.getInt(userTimeLine[indexPath.row].id)
-                            debugPrint("saveoppid=-=-=",oppid)
-                            self.saveoppoertunityapi(oppr_id: oppid)
-                            cell.imgsave.image = UIImage(named: "saveopr")
-                            cell.lblSave.text = "Saved"
+                    if UserData.shared.isskiplogin == true{
+                        self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                    }else{
+                        if sender.isSelected{
+                            if String.getString(obj.is_saved) == "0"{
+                                let oppid = Int.getInt(userTimeLine[indexPath.row].id)
+                                debugPrint("saveoppid=-=-=",oppid)
+                                self.saveoppoertunityapi(oppr_id: oppid)
+                                cell.imgsave.image = UIImage(named: "saveopr")
+                                cell.lblSave.text = "Saved"
+                            }
+                            else{
+                                let oppid = Int.getInt(userTimeLine[indexPath.row].id)
+                                self.unsaveoppoertunityapi(oppr_id: oppid)
+                                cell.imgsave.image = UIImage(named: "save-3")
+                                cell.lblSave.text = "Save"
+                            }
                         }
                         else{
                             let oppid = Int.getInt(userTimeLine[indexPath.row].id)
@@ -356,12 +386,6 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                             cell.imgsave.image = UIImage(named: "save-3")
                             cell.lblSave.text = "Save"
                         }
-                    }
-                    else{
-                        let oppid = Int.getInt(userTimeLine[indexPath.row].id)
-                        self.unsaveoppoertunityapi(oppr_id: oppid)
-                        cell.imgsave.image = UIImage(named: "save-3")
-                        cell.lblSave.text = "Save"
                     }
                 }
                 
@@ -425,20 +449,29 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                         vc.callback = { txt in
                             
                             if txt == "Chatwithuser"{
-                                
-                                let userid = Int.getInt(userTimeLine[indexPath.row].user_id)
-                                let vc = self.storyboard?.instantiateViewController(withIdentifier: ChatVC.getStoryboardID()) as! ChatVC
-                                vc.friendid = userid
-                                vc.friendname = String.getString(obj.userdetail?.name)
-                                vc.friendimage = imguserurl
-                                self.navigationController?.pushViewController(vc, animated: true)
-                                self.dismiss(animated: true)
+                                if UserData.shared.isskiplogin == true{
+                                    self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                                }
+                                else{
+                                    let userid = Int.getInt(userTimeLine[indexPath.row].user_id)
+                                    let vc = self.storyboard?.instantiateViewController(withIdentifier: ChatVC.getStoryboardID()) as! ChatVC
+                                    vc.friendid = userid
+                                    vc.friendname = String.getString(obj.userdetail?.name)
+                                    vc.friendimage = imguserurl
+                                    self.navigationController?.pushViewController(vc, animated: true)
+                                    self.dismiss(animated: true)
+                                }
                             }
                             
                             if txt == "MarkasInterested"{
-                                let oppid = Int.getInt(userTimeLine[indexPath.row].id)
-                                self.markinterestedapi(oppr_id: oppid)
-                                self.dismiss(animated: true)
+                                if UserData.shared.isskiplogin == true{
+                                    self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                                }
+                                else{
+                                    let oppid = Int.getInt(userTimeLine[indexPath.row].id)
+                                    self.markinterestedapi(oppr_id: oppid)
+                                    self.dismiss(animated: true)
+                                }
                             }
                             
                             if txt == "Flag"{
@@ -475,14 +508,18 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                             }
                             
                             if txt == "viewdetails"{
-                                let oppid = Int.getInt(userTimeLine[indexPath.row].id)
-                                debugPrint("detailsppid=-=-=",oppid)
-                                let vc = self.storyboard?.instantiateViewController(withIdentifier: DetailScreenVC.getStoryboardID()) as! DetailScreenVC
-                                
-                                vc.oppid = oppid
-                                self.navigationController?.pushViewController(vc, animated: true)
+                                if UserData.shared.isskiplogin == true{
+                                    self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                                }
+                                else{
+                                    let oppid = Int.getInt(userTimeLine[indexPath.row].id)
+                                    debugPrint("detailsppid=-=-=",oppid)
+                                    let vc = self.storyboard?.instantiateViewController(withIdentifier: DetailScreenVC.getStoryboardID()) as! DetailScreenVC
+                                    
+                                    vc.oppid = oppid
+                                    self.navigationController?.pushViewController(vc, animated: true)
+                                }
                             }
-                            
                         }
                         self.present(vc, animated: false)
                     }
@@ -491,42 +528,56 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                 //                       COMMENT PART
                 
                 if txt == "reply"{
-                    
-                    let oppid = Int.getInt(userTimeLine[indexPath.row].id)
-                    debugPrint("detailsppid=-=-=",oppid)
-                    let vc = self.storyboard?.instantiateViewController(withIdentifier: DetailScreenVC.getStoryboardID()) as! DetailScreenVC
-                    
-                    vc.oppid = oppid
-                    self.navigationController?.pushViewController(vc, animated: true)
+                    if UserData.shared.isskiplogin == true{
+                        self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                    }
+                    else{
+                        let oppid = Int.getInt(userTimeLine[indexPath.row].id)
+                        debugPrint("detailsppid=-=-=",oppid)
+                        let vc = self.storyboard?.instantiateViewController(withIdentifier: DetailScreenVC.getStoryboardID()) as! DetailScreenVC
+                        
+                        vc.oppid = oppid
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    }
                 }
                 
                 if txt == "Seemorecomment"{
-                    let oppid = Int.getInt(userTimeLine[indexPath.row].id)
-                    debugPrint("detailsppid=-=-=",oppid)
-                    let vc = self.storyboard?.instantiateViewController(withIdentifier: DetailScreenVC.getStoryboardID()) as! DetailScreenVC
-                    
-                    vc.oppid = oppid
-                    self.navigationController?.pushViewController(vc, animated: true)
+                    if UserData.shared.isskiplogin == true{
+                        self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                    }
+                    else{
+                        let oppid = Int.getInt(userTimeLine[indexPath.row].id)
+                        debugPrint("detailsppid=-=-=",oppid)
+                        let vc = self.storyboard?.instantiateViewController(withIdentifier: DetailScreenVC.getStoryboardID()) as! DetailScreenVC
+                        
+                        vc.oppid = oppid
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    }
                 }
                 
                 if txt == "ClickComment"{
-                    if sender.isSelected{
-                        if obj.isComment == false{
-                            obj.isComment = true
-                            self.tblViewViewPost.reloadData()
-                        }
-                        else{
-                            obj.isComment = false
-                            self.tblViewViewPost.reloadData()
-                        }
-                    }else{
-                        if obj.isComment == false{
-                            obj.isComment = true
-                            self.tblViewViewPost.reloadData()
-                        }
-                        else{
-                            obj.isComment = false
-                            self.tblViewViewPost.reloadData()
+                    if UserData.shared.isskiplogin == true{
+                        self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                    }
+                    else{
+                        if sender.isSelected{
+                            if obj.isComment == false{
+                                obj.isComment = true
+                                self.tblViewViewPost.reloadData()
+                            }
+                            else{
+                                obj.isComment = false
+                                self.tblViewViewPost.reloadData()
+                            }
+                        }else{
+                            if obj.isComment == false{
+                                obj.isComment = true
+                                self.tblViewViewPost.reloadData()
+                            }
+                            else{
+                                obj.isComment = false
+                                self.tblViewViewPost.reloadData()
+                            }
                         }
                     }
                 }
@@ -1047,7 +1098,6 @@ extension HomeVC{
             }
         }
         
-        
         let params:[String : Any] = [
             "user_id":Int.getInt(UserData.shared.id),
             "opr_id":oppr_id
@@ -1360,9 +1410,9 @@ extension HomeVC{
                             vc.imgarray  = self?.UserTimeLineOppdetails?.oppimage ?? []
                             vc.docarray = self?.UserTimeLineOppdetails?.oppdocument ?? []
                             debugPrint("imgaraay=-=-=-==-=", vc.imgarray)
-                            
-                            
+                
                         }
+                        
                         else if Int.getInt(self?.UserTimeLineOppdetails?.category_id) == 4{
                             let vc = self?.storyboard?.instantiateViewController(withIdentifier: MiningServiceVC.getStoryboardID()) as! MiningServiceVC
                             self?.navigationController?.pushViewController(vc, animated: true)
@@ -1376,10 +1426,8 @@ extension HomeVC{
                             vc.docarray = self?.UserTimeLineOppdetails?.oppdocument ?? []
                             debugPrint("imgaraay=-=-=-==-=", vc.imgarray)
                             
-                            
                         }
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                        
                     }
                     
                     else if  Int.getInt(dictResult["status"]) == 400{
@@ -1440,7 +1488,6 @@ extension HomeVC{
                     else if  Int.getInt(dictResult["status"]) == 400{
                         self.imgNotification.isHidden = false
                         self.imgNotification.image = UIImage(named: "notification-bing-1")
-                        
                     }
                     
                 default:
@@ -1463,10 +1510,11 @@ extension NSMutableAttributedString {
         self.addAttribute(NSAttributedString.Key.foregroundColor, value: color, range: range)
     }
 }
+// MARK: - Localisation
 
 extension HomeVC{
     func setuplanguage(){
-        lblHello.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Hello", comment: "")
+        lblHello.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Hello,", comment: "")
     }
 }
 

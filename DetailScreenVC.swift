@@ -12,7 +12,6 @@ class DetailScreenVC: UIViewController, subCommentCellDelegate {
     var img = [oppr_image]()
     var oppid = 0
     
-    
     var txtcomment = " "
     var comment = [user_comment]()
     var subcomment  = [sub_Comment]()
@@ -54,7 +53,7 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+
         switch indexPath.section{
         case 0:
             let cell = self.tblviewDetail.dequeueReusableCell(withIdentifier: "DetailsTableViewCell") as! DetailsTableViewCell
@@ -69,7 +68,7 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
             cell.lblTitle.text = String.getString(self.userTimeLine?.title)
             cell.viewAddComment.isHidden = self.userTimeLine?.isComment == false ? true : false
             cell.heightAddComment.constant = self.userTimeLine?.isComment == false ? 0 : 55
-//            cell.heightViewAddComment.constant = self.userTimeLine?.isComment == false ? 0 : 55
+//          cell.heightViewAddComment.constant = self.userTimeLine?.isComment == false ? 0 : 55
             cell.lblCategory.text = String.getString(self.userTimeLine?.category_name)
             cell.lblSub_category.text = String.getString(self.userTimeLine?.subcategory_name)
             
@@ -396,7 +395,6 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                     else{
                         self.commentreplyapi(oppr_id: Int.getInt(self.userTimeLine?.id) ?? 0, commentid:Int.getInt(self.userTimeLine?.usercomment[indexPath.row].id)) { usersubComment in
                             
-                            
                             cell.txtviewsubComment.text = ""
                             cell.lblNameandComment.text = String.getString(usersubComment.first?.usersubcommentdetails?.name) + " " + String.getString(usersubComment.first?.comments)
                             debugPrint("lblcommentName=-=-=-", cell.lblNameandComment.text )
@@ -426,7 +424,6 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                     }
                 }
             }
-            
             
             cell.callbacktxtviewsubcomment = {[weak tblviewDetail] (_) in
                 

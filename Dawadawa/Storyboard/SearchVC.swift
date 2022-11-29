@@ -1,7 +1,5 @@
-//
 //  SearchVC.swift
 //  Dawadawa
-
 //  Created by Ritesh Gupta on 21/07/22.
 
 import UIKit
@@ -31,14 +29,18 @@ class SearchVC: UIViewController,UITextFieldDelegate{
         viewSearch.addShadowWithBlurOnView(viewSearch, spread: 0, blur: 10, color: .black, opacity: 0.16, OffsetX: 0, OffsetY: 1)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.imgNotfound.isHidden = true
+        self.txtfieldSearch.text = ""
+    }
+    
     //    override func viewWillAppear(_ animated: Bool) {
     //        self.hidesBottomBarWhenPushed = false
     //        self.tabBarController?.tabBar.isHidden = false
     //        self.tabBarController?.hidesBottomBarWhenPushed = false
     //        self.tabBarController?.tabBar.layer.zPosition = 0
     //    }
-    
-    
     
     func setup(){
         tblViewSearchOpp.register(UINib(nibName: "PopularSearchTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "PopularSearchTableViewCell")
@@ -78,13 +80,10 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section{
             
-            
         case 0:
             let cell = self.tblViewSearchOpp.dequeueReusableCell(withIdentifier: "PopularSearchTableViewCell") as! PopularSearchTableViewCell
             cell.SearchCollectionView.tag = indexPath.section
             return cell
-            
-            
             
         case 1:
             let cell = self.tblViewSearchOpp.dequeueReusableCell(withIdentifier: "PremiumOppTableViewCell") as! PremiumOppTableViewCell
@@ -100,8 +99,6 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
                 }
             }
             return cell
-            
-            
             
         case 2:
             let cell = self.tblViewSearchOpp.dequeueReusableCell(withIdentifier: "SocialPostTableViewCell") as! SocialPostTableViewCell
@@ -126,7 +123,6 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
             cell.imgOpp_plan.image = obj.opp_plan == "Featured" ? UIImage(named: "Star Filled") : obj.opp_plan == "Premium" ? UIImage(named: "Crown") : UIImage(named: "Folded Booklet")
             
             
-            
             if Int.getInt(obj.close_opr) == 0{
                 cell.lblTitle.text = String.getString(obj.title)
                 cell.lblTitle.textColor = .black
@@ -146,7 +142,6 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
                 cell.imglike.image = UIImage(named: "unlike")
                 cell.lbllike.text = "Like"
             }
-            
             
             if String.getString(obj.is_saved) == "1"{
                 cell.imgsave.image = UIImage(named: "saveopr")

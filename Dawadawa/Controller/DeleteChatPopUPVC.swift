@@ -25,5 +25,4 @@ class DeleteChatPopUPVC: UIViewController {
         self.callback?("DeleteChat")
         
     }
-    
 }

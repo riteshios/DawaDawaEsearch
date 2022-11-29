@@ -1,8 +1,6 @@
 //  RockPitOpportunityVC.swift
 //  Dawadawa
 //  Created by Ritesh Gupta on 07/07/22.
-
-
 import UIKit
 import SKFloatingTextField
 import Alamofire
@@ -121,11 +119,9 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
         self.setup()
         
         if isedit == "True"{
-            
             if self.userTimeLineoppdetails?.oppimage.count == 0{
                 self.viewSelectCategoryTop.constant = 10
                 self.fetdata()
-                
             }
             else{
                 self.viewSelectCategoryTop.constant = 420
@@ -164,7 +160,16 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
         self.txtFieldMobileNumber.text = self.userTimeLineoppdetails?.mobile_num
         self.txtFieldWhatsappNumber.text = self.userTimeLineoppdetails?.whatsaap_num
         self.txtFieldPricing.text = self.userTimeLineoppdetails?.pricing
-        self.lblLookingFor.text = self.userTimeLineoppdetails?.looking_for
+        
+        if self.userTimeLineoppdetails?.looking_for == "0"{
+            self.lblLookingFor.text = "Investor"
+        }
+        else if self.userTimeLineoppdetails?.looking_for == "1"{
+            self.lblLookingFor.text = "Business Owner"
+        }
+        else if self.userTimeLineoppdetails?.looking_for == "2"{
+            self.lblLookingFor.text = "Service Provider"
+        }
         self.stateid = Int.getInt(self.userTimeLineoppdetails?.opp_state)
         self.getlocalityapi(id: Int.getInt(self.stateid))
         if String.getString(self.userTimeLineoppdetails?.opp_plan) == "Basic"{
@@ -320,8 +325,8 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
             self.getlocalityapi(id: self.stateid ?? 0 )
             self.isSelectState = true
         }
-        
     }
+    
     @IBAction func btnLocalityTapped(_ sender: UIButton) {
         kSharedAppDelegate?.dropDown(dataSource: getlocalitylist.map{String.getString($0.local_name)}, text: btnLocality){
             (index,item) in
@@ -447,16 +452,16 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
             showSimpleAlert(message: Notifications.kDescription)
             return
         }
-        //        else if String.getString(self.txtFieldMobileNumber.text).isEmpty
-        //        {
-        //            showSimpleAlert(message: Notifications.kEnterMobileNumber)
-        //            return
-        //        }
-        //        else if !String.getString(self.txtFieldMobileNumber.text).isPhoneNumber()
-        //        {
-        //            self.showSimpleAlert(message: Notifications.kEnterValidMobileNumber)
-        //            return
-        //        }
+        else if String.getString(self.txtFieldMobileNumber.text).isEmpty
+        {
+            showSimpleAlert(message: Notifications.kEnterMobileNumber)
+            return
+        }
+        else if !String.getString(self.txtFieldMobileNumber.text).isPhoneNumber()
+        {
+            self.showSimpleAlert(message: Notifications.kEnterValidMobileNumber)
+            return
+        }
         
         else if self.isSelectLookingFor == false{
             self.showSimpleAlert(message: "Please Select looking For")
@@ -494,7 +499,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
             else {
                 return self.docummentarray.count
             }
-            default: return 5
+        default: return 5
         }
     }
     
@@ -517,13 +522,11 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
                     cell.image.downlodeImage(serviceurl: imageurl, placeHolder: UIImage(named: "baba"))
                 }
                 
-                
                 cell.callback = {
                     self.imgarray.remove(at: indexPath.row)
                     let imgid = Int.getInt(self.userTimeLineoppdetails?.oppimage[indexPath.row].id)
                     self.deleteimageapi(imageid: imgid)
                     self.UploadimageCollectionView.reloadData()
-                    
                 }
             }
             
@@ -551,7 +554,6 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
                     self.UploaddocumentCollectionView.reloadData()
                     
                 }
-                
             }
             
             else{
@@ -597,9 +599,9 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
             self.present(alert, animated: true, completion: nil)
         }
         
-//        let documentPicker = UIDocumentPickerViewController(documentTypes: ["com.apple.iwork.pages.pages", "com.apple.iwork.numbers.numbers", "com.apple.iwork.keynote.key","public.image", "com.apple.application", "public.item","public.data", "public.content", "public.audiovisual-content", "public.movie", "public.audiovisual-content", "public.video", "public.audio", "public.text", "public.data", "public.zip-archive", "com.pkware.zip-archive", "public.composite-content", "public.text"], in: .import)
+        //        let documentPicker = UIDocumentPickerViewController(documentTypes: ["com.apple.iwork.pages.pages", "com.apple.iwork.numbers.numbers", "com.apple.iwork.keynote.key","public.image", "com.apple.application", "public.item","public.data", "public.content", "public.audiovisual-content", "public.movie", "public.audiovisual-content", "public.video", "public.audio", "public.text", "public.data", "public.zip-archive", "com.pkware.zip-archive", "public.composite-content", "public.text"], in: .import)
         
-//        let documentTypes =  ["public.image", "com.apple.application", "public.item","public.data", "public.content", "public.audiovisual-content", "public.movie", "public.audiovisual-content", "public.video", "public.audio", "public.text", "public.data", "public.composite-content", "public.text"]
+        //        let documentTypes =  ["public.image", "com.apple.application", "public.item","public.data", "public.content", "public.audiovisual-content", "public.movie", "public.audiovisual-content", "public.video", "public.audio", "public.text", "public.data", "public.composite-content", "public.text"]
         let documentType = [kUTTypePDF as String]
         //[String(kUTTypeText),String(kUTTypeContent),String(kUTTypeItem),String(kUTTypeData)
         let documentsPicker = UIDocumentPickerViewController(documentTypes: documentType, in: .import)
@@ -728,8 +730,8 @@ extension RockPitOpportunityVC{
                 CommonUtils.showError(.error, String.getString(message))
             }
         }
-        
     }
+    
     func getlocalityapi(id:Int){
         CommonUtils.showHudWithNoInteraction(show: true)
         localityapi(language: "en"){ sucess, localdata, message in
@@ -936,8 +938,6 @@ extension RockPitOpportunityVC{
         params.updateValue("\(self.stateid ?? 0)", forKey: "localitys_id")
         debugPrint("stateiddddddd.....",   params.updateValue("\(self.stateid ?? 0)", forKey: "localitys_id"))
         
-        
-        
         let url = kBASEURL + ServiceName.kgetlocality
         //
         //        print("============\(params)")
@@ -961,7 +961,6 @@ extension RockPitOpportunityVC{
             case .failure(let error):
                 completionBlock(0,nil,error.localizedDescription)
             }
-            
         }
     }
     
@@ -972,8 +971,6 @@ extension RockPitOpportunityVC{
         let kStatus = "status"
         let kMessage = "message"
         let klocalitys = "localitys"
-        
-        
         
         var responsecode = 0
         var status = 0
@@ -1344,7 +1341,7 @@ extension RockPitOpportunityVC{
                     else if  Int.getInt(dictResult["status"]) == 404{
                         
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                        //                        kSharedAppDelegate?.makeRootViewController()
+                        // kSharedAppDelegate?.makeRootViewController()
                     }
                     
                 default:
@@ -1359,13 +1356,6 @@ extension RockPitOpportunityVC{
         }
     }
 }
-
-
-
-
-
-
-
 
 // MARK: - Localisation
 extension RockPitOpportunityVC{

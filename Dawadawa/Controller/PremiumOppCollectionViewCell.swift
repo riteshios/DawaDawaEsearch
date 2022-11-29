@@ -18,9 +18,9 @@ class PremiumOppCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         
         
-        // border
-        viewImage.layer.borderWidth = 1.0
-        viewImage.layer.borderColor = UIColor.black.cgColor
+//        // border
+//        viewImage.layer.borderWidth = 1.0
+//        viewImage.layer.borderColor = UIColor.black.cgColor
         
         // shadow
         viewImage.layer.shadowColor = UIColor.black.cgColor

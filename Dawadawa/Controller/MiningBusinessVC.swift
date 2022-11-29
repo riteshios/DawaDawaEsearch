@@ -52,7 +52,11 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
     
     @IBOutlet weak var UploadimageCollectionView: UICollectionView!
     @IBOutlet weak var UploaddocumentCollectionView: UICollectionView!
-    
+    @IBOutlet weak var lblSelectImages: UILabel!
+    @IBOutlet weak var lblSelectdocuments: UILabel!
+    @IBOutlet weak var btnCreateOpp: UIButton!
+    @IBOutlet weak var viewSelectImage: UIView!
+    @IBOutlet weak var viewSelectDocument: UIView!
     
     var stateid:Int?
     var localityid:Int?
@@ -65,7 +69,6 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
     var docummentarray = [String]()
     
     var plan = ""
-    
     
     var isSelectimage = false
     var isSelectDocument = false
@@ -100,6 +103,7 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setuplanguage()
         self.getsubcategoryapi()
         self.getstateapi()
         self.getservicetypeapi()
@@ -108,8 +112,14 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
         self.setup()
         
         if isedit == "True"{
-            self.viewSelectCategoryTop.constant = 420
-            self.fetdata()
+            if self.userTimeLineoppdetails?.oppimage.count == 0{
+                self.viewSelectCategoryTop.constant = 10
+                self.fetchdata()
+            }
+            else{
+                self.viewSelectCategoryTop.constant = 420
+                self.fetchdata()
+            }
         }
         self.UploadimageCollectionView.reloadData()
     }
@@ -119,6 +129,8 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
     func setup(){
         self.txtFieldMobileNumber.keyBoardType = .numberPad
         self.txtFieldWhatsappNumber.keyBoardType = .numberPad
+        self.viewSelectImage.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
+        self.viewSelectDocument.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
         self.viewCreateOpportunity.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
         self.setTextFieldUI(textField: txtFieldTitle, place: "Title", floatingText: "Title")
         self.setTextFieldUI(textField: txtFieldLocationName, place: "Location name", floatingText: "Location name")
@@ -128,22 +140,32 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
         self.setTextFieldUI(textField: txtFieldPricing, place: "Price in US Dollar (optional)", floatingText: "Price in US Dollar (optional)")
     }
     
-    func fetdata(){
+    func fetchdata(){
         
         self.UploadimageCollectionView.reloadData()
         self.UploaddocumentCollectionView.reloadData()
         self.btnCreate_UpdateOpp.setTitle("Update opportunity", for: .normal)
         self.lblSubCategory.text = self.userTimeLineoppdetails?.subcategory_name
         self.txtFieldTitle.text = self.userTimeLineoppdetails?.title
-        self.lblState.text = self.userTimeLineoppdetails?.opp_state
-        self.lblLocality.text = self.userTimeLineoppdetails?.opp_locality
+//        self.lblState.text = self.userTimeLineoppdetails?.opp_state
+//        self.lblLocality.text = self.userTimeLineoppdetails?.opp_locality
         self.txtFieldLocationName.text = self.userTimeLineoppdetails?.location_name
         
         self.TextViewDescription.text = self.userTimeLineoppdetails?.description
         self.txtFieldMobileNumber.text = self.userTimeLineoppdetails?.mobile_num
         self.txtFieldWhatsappNumber.text = self.userTimeLineoppdetails?.whatsaap_num
         self.txtFieldPricing.text = self.userTimeLineoppdetails?.pricing
-        self.lblLookingFor.text = self.userTimeLineoppdetails?.looking_for
+        if self.userTimeLineoppdetails?.looking_for == "0"{
+            self.lblLookingFor.text = "Investor"
+        }
+        else if self.userTimeLineoppdetails?.looking_for == "1"{
+            self.lblLookingFor.text = "Business Owner"
+        }
+        else if self.userTimeLineoppdetails?.looking_for == "2"{
+            self.lblLookingFor.text = "Service Provider"
+        }
+        self.stateid = Int.getInt(self.userTimeLineoppdetails?.opp_state)
+        self.getlocalityapi(id: Int.getInt(self.stateid))
         
         if String.getString(self.userTimeLineoppdetails?.opp_plan) == "Basic"{
             self.viewBasic.backgroundColor = UIColor(red: 21, green: 114, blue: 161)
@@ -221,7 +243,6 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
             self.viewSelectCategoryTop.constant = 420  // 310
             self.isSelectimage = true
         }
-        
     }
     
     @IBAction func btnAddmoreImageTapped(_ sender: UIButton) {
@@ -430,20 +451,20 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
 //            showSimpleAlert(message: Notifications.kLocationName)
 //            return
 //        }
-//        else if String.getString(self.TextViewDescription.text).isEmpty{
-//            showSimpleAlert(message: Notifications.kDescription)
-//            return
-//        }
-//        else if String.getString(self.txtFieldMobileNumber.text).isEmpty
-//        {
-//            showSimpleAlert(message: Notifications.kEnterMobileNumber)
-//            return
-//        }
-//        else if !String.getString(self.txtFieldMobileNumber.text).isPhoneNumber()
-//        {
-//            self.showSimpleAlert(message: Notifications.kEnterValidMobileNumber)
-//            return
-//        }
+        else if String.getString(self.TextViewDescription.text).isEmpty{
+            showSimpleAlert(message: Notifications.kDescription)
+            return
+        }
+        else if String.getString(self.txtFieldMobileNumber.text).isEmpty
+        {
+            showSimpleAlert(message: Notifications.kEnterMobileNumber)
+            return
+        }
+        else if !String.getString(self.txtFieldMobileNumber.text).isPhoneNumber()
+        {
+            self.showSimpleAlert(message: Notifications.kEnterValidMobileNumber)
+            return
+        }
         
 //        else if String.getString(self.txtFieldWhatsappNumber.text).isEmpty
 //        {
@@ -729,6 +750,13 @@ extension MiningBusinessVC{
             if sucess == 200 {
                 if let statedata = statedata {
                     self.getstatelist = statedata
+                    if self.isedit == "True"{
+                        for i in 0 ..< self.getstatelist.count - 1{
+                            if String.getString(self.userTimeLineoppdetails?.opp_state) == String.getString(self.getstatelist[i].id){
+                                self.lblState.text = String.getString(self.getstatelist[i].state_name)
+                            }
+                        }
+                    }
                 }
             }
             else {
@@ -744,6 +772,13 @@ extension MiningBusinessVC{
             if sucess == 200 {
                 if let localdata = localdata {
                     self.getlocalitylist = localdata
+                    if self.isedit == "True"{
+                        for i in 0 ..< self.getlocalitylist.count - 1{
+                            if String.getString(self.userTimeLineoppdetails?.opp_locality) == String.getString(self.getlocalitylist[i].id){
+                                self.lblLocality.text = String.getString(self.getlocalitylist[i].local_name)
+                            }
+                        }
+                    }
                 }
             }
             else{
@@ -1372,7 +1407,33 @@ extension MiningBusinessVC{
     }
 }
 
-
+// MARK: - Localisation
+extension MiningBusinessVC{
+    func setuplanguage(){
+        lblSelectImages.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Select images", comment: "")
+        lblSelectdocuments.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Select documents", comment: "")
+        lblSubCategory.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Select subcategory", comment: "")
+        txtFieldTitle.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Title", comment: "")
+        txtFieldTitle.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Title", comment: "")
+        lblState.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "State", comment: "")
+        lblLocality.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Locality", comment: "")
+        txtFieldLocationName.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Location name", comment: "")
+        txtFieldLocationName.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Location name", comment: "")
+        txtFieldMobileNumber.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Mobile number", comment: "")
+        txtFieldMobileNumber.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Mobile number", comment: "")
+        txtFieldWhatsappNumber.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Whatsapp number", comment: "")
+        txtFieldWhatsappNumber.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Whatsapp number", comment: "")
+        txtFieldPricing.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Price in US Dollar (optional)", comment: "")
+        txtFieldPricing.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Price in US Dollar (optional)", comment: "")
+        
+        lblLocationOnMap.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Pin Location on map(optional)", comment: "")
+        lblLookingFor.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Looking for", comment: "")
+        lblBasic.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Basic", comment: "")
+        lblFeature.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Featured", comment: "")
+        lblPremium.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Premium", comment: "")
+        btnCreateOpp.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "Create opportunity", comment: ""), for: .normal)
+    }
+}
 
 
 

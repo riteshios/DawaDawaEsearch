@@ -13,7 +13,6 @@ class SocialPostTableViewCell: UITableViewCell,UITextViewDelegate {
     var callback:((String, UIButton)->())?
     var callbacktextviewcomment: ((String) -> Void)?
     
-    
     @IBOutlet weak var lblUserName: UILabel!
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var lblDescribtion: UILabel!
@@ -41,8 +40,10 @@ class SocialPostTableViewCell: UITableViewCell,UITextViewDelegate {
     @IBOutlet weak var heightSocialPostCollectionView: NSLayoutConstraint!
     
     @IBOutlet weak var imgOppFlag: UIImageView!
+    @IBOutlet weak var btnProfileimage: UIButton!
     @IBOutlet weak var btnChat: UIButton!
     @IBOutlet weak var btnviewDetails: UIButton!
+    @IBOutlet weak var btnDescription: UIButton!
     
     @IBOutlet weak var viewSave: UIView!
     //    Comment Section
@@ -64,7 +65,7 @@ class SocialPostTableViewCell: UITableViewCell,UITextViewDelegate {
     @IBOutlet weak var heightViewComment: NSLayoutConstraint!
     @IBOutlet weak var btnUserComment: UIButton!
     @IBOutlet weak var btnUserSubComment: UIButton!
-    @IBOutlet weak var btnDescription: UIButton!
+    
     
     var imgUrl = ""
     var userTimeLine = [SocialPostData]()

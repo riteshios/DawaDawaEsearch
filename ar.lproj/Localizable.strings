@@ -181,7 +181,7 @@
 
 // MARK: - HomeVC
 
-"Hello" = "مرحبًا";
+"Hello," = "مرحبًا,";
 
 // MARK: - SearchVC
 
@@ -306,3 +306,11 @@
 "Featured" = "";
 "Premium" = "الممتازة";
 "Create opportunity" = "خلق فرصة";
+"Business name" = "الاسم التجاري";
+"Business mining BLOCK" = "كتلة التعدين الأعمال";
+
+// MARK: - QuitVCViewController
+
+"Quit" = "يترك";
+"Do you really want to quit now?" = "هل تريد حقًا الإقلاع عن التدخين الآن؟";
+"Cancel" = "يلغي";

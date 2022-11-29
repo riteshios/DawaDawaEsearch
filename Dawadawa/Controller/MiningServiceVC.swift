@@ -1,9 +1,6 @@
-//
 //  MiningServiceVC.swift
 //  Dawadawa
-//
 //  Created by Ritesh Gupta on 12/07/22.
-//
 
 import UIKit
 import SKFloatingTextField
@@ -59,10 +56,16 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
     
     @IBOutlet weak var UploadimageCollectionView: UICollectionView!
     @IBOutlet weak var UploaddocumentCollectionView: UICollectionView!
+    @IBOutlet weak var lblSelectImages: UILabel!
+    @IBOutlet weak var lblSelectdocuments: UILabel!
+    @IBOutlet weak var btnCreateOpp: UIButton!
+    @IBOutlet weak var viewSelectImage: UIView!
+    @IBOutlet weak var viewSelectDocument: UIView!
     
     
     var stateid:Int?
     var localityid:Int?
+    var BusinessType:Int?
     var subcatid:Int?
     var lookingforid:Int?
     var doc = ""
@@ -108,6 +111,7 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setuplanguage()
         self.getsubcategoryapi()
         self.getstateapi()
         self.getbusinessminingtypeapi()
@@ -116,17 +120,24 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
         self.setup()
         
         if isedit == "True"{
-            self.viewSelectCategoryTop.constant = 420
-            self.fetdata()
+            if self.userTimeLineoppdetails?.oppimage.count == 0{
+                self.viewSelectCategoryTop.constant = 10
+                self.fetchdata()
+            }
+            else{
+                self.viewSelectCategoryTop.constant = 420
+                self.fetchdata()
+            }
         }
         
         self.UploadimageCollectionView.reloadData()
-        
     }
     
     func setup(){
         self.txtFieldMobileNumber.keyBoardType = .numberPad
         self.txtFieldWhatsappNumber.keyBoardType = .numberPad
+        self.viewSelectImage.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
+        self.viewSelectDocument.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
         self.viewCreateOpportunity.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
         self.setTextFieldUI(textField: txtFieldTitle, place: "Title", floatingText: "Title")
         self.setTextFieldUI(textField: txtFieldLocationName, place: "Location name", floatingText: "Location name")
@@ -138,8 +149,7 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
         
     }
     
-    
-    func fetdata(){
+    func fetchdata(){
         
         self.UploadimageCollectionView.reloadData()
         self.UploaddocumentCollectionView.reloadData()
@@ -149,15 +159,25 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
         self.txtFieldBusinessName.text = self.userTimeLineoppdetails?.business_name
         self.lblBusinesstype.text = self.userTimeLineoppdetails?.business_mining_type
         self.txtFieldBusinessMiningBlock.text = self.userTimeLineoppdetails?.business_mining_block
-        self.lblState.text = self.userTimeLineoppdetails?.opp_state
-        self.lblLocality.text = self.userTimeLineoppdetails?.opp_locality
+//        self.lblState.text = self.userTimeLineoppdetails?.opp_state
+//        self.lblLocality.text = self.userTimeLineoppdetails?.opp_locality
         self.txtFieldLocationName.text = self.userTimeLineoppdetails?.location_name
         
         self.TextViewDescription.text = self.userTimeLineoppdetails?.description
         self.txtFieldMobileNumber.text = self.userTimeLineoppdetails?.mobile_num
         self.txtFieldWhatsappNumber.text = self.userTimeLineoppdetails?.whatsaap_num
         self.txtFieldPricing.text = self.userTimeLineoppdetails?.pricing
-        self.lblLookingFor.text = self.userTimeLineoppdetails?.looking_for
+        if self.userTimeLineoppdetails?.looking_for == "0"{
+            self.lblLookingFor.text = "Investor"
+        }
+        else if self.userTimeLineoppdetails?.looking_for == "1"{
+            self.lblLookingFor.text = "Business Owner"
+        }
+        else if self.userTimeLineoppdetails?.looking_for == "2"{
+            self.lblLookingFor.text = "Service Provider"
+        }
+        self.stateid = Int.getInt(self.userTimeLineoppdetails?.opp_state)
+        self.getlocalityapi(id: Int.getInt(self.stateid))
         
         if String.getString(self.userTimeLineoppdetails?.opp_plan) == "Basic"{
             self.viewBasic.backgroundColor = UIColor(red: 21, green: 114, blue: 161)
@@ -172,7 +192,6 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
             self.viewPremium.backgroundColor = UIColor(red: 21, green: 114, blue: 161)
             self.lblPremium.textColor = .white
         }
-        
     }
     
     // MARK: - @IBActions
@@ -335,6 +354,9 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
     @IBAction func btnBusinessTypeTapped(_ sender: UIButton) {
         kSharedAppDelegate?.dropDown(dataSource: getbusinesstypelist.map{String.getString($0.business_mining_type)}, text: btnBusinessType) { (index, item) in
             self.lblBusinesstype.text = item
+            let id = self.getbusinesstypelist[index].id
+            self.BusinessType = id
+            debugPrint("businesstype..btnnnnt", self.BusinessType = id)
             self.isBusinessMiningType = true
         }
         
@@ -467,16 +489,16 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
             return
         }
         
-//        else if String.getString(self.txtFieldMobileNumber.text).isEmpty
-//        {
-//            showSimpleAlert(message: Notifications.kEnterMobileNumber)
-//            return
-//        }
-//        else if !String.getString(self.txtFieldMobileNumber.text).isPhoneNumber()
-//        {
-//            self.showSimpleAlert(message: Notifications.kEnterValidMobileNumber)
-//            return
-//        }
+        else if String.getString(self.txtFieldMobileNumber.text).isEmpty
+        {
+            showSimpleAlert(message: Notifications.kEnterMobileNumber)
+            return
+        }
+        else if !String.getString(self.txtFieldMobileNumber.text).isPhoneNumber()
+        {
+            self.showSimpleAlert(message: Notifications.kEnterValidMobileNumber)
+            return
+        }
         
 //        else if String.getString(self.txtFieldWhatsappNumber.text).isEmpty
 //        {
@@ -760,14 +782,21 @@ extension MiningServiceVC{
             if sucess == 200 {
                 if let statedata = statedata {
                     self.getstatelist = statedata
+                    if self.isedit == "True"{
+                        for i in 0 ..< self.getstatelist.count-1{
+                            if String.getString(self.userTimeLineoppdetails?.opp_state) == String.getString(self.getstatelist[i].id){
+                                self.lblState.text = String.getString(self.getstatelist[i].state_name)
+                            }
+                        }
+                    }
                 }
             }
             else {
                 CommonUtils.showError(.error, String.getString(message))
             }
         }
-        
     }
+    
     func getlocalityapi(id:Int){
         CommonUtils.showHudWithNoInteraction(show: true)
         localityapi(language: "en"){ sucess, localdata, message in
@@ -775,12 +804,18 @@ extension MiningServiceVC{
             if sucess == 200 {
                 if let localdata = localdata {
                     self.getlocalitylist = localdata
+                    if self.isedit == "True"{
+                        for i in 0 ..< self.getlocalitylist.count-1{
+                            if String.getString(self.userTimeLineoppdetails?.opp_state) == String.getString(self.getlocalitylist[i].id){
+                                self.lblLocality.text = String.getString(self.getlocalitylist[i].local_name)
+                            }
+                        }
+                    }
                 }
             }
             else{
                 CommonUtils.showError(.error, String.getString(message))
             }
-            
         }
     }
     
@@ -809,21 +844,16 @@ extension MiningServiceVC{
         }
     }
     
-    
-    
 }
 extension MiningServiceVC{
     //    Sub-Category API
     func subcategoryapi(language:String, completionBlock: @escaping (_ success: Int, _ catdata : [getSubCartegoryModel]?, _ message: String) -> Void) {
-        
         
         let headers : HTTPHeaders = ["Authorization": "Bearer " + kSharedUserDefaults.getLoggedInAccessToken(), "Accept-Language": language]
         debugPrint("headers......\(headers)")
         
         var params = Dictionary<String, String>()
         params.updateValue("4", forKey: "category_id")
-        
-        
         
         //
         let url = kBASEURL + ServiceName.ksubcategory
@@ -860,9 +890,7 @@ extension MiningServiceVC{
         let kStatus = "status"
         let kMessage = "message"
         let kCategories = "Categories"
-        
-        
-        
+    
         var responsecode = 0
         var status = 0
         var message = ""
@@ -902,7 +930,6 @@ extension MiningServiceVC{
         
         var params = Dictionary<String, String>()
         //        params.updateValue("1", forKey: "category_id")
-        
         
         
         //
@@ -1244,6 +1271,9 @@ extension MiningServiceVC{
         let localityid = Int(self.localityid ?? 0)
         debugPrint("checklocalityid",localityid)
         
+        let businesstypeid = Int(self.BusinessType ?? 0)
+        debugPrint("businessid",businesstypeid)
+        
         let lookingforid = Int(self.lookingforid ?? 0)
         debugPrint("checklookingforid",lookingforid)
         
@@ -1253,7 +1283,7 @@ extension MiningServiceVC{
             "sub_category":"\(String(describing: subcatid))",
             "title":String.getString(self.txtFieldTitle.text),
             "business_name":String.getString(self.txtFieldBusinessName.text),
-            "business_mining_type":String.getString(self.lblBusinesstype.text),
+            "business_mining_type":"\(String(describing: businesstypeid))",
             "business_mining_block":String.getString(self.txtFieldBusinessMiningBlock.text),
             "opp_state":"\(String(describing: stateid))",
             "opp_locality":"\(String(describing: localityid))",
@@ -1270,9 +1300,6 @@ extension MiningServiceVC{
             "longitude":String.getString(self.longitude),
             "cat_type_id":"2"
         ]
-        
-        
-        
         
         let uploadimage:[String:Any] = ["filenames[]":self.imagearr]
         let uploaddocument:[String:Any] = ["opportunity_documents[]":self.documentarr]
@@ -1344,7 +1371,6 @@ extension MiningServiceVC{
         let lookingforid = Int(self.lookingforid ?? 0)
         debugPrint("checklookingforid",lookingforid)
         
-        
         let params:[String : Any] = [
             "oppr_id":"\(String(describing: oppid))",
             "category_id":"4",
@@ -1366,15 +1392,11 @@ extension MiningServiceVC{
             //            "cat_type_id":"0"
         ]
         
-        
-        
-        
         let uploadimage:[String:Any] = ["filenames[]":self.imagearr]
         let uploaddocument:[String:Any] = ["opportunity_documents[]":self.documentarr]
         
         debugPrint("image[]......",self.imagearr)
         debugPrint("opportunity_documents[]......",self.documentarr)
-        
         
         TANetworkManager.sharedInstance.UpdatetMultiPartwithlanguage(withServiceName:ServiceName.kupdateopportunity , requestMethod: .post, requestImages: [:], requestdoc: [:],requestVideos: [:], requestData:params, req: self.imagearr, req:self.documentarr)
         { (result:Any?, error:Error?, errortype:ErrorType?, statusCode:Int?) in
@@ -1411,3 +1433,35 @@ extension MiningServiceVC{
         }
     }
 }
+// MARK: - Localisation
+extension MiningServiceVC{
+    func setuplanguage(){
+        lblSelectImages.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Select images", comment: "")
+        lblSelectdocuments.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Select documents", comment: "")
+        lblSubCategory.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Select subcategory", comment: "")
+        txtFieldTitle.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Title", comment: "")
+        txtFieldTitle.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Title", comment: "")
+        txtFieldBusinessName.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Business name", comment: "")
+        txtFieldBusinessName.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Business name", comment: "")
+        txtFieldBusinessMiningBlock.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Business mining BLOCK", comment: "")
+        txtFieldBusinessMiningBlock.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Business mining BLOCK", comment: "")
+        lblState.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "State", comment: "")
+        lblLocality.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Locality", comment: "")
+        txtFieldLocationName.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Location name", comment: "")
+        txtFieldLocationName.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Location name", comment: "")
+        txtFieldMobileNumber.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Mobile number", comment: "")
+        txtFieldMobileNumber.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Mobile number", comment: "")
+        txtFieldWhatsappNumber.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Whatsapp number", comment: "")
+        txtFieldWhatsappNumber.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Whatsapp number", comment: "")
+        txtFieldPricing.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Price in US Dollar (optional)", comment: "")
+        txtFieldPricing.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Price in US Dollar (optional)", comment: "")
+        
+        lblLocationOnMap.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Pin Location on map(optional)", comment: "")
+        lblLookingFor.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Looking for", comment: "")
+        lblBasic.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Basic", comment: "")
+        lblFeature.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Featured", comment: "")
+        lblPremium.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Premium", comment: "")
+        btnCreateOpp.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "Create opportunity", comment: ""), for: .normal)
+    }
+}
+

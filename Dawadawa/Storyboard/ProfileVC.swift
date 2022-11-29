@@ -37,7 +37,7 @@ class ProfileVC: UIViewController {
         super.viewDidLoad()
         self.imgNoOpp.isHidden = true
         
-        //        self.listoppoertunityapi()
+        //  self.listoppoertunityapi()
         tblViewSocialPost.register(UINib(nibName: "OpportunitypostedTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "OpportunitypostedTableViewCell")
         tblViewSocialPost.register(UINib(nibName: "SocialPostTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "SocialPostTableViewCell")
         
@@ -46,6 +46,7 @@ class ProfileVC: UIViewController {
             self.lblMobileNumber.isHidden = true
             self.lblEmail.isHidden = true
             self.imgNoOpp.isHidden = false
+            self.tblViewSocialPost.isHidden = true
         }
         else{
             self.fetchdata()
@@ -218,12 +219,12 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section{
         case 0:
-            let cell = self.tblViewSocialPost.dequeueReusableCell(withIdentifier: "OpportunitypostedTableViewCell") as! OpportunitypostedTableViewCell
             
             if UserData.shared.isskiplogin == true{
-//                cell.imgOppPosted.isHidden = true
+                print("Guest User")
             }
             else{
+                let cell = self.tblViewSocialPost.dequeueReusableCell(withIdentifier: "OpportunitypostedTableViewCell") as! OpportunitypostedTableViewCell
                 if UserData.shared.user_type == "0"{
                     cell.lblshowdata.text = String.getString(self.datadashboard?.expiry_date)
                     cell.lblDate.text = "Expiration Date"
@@ -250,44 +251,42 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                     cell.lblOpportunity.text = "Flagged Opportunities"
                     
                 }
+                cell.callbackbtnSelect = { txt in
+                    if txt == "All"{
+                        if UserData.shared.isskiplogin == true{
+                            self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                            self.imgNoOpp.isHidden = false
+                        }
+                        else{
+                            self.isbtnAllSelect  = true
+                            self.listoppoertunityapi()
+                        }
+                        
+                    }
+                    if txt == "Premium"{
+                        if UserData.shared.isskiplogin == true{
+                            self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                            self.imgNoOpp.isHidden = false
+                        }
+                        else{
+                            self.isbtnPremiumSelect = true
+                            self.getallpremiumapi()
+                        }
+                        
+                    }
+                    if txt == "Featured"{
+                        if UserData.shared.isskiplogin == true{
+                            self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                            self.imgNoOpp.isHidden = false
+                        }
+                        else{
+                            self.isbtnFeaturedSelect = true
+                            self.getallFeaturedapi()
+                        }
+                    }
+                }
+                return cell
             }
-            cell.callbackbtnSelect = { txt in
-                if txt == "All"{
-                    if UserData.shared.isskiplogin == true{
-                        self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
-                        self.imgNoOpp.isHidden = false
-                    }
-                    else{
-                        self.isbtnAllSelect  = true
-                        self.listoppoertunityapi()
-                    }
-                    
-                }
-                if txt == "Premium"{
-                    if UserData.shared.isskiplogin == true{
-                        self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
-                        self.imgNoOpp.isHidden = false
-                    }
-                    else{
-                        self.isbtnPremiumSelect = true
-                        self.getallpremiumapi()
-                    }
-                    
-                }
-                if txt == "Featured"{
-                    if UserData.shared.isskiplogin == true{
-                        self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
-                        self.imgNoOpp.isHidden = false
-                    }
-                    else{
-                        self.isbtnFeaturedSelect = true
-                        self.getallFeaturedapi()
-                    }
-                    
-                }
-                
-            }
-            return cell
             
         case 1:
             let cell = self.tblViewSocialPost.dequeueReusableCell(withIdentifier: "SocialPostTableViewCell") as! SocialPostTableViewCell
@@ -443,7 +442,7 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                         cell.lblSave.text = "Save"
                     }
                 }
-                                      
+                
                 if txt == "More" {
                     let vc = self.storyboard?.instantiateViewController(withIdentifier: ProileSocialMoreVC.getStoryboardID()) as! ProileSocialMoreVC
                     vc.modalTransitionStyle = .crossDissolve
@@ -541,8 +540,6 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                     self.navigationController?.pushViewController(vc, animated: true)
                     
                 }
-                
-                
                 
                 if txt == "ClickComment"{
                     if tapped.isSelected{
@@ -725,21 +722,21 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
         default:
             return UITableViewCell()
         }
-    }
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        switch indexPath.section{
-        case 0:
-            return 180
-            
-        case 1:
-            return UITableView.automaticDimension
-            
-        default:
-            return 0
+        
+        func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+            switch indexPath.section{
+            case 0:
+                return 180
+                
+            case 1:
+                return UITableView.automaticDimension
+                
+            default:
+                return 0
+            }
         }
     }
 }
-
 // MARK: -API call
 
 extension ProfileVC{
@@ -832,7 +829,7 @@ extension ProfileVC{
                 
                 switch Int.getInt(statusCode) {
                 case 200:
-            
+                    
                     if Int.getInt(dictResult["status"]) == 200{
                         
                         let endToken = kSharedUserDefaults.getLoggedInAccessToken()
@@ -882,7 +879,7 @@ extension ProfileVC{
                 kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
             }
         }
-    
+        
         let params:[String : Any] = [
             "user_id":Int.getInt(UserData.shared.id),
             "id":1
@@ -1614,6 +1611,4 @@ extension ProfileVC{
             
         }
     }
-    
 }
-

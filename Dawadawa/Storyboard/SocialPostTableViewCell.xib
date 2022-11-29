@@ -207,7 +207,7 @@
                                 </collectionViewFlowLayout>
                             </collectionView>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" hidesForSinglePage="YES" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="Mtw-CB-bdI">
-                                <rect key="frame" x="130" y="315.5" width="155.5" height="18"/>
+                                <rect key="frame" x="129.5" y="315.5" width="156.5" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="18" id="0sn-Vg-HXQ"/>
                                 </constraints>
@@ -721,6 +721,7 @@
                 <outlet property="btnChat" destination="YaD-9S-ZSR" id="cI2-ZQ-DyN"/>
                 <outlet property="btnClickComment" destination="p8M-PC-Ljt" id="q01-cC-GNx"/>
                 <outlet property="btnDescription" destination="ZXe-eR-a0n" id="QhQ-CY-aKx"/>
+                <outlet property="btnProfileimage" destination="uel-i3-6NV" id="fCp-hC-D4A"/>
                 <outlet property="btnSave" destination="6ue-Uh-RMM" id="eLh-0h-jFf"/>
                 <outlet property="btnShare" destination="9NH-Yq-NKr" id="QuT-gG-Egd"/>
                 <outlet property="btnlike" destination="W05-Qz-8CE" id="RoN-yl-ly8"/>

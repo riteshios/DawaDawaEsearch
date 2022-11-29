@@ -1,9 +1,6 @@
-//
 //  TrailingOpportunityVC.swift
 //  Dawadawa
-//
 //  Created by Ritesh Gupta on 12/07/22.
-//
 
 import UIKit
 import SKFloatingTextField
@@ -12,7 +9,6 @@ import SwiftyJSON
 class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout, UITextViewDelegate,UIDocumentPickerDelegate {
     
     //   MARK: - Properties
-    
     
     @IBOutlet weak var txtFieldTitle: SKFloatingTextField!
     @IBOutlet weak var txtFieldLocationName: SKFloatingTextField!
@@ -53,6 +49,11 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
     @IBOutlet weak var btnMoreDocument: UIButton!
     @IBOutlet weak var UploadimageCollectionView: UICollectionView!
     @IBOutlet weak var UploaddocumentCollectionView: UICollectionView!
+    @IBOutlet weak var lblSelectImages: UILabel!
+    @IBOutlet weak var lblSelectdocuments: UILabel!
+    @IBOutlet weak var btnCreateOpp: UIButton!
+    @IBOutlet weak var viewSelectImage: UIView!
+    @IBOutlet weak var viewSelectDocument: UIView!
     
     var stateid:Int?
     var localityid:Int?
@@ -102,9 +103,10 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setup()
+        self.setuplanguage()
         self.getsubcategoryapi()
         self.getstateapi()
-        self.setup()
         self.getlookingforapi(id: self.lookingforid ?? 0)
         self.txtViewDiscription.delegate = self
         func textViewDidEndEditing(_ textView: UITextView) {
@@ -116,21 +118,25 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
                 placeholder = txtViewDiscription.text
             }
         }
-        
         if isedit == "True"{
-            self.viewSelectCategoryTop.constant = 420
-            self.fetdata()
+            if self.userTimeLineoppdetails?.oppimage.count == 0{
+                self.viewSelectCategoryTop.constant = 10
+                self.fetdata()
+            }
+            else{
+                self.viewSelectCategoryTop.constant = 420
+                self.fetdata()
+            }
         }
         
         self.UploadimageCollectionView.reloadData()
-        
     }
-    
-    
     
     func setup(){
         self.txtFieldMobileNumber.keyBoardType = .numberPad
         self.txtFieldWhatsappNumber.keyBoardType = .numberPad
+        self.viewSelectImage.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
+        self.viewSelectDocument.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
         self.viewCreateOpportunity.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
         self.setTextFieldUI(textField: txtFieldTitle, place: "Title", floatingText: "Title")
         self.setTextFieldUI(textField: txtFieldLocationName, place: "Location name", floatingText: "Location name")
@@ -147,16 +153,25 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
         self.btnCreate_UpdateOpp.setTitle("Update opportunity", for: .normal)
         self.lblSubCategory.text = self.userTimeLineoppdetails?.subcategory_name
         self.txtFieldTitle.text = self.userTimeLineoppdetails?.title
-        self.lblState.text = self.userTimeLineoppdetails?.opp_state
-        self.lblLocality.text = self.userTimeLineoppdetails?.opp_locality
+        //        self.lblState.text = self.userTimeLineoppdetails?.opp_state
+        //        self.lblLocality.text = self.userTimeLineoppdetails?.opp_locality
         self.txtFieldLocationName.text = self.userTimeLineoppdetails?.location_name
         
         self.txtViewDiscription.text = self.userTimeLineoppdetails?.description
         self.txtFieldMobileNumber.text = self.userTimeLineoppdetails?.mobile_num
         self.txtFieldWhatsappNumber.text = self.userTimeLineoppdetails?.whatsaap_num
         self.txtFieldPricing.text = self.userTimeLineoppdetails?.pricing
-        self.lblLookingFor.text = self.userTimeLineoppdetails?.looking_for
-        
+        if self.userTimeLineoppdetails?.looking_for == "0"{
+            self.lblLookingFor.text = "Investor"
+        }
+        else if self.userTimeLineoppdetails?.looking_for == "1"{
+            self.lblLookingFor.text = "Business Owner"
+        }
+        else if self.userTimeLineoppdetails?.looking_for == "2"{
+            self.lblLookingFor.text = "Service Provider"
+        }
+        self.stateid = Int.getInt(self.userTimeLineoppdetails?.opp_state)
+        self.getlocalityapi(id: Int.getInt(self.stateid))
         if String.getString(self.userTimeLineoppdetails?.opp_plan) == "Basic"{
             self.viewBasic.backgroundColor = UIColor(red: 21, green: 114, blue: 161)
             self.lblBasic.textColor = .white
@@ -170,7 +185,6 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
             self.viewPremium.backgroundColor = UIColor(red: 21, green: 114, blue: 161)
             self.lblPremium.textColor = .white
         }
-        
     }
     
     // MARK: - @IBActions
@@ -356,7 +370,7 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
             self.updateopportunityapi()
         }
         else{
-        self.Validation()
+            self.Validation()
         }
     }
     
@@ -407,15 +421,15 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
     //    MARK: - Validation
     
     func Validation(){
-//        if self.isSelectimage == false && self.imagearr.count == 0{
-//            self.showSimpleAlert(message: "Please Select the image")
-//            return
-//        }
-//        else if self.isSelectDocument == false && self.documentarr.count == 0 {
-//            self.showSimpleAlert(message: "Please Select the Document")
-//            return
-//        }
-         if self.isSelectSubcategory == false{
+        //        if self.isSelectimage == false && self.imagearr.count == 0{
+        //            self.showSimpleAlert(message: "Please Select the image")
+        //            return
+        //        }
+        //        else if self.isSelectDocument == false && self.documentarr.count == 0 {
+        //            self.showSimpleAlert(message: "Please Select the Document")
+        //            return
+        //        }
+        if self.isSelectSubcategory == false{
             self.showSimpleAlert(message: "Please Select the Subcategory")
             return
         }
@@ -438,36 +452,36 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
             return
         }
         
-//        else if String.getString(self.txtFieldLocationName.text).isEmpty
-//        {
-//            showSimpleAlert(message: Notifications.kLocationName)
-//            return
-//        }
+        //        else if String.getString(self.txtFieldLocationName.text).isEmpty
+        //        {
+        //            showSimpleAlert(message: Notifications.kLocationName)
+        //            return
+        //        }
         else if String.getString(self.txtViewDiscription.text).isEmpty{
             showSimpleAlert(message: Notifications.kDescription)
             return
         }
-//        else if String.getString(self.txtFieldMobileNumber.text).isEmpty
-//        {
-//            showSimpleAlert(message: Notifications.kEnterMobileNumber)
-//            return
-//        }
-//        else if !String.getString(self.txtFieldMobileNumber.text).isPhoneNumber()
-//        {
-//            self.showSimpleAlert(message: Notifications.kEnterValidMobileNumber)
-//            return
-//        }
+                else if String.getString(self.txtFieldMobileNumber.text).isEmpty
+                {
+                    showSimpleAlert(message: Notifications.kEnterMobileNumber)
+                    return
+                }
+                else if !String.getString(self.txtFieldMobileNumber.text).isPhoneNumber()
+                {
+                    self.showSimpleAlert(message: Notifications.kEnterValidMobileNumber)
+                    return
+                }
         
-//        else if String.getString(self.txtFieldWhatsappNumber.text).isEmpty
-//        {
-//            showSimpleAlert(message: Notifications.kwhatsappnumber)
-//            return
-//        }
-//        else if !String.getString(self.txtFieldWhatsappNumber.text).isPhoneNumber()
-//        {
-//            self.showSimpleAlert(message: Notifications.kvalidwhatsappnumber)
-//            return
-//        }
+        //        else if String.getString(self.txtFieldWhatsappNumber.text).isEmpty
+        //        {
+        //            showSimpleAlert(message: Notifications.kwhatsappnumber)
+        //            return
+        //        }
+        //        else if !String.getString(self.txtFieldWhatsappNumber.text).isPhoneNumber()
+        //        {
+        //            self.showSimpleAlert(message: Notifications.kvalidwhatsappnumber)
+        //            return
+        //        }
         else if self.isSelectLookingFor == false{
             self.showSimpleAlert(message: "Please Select looking For")
             return
@@ -501,14 +515,14 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
             else{
                 return self.imagearr.count
             }
-           
+            
             
         case self.UploaddocumentCollectionView:
             if self.isedit == "True"{
                 return self.docarray.count
             }
             else {
-              return self.docummentarray.count
+                return self.docummentarray.count
             }
             
         default: return 5
@@ -530,9 +544,9 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
                     cell.image.image = self.imgarray[indexPath.item].img
                 }
                 else{
-                let imageurl = "\(self.imgUrl)/\(String.getString(imgurl))"
-                print("-=imageurl=-=-\(imageurl)")
-                cell.image.downlodeImage(serviceurl: imageurl, placeHolder: UIImage(named: "baba"))
+                    let imageurl = "\(self.imgUrl)/\(String.getString(imgurl))"
+                    print("-=imageurl=-=-\(imageurl)")
+                    cell.image.downlodeImage(serviceurl: imageurl, placeHolder: UIImage(named: "baba"))
                 }
                 
                 
@@ -574,17 +588,17 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
                     self.UploaddocumentCollectionView.reloadData()
                     
                 }
-              
+                
             }
             
             else{
-            cell.lbldocument.text = docummentarray[indexPath.row]
-            cell.callbackclose = {
-                self.docummentarray.remove(at: indexPath.row)
-                self.UploaddocumentCollectionView.reloadData()
-                
+                cell.lbldocument.text = docummentarray[indexPath.row]
+                cell.callbackclose = {
+                    self.docummentarray.remove(at: indexPath.row)
+                    self.UploaddocumentCollectionView.reloadData()
+                    
+                }
             }
-        }
             return cell
         default: return UICollectionViewCell()
             
@@ -743,14 +757,22 @@ extension TrailingOpportunityVC{
             if sucess == 200 {
                 if let statedata = statedata {
                     self.getstatelist = statedata
+                    if self.isedit == "True"{
+                        for i in 0 ..< self.getstatelist.count-1{
+                            if String.getString(self.userTimeLineoppdetails?.opp_state) == String.getString(self.getstatelist[i].id){
+                                self.lblState.text = String.getString(self.getstatelist[i].state_name)
+                                return
+                            }
+                        }
+                    }
                 }
             }
             else {
                 CommonUtils.showError(.error, String.getString(message))
             }
         }
-        
     }
+    
     func getlocalityapi(id:Int){
         CommonUtils.showHudWithNoInteraction(show: true)
         localityapi(language: "en"){ sucess, localdata, message in
@@ -758,6 +780,13 @@ extension TrailingOpportunityVC{
             if sucess == 200 {
                 if let localdata = localdata {
                     self.getlocalitylist = localdata
+                    if self.isedit == "True"{
+                        for i in 0 ..< self.getlocalitylist.count-1{
+                            if String.getString(self.userTimeLineoppdetails?.opp_locality) == String.getString(self.getlocalitylist[i].id){
+                                self.lblLocality.text = String.getString(self.getlocalitylist[i].local_name)
+                            }
+                        }
+                    }
                 }
             }
             else{
@@ -1143,7 +1172,7 @@ extension TrailingOpportunityVC{
             "opp_state":"\(String(describing: stateid))",
             "opp_locality":"\(String(describing: localityid))",
             "location_name":String.getString(self.txtFieldLocationName.text),
-           
+            
             "description":String.getString(self.txtViewDiscription.text),
             "mobile_num":String.getString(self.txtFieldMobileNumber.text),
             "whatsaap_num":String.getString(self.txtFieldWhatsappNumber.text),
@@ -1200,7 +1229,6 @@ extension TrailingOpportunityVC{
         }
     }
     
-    
     // Update Opportunity Api
     
     func updateopportunityapi(){
@@ -1213,7 +1241,7 @@ extension TrailingOpportunityVC{
                 let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
                 kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
             }
-            //            headers["token"] = kSharedUserDefaults.getLoggedInAccessToken()
+            //  headers["token"] = kSharedUserDefaults.getLoggedInAccessToken()
         }
         
         let oppid = Int(self.oppid ?? 0) // For remove optional
@@ -1240,7 +1268,7 @@ extension TrailingOpportunityVC{
             "opp_state":"\(String(describing: stateid))",
             "opp_locality":"\(String(describing: localityid))",
             "location_name":String.getString(self.txtFieldLocationName.text),
-           
+            
             "description":String.getString(self.txtViewDiscription.text),
             "mobile_num":String.getString(self.txtFieldMobileNumber.text),
             "whatsaap_num":String.getString(self.txtFieldWhatsappNumber.text),
@@ -1252,9 +1280,6 @@ extension TrailingOpportunityVC{
             "longitude":String.getString(self.longitude),
             //            "cat_type_id":"0"
         ]
-        
-        
-        
         
         let uploadimage:[String:Any] = ["filenames[]":self.imagearr]
         let uploaddocument:[String:Any] = ["opportunity_documents[]":self.documentarr]
@@ -1299,3 +1324,30 @@ extension TrailingOpportunityVC{
     }
 }
 
+// MARK: - Localisation
+extension TrailingOpportunityVC{
+    func setuplanguage(){
+        lblSelectImages.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Select images", comment: "")
+        lblSelectdocuments.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Select documents", comment: "")
+        lblSubCategory.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Select subcategory", comment: "")
+        txtFieldTitle.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Title", comment: "")
+        txtFieldTitle.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Title", comment: "")
+        lblState.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "State", comment: "")
+        lblLocality.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Locality", comment: "")
+        txtFieldLocationName.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Location name", comment: "")
+        txtFieldLocationName.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Location name", comment: "")
+        txtFieldMobileNumber.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Mobile number", comment: "")
+        txtFieldMobileNumber.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Mobile number", comment: "")
+        txtFieldWhatsappNumber.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Whatsapp number", comment: "")
+        txtFieldWhatsappNumber.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Whatsapp number", comment: "")
+        txtFieldPricing.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Price in US Dollar (optional)", comment: "")
+        txtFieldPricing.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Price in US Dollar (optional)", comment: "")
+        
+        lblLocationOnMap.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Pin Location on map(optional)", comment: "")
+        lblLookingFor.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Looking for", comment: "")
+        lblBasic.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Basic", comment: "")
+        lblFeature.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Featured", comment: "")
+        lblPremium.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Premium", comment: "")
+        btnCreateOpp.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "Create opportunity", comment: ""), for: .normal)
+    }
+}

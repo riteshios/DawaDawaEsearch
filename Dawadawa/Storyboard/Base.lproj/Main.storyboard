@@ -2041,20 +2041,27 @@
                                     <action selector="btnBackTapped:" destination="XfY-77-Vo8" eventType="touchUpInside" id="BZC-v0-E3n"/>
                                 </connections>
                             </button>
-                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fPN-j9-SF7">
-                                <rect key="frame" x="0.0" y="35" width="414" height="701"/>
-                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <wkWebViewConfiguration key="configuration">
-                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
-                                    <wkPreferences key="preferences"/>
-                                </wkWebViewConfiguration>
-                            </wkWebView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sxy-an-a7L">
                                 <rect key="frame" x="177.66666666666666" y="8" width="59" height="28"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="24"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xPv-ly-Xor">
+                                <rect key="frame" x="0.0" y="41" width="414" height="30"/>
+                                <color key="backgroundColor" systemColor="systemGray4Color"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="9XI-BU-cxo"/>
+                                </constraints>
+                            </view>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fPN-j9-SF7">
+                                <rect key="frame" x="0.0" y="71" width="414" height="665"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="CCh-nq-g88"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -2062,11 +2069,14 @@
                             <constraint firstItem="CCh-nq-g88" firstAttribute="trailing" secondItem="fPN-j9-SF7" secondAttribute="trailing" id="0uf-tx-Nqh"/>
                             <constraint firstItem="fPN-j9-SF7" firstAttribute="leading" secondItem="CCh-nq-g88" secondAttribute="leading" id="5AB-7q-lbc"/>
                             <constraint firstItem="sxy-an-a7L" firstAttribute="centerY" secondItem="vlq-Lh-ZI3" secondAttribute="centerY" id="6AJ-Lh-5Wg"/>
+                            <constraint firstItem="CCh-nq-g88" firstAttribute="trailing" secondItem="xPv-ly-Xor" secondAttribute="trailing" id="Bcp-zF-dcs"/>
                             <constraint firstItem="CCh-nq-g88" firstAttribute="bottom" secondItem="fPN-j9-SF7" secondAttribute="bottom" id="E2T-6o-I3X"/>
                             <constraint firstItem="vlq-Lh-ZI3" firstAttribute="top" secondItem="CCh-nq-g88" secondAttribute="top" constant="10" id="HOa-gv-Fal"/>
                             <constraint firstItem="vlq-Lh-ZI3" firstAttribute="leading" secondItem="CCh-nq-g88" secondAttribute="leading" constant="10" id="N5e-Fg-Sbc"/>
-                            <constraint firstItem="fPN-j9-SF7" firstAttribute="top" secondItem="CCh-nq-g88" secondAttribute="top" constant="35" id="bLU-4U-JSD"/>
+                            <constraint firstItem="xPv-ly-Xor" firstAttribute="leading" secondItem="CCh-nq-g88" secondAttribute="leading" id="exc-sb-GBG"/>
+                            <constraint firstItem="fPN-j9-SF7" firstAttribute="top" secondItem="xPv-ly-Xor" secondAttribute="bottom" id="jif-S1-miI"/>
                             <constraint firstItem="sxy-an-a7L" firstAttribute="centerX" secondItem="Rlq-Md-M40" secondAttribute="centerX" id="l71-WE-EEG"/>
+                            <constraint firstItem="xPv-ly-Xor" firstAttribute="top" secondItem="sxy-an-a7L" secondAttribute="bottom" constant="5" id="tmg-K0-7Ku"/>
                         </constraints>
                     </view>
                     <connections>
@@ -2112,6 +2122,9 @@
         <image name="image 4" width="20" height="16"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray4Color">
+            <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
