@@ -162,6 +162,7 @@ class EditProfileVC: UIViewController {
         
         if UserData.shared.user_country != ""{
             self.lblCountry.text = UserData.shared.user_country
+            debugPrint("self.lblCountry.text==",self.lblCountry.text)
         }
         
         if UserData.shared.user_gender != ""{
@@ -343,9 +344,7 @@ class EditProfileVC: UIViewController {
         {(Index ,item) in
             self.lblGender.text = item
         }
-        
     }
-    
     
     @IBAction func btnSelectCountryTapped(_ sender: UIButton) {
         AppsCountryPickerInstanse.sharedInstanse.showController(referense: self) { (selectedCountry) in

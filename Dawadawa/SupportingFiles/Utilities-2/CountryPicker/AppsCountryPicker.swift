@@ -1,10 +1,7 @@
-//
 //  AppsCountryPicker.swift
 //  CountryPickerDemo
-//
 //  Created by Shubham Kaliyar on 29/01/20.
 //  Copyright © 2020 Shubham Kaliyar. All rights reserved.
-//
 
 import Foundation
 import UIKit
@@ -19,7 +16,6 @@ public var currentcountryCode = NSLocale.current.regionCode
 public var currentcountrylanguageCode = NSLocale.current.languageCode
 fileprivate var savedContentOffset = CGPoint(x: 0, y: -50)
 fileprivate var savedCountryCode = String()
-
 
 //MARK:- Class for Country Picker
 final class AppsCountryPicker: UITableViewController {
@@ -72,9 +68,6 @@ final class AppsCountryPicker: UITableViewController {
         print(plist)
         self.countries = plist
     }
-    
-    
-    
     
     fileprivate func configureView() {
         title = "Select your country"
@@ -227,8 +220,6 @@ class AppsCountryPickerInstanse : AppsCountryPickerDelegate {
     }
 }
 
-
-
 import UIKit
 
 final class CountryCodeCell: UITableViewCell {
@@ -260,7 +251,6 @@ final class CountryCodeCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
     //MARK:- func for update Cell
     func updateCell(dataforCell data:[String:String]? , countrytextColor:UIColor) {
         self.underlineView.backgroundColor = .gray
@@ -279,8 +269,6 @@ final class CountryCodeCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
         accessoryType = selected ? .checkmark : .none
     }
-    
-    
 }
 
 
@@ -289,7 +277,7 @@ extension UIImage {
     func countryFlagSize(size: CGSize, roundedRadius radius: CGFloat) -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(size, false, UIScreen.main.scale)
         if let currentContext = UIGraphicsGetCurrentContext() {
-            let rect = CGRect(origin: .zero, size: size)
+    let rect = CGRect(origin: .zero, size: size)
             currentContext.addPath(UIBezierPath(roundedRect: rect,byRoundingCorners: .allCorners,cornerRadii: CGSize(width: radius, height: radius)).cgPath)
             currentContext.clip()
             draw(in: rect)

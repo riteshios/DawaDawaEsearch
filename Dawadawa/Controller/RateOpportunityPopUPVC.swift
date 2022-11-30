@@ -66,7 +66,6 @@ class RateOpportunityPopUPVC: UIViewController {
     
     //    MARK: - @IBAction
     
-    
     @IBAction func btnDismissTapped(_ sender: UIButton) {
 //        self.callback?("Dismiss")
         self.dismiss(animated: true)

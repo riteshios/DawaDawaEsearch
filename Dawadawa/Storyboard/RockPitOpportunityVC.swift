@@ -348,7 +348,6 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
             debugPrint("looking idddddd.....",self.lookingforid = id)
             self.getlookingforapi(id: self.lookingforid ?? 0)
             self.isSelectLookingFor = true
-            
         }
     }
     

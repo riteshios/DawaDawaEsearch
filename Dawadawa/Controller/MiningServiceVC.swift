@@ -518,15 +518,10 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
             self.showSimpleAlert(message: "Please Select Opportunity Plan")
             return
         }
-        else if self.isSelectopp_planPremium == true{
-            if self.isSelectimage == false && self.imagearr.count == 0{
-                self.showSimpleAlert(message: "Please add at least one opportunity photo")
-                return
-            }
+        else if self.isSelectopp_planPremium == true && self.isSelectimage == false && self.imagearr.count == 0{
+            self.showSimpleAlert(message: "Please add at least one opportunity photo")
             return
         }
-        
-        
         self.view.endEditing(true)
         self.createopportunityapi()
     }

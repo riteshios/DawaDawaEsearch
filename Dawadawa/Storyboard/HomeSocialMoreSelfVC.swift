@@ -39,7 +39,7 @@ class HomeSocialMoreSelfVC: UIViewController {
     //    MARK: - @IBAction
     
     @IBAction func btnDismissTapped(_ sender: UIButton) {
-        //        self.callback?("Dismiss")
+        //  self.callback?("Dismiss")
         self.dismiss(animated: true)
     }
     
@@ -57,6 +57,7 @@ class HomeSocialMoreSelfVC: UIViewController {
     
     @IBAction func btnvViewDetailsTapped(_ sender: UIButton) {
         self.callback?("viewdetails")
+        self.dismiss(animated: true)
     }
 }
 

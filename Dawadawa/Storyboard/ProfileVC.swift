@@ -37,7 +37,7 @@ class ProfileVC: UIViewController {
         super.viewDidLoad()
         self.imgNoOpp.isHidden = true
         
-        //  self.listoppoertunityapi()
+        //        self.listoppoertunityapi()
         tblViewSocialPost.register(UINib(nibName: "OpportunitypostedTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "OpportunitypostedTableViewCell")
         tblViewSocialPost.register(UINib(nibName: "SocialPostTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "SocialPostTableViewCell")
         
@@ -46,7 +46,6 @@ class ProfileVC: UIViewController {
             self.lblMobileNumber.isHidden = true
             self.lblEmail.isHidden = true
             self.imgNoOpp.isHidden = false
-            self.tblViewSocialPost.isHidden = true
         }
         else{
             self.fetchdata()
@@ -79,7 +78,6 @@ class ProfileVC: UIViewController {
             
             task.resume()
         }
-        
     }
     
     // MARK: - @IBAction
@@ -90,11 +88,8 @@ class ProfileVC: UIViewController {
             self.ImageProfile.image = image
             self.uploadImage(image: self.ImageProfile.image ?? UIImage())
         }
-        
     }
-    
-    
-    
+
     @IBAction func btnMoreTapped(_ sender: UIButton) {
         
         let vc = self.storyboard?.instantiateViewController(withIdentifier: MoreVC.getStoryboardID()) as! MoreVC
@@ -185,7 +180,6 @@ class ProfileVC: UIViewController {
                                 
                                 self.navigationController?.pushViewController(vc, animated: true)
                             }
-                            
                         }
                     }
                     self.present(vc, animated: false)
@@ -219,14 +213,15 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section{
         case 0:
+            let cell = self.tblViewSocialPost.dequeueReusableCell(withIdentifier: "OpportunitypostedTableViewCell") as! OpportunitypostedTableViewCell
             
             if UserData.shared.isskiplogin == true{
-                print("Guest User")
+//                cell.imgOppPosted.isHidden = true
             }
             else{
-                let cell = self.tblViewSocialPost.dequeueReusableCell(withIdentifier: "OpportunitypostedTableViewCell") as! OpportunitypostedTableViewCell
                 if UserData.shared.user_type == "0"{
                     cell.lblshowdata.text = String.getString(self.datadashboard?.expiry_date)
+                    cell.lbltotalused.isHidden = true
                     cell.lblDate.text = "Expiration Date"
                     cell.lblshowplan.text = String.getString(self.datadashboard?.plan_type)
                     cell.lblPlan.text = "Subscription Plan"
@@ -236,6 +231,7 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                 else if UserData.shared.user_type == "1"{
                     cell.lblshowdata.text = String.getString(self.datadashboard?.total_create)
                     cell.lbltotalused.text = String.getString(self.datadashboard?.total_used) + "/"
+                    debugPrint("cell.lbltotalused.text===",String.getString(self.datadashboard?.total_used))
                     cell.lblDate.text = "Total Create"
                     cell.lblshowplan.text = String.getString(self.datadashboard?.no_view)
                     cell.lblPlan.text = "Total views"
@@ -245,48 +241,50 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                 else if UserData.shared.user_type == "2"{
                     cell.lblshowdata.text = String.getString(self.datadashboard?.total_create)
                     cell.lblDate.text = "Total Create"
+                    cell.lbltotalused.isHidden = true
                     cell.lblshowplan.text = String.getString(self.datadashboard?.no_view)
                     cell.lblPlan.text = "Total views"
                     cell.lblshowOpportunity.text = String.getString(self.datadashboard?.no_flag)
                     cell.lblOpportunity.text = "Flagged Opportunities"
                     
                 }
-                cell.callbackbtnSelect = { txt in
-                    if txt == "All"{
-                        if UserData.shared.isskiplogin == true{
-                            self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
-                            self.imgNoOpp.isHidden = false
-                        }
-                        else{
-                            self.isbtnAllSelect  = true
-                            self.listoppoertunityapi()
-                        }
-                        
+            }
+            cell.callbackbtnSelect = { txt in
+                if txt == "All"{
+                    if UserData.shared.isskiplogin == true{
+                        self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                        self.imgNoOpp.isHidden = false
                     }
-                    if txt == "Premium"{
-                        if UserData.shared.isskiplogin == true{
-                            self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
-                            self.imgNoOpp.isHidden = false
-                        }
-                        else{
-                            self.isbtnPremiumSelect = true
-                            self.getallpremiumapi()
-                        }
-                        
+                    else{
+                        self.isbtnAllSelect  = true
+                        self.listoppoertunityapi()
                     }
-                    if txt == "Featured"{
-                        if UserData.shared.isskiplogin == true{
-                            self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
-                            self.imgNoOpp.isHidden = false
-                        }
-                        else{
-                            self.isbtnFeaturedSelect = true
-                            self.getallFeaturedapi()
-                        }
+                    
+                }
+                if txt == "Premium"{
+                    if UserData.shared.isskiplogin == true{
+                        self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                        self.imgNoOpp.isHidden = false
+                    }
+                    else{
+                        self.isbtnPremiumSelect = true
+                        self.getallpremiumapi()
+                    }
+                    
+                }
+                if txt == "Featured"{
+                    if UserData.shared.isskiplogin == true{
+                        self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                        self.imgNoOpp.isHidden = false
+                    }
+                    else{
+                        self.isbtnFeaturedSelect = true
+                        self.getallFeaturedapi()
                     }
                 }
-                return cell
             }
+            
+            return cell
             
         case 1:
             let cell = self.tblViewSocialPost.dequeueReusableCell(withIdentifier: "SocialPostTableViewCell") as! SocialPostTableViewCell
@@ -295,7 +293,7 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
             cell.btnChat.isHidden = true
             cell.viewSave.isHidden = true
             
-            let profilrimageurl = "\("https://demo4app.com/dawadawa/public/admin_assets/user_profile/" + String.getString(UserData.shared.social_profile))"
+            let profilrimageurl = "\("https://demo4esl.com/dawadawa/public/admin_assets/user_profile/" + String.getString(UserData.shared.social_profile))"
             
             let obj = userTimeLine[indexPath.row]
             
@@ -442,7 +440,7 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                         cell.lblSave.text = "Save"
                     }
                 }
-                
+                                      
                 if txt == "More" {
                     let vc = self.storyboard?.instantiateViewController(withIdentifier: ProileSocialMoreVC.getStoryboardID()) as! ProileSocialMoreVC
                     vc.modalTransitionStyle = .crossDissolve
@@ -722,21 +720,26 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
         default:
             return UITableViewCell()
         }
-        
-        func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-            switch indexPath.section{
-            case 0:
-                return 180
-                
-            case 1:
-                return UITableView.automaticDimension
-                
-            default:
+    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch indexPath.section{
+        case 0:
+            if UserData.shared.isskiplogin == true{
                 return 0
             }
+            else{
+                return 180
+            }
+
+        case 1:
+            return UITableView.automaticDimension
+            
+        default:
+            return 0
         }
     }
 }
+
 // MARK: -API call
 
 extension ProfileVC{
@@ -829,7 +832,7 @@ extension ProfileVC{
                 
                 switch Int.getInt(statusCode) {
                 case 200:
-                    
+            
                     if Int.getInt(dictResult["status"]) == 200{
                         
                         let endToken = kSharedUserDefaults.getLoggedInAccessToken()
@@ -879,7 +882,7 @@ extension ProfileVC{
                 kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
             }
         }
-        
+    
         let params:[String : Any] = [
             "user_id":Int.getInt(UserData.shared.id),
             "id":1
@@ -1363,15 +1366,13 @@ extension ProfileVC{
             }
         }
         
-        
         let params:[String : Any] = [
             "user_id":Int.getInt(UserData.shared.id),
             "oppr_id":oppr_id
         ]
         
         debugPrint("user_id......",Int.getInt(UserData.shared.id))
-        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kdeleteopportunity, requestMethod: .POST,
-                                                               requestParameters:params, withProgressHUD: false)
+        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kdeleteopportunity, requestMethod: .POST, requestParameters:params, withProgressHUD: false)
         {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
             
             CommonUtils.showHudWithNoInteraction(show: false)
@@ -1611,4 +1612,7 @@ extension ProfileVC{
             
         }
     }
+    
 }
+
+

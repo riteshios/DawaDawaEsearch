@@ -6,6 +6,8 @@ import UIKit
 
 class ChangePasswordOTPVerifyVC: UIViewController {
     
+    @IBOutlet weak var viewBG: UIView!
+    
     @IBOutlet weak var txtfieldOtp1: UITextField!
     @IBOutlet weak var txtfieldOtp2: UITextField!
     @IBOutlet weak var lblWrongOtp: UILabel!
@@ -29,9 +31,6 @@ class ChangePasswordOTPVerifyVC: UIViewController {
     @IBOutlet weak var btnResendCode: UIButton!
     @IBOutlet weak var btnVerify: UIButton!
     
-    
-    
-    
     var callbackotp:(()->())?
     var otp = ""
 
@@ -41,6 +40,14 @@ class ChangePasswordOTPVerifyVC: UIViewController {
         super.viewDidLoad()
         self.setuplanguage()
         self.setup()
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if let touch = touches.first{
+            if viewBG == touch.view{
+                self.dismiss(animated: true)
+            }
+        }
     }
     
     func setup(){

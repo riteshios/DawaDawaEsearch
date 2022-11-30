@@ -1,9 +1,6 @@
-//
 //  MysubscriptionVC.swift
 //  Dawadawa
-
 //  Created by Ritesh Gupta on 09/09/22.
-
 
 import UIKit
 
@@ -168,8 +165,10 @@ extension MysubscriptionVC{
                     }
                     else if  Int.getInt(dictResult["responsecodes"]) == 400{
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        self.lblNumberofcreate.isHidden = true
+                        self.lblDate.isHidden = true
+                        self.lblLeftbalance.isHidden = true
                     }
-                    
                     
                 default:
                     CommonUtils.showError(.error, String.getString(dictResult["message"]))
@@ -230,7 +229,6 @@ extension MysubscriptionVC{
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
-                    
                 default:
                     CommonUtils.showError(.error, String.getString(dictResult["message"]))
                 }
@@ -241,6 +239,5 @@ extension MysubscriptionVC{
                 CommonUtils.showToastForDefaultError()
             }
         }
-        
     }
 }

@@ -55,10 +55,8 @@ class SearchVC: UIViewController,UITextFieldDelegate{
 }
 extension SearchVC:UITableViewDelegate,UITableViewDataSource{
     
-    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 3
-        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -75,8 +73,8 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
         default:
             return 0
         }
-        
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section{
             
@@ -131,7 +129,6 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
                 cell.imgredCircle.isHidden = false
                 cell.lblcloseOpportunity.isHidden = false
             }
-            
             
             if String.getString(obj.is_user_like) == "1"{
                 cell.imglike.image = UIImage(named: "dil")

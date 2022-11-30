@@ -2785,22 +2785,25 @@
                                 <rect key="frame" x="16" y="191.66666666666663" width="382" height="353"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m6K-ue-gy2">
-                                        <rect key="frame" x="336" y="29" width="24" height="24"/>
+                                        <rect key="frame" x="330" y="29" width="30" height="30"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Frame 65" translatesAutoresizingMaskIntoConstraints="NO" id="2e6-nB-IiG">
-                                                <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MOs-cP-kuL">
-                                                <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <connections>
+                                                    <action selector="btnDismiss:" destination="e7b-pr-0qa" eventType="touchUpInside" id="FJ2-7e-EcN"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="2e6-nB-IiG" secondAttribute="trailing" id="3Vr-iF-Aq4"/>
-                                            <constraint firstAttribute="height" constant="24" id="LiB-0k-KYb"/>
-                                            <constraint firstAttribute="width" constant="24" id="Nzt-lS-8pw"/>
+                                            <constraint firstAttribute="height" constant="30" id="LiB-0k-KYb"/>
+                                            <constraint firstAttribute="width" constant="30" id="Nzt-lS-8pw"/>
                                             <constraint firstAttribute="bottom" secondItem="2e6-nB-IiG" secondAttribute="bottom" id="QZk-aI-RcG"/>
                                             <constraint firstItem="MOs-cP-kuL" firstAttribute="leading" secondItem="m6K-ue-gy2" secondAttribute="leading" id="cI0-el-snv"/>
                                             <constraint firstAttribute="bottom" secondItem="MOs-cP-kuL" secondAttribute="bottom" id="dO0-RD-tos"/>
@@ -3096,6 +3099,7 @@
                         <outlet property="txtfieldOtp4" destination="xsP-cH-no1" id="nxF-Rt-jYn"/>
                         <outlet property="txtfieldOtp5" destination="RcZ-sg-z0W" id="LsR-gx-s14"/>
                         <outlet property="txtfieldOtp6" destination="4lZ-oY-0oW" id="3DP-kP-cEH"/>
+                        <outlet property="viewBG" destination="KvH-Fj-Owq" id="6ea-YJ-E0r"/>
                         <outlet property="viewOtp1" destination="thN-qA-M79" id="f8w-vr-St7"/>
                         <outlet property="viewOtp2" destination="FGF-B3-8iK" id="Sbi-gs-cFG"/>
                         <outlet property="viewOtp3" destination="SBQ-tn-kbf" id="QxC-qc-MII"/>
@@ -4554,14 +4558,14 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UAg-s8-Apj">
                                                 <rect key="frame" x="15" y="444" width="383" height="55"/>
                                                 <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="India.png" translatesAutoresizingMaskIntoConstraints="NO" id="l9L-de-bwg">
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sudan" translatesAutoresizingMaskIntoConstraints="NO" id="l9L-de-bwg">
                                                         <rect key="frame" x="20" y="20" width="16" height="15"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="16" id="12K-Ek-pEe"/>
                                                         </constraints>
                                                     </imageView>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sudan" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cUH-x0-wNh">
-                                                        <rect key="frame" x="41" y="17.666666666666686" width="43.333333333333343" height="19.666666666666671"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sudan" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cUH-x0-wNh">
+                                                        <rect key="frame" x="41" y="2" width="297" height="51"/>
                                                         <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="16"/>
                                                         <color key="textColor" red="0.08235294118" green="0.44705882349999998" blue="0.63137254899999995" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -4589,12 +4593,14 @@
                                                     <constraint firstItem="oqk-t1-3IB" firstAttribute="top" secondItem="UAg-s8-Apj" secondAttribute="top" constant="24" id="9qN-Tk-fFm"/>
                                                     <constraint firstAttribute="trailing" secondItem="oqk-t1-3IB" secondAttribute="trailing" constant="23" id="GQO-0P-FKr"/>
                                                     <constraint firstAttribute="bottom" secondItem="MbL-kr-XZT" secondAttribute="bottom" id="GeG-aL-i3d"/>
+                                                    <constraint firstAttribute="bottom" secondItem="cUH-x0-wNh" secondAttribute="bottom" constant="2" id="IA4-UI-3fL"/>
                                                     <constraint firstItem="MbL-kr-XZT" firstAttribute="top" secondItem="UAg-s8-Apj" secondAttribute="top" id="K2A-gp-VaF"/>
                                                     <constraint firstAttribute="bottom" secondItem="l9L-de-bwg" secondAttribute="bottom" constant="20" id="MOG-TG-hiC"/>
                                                     <constraint firstItem="l9L-de-bwg" firstAttribute="top" secondItem="UAg-s8-Apj" secondAttribute="top" constant="20" id="PyM-sT-WBV"/>
                                                     <constraint firstAttribute="trailing" secondItem="MbL-kr-XZT" secondAttribute="trailing" id="QAK-2w-VaU"/>
                                                     <constraint firstAttribute="bottom" secondItem="oqk-t1-3IB" secondAttribute="bottom" constant="24" id="UCK-gR-Re5"/>
                                                     <constraint firstItem="cUH-x0-wNh" firstAttribute="leading" secondItem="l9L-de-bwg" secondAttribute="trailing" constant="5" id="b0d-AL-Tbx"/>
+                                                    <constraint firstItem="oqk-t1-3IB" firstAttribute="leading" secondItem="cUH-x0-wNh" secondAttribute="trailing" constant="6" id="rFf-0w-oJh"/>
                                                     <constraint firstItem="MbL-kr-XZT" firstAttribute="leading" secondItem="UAg-s8-Apj" secondAttribute="leading" id="yuq-kt-aTX"/>
                                                 </constraints>
                                                 <userDefinedRuntimeAttributes>
@@ -11362,8 +11368,8 @@ this opportunity?</string>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HlJ-X2-LEU">
                                                 <rect key="frame" x="0.0" y="1043.3333333333333" width="414" height="115"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Opportunity status " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q5v-Jp-nHp">
-                                                        <rect key="frame" x="16" y="9.9999999999999982" width="147.33333333333334" height="20.333333333333329"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q5v-Jp-nHp">
+                                                        <rect key="frame" x="16" y="9.9999999999999982" width="65.333333333333329" height="20.333333333333329"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -14081,7 +14087,7 @@ this opportunity?</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HrY-uG-y9W">
-                                <rect key="frame" x="0.0" y="306" width="414" height="430"/>
+                                <rect key="frame" x="0.0" y="326" width="414" height="410"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NZ2-ep-CDP">
                                         <rect key="frame" x="22" y="29" width="24" height="24"/>
@@ -14113,22 +14119,22 @@ this opportunity?</string>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xdj-C3-mxD">
-                                        <rect key="frame" x="0.0" y="73" width="414" height="50"/>
+                                        <rect key="frame" x="0.0" y="73" width="414" height="45"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chat" translatesAutoresizingMaskIntoConstraints="NO" id="mRV-qK-fFE">
-                                                <rect key="frame" x="18" y="15" width="20" height="20"/>
+                                                <rect key="frame" x="18" y="15" width="20" height="15"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="20" id="Yaf-A6-Gt2"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chat with user" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Diw-xD-sLF">
-                                                <rect key="frame" x="55" y="14" width="114" height="22"/>
+                                                <rect key="frame" x="55" y="11.666666666666686" width="114" height="22"/>
                                                 <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="18"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LAX-tm-Eb5">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="45"/>
                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <connections>
@@ -14144,28 +14150,28 @@ this opportunity?</string>
                                             <constraint firstItem="mRV-qK-fFE" firstAttribute="leading" secondItem="Xdj-C3-mxD" secondAttribute="leading" constant="18" id="dyj-4i-2rI"/>
                                             <constraint firstItem="mRV-qK-fFE" firstAttribute="top" secondItem="Xdj-C3-mxD" secondAttribute="top" constant="15" id="exO-7c-8R2"/>
                                             <constraint firstAttribute="bottom" secondItem="mRV-qK-fFE" secondAttribute="bottom" constant="15" id="gRx-lF-5jP"/>
-                                            <constraint firstAttribute="height" constant="50" id="iMB-e5-DTA"/>
+                                            <constraint firstAttribute="height" constant="45" id="iMB-e5-DTA"/>
                                             <constraint firstItem="LAX-tm-Eb5" firstAttribute="leading" secondItem="Xdj-C3-mxD" secondAttribute="leading" id="o2A-GB-BP2"/>
                                             <constraint firstAttribute="bottom" secondItem="LAX-tm-Eb5" secondAttribute="bottom" id="weg-Ah-iVS"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R9K-UZ-Qyw">
-                                        <rect key="frame" x="0.0" y="133" width="414" height="50"/>
+                                        <rect key="frame" x="0.0" y="128" width="414" height="45"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="copy" translatesAutoresizingMaskIntoConstraints="NO" id="ppt-JD-X8B">
-                                                <rect key="frame" x="18" y="15" width="20" height="20"/>
+                                                <rect key="frame" x="18" y="15" width="20" height="15"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="20" id="rTw-Ip-dW8"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Copy link" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XAu-gf-HDg">
-                                                <rect key="frame" x="55" y="14" width="72" height="22"/>
+                                                <rect key="frame" x="55" y="11.666666666666686" width="72" height="22"/>
                                                 <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="18"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="375-Vf-DGK">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="45"/>
                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <connections>
@@ -14182,7 +14188,7 @@ this opportunity?</string>
                                             <constraint firstItem="375-Vf-DGK" firstAttribute="leading" secondItem="R9K-UZ-Qyw" secondAttribute="leading" id="H8J-rs-fRz"/>
                                             <constraint firstAttribute="bottom" secondItem="ppt-JD-X8B" secondAttribute="bottom" constant="15" id="Jar-hD-e7N"/>
                                             <constraint firstItem="ppt-JD-X8B" firstAttribute="top" secondItem="R9K-UZ-Qyw" secondAttribute="top" constant="15" id="MEc-US-F4h"/>
-                                            <constraint firstAttribute="height" constant="50" id="URs-ZI-Ij0"/>
+                                            <constraint firstAttribute="height" constant="45" id="URs-ZI-Ij0"/>
                                             <constraint firstAttribute="trailing" secondItem="375-Vf-DGK" secondAttribute="trailing" id="VCV-U3-j0W"/>
                                             <constraint firstItem="375-Vf-DGK" firstAttribute="top" secondItem="R9K-UZ-Qyw" secondAttribute="top" id="cpq-D8-RhY"/>
                                             <constraint firstAttribute="bottom" secondItem="375-Vf-DGK" secondAttribute="bottom" id="jpu-AZ-mmx"/>
@@ -14190,22 +14196,22 @@ this opportunity?</string>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="876-Er-qEU">
-                                        <rect key="frame" x="0.0" y="193" width="414" height="50"/>
+                                        <rect key="frame" x="0.0" y="183" width="414" height="45"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="interested" translatesAutoresizingMaskIntoConstraints="NO" id="e82-zR-nXL">
-                                                <rect key="frame" x="18" y="15" width="20" height="20"/>
+                                                <rect key="frame" x="18" y="15" width="20" height="15"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="20" id="xtt-ho-PC8"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mark as interested" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vaM-LB-4gS">
-                                                <rect key="frame" x="55" y="14" width="144" height="22"/>
+                                                <rect key="frame" x="55" y="11.666666666666629" width="144" height="22"/>
                                                 <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="18"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mWE-g9-PUZ">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="45"/>
                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <connections>
@@ -14216,7 +14222,7 @@ this opportunity?</string>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="mWE-g9-PUZ" secondAttribute="trailing" id="C2w-65-9bT"/>
                                             <constraint firstItem="mWE-g9-PUZ" firstAttribute="top" secondItem="876-Er-qEU" secondAttribute="top" id="DUX-Kq-bFl"/>
-                                            <constraint firstAttribute="height" constant="50" id="EZn-FY-01N"/>
+                                            <constraint firstAttribute="height" constant="45" id="EZn-FY-01N"/>
                                             <constraint firstItem="mWE-g9-PUZ" firstAttribute="leading" secondItem="876-Er-qEU" secondAttribute="leading" id="KfG-n4-K32"/>
                                             <constraint firstItem="e82-zR-nXL" firstAttribute="top" secondItem="876-Er-qEU" secondAttribute="top" constant="15" id="O84-JC-ZY2"/>
                                             <constraint firstAttribute="trailing" secondItem="mWE-g9-PUZ" secondAttribute="trailing" id="OaL-sX-Ki0"/>
@@ -14230,22 +14236,22 @@ this opportunity?</string>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dRV-FZ-Ewh">
-                                        <rect key="frame" x="0.0" y="253" width="414" height="50"/>
+                                        <rect key="frame" x="0.0" y="238" width="414" height="45"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="flag" translatesAutoresizingMaskIntoConstraints="NO" id="FIP-PA-QMJ">
-                                                <rect key="frame" x="18" y="15" width="20" height="20"/>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="flag-2" translatesAutoresizingMaskIntoConstraints="NO" id="FIP-PA-QMJ">
+                                                <rect key="frame" x="18" y="15" width="20" height="15"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="20" id="57u-Gi-ZWz"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Flag post" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iJn-vE-Kni">
-                                                <rect key="frame" x="54.999999999999993" y="14" width="71.333333333333314" height="22"/>
+                                                <rect key="frame" x="54.999999999999993" y="11.666666666666629" width="71.333333333333314" height="22"/>
                                                 <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="18"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IS9-pV-Qkf">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="45"/>
                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <connections>
@@ -14264,13 +14270,13 @@ this opportunity?</string>
                                             <constraint firstItem="IS9-pV-Qkf" firstAttribute="leading" secondItem="dRV-FZ-Ewh" secondAttribute="leading" id="b9m-PL-LiL"/>
                                             <constraint firstItem="iJn-vE-Kni" firstAttribute="leading" secondItem="FIP-PA-QMJ" secondAttribute="trailing" constant="17" id="pjP-vz-4rJ"/>
                                             <constraint firstAttribute="bottom" secondItem="IS9-pV-Qkf" secondAttribute="bottom" id="slj-3k-DR0"/>
-                                            <constraint firstAttribute="height" constant="50" id="tIH-dN-d69"/>
+                                            <constraint firstAttribute="height" constant="45" id="tIH-dN-d69"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gSJ-XG-lMK">
-                                        <rect key="frame" x="0.0" y="313" width="414" height="50"/>
+                                        <rect key="frame" x="0.0" y="293" width="414" height="45"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="reduser" translatesAutoresizingMaskIntoConstraints="NO" id="3fF-eX-2it">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="frame" translatesAutoresizingMaskIntoConstraints="NO" id="3fF-eX-2it">
                                                 <rect key="frame" x="18" y="15" width="20" height="24"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="20" id="dMl-BD-0I7"/>
@@ -14301,13 +14307,13 @@ this opportunity?</string>
                                             <constraint firstItem="3fF-eX-2it" firstAttribute="top" secondItem="gSJ-XG-lMK" secondAttribute="top" constant="15" id="U6w-ae-1MI"/>
                                             <constraint firstAttribute="trailing" secondItem="2my-6Y-nYm" secondAttribute="trailing" id="WRc-0F-xET"/>
                                             <constraint firstAttribute="trailing" secondItem="2my-6Y-nYm" secondAttribute="trailing" id="omc-Sh-Y5J"/>
-                                            <constraint firstAttribute="height" constant="50" id="rCV-ne-LqE"/>
+                                            <constraint firstAttribute="height" constant="45" id="rCV-ne-LqE"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rCb-jA-NAL">
-                                        <rect key="frame" x="0.0" y="373" width="414" height="50"/>
+                                        <rect key="frame" x="0.0" y="348" width="414" height="45"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="viewdetails" translatesAutoresizingMaskIntoConstraints="NO" id="ZCL-4W-jva">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="viewdetail" translatesAutoresizingMaskIntoConstraints="NO" id="ZCL-4W-jva">
                                                 <rect key="frame" x="18" y="15" width="20" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="20" id="xFi-gB-dfX"/>
@@ -14320,7 +14326,7 @@ this opportunity?</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ebh-MI-pxX">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="30"/>
                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <connections>
@@ -14335,10 +14341,9 @@ this opportunity?</string>
                                             <constraint firstItem="WzI-0K-cdv" firstAttribute="centerY" secondItem="ZCL-4W-jva" secondAttribute="centerY" id="Cju-gX-h2m"/>
                                             <constraint firstItem="ZCL-4W-jva" firstAttribute="leading" secondItem="rCb-jA-NAL" secondAttribute="leading" constant="18" id="OJW-EV-QG5"/>
                                             <constraint firstItem="ZCL-4W-jva" firstAttribute="top" secondItem="rCb-jA-NAL" secondAttribute="top" constant="15" id="URc-c6-90e"/>
-                                            <constraint firstAttribute="bottom" secondItem="ebh-MI-pxX" secondAttribute="bottom" id="jOa-Zd-TAK"/>
                                             <constraint firstItem="ebh-MI-pxX" firstAttribute="top" secondItem="rCb-jA-NAL" secondAttribute="top" id="lrY-Ke-xnH"/>
                                             <constraint firstAttribute="trailing" secondItem="ebh-MI-pxX" secondAttribute="trailing" id="mXf-Ta-RuV"/>
-                                            <constraint firstAttribute="height" constant="50" id="ztv-vH-Faa"/>
+                                            <constraint firstAttribute="height" constant="45" id="ztv-vH-Faa"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -14348,6 +14353,7 @@ this opportunity?</string>
                                     <constraint firstItem="R9K-UZ-Qyw" firstAttribute="leading" secondItem="Xdj-C3-mxD" secondAttribute="leading" id="7ru-V5-dsl"/>
                                     <constraint firstItem="NZ2-ep-CDP" firstAttribute="leading" secondItem="HrY-uG-y9W" secondAttribute="leading" constant="22" id="AMS-kD-0Hz"/>
                                     <constraint firstItem="Xdj-C3-mxD" firstAttribute="leading" secondItem="HrY-uG-y9W" secondAttribute="leading" id="BHF-eM-IXn"/>
+                                    <constraint firstAttribute="bottom" secondItem="rCb-jA-NAL" secondAttribute="bottom" constant="17" id="MDV-0a-J6I"/>
                                     <constraint firstItem="876-Er-qEU" firstAttribute="trailing" secondItem="R9K-UZ-Qyw" secondAttribute="trailing" id="NKa-XE-NHo"/>
                                     <constraint firstItem="gSJ-XG-lMK" firstAttribute="top" secondItem="dRV-FZ-Ewh" secondAttribute="bottom" constant="10" id="QD9-21-GM0"/>
                                     <constraint firstItem="dRV-FZ-Ewh" firstAttribute="leading" secondItem="R9K-UZ-Qyw" secondAttribute="leading" id="RkU-Sw-j8n"/>
@@ -14360,7 +14366,7 @@ this opportunity?</string>
                                     <constraint firstItem="rCb-jA-NAL" firstAttribute="leading" secondItem="gSJ-XG-lMK" secondAttribute="leading" id="elY-Hq-Eg0"/>
                                     <constraint firstItem="gSJ-XG-lMK" firstAttribute="trailing" secondItem="dRV-FZ-Ewh" secondAttribute="trailing" id="ffb-iK-SkZ"/>
                                     <constraint firstItem="R9K-UZ-Qyw" firstAttribute="trailing" secondItem="Xdj-C3-mxD" secondAttribute="trailing" id="kEa-D3-tsq"/>
-                                    <constraint firstAttribute="height" constant="430" id="oN9-cw-9xx"/>
+                                    <constraint firstAttribute="height" constant="410" id="oN9-cw-9xx"/>
                                     <constraint firstItem="rCb-jA-NAL" firstAttribute="trailing" secondItem="gSJ-XG-lMK" secondAttribute="trailing" id="rIZ-WP-fIy"/>
                                     <constraint firstAttribute="trailing" secondItem="Xdj-C3-mxD" secondAttribute="trailing" id="uJc-Ki-juf"/>
                                     <constraint firstItem="dRV-FZ-Ewh" firstAttribute="top" secondItem="876-Er-qEU" secondAttribute="bottom" constant="10" id="ue5-lF-IxE"/>
@@ -15085,7 +15091,7 @@ this opportunity?</string>
                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <connections>
-                                                    <action selector="btnDismissTapped:" destination="ngi-Oh-SEj" eventType="touchUpInside" id="1v7-Kk-2bN"/>
+                                                    <action selector="btnDismissTapped:" destination="ngi-Oh-SEj" eventType="touchUpInside" id="QI3-Wv-uy5"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -16148,8 +16154,26 @@ this Chat?</string>
         </scene>
     </scenes>
     <designables>
+        <designable name="Au9-O0-cbA">
+            <size key="intrinsicContentSize" width="120" height="20"/>
+        </designable>
+        <designable name="VSf-iM-2vh">
+            <size key="intrinsicContentSize" width="259" height="44"/>
+        </designable>
+        <designable name="fV5-fA-npc">
+            <size key="intrinsicContentSize" width="120" height="20"/>
+        </designable>
         <designable name="hYJ-9L-6ep">
             <size key="intrinsicContentSize" width="-1" height="49"/>
+        </designable>
+        <designable name="ozH-Xo-8GJ">
+            <size key="intrinsicContentSize" width="120" height="20"/>
+        </designable>
+        <designable name="r55-Lk-l5f">
+            <size key="intrinsicContentSize" width="259" height="44"/>
+        </designable>
+        <designable name="ybI-DQ-vGn">
+            <size key="intrinsicContentSize" width="-1" height="65"/>
         </designable>
     </designables>
     <resources>
@@ -16161,7 +16185,6 @@ this Chat?</string>
         <image name="Frame 176" width="414" height="171"/>
         <image name="Frame 65" width="24" height="24"/>
         <image name="IND" width="16" height="16"/>
-        <image name="India.png" width="70" height="47"/>
         <image name="Mapsicle Map" width="414" height="311"/>
         <image name="NoOpp" width="410.33334350585938" height="400.66665649414062"/>
         <image name="Rectangle 101" width="11" height="11"/>
@@ -16189,6 +16212,8 @@ this Chat?</string>
         <image name="eye-slash" width="16" height="16"/>
         <image name="eye.slash" catalog="system" width="128" height="86"/>
         <image name="flag" width="12.333333015441895" height="20"/>
+        <image name="flag-2" width="24" height="24"/>
+        <image name="frame" width="24" height="24"/>
         <image name="guest" width="414" height="418"/>
         <image name="home" width="21.333333969116211" height="20.666666030883789"/>
         <image name="image" width="16" height="16"/>
@@ -16214,9 +16239,11 @@ this Chat?</string>
         <image name="send" width="18" height="18"/>
         <image name="setting-2" width="24" height="24"/>
         <image name="subscription" width="24" height="24"/>
+        <image name="sudan" width="16" height="16"/>
         <image name="trash" width="24" height="24"/>
         <image name="truck" width="150" height="135"/>
         <image name="user-square" width="24" height="24"/>
+        <image name="viewdetail" width="21" height="21"/>
         <image name="viewdetails" width="21" height="21"/>
         <image name="warning-2" width="100" height="100"/>
         <systemColor name="labelColor">

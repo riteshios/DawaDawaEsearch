@@ -219,7 +219,6 @@ extension ViewAllSavedVC:UITableViewDelegate,UITableViewDataSource{
                 }
             }
             
-            
             if txt == "More" {
                 if UserData.shared.id == Int.getInt(obj.user_id){
                     
@@ -234,25 +233,75 @@ extension ViewAllSavedVC:UITableViewDelegate,UITableViewDataSource{
                             }
                             else{
                                 let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
-                                
                                 debugPrint("oppid+++++++",oppid)
-                                
                                 self.opportunitydetailsapi(oppr_id: oppid)
-                                
                             }
                         }
                         
+                        if txt == "Close"{
+                            self.dismiss(animated: false){
+                                let vc = self.storyboard?.instantiateViewController(withIdentifier: ClosePopUpVC.getStoryboardID()) as! ClosePopUpVC
+                                vc.modalTransitionStyle = .crossDissolve
+                                vc.modalPresentationStyle = .overCurrentContext
+                                vc.callback = { txt in
+                                    
+                                    if txt == "Close"{
+                                        vc.dismiss(animated: false) {
+                                            let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
+                                            self.closeopportunityapi(opr_id: oppid)
+                                            debugPrint("oppidclose......",oppid)
+                                            self.getallsaveopportunity()
+                                        }
+                                    }
+                                }
+                                self.present(vc, animated: false)
+                            }
+                        }
+                        
+                        if txt == "viewdetails" {
+                            let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
+                            debugPrint("detailsppid=-=-=",oppid)
+                            let vc = self.storyboard?.instantiateViewController(withIdentifier: DetailScreenVC.getStoryboardID()) as! DetailScreenVC
+                            
+                            vc.oppid = oppid
+                            self.navigationController?.pushViewController(vc, animated: true)
+                            self.dismiss(animated: true)
+                        }
                     }
                     self.present(vc, animated: false)
-                    
                 }
-                
                 else{
-                    
                     let vc = self.storyboard?.instantiateViewController(withIdentifier: HomeSocialMoreVC.getStoryboardID()) as! HomeSocialMoreVC
                     vc.modalTransitionStyle = .crossDissolve
                     vc.modalPresentationStyle = .overCurrentContext
                     vc.callback = { txt in
+                        
+                        if txt == "Chatwithuser"{
+                            if UserData.shared.isskiplogin == true{
+                                self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                            }
+                            else{
+                                let userid = Int.getInt(self.userTimeLine[indexPath.row].user_id)
+                                let vc = self.storyboard?.instantiateViewController(withIdentifier: ChatVC.getStoryboardID()) as! ChatVC
+                                vc.friendid = userid
+                                vc.friendname = String.getString(obj.userdetail?.name)
+                                vc.friendimage = imguserurl
+                                self.navigationController?.pushViewController(vc, animated: true)
+                                self.dismiss(animated: true)
+                            }
+                        }
+                        
+                        if txt == "MarkasInterested"{
+                            if UserData.shared.isskiplogin == true{
+                                self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                            }
+                            else{
+                                let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
+                                self.markinterestedapi(oppr_id: oppid)
+                                self.dismiss(animated: true)
+                            }
+                        }
+                        
                         
                         if txt == "Flag"{
                             if UserData.shared.isskiplogin == true{
@@ -265,22 +314,38 @@ extension ViewAllSavedVC:UITableViewDelegate,UITableViewDataSource{
                                 cell.imgOppFlag.isHidden = false
                             }
                         }
-                        
                         if txt == "Report"{
                             if UserData.shared.isskiplogin == true{
                                 self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
                             }
                             else{
-                                kSharedAppDelegate?.makeRootViewController()
+                                self.dismiss(animated: false){
+                                    let vc = self.storyboard?.instantiateViewController(withIdentifier: ReportUserPopUpVC.getStoryboardID()) as! ReportUserPopUpVC
+                                    vc.modalTransitionStyle = .crossDissolve
+                                    vc.modalPresentationStyle = .overCurrentContext
+                                    let oppid = Int.getInt(self.userTimeLine[indexPath.row].user_id)
+                                    vc.userid = oppid
+                                    self.present(vc, animated: false)
+                                }
                             }
-                            
                         }
-                        
+                        if txt == "viewdetails"{
+                            if UserData.shared.isskiplogin == true{
+                                self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                            }
+                            else{
+                                let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
+                                debugPrint("detailsppid=-=-=",oppid)
+                                let vc = self.storyboard?.instantiateViewController(withIdentifier: DetailScreenVC.getStoryboardID()) as! DetailScreenVC
+                                vc.oppid = oppid
+                                self.navigationController?.pushViewController(vc, animated: true)
+                                self.dismiss(animated: true)
+                            }
+                        }
                     }
                     self.present(vc, animated: false)
                 }
             }
-            
             
             //                       COMMENT PART
             
@@ -606,6 +671,70 @@ extension ViewAllSavedVC{
         }
     }
     
+    //    Close opportunity api
+    func closeopportunityapi(opr_id:Int){
+        
+        CommonUtils.showHud(show: true)
+        
+        if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
+            let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+            let septoken = endToken.components(separatedBy: " ")
+            if septoken[0] != "Bearer"{
+                let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
+                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
+            }
+        }
+        
+        let params:[String : Any] = [
+            "user_id":Int.getInt(UserData.shared.id),
+            "opr_id":opr_id
+        ]
+        
+        debugPrint("user_id......",Int.getInt(UserData.shared.id))
+        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kcloseopportunity, requestMethod: .POST,
+                                                               requestParameters:params, withProgressHUD: false)
+        {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
+            
+            CommonUtils.showHudWithNoInteraction(show: false)
+            
+            if errorType == .requestSuccess {
+                
+                let dictResult = kSharedInstance.getDictionary(result)
+                
+                switch Int.getInt(statusCode) {
+                case 200:
+                    
+                    if Int.getInt(dictResult["status"]) == 200{
+                        
+                        let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+                        let septoken = endToken.components(separatedBy: " ")
+                        if septoken[0] == "Bearer"{
+                            kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
+                        }
+                        
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        
+                    }
+                    
+                    else if  Int.getInt(dictResult["status"]) == 404{
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    }
+                    else if  Int.getInt(dictResult["status"]) == 400{
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    }
+                    
+                default:
+                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                }
+            } else if errorType == .noNetwork {
+                CommonUtils.showToastForInternetUnavailable()
+                
+            } else {
+                CommonUtils.showToastForDefaultError()
+            }
+        }
+    }
+    
     //    Api like Opportunity
     
     func likeOpportunityapi(oppr_id:Int,completion: @escaping(_ countLike: String)->Void){
@@ -676,6 +805,67 @@ extension ViewAllSavedVC{
         }
         
     }
+    
+    //    Markinterestedapi
+    
+    func markinterestedapi(oppr_id:Int){
+        CommonUtils.showHud(show: true)
+        
+        if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
+            let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+            let septoken = endToken.components(separatedBy: " ")
+            if septoken[0] != "Bearer"{
+                let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
+                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
+            }
+        }
+        
+        let params:[String : Any] = [
+            "user_id":Int.getInt(UserData.shared.id),
+            "opr_id":oppr_id
+        ]
+        
+        debugPrint("user_id......",Int.getInt(UserData.shared.id))
+        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kmarkinterested, requestMethod: .POST,requestParameters:params, withProgressHUD: false)
+        {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
+            
+            CommonUtils.showHudWithNoInteraction(show: false)
+            
+            if errorType == .requestSuccess {
+                
+                let dictResult = kSharedInstance.getDictionary(result)
+                
+                switch Int.getInt(statusCode) {
+                case 200:
+                    
+                    if Int.getInt(dictResult["status"]) == 200{
+                        
+                        let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+                        let septoken = endToken.components(separatedBy: " ")
+                        if septoken[0] == "Bearer"{
+                            kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
+                        }
+                        
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    }
+                    
+                    else if  Int.getInt(dictResult["status"]) == 201{
+                        //  CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    }
+                    
+                default:
+                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                }
+            } else if errorType == .noNetwork {
+                CommonUtils.showToastForInternetUnavailable()
+                
+            } else {
+                CommonUtils.showToastForDefaultError()
+            }
+        }
+    }
+    
     //    Api comment opportunity
     
     func commentoppoertunityapi(oppr_id:Int,completion: @escaping(_ viewH : [user_comment])->Void){
@@ -883,7 +1073,6 @@ extension ViewAllSavedVC{
     func opportunitydetailsapi(oppr_id:Int){
         CommonUtils.showHud(show: true)
         
-        
         if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
             let endToken = kSharedUserDefaults.getLoggedInAccessToken()
             let septoken = endToken.components(separatedBy: " ")
@@ -896,7 +1085,6 @@ extension ViewAllSavedVC{
         let params:[String : Any] = [
             "oppr_id":oppr_id,
             "user_id":UserData.shared.id
-            
         ]
         
         debugPrint("oppr_id...===...",oppr_id)
@@ -983,7 +1171,7 @@ extension ViewAllSavedVC{
                             vc.imgarray  = self?.UserTimeLineOppdetails?.oppimage ?? []
                             vc.docarray = self?.UserTimeLineOppdetails?.oppdocument ?? []
                             debugPrint("imgaraay=-=-=-==-=", vc.imgarray)
-                            
+
                         }
                         
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
@@ -1003,7 +1191,6 @@ extension ViewAllSavedVC{
             } else {
                 CommonUtils.showToastForDefaultError()
             }
-            
         }
     }
 }

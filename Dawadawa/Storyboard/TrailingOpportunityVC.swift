@@ -338,8 +338,8 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
             self.isSelectState = true
             
         }
-        
     }
+    
     @IBAction func btnLocalityTapped(_ sender: UIButton) {
         kSharedAppDelegate?.dropDown(dataSource: getlocalitylist.map{String.getString($0.local_name)}, text: btnLocality){
             (index,item) in
@@ -360,8 +360,6 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
             debugPrint("looking idddddd.....",self.lookingforid = id)
             self.getlookingforapi(id: self.lookingforid ?? 0)
             self.isSelectLookingFor = true
-            
-            
         }
     }
     
@@ -373,7 +371,6 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
             self.Validation()
         }
     }
-    
     
     @IBAction func btnBasicTapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
@@ -486,18 +483,10 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
             self.showSimpleAlert(message: "Please Select looking For")
             return
         }
-        else if self.isSelectopp_planBasic == false && self.isSelectopp_planPremium == false && self.isSelectopp_planFeatured == false{
-            self.showSimpleAlert(message: "Please Select Opportunity Plan")
+        else if self.isSelectopp_planPremium == true && self.isSelectimage == false && self.imagearr.count == 0{
+            self.showSimpleAlert(message: "Please add at least one opportunity photo")
             return
         }
-        else if self.isSelectopp_planPremium == true{
-            if self.isSelectimage == false && self.imagearr.count == 0{
-                self.showSimpleAlert(message: "Please add at least one opportunity photo")
-                return
-            }
-            return
-        }
-        
         self.view.endEditing(true)
         self.createopportunityapi()
     }

@@ -39,8 +39,6 @@ class HomeVC: UIViewController{
             print("Guest User")
             if cameFrom != "FilterData"{
                 self.guestgetallopportunity()
-                self.lblUserName.text = "Guest User"
-                self.ImgUser.image = UIImage(named: "baba")
             }
         }
         else{
@@ -58,10 +56,9 @@ class HomeVC: UIViewController{
             self.fetchdata()
             self.getcountnotification()
         }
-//        if UserData.shared.isskiplogin == true{
-//            self.lblUserName.text = "Guest User"
-//            self.ImgUser.image = UIImage(named: "")
-//        }
+        if UserData.shared.isskiplogin == true{
+            self.guestgetallopportunity()
+        }
     }
     
     private func setup(){
@@ -744,7 +741,6 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
         default:
             return 0
         }
-        
     }
     
     @objc func buttonTappedFilter(_ sender:UIButton){
@@ -961,7 +957,6 @@ extension HomeVC{
             }
         }
         
-        
         let params:[String : Any] = [
             "user_id":Int.getInt(UserData.shared.id),
             "opr_id":oppr_id,
@@ -1015,16 +1010,13 @@ extension HomeVC{
             } else {
                 CommonUtils.showToastForDefaultError()
             }
-            
         }
     }
-    
     
     //    Save Opportunity Api
     
     func saveoppoertunityapi(oppr_id:Int){
         CommonUtils.showHud(show: true)
-        
         
         if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
             let endToken = kSharedUserDefaults.getLoggedInAccessToken()
@@ -1034,7 +1026,6 @@ extension HomeVC{
                 kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
             }
         }
-        
         
         let params:[String : Any] = [
             "user_id":Int.getInt(UserData.shared.id),
@@ -1080,14 +1071,12 @@ extension HomeVC{
             } else {
                 CommonUtils.showToastForDefaultError()
             }
-            
         }
     }
     //    Unsaved Opportunity
     
     func unsaveoppoertunityapi(oppr_id:Int){
         CommonUtils.showHud(show: true)
-        
         
         if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
             let endToken = kSharedUserDefaults.getLoggedInAccessToken()
@@ -1143,7 +1132,6 @@ extension HomeVC{
             } else {
                 CommonUtils.showToastForDefaultError()
             }
-            
         }
     }
     
@@ -1225,16 +1213,16 @@ extension HomeVC{
                         userTimeLine = Opportunity.map{SocialPostData(data: kSharedInstance.getDictionary($0))}
                         print("Dataallpost=\(userTimeLine)")
                         
-                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //  CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         self.tblViewViewPost.reloadData()
                         self.lblUserName.text = String.getString("Guest User")
+                        debugPrint("self.lblUserName.text===",self.lblUserName.text)
                         self.ImgUser.image = UIImage(named: "Boss")
                         
                     }
                     else if  Int.getInt(dictResult["status"]) == 400{
-                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //  CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
-                    
                     
                 default:
                     CommonUtils.showError(.error, String.getString(dictResult["message"]))

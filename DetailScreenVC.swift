@@ -58,7 +58,7 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
         case 0:
             let cell = self.tblviewDetail.dequeueReusableCell(withIdentifier: "DetailsTableViewCell") as! DetailsTableViewCell
             
-            cell.viewLine.isHidden = true
+//            cell.viewLine.isHidden = true
             cell.SocialPostCollectionView.tag = indexPath.section
             cell.DocumentCollectionView.tag = indexPath.section
             
