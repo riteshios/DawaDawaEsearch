@@ -4,14 +4,19 @@
 
 import UIKit
 
+//protocol MyDataSendingDelegateProtocol {
+//    func sendData(myData: String)
+//}
+
 class SubCommentTableViewCell: UITableViewCell {
 
     @IBOutlet weak var imgSubCommentUser: UIImageView!
     @IBOutlet weak var lblSubComment: UILabel!
     
-    var callback:((String)->())?
+    @IBOutlet weak var buttonShowDetails: UIButton!
     
-   
+    
+    var callBack:(()->())?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -22,10 +27,10 @@ class SubCommentTableViewCell: UITableViewCell {
 
     }
     
-    @IBAction func btniconSubCommentTapped(_ sender: UIButton){
-      
-        self.callback?("IconSubComment")
+    @IBAction func buttonTappedShowDetails(_ sender: UIButton) {
+        self.callBack?()
     }
+    
 }
 
 extension UILabel {
@@ -36,4 +41,3 @@ extension UILabel {
         return Int(ceil(textHeight / lineHeight))
     }
 }
-

@@ -1167,9 +1167,7 @@ extension RockPitOpportunityVC{
                             
                             vc.callbackamount = { Price in
                                 self.amount = Price
-                                
                                 print("amount=-=-\(self.amount)")
-                                
                             }
                             
                             vc.callback = { txt in
@@ -1183,10 +1181,8 @@ extension RockPitOpportunityVC{
                                     }
                                 }
                             }
-                            
                             self.present(vc, animated: false)
                         }
-                        
                     }
                     else if  Int.getInt(dictResult["status"]) == 400{
                         // CommonUtils.showError(.info, String.getString(dictResult["message"]))

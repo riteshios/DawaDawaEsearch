@@ -1,9 +1,6 @@
-//
 //  LogOutVC.swift
 //  Dawadawa
-//
 //  Created by Ritesh Gupta on 23/06/22.
-//
 
 import UIKit
 
@@ -14,16 +11,15 @@ class LogOutVC: UIViewController {
     @IBOutlet weak var lblCancel: UILabel!
     @IBOutlet weak var lblSecondLogout: UILabel!
     
-    
     @IBOutlet weak var btnLogOut: UIButton!
     var callbacklogout:((String)->())?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.languagesetup()
-
-      
     }
+    
+//    MARK: - @IBAction
     
     @IBAction func btnCancelTapped(_ sender: UIButton) {
 //        self.callbacklogout?("Cancel")
@@ -43,6 +39,7 @@ class LogOutVC: UIViewController {
             self.callbacklogout?("Logout")
     }
 }
+// MARK: - Localisation
 
 extension LogOutVC{
     func languagesetup(){
@@ -66,3 +63,4 @@ extension LogOutVC{
 //        print("\(kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: ""))")
 //    }
 //}
+ 

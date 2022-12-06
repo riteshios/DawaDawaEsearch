@@ -139,6 +139,7 @@
 "User Profile" = "ملف تعريفي للمستخدم";
 "About" = "حول";
 "Rate user" = "قيم المستخدم";
+"Chat with user" = "الدردشة مع المستخدم";
 
 // MARK: - HomeSocialMoreSelfVC
 
@@ -314,3 +315,73 @@
 "Quit" = "يترك";
 "Do you really want to quit now?" = "هل تريد حقًا الإقلاع عن التدخين الآن؟";
 "Cancel" = "يلغي";
+
+// MARK: - ProileSocialMoreVC
+
+"Copy link" = "انسخ الرابط";
+"Update" = "تحديث";
+"Delete" = "حذف";
+"Close" = "قريب";
+
+// MARK: - ViewAllSavedVC
+
+"Saved" = "أنقذ";
+
+// MARK: - SaveOpportunityMoreVC
+
+"Chat with user" = "الدردشة مع المستخدم";
+"Copy link" = "انسخ الرابط";
+"Flag post" = "نشر العلم";
+"Report user" = "أبلغ عن مستخدم";
+"Removed from saved" = "تمت إزالته من المحفوظة";
+
+// MARK: - DetailScreenVC
+
+"Detail Screen" = "شاشة التفاصيل";
+
+// MARK: - SavedOpportunitiesVC
+
+"Saved/Interested opportunities" = "الفرص المحفوظة / المهتمة";
+"Saved" = "أنقذ";
+"Interested" = "يستفد";
+"View All" = "مشاهدة الكل";
+
+// MARK: - MysubscriptionVC
+
+"Subscription" = "الاشتراك";
+"No transaction history" = "لا يوجد سجل معاملات";
+"There is no transactions to show. Your all transactions will be shown here" = "لا توجد معاملات لإظهارها. سيتم عرض جميع معاملاتك هنا";
+"Buy Plans" = "خطط الشراء";
+"Choose Plan" = "اختر خطة";
+
+// MARK: - NotificationsVC
+
+"Notifications" = "إشعارات";
+"Mark all as read" = "اشر عليها بانها قرات";
+
+// MARK: - PaymentForFeatureandPremiumPopUPVC
+
+"Payment" = "دفع";
+"Payment: - $" = "الدفع: - دولار";
+"Cancel" = "يلغي";
+"Proceed To Pay" = "المضي قدما في الدفع";
+
+// MARK: - PaymentforFeaturePremiumVC
+
+"Pay" = "يدفع";
+
+// MARK: - DeleteChatPopUPVC
+
+"Delete Chat" = "حذف الدردشة";
+"Do you really want to delete this Chat?" = "هل تريد حقًا حذف هذه الدردشة؟";
+"Cancel" = "يلغي";
+"Delete" = "حذف";
+
+// MARK: - MyChatVC
+
+"My Chat" = "الدردشة الخاصة بي";
+"Search Names" = "أسماء البحث";
+
+// MARK: - ViewAllInterestedVC
+
+"Interested" = "يستفد";

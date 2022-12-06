@@ -110,19 +110,23 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
             if String.getString(obj.is_user_like) == "1"{
                 cell.imglike.image = UIImage(named: "dil")
                 cell.lbllike.text = "Liked"
+                cell.lbllike.textColor = .red
                 
             }
             else{
                 cell.imglike.image = UIImage(named: "unlike")
                 cell.lbllike.text = "Like"
+                cell.lbllike.textColor = UIColor(hexString: "#A6A6A6")
             }
             if String.getString(obj.is_saved) == "1"{
                 cell.imgsave.image = UIImage(named: "saveopr")
                 cell.lblSave.text = "Saved"
+                cell.lblSave.textColor = UIColor(hexString: "#1572A1")
             }
             else{
                 cell.imgsave.image = UIImage(named: "save-3")
                 cell.lblSave.text = "Save"
+                cell.lblSave.textColor = UIColor(hexString: "#A6A6A6")
             }
             
             if String.getString(obj.is_flag) == "1"{
@@ -194,6 +198,7 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
                     }
                     cell.imglike.image = UIImage(named: "dil")
                     cell.lbllike.text = "Liked"
+                    cell.lbllike.textColor = .red
                     self.getallpremium()
                     
                 }
@@ -220,12 +225,14 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
                             self.saveoppoertunityapi(oppr_id: oppid)
                             cell.imgsave.image = UIImage(named: "saveopr")
                             cell.lblSave.text = "Saved"
+                            cell.lblSave.textColor = UIColor(hexString: "#1572A1")
                         }
                         else{
                             let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
                             self.unsaveoppoertunityapi(oppr_id: oppid)
                             cell.imgsave.image = UIImage(named: "save-3")
                             cell.lblSave.text = "Save"
+                            cell.lblSave.textColor = UIColor(hexString: "#A6A6A6")
                         }
                         
                     }
@@ -234,6 +241,7 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
                         self.unsaveoppoertunityapi(oppr_id: oppid)
                         cell.imgsave.image = UIImage(named: "save-3")
                         cell.lblSave.text = "Save"
+                        cell.lblSave.textColor = UIColor(hexString: "#A6A6A6")
                     }
                 }
                 

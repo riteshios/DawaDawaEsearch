@@ -154,7 +154,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     func moveToLoginScreen(){
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyBoard.instantiateViewController(identifier:"LoginVC") as! LoginVC
+        let vc = storyBoard.instantiateViewController(identifier:"WelcomeScreenVC") as! WelcomeScreenVC
         let navigationController = UINavigationController(rootViewController: vc)
         navigationController.setNavigationBarHidden(true, animated: true)
         UIApplication.shared.windows.first?.rootViewController = navigationController

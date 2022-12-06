@@ -1,14 +1,14 @@
-//
 //  ViewAllInterestedVC.swift
 //  Dawadawa
 //  Created by Ritesh Gupta on 17/11/22.
-
 
 import UIKit
 
 class ViewAllInterestedVC: UIViewController {
 
     @IBOutlet weak var TblViewInterestedOpp: UITableView!
+    @IBOutlet weak var lblInterested: UILabel!
+    
     var imgUrl = ""
     var docUrl = ""
     var userTimeLine = [SocialPostData]()
@@ -16,10 +16,12 @@ class ViewAllInterestedVC: UIViewController {
     var comment = [user_comment]()
     var txtcomment = " "
     
+//    MARK: - Life Cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.setup()
+        lblInterested.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Interested", comment: "")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -31,13 +33,15 @@ class ViewAllInterestedVC: UIViewController {
         TblViewInterestedOpp.register(UINib(nibName: "SocialPostTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "SocialPostTableViewCell")
     }
     
+//    MARK: - @IBAction
+    
     @IBAction func btnBackTapped(_ sender: UIButton) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: SavedOpportunitiesVC.getStoryboardID()) as! SavedOpportunitiesVC
         self.navigationController?.pushViewController(vc, animated: false)
         //        self.navigationController?.popViewController(animated: true)
     }
 }
-
+// MARK: - TableView Delegate
 extension ViewAllInterestedVC:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return userTimeLine.count
@@ -76,20 +80,24 @@ extension ViewAllInterestedVC:UITableViewDelegate,UITableViewDataSource{
         if String.getString(obj.is_user_like) == "1"{
             cell.imglike.image = UIImage(named: "dil")
             cell.lbllike.text = "Liked"
+            cell.lbllike.textColor = .red
             
         }
         else{
             cell.imglike.image = UIImage(named: "unlike")
             cell.lbllike.text = "Like"
+            cell.lbllike.textColor = UIColor(hexString: "#A6A6A6")
         }
         
         if String.getString(obj.is_saved) == "1"{
             cell.imgsave.image = UIImage(named: "saveopr")
             cell.lblSave.text = "Saved"
+            cell.lblSave.textColor = UIColor(hexString: "#1572A1")
         }
         else{
             cell.imgsave.image = UIImage(named: "save-3")
             cell.lblSave.text = "Save"
+            cell.lblSave.textColor = UIColor(hexString: "#A6A6A6")
         }
         
         if String.getString(obj.is_flag) == "1"{
@@ -162,6 +170,7 @@ extension ViewAllInterestedVC:UITableViewDelegate,UITableViewDataSource{
                         }
                         cell.imglike.image = UIImage(named: "dil")
                         cell.lbllike.text = "Liked"
+                        cell.lbllike.textColor = .red
                         self.getallinterestedapi()
                         
                     }
@@ -191,12 +200,14 @@ extension ViewAllInterestedVC:UITableViewDelegate,UITableViewDataSource{
                         self.saveoppoertunityapi(oppr_id: oppid)
                         cell.imgsave.image = UIImage(named: "saveopr")
                         cell.lblSave.text = "Saved"
+                        cell.lblSave.textColor = UIColor(hexString: "#1572A1")
                     }
                     else{
                         let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
                         self.unsaveoppoertunityapi(oppr_id: oppid)
                         cell.imgsave.image = UIImage(named: "save-3")
                         cell.lblSave.text = "Save"
+                        cell.lblSave.textColor = UIColor(hexString: "#A6A6A6")
                     }
                     
                 }
@@ -205,6 +216,7 @@ extension ViewAllInterestedVC:UITableViewDelegate,UITableViewDataSource{
                     self.unsaveoppoertunityapi(oppr_id: oppid)
                     cell.imgsave.image = UIImage(named: "save-3")
                     cell.lblSave.text = "Save"
+                    cell.lblSave.textColor = UIColor(hexString: "#A6A6A6")
                 }
             }
             
@@ -522,10 +534,9 @@ extension ViewAllInterestedVC:UITableViewDelegate,UITableViewDataSource{
     }
 }
 
+// MARK: -    API CALL
+
 extension ViewAllInterestedVC{
-    
-    // MARK: -    API CALL
-    
     //    MarkInterested List
     
     func getallinterestedapi(){
@@ -902,7 +913,7 @@ extension ViewAllInterestedVC{
                         }
                         
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                        //                        self?.TblViewSavedOpp.reloadData()
+                        //    self?.TblViewSavedOpp.reloadData()
                     }
                     
                     else if  Int.getInt(dictResult["responsecode"]) == 400{
@@ -1115,5 +1126,4 @@ extension ViewAllInterestedVC{
             
         }
     }
-    
 }

@@ -138,6 +138,7 @@
 "User Profile" = "User Profile";
 "About" = "About";
 "Rate user" = "Rate user";
+"Chat with user" = "Chat with user";
 
 // MARK: - HomeSocialMoreSelfVC
 
@@ -315,22 +316,71 @@
 "Cancel" = "Cancel";
 "Quit" = "Quit";
 
-// MARK: -
+// MARK: - ProileSocialMoreVC
+"Copy link" = "Copy link";
+"Update" = "Update";
+"Delete" = "Delete";
+"Close" = "Close";
 
+// MARK: - ViewAllSavedVC
 
+"Saved" = "Saved";
 
+// MARK: - SaveOpportunityMoreVC
 
+"Chat with user" = "Chat with user";
+"Copy link" = "Copy link";
+"Flag post" = "Flag post";
+"Report user" = "Report user";
+"Removed from saved" = "Removed from saved";
 
+// MARK: - DetailScreenVC
 
+"Detail Screen" = "Detail Screen";
 
+// MARK: - SavedOpportunitiesVC
 
+"Saved/Interested opportunities" = "Saved/Interested opportunities";
+"Saved" = "Saved";
+"Interested" = "Interested";
+"View All" = "View All";
 
+// MARK: - MysubscriptionVC
 
+"Subscription" = "Subscription";
+"No transaction history" = "No transaction history";
+"There is no transactions to show. Your all transactions will be shown here" = "There is no transactions to show. Your all transactions will be shown here";
+"Buy Plans" = "Buy Plans";
+"Choose Plan" = "Choose Plan";
 
+// MARK: - NotificationsVC
 
+"Notifications" = "Notifications";
+"Mark all as read" = "Mark all as read";
 
+// MARK: - PaymentForFeatureandPremiumPopUPVC
 
+"Payment" = "Payment";
+"Payment: - $" = "Payment: - $";
+"Cancel" = "Cancel";
+"Proceed To Pay" = "Proceed To Pay";
 
+// MARK: - PaymentforFeaturePremiumVC
 
+"Pay" = "Pay";
 
+// MARK: - DeleteChatPopUPVC
 
+"Delete Chat" = "Delete Chat";
+"Do you really want to delete this Chat?" = "Do you really want to delete this Chat?";
+"Cancel" = "Cancel";
+"Delete" = "Delete";
+
+// MARK: - MyChatVC
+
+"My Chat" = "My Chat";
+"Search Names" = "Search Names";
+
+// MARK: - ViewAllInterestedVC
+
+"Interested" = "Interested";

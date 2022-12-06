@@ -1,9 +1,6 @@
-//
 //  STTabbar.swift
 //  Pods-STTabbar_Example
-//
 //  Created by Shraddha Sojitra on 19/06/20.
-//
 
 import Foundation
 import UIKit
@@ -20,8 +17,7 @@ public final class STTabbar: UITabBar {
     @IBInspectable public var buttonImage = UIImage(named: "add-square")
     @IBInspectable public var buttonTitle: String?
    
-    
-    @IBInspectable public var tabbarColor: UIColor = UIColor.lightGray
+    @IBInspectable public var tabbarColor: UIColor = UIColor.init(red: 21, green: 114, blue: 161, alpha: 1)
     @IBInspectable public var unselectedItemColor: UIColor = UIColor.white
 
     private var shapeLayer: CALayer?

@@ -437,7 +437,6 @@ extension CreateAccountVC {
                         UserData.shared.saveData(data: data, token:  String.getString(dictResult[kLoggedInAccessToken]))
                         
                         kSharedAppDelegate?.makeRootViewController()
-                        
                     }
                     else if  Int.getInt(dictResult["status"]) == 400{
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))

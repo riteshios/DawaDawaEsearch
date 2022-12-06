@@ -6,6 +6,9 @@ import UIKit
 
 class MysubscriptionVC: UIViewController {
     
+    
+    @IBOutlet weak var lblHeading: UILabel!
+    
     @IBOutlet weak var tblviewTransaction: UITableView!
     @IBOutlet weak var imgPlan: UIImageView!
     @IBOutlet weak var lblPlan: UILabel!
@@ -20,14 +23,14 @@ class MysubscriptionVC: UIViewController {
     @IBOutlet weak var lblNoTransaction: UILabel!
     @IBOutlet weak var lblSubNoTransaction: UILabel!
     
+    @IBOutlet weak var btnBuyPlans: UIButton!
     @IBOutlet weak var heightViewPlanshow: NSLayoutConstraint!
     var activeplan:active_plan?
     var transaction = [trans_history]()
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
-        
+        self.setuplanguage()
         self.imgPlan.isHidden = true
         self.lblDate.isHidden = true
         self.getactiveplan()
@@ -76,13 +79,10 @@ extension MysubscriptionVC:UITableViewDelegate,UITableViewDataSource{
         
         return cell
     }
-    
 }
 
 extension MysubscriptionVC{
-    
     //    API
-    
     //    Active plan api
     
     func getactiveplan(){
@@ -128,7 +128,7 @@ extension MysubscriptionVC{
                         self.imgNoTransaction.isHidden = true
                         self.lblNoTransaction.isHidden = true
                         self.lblSubNoTransaction.isHidden = true
-                        self.lblChoosePlan.text = "Change plan"
+                        self.lblChoosePlan.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Choose Plan", comment: "")
                         
                         if UserData.shared.user_type == "0"{
                             self.lblDate.text = "(expire on \(String.getString(self.activeplan?.end_date)))"
@@ -180,9 +180,7 @@ extension MysubscriptionVC{
                 CommonUtils.showToastForDefaultError()
             }
         }
-        
     }
-    
     //    Get transaction_History api
     
     func gettransaction_historyapi(){
@@ -239,5 +237,13 @@ extension MysubscriptionVC{
                 CommonUtils.showToastForDefaultError()
             }
         }
+    }
+}
+extension MysubscriptionVC{
+    func setuplanguage(){
+        lblHeading.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Subscription", comment: "")
+        lblNoTransaction.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "No transaction history", comment: "")
+        lblSubNoTransaction.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "There is no transactions to show. Your all transactions will be shown here", comment: "")
+        btnBuyPlans.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "Buy Plans", comment: ""), for: .normal)
     }
 }

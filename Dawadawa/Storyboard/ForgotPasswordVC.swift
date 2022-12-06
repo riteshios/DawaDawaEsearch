@@ -1,16 +1,13 @@
-//
 //  ForgotPasswordVC.swift
 //  Dawadawa
-//
 //  Created by Ritesh Gupta on 12/06/22.
-//
 
 import UIKit
 import SKFloatingTextField
 
 class ForgotPasswordVC: UIViewController {
     
-//    MARK: - Properties
+    //    MARK: - Properties
     @IBOutlet weak var viewMain: UIView!
     @IBOutlet weak var viewButtonSendCode: UIView!
     @IBOutlet weak var btnSendEmail_Phone: UIButton!
@@ -23,16 +20,13 @@ class ForgotPasswordVC: UIViewController {
     
     @IBOutlet weak var txtFieldPhone_Email: SKFloatingTextField!
     
-    
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setuplanguage()
         self.setup()
-       
+        
     }
-// MARK: - Life Cyclye
+    // MARK: - Life Cyclye
     func setup(){
         viewMain.clipsToBounds = true
         viewMain.layer.cornerRadius = 25
@@ -47,7 +41,7 @@ class ForgotPasswordVC: UIViewController {
         lblSendEmail_Phone.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Send on email address", comment: "")
     }
     
-// MARK: - @IBAction
+    // MARK: - @IBAction
     
     @IBAction func btnBackTapped(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
@@ -61,7 +55,7 @@ class ForgotPasswordVC: UIViewController {
             self.setTextFieldUI(textField: txtFieldPhone_Email, place: "Email address", floatingText: "Email address")
             txtFieldPhone_Email.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Email address", comment: "")
             txtFieldPhone_Email.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Email address", comment: "")
-           
+            
         }
         else{
             self.setTextFieldUI(textField: txtFieldPhone_Email, place: "Phone number", floatingText: "Phone number")
@@ -69,7 +63,7 @@ class ForgotPasswordVC: UIViewController {
             lblSendEmail_Phone.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Send on email address", comment: "")
             txtFieldPhone_Email.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Phone number", comment: "")
             txtFieldPhone_Email.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Phone number", comment: "")
-           
+            
         }
     }
     
@@ -79,17 +73,16 @@ class ForgotPasswordVC: UIViewController {
         {
             self.fieldvalidationPhoneNumber()
         }
-       
+        
         else if  lblSendEmail_Phone.text == LocalizationSystem.sharedInstance.localizedStringForKey(key: "Send on phone number", comment: "")
                     
         {
             self.fieldvalidationEmailAdress()
         }
-       
     }
     
     
-//  MARK: - Validation
+    //  MARK: - Validation
     func fieldvalidationPhoneNumber(){
         if String.getString(self.txtFieldPhone_Email.text).isEmpty
         {
@@ -117,8 +110,6 @@ class ForgotPasswordVC: UIViewController {
         self.forgotpasswordapi()
     }
 }
-
-
 
 extension ForgotPasswordVC{
     
@@ -151,7 +142,6 @@ extension ForgotPasswordVC : SKFlaotingTextFieldDelegate {
     func textFieldDidBeginEditing(textField: SKFloatingTextField) {
         print("begin editing")
     }
-    
 }
 
 extension ForgotPasswordVC{
@@ -159,15 +149,13 @@ extension ForgotPasswordVC{
         
         CommonUtils.showHud(show: true)
         let accessToken = kSharedUserDefaults.getLoggedInAccessToken()
-       
-
+        
         let params:[String : Any] = [
             "email":String.getString(self.txtFieldPhone_Email.text),
         ]
-
         
-        TANetworkManager.sharedInstance.requestApi(withServiceName:ServiceName.kforgotpassword, requestMethod: .POST,
-                                                   requestParameters:params, withProgressHUD: false)
+        TANetworkManager.sharedInstance.requestApi(withServiceName:ServiceName.kforgotpassword, requestMethod: .POST,requestParameters:params, withProgressHUD: false)
+        
         {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
             
             CommonUtils.showHudWithNoInteraction(show: false)
@@ -175,7 +163,7 @@ extension ForgotPasswordVC{
             if errorType == .requestSuccess {
                 
                 let dictResult = kSharedInstance.getDictionary(result)
-               
+                
                 switch Int.getInt(statusCode) {
                 case 200:
                     if Int.getInt(dictResult["status"]) == 200{
@@ -229,7 +217,6 @@ extension ForgotPasswordVC{
         }
     }
 }
-
 
 extension ForgotPasswordVC{
     func setuplanguage(){

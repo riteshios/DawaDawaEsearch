@@ -1,9 +1,6 @@
-//
 //  NotificationDetail.swift
 //  Dawadawa
-//
 //  Created by Ritesh Gupta on 11/10/22.
-
 
 import UIKit
 
@@ -16,21 +13,25 @@ class NotificationDetail: UIViewController {
     var heading = ""
     var subheading = ""
     
+//    MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.lblHeading.text = self.heading
-        self.lblSubheading.text = self.subheading
+        lblHeading.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: self.heading, comment: "")
+        lblSubheading.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: self.subheading, comment: "")
         self.readnotificationapi()
     }
+    
+//     MARK: - @IBAction
     
     @IBAction func btnBackTapped(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
     }
     
-
 }
+
+// MARK: - API call
 
 extension NotificationDetail{
     

@@ -1,9 +1,6 @@
-//
 //  PaymentForFeatureandPremiumPopUPVC.swift
 //  Dawadawa
-//
-//  Created by Alekh on 19/10/22.
-//
+//  Created by Ritesh Gupta on 19/10/22.
 
 import UIKit
 
@@ -14,15 +11,21 @@ class PaymentForFeatureandPremiumPopUPVC: UIViewController {
     var plan = 0
     var planamount:plan_amount?
     
-    
-    
+    @IBOutlet weak var lblHeading: UILabel!
     @IBOutlet weak var lblAmount: UILabel!
+    @IBOutlet weak var lblPrice: UILabel!
+    @IBOutlet weak var lblCancel: UILabel!
+    @IBOutlet weak var lblProceedToPay: UILabel!
+    
+//    MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.setuplanguage()
         self.getplan_amountyapi()
     }
+    
+//     MARK: - @IBAction
     
     @IBAction func btnCancelTapped(_ sender: UIButton) {
         self.dismiss(animated: true)
@@ -33,6 +36,8 @@ class PaymentForFeatureandPremiumPopUPVC: UIViewController {
     }
     
 }
+
+// MARK: - API call
 
 extension PaymentForFeatureandPremiumPopUPVC {
     
@@ -70,11 +75,9 @@ extension PaymentForFeatureandPremiumPopUPVC {
                         self.planamount = plan_amount(data: data)
                         print("Dataplanamount=\(self.planamount)")
 
-                        self.lblAmount.text = String.getString("Payment: - $\(Int((self.planamount?.amount) ?? 0))")
-                      
+//                        self.lblAmount.text = String.getString("Payment: - $\(Int((self.planamount?.amount) ?? 0))")
+                        self.lblPrice.text = String.getString(Int(self.planamount?.amount ?? 0))
                         self.callbackamount?(Int((self.planamount?.amount ?? 0)))
-                        
-                        
                     }
 
                     else if  Int.getInt(dictResult["responsecode"]) == 400{
@@ -92,5 +95,13 @@ extension PaymentForFeatureandPremiumPopUPVC {
             }
         }
     }
-    
+}
+
+extension PaymentForFeatureandPremiumPopUPVC{
+    func setuplanguage(){
+        lblHeading.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Payment", comment: "")
+        lblAmount.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Payment: - $", comment: "")
+        lblCancel.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Cancel", comment: "")
+        lblProceedToPay.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Proceed To Pay", comment: "")
+    }
 }

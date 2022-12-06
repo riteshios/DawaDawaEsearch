@@ -1,15 +1,12 @@
-//
 //  WebViewVC.swift
 //  Dawadawa
-//
 //  Created by Ritesh Gupta on 04/07/22.
-//
 
 import UIKit
 import WebKit
 
 class WebViewVC: UIViewController {
-
+    
     @IBOutlet weak var lblheading: UILabel!
     @IBOutlet weak var webkit: WKWebView!
     var strurl = ""

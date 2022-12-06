@@ -1,7 +1,5 @@
-//
 //  PaymentforFeaturePremiumVC.swift
 //  Dawadawa
-//
 //  Created by Ritesh Gupta on 19/10/22.
 
 import UIKit
@@ -11,6 +9,8 @@ import Alamofire
 
 class PaymentforFeaturePremiumVC: UIViewController {
     
+    @IBOutlet weak var lblPay: UILabel!
+    @IBOutlet weak var btnPay: UIButton!
     @IBOutlet weak var viewPay: UIView!
     @IBOutlet weak var txtfieldcardNumber: STPPaymentCardTextField!
     
@@ -18,15 +18,11 @@ class PaymentforFeaturePremiumVC: UIViewController {
     var price = 0
     var opptype = 0
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.getSecretKey()
-        
         self.viewPay.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
         StripeAPI.defaultPublishableKey = "pk_test_51LUU9lSEPPSFgjen2ZegQAsLCVxgSmxxIs6AXPH8bo2kUidir4DuZomtqfyZRbce9AsbJzmNaicXAuMZZRKMbn5Q00vLc7e5Mv"
-        
     }
     
     //    APi call
@@ -51,39 +47,26 @@ class PaymentforFeaturePremiumVC: UIViewController {
     
     @IBAction func btnPayTapped(_ sender: UIButton) {
         let cardParams = txtfieldcardNumber.cardParams
-        
         let paymentMethodParams = STPPaymentMethodParams(card: cardParams, billingDetails: nil, metadata: nil)
-        
         let paymentIntentParams = STPPaymentIntentParams(clientSecret: paymentIntentClientSecret)
-        
         paymentIntentParams.paymentMethodParams = paymentMethodParams
-        
         
         
         // Submit the payment
         
         let paymentHandler = STPPaymentHandler.shared()
-        
         paymentHandler.confirmPayment(paymentIntentParams, with: self) { (status, paymentIntent, error) in
-            
             switch (status) {
-                
             case .failed:
-                
                 print("Payment failed")
-                
                 print(error)
-                
                 break
                 
             case .canceled:
-                
                 print("Payment canceled")
-                
                 break
                 
             case .succeeded:
-                
                 print("Payment succeeded")
                 debugPrint(paymentIntent?.amount)
                 debugPrint(paymentIntent?.description)
@@ -92,15 +75,10 @@ class PaymentforFeaturePremiumVC: UIViewController {
                 self.storepaymentapi(message: paymentIntent!)
                 
                 break
-                
             @unknown default:
-                
                 fatalError()
-                
                 break
-                
             }
-            
         }
     }
 }
@@ -253,5 +231,12 @@ extension PaymentforFeaturePremiumVC{
                 CommonUtils.showToastForDefaultError()
             }
         }
+    }
+}
+
+extension PaymentforFeaturePremiumVC{
+    func setuplanguage(){
+        lblPay.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Pay", comment: "")
+        btnPay.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "Pay", comment: ""), for: .normal)
     }
 }

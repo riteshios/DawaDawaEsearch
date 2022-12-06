@@ -1,9 +1,6 @@
-//
 //  TabBarVC.swift
 //  Dawadawa
-//
 //  Created by Ritesh Gupta on 20/06/22.
-//
 
 import UIKit
 import STTabbar
@@ -29,14 +26,8 @@ class TabBarVC: UITabBarController {
                         let vc = self.storyboard!.instantiateViewController(withIdentifier: SelectCategoryVC.getStoryboardID()) as! SelectCategoryVC
                         self.navigationController?.pushViewController(vc, animated: true)
                     }
-                    
                 }
             }
         }
     }
-    
-    
-    
-    
-    
 }

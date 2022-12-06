@@ -1221,6 +1221,9 @@
                             <userDefinedRuntimeAttribute type="color" keyPath="unselectedItemColor">
                                 <color key="value" red="0.65098039215686276" green="0.65098039215686276" blue="0.65098039215686276" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="selectedItemColor">
+                                <color key="value" red="0.08235294118" green="0.44705882349999998" blue="0.63137254899999995" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </tabBar>
                     <connections>
@@ -6737,7 +6740,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sLF-Hh-MMO">
                                         <rect key="frame" x="141" y="33" width="100" height="100"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="warning-2" translatesAutoresizingMaskIntoConstraints="NO" id="bVH-8n-eep">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="close-square-1" translatesAutoresizingMaskIntoConstraints="NO" id="bVH-8n-eep">
                                                 <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                             </imageView>
                                         </subviews>
@@ -6879,6 +6882,8 @@
                         <outlet property="lblQuit" destination="9pa-cP-otx" id="BoV-Wj-hnx"/>
                         <outlet property="lblquit" destination="TWR-gv-eOv" id="Dh1-Um-axA"/>
                         <outlet property="lblsecondHeading" destination="ya5-Zl-BcV" id="yqc-to-aOq"/>
+                        <outlet property="viewCancel" destination="kmd-ta-Kfh" id="qlG-8w-KwJ"/>
+                        <outlet property="viewQuit" destination="n81-V0-ymf" id="3W2-Lx-cwK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CJg-3Z-2iq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -10200,6 +10205,11 @@
                     </view>
                     <connections>
                         <outlet property="Viewmain" destination="6TH-Ow-74a" id="XcN-qI-V5w"/>
+                        <outlet property="lblClose" destination="eNe-a8-PQb" id="00V-9A-XhI"/>
+                        <outlet property="lblCopylink" destination="xfC-us-hRl" id="8tn-0p-xwa"/>
+                        <outlet property="lblDelete" destination="oeN-Dw-bqP" id="Ud0-KX-4u3"/>
+                        <outlet property="lblUpdate" destination="FAH-Oi-dnD" id="h6C-HA-D3y"/>
+                        <outlet property="viewBG" destination="W5B-uR-K3H" id="M70-lO-BKW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8mR-Fg-6MD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -12438,6 +12448,7 @@ this opportunity?</string>
                     <size key="freeformSize" width="414" height="874"/>
                     <connections>
                         <outlet property="TblViewSavedOpp" destination="Mmg-UL-bau" id="e0M-RH-pNK"/>
+                        <outlet property="lblLabel" destination="1Qo-wy-gT8" id="0Sf-VW-RWk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oKk-H3-P6P" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -12724,6 +12735,11 @@ this opportunity?</string>
                     <size key="freeformSize" width="414" height="874"/>
                     <connections>
                         <outlet property="Viewmain" destination="rDe-hs-4tT" id="Z4X-vc-ukz"/>
+                        <outlet property="lblChatwithuser" destination="92l-KD-uaJ" id="b7f-Aa-Vo2"/>
+                        <outlet property="lblCopylink" destination="4P0-h5-gYH" id="LMn-Z1-rTG"/>
+                        <outlet property="lblFlagpost" destination="r30-Xg-0Nn" id="vRK-jv-FEv"/>
+                        <outlet property="lblRemovedfromsaved" destination="PKJ-HF-NYq" id="R98-VN-3lJ"/>
+                        <outlet property="lblReportuser" destination="HP0-v1-xvV" id="992-tu-iab"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="49b-gg-VIe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -12826,6 +12842,7 @@ this opportunity?</string>
                     </view>
                     <size key="freeformSize" width="414" height="874"/>
                     <connections>
+                        <outlet property="lblDetailScreen" destination="4XI-ad-KO9" id="1ky-tF-zen"/>
                         <outlet property="tblviewDetail" destination="euA-y9-J3o" id="jyT-cN-tTl"/>
                     </connections>
                 </viewController>
@@ -13149,6 +13166,7 @@ this opportunity?</string>
                                                             <constraint firstAttribute="width" constant="70" id="9zT-uq-KQl"/>
                                                             <constraint firstAttribute="height" constant="35" id="dSi-eC-PGP"/>
                                                         </constraints>
+                                                        <color key="tintColor" red="0.08235294118" green="0.44705882349999998" blue="0.63137254899999995" alpha="1" colorSpace="calibratedRGB"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" title="View All"/>
                                                         <connections>
@@ -13288,6 +13306,7 @@ this opportunity?</string>
                                                             <constraint firstAttribute="height" constant="35" id="VNW-EG-N0U"/>
                                                             <constraint firstAttribute="width" constant="70" id="mkm-ov-yRb"/>
                                                         </constraints>
+                                                        <color key="tintColor" red="0.08235294118" green="0.44705882349999998" blue="0.63137254899999995" alpha="1" colorSpace="calibratedRGB"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" title="View All"/>
                                                         <connections>
@@ -13449,10 +13468,12 @@ this opportunity?</string>
                     <connections>
                         <outlet property="CollectionViewInterested" destination="nDE-iz-YaX" id="IBj-2P-40E"/>
                         <outlet property="CollectionViewSave" destination="bOP-h5-stZ" id="zsE-Fd-cKh"/>
-                        <outlet property="btnViewAllInterested" destination="tLW-w0-97W" id="gNr-In-Zju"/>
+                        <outlet property="btnViewAllInterested" destination="tLW-w0-97W" id="dT9-vm-dYX"/>
                         <outlet property="btnViewAllSaved" destination="J5o-ex-Inh" id="BWb-ly-m6O"/>
                         <outlet property="imgNoOpp" destination="CiQ-FY-LGM" id="BWE-4O-WOU"/>
+                        <outlet property="lblInterested" destination="qOQ-6m-SLq" id="Qt4-A3-aFs"/>
                         <outlet property="lblSaved" destination="qA8-ZM-wxt" id="syY-gz-JyH"/>
+                        <outlet property="lblheading" destination="fhO-fe-vwM" id="JAB-1n-Hu5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J8m-DC-VxO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -13884,11 +13905,13 @@ this opportunity?</string>
                     <tabBarItem key="tabBarItem" tag="4" title="Profile" image="user-square" id="Hpd-Tn-upB"/>
                     <size key="freeformSize" width="414" height="900"/>
                     <connections>
+                        <outlet property="btnBuyPlans" destination="vtR-eP-Yd3" id="6um-Jy-QBQ"/>
                         <outlet property="heightViewPlanshow" destination="5MP-ag-Fbg" id="aRM-Kd-bDp"/>
                         <outlet property="imgNoTransaction" destination="AHs-Nh-x7e" id="c4A-F8-4Cp"/>
                         <outlet property="imgPlan" destination="1Rd-hI-u9c" id="Xu0-ae-Zxf"/>
                         <outlet property="lblChoosePlan" destination="9dK-k4-8jN" id="Gci-nD-Eos"/>
                         <outlet property="lblDate" destination="J5f-cf-BGb" id="wQg-8e-bjD"/>
+                        <outlet property="lblHeading" destination="Kw7-F9-Clq" id="guL-yI-yDa"/>
                         <outlet property="lblLeftbalance" destination="mOB-01-sdD" id="tCw-Se-DeD"/>
                         <outlet property="lblNoTransaction" destination="Uce-rD-HnH" id="3N2-A2-UwW"/>
                         <outlet property="lblNumberofcreate" destination="mhN-ON-9X8" id="I0j-gh-k8G"/>
@@ -14014,6 +14037,8 @@ this opportunity?</string>
                     </view>
                     <size key="freeformSize" width="414" height="874"/>
                     <connections>
+                        <outlet property="btnMarkAllRead" destination="o6r-s6-Iw5" id="dyA-cT-gXD"/>
+                        <outlet property="lblNotification" destination="bhq-EV-FYR" id="eTJ-X8-NdS"/>
                         <outlet property="tblviewNotification" destination="ksE-7u-oQu" id="rfs-x1-D8K"/>
                     </connections>
                 </viewController>
@@ -14599,9 +14624,18 @@ this opportunity?</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Payment: -   $" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cEq-Ol-oyy">
-                                        <rect key="frame" x="30" y="59.333333333333314" width="322" height="22"/>
+                                        <rect key="frame" x="30" y="59.333333333333314" width="114" height="22"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="114" id="fH5-4K-GdE"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="18"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YRx-Ke-Sup">
+                                        <rect key="frame" x="145" y="70.333333333333314" width="0.0" height="0.0"/>
+                                        <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="18"/>
+                                        <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="850-6h-beP">
@@ -14687,13 +14721,13 @@ this opportunity?</string>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstItem="cEq-Ol-oyy" firstAttribute="centerX" secondItem="VHe-dP-kJS" secondAttribute="centerX" id="5Pr-Q8-sFr"/>
                                     <constraint firstAttribute="height" constant="250" id="6WY-lV-iK0"/>
                                     <constraint firstItem="4FV-AC-s0G" firstAttribute="top" secondItem="VHe-dP-kJS" secondAttribute="top" constant="20" id="CmB-tg-2VS"/>
                                     <constraint firstItem="cEq-Ol-oyy" firstAttribute="top" secondItem="4FV-AC-s0G" secondAttribute="bottom" constant="10" id="HMo-nd-nFY"/>
                                     <constraint firstItem="cEq-Ol-oyy" firstAttribute="leading" secondItem="VHe-dP-kJS" secondAttribute="leading" constant="30" id="KSc-6P-7sh"/>
+                                    <constraint firstItem="YRx-Ke-Sup" firstAttribute="centerY" secondItem="cEq-Ol-oyy" secondAttribute="centerY" id="Kdd-3N-TNI"/>
                                     <constraint firstItem="850-6h-beP" firstAttribute="leading" secondItem="VHe-dP-kJS" secondAttribute="leading" constant="21" id="SRg-HP-U4e"/>
-                                    <constraint firstAttribute="trailing" secondItem="cEq-Ol-oyy" secondAttribute="trailing" constant="30" id="b5n-cg-933"/>
+                                    <constraint firstItem="YRx-Ke-Sup" firstAttribute="leading" secondItem="cEq-Ol-oyy" secondAttribute="trailing" constant="1" id="T6w-ec-Rbq"/>
                                     <constraint firstItem="4FV-AC-s0G" firstAttribute="centerX" secondItem="VHe-dP-kJS" secondAttribute="centerX" id="jrR-gQ-V1K"/>
                                     <constraint firstAttribute="bottom" secondItem="850-6h-beP" secondAttribute="bottom" constant="32" id="k7a-Wx-LtX"/>
                                     <constraint firstAttribute="trailing" secondItem="850-6h-beP" secondAttribute="trailing" constant="21" id="p6W-bs-10o"/>
@@ -14716,12 +14750,16 @@ this opportunity?</string>
                     </view>
                     <connections>
                         <outlet property="lblAmount" destination="cEq-Ol-oyy" id="yX4-Tr-wYT"/>
+                        <outlet property="lblCancel" destination="CLu-PS-vnL" id="suW-MV-Q6y"/>
+                        <outlet property="lblHeading" destination="4FV-AC-s0G" id="dHX-yK-5gt"/>
+                        <outlet property="lblPrice" destination="YRx-Ke-Sup" id="WRK-cD-Td4"/>
+                        <outlet property="lblProceedToPay" destination="l3v-kw-fY0" id="Pqs-vW-AUU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9PN-XK-6QS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="YnI-ML-5Q7" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="9487" y="-267"/>
+            <point key="canvasLocation" x="9486.9565217391319" y="-267.39130434782612"/>
         </scene>
         <!--Paymentfor Feature PremiumVC-->
         <scene sceneID="wAc-Jj-HP5">
@@ -14865,6 +14903,8 @@ this opportunity?</string>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="btnPay" destination="80e-AG-5NS" id="Zdj-G7-ScV"/>
+                        <outlet property="lblPay" destination="UI9-VP-YZD" id="x1c-gd-snp"/>
                         <outlet property="txtfieldcardNumber" destination="VSf-iM-2vh" id="K8D-X7-Gx5"/>
                         <outlet property="viewPay" destination="hBs-hH-A4f" id="xpg-ks-s7g"/>
                     </connections>
@@ -14932,7 +14972,7 @@ this opportunity?</string>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="P8R-mj-KMq">
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="P8R-mj-KMq">
                                         <rect key="frame" x="340" y="35.666666666666664" width="59" height="48.999999999999993"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="49" id="iIO-pM-OHi"/>
@@ -15398,6 +15438,12 @@ this Chat?</string>
                             <constraint firstItem="fFX-2l-Rr5" firstAttribute="centerY" secondItem="Jdw-DX-kK4" secondAttribute="centerY" id="rmF-Eb-JRs"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="lblCancel" destination="OUb-PQ-lDb" id="Rsa-89-nIQ"/>
+                        <outlet property="lblDelete" destination="bAP-7d-pVS" id="he9-wP-l6G"/>
+                        <outlet property="lblHeading" destination="oXm-XW-BcZ" id="4Mv-hy-oyb"/>
+                        <outlet property="lblSubheading" destination="Qws-Rp-dik" id="X6D-k1-4sq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KKw-7d-huJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="3Fv-mB-iBv" userLabel="Exit" sceneMemberID="exit"/>
@@ -15509,8 +15555,9 @@ this Chat?</string>
                             <constraint firstItem="8jc-zN-OB5" firstAttribute="trailing" secondItem="spI-09-vGr" secondAttribute="trailing" id="zsp-OS-XmB"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" tag="3" title="chat" image="message-text" id="QVx-Xm-GF5"/>
+                    <tabBarItem key="tabBarItem" tag="3" title="chats" image="message-text" id="QVx-Xm-GF5"/>
                     <connections>
+                        <outlet property="lblMyChat" destination="3iX-wH-RMl" id="N3U-85-rhc"/>
                         <outlet property="tblviewMyChat" destination="WFp-z6-6LN" id="nYP-Zi-tyW"/>
                         <outlet property="textFieldSearch" destination="RKE-Wk-fNk" id="y2J-wI-OB3"/>
                         <outlet property="viewSearch" destination="tr9-jy-MQn" id="SS8-6L-lZd"/>
@@ -15613,6 +15660,7 @@ this Chat?</string>
                     <size key="freeformSize" width="414" height="874"/>
                     <connections>
                         <outlet property="TblViewInterestedOpp" destination="msg-cL-1pX" id="QWa-a2-Oab"/>
+                        <outlet property="lblInterested" destination="m0Z-xa-yyN" id="23D-F4-AmW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RIx-ae-sC5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -15916,6 +15964,7 @@ this Chat?</string>
                         <outlet property="btnRateUser" destination="Hu8-EW-Xlu" id="qJz-07-neY"/>
                         <outlet property="lblAbout" destination="hb4-9l-dJZ" id="e2O-PJ-hOD"/>
                         <outlet property="lblAboutDescription" destination="Umf-gI-r0u" id="4Qx-7F-UVO"/>
+                        <outlet property="lblChatwithUser" destination="Lne-Jx-qMk" id="GT7-8X-2rr"/>
                         <outlet property="lblMobile" destination="vho-JX-mCc" id="uXo-Rc-tcP"/>
                         <outlet property="lblName" destination="Xqh-aA-DbI" id="9ri-2h-WQn"/>
                         <outlet property="lblRating" destination="4zV-yB-bDH" id="wSw-ZZ-B0S"/>
@@ -16055,7 +16104,7 @@ this Chat?</string>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                                     <inset key="titleEdgeInsets" minX="50" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                                    <state key="normal" title="search opportunities">
+                                                                    <state key="normal" title="Search Opportunities">
                                                                         <color key="titleColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     </state>
                                                                     <connections>
@@ -16154,26 +16203,8 @@ this Chat?</string>
         </scene>
     </scenes>
     <designables>
-        <designable name="Au9-O0-cbA">
-            <size key="intrinsicContentSize" width="120" height="20"/>
-        </designable>
-        <designable name="VSf-iM-2vh">
-            <size key="intrinsicContentSize" width="259" height="44"/>
-        </designable>
-        <designable name="fV5-fA-npc">
-            <size key="intrinsicContentSize" width="120" height="20"/>
-        </designable>
         <designable name="hYJ-9L-6ep">
             <size key="intrinsicContentSize" width="-1" height="49"/>
-        </designable>
-        <designable name="ozH-Xo-8GJ">
-            <size key="intrinsicContentSize" width="120" height="20"/>
-        </designable>
-        <designable name="r55-Lk-l5f">
-            <size key="intrinsicContentSize" width="259" height="44"/>
-        </designable>
-        <designable name="ybI-DQ-vGn">
-            <size key="intrinsicContentSize" width="-1" height="65"/>
         </designable>
     </designables>
     <resources>
@@ -16199,6 +16230,7 @@ this Chat?</string>
         <image name="chat" width="20" height="20"/>
         <image name="close-circle" width="24" height="24"/>
         <image name="close-square" width="24" height="24"/>
+        <image name="close-square-1" width="100" height="100"/>
         <image name="closesquare" width="24" height="24"/>
         <image name="copy" width="24" height="24"/>
         <image name="cross" width="24" height="24"/>
@@ -16240,7 +16272,7 @@ this Chat?</string>
         <image name="setting-2" width="24" height="24"/>
         <image name="subscription" width="24" height="24"/>
         <image name="sudan" width="16" height="16"/>
-        <image name="trash" width="24" height="24"/>
+        <image name="trash" width="100" height="100"/>
         <image name="truck" width="150" height="135"/>
         <image name="user-square" width="24" height="24"/>
         <image name="viewdetail" width="21" height="21"/>

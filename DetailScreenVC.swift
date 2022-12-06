@@ -3,10 +3,12 @@
 //  Created by Ritesh Gupta on 25/08/22.
 
 import UIKit
+import StripeUICore
 
-class DetailScreenVC: UIViewController, subCommentCellDelegate {
-   
+class DetailScreenVC: UIViewController{
+    
     @IBOutlet weak var tblviewDetail: UITableView!
+    @IBOutlet weak var lblDetailScreen: UILabel!
     var imgUrl = ""
     var userTimeLine: SocialPostData?
     var img = [oppr_image]()
@@ -18,9 +20,12 @@ class DetailScreenVC: UIViewController, subCommentCellDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.setuplanguage()
         tblviewDetail.register(UINib(nibName: "DetailsTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "DetailsTableViewCell")
         tblviewDetail.register(UINib(nibName: "SeeMoreCommentCell", bundle: Bundle.main), forCellReuseIdentifier: "SeeMoreCommentCell")
+        tblviewDetail.register(UINib(nibName: "SubCommentTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "SubCommentTableViewCell")
+        tblviewDetail.register(UINib(nibName: "CommentHeaderView", bundle: Bundle.main), forHeaderFooterViewReuseIdentifier: "CommentHeaderView")
+        tblviewDetail.register(UINib(nibName: "FooterView", bundle: Bundle.main), forHeaderFooterViewReuseIdentifier: "FooterView")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -35,30 +40,113 @@ class DetailScreenVC: UIViewController, subCommentCellDelegate {
 
 extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return (self.userTimeLine?.usercomment.count ?? 0) + 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        switch section{
-        case 0:
+        if section == 0{
             return 1
             
-        case 1:
-            return self.userTimeLine?.usercomment.count ?? 0
+        }else{
+            return self.userTimeLine?.usercomment[section - 1].subcomment.count ?? 0
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        if section == 0{
+            return UIView()
             
-        default:
-            return 0
+        }else{
+            let view = tblviewDetail.dequeueReusableHeaderFooterView(withIdentifier: "CommentHeaderView") as! CommentHeaderView
+            let obj = self.userTimeLine?.usercomment[section - 1]
+            // view.labelName.text = obj?.comments
+            let first = String.getString(obj?.name)
+            let second = String.getString(obj?.comments)
+            let attributedStringcomment: NSMutableAttributedString = NSMutableAttributedString(string: "\(first)  \(second)")
+            attributedStringcomment.setColorForText(textToFind: first, withColor: UIColor.black)
+            attributedStringcomment.setColorForText(textToFind: second, withColor: UIColor.gray)
+            view.labelName.attributedText = attributedStringcomment
+            
+            let imgurl = URL(string: String.getString(obj?.image))
+            view.labelImage.sd_setImage(with: imgurl)
+            
+            view.callBack = { txt in
+                if txt == "detail"{
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: UserProfileDetailsVC.getStoryboardID()) as! UserProfileDetailsVC
+                    vc.userid = Int.getInt(obj?.user_id)
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
+            }
+            
+            return view
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        if section == 0{
+            return UIView()
+            
+        }else{
+            let view = tblviewDetail.dequeueReusableHeaderFooterView(withIdentifier: "FooterView") as! FooterView
+            let obj = self.userTimeLine?.usercomment[section - 1]
+            
+            view.buttonReply.isHidden = obj?.isReply == true ? true : false
+            view.heightButtonReply.constant = obj?.isReply == true ? 0 : 30
+            view.viewAddPost.isHidden = obj?.isReply == true ? false : true
+            view.heightAddPost.constant = obj?.isReply == true ? 73 : 0
+            view.delegate()
+            view.callbacktxtviewsubcomment = {[weak tblviewDetail] (_) in
+                self.txtcomment = view.textview.text
+                debugPrint("txtSubcomment=-=-=-=",self.txtcomment)
+                self.tblviewDetail?.beginUpdates()
+                self.tblviewDetail?.endUpdates()
+            }
+            
+            view.callBack = { txt in
+                if txt == "reply"{
+                    obj?.isReply = true
+                    view.viewAddPost.isHidden = false
+                    view.heightAddPost.constant = 73
+                    view.buttonReply.isHidden = true
+                    view.heightButtonReply.constant = 0
+                    self.tblviewDetail.reloadData()
+                    
+                }else if txt == "post"{
+                    if self.txtcomment == ""{
+                        self.showSimpleAlert(message: "Please add reply")
+                    }else{
+                        self.commentreplyapi(oppr_id: Int.getInt(self.userTimeLine?.id) , commentid:Int.getInt(obj?.id)) { usersubComment in
+                            view.textview.text = ""
+                            self.txtcomment = ""
+                            obj?.isReply = false
+                            //  self.tblviewDetail.reloadData()
+                            self.getalldetail()
+                        }
+                    }
+                }else if txt == "cancel" {
+                    
+                    obj?.isReply = false
+                    view.textview.text = ""
+                    view.viewAddPost.isHidden = true
+                    view.heightAddPost.constant = 0
+                    view.buttonReply.isHidden = false
+                    view.heightButtonReply.constant = 30
+                    self.tblviewDetail.reloadData()
+                }
+            }
+            
+            return view
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
-        switch indexPath.section{
-        case 0:
+        
+        if indexPath.section == 0{
             let cell = self.tblviewDetail.dequeueReusableCell(withIdentifier: "DetailsTableViewCell") as! DetailsTableViewCell
             
-//            cell.viewLine.isHidden = true
+            //            cell.viewLine.isHidden = true
             cell.SocialPostCollectionView.tag = indexPath.section
             cell.DocumentCollectionView.tag = indexPath.section
             
@@ -68,7 +156,7 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
             cell.lblTitle.text = String.getString(self.userTimeLine?.title)
             cell.viewAddComment.isHidden = self.userTimeLine?.isComment == false ? true : false
             cell.heightAddComment.constant = self.userTimeLine?.isComment == false ? 0 : 55
-//          cell.heightViewAddComment.constant = self.userTimeLine?.isComment == false ? 0 : 55
+            //          cell.heightViewAddComment.constant = self.userTimeLine?.isComment == false ? 0 : 55
             cell.lblCategory.text = String.getString(self.userTimeLine?.category_name)
             cell.lblSub_category.text = String.getString(self.userTimeLine?.subcategory_name)
             
@@ -172,19 +260,24 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
             if String.getString(self.userTimeLine?.is_user_like) == "1"{
                 cell.imglike.image = UIImage(named: "dil")
                 cell.lbllike.text = "Liked"
+                cell.lbllike.textColor = .red
                 
             }
             else{
                 cell.imglike.image = UIImage(named: "unlike")
                 cell.lbllike.text = "Like"
+                cell.lbllike.textColor = UIColor(hexString: "#A6A6A6")
             }
             if String.getString(self.userTimeLine?.is_saved) == "1"{
                 cell.imgsave.image = UIImage(named: "saveopr")
                 cell.lblSave.text = "Saved"
+                cell.lblSave.textColor = UIColor(hexString: "#1572A1")
+                
             }
             else{
                 cell.imgsave.image = UIImage(named: "save-3")
                 cell.lblSave.text = "Save"
+                cell.lblSave.textColor = UIColor(hexString: "#A6A6A6")
             }
             if Int.getInt(self.userTimeLine?.oppimage.count) == 0{
                 cell.heightSocialPostCollectionView.constant = 0
@@ -216,6 +309,7 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                     }
                     cell.imglike.image = UIImage(named: "dil")
                     cell.lbllike.text = "Liked"
+                    cell.lbllike.textColor = .red
                 }
                 
                 if txt == "Rate"{
@@ -240,6 +334,7 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                             self.saveoppoertunityapi(oppr_id: oppid)
                             cell.imgsave.image = UIImage(named: "saveopr")
                             cell.lblSave.text = "Saved"
+                            cell.lblSave.textColor = UIColor(hexString: "#1572A1")
                             self.getalldetail()
                         }
                         else{
@@ -247,6 +342,7 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                             self.unsaveoppoertunityapi(oppr_id: oppid)
                             cell.imgsave.image = UIImage(named: "save-3")
                             cell.lblSave.text = "Save"
+                            cell.lblSave.textColor = UIColor(hexString: "#A6A6A6")
                             self.getalldetail()
                         }
                     }
@@ -255,6 +351,7 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                         self.unsaveoppoertunityapi(oppr_id: oppid)
                         cell.imgsave.image = UIImage(named: "save-3")
                         cell.lblSave.text = "Save"
+                        cell.lblSave.textColor = UIColor(hexString: "#A6A6A6")
                         self.getalldetail()
                     }
                 }
@@ -283,7 +380,7 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                         }
                         
                         if txt == "Flag"{
-//                            let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
+                            //                            let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
                             self.flagopportunityapi(oppr_id: Int.getInt(self.userTimeLine?.id) ?? 0)
                         }
                         
@@ -345,128 +442,40 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
             }
             return cell
             
-        case 1:
-            
-            let cell = self.tblviewDetail.dequeueReusableCell(withIdentifier: "SeeMoreCommentCell") as! SeeMoreCommentCell
-            
-            let obj = self.userTimeLine?.usercomment[indexPath.row]
-            cell.celldelegate = self
-            cell.topsubTableview.constant = obj?.subcomment.count == 0 ? 0 : 10
-//            cell.bottomSubtableview.constant = obj?.subcomment.count == 0 ? 0 : 10
-            cell.viewPostComment.isHidden = obj?.subcomment.count == 0 ? false : true
-            cell.heightAddPost.constant = obj?.isReply == true ? 40 : 0
-            cell.heightViewPostComment.constant = obj?.isReply == true ? 70 : 0
-            cell.viewPostComment.isHidden = obj?.isReply == true ? false : true
-            cell.btnReply.isHidden = obj?.isReply == true ? true : false
-//            cell.heightReply.constant = obj?.isReply == true ? -25 : 0
-            cell.heightbuttonReply.constant = obj?.isReply == true ? 0 : 30
-            
-            cell.lblNameandComment.text = String.getString(obj?.name) + "   " + String.getString(obj?.comments)
-            let imgcommentuser = String.getString(obj?.image)
-            cell.imgCommentUser.downlodeImage(serviceurl: imgcommentuser, placeHolder: UIImage(named: "Boss"))
-            
-            if obj?.subcomment.count == 0{
-                cell.heightTableView.constant = 2
-            }else{
-                cell.heightTableView.constant = CGFloat(32 * (obj?.subcomment.count)!)
-                // cell.tblviewSubComment.estimatedRowHeight = 35
-            }
-            
-            cell.subcomment = obj?.subcomment ?? []  // See more comment cell pr pass kr rhe h
-            cell.reloadTable()
-            print("datacount---",cell.subcomment.count)
-            
-            cell.callback = { txt in
-                
-                if txt == "Reply"{
-                    obj?.isReply = true
-                    self.tblviewDetail.reloadData()
-                }
-                else if txt == "Cancel"{
-                    obj?.isReply = false
-                    self.tblviewDetail.reloadData()
-                }
-                
-                if txt == "Post"{
-                    
-                    if cell.txtviewsubComment.text == ""{
-                        self.showSimpleAlert(message: "Please add reply")
-                    }
-                    else{
-                        self.commentreplyapi(oppr_id: Int.getInt(self.userTimeLine?.id) ?? 0, commentid:Int.getInt(self.userTimeLine?.usercomment[indexPath.row].id)) { usersubComment in
-                            
-                            cell.txtviewsubComment.text = ""
-                            cell.lblNameandComment.text = String.getString(usersubComment.first?.usersubcommentdetails?.name) + " " + String.getString(usersubComment.first?.comments)
-                            debugPrint("lblcommentName=-=-=-", cell.lblNameandComment.text )
-                            
-                            let imgcommentuserurl = String.getString(usersubComment.first?.usersubcommentdetails?.image)
-                            debugPrint("commentuserprofile......",imgcommentuserurl)
-                            
-                            cell.imgCommentUser.downlodeImage(serviceurl: imgcommentuserurl , placeHolder: UIImage(named: "Boss"))
-                            
-                            cell.viewPostComment.isHidden = true
-                            self.getalldetail()
-                        }
-                    }
-                }
-                
-                if txt == "IconComment"{
-                    let userid = Int.getInt(self.userTimeLine?.usercomment[indexPath.row].user_id) ?? 0
-                    if UserData.shared.id == userid{
-                        print("SelfICON")
-                    }
-                    else{
-                        let vc = self.storyboard?.instantiateViewController(withIdentifier: UserProfileDetailsVC.getStoryboardID()) as! UserProfileDetailsVC
-                        vc.userid = userid
-                        vc.friendname = String.getString(self.userTimeLine?.usercomment[indexPath.row].name)
-                        vc.friendimage = String.getString(self.userTimeLine?.usercomment[indexPath.row].image)
-                        self.navigationController?.pushViewController(vc, animated: true)
-                    }
-                }
-            }
-            
-            cell.callbacktxtviewsubcomment = {[weak tblviewDetail] (_) in
-                
-                self.txtcomment = cell.txtviewsubComment.text
-                debugPrint("txtSubcomment=-=-=-=",self.txtcomment)
-                self.tblviewDetail?.beginUpdates()
-                self.tblviewDetail?.endUpdates()
-            }
-            
-            let first = String.getString(obj?.name)
+        }
+        else{
+            let cell = self.tblviewDetail.dequeueReusableCell(withIdentifier: "SubCommentTableViewCell") as! SubCommentTableViewCell
+            let obj = self.userTimeLine?.usercomment[indexPath.section - 1].subcomment[indexPath.row]
+            let first = String.getString(obj?.usersubcommentdetails?.name)
             let second = String.getString(obj?.comments)
-            
             let attributedStringcomment: NSMutableAttributedString = NSMutableAttributedString(string: "\(first)  \(second)")
-            
             attributedStringcomment.setColorForText(textToFind: first, withColor: UIColor.black)
             attributedStringcomment.setColorForText(textToFind: second, withColor: UIColor.gray)
+            cell.lblSubComment.attributedText = attributedStringcomment
+            let imgurl = URL(string: String.getString(obj?.usersubcommentdetails?.image))
+            cell.imgSubCommentUser.sd_setImage(with: imgurl, placeholderImage:UIImage(named: "Boss"))
             
-            cell.lblNameandComment.attributedText = attributedStringcomment
-            
+            cell.callBack = {
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: UserProfileDetailsVC.getStoryboardID()) as! UserProfileDetailsVC
+                vc.userid = Int.getInt(obj?.usersubcommentdetails?.id)
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
             return cell
-            
-        default:
-            return UITableViewCell()
         }
     }
+
+func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    return UITableView.automaticDimension
     
-    func tableView(tblView: SubCommentTableViewCell?, index: Int, result: String, didTappedInTableViewCell: SeeMoreCommentCell) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: UserProfileDetailsVC.getStoryboardID()) as! UserProfileDetailsVC
-        vc.userid = Int.getInt(result)
-        self.navigationController?.pushViewController(vc, animated: true)
-    }
+}
+
+func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    return UITableView.automaticDimension
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        switch indexPath.section{
-        case 0:
-            return UITableView.automaticDimension
-            
-        case 1:
-            return UITableView.automaticDimension
-            
-        default:
-            return 0
-        }
+}
+
+func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    return UITableView.automaticDimension
     }
 }
 
@@ -983,4 +992,12 @@ extension DetailScreenVC{
         }
     }
 }
+
+extension DetailScreenVC{
+    func setuplanguage(){
+        lblDetailScreen.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Detail Screen", comment: "")
+    }
+}
+
+
 

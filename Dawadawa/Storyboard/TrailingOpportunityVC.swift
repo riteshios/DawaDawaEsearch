@@ -252,7 +252,6 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
             self.viewSelectCategoryTop.constant = 420  // 310
             
         }
-        
     }
     
     @IBAction func btnAddmoreImageTapped(_ sender: UIButton) {
@@ -313,7 +312,6 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
                 }
             }
         }
-        
     }
     
     @IBAction func btnSelectSubCategoryTapped(_ sender: UIButton) {

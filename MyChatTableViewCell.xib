@@ -53,8 +53,28 @@
                                     <action selector="btnChatTapped:" destination="M8m-dw-vuz" eventType="touchUpInside" id="QEi-eh-Wdt"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vFL-gX-rY4">
+                                <rect key="frame" x="10" y="74" width="330" height="1"/>
+                                <color key="backgroundColor" red="0.92941176469999998" green="0.92941176469999998" blue="0.92941176469999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1.2" id="zDB-V6-hez"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="plJ-ac-OfC">
+                                <rect key="frame" x="304" y="22.5" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="Dpg-QU-7yV"/>
+                                    <constraint firstAttribute="height" constant="30" id="uXV-R5-KOR"/>
+                                </constraints>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Button">
+                                    <attributedString key="attributedTitle"/>
+                                </state>
+                                <buttonConfiguration key="configuration" style="plain" image="more" title=""/>
+                            </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="36q-80-zqo">
-                                <rect key="frame" x="296" y="25" width="25" height="25"/>
+                                <rect key="frame" x="259" y="25" width="25" height="25"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MW2-Fb-v18">
                                         <rect key="frame" x="1" y="0.0" width="23" height="25"/>
@@ -78,21 +98,13 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vFL-gX-rY4">
-                                <rect key="frame" x="10" y="74" width="330" height="1"/>
-                                <color key="backgroundColor" red="0.92941176469999998" green="0.92941176469999998" blue="0.92941176469999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="1.2" id="zDB-V6-hez"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="36q-80-zqo" secondAttribute="trailing" constant="29" id="5Hz-Dk-82Y"/>
                             <constraint firstItem="X9n-3Z-p4d" firstAttribute="centerY" secondItem="Vaj-e6-mCe" secondAttribute="centerY" id="HwB-vY-JZV"/>
                             <constraint firstItem="vFL-gX-rY4" firstAttribute="leading" secondItem="Vaj-e6-mCe" secondAttribute="leading" constant="10" id="KTd-3e-EYs"/>
                             <constraint firstAttribute="trailing" secondItem="vFL-gX-rY4" secondAttribute="trailing" constant="10" id="MYU-HW-ug8"/>
-                            <constraint firstItem="36q-80-zqo" firstAttribute="centerY" secondItem="Vaj-e6-mCe" secondAttribute="centerY" id="OHs-ez-sxd"/>
+                            <constraint firstAttribute="trailing" secondItem="plJ-ac-OfC" secondAttribute="trailing" constant="16" id="MhI-oO-njS"/>
                             <constraint firstItem="dcY-v0-9ST" firstAttribute="leading" secondItem="X9n-3Z-p4d" secondAttribute="trailing" constant="15" id="XDN-4t-yYC"/>
                             <constraint firstItem="WhH-8a-TVP" firstAttribute="leading" secondItem="Vaj-e6-mCe" secondAttribute="leading" id="a51-es-2tN"/>
                             <constraint firstItem="dcY-v0-9ST" firstAttribute="centerY" secondItem="X9n-3Z-p4d" secondAttribute="centerY" id="aD0-JU-7rS"/>
@@ -101,7 +113,10 @@
                             <constraint firstAttribute="bottom" secondItem="vFL-gX-rY4" secondAttribute="bottom" id="dvl-Ma-LGG"/>
                             <constraint firstAttribute="height" constant="75" id="eHn-OS-9dg"/>
                             <constraint firstAttribute="trailing" secondItem="WhH-8a-TVP" secondAttribute="trailing" id="fDQ-2q-JYS"/>
+                            <constraint firstItem="plJ-ac-OfC" firstAttribute="leading" secondItem="36q-80-zqo" secondAttribute="trailing" constant="20" id="fFA-ky-3Er"/>
                             <constraint firstItem="WhH-8a-TVP" firstAttribute="top" secondItem="Vaj-e6-mCe" secondAttribute="top" id="kMa-fP-WZH"/>
+                            <constraint firstItem="plJ-ac-OfC" firstAttribute="centerY" secondItem="X9n-3Z-p4d" secondAttribute="centerY" id="qi8-7f-g6x"/>
+                            <constraint firstItem="36q-80-zqo" firstAttribute="centerY" secondItem="plJ-ac-OfC" secondAttribute="centerY" id="rQN-NN-tMi"/>
                             <constraint firstItem="X9n-3Z-p4d" firstAttribute="leading" secondItem="Vaj-e6-mCe" secondAttribute="leading" constant="14" id="uiJ-E8-W3w"/>
                         </constraints>
                     </view>
@@ -127,5 +142,6 @@
     </objects>
     <resources>
         <image name="Boss" width="75" height="75"/>
+        <image name="more" width="24" height="24"/>
     </resources>
 </document>

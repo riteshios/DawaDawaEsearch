@@ -1,7 +1,5 @@
-//
 //  ProileSocialMoreVC.swift
 //  Dawadawa
-//
 //  Created by Ritesh Gupta on 22/07/22.
 
 
@@ -12,6 +10,12 @@ class ProileSocialMoreVC: UIViewController {
     var callback:((String)->())?
 
     @IBOutlet weak var Viewmain: UIView!
+    @IBOutlet weak var viewBG: UIView!
+    
+    @IBOutlet weak var lblCopylink: UILabel!
+    @IBOutlet weak var lblUpdate: UILabel!
+    @IBOutlet weak var lblDelete: UILabel!
+    @IBOutlet weak var lblClose: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,4 +53,14 @@ class ProileSocialMoreVC: UIViewController {
         self.callback?("Close")
     }
     
+}
+// MARK: - LOcalisation
+
+extension ProileSocialMoreVC{
+    func setuplanguage(){
+        lblCopylink.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Copy link", comment: "")
+        lblUpdate.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Update", comment: "")
+        lblDelete.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Delete", comment: "")
+        lblClose.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Close", comment: "")
+    }
 }

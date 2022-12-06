@@ -207,7 +207,7 @@
                                 </collectionViewFlowLayout>
                             </collectionView>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" hidesForSinglePage="YES" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="Mtw-CB-bdI">
-                                <rect key="frame" x="129.5" y="315.5" width="156.5" height="18"/>
+                                <rect key="frame" x="130" y="315.5" width="155.5" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="18" id="0sn-Vg-HXQ"/>
                                 </constraints>
@@ -336,7 +336,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zAD-b6-yeR">
                                         <rect key="frame" x="287.5" y="0.0" width="95.5" height="30"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="imageView:634-6R-FaE:image" translatesAutoresizingMaskIntoConstraints="NO" id="634-6R-FaE">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imageView:634-6R-FaE:image" translatesAutoresizingMaskIntoConstraints="NO" id="634-6R-FaE">
                                                 <rect key="frame" x="3" y="5" width="20" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="20" id="fBl-gx-xzk"/>
@@ -362,6 +362,7 @@
                                         <constraints>
                                             <constraint firstItem="a3U-sN-cao" firstAttribute="top" secondItem="zAD-b6-yeR" secondAttribute="top" id="2uh-lC-Zmt"/>
                                             <constraint firstItem="6ue-Uh-RMM" firstAttribute="top" secondItem="zAD-b6-yeR" secondAttribute="top" id="Jra-fC-7Fb"/>
+                                            <constraint firstItem="634-6R-FaE" firstAttribute="centerY" secondItem="zAD-b6-yeR" secondAttribute="centerY" id="Nsx-yg-uUo"/>
                                             <constraint firstItem="6ue-Uh-RMM" firstAttribute="leading" secondItem="zAD-b6-yeR" secondAttribute="leading" id="XLo-my-uXX"/>
                                             <constraint firstItem="634-6R-FaE" firstAttribute="leading" secondItem="zAD-b6-yeR" secondAttribute="leading" constant="3" id="Yww-Zj-c5W"/>
                                             <constraint firstItem="a3U-sN-cao" firstAttribute="leading" secondItem="634-6R-FaE" secondAttribute="trailing" constant="7" id="htF-gK-6bW"/>

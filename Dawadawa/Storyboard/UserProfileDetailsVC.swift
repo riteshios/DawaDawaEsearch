@@ -23,6 +23,7 @@ class UserProfileDetailsVC: UIViewController {
     @IBOutlet weak var btnRateUser: UIButton!
     
     @IBOutlet weak var viewChatwithuser: UIView!
+    @IBOutlet weak var lblChatwithUser: UILabel!
     
     var userid = 0
     var friendname = ""
@@ -162,5 +163,6 @@ extension UserProfileDetailsVC {
         lblUserProfile.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "User Profile", comment: "")
         lblAbout.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "About", comment: "")
         btnRateUser.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "Rate user", comment: ""), for: .normal)
+        lblChatwithUser.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Chat with user", comment: "")
     }
 }

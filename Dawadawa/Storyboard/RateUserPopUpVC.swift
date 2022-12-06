@@ -1,9 +1,6 @@
-//
 //  RateUserPopUpVC.swift
 //  Dawadawa
-//
 //  Created by Ritesh Gupta on 02/09/22.
-
 
 import UIKit
 import Cosmos

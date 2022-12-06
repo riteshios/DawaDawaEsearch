@@ -321,7 +321,7 @@ class FilterVC: UIViewController {
             self.lblClosed.textColor = UIColor(red: 21, green: 114, blue: 161)
             self.viewSold.backgroundColor = UIColor(red: 241, green: 249, blue: 253)
             self.lblSold.textColor = UIColor(red: 21, green: 114, blue: 161)
-            self.oppstatus = 1
+//            self.oppstatus = 1
             filteredArray.append("All")
             for i in 0 ..< filteredArray.count - 1{
                 if filteredArray[i] == "Available"{
@@ -349,7 +349,7 @@ class FilterVC: UIViewController {
             self.lblClosed.textColor = UIColor(red: 21, green: 114, blue: 161)
             self.viewSold.backgroundColor = UIColor(red: 241, green: 249, blue: 253)
             self.lblSold.textColor = UIColor(red: 21, green: 114, blue: 161)
-            self.oppstatus = 3
+            self.oppstatus = 2
             filteredArray.append("Available")
               for i in 0 ..< filteredArray.count - 1{
                         if filteredArray[i] == "All"{
@@ -378,7 +378,7 @@ class FilterVC: UIViewController {
             self.lblAll.textColor = UIColor(red: 21, green: 114, blue: 161)
             self.viewSold.backgroundColor = UIColor(red: 241, green: 249, blue: 253)
             self.lblSold.textColor = UIColor(red: 21, green: 114, blue: 161)
-            self.oppstatus = 2
+            self.oppstatus = 1
             filteredArray.append("Closed")
             for i in 0 ..< filteredArray.count - 1{
                 if filteredArray[i] == "All"{
@@ -635,12 +635,12 @@ class FilterVC: UIViewController {
     }
     
     @IBAction func btnApplyfilterTapped(_ sender: UIButton) {
-        //        if UserData.shared.isskiplogin == true{
-        self.guestfilterdataapi()
-        //        }
-        //        else{
-        //        self.filterdataapi()
-        //        }
+        if UserData.shared.isskiplogin == true{
+            self.guestfilterdataapi()
+        }
+        else{
+            self.filterdataapi()
+        }
     }
     
     //   MARK: - APICALL
@@ -1340,12 +1340,10 @@ extension FilterVC{
             } else {
                 CommonUtils.showToastForDefaultError()
             }
-            
         }
     }
     
     // API Filter DATA
-    
     
     func filterdataapi(){
         CommonUtils.showHud(show: true)
@@ -1360,16 +1358,11 @@ extension FilterVC{
             //            headers["token"] = kSharedUserDefaults.getLoggedInAccessToken()
         }
         
-        
-        
-        
         let stateids = Int(self.stateid ?? 0) // For remove optional
         debugPrint("checkstateids",stateids)
         
         let localityid = Int(self.localityid ?? 0)
         debugPrint("checklocalityid",localityid)
-        
-        
         
         let params:[String : Any] = [
             "user_id":Int.getInt(UserData.shared.id),
@@ -1386,8 +1379,7 @@ extension FilterVC{
             "services_type":selectedservicetype,
             "sort_by":Int.getInt(sortby),
             "start_date":String.getString(self.txtfieldStartDate.text),
-            "end_date":String.getString(self.txtfieldEndDate.text),
-            
+            "end_date":String.getString(self.txtfieldEndDate.text)
         ]
         // Added user id in api url
         TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kfilter, requestMethod: .POST,
@@ -1447,9 +1439,7 @@ extension FilterVC{
             } else {
                 CommonUtils.showToastForDefaultError()
             }
-            
         }
-        
     }
     
     //    MARK: - API For Guest
@@ -1458,7 +1448,6 @@ extension FilterVC{
     
     func guestcategory(){
         CommonUtils.showHudWithNoInteraction(show: true)
-        
         
         TANetworkManager.sharedInstance.requestlangApi(withServiceName: ServiceName.kguestcategory, requestMethod: .GET, requestParameters:[:], withProgressHUD: false) { (result:Any?, error:Error?, errorType:ErrorType?,statusCode:Int?) in
             CommonUtils.showHudWithNoInteraction(show: false)
@@ -1497,14 +1486,12 @@ extension FilterVC{
     func guestfiltersubcategoryapi(catid:String){
         CommonUtils.showHud(show: true)
         
-        
         let stateids = Int(self.stateid ?? 0) // For remove optional
         debugPrint("checkstateids",stateids)
         
         let params:[String : Any] = [
             "category_id":catid
         ]
-        
         
         TANetworkManager.sharedInstance.requestlangApi(withServiceName:ServiceName.kguestfiltersubcategory, requestMethod: .POST,
                                                        requestParameters:params, withProgressHUD: false)
@@ -1545,7 +1532,6 @@ extension FilterVC{
             } else {
                 CommonUtils.showToastForDefaultError()
             }
-            
         }
     }
     
@@ -1610,8 +1596,6 @@ extension FilterVC{
                     else if  Int.getInt(dictResult["status"]) == 401{
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
-                    
-                    
                 default:
                     CommonUtils.showError(.error, String.getString(dictResult["message"]))
                 }
@@ -1659,7 +1643,6 @@ extension FilterVC{
                         DispatchQueue.main.async {
                             self?.tblViewOpportunitytype.reloadData()
                         }
-                        
                     }
                     
                     else if  Int.getInt(dictResult["status"]) == 400{
@@ -1676,7 +1659,6 @@ extension FilterVC{
             } else {
                 CommonUtils.showToastForDefaultError()
             }
-            
         }
     }
     
@@ -1685,14 +1667,11 @@ extension FilterVC{
     func guestfilterdataapi(){
         CommonUtils.showHud(show: true)
         
-        
         let stateids = Int(self.stateid ?? 0) // For remove optional
         debugPrint("checkstateids",stateids)
         
         let localityid = Int(self.localityid ?? 0)
         debugPrint("checklocalityid",localityid)
-        
-        
         
         let params:[String : Any] = [
             "most_like":String.getString(like),
@@ -1708,8 +1687,7 @@ extension FilterVC{
             "services_type":selectedservicetype,
             "sort_by":Int.getInt(sortby),
             "start_date":String.getString(self.txtfieldStartDate.text),
-            "end_date":String.getString(self.txtfieldEndDate.text),
-            
+            "end_date":String.getString(self.txtfieldEndDate.text)
         ]
         
         TANetworkManager.sharedInstance.requestlangApi(withServiceName:ServiceName.kguestfilter, requestMethod: .POST,
@@ -1751,8 +1729,6 @@ extension FilterVC{
                         self?.tabBarController?.selectedIndex = 0
                         
                         self?.navigationController?.pushViewController(vc, animated: true)
-                        
-                        
                     }
                     
                     else if  Int.getInt(dictResult["status"]) == 400{
@@ -1769,9 +1745,7 @@ extension FilterVC{
             } else {
                 CommonUtils.showToastForDefaultError()
             }
-            
         }
-        
     }
 }
 

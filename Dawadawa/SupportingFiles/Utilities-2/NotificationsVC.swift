@@ -1,29 +1,28 @@
-//
 //  NotificationsVC.swift
 //  Dawadawa
-//
 //  Created by Ritesh Gupta on 10/10/22.
-//
 
 import UIKit
 
 class NotificationsVC: UIViewController {
     
+    @IBOutlet weak var lblNotification: UILabel!
+    @IBOutlet weak var btnMarkAllRead: UIButton!
     @IBOutlet weak var tblviewNotification: UITableView!
     var NotificationData = [Notification_data]()
-  
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.setuplanguage()
         tblviewNotification.register(UINib(nibName: "NotificationTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "NotificationTableViewCell")
-       
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.getallNotification()
         }
+    
+//    MARK: - @IBAction
     
     @IBAction func btnBackTapped(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
@@ -35,6 +34,8 @@ class NotificationsVC: UIViewController {
     }
 }
 
+// MARK: - Table view Delegate
+
 extension NotificationsVC:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return NotificationData.count
@@ -43,9 +44,9 @@ extension NotificationsVC:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tblviewNotification.dequeueReusableCell(withIdentifier: "NotificationTableViewCell") as! NotificationTableViewCell
         let obj = self.NotificationData[indexPath.row]
+        
         cell.lblHeading.text = String.getString(obj.title)
         cell.lblSubheading.text = String.getString(obj.body)
-       
         
         if String.getString(obj.read_status) == "1"{
             cell.viewNotification.backgroundColor = UIColor.white
@@ -75,6 +76,8 @@ extension NotificationsVC:UITableViewDelegate,UITableViewDataSource{
     }
     
 }
+
+// MARK: - API Call
 
 extension NotificationsVC{
     
@@ -115,9 +118,7 @@ extension NotificationsVC{
                     }
                     else if  Int.getInt(dictResult["status"]) == 400{
                         
-                        
                     }
-                    
                     
                 default:
                     CommonUtils.showError(.error, String.getString(dictResult["message"]))
@@ -187,5 +188,12 @@ extension NotificationsVC{
                 CommonUtils.showToastForDefaultError()
             }
         }
+    }
+}
+
+extension NotificationsVC{
+    func setuplanguage(){
+        lblNotification.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Notifications", comment: "")
+        btnMarkAllRead.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "Mark all as read", comment: ""), for: .normal)
     }
 }

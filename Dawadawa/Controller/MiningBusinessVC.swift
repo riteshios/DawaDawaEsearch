@@ -69,6 +69,7 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
     var docummentarray = [String]()
     
     var plan = ""
+    var ServiceType = 0
     
     var isSelectimage = false
     var isSelectDocument = false
@@ -392,6 +393,7 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
         kSharedAppDelegate?.dropDown(dataSource: getServiceTypeList.map{String.getString($0.services_type)}, text: btnServiceType){
             (index,item) in
             self.lblServiceType.text = item
+            self.ServiceType = index
             self.isSelectServiceType = true
         }
     }
@@ -1245,7 +1247,7 @@ extension MiningBusinessVC{
             "user_id":"\(String(describing: userid))",
             "category_id":"3",
             "sub_category":"\(String(describing: subcatid))",
-            "services_type":String.getString(self.lblServiceType.text),
+            "services_type":Int.getInt(self.ServiceType),
             "title":String.getString(self.txtFieldTitle.text),
             "opp_state":"\(String(describing: stateid))",
             "opp_locality":"\(String(describing: localityid))",
@@ -1340,7 +1342,7 @@ extension MiningBusinessVC{
             "category_id":"3",
             "sub_category":"\(String(describing: subcatid))",
             "title":String.getString(self.txtFieldTitle.text),
-            "services_type":String.getString(self.lblServiceType.text),
+            "services_type":Int.getInt(self.ServiceType),
             "opp_state":"\(String(describing: stateid))",
             "opp_locality":"\(String(describing: localityid))",
             "location_name":String.getString(self.txtFieldLocationName.text),

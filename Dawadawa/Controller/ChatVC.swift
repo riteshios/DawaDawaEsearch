@@ -50,6 +50,8 @@ class ChatVC: UIViewController{
         }
     }
     
+//    MARK: - @IBAction
+    
     @IBAction func btnBackTapped(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
     }
@@ -75,7 +77,6 @@ class ChatVC: UIViewController{
                 self.dismiss(animated: true)
             }
         }
-        
         self.present(vc, animated: false)
     }
     
@@ -151,6 +152,8 @@ extension ChatVC:UITableViewDelegate,UITableViewDataSource {
         return UITableView.automaticDimension
     }
 }
+
+// MARK: - Api call
 
 extension ChatVC {
     //    Api call
@@ -238,15 +241,12 @@ extension ChatVC {
                                                    requestParameters:params, withProgressHUD: false)
         {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
             
-            //            CommonUtils.showHudWithNoInteraction(show: false)
+            //    CommonUtils.showHudWithNoInteraction(show: false)
             
             if errorType == .requestSuccess {
-                
                 let dictResult = kSharedInstance.getDictionary(result)
-                
                 switch Int.getInt(statusCode) {
                 case 200:
-                    
                     if Int.getInt(dictResult["status"]) == 200{
                         
                         let endToken = kSharedUserDefaults.getLoggedInAccessToken()
@@ -278,7 +278,7 @@ extension ChatVC {
     //    API Get Messsage
     
     func getmessageeapi(){
-        //        CommonUtils.showHud(show: true)
+//        CommonUtils.showHud(show: true)
         
         if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
             let endToken = kSharedUserDefaults.getLoggedInAccessToken()
@@ -294,7 +294,6 @@ extension ChatVC {
             "my_id":UserData.shared.id,
             "user_id":friendid
         ]
-        
         
         TANetworkManager.sharedInstance.requestApi(withServiceName:ServiceName.kgetmessage, requestMethod: .POST,
                                                    requestParameters:params, withProgressHUD: false)

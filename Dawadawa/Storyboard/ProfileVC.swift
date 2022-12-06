@@ -176,8 +176,7 @@ class ProfileVC: UIViewController {
                         if txt == "Logout"{
                             vc.dismiss(animated: false) {
                                 // self.logout()
-                                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
-                                
+                                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WelcomeScreenVC") as! WelcomeScreenVC
                                 self.navigationController?.pushViewController(vc, animated: true)
                             }
                         }
@@ -246,7 +245,6 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                     cell.lblPlan.text = "Total views"
                     cell.lblshowOpportunity.text = String.getString(self.datadashboard?.no_flag)
                     cell.lblOpportunity.text = "Flagged Opportunities"
-                    
                 }
             }
             cell.callbackbtnSelect = { txt in
@@ -312,7 +310,6 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
             
             cell.lblLikeCount.text = String.getString(obj.likes) + " " + "Likes"
             
-            
             if Int.getInt(obj.close_opr) == 0{
                 cell.lblTitle.text = String.getString(obj.title)
                 cell.lblTitle.textColor = .black
@@ -325,20 +322,24 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
             if String.getString(obj.is_user_like) == "1"{
                 cell.imglike.image = UIImage(named: "dil")
                 cell.lbllike.text = "Liked"
+                cell.lbllike.textColor = .red
                 
             }
             else{
                 cell.imglike.image = UIImage(named: "unlike")
                 cell.lbllike.text = "Like"
+                cell.lbllike.textColor = UIColor(hexString: "#A6A6A6")
             }
             
             if String.getString(obj.is_saved) == "1"{
                 cell.imgsave.image = UIImage(named: "saveopr")
                 cell.lblSave.text = "Saved"
+                cell.lblSave.textColor = UIColor(hexString: "#1572A1")
             }
             else{
                 cell.imgsave.image = UIImage(named: "save-3")
                 cell.lblSave.text = "Save"
+                cell.lblSave.textColor = UIColor(hexString: "#A6A6A6")
             }
             if obj.oppimage.count == 0{
                 cell.heightSocialPostCollectionView.constant = 0
@@ -386,6 +387,7 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                     }
                     cell.imglike.image = UIImage(named: "dil")
                     cell.lbllike.text = "Liked"
+                    cell.lbllike.textColor = .red
                 }
                 
                 if txt == "Rate"{
@@ -424,12 +426,14 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                             self.saveoppoertunityapi(oppr_id: oppid)
                             cell.imgsave.image = UIImage(named: "saveopr")
                             cell.lblSave.text = "Saved"
+                            cell.lblSave.textColor = UIColor(hexString: "#1572A1")
                         }
                         else{
                             let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
                             self.unsaveoppoertunityapi(oppr_id: oppid)
                             cell.imgsave.image = UIImage(named: "save-3")
                             cell.lblSave.text = "Save"
+                            cell.lblSave.textColor = UIColor(hexString: "#A6A6A6")
                         }
                     }
                     
@@ -438,6 +442,7 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                         self.unsaveoppoertunityapi(oppr_id: oppid)
                         cell.imgsave.image = UIImage(named: "save-3")
                         cell.lblSave.text = "Save"
+                        cell.lblSave.textColor = UIColor(hexString: "#A6A6A6")
                     }
                 }
                                       

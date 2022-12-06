@@ -77,7 +77,9 @@ class HomeVC: UIViewController{
                 guard let data = data, error == nil else { return }
                 
                 DispatchQueue.main.async { /// execute on main thread
-                    self.ImgUser.image = UIImage(data: data)
+//                    self.ImgUser.image = UIImage(data: data)
+//                    let userUrl = URL(string: url)
+                    self.ImgUser.sd_setImage(with: url, placeholderImage:UIImage(named: "Boss") )
                 }
             }
             task.resume()
@@ -138,7 +140,7 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                 if cameFrom != "FilterData"{
                     // cell.heightMainView.constant = 100
                     cell.heightViewCollectionview.constant = 50
-//                    cell.heightCollectionView.constant = 0
+                    //                    cell.heightCollectionView.constant = 0
                 }
             }else{
                 cell.callbacknavigation = { txt in
@@ -197,24 +199,27 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                 cell.lblcloseOpportunity.isHidden = false
             }
             
-            
             if String.getString(obj.is_user_like) == "1"{
                 cell.imglike.image = UIImage(named: "dil")
                 cell.lbllike.text = "Liked"
+                cell.lbllike.textColor = .red
                 
             }
             else{
                 cell.imglike.image = UIImage(named: "unlike")
                 cell.lbllike.text = "Like"
+                cell.lbllike.textColor = UIColor(hexString: "#A6A6A6")
             }
             
             if String.getString(obj.is_saved) == "1"{
                 cell.imgsave.image = UIImage(named: "saveopr")
                 cell.lblSave.text = "Saved"
+                cell.lblSave.textColor = UIColor(hexString: "#1572A1")
             }
             else{
                 cell.imgsave.image = UIImage(named: "save-3")
                 cell.lblSave.text = "Save"
+                cell.lblSave.textColor = UIColor(hexString: "#A6A6A6")
             }
             
             if String.getString(obj.is_flag) == "1"{
@@ -319,10 +324,10 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                             }
                             cell.imglike.image = UIImage(named: "dil")
                             cell.lbllike.text = "Liked"
+                            cell.lbllike.textColor = .red
                             
                             debugPrint("count=-==0-",self.count)
                             //   self.getallopportunity()
-                            
                         }
                     }
                 }
@@ -369,12 +374,14 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                                 self.saveoppoertunityapi(oppr_id: oppid)
                                 cell.imgsave.image = UIImage(named: "saveopr")
                                 cell.lblSave.text = "Saved"
+                                cell.lblSave.textColor = UIColor(hexString: "#1572A1")
                             }
                             else{
                                 let oppid = Int.getInt(userTimeLine[indexPath.row].id)
                                 self.unsaveoppoertunityapi(oppr_id: oppid)
                                 cell.imgsave.image = UIImage(named: "save-3")
                                 cell.lblSave.text = "Save"
+                                cell.lblSave.textColor = UIColor(hexString: "#A6A6A6")
                             }
                         }
                         else{
@@ -382,6 +389,7 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                             self.unsaveoppoertunityapi(oppr_id: oppid)
                             cell.imgsave.image = UIImage(named: "save-3")
                             cell.lblSave.text = "Save"
+                            cell.lblSave.textColor = UIColor(hexString: "#A6A6A6")
                         }
                     }
                 }
@@ -1320,7 +1328,6 @@ extension HomeVC{
             }
         }
         
-        
         let params:[String : Any] = [
             "oppr_id":oppr_id,
             "user_id":UserData.shared.id
@@ -1398,7 +1405,7 @@ extension HomeVC{
                             vc.imgarray  = self?.UserTimeLineOppdetails?.oppimage ?? []
                             vc.docarray = self?.UserTimeLineOppdetails?.oppdocument ?? []
                             debugPrint("imgaraay=-=-=-==-=", vc.imgarray)
-                
+                            
                         }
                         
                         else if Int.getInt(self?.UserTimeLineOppdetails?.category_id) == 4{
@@ -1432,7 +1439,6 @@ extension HomeVC{
             } else {
                 CommonUtils.showToastForDefaultError()
             }
-            
         }
     }
     

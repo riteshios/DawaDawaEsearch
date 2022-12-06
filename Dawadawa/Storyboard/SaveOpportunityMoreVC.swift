@@ -1,21 +1,27 @@
-//
 //  SaveOpportunityMoreVC.swift
 //  Dawadawa
-//
 //  Created by Ritesh Gupta on 10/08/22.
-//
+
 
 import UIKit
 
 class SaveOpportunityMoreVC: UIViewController {
+    
 
     var callback:((String)->())?
+    
+    @IBOutlet weak var lblChatwithuser: UILabel!
+    @IBOutlet weak var lblCopylink: UILabel!
+    @IBOutlet weak var lblFlagpost: UILabel!
+    @IBOutlet weak var lblReportuser: UILabel!
+    @IBOutlet weak var lblRemovedfromsaved: UILabel!
 
     @IBOutlet weak var Viewmain: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setup()
+        self.setuplanguage()
        
     }
     func setup(){
@@ -49,6 +55,14 @@ class SaveOpportunityMoreVC: UIViewController {
         self.callback?("Unsaved")
     }
     
-    
 }
-
+extension SaveOpportunityMoreVC{
+    func setuplanguage(){
+        lblChatwithuser.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Chat with user", comment: "")
+        lblChatwithuser.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Copy link", comment: "")
+        lblFlagpost.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Flag post", comment: "")
+        lblReportuser.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Report user", comment: "")
+        lblRemovedfromsaved.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Removed from saved", comment: "")
+        
+    }
+}

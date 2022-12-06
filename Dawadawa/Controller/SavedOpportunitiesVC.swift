@@ -1,4 +1,3 @@
-
 //  SavedOpportunitiesVC.swift
 //  Dawadawa
 //  Created by Ritesh Gupta on 09/08/22.
@@ -8,8 +7,12 @@ import UIKit
 
 class SavedOpportunitiesVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource {
     
+    @IBOutlet weak var lblheading:UILabel!
+    
     @IBOutlet weak var lblSaved:UILabel!
     @IBOutlet weak var btnViewAllSaved:UIButton!
+
+    @IBOutlet weak var lblInterested: UILabel!
     @IBOutlet weak var btnViewAllInterested: UIButton!
 
     @IBOutlet weak var CollectionViewSave: UICollectionView!
@@ -21,6 +24,7 @@ class SavedOpportunitiesVC: UIViewController,UICollectionViewDelegate,UICollecti
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setuplanguage()
 //        self.imgNoOpp.isHidden = true
     }
     
@@ -207,5 +211,17 @@ extension SavedOpportunitiesVC{
                 CommonUtils.showToastForDefaultError()
             }
         }
+    }
+}
+
+extension SavedOpportunitiesVC{
+    
+    func setuplanguage(){
+        lblheading.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Saved/Interested opportunities", comment: "")
+        lblSaved.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Saved", comment: "")
+        lblInterested.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Interested", comment: "")
+        btnViewAllSaved.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "View All", comment: ""), for: .normal)
+        btnViewAllInterested.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "View All", comment: ""), for: .normal)
+        
     }
 }

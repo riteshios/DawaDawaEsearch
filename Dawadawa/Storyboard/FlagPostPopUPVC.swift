@@ -1,9 +1,6 @@
-//
 //  FlagPostPopUPVC.swift
 //  Dawadawa
-//
 //  Created by Ritesh Gupta on 08/11/22.
-//
 
 import UIKit
 import IQKeyboardManagerSwift
@@ -41,11 +38,6 @@ class FlagPostPopUPVC: UIViewController {
         }
     }
     
-    
-    
-    
-    
-    
 
     // Api flag Opportunity
     
@@ -61,7 +53,6 @@ class FlagPostPopUPVC: UIViewController {
                 kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
             }
         }
-        
         
         let params:[String : Any] = [
             "opr_id":self.oppid,

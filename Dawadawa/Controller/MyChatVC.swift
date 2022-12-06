@@ -1,14 +1,12 @@
-//
 //  MyChatVC.swift
 //  Dawadawa
-
 //  Created by Ritesh Gupta on 01/11/22.
-
 
 import UIKit
 
 class MyChatVC: UIViewController, UITextFieldDelegate {
     
+    @IBOutlet weak var lblMyChat: UILabel!
     @IBOutlet weak var tblviewMyChat: UITableView!
     @IBOutlet weak var viewSearch: UIView!
     @IBOutlet weak var textFieldSearch:UITextField!
@@ -17,8 +15,11 @@ class MyChatVC: UIViewController, UITextFieldDelegate {
     var searchData = [user_detail]()
     var txtdata = ""
     
+//    MARK: - Life Cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setuplanguage()
         viewSearch.addShadowWithBlurOnView(viewSearch, spread: 0, blur: 10, color: .black, opacity: 0.16, OffsetX: 0, OffsetY: 1)
         self.textFieldSearch.delegate = self
         tblviewMyChat.register(UINib(nibName: "MyChatTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "MyChatTableViewCell")
@@ -28,9 +29,7 @@ class MyChatVC: UIViewController, UITextFieldDelegate {
         self.friendlistapi()
     }
     
-    
     //    MARK: - @IBAction
-    
     
     @IBAction func btnBackTapped(_ sender: UIButton) {
         
@@ -51,12 +50,13 @@ class MyChatVC: UIViewController, UITextFieldDelegate {
                 if range != nil {
                     searchData.append(dicData)
                 }
-                
             }
         }
         self.tblviewMyChat.reloadData()
     }
 }
+
+// MARK: - Tableview Delegate
 
 extension MyChatVC:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -74,6 +74,7 @@ extension MyChatVC:UITableViewDelegate,UITableViewDataSource{
         
         cell.lblName.text = String.getString(obj.name)
         cell.imgFriend.downlodeImage(serviceurl: imgurl , placeHolder: UIImage(named: "Boss"))
+        
         if Int.getInt(obj.unread) == 0{
             cell.viewCountMessage.isHidden = true
         }
@@ -90,18 +91,12 @@ extension MyChatVC:UITableViewDelegate,UITableViewDataSource{
                 vc.friendimage = String.getString(obj.social_profile)
                 self.navigationController?.pushViewController(vc, animated: true)
             }
-            
         }
-        
-        
         return cell
     }
-    
 }
-
-
+//  MARK: -   API Call
 extension MyChatVC {
-    //    API Call
     
     func friendlistapi(){
         //        CommonUtils.showHud(show: true)
@@ -164,5 +159,10 @@ extension MyChatVC {
             }
         }
     }
-    
+}
+extension MyChatVC{
+    func setuplanguage(){
+        lblMyChat.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "My Chat", comment: "")
+        textFieldSearch.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Search Names", comment: "")
+    }
 }
