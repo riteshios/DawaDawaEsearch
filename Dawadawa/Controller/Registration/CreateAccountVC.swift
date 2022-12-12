@@ -60,8 +60,6 @@ class CreateAccountVC: UIViewController {
         
     }
     
-    
-    
     func setup(){
         
         viewMain.clipsToBounds = true

@@ -138,12 +138,37 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
         self.viewSelectImage.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
         self.viewSelectDocument.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
         self.viewCreateOpportunity.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
-        self.setTextFieldUI(textField: txtFieldTitle, place: "Title", floatingText: "Title")
-        self.setTextFieldUI(textField: txtFieldLocationName, place: "Location name", floatingText: "Location name")
-        self.setTextFieldUI(textField: txtFieldMobileNumber, place: "Mobile number", floatingText: "Mobile number")
-        self.setTextFieldUI(textField: txtFieldWhatsappNumber, place: "WhatsApp number", floatingText: "WhatsApp number")
-        self.setTextFieldUI(textField: txtFieldPricing, place: "Price in US Dollar (optional)", floatingText: "Price in US Dollar (optional)")
         
+        if txtFieldTitle.text == ""{
+            self.setTextField(textField: txtFieldTitle, place: "Title", floatingText: "Title")
+        }
+        else{
+            self.setTextFieldUI(textField: txtFieldTitle, place: "Title", showFloating: true, floatingText: "Title")
+        }
+        if txtFieldLocationName.text == ""{
+            self.setTextField(textField: txtFieldLocationName, place: "Location name", floatingText: "Location name")
+        }
+        else{
+            self.setTextFieldUI(textField: txtFieldLocationName, place: "Location name", showFloating: true, floatingText: "Location name")
+        }
+        if txtFieldMobileNumber.text == ""{
+            self.setTextField(textField: txtFieldMobileNumber, place:  "Mobile number", floatingText: "Title")
+        }
+        else{
+            self.setTextFieldUI(textField: txtFieldMobileNumber, place:  "Mobile number", showFloating: true, floatingText: "Title")
+        }
+        if txtFieldWhatsappNumber.text == ""{
+            self.setTextField(textField: txtFieldWhatsappNumber, place: "WhatsApp number", floatingText: "WhatsApp number")
+        }
+        else{
+            self.setTextFieldUI(textField: txtFieldWhatsappNumber, place: "WhatsApp number", showFloating: true, floatingText: "WhatsApp number")
+        }
+        if txtFieldPricing.text == ""{
+            self.setTextField(textField: txtFieldPricing, place: "Price in US Dollar (optional)", floatingText: "Price in US Dollar (optional)")
+        }
+        else{
+            self.setTextFieldUI(textField: txtFieldPricing, place: "Price in US Dollar (optional)", showFloating: true, floatingText: "Price in US Dollar (optional)")
+        }
     }
     
     func fetdata(){
@@ -185,6 +210,7 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
             self.viewPremium.backgroundColor = UIColor(red: 21, green: 114, blue: 161)
             self.lblPremium.textColor = .white
         }
+        self.setup()
     }
     
     // MARK: - @IBActions
@@ -673,36 +699,35 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
         self.dismiss(animated: true, completion: nil)
     }
     
-    
     func savePdf(url:URL, fileName:String) {
         
     }
     
     func updateImageViewWithExtension(_ fileExtention:String) {
-        
-        
-        
+
     }
     
 }
 
 
 extension TrailingOpportunityVC{
+    func setTextFieldUI(textField:SKFloatingTextField,place:String,showFloating:Bool ,floatingText:String){
+        textField.delegate = self
+        textField.showFloatingTitle(isShow: showFloating)
+        //textField.placeholder = place
+        textField.activeBorderColor = .init(red: 21, green: 114, blue: 161)
+        textField.floatingLabelText = floatingText
+        textField.floatingLabelColor = .init(red: 21, green: 114, blue: 161)
+        textField.setRoundTFUI()
+    }
     
-    func setTextFieldUI(textField:SKFloatingTextField,place:String ,floatingText:String){
-        
+    func setTextField(textField:SKFloatingTextField,place:String,floatingText:String){
+        textField.delegate = self
         textField.placeholder = place
         textField.activeBorderColor = .init(red: 21, green: 114, blue: 161)
         textField.floatingLabelText = floatingText
         textField.floatingLabelColor = .init(red: 21, green: 114, blue: 161)
-        //floatingTextField.setRectTFUI()
-        //floatingTextField.setRoundTFUI()
-        //floatingTextField.setOnlyBottomBorderTFUI()
-        //        textField.setCircularTFUI()
         textField.setRoundTFUI()
-        textField.delegate = self
-        //floatingTextField.errorLabelText = "Error"
-        
     }
 }
 extension TrailingOpportunityVC : SKFlaotingTextFieldDelegate {
@@ -1171,9 +1196,6 @@ extension TrailingOpportunityVC{
             "longitude":String.getString(self.longitude),
             "cat_type_id":"0"
         ]
-        
-        
-        
         
         let uploadimage:[String:Any] = ["filenames[]":self.imagearr]
         let uploaddocument:[String:Any] = ["opportunity_documents[]":self.documentarr]

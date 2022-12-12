@@ -43,6 +43,7 @@ public final class STTabbar: UITabBar {
         self.shapeLayer = shapeLayer
         self.tintColor = centerButtonColor
         self.unselectedItemTintColor = unselectedItemColor
+        self.selectedImageTintColor = UIColor(red: 0.082, green: 0.447, blue: 0.631, alpha: 1)
         self.setupMiddleButton()
     }
     

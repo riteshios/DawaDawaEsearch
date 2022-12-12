@@ -77,7 +77,7 @@ class LoginVC: UIViewController {
     }
     
     @IBAction func btnCreateAccountTapped(_ sender: UIButton) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "CreateAccountVC") as! CreateAccountVC
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "EnterNameVC") as! EnterNameVC
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -214,15 +214,22 @@ extension LoginVC{
                         kSharedUserDefaults.setLoggedInUserDetails(loggedInUserDetails: data)
                         kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: String.getString(dictResult[kLoggedInAccessToken]))
                         UserData.shared.saveData(data: data, token: String.getString(dictResult[kLoggedInAccessToken]))
-                        
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                        kSharedAppDelegate?.makeRootViewController()
-                        
                         cameFrom = ""
                         
+                        if Int.getInt(UserData.shared.check_sub_plan) == 1{
+                            kSharedAppDelegate?.makeRootViewController()
+                           
+                        }
+                        else if Int.getInt(UserData.shared.check_sub_plan) == 0{
+
+                            let vc = self?.storyboard?.instantiateViewController(withIdentifier: "LoginSubscriptionPlanVC") as! LoginSubscriptionPlanVC
+                            self?.navigationController?.pushViewController(vc, animated: true)
+                
+                        }
+//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     else if  Int.getInt(dictResult["status"]) == 400{
-                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //   CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     else if Int.getInt(dictResult["status"]) == 401{

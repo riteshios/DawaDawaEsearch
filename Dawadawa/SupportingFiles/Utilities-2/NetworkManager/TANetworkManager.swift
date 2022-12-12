@@ -1035,8 +1035,6 @@ public class TANetworkManager {
         return headers
     }
     
-    
-    
     private func getHeaderWithAPIAndLanguageName(serviceName: String) -> [String: String] {
         var headers:[String: String] = [:]
         if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
@@ -1045,8 +1043,8 @@ public class TANetworkManager {
         else {
             headers["Authorization"] = ""
         }
-        if String.getString(kSharedUserDefaults.getlanguage) != ""{
-            headers["Accept-Language"] = String.getString(kSharedUserDefaults.getlanguage)
+        if String.getString(kSharedUserDefaults.getlanguage()) != ""{
+            headers["Accept-Language"] = String.getString(kSharedUserDefaults.getlanguage())
         }
         
         else {
@@ -1068,8 +1066,8 @@ public class TANetworkManager {
         else {
             headers["Authorization"] = ""
         }
-        if String.getString(kSharedUserDefaults.getlanguage) != ""{
-            headers["Accept-Language"] = String.getString(kSharedUserDefaults.getlanguage)
+        if String.getString(kSharedUserDefaults.getlanguage()) != ""{
+            headers["Accept-Language"] = String.getString(kSharedUserDefaults.getlanguage())
         }
         
         else {

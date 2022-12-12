@@ -1,9 +1,6 @@
-//
 //  ActivationCodeVC.swift
 //  Dawadawa
-//
 //  Created by Ritesh Gupta on 10/06/22.
-//
 
 import UIKit
 
@@ -167,7 +164,6 @@ class ActivationCodeVC: UIViewController{
             return false
         }
     }
-    
 }
 // MARK: - TextField Delegate
 
@@ -235,7 +231,6 @@ extension ActivationCodeVC{
             "email":self.email,
             "otp":self.otp]
 
-        
         TANetworkManager.sharedInstance.requestApi(withServiceName:ServiceName.kOtpVerify, requestMethod: .POST,
                                                    requestParameters:params, withProgressHUD: false)
         {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in

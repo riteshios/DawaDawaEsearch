@@ -72,7 +72,8 @@ class ProfileVC: UIViewController {
                 guard let data = data, error == nil else { return }
                 
                 DispatchQueue.main.async { /// execute on main thread
-                    self.ImageProfile.image = UIImage(data: data)
+//                    self.ImageProfile.image = UIImage(data: data)
+                    self.ImageProfile.sd_setImage(with: url, placeholderImage:UIImage(named: "Boss") )
                 }
             }
             
@@ -720,8 +721,6 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
             
             return cell
             
-            
-            
         default:
             return UITableViewCell()
         }
@@ -928,7 +927,7 @@ extension ProfileVC{
                     
                     else if  Int.getInt(dictResult["status"]) == 400{
                         
-                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //  CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                 default:
@@ -958,7 +957,6 @@ extension ProfileVC{
                 kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
             }
         }
-        
         
         let params:[String : Any] = [
             "user_id":Int.getInt(UserData.shared.id),

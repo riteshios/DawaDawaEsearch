@@ -11,13 +11,29 @@ class DeleteOpportunityPopUPVC: UIViewController {
     @IBOutlet weak var lblSubheading: UILabel!
     @IBOutlet weak var lblCancel: UILabel!
     @IBOutlet weak var lblDelete: UILabel!
+    @IBOutlet weak var viewBG: UIView!
+    @IBOutlet weak var viewCancel: UIView!
+    @IBOutlet weak var viewDelete: UIView!
+    
     
     var callback:((String)->())?
+    
+//    MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setuplanguage()
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if let touch = touches.first{
+            if viewBG == touch.view{
+                self.dismiss(animated: true)
+            }
+        }
+    }
+    
+//    MARK: - @IBAction
     
     @IBAction func btnCancelTapped(_ sender: UIButton) {
         self.dismiss(animated: true)
@@ -28,6 +44,8 @@ class DeleteOpportunityPopUPVC: UIViewController {
         self.callback?("Delete")
     }
 }
+
+// MARK: - Localisation
 
 extension DeleteOpportunityPopUPVC{
     func setuplanguage(){

@@ -50,7 +50,6 @@ class CurrentLocationVC: UIViewController{
         //       self.view = Mapview // To Show only on main view
         //        makeButton()
         
-        
         resultsViewController = GMSAutocompleteResultsViewController()
         resultsViewController?.delegate = self
         

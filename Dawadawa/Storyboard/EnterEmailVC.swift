@@ -11,7 +11,10 @@ class EnterEmailVC: UIViewController {
     @IBOutlet weak var lblName: UILabel!
     @IBOutlet weak var txtfldEmail: SKFloatingTextField!
     @IBOutlet weak var viewContinue: UIView!
+    
     var name = ""
+    var lastame = ""
+    var usertype = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,16 +27,38 @@ class EnterEmailVC: UIViewController {
         self.setTextFieldUI(textField: txtfldEmail, place: "Email*", floatingText: "Email")
     }
     
-//     MARK: - @IBACtion
+    //     MARK: - @IBACtion
     
     @IBAction func btnbackTapped(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func btnContinueTapped(_ sender: UIButton) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "EnterPhoneNumberVC") as! EnterPhoneNumberVC
-        self.navigationController?.pushViewController(vc, animated: true)
+        self.validation()
+    }
+    
+    
+    // MARK: - Validation
+    
+    func validation(){
         
+        if String.getString(self.txtfldEmail.text).isEmpty
+        {
+            showSimpleAlert(message: Notifications.kEnterEmail)
+            return
+        }
+        else if !String.getString(txtfldEmail.text).isEmail()
+        {
+            self.showSimpleAlert(message: Notifications.kEnterValidEmail)
+            
+        }
+        self.view.endEditing(true)
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "EnterPhoneNumberVC") as! EnterPhoneNumberVC
+        vc.name = self.name
+        vc.lastame = self.lastame
+        vc.usertype = self.usertype
+        vc.email = self.txtfldEmail.text ?? ""
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 

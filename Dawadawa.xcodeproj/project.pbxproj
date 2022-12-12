@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0405EC7D29430BEB00487E36 /* LoginSubscriptionPlanVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0405EC7C29430BEB00487E36 /* LoginSubscriptionPlanVC.swift */; };
 		0406774B2887FFEA0061AE70 /* ViewPostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040677492887FFEA0061AE70 /* ViewPostTableViewCell.swift */; };
 		0406774C2887FFEA0061AE70 /* ViewPostTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0406774A2887FFEA0061AE70 /* ViewPostTableViewCell.xib */; };
 		04067751288820B60061AE70 /* PremiumOppCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0406774F288820B60061AE70 /* PremiumOppCollectionViewCell.swift */; };
@@ -31,6 +32,8 @@
 		043F807528D4AD3900CD85F7 /* TransactionHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043F807328D4AD3900CD85F7 /* TransactionHistory.swift */; };
 		043F807628D4AD3900CD85F7 /* TransactionHistory.xib in Resources */ = {isa = PBXBuildFile; fileRef = 043F807428D4AD3900CD85F7 /* TransactionHistory.xib */; };
 		044D71762861988B0054DAA5 /* SettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044D71752861988B0054DAA5 /* SettingVC.swift */; };
+		0454D0372941E4E9003BB307 /* CountryStatePopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0454D0362941E4E9003BB307 /* CountryStatePopUpVC.swift */; };
+		0454D0392941E5CF003BB307 /* CountryState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0454D0382941E5CF003BB307 /* CountryState.swift */; };
 		045BD9BE285844DA00A848FA /* Product Sans Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 045BD9BD285844DA00A848FA /* Product Sans Regular.ttf */; };
 		045C4E6A28895DC600E831AA /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045C4E6928895DC600E831AA /* SearchVC.swift */; };
 		045C4E6D28895EE800E831AA /* PopularSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045C4E6B28895EE800E831AA /* PopularSearchTableViewCell.swift */; };
@@ -682,6 +685,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0405EC7C29430BEB00487E36 /* LoginSubscriptionPlanVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginSubscriptionPlanVC.swift; path = Dawadawa/Storyboard/LoginSubscriptionPlanVC.swift; sourceTree = SOURCE_ROOT; };
 		040677492887FFEA0061AE70 /* ViewPostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewPostTableViewCell.swift; sourceTree = "<group>"; };
 		0406774A2887FFEA0061AE70 /* ViewPostTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewPostTableViewCell.xib; sourceTree = "<group>"; };
 		0406774F288820B60061AE70 /* PremiumOppCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumOppCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -706,6 +710,8 @@
 		043F807328D4AD3900CD85F7 /* TransactionHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHistory.swift; sourceTree = "<group>"; };
 		043F807428D4AD3900CD85F7 /* TransactionHistory.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransactionHistory.xib; sourceTree = "<group>"; };
 		044D71752861988B0054DAA5 /* SettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingVC.swift; sourceTree = "<group>"; };
+		0454D0362941E4E9003BB307 /* CountryStatePopUpVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryStatePopUpVC.swift; sourceTree = "<group>"; };
+		0454D0382941E5CF003BB307 /* CountryState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryState.swift; sourceTree = "<group>"; };
 		045BD9BD285844DA00A848FA /* Product Sans Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Product Sans Regular.ttf"; sourceTree = "<group>"; };
 		045C4E6928895DC600E831AA /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SearchVC.swift; path = Dawadawa/Storyboard/SearchVC.swift; sourceTree = SOURCE_ROOT; };
 		045C4E6B28895EE800E831AA /* PopularSearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularSearchTableViewCell.swift; sourceTree = "<group>"; };
@@ -1772,8 +1778,10 @@
 				0481C0232938DA7000A62D30 /* EnterEmailVC.swift */,
 				0481C0252938E1A800A62D30 /* EnterPhoneNumberVC.swift */,
 				04A71CA82939DEE700C29394 /* EnterResidenceVC.swift */,
+				0454D0362941E4E9003BB307 /* CountryStatePopUpVC.swift */,
 				04AE6FB7293A007B00B27B9C /* EnterPasswordVC.swift */,
 				3D0B08512854B8F700590891 /* LoginVC.swift */,
+				0405EC7C29430BEB00487E36 /* LoginSubscriptionPlanVC.swift */,
 				447DCE672851CB7D00C40DDD /* CreateAccountVC.swift */,
 				3D0C9647285581F6000384BD /* ResetPasswordVC.swift */,
 				3D0C964528557FC2000384BD /* ForgotPasswordVC.swift */,
@@ -2595,6 +2603,7 @@
 				0432E33C286430EA00B4B40D /* userData.swift */,
 				04647ECD287831540006B8D2 /* Category.swift */,
 				0461E31C288AB0D800B7F0E7 /* SocialPost.swift */,
+				0454D0382941E5CF003BB307 /* CountryState.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3285,6 +3294,7 @@
 				049D83582938885500302CC7 /* SubCommentTableViewCell.swift in Sources */,
 				0489D1982892B12300725664 /* SubcategoryTableViewCell.swift in Sources */,
 				0406DB7E287D3DF700B57A0B /* TrailingOpportunityVC.swift in Sources */,
+				0454D0392941E5CF003BB307 /* CountryState.swift in Sources */,
 				04067755288831290061AE70 /* SocialPostTableViewCell.swift in Sources */,
 				042293C02869B1E2000503B7 /* VerifyNewNumberOTPVC.swift in Sources */,
 				447DCE642851CB1300C40DDD /* AppConstant.swift in Sources */,
@@ -3359,6 +3369,7 @@
 				04A73F402876E05C00A46E12 /* RockPitOpportunityVC.swift in Sources */,
 				447DCC822851CB1100C40DDD /* UIImageViewCornerRadius.swift in Sources */,
 				043EBE332869ABD8001EBA02 /* VerifyNumberOTPVC.swift in Sources */,
+				0405EC7D29430BEB00487E36 /* LoginSubscriptionPlanVC.swift in Sources */,
 				447DCC742851CB1100C40DDD /* LocalePickerViewController.swift in Sources */,
 				045C4E7E28897ACC00E831AA /* PremiumOpportunitiesVC.swift in Sources */,
 				447DCC812851CB1100C40DDD /* UIImageViewBorderWidthAndColor.swift in Sources */,
@@ -3368,6 +3379,7 @@
 				049F4A9128FFD870009AB128 /* PaymentForFeatureandPremiumPopUPVC.swift in Sources */,
 				447DCC622851CB1100C40DDD /* UIImageView+Extensions.swift in Sources */,
 				447DCE582851CB1300C40DDD /* MTGoogleHelper.swift in Sources */,
+				0454D0372941E4E9003BB307 /* CountryStatePopUpVC.swift in Sources */,
 				0481C0242938DA7100A62D30 /* EnterEmailVC.swift in Sources */,
 				447DCC762851CB1100C40DDD /* CurrencyCell.swift in Sources */,
 				04F9E2FB2887DF8700415C52 /* HomeVC.swift in Sources */,

@@ -349,7 +349,7 @@ class FilterVC: UIViewController {
             self.lblClosed.textColor = UIColor(red: 21, green: 114, blue: 161)
             self.viewSold.backgroundColor = UIColor(red: 241, green: 249, blue: 253)
             self.lblSold.textColor = UIColor(red: 21, green: 114, blue: 161)
-            self.oppstatus = 2
+            self.oppstatus = 0
             filteredArray.append("Available")
               for i in 0 ..< filteredArray.count - 1{
                         if filteredArray[i] == "All"{
@@ -410,8 +410,8 @@ class FilterVC: UIViewController {
             self.lblAll.textColor = UIColor(red: 21, green: 114, blue: 161)
             self.oppstatus = 5
         }
-        
     }
+    
     
     @IBAction func btnTodayTapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
@@ -1368,7 +1368,7 @@ extension FilterVC{
             "user_id":Int.getInt(UserData.shared.id),
             "most_like":String.getString(like),
             "rating":String.getString(rating),
-            "opp_status":Int.getInt(oppstatus),
+            "opr_status":Int.getInt(oppstatus),
             "opr_type":selectedoptype,
             "opr_subtype":selectedsuboptype,
             "date":Int.getInt(today),

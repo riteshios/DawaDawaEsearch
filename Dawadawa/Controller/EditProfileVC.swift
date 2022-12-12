@@ -59,7 +59,7 @@ class EditProfileVC: UIViewController {
     @IBOutlet weak var lblArabic: UILabel!
     @IBOutlet weak var lblWhatsNumber: UILabel!
     @IBOutlet weak var btnSaveChanges: UIButton!
- 
+    
     
     var getstatelistarr        =      [getstateModel]()
     var getlocalitylistarr     =      [getlocalityModel]()
@@ -593,7 +593,7 @@ extension EditProfileVC{
                 kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
             }
         }
-    
+        
         TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName: ServiceName.kgetstate, requestMethod: .GET, requestParameters:[:], withProgressHUD: false) { (result:Any?, error:Error?, errorType:ErrorType?,statusCode:Int?) in
             CommonUtils.showHudWithNoInteraction(show: false)
             if errorType == .requestSuccess {

@@ -1,7 +1,6 @@
 //
 //  SMTextField.swift
 //  SmartVCApp
-//
 //  Created by Sandeep on 01/03/21.
 //
 
@@ -218,7 +217,7 @@ public class SKFloatingTextField : UIView {
         self.textField.addTarget(self, action: #selector(textFieldDidEndEditing), for: .editingDidEnd)
         self.textField.addTarget(self, action: #selector(textFieldDidBeginEditing), for: .editingDidBegin)
         self.textField.addTarget(self, action: #selector(textFieldDidChangeSelection), for: .editingChanged)
-        
+        self.textField.tintColor = #colorLiteral(red: 0.06835500151, green: 0.5241013765, blue: 0.69299227, alpha: 1)
     }
     /**
      Member Methods
@@ -286,9 +285,9 @@ public class SKFloatingTextField : UIView {
         (self.delegate as? SKFlaotingTextFieldDelegate)?.didTapOnRightView?(textField: self)
     }
     
-    public func showTitle(){
-        self.titleView.isHidden = false
-    }
+    public func showFloatingTitle(isShow:Bool) {
+            self.titleView.isHidden = isShow == true ? false : true
+        }
     
     public func hideTitle(){
         self.titleView.isHidden = true
@@ -317,7 +316,7 @@ extension SKFloatingTextField{
         (self.delegate as? SKFlaotingTextFieldDelegate)?.textFieldDidEndEditing?(textField: self)
     }
     @objc fileprivate func textFieldDidBeginEditing() {
-        self.showTitle()
+        self.showFloatingTitle(isShow: true)
         self.placeholder = ""
         if let color = self.activeBorderColor {
             self.textField.layer.borderColor = color.cgColor
@@ -327,7 +326,7 @@ extension SKFloatingTextField{
     }
     @objc fileprivate func textFieldDidChangeSelection() {
         self.placeholder = ""
-        self.showTitle()
+        self.showFloatingTitle(isShow: true)
         self.errorLabelText = ""
         if let color = self.activeBorderColor {
             self.textField.layer.borderColor = color.cgColor

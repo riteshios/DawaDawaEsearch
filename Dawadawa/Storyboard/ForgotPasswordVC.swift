@@ -111,6 +111,8 @@ class ForgotPasswordVC: UIViewController {
     }
 }
 
+// MARK: - Textfield Delegate
+
 extension ForgotPasswordVC{
     
     func setTextFieldUI(textField:SKFloatingTextField,place:String ,floatingText:String){
@@ -143,6 +145,8 @@ extension ForgotPasswordVC : SKFlaotingTextFieldDelegate {
         print("begin editing")
     }
 }
+
+// MARK: - Api Call
 
 extension ForgotPasswordVC{
     func forgotpasswordapi(){
@@ -217,6 +221,8 @@ extension ForgotPasswordVC{
         }
     }
 }
+
+// MARK: - Localisation
 
 extension ForgotPasswordVC{
     func setuplanguage(){

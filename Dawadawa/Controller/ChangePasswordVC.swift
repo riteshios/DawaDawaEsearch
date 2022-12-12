@@ -27,10 +27,20 @@ class ChangePasswordVC: UIViewController {
         self.viewBtnChangePassword.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
     }
     
+    @IBAction func btnSecureNewPasswordTapped(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        self.txtFieldNewPassword.isSecureTextInput.toggle()
+    }
+    @IBAction func btnSecureConfirmPasswordTapped(_ sender: UIButton){
+        sender.isSelected = !sender.isSelected
+        self.txtFieldConfirmPassword.isSecureTextInput.toggle()
+    }
+    
     @IBAction func btnChangePasswordTapped(_ sender: UIButton) {
         //        self.callbackchangepassword?()
         self.fieldValidations()
     }
+    
     
     //   MARK: - Validation
     

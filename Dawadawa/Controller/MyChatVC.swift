@@ -15,7 +15,7 @@ class MyChatVC: UIViewController, UITextFieldDelegate {
     var searchData = [user_detail]()
     var txtdata = ""
     
-//    MARK: - Life Cycle
+    //    MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -91,6 +91,22 @@ extension MyChatVC:UITableViewDelegate,UITableViewDataSource{
                 vc.friendimage = String.getString(obj.social_profile)
                 self.navigationController?.pushViewController(vc, animated: true)
             }
+            
+            if txt == "Delete"{
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: DeleteChatPopUPVC.getStoryboardID()) as! DeleteChatPopUPVC
+                vc.modalTransitionStyle = .crossDissolve
+                vc.modalPresentationStyle = .overCurrentContext
+                vc.callback = { txt in
+                    
+                    if txt == "Dismiss"{
+                        self.dismiss(animated: true)
+                    }
+                    if txt == "DeleteChat"{
+                        self.deleteChatapi(friendid: Int.getInt(obj.id))
+                        self.dismiss(animated: true)
+                    }
+                }
+                self.present(vc, animated: false)            }
         }
         return cell
     }
@@ -146,6 +162,64 @@ extension MyChatVC {
                     }
                     else if Int.getInt(dictResult["status"]) == 401{
                         //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    }
+                    
+                default:
+                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                }
+            } else if errorType == .noNetwork {
+                CommonUtils.showToastForInternetUnavailable()
+                
+            } else {
+                CommonUtils.showToastForDefaultError()
+            }
+        }
+    }
+    
+    //    API Delete Chat
+    func deleteChatapi(friendid:Int){
+        CommonUtils.showHud(show: true)
+        
+        if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
+            let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+            let septoken = endToken.components(separatedBy: " ")
+            if septoken[0] != "Bearer"{
+                let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
+                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
+            }
+        }
+        
+        let params:[String : Any] = [
+            "delete_id":friendid,
+            "login_user_id":UserData.shared.id
+        ]
+        
+        TANetworkManager.sharedInstance.requestApi(withServiceName:ServiceName.kdeleteUsermessage, requestMethod: .POST,
+                                                   requestParameters:params, withProgressHUD: false)
+        {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
+            
+            CommonUtils.showHudWithNoInteraction(show: false)
+            
+            if errorType == .requestSuccess {
+                
+                let dictResult = kSharedInstance.getDictionary(result)
+                
+                switch Int.getInt(statusCode) {
+                case 200:
+                    
+                    if Int.getInt(dictResult["status"]) == 200{
+                        
+                        let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+                        let septoken = endToken.components(separatedBy: " ")
+                        if septoken[0] == "Bearer"{
+                            kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
+                        }
+                        CommonUtils.showError(.info, String.getString(dictResult["messages"]))
+                        self?.friendlistapi()
+                        
+                    }
+                    else if Int.getInt(dictResult["status"]) == 400{
+                        CommonUtils.showError(.info, String.getString(dictResult["messages"]))
                     }
                     
                 default:

@@ -10,8 +10,13 @@ class EnterNameVC: UIViewController {
     @IBOutlet weak var viewMain: UIView!
     @IBOutlet weak var txtFieldFirstName: SKFloatingTextField!
     @IBOutlet weak var txtFieldLastName: SKFloatingTextField!
+    @IBOutlet weak var lblUserType: UILabel!
+    @IBOutlet weak var btnDropUserType: UIButton!
     @IBOutlet weak var viewContinue: UIView!
-    var name = ""
+    
+
+    var usertype = 0
+    var isSelectuser = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,12 +40,63 @@ class EnterNameVC: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
+   
+    @IBAction func btnSelectUserTypeTapped(_ sender: UIButton){
+        let dataSource1 = ["Investor","Business Owner","Service Provider"]
+        kSharedAppDelegate?.dropDown(dataSource:dataSource1 , text: btnDropUserType)
+        {(Index ,item) in
+            self.lblUserType.text = item
+            self.usertype = Index
+            self.isSelectuser = true
+            debugPrint("usertpe=-=-=",self.usertype)
+        }
+    }
+    
     @IBAction func btnContinueTapped(_ sender: UIButton) {
+        self.validation()
+    }
+    
+//    MARK: - Validation
+    
+    func validation(){
+        
+        if String.getString(self.txtFieldFirstName.text).isEmpty
+        {
+            self.showSimpleAlert(message: Notifications.kFirstName)
+            return
+        }
+        else if !String.getString(self.txtFieldFirstName.text).isValidUserName()
+        {
+            self.showSimpleAlert(message: Notifications.kvalidfirsname)
+            return
+        }
+        
+        else if String.getString(self.txtFieldLastName.text).isEmpty
+        {
+            showSimpleAlert(message: Notifications.kLastName)
+            return
+        }
+        else if !String.getString(txtFieldLastName.text).isValidUserName()
+        {
+            self.showSimpleAlert(message: Notifications.kvalidlastname)
+            return
+            
+        }
+        else if self.isSelectuser == false{
+            self.showSimpleAlert(message: "Please Select Who Are you")
+        }
+        
+        self.view.endEditing(true)
+        
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "EnterEmailVC") as! EnterEmailVC
         vc.name = self.txtFieldFirstName.text ?? ""
+        vc.lastame = self.txtFieldLastName.text ?? ""
+        vc.usertype = self.usertype
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
+
+// MARK: - Textfield Delegate
 
 extension EnterNameVC{
     func setTextFieldUI(textField:SKFloatingTextField,place:String ,floatingText:String){

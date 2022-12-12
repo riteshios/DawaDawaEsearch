@@ -160,6 +160,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.shared.windows.first?.rootViewController = navigationController
         UIApplication.shared.windows.first?.makeKeyAndVisible()
     }
+    
+    func moveTOLoginSubscriptionPlanScreen(){
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyBoard.instantiateViewController(identifier:"LoginSubscriptionPlanVC") as! LoginSubscriptionPlanVC
+        let navigationController = UINavigationController(rootViewController: vc)
+        navigationController.setNavigationBarHidden(true, animated: true)
+        UIApplication.shared.windows.first?.rootViewController = navigationController
+        UIApplication.shared.windows.first?.makeKeyAndVisible()
+    }
+    
+    
     func dropDown(dataSource:[String] , text:UIView , completion: @escaping ( _ index: Int ,    _ item: String) -> ()) -> Void {
         let dropDown = DropDown()
         dropDown.anchorView = text

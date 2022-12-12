@@ -30,4 +30,9 @@ class MyChatTableViewCell: UITableViewCell {
     @IBAction func btnChatTapped(_ sender: UIButton) {
         self.callback?("Chat")
     }
+    
+    @IBAction func btnDeleteTapped(_ sender: UIButton) {
+        self.callback?("Delete")
+    }
+    
 }

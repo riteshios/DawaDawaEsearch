@@ -1,9 +1,7 @@
-//
 //  userData.swift
 //  Dawadawa
-//
 //  Created by Ritesh Gupta on 23/06/22.
-//
+
 
 import Foundation
 class UserData{
@@ -20,6 +18,7 @@ class UserData{
     var whatspp_number:String?
     var social_profile:String?
     var g_id:String?
+    var check_sub_plan:Int?
     var about:String?
     var user_gender:String?
     var user_type:String?
@@ -48,6 +47,7 @@ class UserData{
         self.whatspp_number = String.getString(data["whatspp_number"])
         self.social_profile = String.getString(data["social_profile"])
         self.g_id = String.getString(data["g_id"])
+        self.check_sub_plan = Int.getInt(data["check_sub_plan"])
         self.about = String.getString(data["about"])
         self.user_gender = String.getString(data["user_gender"])
         self.user_type = String.getString(data["user_type"])

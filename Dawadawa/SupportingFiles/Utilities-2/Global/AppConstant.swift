@@ -92,6 +92,7 @@ struct ServiceName {
     static let kprivacypolicy         =         "api/privacy-policy"
     static let kAboutUs               =         "api/about"
     static let kFaq                   =         "api/faq"
+   
     
     static let kgetcategory           =        "api/category"
     static let ksubcategory           =        "api/sub-category"

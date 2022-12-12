@@ -20,7 +20,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if ((kSharedUserDefaults.getLoggedInAccessToken() as? String) != ""){
 //            print("\(kSharedUserDefaults.getLoggedInAccessToken())")
             kSharedUserDefaults.getLoggedInUserDetails()
-            kSharedAppDelegate?.makeRootViewController()
+//            kSharedAppDelegate?.makeRootViewController()
+            if Int.getInt(UserData.shared.check_sub_plan) == 1{
+                kSharedAppDelegate?.makeRootViewController()
+               
+            }
+            else if Int.getInt(UserData.shared.check_sub_plan) == 0{
+                kSharedAppDelegate?.moveTOLoginSubscriptionPlanScreen()
+            }
         }
         else{
             kSharedAppDelegate?.moveToLoginScreen()

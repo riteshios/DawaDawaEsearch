@@ -521,12 +521,7 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
                 self.tblViewPremiumOpp?.endUpdates()
             }
             
-            
-            
-            
             return cell
-            
-            
             
         default:
             return UITableViewCell()
@@ -536,7 +531,8 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section{
         case 0:
-            return 65
+            return 0
+            
         case 1:
             return UITableView.automaticDimension
             

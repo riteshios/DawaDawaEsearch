@@ -1,9 +1,6 @@
-//
 //  Category.swift
 //  Dawadawa
-//
 //  Created by Ritesh Gupta on 08/07/22.
-//
 
 import Foundation
 import SwiftyJSON

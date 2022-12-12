@@ -46,7 +46,6 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
     @IBOutlet weak var lblPremium: UILabel!
     @IBOutlet weak var btnPremium: UIButton!
     
-    
     @IBOutlet weak var viewCreateOpportunity: UIView!
     @IBOutlet weak var viewSelectCategoryTop: NSLayoutConstraint!
     @IBOutlet weak var btnSelectImage: UIButton!
@@ -61,7 +60,6 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
     @IBOutlet weak var btnCreateOpp: UIButton!
     @IBOutlet weak var viewSelectImage: UIView!
     @IBOutlet weak var viewSelectDocument: UIView!
-    
     
     var stateid:Int?
     var localityid:Int?
@@ -139,14 +137,49 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
         self.viewSelectImage.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
         self.viewSelectDocument.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
         self.viewCreateOpportunity.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
-        self.setTextFieldUI(textField: txtFieldTitle, place: "Title", floatingText: "Title")
-        self.setTextFieldUI(textField: txtFieldLocationName, place: "Location name", floatingText: "Location name")
-        self.setTextFieldUI(textField: txtFieldMobileNumber, place: "Mobile number", floatingText: "Mobile number")
-        self.setTextFieldUI(textField: txtFieldWhatsappNumber, place: "WhatsApp number", floatingText: "WhatsApp number")
-        self.setTextFieldUI(textField: txtFieldPricing, place: "Price in US Dollar (optional)", floatingText: "Price in US Dollar (optional)")
-        self.setTextFieldUI(textField: txtFieldBusinessName, place: "Business name", floatingText: "Business name")
-        self.setTextFieldUI(textField: txtFieldBusinessMiningBlock, place: "Business mining BLOCK", floatingText: "Business mining BLOCK")
         
+        if txtFieldTitle.text == ""{
+            self.setTextField(textField: txtFieldTitle, place: "Title", floatingText: "Title")
+        }
+        else{
+            self.setTextFieldUI(textField: txtFieldTitle, place: "Title", showFloating: true, floatingText: "Title")
+        }
+        if txtFieldLocationName.text == ""{
+            self.setTextField(textField: txtFieldLocationName, place: "Location name", floatingText: "Location name")
+        }
+        else{
+            self.setTextFieldUI(textField: txtFieldLocationName, place: "Location name", showFloating: true, floatingText: "Location name")
+        }
+        if txtFieldMobileNumber.text == ""{
+            self.setTextField(textField: txtFieldMobileNumber, place:  "Mobile number", floatingText: "Title")
+        }
+        else{
+            self.setTextFieldUI(textField: txtFieldMobileNumber, place:  "Mobile number", showFloating: true, floatingText: "Title")
+        }
+        if txtFieldWhatsappNumber.text == ""{
+            self.setTextField(textField: txtFieldWhatsappNumber, place: "WhatsApp number", floatingText: "WhatsApp number")
+        }
+        else{
+            self.setTextFieldUI(textField: txtFieldWhatsappNumber, place: "WhatsApp number", showFloating: true, floatingText: "WhatsApp number")
+        }
+        if txtFieldPricing.text == ""{
+            self.setTextField(textField: txtFieldPricing, place: "Price in US Dollar (optional)", floatingText: "Price in US Dollar (optional)")
+        }
+        else{
+            self.setTextFieldUI(textField: txtFieldPricing, place: "Price in US Dollar (optional)", showFloating: true, floatingText: "Price in US Dollar (optional)")
+        }
+        if self.txtFieldBusinessName.text == ""{
+            self.setTextField(textField: txtFieldBusinessName, place: "Business name", floatingText: "Business name")
+        }
+        else{
+            self.setTextFieldUI(textField: txtFieldBusinessName, place: "Business name", showFloating: true, floatingText: "Business name")
+        }
+        if txtFieldBusinessMiningBlock.text == ""{
+            self.setTextField(textField: txtFieldBusinessMiningBlock, place: "Business mining BLOCK", floatingText: "Business mining BLOCK")
+        }
+        else{
+            self.setTextFieldUI(textField: txtFieldBusinessMiningBlock, place: "Business mining BLOCK", showFloating: true, floatingText: "Business mining BLOCK")
+        }
     }
     
     func fetchdata(){
@@ -159,8 +192,8 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
         self.txtFieldBusinessName.text = self.userTimeLineoppdetails?.business_name
         self.lblBusinesstype.text = self.userTimeLineoppdetails?.business_mining_type
         self.txtFieldBusinessMiningBlock.text = self.userTimeLineoppdetails?.business_mining_block
-//        self.lblState.text = self.userTimeLineoppdetails?.opp_state
-//        self.lblLocality.text = self.userTimeLineoppdetails?.opp_locality
+        //        self.lblState.text = self.userTimeLineoppdetails?.opp_state
+        //        self.lblLocality.text = self.userTimeLineoppdetails?.opp_locality
         self.txtFieldLocationName.text = self.userTimeLineoppdetails?.location_name
         
         self.TextViewDescription.text = self.userTimeLineoppdetails?.description
@@ -192,6 +225,7 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
             self.viewPremium.backgroundColor = UIColor(red: 21, green: 114, blue: 161)
             self.lblPremium.textColor = .white
         }
+        self.setup()
     }
     
     // MARK: - @IBActions
@@ -337,8 +371,8 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
             self.isSelectState = true
             
         }
-        
     }
+    
     @IBAction func btnLocalityTapped(_ sender: UIButton) {
         kSharedAppDelegate?.dropDown(dataSource: getlocalitylist.map{String.getString($0.local_name)}, text: btnLocality){
             (index,item) in
@@ -425,7 +459,7 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
             self.updateopportunityapi()
         }
         else{
-        self.Validation()
+            self.Validation()
         }
         
     }
@@ -433,14 +467,14 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
     //    MARK: - Validation
     
     func Validation(){
-//        if self.isSelectimage == false && self.imagearr.count == 0{
-//            self.showSimpleAlert(message: "Please Select the image")
-//            return
-//        }
-//        else if self.isSelectDocument == false && self.documentarr.count == 0 {
-//            self.showSimpleAlert(message: "Please Select the Document")
-//            return
-//        }
+        //        if self.isSelectimage == false && self.imagearr.count == 0{
+        //            self.showSimpleAlert(message: "Please Select the image")
+        //            return
+        //        }
+        //        else if self.isSelectDocument == false && self.documentarr.count == 0 {
+        //            self.showSimpleAlert(message: "Please Select the Document")
+        //            return
+        //        }
         //            else if self.isSelectSubcategory == false{
         //                self.showSimpleAlert(message: "Please Select the Subcategory")
         //                return
@@ -479,11 +513,11 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
             return
         }
         
-//        else if String.getString(self.txtFieldLocationName.text).isEmpty
-//        {
-//            showSimpleAlert(message: Notifications.kLocationName)
-//            return
-//        }
+        //        else if String.getString(self.txtFieldLocationName.text).isEmpty
+        //        {
+        //            showSimpleAlert(message: Notifications.kLocationName)
+        //            return
+        //        }
         else if String.getString(self.TextViewDescription.text).isEmpty{
             showSimpleAlert(message: Notifications.kDescription)
             return
@@ -500,16 +534,16 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
             return
         }
         
-//        else if String.getString(self.txtFieldWhatsappNumber.text).isEmpty
-//        {
-//            showSimpleAlert(message: Notifications.kwhatsappnumber)
-//            return
-//        }
-//        else if !String.getString(self.txtFieldWhatsappNumber.text).isPhoneNumber()
-//        {
-//            self.showSimpleAlert(message: Notifications.kvalidwhatsappnumber)
-//            return
-//        }
+        //        else if String.getString(self.txtFieldWhatsappNumber.text).isEmpty
+        //        {
+        //            showSimpleAlert(message: Notifications.kwhatsappnumber)
+        //            return
+        //        }
+        //        else if !String.getString(self.txtFieldWhatsappNumber.text).isPhoneNumber()
+        //        {
+        //            self.showSimpleAlert(message: Notifications.kvalidwhatsappnumber)
+        //            return
+        //        }
         else if self.isSelectLookingFor == false{
             self.showSimpleAlert(message: "Please Select looking For")
             return
@@ -538,16 +572,14 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
             else{
                 return self.imagearr.count
             }
-           
             
         case self.UploaddocumentCollectionView:
             if self.isedit == "True"{
                 return self.docarray.count
             }
             else {
-              return self.docummentarray.count
+                return self.docummentarray.count
             }
-            
         default: return 5
         }
     }
@@ -556,7 +588,6 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
         switch collectionView{
         case self.UploadimageCollectionView:
             let cell = UploadimageCollectionView.dequeueReusableCell(withReuseIdentifier: "UploadImageCollectionViewCell", for: indexPath) as! UploadImageCollectionViewCell
-            
             
             if self.isedit == "True"{
                 let imgurl = self.imgarray[indexPath.item].imageurl
@@ -567,9 +598,9 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
                     cell.image.image = self.imgarray[indexPath.item].img
                 }
                 else{
-                let imageurl = "\(self.imgUrl)/\(String.getString(imgurl))"
-                print("-=imageurl=-=-\(imageurl)")
-                cell.image.downlodeImage(serviceurl: imageurl, placeHolder: UIImage(named: "baba"))
+                    let imageurl = "\(self.imgUrl)/\(String.getString(imgurl))"
+                    print("-=imageurl=-=-\(imageurl)")
+                    cell.image.downlodeImage(serviceurl: imageurl, placeHolder: UIImage(named: "baba"))
                 }
                 
                 
@@ -609,17 +640,17 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
                     self.UploaddocumentCollectionView.reloadData()
                     
                 }
-              
+                
             }
             
             else{
-            cell.lbldocument.text = docummentarray[indexPath.row]
-            cell.callbackclose = {
-                self.docummentarray.remove(at: indexPath.row)
-                self.UploaddocumentCollectionView.reloadData()
-                
+                cell.lbldocument.text = docummentarray[indexPath.row]
+                cell.callbackclose = {
+                    self.docummentarray.remove(at: indexPath.row)
+                    self.UploaddocumentCollectionView.reloadData()
+                    
+                }
             }
-        }
             return cell
             
         default: return UICollectionViewCell()
@@ -719,24 +750,29 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
     
 }
 
+// MARK: - Textfield Delegate
+
 extension MiningServiceVC{
+    func setTextFieldUI(textField:SKFloatingTextField,place:String,showFloating:Bool ,floatingText:String){
+        textField.delegate = self
+        textField.showFloatingTitle(isShow: showFloating)
+        //textField.placeholder = place
+        textField.activeBorderColor = .init(red: 21, green: 114, blue: 161)
+        textField.floatingLabelText = floatingText
+        textField.floatingLabelColor = .init(red: 21, green: 114, blue: 161)
+        textField.setRoundTFUI()
+    }
     
-    func setTextFieldUI(textField:SKFloatingTextField,place:String ,floatingText:String){
-        
+    func setTextField(textField:SKFloatingTextField,place:String,floatingText:String){
+        textField.delegate = self
         textField.placeholder = place
         textField.activeBorderColor = .init(red: 21, green: 114, blue: 161)
         textField.floatingLabelText = floatingText
         textField.floatingLabelColor = .init(red: 21, green: 114, blue: 161)
-        //floatingTextField.setRectTFUI()
-        //floatingTextField.setRoundTFUI()
-        //floatingTextField.setOnlyBottomBorderTFUI()
-        //        textField.setCircularTFUI()
         textField.setRoundTFUI()
-        textField.delegate = self
-        //floatingTextField.errorLabelText = "Error"
-        
     }
 }
+
 extension MiningServiceVC : SKFlaotingTextFieldDelegate {
     
     func textFieldDidEndEditing(textField: SKFloatingTextField) {
@@ -885,7 +921,7 @@ extension MiningServiceVC{
         let kStatus = "status"
         let kMessage = "message"
         let kCategories = "Categories"
-    
+        
         var responsecode = 0
         var status = 0
         var message = ""
@@ -963,8 +999,6 @@ extension MiningServiceVC{
         let kStatus = "status"
         let kMessage = "message"
         let kState = "state"
-        
-        
         
         var responsecode = 0
         var status = 0
@@ -1125,8 +1159,6 @@ extension MiningServiceVC{
         let kMessage = "message"
         let kbmy = "bmy"
         
-        
-        
         var responsecode = 0
         var status = 0
         var message = ""
@@ -1156,7 +1188,6 @@ extension MiningServiceVC{
             super.init()
         }
     }
-    
     
     //  Looking For Api
     
@@ -1283,7 +1314,7 @@ extension MiningServiceVC{
             "opp_state":"\(String(describing: stateid))",
             "opp_locality":"\(String(describing: localityid))",
             "location_name":String.getString(self.txtFieldLocationName.text),
-           
+            
             "description":String.getString(self.TextViewDescription.text),
             "mobile_num":String.getString(self.txtFieldMobileNumber.text),
             "whatsaap_num":String.getString(self.txtFieldWhatsappNumber.text),

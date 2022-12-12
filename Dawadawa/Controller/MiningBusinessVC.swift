@@ -133,12 +133,36 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
         self.viewSelectImage.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
         self.viewSelectDocument.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
         self.viewCreateOpportunity.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
-        self.setTextFieldUI(textField: txtFieldTitle, place: "Title", floatingText: "Title")
-        self.setTextFieldUI(textField: txtFieldLocationName, place: "Location name", floatingText: "Location name")
-    
-        self.setTextFieldUI(textField: txtFieldMobileNumber, place: "Mobile number", floatingText: "Mobile number")
-        self.setTextFieldUI(textField: txtFieldWhatsappNumber, place: "WhatsApp number", floatingText: "WhatsApp number")
-        self.setTextFieldUI(textField: txtFieldPricing, place: "Price in US Dollar (optional)", floatingText: "Price in US Dollar (optional)")
+        if txtFieldTitle.text == ""{
+            self.setTextField(textField: txtFieldTitle, place: "Title", floatingText: "Title")
+        }
+        else{
+            self.setTextFieldUI(textField: txtFieldTitle, place: "Title", showFloating: true, floatingText: "Title")
+        }
+        if txtFieldLocationName.text == ""{
+            self.setTextField(textField: txtFieldLocationName, place: "Location name", floatingText: "Location name")
+        }
+        else{
+            self.setTextFieldUI(textField: txtFieldLocationName, place: "Location name", showFloating: true, floatingText: "Location name")
+        }
+        if txtFieldMobileNumber.text == ""{
+            self.setTextField(textField: txtFieldMobileNumber, place:  "Mobile number", floatingText: "Title")
+        }
+        else{
+            self.setTextFieldUI(textField: txtFieldMobileNumber, place:  "Mobile number", showFloating: true, floatingText: "Title")
+        }
+        if txtFieldWhatsappNumber.text == ""{
+            self.setTextField(textField: txtFieldWhatsappNumber, place: "WhatsApp number", floatingText: "WhatsApp number")
+        }
+        else{
+            self.setTextFieldUI(textField: txtFieldWhatsappNumber, place: "WhatsApp number", showFloating: true, floatingText: "WhatsApp number")
+        }
+        if txtFieldPricing.text == ""{
+            self.setTextField(textField: txtFieldPricing, place: "Price in US Dollar (optional)", floatingText: "Price in US Dollar (optional)")
+        }
+        else{
+            self.setTextFieldUI(textField: txtFieldPricing, place: "Price in US Dollar (optional)", showFloating: true, floatingText: "Price in US Dollar (optional)")
+        }
     }
     
     func fetchdata(){
@@ -181,6 +205,7 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
             self.viewPremium.backgroundColor = UIColor(red: 21, green: 114, blue: 161)
             self.lblPremium.textColor = .white
         }
+        self.setup()
     }
     
     // MARK: - @IBActions
@@ -690,23 +715,26 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
     }
 }
 
+// MARK: - Textfield delegate
 
 extension MiningBusinessVC{
+    func setTextFieldUI(textField:SKFloatingTextField,place:String,showFloating:Bool ,floatingText:String){
+        textField.delegate = self
+        textField.showFloatingTitle(isShow: showFloating)
+        //textField.placeholder = place
+        textField.activeBorderColor = .init(red: 21, green: 114, blue: 161)
+        textField.floatingLabelText = floatingText
+        textField.floatingLabelColor = .init(red: 21, green: 114, blue: 161)
+        textField.setRoundTFUI()
+    }
     
-    func setTextFieldUI(textField:SKFloatingTextField,place:String ,floatingText:String){
-        
+    func setTextField(textField:SKFloatingTextField,place:String,floatingText:String){
+        textField.delegate = self
         textField.placeholder = place
         textField.activeBorderColor = .init(red: 21, green: 114, blue: 161)
         textField.floatingLabelText = floatingText
         textField.floatingLabelColor = .init(red: 21, green: 114, blue: 161)
-        //floatingTextField.setRectTFUI()
-        //floatingTextField.setRoundTFUI()
-        //floatingTextField.setOnlyBottomBorderTFUI()
-        //        textField.setCircularTFUI()
         textField.setRoundTFUI()
-        textField.delegate = self
-        //floatingTextField.errorLabelText = "Error"
-        
     }
 }
 extension MiningBusinessVC : SKFlaotingTextFieldDelegate {
@@ -1090,7 +1118,6 @@ extension MiningBusinessVC{
             case .failure(let error):
                 completionBlock(0,nil,error.localizedDescription)
             }
-            
         }
     }
     
@@ -1101,8 +1128,6 @@ extension MiningBusinessVC{
         let kStatus = "status"
         let kMessage = "message"
         let kbmy = "bmy"
-        
-        
         
         var responsecode = 0
         var status = 0

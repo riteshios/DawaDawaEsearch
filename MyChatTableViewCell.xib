@@ -47,7 +47,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WhH-8a-TVP">
-                                <rect key="frame" x="0.0" y="0.0" width="350" height="75"/>
+                                <rect key="frame" x="0.0" y="0.0" width="259" height="75"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <connections>
                                     <action selector="btnChatTapped:" destination="M8m-dw-vuz" eventType="touchUpInside" id="QEi-eh-Wdt"/>
@@ -72,6 +72,9 @@
                                     <attributedString key="attributedTitle"/>
                                 </state>
                                 <buttonConfiguration key="configuration" style="plain" image="more" title=""/>
+                                <connections>
+                                    <action selector="btnDeleteTapped:" destination="M8m-dw-vuz" eventType="touchUpInside" id="YGY-6d-lqO"/>
+                                </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="36q-80-zqo">
                                 <rect key="frame" x="259" y="25" width="25" height="25"/>
@@ -101,6 +104,7 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="36q-80-zqo" firstAttribute="leading" secondItem="WhH-8a-TVP" secondAttribute="trailing" id="D9B-iG-AGW"/>
                             <constraint firstItem="X9n-3Z-p4d" firstAttribute="centerY" secondItem="Vaj-e6-mCe" secondAttribute="centerY" id="HwB-vY-JZV"/>
                             <constraint firstItem="vFL-gX-rY4" firstAttribute="leading" secondItem="Vaj-e6-mCe" secondAttribute="leading" constant="10" id="KTd-3e-EYs"/>
                             <constraint firstAttribute="trailing" secondItem="vFL-gX-rY4" secondAttribute="trailing" constant="10" id="MYU-HW-ug8"/>
@@ -112,7 +116,6 @@
                             <constraint firstAttribute="trailing" secondItem="dcY-v0-9ST" secondAttribute="trailing" constant="50" id="dRb-25-yuw"/>
                             <constraint firstAttribute="bottom" secondItem="vFL-gX-rY4" secondAttribute="bottom" id="dvl-Ma-LGG"/>
                             <constraint firstAttribute="height" constant="75" id="eHn-OS-9dg"/>
-                            <constraint firstAttribute="trailing" secondItem="WhH-8a-TVP" secondAttribute="trailing" id="fDQ-2q-JYS"/>
                             <constraint firstItem="plJ-ac-OfC" firstAttribute="leading" secondItem="36q-80-zqo" secondAttribute="trailing" constant="20" id="fFA-ky-3Er"/>
                             <constraint firstItem="WhH-8a-TVP" firstAttribute="top" secondItem="Vaj-e6-mCe" secondAttribute="top" id="kMa-fP-WZH"/>
                             <constraint firstItem="plJ-ac-OfC" firstAttribute="centerY" secondItem="X9n-3Z-p4d" secondAttribute="centerY" id="qi8-7f-g6x"/>

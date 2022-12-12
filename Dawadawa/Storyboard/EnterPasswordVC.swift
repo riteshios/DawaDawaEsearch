@@ -9,12 +9,33 @@ class EnterPasswordVC: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var txtFieldPassword: SKFloatingTextField!
     @IBOutlet weak var txtFieldConfirmPassword: SKFloatingTextField!
+   
+    @IBOutlet weak var imgCheckSixChar: UIImageView!
+    @IBOutlet weak var imgCheckupperandlowerChar: UIImageView!
+    @IBOutlet weak var imgCheckNumberChar: UIImageView!
+    @IBOutlet weak var imgCheckSpecialChar: UIImageView!
+    @IBOutlet weak var btnTandC: UIButton!
     @IBOutlet weak var viewContinue: UIView!
     
-    override func viewDidLoad() {
+    var name = ""
+    var lastame = ""
+    var usertype = 0
+    var email = ""
+    var phone = ""
+    var country = ""
+    var state = ""
+    var locality = ""
+    
+    var checkPass = ""
+    var isprivacypolicy = false
+    
+    override func viewDidLoad(){
         super.viewDidLoad()
+        self.txtFieldPassword.delegate = self
+        self.txtFieldConfirmPassword.delegate = self
         self.setup()
     }
+//    MARK: - Life Cycle
     
     func setup(){
         
@@ -24,12 +45,13 @@ class EnterPasswordVC: UIViewController, UITextFieldDelegate {
         self.setTextFieldUI(textField: txtFieldPassword, place: "Password*", floatingText: "Password")
         self.setTextFieldUI(textField: txtFieldConfirmPassword, place: "Confirm password*", floatingText: "Confirm password")
     }
-        
+    
     //   MARK: - @IBACtions
     
     @IBAction func btnbackTapped(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
     }
+    
     
     @IBAction func btnTerms(_ sender: UIButton) {
         self.termsandConditionApi()
@@ -56,12 +78,45 @@ class EnterPasswordVC: UIViewController, UITextFieldDelegate {
         txtFieldConfirmPassword.isSecureTextInput.toggle()
     }
     
-    @IBAction func btnContinueTapped(_ sender: UIButton) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "EnterPasswordVC") as! EnterPasswordVC
-        self.navigationController?.pushViewController(vc, animated: true)
+    @IBAction func btnTandCTapped(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        self.isprivacypolicy = sender.isSelected == true ? true : false
     }
     
+    @IBAction func btnContinueTapped(_ sender: UIButton) {
+        self.validation()
+    }
+//    MARK: - Validation
+    
+    func validation(){
+        if String.getString(self.txtFieldPassword.text).isEmpty{
+          showSimpleAlert(message: Notifications.kPassword)
+          return
+      }
+        else if !String.getString(txtFieldPassword.text).isValidPassword()
+        {
+            self.showSimpleAlert(message: Notifications.kValidPassword)
+            return
+        }
+        else if String.getString(txtFieldConfirmPassword.text).isEmpty {
+            self.showSimpleAlert(message: Notifications.kConfirmPassword)
+            return
+        }
+        else if(txtFieldPassword.text != self.txtFieldConfirmPassword.text)
+        {
+            self.showSimpleAlert(message: Notifications.kMatchPassword)
+            return
+        }
+        else if self.isprivacypolicy == false{
+            self.showSimpleAlert(message: "Please Select T&C and Privacy Policy")
+        }
+        self.view.endEditing(true)
+        self.createAccountapi()
+    }
 }
+
+// MARK: - Textfield Delegate
+
 extension EnterPasswordVC{
     func setTextFieldUI(textField:SKFloatingTextField,place:String ,floatingText:String){
         
@@ -86,17 +141,150 @@ extension EnterPasswordVC : SKFlaotingTextFieldDelegate {
     }
     
     func textFieldDidChangeSelection(textField: SKFloatingTextField) {
-        print("changing text")
+        self.checkPass = textField.text ?? ""
+        
+        switch textField{
+            
+        case txtFieldPassword:
+            
+            if (self.checkPass.filter{$0.isLowercase}.count != 0) && (self.checkPass.filter{$0.isUppercase}.count != 0){
+                print("lowercase",self.checkPass)
+                self.imgCheckupperandlowerChar.image = UIImage(named: "Box")
+            }
+            else{
+                self.imgCheckupperandlowerChar.image = UIImage(named: "Check")
+            }
+            
+            if (self.checkPass.filter{$0.isNumber}.count != 0){
+                print("number", self.checkPass)
+                self.imgCheckNumberChar.image  = UIImage(named: "Box")
+            }
+            else{
+                self.imgCheckNumberChar.image = UIImage(named: "Check")
+            }
+            
+            if (self.checkPass.filter{$0.isPunctuation}.count != 0){
+                print("Special Character",self.checkPass)
+                self.imgCheckSpecialChar.image = UIImage(named: "Box")
+            }
+            else{
+                self.imgCheckSpecialChar.image = UIImage(named: "Check")
+            }
+            
+            if (self.checkPass.count >= 8) == true{
+                self.imgCheckSixChar.image = UIImage(named: "Box")
+            }
+            else{
+                self.imgCheckSixChar.image = UIImage(named: "Check")
+            }
+            
+        default:
+            UITextField()
+        }
+       
+//        let lowercase = self.checkPass.filter{$0.isLowercase}.count
+//        print("lowercase",lowercase)
+//        let uppercase = self.checkPass.filter{$0.isUppercase}.count
+//        print("Upercase",uppercase)
+//        let number = self.checkPass.filter{$0.isNumber}.count
+//        print("number", number)
+//        let special = self.checkPass.filter{$0.isPunctuation}.count
+//        print("Special Character",special)
     }
     
     func textFieldDidBeginEditing(textField: SKFloatingTextField) {
         print("begin editing")
     }
+    
 }
 
-// API CALL
+//  MARK: - API CALL
 
 extension EnterPasswordVC{
+
+    
+//    Create Account api
+    func createAccountapi(){
+
+        CommonUtils.showHud(show: true)
+        let params: [String:Any] = [
+            "firstname":String.getString(self.name),
+            "lastname":String.getString(self.lastame),
+            "email":String.getString(self.email),
+            "user_country":String.getString(self.country),
+            "state":String.getString(self.state),
+            "locality":String.getString(self.locality),
+            "phone":String.getString(self.phone),
+            "device_type":"1",
+            "device_id":kSharedUserDefaults.getDeviceToken(),
+            "password":String.getString(self.txtFieldPassword.text),
+            "confirm_password":String.getString(self.txtFieldConfirmPassword.text),
+            "user_type":Int.getInt(self.usertype)
+        ]
+
+        TANetworkManager.sharedInstance.requestApi(withServiceName: ServiceName.kcreateAccount, requestMethod: .POST, requestParameters: params, withProgressHUD: false) { (result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
+
+            if errorType == .requestSuccess {
+                let dictResult = kSharedInstance.getDictionary(result)
+
+                switch Int.getInt(statusCode){
+                case 200:
+                    //                    UserData.shared.saveData (data:dictResult)
+                    //                    self.save()
+                    //                    UserDefaults.standard.set(String.getString(self.txtFieldEmail.text), forKey: "email")
+                    if Int.getInt(dictResult["status"]) == 200{
+                        let vc = self.storyboard?.instantiateViewController(withIdentifier: ActivationCodeVC.getStoryboardID()) as! ActivationCodeVC
+                        vc.modalTransitionStyle = .crossDissolve
+                        vc.modalPresentationStyle = .overCurrentContext
+                        vc.type = .signUp
+                        vc.email = String.getString(self.email)
+                        vc.callback =
+                        {
+                            vc.dismiss(animated: false){
+                                let vc = self.storyboard?.instantiateViewController(withIdentifier: ActivatedSuccessfullyPopUpVC.getStoryboardID()) as! ActivatedSuccessfullyPopUpVC
+                                vc.modalTransitionStyle = .crossDissolve
+                                vc.modalPresentationStyle = .overCurrentContext
+                                vc.type = .signUp
+                                vc.callback1 = {
+                                    self.dismiss(animated: false) {
+
+                                        kSharedAppDelegate?.moveToLoginScreen()
+                                        //                                        let vc = UIStoryboard(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "TabBarVC") as! TabBarVC
+                                        //                                        self.navigationController?.pushViewController(vc, animated: true)
+                                    }
+                                }
+                                self.present(vc, animated: false)
+                            }
+                        }
+                        self.present(vc, animated: false)
+                    }
+                    if Int.getInt(dictResult["status"]) == 400{
+                        let response = kSharedInstance.getDictionary(dictResult["response"])
+
+                        if let _ = response["email"] {
+                            let msg = kSharedInstance.getStringArray(response["email"])
+                            CommonUtils.showError(.info, msg[0])// msg is on 0th index
+                        }
+                        else if let _ = response["phone"] {
+                            let msg = kSharedInstance.getStringArray(response["phone"])
+                            CommonUtils.showError(.info, msg[0])// msg is on 0th index
+                        }
+                        //let msg = kSharedInstance.getStringArray(response["phone"])
+                        // CommonUtils.showError(.info, msg[0])// msg is on 0th index
+                    }
+
+                default:
+                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                }
+            }else if errorType == .noNetwork {
+                CommonUtils.showToastForInternetUnavailable()
+
+            } else {
+                CommonUtils.showToastForDefaultError()
+            }
+        }
+    }
+//   terms and condition  Api
     
     func termsandConditionApi(){
         CommonUtils.showHudWithNoInteraction(show: true)
@@ -176,5 +364,3 @@ extension EnterPasswordVC{
         }
     }
 }
-
-
