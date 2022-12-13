@@ -1,10 +1,7 @@
-//
 //  LocalizationSystem.swift
 //  Crisp-Demo
-//
 //  Created by Aman Aggarwal on 8/10/18.
 //  Copyright © 2018 iostutorialjunction.com . All rights reserved.
-//
 
 import Foundation
 import UIKit

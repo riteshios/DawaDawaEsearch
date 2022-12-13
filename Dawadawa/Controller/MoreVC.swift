@@ -32,6 +32,7 @@ class MoreVC: UIViewController {
     @IBOutlet weak var lblEditProfile: UILabel!
     @IBOutlet weak var lblChangePassword: UILabel!
     @IBOutlet weak var lblSavedOpportunity: UILabel!
+    @IBOutlet weak var lblInterestedOpportunity: UILabel!
     @IBOutlet weak var lblContactUs: UILabel!
     @IBOutlet weak var lblLogout: UILabel!
     
@@ -193,6 +194,7 @@ extension MoreVC{
         lblEditProfile.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Edit Profile", comment: "")
         lblChangePassword.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Change password", comment: "")
         lblSavedOpportunity.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Saved Opportunities", comment: "")
+        lblInterestedOpportunity.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Interested Opportunities", comment: "")
         lblContactUs.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Contact Us", comment: "")
         lblLogout.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Log Out", comment: "")
     }

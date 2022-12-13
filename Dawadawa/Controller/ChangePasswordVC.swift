@@ -65,7 +65,6 @@ class ChangePasswordVC: UIViewController {
     
 }
 
-
 extension ChangePasswordVC{
     
     func setTextFieldUI(textField:SKFloatingTextField,place:String ,floatingText:String){
@@ -164,10 +163,6 @@ extension ChangePasswordVC{
         }
     }
 }
-
-
-
-                      
                         
 extension ChangePasswordVC{
     func setuplanguage(){

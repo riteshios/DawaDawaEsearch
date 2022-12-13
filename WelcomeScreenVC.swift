@@ -9,11 +9,19 @@ class WelcomeScreenVC: UIViewController {
     @IBOutlet weak var viewMain: UIView!
     @IBOutlet weak var viewLogin: UIView!
     @IBOutlet weak var viewRegister: UIView!
+    
+    @IBOutlet weak var lblDawadawa: UILabel!
+    @IBOutlet weak var lblDescription: UILabel!
+    @IBOutlet weak var lbllogin: UILabel!
+    @IBOutlet weak var lblregister: UILabel!
+    @IBOutlet weak var btnSkiplogin: UIButton!
+    
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setup()
-
+        self.setuplanguage()
         // Do any additional setup after loading the view.
     }
     
@@ -44,12 +52,9 @@ class WelcomeScreenVC: UIViewController {
     }
     
     @IBAction func btnRegisterTapped(_ sender: UIButton) {
-       
 //            self.viewRegister.backgroundColor = UIColor(hexString: "#1572A1")
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "EnterNameVC") as! EnterNameVC
         self.navigationController?.pushViewController(vc, animated: true)
-        
-       
     }
     
     @IBAction func btnSkipTapped(_ sender: UIButton){
@@ -57,8 +62,16 @@ class WelcomeScreenVC: UIViewController {
         cameFrom = ""
         kSharedAppDelegate?.makeRootViewController()
     }
-    
-    
 }
+// MARK: - Localisation
 
+extension WelcomeScreenVC{
+    
+    func setuplanguage(){
+        lblDawadawa.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "DawaDawa", comment: "")
+        lbllogin.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Login", comment: "")
+        lblregister.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Register", comment: "")
+        btnSkiplogin.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "Skip Login", comment: ""), for: .normal)
+    }
+}
 

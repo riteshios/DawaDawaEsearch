@@ -1,7 +1,6 @@
 /*
   Localizable.string.strings
   Dawadawa
-
   Created by Ritesh Gupta on 15/06/22.
 
 */
@@ -26,6 +25,57 @@
 "Already have an account?" = "هل لديك حساب؟";
 "Login" = "تسجيل الدخول";
 "Skip registration" = "تخطي تسجيل";
+
+// MARK: - WelcomeScreenVC
+
+"DawaDawa" = "الدعوة";
+"Login" = "تسجيل الدخول";
+"Register" = "يسجل";
+"Skip Login" = "تخطي تسجيل الدخول";
+
+// MARK: - EnterNameVC
+
+"Enter your first name and last name" = "أدخل اسمك الأول واسم العائلة";
+"Please enter your legal name that will be associated with your account." = "الرجاء إدخال اسمك القانوني الذي سيرتبط بحسابك.";
+"You want to be?" = "تريد ان تكون؟";
+"First name" = "الاسم الاول";
+"Last name" = "اللقب";
+"Continue" = "يكمل";
+"Select user type" = "حدد نوع المستخدم";
+
+// MARK: - EnterEmailVC
+
+"Hello" = "مرحبًا";
+"Please enter your email address that you would like to sign into DawaDawa." = "الرجاء إدخال عنوان بريدك الإلكتروني الذي ترغب في تسجيل الدخول إليه.";
+"Email" = "البريد الإلكتروني";
+
+// MARK: - EnterPhoneNumberVC
+
+"Please enter your phone number that you would like to sign into DawaDawa." = "الرجاء إدخال رقم هاتفك الذي ترغب في تسجيل الدخول إليه.";
+"Phone Number*" = "رقم الهاتف*";
+
+// MARK: - EnterResidenceVC
+
+"Let's get started with country of residence" = "لنبدأ مع بلد الإقامة";
+"Please choose your country of residence from the options below" = "يرجى اختيار بلد إقامتك من الخيارات أدناه";
+"Country" = "دولة";
+"State" = "حالة";
+"Locality" = "المنطقة";
+
+// MARK: - EnterPasswordVC
+
+"Set up a password" = "قم بإعداد كلمة مرور";
+"To allow you to sign in on multiple devices, you will need a password." = "للسماح لك بتسجيل الدخول على أجهزة متعددة ، ستحتاج إلى كلمة مرور.";
+"Password*" = "كلمة المرور*";
+"Confirm password*" = "تأكيد كلمة المرور*";
+"At least 8 Characters" = "8 أحرف على الأقل";
+"Upper and lowercase Characters" = "أحرف كبيرة وصغيرة";
+"Numbers" = "أعداد";
+"Special Characters" = "الشخصيات الخاصة";
+"Please accept our" = "الرجاء قبول";
+"T&C" = "الشروط والأحكام";
+"and" = "و";
+"Privacy Policy" = "سياسة الخصوصية";
 
 // MARK: - LoginVC
 
@@ -79,6 +129,7 @@
 "Edit Profile" = "تعديل الملف الشخصي";
 "Change password" = "غير كلمة السر";
 "Saved Opportunities" = "الفرص المحفوظة";
+"Interested Opportunities" = "الفرص المهتمة";
 "Contact Us" = "اتصل بنا";
 "Log Out" = "تسجيل خروج";
 

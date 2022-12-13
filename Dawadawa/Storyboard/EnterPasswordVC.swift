@@ -7,6 +7,19 @@ import SKFloatingTextField
 
 class EnterPasswordVC: UIViewController, UITextFieldDelegate {
     
+    @IBOutlet weak var lblHeading: UILabel!
+    @IBOutlet weak var lblSubHeading: UILabel!
+    @IBOutlet weak var lblCheckEightChar: UILabel!
+    @IBOutlet weak var lblCheckupperandlowerChar: UILabel!
+    @IBOutlet weak var lblCheckNumberChar: UILabel!
+    @IBOutlet weak var lblCheckSpecialChar: UILabel!
+    @IBOutlet weak var lblPlsAccept: UILabel!
+    @IBOutlet weak var lbland: UILabel!
+    
+//    @IBOutlet weak var btnTandC: UIButton!
+    @IBOutlet weak var btnPrivacyPolicy: UIButton!
+    @IBOutlet weak var btnContinue: UIButton!
+    
     @IBOutlet weak var txtFieldPassword: SKFloatingTextField!
     @IBOutlet weak var txtFieldConfirmPassword: SKFloatingTextField!
    
@@ -34,6 +47,7 @@ class EnterPasswordVC: UIViewController, UITextFieldDelegate {
         self.txtFieldPassword.delegate = self
         self.txtFieldConfirmPassword.delegate = self
         self.setup()
+        self.setuplanguage()
     }
 //    MARK: - Life Cycle
     
@@ -364,3 +378,24 @@ extension EnterPasswordVC{
         }
     }
 }
+// MARK: - Localisationand
+extension EnterPasswordVC{
+    func setuplanguage(){
+        lblHeading.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Set up a password", comment: "")
+        lblSubHeading.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "To allow you to sign in on multiple devices, you will need a password.", comment: "")
+        txtFieldPassword.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Password*", comment: "")
+        txtFieldPassword.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Password*", comment: "")
+        txtFieldPassword.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Confirm password*", comment: "")
+        txtFieldPassword.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Confirm password*", comment: "")
+        lblCheckEightChar.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "At least 8 Characters", comment: "")
+        lblCheckupperandlowerChar.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Upper and lowercase Characters", comment: "")
+        lblCheckNumberChar.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Numbers", comment: "")
+        lblCheckSpecialChar.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Special Characters", comment: "")
+        lblPlsAccept.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Please accept our", comment: "")
+        btnTandC.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "T&C", comment: ""), for: .normal)
+        lbland.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "and", comment: "")
+        btnPrivacyPolicy.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "Privacy Policy", comment: ""), for: .normal)
+        btnContinue.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "Continue", comment: ""), for: .normal)
+    }
+}
+

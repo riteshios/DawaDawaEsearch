@@ -8,19 +8,25 @@ import SKFloatingTextField
 class EnterNameVC: UIViewController {
     
     @IBOutlet weak var viewMain: UIView!
+    @IBOutlet weak var lblHeading: UILabel!
+    @IBOutlet weak var lblSubHeading: UILabel!
+    @IBOutlet weak var lblYouwant: UILabel!
+    @IBOutlet weak var btnContinue: UIButton!
+    
+    
     @IBOutlet weak var txtFieldFirstName: SKFloatingTextField!
     @IBOutlet weak var txtFieldLastName: SKFloatingTextField!
     @IBOutlet weak var lblUserType: UILabel!
     @IBOutlet weak var btnDropUserType: UIButton!
     @IBOutlet weak var viewContinue: UIView!
     
-
     var usertype = 0
     var isSelectuser = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setup()
+        self.setuplanguage()
     }
 // MARK: - Life Cycle
     
@@ -127,5 +133,21 @@ extension EnterNameVC : SKFlaotingTextFieldDelegate {
     
     func textFieldDidBeginEditing(textField: SKFloatingTextField) {
         print("begin editing")
+    }
+}
+
+// MARK: - Localisation
+
+extension EnterNameVC{
+    func setuplanguage(){
+        txtFieldFirstName.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "First name", comment: "")
+        txtFieldFirstName.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "First name", comment: "")
+        txtFieldLastName.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Last name", comment: "")
+        txtFieldLastName.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Last name", comment: "")
+        lblHeading.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Enter your first name and last name", comment: "")
+        lblSubHeading.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Please enter your legal name that will be associated with your account.", comment: "")
+        lblYouwant.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "You want to be?", comment: "")
+        lblUserType.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Select user type", comment: "")
+        btnContinue.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "Continue", comment: ""), for: .normal)
     }
 }

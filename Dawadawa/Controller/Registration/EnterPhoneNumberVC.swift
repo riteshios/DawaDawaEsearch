@@ -8,6 +8,8 @@ import SKFloatingTextField
 class EnterPhoneNumberVC: UIViewController {
     
     @IBOutlet weak var txtfieldPhoneNumber: SKFloatingTextField!
+    @IBOutlet weak var lblHello: UILabel!
+    @IBOutlet weak var lblSubHeading: UILabel!
     @IBOutlet weak var lblname: UILabel!
     @IBOutlet weak var btnCountrySelect: UIButton!
     @IBOutlet weak var imageFlag: UIImageView!
@@ -15,6 +17,7 @@ class EnterPhoneNumberVC: UIViewController {
     @IBOutlet weak var labelCountryCode: UILabel!
     
     @IBOutlet weak var viewContinue: UIView!
+    @IBOutlet weak var btnContinue: UIButton!
     
     var name = ""
     var lastame = ""
@@ -28,6 +31,7 @@ class EnterPhoneNumberVC: UIViewController {
         super.viewDidLoad()
         self.lblname.text = self.name
         self.setup()
+        self.setuplanguage()
     }
     
     func setup(){
@@ -115,5 +119,17 @@ extension EnterPhoneNumberVC : SKFlaotingTextFieldDelegate {
     
     func textFieldDidBeginEditing(textField: SKFloatingTextField) {
         print("begin editing")
+    }
+}
+
+// MARK: - Localisation
+
+extension EnterPhoneNumberVC{
+    func setuplanguage(){
+        lblHello.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Hello", comment: "")
+        lblSubHeading.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Please enter your phone number that you would like to sign into DawaDawa.", comment: "")
+        txtfieldPhoneNumber.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Phone Number*", comment: "")
+        txtfieldPhoneNumber.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Phone Number*", comment: "")
+        btnContinue.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "Continue", comment: ""), for: .normal)
     }
 }

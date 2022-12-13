@@ -297,6 +297,12 @@ extension ViewAllSavedVC:UITableViewDelegate,UITableViewDataSource{
                             }
                         }
                         
+                        if txt == "CopyLink"{
+                            let share_link = String.getString(self.userTimeLine[indexPath.row].share_link)
+                            UIPasteboard.general.string = share_link
+                            print("share_link\(share_link)")
+                        }
+                        
                         if txt == "MarkasInterested"{
                             if UserData.shared.isskiplogin == true{
                                 self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
@@ -787,15 +793,14 @@ extension ViewAllSavedVC{
                         //                        self?.count = String.getString(dictResult["count"])
                         //                        debugPrint("likecount=-=-=-=",self?.count)
                         completion(String.getString(dictResult["count"]))
-                        
-                        
+                
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                        
                         
                     }
                     
                     else if  Int.getInt(dictResult["status"]) == 400{
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        CommonUtils.showError(.info, String.getString("This Opportunity is unlike by You"))
+//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                 default:

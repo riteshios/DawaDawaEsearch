@@ -27,6 +27,58 @@
 "Login" = "Login";
 "Skip registration" = "Skip registration";
 
+// MARK: - WelcomeScreenVC
+
+"DawaDawa" = "DawaDawa";
+"Login" = "Login";
+"Register" = "Register";
+"Skip Login" = "Skip Login";
+
+// MARK: - EnterNameVC
+
+"Enter your first name and last name" = "Enter your first name and last name";
+"Please enter your legal name that will be associated with your account." = "Please enter your legal name that will be associated with your account.";
+"You want to be?" = "You want to be?";
+"First name" = "First name";
+"Last name" = "Last name";
+"Continue" = "Continue";
+"Select user type" = "Select user type";
+
+// MARK: - EnterEmailVC
+
+"Hello" = "Hello";
+"Please enter your email address that you would like to sign into DawaDawa." = "Please enter your email address that you would like to sign into DawaDawa.";
+"Email*" = "Email*";
+
+// MARK: - EnterPhoneNumberVC
+
+"Please enter your phone number that you would like to sign into DawaDawa." = "Please enter your phone number that you would like to sign into DawaDawa.";
+"Phone Number*" = "Phone Number*";
+
+// MARK: - EnterResidenceVC
+
+"Let's get started with country of residence" = "Let's get started with country of residence";
+"Please choose your country of residence from the options below" = "Please choose your country of residence from the options below";
+"Country" = "Country";
+"State" = "State";
+"Locality" = "Locality";
+
+// MARK: - EnterPasswordVC
+
+"Set up a password" = "Set up a password";
+"To allow you to sign in on multiple devices, you will need a password." = "To allow you to sign in on multiple devices, you will need a password.";
+"Password*" = "Password*";
+"Confirm password*" = "Confirm password*";
+"At least 8 Characters" = "At least 8 Characters";
+"Upper and lowercase Characters" = "Upper and lowercase Characters";
+"Numbers" = "Numbers";
+"Special Characters" = "Special Characters";
+"Please accept our" = "Please accept our";
+"T&C" = "T&C";
+"and" = "and";
+"Privacy Policy" = "Privacy Policy";
+
+
 // MARK: - LoginVC
 
 "Forgot Password" = "Forgot Password?";
@@ -76,6 +128,7 @@
 "Edit Profile" = "Edit Profile";
 "Change password" = "Change password";
 "Saved Opportunities" = "Saved Opportunities";
+"Interested Opportunities" = "Interested Opportunities";
 "Contact Us" = "Contact Us";
 "Log Out" = "Log Out";
 

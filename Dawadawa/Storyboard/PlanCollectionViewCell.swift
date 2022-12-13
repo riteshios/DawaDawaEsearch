@@ -1,9 +1,6 @@
-//
 //  PlanCollectionViewCell.swift
 //  Dawadawa
-//
 //  Created by Ritesh Gupta on 02/08/22.
-//
 
 import UIKit
 
@@ -50,7 +47,7 @@ extension PlanCollectionViewCell: UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section{
         case 0:
-            
+
             return subsdata.count == 0 ? 0 : 1
             
         case 1:

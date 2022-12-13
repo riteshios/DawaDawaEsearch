@@ -1,8 +1,4 @@
-//  SearchVC.swift
-//  Dawadawa
-//  Created by Ritesh Gupta on 21/07/22.
-
-import UIKit
+ import UIKit
 
 class SearchVC: UIViewController,UITextFieldDelegate{
     
@@ -227,9 +223,9 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
                             obj.likes = Int.getInt(countLike)
                             cell.lblLikeCount.text = String.getString(obj.likes) + " " + "likes"
                         }
-                        cell.imglike.image = UIImage(named: "dil")
-                        cell.lbllike.text = "Liked"
-                        cell.lbllike.textColor = .red
+//                        cell.imglike.image = UIImage(named: "dil")
+//                        cell.lbllike.text = "Liked"
+//                        cell.lbllike.textColor = .red
                         self.searchopportunityapi()
                     }
                 }
@@ -320,6 +316,11 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
                                 vc.friendimage = imguserurl
                                 self.navigationController?.pushViewController(vc, animated: true)
                                 self.dismiss(animated: true)
+                            }
+                            if txt == "CopyLink"{
+                                let share_link = String.getString(self.userTimeLine[indexPath.row].share_link)
+                                UIPasteboard.general.string = share_link
+                                print("share_link\(share_link)")
                             }
                             
                             if txt == "MarkasInterested"{
@@ -648,11 +649,9 @@ extension SearchVC{
                         self?.userTimeLine = Opportunity.map{SocialPostData(data: kSharedInstance.getDictionary($0))}
                         print("DataallSearchpost=\(self?.userTimeLine)")
                         
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         self?.imgNotfound.isHidden = true
                         self?.tblViewSearchOpp.reloadData()
-                        
-                        
                     }
                     
                     else if  Int.getInt(dictResult["status"]) == 400{
@@ -720,15 +719,12 @@ extension SearchVC{
                         //                        self?.count = String.getString(dictResult["count"])
                         //                        debugPrint("likecount=-=-=-=",self?.count)
                         completion(String.getString(dictResult["count"]))
-                        
-                        
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                        
-                        
                     }
                     
                     else if  Int.getInt(dictResult["status"]) == 400{
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        CommonUtils.showError(.info, String.getString("This Opportunity is unlike by You"))
+//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                 default:
@@ -740,9 +736,7 @@ extension SearchVC{
             } else {
                 CommonUtils.showToastForDefaultError()
             }
-            
         }
-        
     }
     
     //    Api comment opportunity
@@ -759,7 +753,6 @@ extension SearchVC{
                 kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
             }
         }
-        
         
         let params:[String : Any] = [
             "user_id":Int.getInt(UserData.shared.id),
@@ -801,7 +794,7 @@ extension SearchVC{
                     }
                     
                     else if  Int.getInt(dictResult["responsecode"]) == 400{
-                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //    CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
@@ -814,7 +807,6 @@ extension SearchVC{
             } else {
                 CommonUtils.showToastForDefaultError()
             }
-            
         }
     }
     
@@ -822,7 +814,6 @@ extension SearchVC{
     
     func saveoppoertunityapi(oppr_id:Int){
         CommonUtils.showHud(show: true)
-        
         
         if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
             let endToken = kSharedUserDefaults.getLoggedInAccessToken()
@@ -832,7 +823,6 @@ extension SearchVC{
                 kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
             }
         }
-        
         
         let params:[String : Any] = [
             "user_id":Int.getInt(UserData.shared.id),

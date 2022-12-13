@@ -1,7 +1,5 @@
-//
 //  HomeSocialMoreVC.swift
 //  Dawadawa
-
 //  Created by Ritesh Gupta on 22/07/22.
 
 
@@ -62,13 +60,14 @@ class HomeSocialMoreVC: UIViewController {
     }
     
     @IBAction func btnCopyLinkTapped(_ sender: UIButton) {
+        self.callback?("CopyLink")
+        self.dismiss(animated: true)
     }
     
     @IBAction func btnMarkasinterestedTapped(_ sender: UIButton){
         self.callback?("MarkasInterested")
         
     }
-    
     
     @IBAction func btnFlagPostTapped(_ sender: UIButton) {
         self.callback?("Flag")

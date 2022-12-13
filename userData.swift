@@ -22,6 +22,7 @@ class UserData{
     var about:String?
     var user_gender:String?
     var user_type:String?
+    var payment_type:String?
     var device_type:String?
     var device_id:String?
     var google_id:String?
@@ -51,6 +52,7 @@ class UserData{
         self.about = String.getString(data["about"])
         self.user_gender = String.getString(data["user_gender"])
         self.user_type = String.getString(data["user_type"])
+        self.payment_type = String.getString(data["payment_type"])
         self.device_type = String.getString(data["device_type"])
         self.device_id = String.getString(data["device_id"])
         self.google_id = String.getString(data["google_id"])

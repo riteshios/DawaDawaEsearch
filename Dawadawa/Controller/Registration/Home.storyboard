@@ -855,6 +855,7 @@
                         <outlet property="lblChangePassword" destination="ITo-hx-jKE" id="vkN-91-SFB"/>
                         <outlet property="lblContactUs" destination="pzW-v9-kgG" id="9WI-Cv-C8d"/>
                         <outlet property="lblEditProfile" destination="NCv-AS-pab" id="LJN-cm-Gfz"/>
+                        <outlet property="lblInterestedOpportunity" destination="nu0-cs-Zka" id="Fbe-QR-7kJ"/>
                         <outlet property="lblLogout" destination="Agc-NS-2AT" id="vaj-1w-v2x"/>
                         <outlet property="lblSavedOpportunity" destination="tJG-3S-GIm" id="rQE-Lr-7pu"/>
                         <outlet property="lblSetting" destination="Pco-xv-XJQ" id="BTb-2X-3je"/>
@@ -2827,23 +2828,23 @@
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Verify Account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iNP-8d-h6b">
-                                        <rect key="frame" x="135.33333333333334" y="37" width="111.33333333333334" height="20.333333333333329"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <rect key="frame" x="133.33333333333334" y="37" width="115.66666666666666" height="22"/>
+                                        <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="18"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password change code is sent on your email address" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a9L-BX-hoP" userLabel="An account activation code has been sent to your email address and phone number">
-                                        <rect key="frame" x="28" y="85.333333333333343" width="326" height="44"/>
+                                        <rect key="frame" x="28" y="87.000000000000028" width="326" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="Xw6-7b-VoI"/>
                                             <constraint firstAttribute="width" constant="326" id="xwj-wB-XCO"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.65098039220000004" green="0.65098039220000004" blue="0.65098039220000004" alpha="0.44253156040000002" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="16"/>
+                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="mrw-n0-02s">
-                                        <rect key="frame" x="21" y="150.33333333333334" width="340" height="50"/>
+                                        <rect key="frame" x="21" y="152.00000000000003" width="340" height="50"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="thN-qA-M79">
                                                 <rect key="frame" x="0.0" y="0.0" width="52.666666666666664" height="50"/>
@@ -3014,7 +3015,6 @@
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BvM-cc-WpU">
                                                 <rect key="frame" x="0.0" y="0.0" width="340" height="60"/>
-                                                <color key="backgroundColor" red="0.65098039220000004" green="0.65098039220000004" blue="0.65098039220000004" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="18"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" title="Verify">
@@ -3030,7 +3030,6 @@
                                                 </connections>
                                             </button>
                                         </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="BvM-cc-WpU" firstAttribute="top" secondItem="2OX-CO-i7g" secondAttribute="top" id="HyS-Fx-U4W"/>
                                             <constraint firstItem="BvM-cc-WpU" firstAttribute="leading" secondItem="2OX-CO-i7g" secondAttribute="leading" id="KjZ-JT-l20"/>
@@ -3045,13 +3044,13 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wrong code entered!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g50-FV-yv6">
-                                        <rect key="frame" x="28" y="226.00000000000003" width="160.66666666666666" height="20.333333333333343"/>
+                                        <rect key="frame" x="28" y="227.66666666666666" width="160.66666666666666" height="20.333333333333343"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="1" green="0.29803921570000003" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3KR-FS-nZc">
-                                        <rect key="frame" x="282" y="221.66666666666666" width="79" height="29"/>
+                                        <rect key="frame" x="282" y="223.33333333333334" width="79" height="29"/>
                                         <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="14"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" title="Resend code">
@@ -3126,10 +3125,10 @@
             </objects>
             <point key="canvasLocation" x="4200" y="-124"/>
         </scene>
-        <!--ChangeNumberVC-->
+        <!--ChangePasswordVC-->
         <scene sceneID="npt-6a-GC7">
             <objects>
-                <viewController storyboardIdentifier="ChangePasswordVC" title="ChangeNumberVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="qpS-3L-cEO" customClass="ChangePasswordVC" customModule="Dawadawa" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ChangePasswordVC" title="ChangePasswordVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="qpS-3L-cEO" customClass="ChangePasswordVC" customModule="Dawadawa" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="HMt-Ln-whe">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="874"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -14179,7 +14178,7 @@ this opportunity?</string>
                                         <rect key="frame" x="0.0" y="73" width="414" height="45"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chat" translatesAutoresizingMaskIntoConstraints="NO" id="mRV-qK-fFE">
-                                                <rect key="frame" x="18" y="15" width="20" height="15"/>
+                                                <rect key="frame" x="18" y="12.666666666666686" width="20" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="20" id="Yaf-A6-Gt2"/>
                                                 </constraints>
@@ -14205,8 +14204,8 @@ this opportunity?</string>
                                             <constraint firstItem="LAX-tm-Eb5" firstAttribute="top" secondItem="Xdj-C3-mxD" secondAttribute="top" id="RCC-eg-sZ7"/>
                                             <constraint firstAttribute="trailing" secondItem="LAX-tm-Eb5" secondAttribute="trailing" id="W0y-fX-1Lz"/>
                                             <constraint firstItem="mRV-qK-fFE" firstAttribute="leading" secondItem="Xdj-C3-mxD" secondAttribute="leading" constant="18" id="dyj-4i-2rI"/>
-                                            <constraint firstItem="mRV-qK-fFE" firstAttribute="top" secondItem="Xdj-C3-mxD" secondAttribute="top" constant="15" id="exO-7c-8R2"/>
-                                            <constraint firstAttribute="bottom" secondItem="mRV-qK-fFE" secondAttribute="bottom" constant="15" id="gRx-lF-5jP"/>
+                                            <constraint firstItem="mRV-qK-fFE" firstAttribute="top" secondItem="Xdj-C3-mxD" secondAttribute="top" constant="12.5" id="exO-7c-8R2"/>
+                                            <constraint firstAttribute="bottom" secondItem="mRV-qK-fFE" secondAttribute="bottom" constant="12.5" id="gRx-lF-5jP"/>
                                             <constraint firstAttribute="height" constant="45" id="iMB-e5-DTA"/>
                                             <constraint firstItem="LAX-tm-Eb5" firstAttribute="leading" secondItem="Xdj-C3-mxD" secondAttribute="leading" id="o2A-GB-BP2"/>
                                             <constraint firstAttribute="bottom" secondItem="LAX-tm-Eb5" secondAttribute="bottom" id="weg-Ah-iVS"/>
@@ -14216,7 +14215,7 @@ this opportunity?</string>
                                         <rect key="frame" x="0.0" y="128" width="414" height="45"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="copy" translatesAutoresizingMaskIntoConstraints="NO" id="ppt-JD-X8B">
-                                                <rect key="frame" x="18" y="15" width="20" height="15"/>
+                                                <rect key="frame" x="18" y="12.666666666666686" width="20" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="20" id="rTw-Ip-dW8"/>
                                                 </constraints>
@@ -14243,8 +14242,8 @@ this opportunity?</string>
                                             <constraint firstItem="XAu-gf-HDg" firstAttribute="leading" secondItem="ppt-JD-X8B" secondAttribute="trailing" constant="17" id="6kb-Cn-0s7"/>
                                             <constraint firstItem="375-Vf-DGK" firstAttribute="top" secondItem="R9K-UZ-Qyw" secondAttribute="top" id="GlW-Z8-s6R"/>
                                             <constraint firstItem="375-Vf-DGK" firstAttribute="leading" secondItem="R9K-UZ-Qyw" secondAttribute="leading" id="H8J-rs-fRz"/>
-                                            <constraint firstAttribute="bottom" secondItem="ppt-JD-X8B" secondAttribute="bottom" constant="15" id="Jar-hD-e7N"/>
-                                            <constraint firstItem="ppt-JD-X8B" firstAttribute="top" secondItem="R9K-UZ-Qyw" secondAttribute="top" constant="15" id="MEc-US-F4h"/>
+                                            <constraint firstAttribute="bottom" secondItem="ppt-JD-X8B" secondAttribute="bottom" constant="12.5" id="Jar-hD-e7N"/>
+                                            <constraint firstItem="ppt-JD-X8B" firstAttribute="top" secondItem="R9K-UZ-Qyw" secondAttribute="top" constant="12.5" id="MEc-US-F4h"/>
                                             <constraint firstAttribute="height" constant="45" id="URs-ZI-Ij0"/>
                                             <constraint firstAttribute="trailing" secondItem="375-Vf-DGK" secondAttribute="trailing" id="VCV-U3-j0W"/>
                                             <constraint firstItem="375-Vf-DGK" firstAttribute="top" secondItem="R9K-UZ-Qyw" secondAttribute="top" id="cpq-D8-RhY"/>
@@ -14256,7 +14255,7 @@ this opportunity?</string>
                                         <rect key="frame" x="0.0" y="183" width="414" height="45"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="interested" translatesAutoresizingMaskIntoConstraints="NO" id="e82-zR-nXL">
-                                                <rect key="frame" x="18" y="15" width="20" height="15"/>
+                                                <rect key="frame" x="18" y="12.666666666666629" width="20" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="20" id="xtt-ho-PC8"/>
                                                 </constraints>
@@ -14281,11 +14280,11 @@ this opportunity?</string>
                                             <constraint firstItem="mWE-g9-PUZ" firstAttribute="top" secondItem="876-Er-qEU" secondAttribute="top" id="DUX-Kq-bFl"/>
                                             <constraint firstAttribute="height" constant="45" id="EZn-FY-01N"/>
                                             <constraint firstItem="mWE-g9-PUZ" firstAttribute="leading" secondItem="876-Er-qEU" secondAttribute="leading" id="KfG-n4-K32"/>
-                                            <constraint firstItem="e82-zR-nXL" firstAttribute="top" secondItem="876-Er-qEU" secondAttribute="top" constant="15" id="O84-JC-ZY2"/>
+                                            <constraint firstItem="e82-zR-nXL" firstAttribute="top" secondItem="876-Er-qEU" secondAttribute="top" constant="12.5" id="O84-JC-ZY2"/>
                                             <constraint firstAttribute="trailing" secondItem="mWE-g9-PUZ" secondAttribute="trailing" id="OaL-sX-Ki0"/>
                                             <constraint firstItem="e82-zR-nXL" firstAttribute="leading" secondItem="876-Er-qEU" secondAttribute="leading" constant="18" id="SMX-p5-CVW"/>
                                             <constraint firstItem="vaM-LB-4gS" firstAttribute="centerY" secondItem="e82-zR-nXL" secondAttribute="centerY" id="T7h-Od-bGR"/>
-                                            <constraint firstAttribute="bottom" secondItem="e82-zR-nXL" secondAttribute="bottom" constant="15" id="YDd-a6-w7m"/>
+                                            <constraint firstAttribute="bottom" secondItem="e82-zR-nXL" secondAttribute="bottom" constant="12.5" id="YDd-a6-w7m"/>
                                             <constraint firstAttribute="bottom" secondItem="mWE-g9-PUZ" secondAttribute="bottom" id="cOA-eN-txd"/>
                                             <constraint firstItem="mWE-g9-PUZ" firstAttribute="top" secondItem="876-Er-qEU" secondAttribute="top" id="cfX-7j-Gpk"/>
                                             <constraint firstItem="vaM-LB-4gS" firstAttribute="leading" secondItem="e82-zR-nXL" secondAttribute="trailing" constant="17" id="eE4-Oi-eGA"/>
@@ -14296,7 +14295,7 @@ this opportunity?</string>
                                         <rect key="frame" x="0.0" y="238" width="414" height="45"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="flag-2" translatesAutoresizingMaskIntoConstraints="NO" id="FIP-PA-QMJ">
-                                                <rect key="frame" x="18" y="15" width="20" height="15"/>
+                                                <rect key="frame" x="18" y="12" width="20" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="20" id="57u-Gi-ZWz"/>
                                                 </constraints>
@@ -14320,9 +14319,9 @@ this opportunity?</string>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="IS9-pV-Qkf" secondAttribute="trailing" id="4qj-Pu-ZWh"/>
                                             <constraint firstItem="iJn-vE-Kni" firstAttribute="centerY" secondItem="FIP-PA-QMJ" secondAttribute="centerY" id="EyP-LR-kAk"/>
-                                            <constraint firstItem="FIP-PA-QMJ" firstAttribute="top" secondItem="dRV-FZ-Ewh" secondAttribute="top" constant="15" id="Kct-6B-9If"/>
+                                            <constraint firstItem="FIP-PA-QMJ" firstAttribute="top" secondItem="dRV-FZ-Ewh" secondAttribute="top" constant="12" id="Kct-6B-9If"/>
                                             <constraint firstItem="IS9-pV-Qkf" firstAttribute="top" secondItem="dRV-FZ-Ewh" secondAttribute="top" id="OQs-RK-ux0"/>
-                                            <constraint firstAttribute="bottom" secondItem="FIP-PA-QMJ" secondAttribute="bottom" constant="15" id="PpL-oj-XIg"/>
+                                            <constraint firstAttribute="bottom" secondItem="FIP-PA-QMJ" secondAttribute="bottom" constant="12" id="PpL-oj-XIg"/>
                                             <constraint firstItem="FIP-PA-QMJ" firstAttribute="leading" secondItem="dRV-FZ-Ewh" secondAttribute="leading" constant="18" id="W2n-eU-oJ1"/>
                                             <constraint firstItem="IS9-pV-Qkf" firstAttribute="leading" secondItem="dRV-FZ-Ewh" secondAttribute="leading" id="b9m-PL-LiL"/>
                                             <constraint firstItem="iJn-vE-Kni" firstAttribute="leading" secondItem="FIP-PA-QMJ" secondAttribute="trailing" constant="17" id="pjP-vz-4rJ"/>
@@ -14334,13 +14333,14 @@ this opportunity?</string>
                                         <rect key="frame" x="0.0" y="293" width="414" height="45"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="frame" translatesAutoresizingMaskIntoConstraints="NO" id="3fF-eX-2it">
-                                                <rect key="frame" x="18" y="15" width="20" height="24"/>
+                                                <rect key="frame" x="18" y="12" width="20" height="22"/>
                                                 <constraints>
+                                                    <constraint firstAttribute="height" constant="22" id="3SO-0c-6IU"/>
                                                     <constraint firstAttribute="width" constant="20" id="dMl-BD-0I7"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Report user" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iUg-ZA-yIP">
-                                                <rect key="frame" x="55.000000000000007" y="16" width="91.666666666666686" height="22"/>
+                                                <rect key="frame" x="55.000000000000007" y="12" width="91.666666666666686" height="22"/>
                                                 <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="18"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -14361,7 +14361,7 @@ this opportunity?</string>
                                             <constraint firstItem="2my-6Y-nYm" firstAttribute="top" secondItem="gSJ-XG-lMK" secondAttribute="top" id="DzE-dZ-d7e"/>
                                             <constraint firstItem="2my-6Y-nYm" firstAttribute="leading" secondItem="gSJ-XG-lMK" secondAttribute="leading" id="H9B-zV-7wb"/>
                                             <constraint firstItem="iUg-ZA-yIP" firstAttribute="centerY" secondItem="3fF-eX-2it" secondAttribute="centerY" id="TKf-cw-gyJ"/>
-                                            <constraint firstItem="3fF-eX-2it" firstAttribute="top" secondItem="gSJ-XG-lMK" secondAttribute="top" constant="15" id="U6w-ae-1MI"/>
+                                            <constraint firstItem="3fF-eX-2it" firstAttribute="top" secondItem="gSJ-XG-lMK" secondAttribute="top" constant="12" id="U6w-ae-1MI"/>
                                             <constraint firstAttribute="trailing" secondItem="2my-6Y-nYm" secondAttribute="trailing" id="WRc-0F-xET"/>
                                             <constraint firstAttribute="trailing" secondItem="2my-6Y-nYm" secondAttribute="trailing" id="omc-Sh-Y5J"/>
                                             <constraint firstAttribute="height" constant="45" id="rCV-ne-LqE"/>

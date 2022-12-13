@@ -38,7 +38,7 @@ class ProileSocialMoreVC: UIViewController {
     }
     
     @IBAction func btnCopyLinkTapped(_ sender: UIButton) {
-        
+        self.callback?("CopyLink")
     }
     
     @IBAction func btnUpdateTapped(_ sender: UIButton) {

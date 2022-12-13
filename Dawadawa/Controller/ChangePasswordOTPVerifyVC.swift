@@ -66,6 +66,7 @@ class ChangePasswordOTPVerifyVC: UIViewController {
         self.viewOtp6.borderColor = UIColor(hexString: "#A6A6A6")
         self.lblWrongOtp.isHidden = true
         self.lblSubHeading.text = "Password change code is sent on your email address \(String.getString(UserData.shared.email))"
+        self.viewVerify.backgroundColor = UIColor(hexString: "#A6A6A6")
     }
     func changebordercolor(){
         

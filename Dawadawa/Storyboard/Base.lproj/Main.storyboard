@@ -1889,8 +1889,12 @@ last name</string>
                     <navigationItem key="navigationItem" id="DCv-3q-3fe"/>
                     <size key="freeformSize" width="414" height="874"/>
                     <connections>
+                        <outlet property="btnContinue" destination="oJ8-rX-JIT" id="nQz-Je-iOQ"/>
                         <outlet property="btnDropUserType" destination="bJp-dF-gho" id="FpT-C8-F9S"/>
+                        <outlet property="lblHeading" destination="P1s-gx-HU7" id="NeL-Cg-qIJ"/>
+                        <outlet property="lblSubHeading" destination="Ecy-IK-Amo" id="MPy-BX-ZDy"/>
                         <outlet property="lblUserType" destination="jWZ-HZ-zqg" id="F3j-6A-CZp"/>
+                        <outlet property="lblYouwant" destination="cv6-xa-IUm" id="3wT-HS-n2S"/>
                         <outlet property="txtFieldFirstName" destination="oNo-24-m9m" id="juv-R9-XBf"/>
                         <outlet property="txtFieldLastName" destination="BjU-9v-Cde" id="EZv-zG-sOu"/>
                         <outlet property="viewContinue" destination="zKi-oN-S13" id="jlO-Tu-tJ7"/>
@@ -2543,6 +2547,11 @@ last name</string>
                     <navigationItem key="navigationItem" id="LGC-7K-itu"/>
                     <size key="freeformSize" width="414" height="920"/>
                     <connections>
+                        <outlet property="btnSkiplogin" destination="bRP-oA-LdF" id="uIJ-yJ-d5V"/>
+                        <outlet property="lblDawadawa" destination="eQ4-H8-8Lx" id="Rc0-gK-1Rs"/>
+                        <outlet property="lblDescription" destination="d1h-uw-bbt" id="I7D-oZ-rZL"/>
+                        <outlet property="lbllogin" destination="y5P-Tz-2Nb" id="itl-JB-u42"/>
+                        <outlet property="lblregister" destination="ovj-TX-Cny" id="mC4-HH-aYc"/>
                         <outlet property="viewLogin" destination="PUJ-cH-c1L" id="BQh-8y-aPh"/>
                         <outlet property="viewMain" destination="1Mn-m5-f4c" id="a2F-H3-kg5"/>
                         <outlet property="viewRegister" destination="nZD-X5-KjI" id="EOf-3r-7Jm"/>
@@ -2740,6 +2749,9 @@ would like to sign into DawaDawa.</string>
                     <navigationItem key="navigationItem" id="lDI-pl-ypF"/>
                     <size key="freeformSize" width="414" height="874"/>
                     <connections>
+                        <outlet property="btnContinue" destination="J9p-Ht-Xft" id="13b-lm-OZ6"/>
+                        <outlet property="lblHeading" destination="zxy-vq-XEN" id="YGn-Rg-vEy"/>
+                        <outlet property="lblHello" destination="2Yp-Dy-68J" id="Oep-8s-Yi6"/>
                         <outlet property="lblName" destination="JOt-Ki-CIl" id="Ejc-Vm-cP3"/>
                         <outlet property="txtfldEmail" destination="WT7-9n-Xra" id="u3G-2y-7KS"/>
                         <outlet property="viewContinue" destination="FDw-Th-B1S" id="wPr-78-Wvz"/>
@@ -2986,10 +2998,13 @@ would like to sign into DawaDawa.</string>
                     <navigationItem key="navigationItem" id="uMi-fg-NEG"/>
                     <size key="freeformSize" width="414" height="874"/>
                     <connections>
+                        <outlet property="btnContinue" destination="bKT-hc-FUl" id="C6h-AI-Pbt"/>
                         <outlet property="btnCountrySelect" destination="SZk-Fx-GHF" id="yJz-h5-uvB"/>
                         <outlet property="imageFlag" destination="xHD-Vm-SBp" id="AeV-8d-kY0"/>
                         <outlet property="labelCountry" destination="aPz-V2-mrJ" id="sVk-9j-lWF"/>
                         <outlet property="labelCountryCode" destination="lWA-BF-DES" id="kJv-Z4-Jgl"/>
+                        <outlet property="lblHello" destination="dlz-kN-YYA" id="LHx-Va-wzJ"/>
+                        <outlet property="lblSubHeading" destination="aQC-nV-6Hj" id="cMp-Fl-92Q"/>
                         <outlet property="lblname" destination="90y-hB-f0C" id="zGL-IU-F8M"/>
                         <outlet property="txtfieldPhoneNumber" destination="8SG-CH-7fS" id="BaM-mN-BFg"/>
                         <outlet property="viewContinue" destination="wLl-BT-kv6" id="sHu-nu-LE9"/>
@@ -3307,8 +3322,11 @@ from the options below</string>
                     <navigationItem key="navigationItem" id="86N-ZX-7Nu"/>
                     <size key="freeformSize" width="414" height="874"/>
                     <connections>
+                        <outlet property="btnContinue" destination="ly8-Gx-BP6" id="qc1-QU-ZcQ"/>
                         <outlet property="labelCountry" destination="EY3-Nb-w9q" id="ZtY-av-Ymt"/>
                         <outlet property="labelState" destination="i6B-bS-V2z" id="WAK-Ni-eTh"/>
+                        <outlet property="lblHeading" destination="o5t-eO-7pV" id="oLF-XK-5yH"/>
+                        <outlet property="lblSubHeading" destination="3BE-gN-vHi" id="JKv-Ka-7nW"/>
                         <outlet property="txtfieldLocality" destination="cjK-LV-CLu" id="igw-ZZ-iE0"/>
                         <outlet property="viewContinue" destination="r1M-Gc-Bgx" id="v0H-x0-Plr"/>
                     </connections>
@@ -3732,11 +3750,21 @@ from the options below</string>
                     <navigationItem key="navigationItem" id="91M-ZE-5vZ"/>
                     <size key="freeformSize" width="414" height="874"/>
                     <connections>
-                        <outlet property="btnTandC" destination="vPi-aU-6D8" id="joL-MU-fvc"/>
+                        <outlet property="btnContinue" destination="0Zg-EK-XK9" id="guv-5J-Ifh"/>
+                        <outlet property="btnPrivacyPolicy" destination="ZtA-v2-4Yj" id="Ge6-D7-IA8"/>
+                        <outlet property="btnTandC" destination="vPi-aU-6D8" id="Ajy-Eu-2ZC"/>
                         <outlet property="imgCheckNumberChar" destination="bRZ-dM-Mte" id="8M8-nK-H9F"/>
                         <outlet property="imgCheckSixChar" destination="e8z-6V-eev" id="4ZF-Dm-q5M"/>
                         <outlet property="imgCheckSpecialChar" destination="7M9-jR-RDN" id="JhK-44-8Sw"/>
                         <outlet property="imgCheckupperandlowerChar" destination="O7y-Zo-f3t" id="Epx-0U-sct"/>
+                        <outlet property="lblCheckEightChar" destination="X8m-06-oVs" id="ljI-ad-MWg"/>
+                        <outlet property="lblCheckNumberChar" destination="GhN-4w-v8z" id="FTT-sB-fav"/>
+                        <outlet property="lblCheckSpecialChar" destination="Ynw-0G-pVc" id="hyJ-pq-yda"/>
+                        <outlet property="lblCheckupperandlowerChar" destination="aTY-tZ-zfm" id="iat-Zg-YtY"/>
+                        <outlet property="lblHeading" destination="0A0-da-Iw7" id="n4T-QB-kNg"/>
+                        <outlet property="lblPlsAccept" destination="bO0-j9-Z7g" id="If7-ur-IdI"/>
+                        <outlet property="lblSubHeading" destination="pGo-a2-wtT" id="1nW-6y-oYa"/>
+                        <outlet property="lbland" destination="US3-DX-JMt" id="qZX-cN-Pku"/>
                         <outlet property="txtFieldConfirmPassword" destination="bV7-hI-2nP" id="nuF-5R-Ovq"/>
                         <outlet property="txtFieldPassword" destination="nta-am-HXA" id="QSs-fN-bWs"/>
                         <outlet property="viewContinue" destination="udT-vl-jY1" id="AUK-Pj-Sbt"/>

@@ -6,7 +6,6 @@ import UIKit
 
 class PremiumOpportunitiesVC: UIViewController {
     
-    
     @IBOutlet weak var tblViewPremiumOpp: UITableView!
     var imgUrl = ""
     var docUrl = ""
@@ -57,9 +56,6 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
             
         case 1:
             return self.userTimeLine.count
-            
-            
-            
             
         default:
             return 0
@@ -265,10 +261,8 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
                                     self.opportunitydetailsapi(oppr_id: oppid)
                                 }
                             }
-                            
                         }
                         self.present(vc, animated: false)
-                        
                     }
                     
                     else{
@@ -287,6 +281,12 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
                                 vc.friendimage = imguserurl
                                 self.navigationController?.pushViewController(vc, animated: true)
                                 self.dismiss(animated: true)
+                            }
+                            
+                            if txt == "CopyLink"{
+                                let share_link = String.getString(self.userTimeLine[indexPath.row].share_link)
+                                UIPasteboard.general.string = share_link
+                                print("share_link\(share_link)")
                             }
                             
                             if txt == "MarkasInterested"{
@@ -316,7 +316,6 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
                                 }
                                 
                             }
-                            
                         }
                         self.present(vc, animated: false)
                     }
@@ -651,15 +650,12 @@ extension PremiumOpportunitiesVC{
                         //                        self?.count = String.getString(dictResult["count"])
                         //                        debugPrint("likecount=-=-=-=",self?.count)
                         completion(String.getString(dictResult["count"]))
-                        
-                        
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                        
-                        
                     }
                     
                     else if  Int.getInt(dictResult["status"]) == 400{
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        CommonUtils.showError(.info, String.getString("This Opportunity is unlike by You"))
+//                       CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                 default:

@@ -8,9 +8,12 @@ import SKFloatingTextField
 
 class EnterEmailVC: UIViewController {
     
+    @IBOutlet weak var lblHello: UILabel!
     @IBOutlet weak var lblName: UILabel!
+    @IBOutlet weak var lblHeading: UILabel!
     @IBOutlet weak var txtfldEmail: SKFloatingTextField!
     @IBOutlet weak var viewContinue: UIView!
+    @IBOutlet weak var btnContinue: UIButton!
     
     var name = ""
     var lastame = ""
@@ -19,6 +22,7 @@ class EnterEmailVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setup()
+        self.setuplanguage()
         self.lblName.text = self.name
     }
     
@@ -91,5 +95,19 @@ extension EnterEmailVC : SKFlaotingTextFieldDelegate {
     
     func textFieldDidBeginEditing(textField: SKFloatingTextField) {
         print("begin editing")
+    }
+}
+
+// MARK: - Localisation
+
+extension EnterEmailVC{
+    
+    func setuplanguage(){
+        lblHello.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Hello", comment: "")
+        lblHeading.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Please enter your email address that you would like to sign into DawaDawa.", comment: "")
+        txtfldEmail.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Email*", comment: "")
+        txtfldEmail.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Email*", comment: "")
+        btnContinue.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "Continue", comment: ""), for: .normal)
+        
     }
 }

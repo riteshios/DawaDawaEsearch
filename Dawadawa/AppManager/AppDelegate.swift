@@ -1,9 +1,6 @@
-//
 //  AppDelegate.swift
 //  Dawadawa
-//
 //  Created by Ritesh Gupta on 09/06/22.
-//
 
 import UIKit
 import IQKeyboardManagerSwift
@@ -60,9 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else {
             
             let settings: UIUserNotificationSettings =
-            
             UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
-            
             application.registerUserNotificationSettings(settings)
             
         }
@@ -92,11 +87,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else {
             // set the initial viewcontroller
             let window = UIApplication.shared.windows.first
-            
             let storybaord = UIStoryboard(name: "Home", bundle: nil)
-            
             window?.rootViewController  = storybaord.instantiateViewController(withIdentifier: "BuyPlanVC")
-            
             window?.makeKeyAndVisible()
         }
         return true

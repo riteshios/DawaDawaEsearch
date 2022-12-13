@@ -382,13 +382,21 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                     let oppid = self.userTimeLine[indexPath.row].id
                     debugPrint("oppid--=-=-=-",oppid)
                     //                            self.likeOpportunityapi(oppr_id: oppid ?? 0)
-                    self.likeOpportunityapi(oppr_id: oppid ?? 0) { countLike in
+                    self.likeOpportunityapi(oppr_id: oppid ?? 0) { countLike,sucess  in
                         obj.likes = Int.getInt(countLike)
                         cell.lblLikeCount.text = String.getString(obj.likes) + " " + "likes"
+                        
+                        if sucess == 200{
+                            cell.imglike.image = UIImage(named: "dil")
+                            cell.lbllike.text = "Liked"
+                            cell.lbllike.textColor = .red
+                        }
+                        else if sucess == 400{
+                            cell.imglike.image = UIImage(named: "unlike")
+                            cell.lbllike.text = "Like"
+                            cell.lbllike.textColor = UIColor(hexString: "#A6A6A6")
+                        }
                     }
-                    cell.imglike.image = UIImage(named: "dil")
-                    cell.lbllike.text = "Liked"
-                    cell.lbllike.textColor = .red
                 }
                 
                 if txt == "Rate"{
@@ -412,7 +420,6 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                         else{
                             self.listoppoertunityapi()
                         }
-                        
                     }
                     self.present(vc, animated: false)
                     
@@ -458,12 +465,16 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                             //                        self.listoppoertunityapi()
                         }
                         
+                        if txt == "CopyLink"{
+                            let share_link = String.getString(self.userTimeLine[indexPath.row].share_link)
+                            UIPasteboard.general.string = share_link
+                            print("share_link\(share_link)")
+                        }
+                        
                         if txt == "Update"{
                             
                             let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
-                            
                             debugPrint("oppid+++++++",oppid)
-                            
                             self.opportunitydetailsapi(oppr_id: oppid)
                             
                         }
@@ -706,11 +717,8 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
             attributedStringSubcomment.setColorForText(textToFind: thrid, withColor: UIColor.black)
             attributedStringSubcomment.setColorForText(textToFind: fourth, withColor: UIColor.gray)
             
-            
             cell.lblusernameandcomment.attributedText = attributedStringcomment
             cell.lblsubUserNameandComment.attributedText = attributedStringSubcomment
-            
-            
             
             cell.callbacktextviewcomment = {[weak tblViewSocialPost] (_) in
                 
@@ -1085,7 +1093,7 @@ extension ProfileVC{
     
     //    Api like Opportunity
     
-    func likeOpportunityapi(oppr_id:Int,completion: @escaping(_ countLike: String)->Void){
+    func likeOpportunityapi(oppr_id:Int,completion: @escaping(_ countLike: String,_ Sucesscode: Int)->Void){
         CommonUtils.showHud(show: true)
         
         
@@ -1129,16 +1137,19 @@ extension ProfileVC{
                         
                         //                        self?.count = String.getString(dictResult["count"])
                         //                        debugPrint("likecount=-=-=-=",self?.count)
-                        completion(String.getString(dictResult["count"]))
-                        
-                        
+                        completion(String.getString(dictResult["count"]), Int.getInt(dictResult["status"]))
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                        
-                        
                     }
                     
                     else if  Int.getInt(dictResult["status"]) == 400{
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+                        let septoken = endToken.components(separatedBy: " ")
+                        if septoken[0] == "Bearer"{
+                            kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
+                        }
+                        completion(String.getString(dictResult["count"]), Int.getInt(dictResult["status"]))
+                        CommonUtils.showError(.info, String.getString("This Opportunity is unlike by You"))
+//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                 default:

@@ -310,7 +310,8 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                 }
                 
                 if txt == "Like"{
-                    if cell.btnlike.isSelected == true{
+
+//                    if cell.btnlike.isSelected == true{
                         if UserData.shared.isskiplogin == true{
                             self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
                         }
@@ -322,14 +323,14 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                                 obj.likes = Int.getInt(countLike)
                                 cell.lblLikeCount.text = String.getString(obj.likes) + " " + "Likes"
                             }
-                            cell.imglike.image = UIImage(named: "dil")
-                            cell.lbllike.text = "Liked"
-                            cell.lbllike.textColor = .red
+//                            cell.imglike.image = UIImage(named: "dil")
+//                            cell.lbllike.text = "Liked"
+//                            cell.lbllike.textColor = .red
                             
                             debugPrint("count=-==0-",self.count)
-                            //   self.getallopportunity()
+                               self.getallopportunity()
                         }
-                    }
+                    
                 }
                 
                 if txt == "Share"{
@@ -466,6 +467,11 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                                     self.navigationController?.pushViewController(vc, animated: true)
                                     self.dismiss(animated: true)
                                 }
+                            }
+                            if txt == "CopyLink"{
+                                let share_link = String.getString(userTimeLine[indexPath.row].share_link)
+                                UIPasteboard.general.string = share_link
+                                print("share_link\(share_link)")
                             }
                             
                             if txt == "MarkasInterested"{
@@ -935,7 +941,8 @@ extension HomeVC{
                     }
                     
                     else if  Int.getInt(dictResult["status"]) == 400{
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        CommonUtils.showError(.info, String.getString("This Opportunity is unlike by You"))
+//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                 default:

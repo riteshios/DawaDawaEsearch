@@ -6,11 +6,13 @@ import UIKit
 
 class EnterResidenceVC: UIViewController {
     
-    @IBOutlet weak var viewContinue: UIView!
+    @IBOutlet weak var lblHeading: UILabel!
+    @IBOutlet weak var lblSubHeading: UILabel!
     @IBOutlet weak var txtfieldLocality: UITextField!
     @IBOutlet weak var labelCountry:UILabel!
     @IBOutlet weak var labelState:UILabel!
-    
+    @IBOutlet weak var viewContinue: UIView!
+    @IBOutlet weak var btnContinue: UIButton!
     
     var name = ""
     var lastame = ""
@@ -24,6 +26,7 @@ class EnterResidenceVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setup()
+        self.setuplanguage()
         self.getCountryStateApi()
         
     }
@@ -148,5 +151,17 @@ extension EnterResidenceVC{
                 CommonUtils.showToastForDefaultError()
             }
         }
+    }
+}
+// MARK: - Localisation
+
+extension EnterResidenceVC{
+    func setuplanguage(){
+        lblHeading.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Let's get started with country of residence", comment: "")
+        lblSubHeading.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Please choose your country of residence from the options below", comment: "")
+        labelCountry.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Country", comment: "")
+        labelState.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "State", comment: "")
+        txtfieldLocality.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Locality", comment: "")
+        btnContinue.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "Continue", comment: ""), for: .normal)
     }
 }
