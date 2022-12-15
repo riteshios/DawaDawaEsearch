@@ -64,6 +64,7 @@ class DetailsTableViewCell: UITableViewCell,UITextViewDelegate {
     @IBOutlet weak var heightviewBusinessminingtype: NSLayoutConstraint!
     @IBOutlet weak var imgOppFlag: UIImageView!
     @IBOutlet weak var btnChat: UIButton!
+    @IBOutlet weak var viewSave: UIView!
     
     
     //    Comment Section

@@ -6,7 +6,7 @@ import UIKit
 import STTabbar
 import IQKeyboardManagerSwift
 
-class HomeVC: UIViewController{
+class HomeVC: UIViewController,UITabBarControllerDelegate{
     
     @IBOutlet weak var tblViewViewPost: UITableView!
     
@@ -31,6 +31,7 @@ class HomeVC: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tabBarController?.delegate = self
         self.setuplanguage()
         self.imgNotification.isHidden = true
         debugPrint("nameid",UserData.shared.id)
@@ -41,6 +42,7 @@ class HomeVC: UIViewController{
                 self.guestgetallopportunity()
             }
         }
+        
         else{
             self.fetchdata()
         }
@@ -55,9 +57,20 @@ class HomeVC: UIViewController{
             self.getallopportunity()
             self.fetchdata()
             self.getcountnotification()
+            //            self.scrollToTop()
         }
         if UserData.shared.isskiplogin == true{
             self.guestgetallopportunity()
+            //            self.scrollToTop()
+        }
+    }
+    
+    
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        //            let tabBarIndex = tabBarController.selectedIndex
+        if tabBarController.selectedIndex == 0 {
+            print("home tapped")
+            self.scrollToTop()
         }
     }
     
@@ -77,8 +90,8 @@ class HomeVC: UIViewController{
                 guard let data = data, error == nil else { return }
                 
                 DispatchQueue.main.async { /// execute on main thread
-//                    self.ImgUser.image = UIImage(data: data)
-//                    let userUrl = URL(string: url)
+                    //                    self.ImgUser.image = UIImage(data: data)
+                    //                    let userUrl = URL(string: url)
                     self.ImgUser.sd_setImage(with: url, placeholderImage:UIImage(named: "Boss") )
                 }
             }
@@ -86,14 +99,13 @@ class HomeVC: UIViewController{
         }
     }
     
-    //    override func viewDidAppear(_ animated: Bool) {
-    //        super.viewDidAppear(animated)
-    //        self.tabBarController?.tabBar.isHidden = false
-    //        self.tabBarController?.tabBar.layer.zPosition = 0
-    //    }
+    //        override func viewDidAppear(_ animated: Bool) {
+    //            super.viewDidAppear(animated)
+    //            self.tabBarController?.tabBar.isHidden = false
+    //            self.tabBarController?.tabBar.layer.zPosition = 0
+    //        }
     
     @IBAction func btnSearchTapped(_ sender: UIButton) {
-        
         tabBarController?.selectedIndex = 1
     }
     
@@ -149,9 +161,15 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                             self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
                         }
                         else{
-                            let vc = self.storyboard!.instantiateViewController(withIdentifier: PremiumOpportunitiesVC.getStoryboardID()) as! PremiumOpportunitiesVC
-                            vc.camefrom = "home"
-                            self.navigationController?.pushViewController(vc, animated: true)
+                            
+                            if kSharedUserDefaults.getpayment_type() as? String == "Basic Plan"{
+                                self.showSimpleAlert(message: "Please Upgrade the Plan for Premium and Featured Opportunities")
+                            }
+                            else{
+                                let vc = self.storyboard!.instantiateViewController(withIdentifier: PremiumOpportunitiesVC.getStoryboardID()) as! PremiumOpportunitiesVC
+                                vc.camefrom = "home"
+                                self.navigationController?.pushViewController(vc, animated: true)
+                            }
                         }
                     }
                     
@@ -247,10 +265,12 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
             
             if UserData.shared.id == Int.getInt(obj.user_id){
                 cell.btnChat.isHidden = true
+                cell.viewSave.isHidden = true
                 //                cell.btnviewDetails.isHidden = true
             }
             else{
                 cell.btnChat.isHidden = false
+                cell.viewSave.isHidden = false
                 //                cell.btnviewDetails.isHidden = false
             }
             cell.callback = { txt, sender in
@@ -310,26 +330,34 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                 }
                 
                 if txt == "Like"{
-
-//                    if cell.btnlike.isSelected == true{
-                        if UserData.shared.isskiplogin == true{
-                            self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
-                        }
-                        else{
-                            let oppid = userTimeLine[indexPath.row].id
-                            debugPrint("oppid--=-=-=-",oppid)
+                    
+                    //                    if cell.btnlike.isSelected == true{
+                    if UserData.shared.isskiplogin == true{
+                        self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                    }
+                    else{
+                        let oppid = userTimeLine[indexPath.row].id
+                        debugPrint("oppid--=-=-=-",oppid)
+                        
+                        
+                        self.likeOpportunityapi(oppr_id: oppid ?? 0) { countLike,sucess  in
+                            obj.likes = Int.getInt(countLike)
+                            debugPrint("Int.getInt(countLike)",Int.getInt(countLike))
+                            cell.lblLikeCount.text = String.getString(obj.likes) + " " + "likes"
                             
-                            self.likeOpportunityapi(oppr_id: oppid ?? 0) { countLike in
-                                obj.likes = Int.getInt(countLike)
-                                cell.lblLikeCount.text = String.getString(obj.likes) + " " + "Likes"
+                            if sucess == 200{
+                                cell.imglike.image = UIImage(named: "dil")
+                                cell.lbllike.text = "Liked"
+                                cell.lbllike.textColor = .red
                             }
-//                            cell.imglike.image = UIImage(named: "dil")
-//                            cell.lbllike.text = "Liked"
-//                            cell.lbllike.textColor = .red
-                            
-                            debugPrint("count=-==0-",self.count)
-                               self.getallopportunity()
+                            else if sucess == 400{
+                                cell.imglike.image = UIImage(named: "unlike")
+                                cell.lbllike.text = "Like"
+                                cell.lbllike.textColor = UIColor(hexString: "#A6A6A6")
+                            }
                         }
+                        
+                    }
                     
                 }
                 
@@ -472,6 +500,7 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                                 let share_link = String.getString(userTimeLine[indexPath.row].share_link)
                                 UIPasteboard.general.string = share_link
                                 print("share_link\(share_link)")
+                                CommonUtils.showError(.info, String.getString("Link Copied"))
                             }
                             
                             if txt == "MarkasInterested"{
@@ -757,6 +786,11 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
         }
     }
     
+    private func scrollToTop() { // Scroll table view to Top
+        let topRow = IndexPath(row: 0,section: 0)
+        self.tblViewViewPost.scrollToRow(at: topRow,at: .bottom, animated: true ) // .top krne pr cell tk scroll krega or .bottom krne pr header tk scroll krega
+    }
+    
     @objc func buttonTappedFilter(_ sender:UIButton){
                 let vc = self.storyboard!.instantiateViewController(withIdentifier: FilterVC.getStoryboardID()) as! FilterVC
                 filteredArray.removeAll()
@@ -894,7 +928,7 @@ extension HomeVC{
     
     //    Api like Opportunity
     
-    func likeOpportunityapi(oppr_id:Int,completion: @escaping(_ countLike: String)->Void){
+    func likeOpportunityapi(oppr_id:Int,completion: @escaping(_ countLike: String,_ Sucesscode: Int)->Void){
         CommonUtils.showHud(show: true)
         
         
@@ -934,15 +968,17 @@ extension HomeVC{
                         
                         //  self?.count = String.getString(dictResult["count"])
                         debugPrint("likecount=-=-=",self?.count)
-                        completion(String.getString(dictResult["count"]))
+                        completion(String.getString(dictResult["count"]),Int.getInt(dictResult["status"]))
                         
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         
                     }
                     
                     else if  Int.getInt(dictResult["status"]) == 400{
+                        completion(String.getString(dictResult["count"]), Int.getInt(dictResult["status"]))
                         CommonUtils.showError(.info, String.getString("This Opportunity is unlike by You"))
-//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+//                        CommonUtils.showError(.info, String.getString("This Opportunity is unlike by You"))
+                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                 default:

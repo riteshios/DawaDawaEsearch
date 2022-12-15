@@ -381,7 +381,7 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                 if txt == "Like"{
                     let oppid = self.userTimeLine[indexPath.row].id
                     debugPrint("oppid--=-=-=-",oppid)
-                    //                            self.likeOpportunityapi(oppr_id: oppid ?? 0)
+                 
                     self.likeOpportunityapi(oppr_id: oppid ?? 0) { countLike,sucess  in
                         obj.likes = Int.getInt(countLike)
                         cell.lblLikeCount.text = String.getString(obj.likes) + " " + "likes"
@@ -469,6 +469,7 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                             let share_link = String.getString(self.userTimeLine[indexPath.row].share_link)
                             UIPasteboard.general.string = share_link
                             print("share_link\(share_link)")
+                            CommonUtils.showError(.info, String.getString("Link Copied"))
                         }
                         
                         if txt == "Update"{

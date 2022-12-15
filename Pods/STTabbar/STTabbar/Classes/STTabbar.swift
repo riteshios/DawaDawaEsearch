@@ -95,7 +95,6 @@ public final class STTabbar: UITabBar {
         centerButton.backgroundColor = centerButtonColor
         centerButton.tintColor = UIColor.white
         
-
         //add to the tabbar and add click event
         self.addSubview(centerButton)
         centerButton.addTarget(self, action: #selector(self.centerButtonAction), for: .touchUpInside)

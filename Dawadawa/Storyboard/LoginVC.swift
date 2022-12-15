@@ -30,6 +30,8 @@ class LoginVC: UIViewController {
     @IBOutlet weak var lblFirstOR: UILabel!
     @IBOutlet weak var lblSecondOR: UILabel!
     
+    var payment_type = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setup()
@@ -212,9 +214,14 @@ extension LoginVC{
                         
                         let data = kSharedInstance.getDictionary(dictResult["data"])
                         kSharedUserDefaults.setLoggedInUserDetails(loggedInUserDetails: data)
+                        
                         kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: String.getString(dictResult[kLoggedInAccessToken]))
+                        
                         UserData.shared.saveData(data: data, token: String.getString(dictResult[kLoggedInAccessToken]))
                         cameFrom = ""
+                        
+                        kSharedUserDefaults.setpayment_type(paymenttype: String.getString(dictResult[kpayment_type]))
+                        
                         
                         if Int.getInt(UserData.shared.check_sub_plan) == 1{
                             kSharedAppDelegate?.makeRootViewController()

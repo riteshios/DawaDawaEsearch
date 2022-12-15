@@ -20,6 +20,19 @@ class SettingVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setuplanguage()
+        self.setup()
+    }
+    
+    func setup(){
+        
+        if kSharedUserDefaults.getlanguage() as? String == "en"{
+            self.imgDropDownMenu.image = UIImage(named: "IND")
+            self.lblDropDownMenu.text = "English-IND"
+        }
+        else{
+            self.imgDropDownMenu.image = UIImage(named: "sudan")
+            self.lblDropDownMenu.text = "Arabic"
+        }
     }
     
     //    MARK: - @IBActions
@@ -39,6 +52,8 @@ class SettingVC: UIViewController {
                 self.setupUpdateView(languageCode: "en")
                 kSharedUserDefaults.setLanguage(language: "en")
                 self.setuplanguage()
+                kSharedAppDelegate?.makeRootViewController()
+                
                 //                       UserDefaults.standard.set("en", forKey: "Language")
                 //                       UIView.appearance().semanticContentAttribute = .forceLeftToRight
             }
@@ -47,10 +62,12 @@ class SettingVC: UIViewController {
                 self.setupUpdateView(languageCode: "ar")
                 kSharedUserDefaults.setLanguage(language: "ar")
                 self.setuplanguage()
+                kSharedAppDelegate?.makeRootViewController()
                 //                       UserDefaults.standard.set("ar", forKey: "Language")
                 //                       UIView.appearance().semanticContentAttribute = .forceRightToLeft
             }
         }
+       
     }
     
     func setupUpdateView(languageCode code: String){

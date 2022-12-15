@@ -5,11 +5,12 @@
 import UIKit
 import STTabbar
 
-class TabBarVC: UITabBarController {
+class TabBarVC: UITabBarController, UITabBarControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.delegate = self
         
         if let myTabbar = tabBar as? STTabbar {
             myTabbar.centerButtonActionHandler = {
@@ -29,5 +30,11 @@ class TabBarVC: UITabBarController {
                 }
             }
         }
+        
+    }
+    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        print("Selected item")
     }
 }
+    
+

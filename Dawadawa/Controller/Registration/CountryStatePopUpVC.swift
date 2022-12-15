@@ -31,7 +31,6 @@ class CountryStatePopUpVC: UIViewController, UITextFieldDelegate {
         self.searchData = data
         self.tableview.delegate = self
         self.tableview.dataSource = self
-        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

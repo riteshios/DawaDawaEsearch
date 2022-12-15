@@ -12,6 +12,8 @@ class UserData{
     var email = ""
     var phone:String?
     var user_country:String?
+    var state:String?
+    var locality:String?
     var language:String?
     var profile_image:String?
     var dob:String?
@@ -42,6 +44,8 @@ class UserData{
         self.email = String.getString(data["email"])
         self.phone = String.getString(data["phone"])
         self.user_country = String.getString(data["user_country"])
+        self.state = String.getString(data["state"])
+        self.locality = String.getString(data["locality"])
         self.language = String.getString(data["language"])
         self.profile_image = String.getString(data["profile_image"])
         self.dob = String.getString(data["dob"])

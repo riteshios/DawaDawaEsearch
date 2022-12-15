@@ -1,4 +1,3 @@
-//
 //  PaymentVC.swift
 //  Dawadawa
 //  Created by Ritesh Gupta on 12/09/22.
@@ -121,12 +120,9 @@ class PaymentVC: UIViewController {
                 break
                 
             }
-            
         }
     }
-    
 }
-
 
 extension PaymentVC: STPAuthenticationContext{
     
@@ -188,7 +184,6 @@ extension PaymentVC{
     func storepaymentapi(message:STPPaymentIntent){
         CommonUtils.showHud(show: true)
         
-        
         if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
             let endToken = kSharedUserDefaults.getLoggedInAccessToken()
             let septoken = endToken.components(separatedBy: " ")
@@ -221,8 +216,7 @@ extension PaymentVC{
             "payment_terms":self.payment_terms
         ]
         
-        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kstorepayment, requestMethod: .POST,
-                                                               requestParameters:params, withProgressHUD: false)
+        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kstorepayment, requestMethod: .POST, requestParameters:params, withProgressHUD: false)
         {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
             
             CommonUtils.showHudWithNoInteraction(show: false)
@@ -244,7 +238,12 @@ extension PaymentVC{
                         let payments_id = String.getString(dictResult["payments_id"])
                         print("payments_idRitesh",payments_id)
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                        kSharedAppDelegate?.makeRootViewController()
+//                        kSharedAppDelegate?.makeRootViewController()
+                        
+                        kSharedUserDefaults.setpayment_type(paymenttype: String.getString(dictResult["payment_type"]))
+                        let vc = self?.storyboard?.instantiateViewController(withIdentifier: "MysubscriptionVC") as! MysubscriptionVC
+                        vc.hascomefrom = "paymentVC"
+                        self?.navigationController?.pushViewController(vc, animated: true)
                     }
                     
                     else if  Int.getInt(dictResult["responsecodes"]) == 400{

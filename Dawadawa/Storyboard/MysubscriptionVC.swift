@@ -25,6 +25,7 @@ class MysubscriptionVC: UIViewController {
     
     @IBOutlet weak var btnBuyPlans: UIButton!
     @IBOutlet weak var heightViewPlanshow: NSLayoutConstraint!
+    var hascomefrom = ""
     var activeplan:active_plan?
     var transaction = [trans_history]()
     
@@ -42,7 +43,13 @@ class MysubscriptionVC: UIViewController {
     //    MARK: - @IBAction
     
     @IBAction func btnBackTapped(_ sender: UIButton) {
-        self.navigationController?.popViewController(animated: true)
+        
+        if self.hascomefrom == "paymentVC"{
+            kSharedAppDelegate?.makeRootViewController()
+        }
+        else{
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
     @IBAction func btnBuyPlans(_ sender: UIButton) {

@@ -127,6 +127,15 @@ extension ViewAllSavedVC:UITableViewDelegate,UITableViewDataSource{
             cell.lblRating.isHidden = false
         }
         
+//        if UserData.shared.id == Int.getInt(obj.user_id){
+//            cell.btnChat.isHidden = true
+//            cell.viewSave.isHidden = true
+//        }
+//        else{
+//            cell.btnChat.isHidden = false
+//            cell.viewSave.isHidden = false
+//        }
+        
         cell.callback = { txt, sender in
             
             if txt == "Chat"{
@@ -301,6 +310,7 @@ extension ViewAllSavedVC:UITableViewDelegate,UITableViewDataSource{
                             let share_link = String.getString(self.userTimeLine[indexPath.row].share_link)
                             UIPasteboard.general.string = share_link
                             print("share_link\(share_link)")
+                            CommonUtils.showError(.info, String.getString("Link Copied"))
                         }
                         
                         if txt == "MarkasInterested"{

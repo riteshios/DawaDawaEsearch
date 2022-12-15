@@ -28,7 +28,6 @@ class EnterResidenceVC: UIViewController {
         self.setup()
         self.setuplanguage()
         self.getCountryStateApi()
-        
     }
     
     func setup(){
@@ -124,6 +123,7 @@ class EnterResidenceVC: UIViewController {
 }
 
 extension EnterResidenceVC{
+    
     func getCountryStateApi(){
         let url = "https://countriesnow.space/api/v0.1/countries/states"
         CommonUtils.showHudWithNoInteraction(show: true)

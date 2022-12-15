@@ -35,12 +35,6 @@ class EditProfileVC: UIViewController {
     @IBOutlet weak var btnEnglish: UIButton!
     @IBOutlet weak var btnArabic: UIButton!
     
-    @IBOutlet weak var imageFlag: UIImageView!
-    @IBOutlet weak var lblCountry: UILabel!
-    @IBOutlet weak var btnSelectCountry: UIButton!
-    
-    @IBOutlet weak var btnState: UIButton!
-    @IBOutlet weak var btnLocality: UIButton!
     
     @IBOutlet weak var lblEditProfile: UILabel!
     @IBOutlet weak var lblPhone: UILabel!
@@ -50,9 +44,10 @@ class EditProfileVC: UIViewController {
     @IBOutlet weak var lblFirstName: UILabel!
     @IBOutlet weak var lblLastName: UILabel!
     @IBOutlet weak var lblDOB: UILabel!
-    @IBOutlet weak var lblheadingCountry: UILabel!
-    @IBOutlet weak var lblState: UILabel!
-    @IBOutlet weak var lblLocality: UILabel!
+   
+    @IBOutlet weak var labelCountry:UILabel!
+    @IBOutlet weak var labelState:UILabel!
+    @IBOutlet weak var txtfieldLocality: UITextField!
     @IBOutlet weak var lblGender: UILabel!
     @IBOutlet weak var lblUserType: UILabel!
     @IBOutlet weak var lblEnglish: UILabel!
@@ -69,6 +64,9 @@ class EditProfileVC: UIViewController {
     var userdata = [UserData]()
     var timePicker = UIDatePicker()
     
+    var country = [Country]()
+    var state = [StateData]()
+    
     //    MARK: - Life Cycle
     
     override func viewDidLoad() {
@@ -84,11 +82,12 @@ class EditProfileVC: UIViewController {
             self.txtFieldEmailAddress.placeholder = "examiple@.com"
             self.txtFieldWhatsappNumber.placeholder = "+91**********"
             self.textfieldDATE.placeholder = "DD/MM/YYYY"
-            self.lblCountry.text = "India"
+            self.labelCountry.text = "India"
         }
         else{
             self.fetchdata()
-            self.getstateapi()
+//            self.getstateapi()
+            self.getCountryStateApi()
         }
     }
     
@@ -161,8 +160,15 @@ class EditProfileVC: UIViewController {
         }
         
         if UserData.shared.user_country != ""{
-            self.lblCountry.text = UserData.shared.user_country
-            debugPrint("self.lblCountry.text==",self.lblCountry.text)
+            self.labelCountry.text = UserData.shared.user_country
+            debugPrint("self.lblCountry.text==",self.labelCountry.text)
+        }
+        
+        if UserData.shared.state != ""{
+            self.labelState.text = UserData.shared.state
+        }
+        if UserData.shared.locality != ""{
+            self.txtfieldLocality.text = UserData.shared.locality
         }
         
         if UserData.shared.user_gender != ""{
@@ -203,6 +209,11 @@ class EditProfileVC: UIViewController {
         else if !String.getString(txtFieldEmailAddress.text).isEmail()
         {
             self.showSimpleAlert(message: Notifications.kEnterValidEmail)
+            return
+        }
+        
+        else if String.getString(txtFieldWhatsappNumber.text).isEmpty{
+            self.showSimpleAlert(message: Notifications.kwhatsappnumber)
             return
         }
         else if !String.getString(txtFieldWhatsappNumber.text).isPhoneNumber()
@@ -315,28 +326,55 @@ class EditProfileVC: UIViewController {
         self.verifyemail()
     }
     
-    @IBAction func btnSelectStateTapped(_ sender: UIButton) {
-        kSharedAppDelegate?.dropDown(dataSource: getstatelistarr.map{String.getString($0.state_name)}, text: btnState){
-            (index,item) in
-            self.lblState.text = item
-            let id = self.getstatelistarr[index].id
-            self.stateid = id
-            debugPrint("State idddd.....btnnnnt",  self.stateid = id)
+    @IBAction func buttonTappedCountry(_ sender:UIButton){
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyBoard.instantiateViewController(identifier:"CountryStatePopUpVC") as! CountryStatePopUpVC
+//        let vc = self.storyboard?.instantiateViewController(withIdentifier: "CountryStatePopUpVC") as! CountryStatePopUpVC
+        vc.modalTransitionStyle = .crossDissolve
+        vc.modalPresentationStyle = .overCurrentContext
+        vc.data.removeAll()
+        for i in 0 ..< country.count - 1{
+            vc.data.append(String.getString(self.country[i].name))
+        }
+        vc.callback = { txt in
+            vc.dismiss(animated: true){
+                self.labelCountry.text = String.getString(txt)
+            }
+        }
+        self.present(vc, animated: true)
+    }
+    
+    @IBAction func buttonTappedState(_ sender:UIButton){
+        if self.labelCountry.text == "Country"{
+            self.showSimpleAlert(message: "Please Select Country")
+            return
+        }else{
+            let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyBoard.instantiateViewController(identifier:"CountryStatePopUpVC") as! CountryStatePopUpVC
+            vc.modalTransitionStyle = .crossDissolve
+            vc.modalPresentationStyle = .overCurrentContext
+            vc.lbldata = "State name"
+            vc.data.removeAll()
+            for i in 0 ..< country.count - 1{
+                if self.labelCountry.text == self.country[i].name{
+                    if self.country[i].state.count > 0{
+                        for j in 0 ..< self.country[i].state.count - 1{
+                            vc.data.append(String.getString(country[i].state[j].name))
+                        }
+                    }
+                    break
+                }
+            }
             
-            self.getlocalityapi(id: self.stateid ?? 0 )
+            vc.callback = { txt in
+                vc.dismiss(animated: true){
+                    self.labelState.text = String.getString(txt)
+                }
+            }
+            self.present(vc, animated: true)
         }
     }
     
-    @IBAction func btnLocalityTapped(_ sender: UIButton) {
-        kSharedAppDelegate?.dropDown(dataSource: getlocalitylistarr.map{String.getString($0.local_name)}, text: btnLocality){
-            (index,item) in
-            self.lblLocality.text = item
-            let id  = self.getlocalitylistarr[index].id
-            self.localityid = id
-            debugPrint("localityid....",self.localityid)
-            
-        }
-    }
     
     @IBAction func btnDropGender(_ sender: UIButton){
         let dataSource1 = ["Male","Female"]
@@ -346,13 +384,6 @@ class EditProfileVC: UIViewController {
         }
     }
     
-    @IBAction func btnSelectCountryTapped(_ sender: UIButton) {
-        AppsCountryPickerInstanse.sharedInstanse.showController(referense: self) { (selectedCountry) in
-            
-            self.lblCountry.text = selectedCountry?.name
-            self.imageFlag.image = selectedCountry?.image ?? UIImage()
-        }
-    }
 }
 
 extension EditProfileVC{
@@ -440,7 +471,9 @@ extension EditProfileVC{
             "whatsapp_number":String.getString(self.txtFieldWhatsappNumber.text),
             "dob":String.getString(self.textfieldDATE.text),
             "phone":String.getString(self.txtFieldPhoneNumber.text),
-            "country_detail":self.lblCountry.text,
+            "country_detail":self.labelCountry.text,
+            "state":self.labelState.text,
+            "locality":String.getString(self.txtfieldLocality.text),
             "user_type":UserData.shared.user_type,
             "gender":self.lblGender.text,
             "about":self.txtfieldEnterAbout.text
@@ -581,103 +614,134 @@ extension EditProfileVC{
     
     //    Api State Type
     
-    func getstateapi(){
-        CommonUtils.showHudWithNoInteraction(show: true)
-        
-        if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
-            let endToken = kSharedUserDefaults.getLoggedInAccessToken()
-            let septoken = endToken.components(separatedBy: " ")
-            if septoken[0] != "Bearer"{
-                let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
-                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
-            }
-        }
-        
-        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName: ServiceName.kgetstate, requestMethod: .GET, requestParameters:[:], withProgressHUD: false) { (result:Any?, error:Error?, errorType:ErrorType?,statusCode:Int?) in
-            CommonUtils.showHudWithNoInteraction(show: false)
-            if errorType == .requestSuccess {
-                let dictResult = kSharedInstance.getDictionary(result)
-                switch Int.getInt(statusCode) {
-                case 200:
-                    if Int.getInt(dictResult["status"]) == 200{
-                        let endToken = kSharedUserDefaults.getLoggedInAccessToken()
-                        let septoken = endToken.components(separatedBy: " ")
-                        if septoken[0] == "Bearer"{
-                            kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
-                        }
-                        
-                        let state = kSharedInstance.getArray(withDictionary: dictResult["state"])
-                        self.getstatelistarr = state.map{getstateModel(data: $0)}
-                        
-                    }
-                    else if  Int.getInt(dictResult["status"]) == 401{
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                    }
-                    
-                    // CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                default:
-                    CommonUtils.showError(.error, String.getString(dictResult["message"]))
-                }
-            }else if errorType == .noNetwork {
-                CommonUtils.showToastForInternetUnavailable()
-                
-            } else {
-                CommonUtils.showToastForDefaultError()
-            }
-        }
-    }
+//    func getstateapi(){
+//        CommonUtils.showHudWithNoInteraction(show: true)
+//
+//        if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
+//            let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+//            let septoken = endToken.components(separatedBy: " ")
+//            if septoken[0] != "Bearer"{
+//                let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
+//                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
+//            }
+//        }
+//
+//        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName: ServiceName.kgetstate, requestMethod: .GET, requestParameters:[:], withProgressHUD: false) { (result:Any?, error:Error?, errorType:ErrorType?,statusCode:Int?) in
+//            CommonUtils.showHudWithNoInteraction(show: false)
+//            if errorType == .requestSuccess {
+//                let dictResult = kSharedInstance.getDictionary(result)
+//                switch Int.getInt(statusCode) {
+//                case 200:
+//                    if Int.getInt(dictResult["status"]) == 200{
+//                        let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+//                        let septoken = endToken.components(separatedBy: " ")
+//                        if septoken[0] == "Bearer"{
+//                            kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
+//                        }
+//
+//                        let state = kSharedInstance.getArray(withDictionary: dictResult["state"])
+//                        self.getstatelistarr = state.map{getstateModel(data: $0)}
+//
+//                    }
+//                    else if  Int.getInt(dictResult["status"]) == 401{
+//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+//                    }
+//
+//                    // CommonUtils.showError(.info, String.getString(dictResult["message"]))
+//                default:
+//                    CommonUtils.showError(.error, String.getString(dictResult["message"]))
+//                }
+//            }else if errorType == .noNetwork {
+//                CommonUtils.showToastForInternetUnavailable()
+//
+//            } else {
+//                CommonUtils.showToastForDefaultError()
+//            }
+//        }
+//    }
     
     //     Locality Api
     
-    func getlocalityapi(id:Int){
-        CommonUtils.showHud(show: true)
-        
-        if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
-            let endToken = kSharedUserDefaults.getLoggedInAccessToken()
-            let septoken = endToken.components(separatedBy: " ")
-            if septoken[0] != "Bearer"{
-                let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
-                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
-            }
-        }
-        
-        let stateids = Int(self.stateid ?? 0) // For remove optional
-        debugPrint("checkstateids",stateids)
-        
-        let params:[String : Any] = [
-            "localitys_id":"\(String(describing: stateids))",
-        ]
-        
-        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kgetlocality, requestMethod: .POST,
-                                                               requestParameters:params, withProgressHUD: false)
-        {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
+//    func getlocalityapi(id:Int){
+//        CommonUtils.showHud(show: true)
+//
+//        if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
+//            let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+//            let septoken = endToken.components(separatedBy: " ")
+//            if septoken[0] != "Bearer"{
+//                let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
+//                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
+//            }
+//        }
+//
+//        let stateids = Int(self.stateid ?? 0) // For remove optional
+//        debugPrint("checkstateids",stateids)
+//
+//        let params:[String : Any] = [
+//            "localitys_id":"\(String(describing: stateids))",
+//        ]
+//
+//        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kgetlocality, requestMethod: .POST,
+//                                                               requestParameters:params, withProgressHUD: false)
+//        {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
+//
+//            CommonUtils.showHudWithNoInteraction(show: false)
+//
+//            if errorType == .requestSuccess {
+//                let dictResult = kSharedInstance.getDictionary(result)
+//                switch Int.getInt(statusCode) {
+//                case 200:
+//
+//                    if Int.getInt(dictResult["status"]) == 200{
+//
+//                        let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+//                        let septoken = endToken.components(separatedBy: " ")
+//                        if septoken[0] == "Bearer"{
+//                            kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
+//                        }
+//                        let localitys = kSharedInstance.getArray(withDictionary: dictResult["localitys"])
+//                        self?.getlocalitylistarr = localitys.map{getlocalityModel(data: $0)}
+//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+//                    }
+//
+//                    else if  Int.getInt(dictResult["status"]) == 400{
+//
+//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+//                    }
+//
+//                default:
+//                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
+//                }
+//            } else if errorType == .noNetwork {
+//                CommonUtils.showToastForInternetUnavailable()
+//
+//            } else {
+//                CommonUtils.showToastForDefaultError()
+//            }
+//        }
+//    }
+    
+//     CountryStateApi
+    
+    func getCountryStateApi(){
+        let url = "https://countriesnow.space/api/v0.1/countries/states"
+        CommonUtils.showHudWithNoInteraction(show: true)
+        TANetworkManager.sharedInstance.requestApi(withServiceName: url, requestMethod: .GET, requestParameters: [:], withProgressHUD: false) {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
             
             CommonUtils.showHudWithNoInteraction(show: false)
             
             if errorType == .requestSuccess {
+                
                 let dictResult = kSharedInstance.getDictionary(result)
+                
                 switch Int.getInt(statusCode) {
                 case 200:
+                    let data = kSharedInstance.getArray(withDictionary: dictResult["data"])
+                    self?.country = data.map{Country(data: kSharedInstance.getDictionary($0))}
                     
-                    if Int.getInt(dictResult["status"]) == 200{
-                        
-                        let endToken = kSharedUserDefaults.getLoggedInAccessToken()
-                        let septoken = endToken.components(separatedBy: " ")
-                        if septoken[0] == "Bearer"{
-                            kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
-                        }
-                        let localitys = kSharedInstance.getArray(withDictionary: dictResult["localitys"])
-                        self?.getlocalitylistarr = localitys.map{getlocalityModel(data: $0)}
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                    }
-                    
-                    else if  Int.getInt(dictResult["status"]) == 400{
-                        
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                    }
                     
                 default:
-                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    CommonUtils.showError(.info, String.getString(dictResult["msg"]))
                 }
             } else if errorType == .noNetwork {
                 CommonUtils.showToastForInternetUnavailable()
@@ -760,9 +824,8 @@ extension EditProfileVC{
         lblFirstName.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "First name", comment: "")
         lblLastName.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Last name", comment: "")
         lblDOB.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Date of birth", comment: "")
-        lblheadingCountry.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Country", comment: "")
-        lblState.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "State", comment: "")
-        lblLocality.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Locality", comment: "")
+       
+        labelState.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "State", comment: "")
         lblGender.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Select gender", comment: "")
         lblUserType.text  = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Select user type*", comment: "")
         lblWhatsNumber.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Whatsapp number", comment: "")

@@ -116,6 +116,15 @@ extension UserDefaults {
     func getLoggedInAccessToken() -> String {
         return String.getString(self.string(forKey: kLoggedInAccessToken))
     }
+    func setpayment_type(paymenttype: String){
+        self.set(paymenttype, forKey: kpayment_type)
+        self.synchronize()
+    }
+    
+    func getpayment_type() -> String{
+        return String.getString(self.string(forKey: kpayment_type))
+    }
+    
     func getAcceptlanguage() -> String {
         return String.getString(self.string(forKey:kacceptlanguage))
     }

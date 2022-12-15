@@ -162,9 +162,11 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
             
             if UserData.shared.id == self.userTimeLine?.user_id{
                 cell.btnChat.isHidden = true
+                cell.viewSave.isHidden = true
             }
             else{
                 cell.btnChat.isHidden = false
+                cell.viewSave.isHidden = false
             }
             
             if String.getString(self.userTimeLine?.business_name) == "Null"{

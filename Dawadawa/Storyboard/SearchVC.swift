@@ -87,9 +87,14 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
                     self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
                 }
                 else{
-                    let vc = self.storyboard!.instantiateViewController(withIdentifier: PremiumOpportunitiesVC.getStoryboardID()) as! PremiumOpportunitiesVC
-                    vc.camefrom = "search"
-                    self.navigationController?.pushViewController(vc, animated: true)
+                    if kSharedUserDefaults.getpayment_type() as? String == "Basic Plan"{
+                        self.showSimpleAlert(message: "Please Upgrade the Plan for Premium and Featured Opportunities")
+                    }
+                    else{
+                        let vc = self.storyboard!.instantiateViewController(withIdentifier: PremiumOpportunitiesVC.getStoryboardID()) as! PremiumOpportunitiesVC
+                        vc.camefrom = "search"
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    }
                 }
             }
             return cell
@@ -170,11 +175,14 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
                 cell.WidthViewRating.constant = 58
                 cell.lblRating.isHidden = false
             }
+            
             if UserData.shared.id == Int.getInt(obj.user_id){
                 cell.btnChat.isHidden = true
+                cell.viewSave.isHidden = true
             }
             else{
                 cell.btnChat.isHidden = false
+                cell.viewSave.isHidden = false
             }
             
             cell.callback = { txt, sender in
@@ -218,15 +226,23 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
                     else{
                         let oppid = self.userTimeLine[indexPath.row].id
                         debugPrint("oppid--=-=-=-",oppid)
-                        // self.likeOpportunityapi(oppr_id: oppid ?? 0)
-                        self.likeOpportunityapi(oppr_id: oppid ?? 0) { countLike in
+                        
+                        self.likeOpportunityapi(oppr_id: oppid ?? 0) { countLike,sucess  in
                             obj.likes = Int.getInt(countLike)
+                            debugPrint("Int.getInt(countLike)",Int.getInt(countLike))
                             cell.lblLikeCount.text = String.getString(obj.likes) + " " + "likes"
+                            
+                            if sucess == 200{
+                                cell.imglike.image = UIImage(named: "dil")
+                                cell.lbllike.text = "Liked"
+                                cell.lbllike.textColor = .red
+                            }
+                            else if sucess == 400{
+                                cell.imglike.image = UIImage(named: "unlike")
+                                cell.lbllike.text = "Like"
+                                cell.lbllike.textColor = UIColor(hexString: "#A6A6A6")
+                            }
                         }
-//                        cell.imglike.image = UIImage(named: "dil")
-//                        cell.lbllike.text = "Liked"
-//                        cell.lbllike.textColor = .red
-                        self.searchopportunityapi()
                     }
                 }
                 
@@ -321,6 +337,7 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
                                 let share_link = String.getString(self.userTimeLine[indexPath.row].share_link)
                                 UIPasteboard.general.string = share_link
                                 print("share_link\(share_link)")
+                                CommonUtils.showError(.info, String.getString("Link Copied"))
                             }
                             
                             if txt == "MarkasInterested"{
@@ -674,7 +691,7 @@ extension SearchVC{
     
     //    Api like Opportunity
     
-    func likeOpportunityapi(oppr_id:Int,completion: @escaping(_ countLike: String)->Void){
+    func likeOpportunityapi(oppr_id:Int,completion: @escaping(_ countLike: String,_ Sucesscode: Int)->Void){
         CommonUtils.showHud(show: true)
         
         
@@ -718,11 +735,12 @@ extension SearchVC{
                         
                         //                        self?.count = String.getString(dictResult["count"])
                         //                        debugPrint("likecount=-=-=-=",self?.count)
-                        completion(String.getString(dictResult["count"]))
+                        completion(String.getString(dictResult["count"]),Int.getInt(dictResult["status"]))
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                     else if  Int.getInt(dictResult["status"]) == 400{
+                        completion(String.getString(dictResult["count"]), Int.getInt(dictResult["status"]))
                         CommonUtils.showError(.info, String.getString("This Opportunity is unlike by You"))
 //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }

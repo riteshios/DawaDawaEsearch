@@ -45,6 +45,7 @@ let kacceptlanguage             = "Accept-Language"
 let kdefaultlanguage            = "language"
 let iosDeviceType               = "1"
 let iosDeviceTokan              = "123456789"
+let kpayment_type               = "payment_type"
 var kBucketUrl                  = ""
 
 let kSharedAppDelegate          = UIApplication.shared.delegate as? AppDelegate
