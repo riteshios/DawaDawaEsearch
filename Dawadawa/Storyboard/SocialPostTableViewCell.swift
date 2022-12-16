@@ -200,7 +200,7 @@ extension SocialPostTableViewCell: UICollectionViewDelegate,UICollectionViewData
         let imageurl = "\(imgUrl)\(String.getString(obj))"
         print("imagebaseurl=-=-\(imageurl)")
         let userUrl = URL(string: imageurl)
-        cell.imgOpportunity.sd_setImage(with: userUrl, placeholderImage:UIImage(named: "baba") )
+        cell.imgOpportunity.sd_setImage(with: userUrl, placeholderImage:UIImage(named: "Frame 726") )
         cell.imgOpportunity.seeFullImage()
         //        cell.imgOpportunity.downlodeImage(serviceurl: imageurl, placeHolder: UIImage(named: "baba"))
         

@@ -543,7 +543,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
                 else{
                     let imageurl = "\(self.imgUrl)/\(String.getString(imgurl))"
                     print("-=imageurl=-=-\(imageurl)")
-                    cell.image.downlodeImage(serviceurl: imageurl, placeHolder: UIImage(named: "baba"))
+                    cell.image.downlodeImage(serviceurl: imageurl, placeHolder: UIImage(named: "Frame 726"))
                 }
                 
                 cell.callback = {

@@ -78,7 +78,7 @@ class SavedOpportunitiesVC: UIViewController,UICollectionViewDelegate,UICollecti
             
             debugPrint("obj......",obj)
             cell.lblTitle.text = String.getString(obj.title)
-            cell.imgsave.downlodeImage(serviceurl: "\(imgUrl)\(String.getString(obj.oppimage.first?.imageurl))", placeHolder: UIImage(named: "truck"))
+            cell.imgsave.downlodeImage(serviceurl: "\(imgUrl)\(String.getString(obj.oppimage.first?.imageurl))", placeHolder: UIImage(named: "Frame 726"))
             return cell
             
         case CollectionViewInterested:
@@ -88,7 +88,7 @@ class SavedOpportunitiesVC: UIViewController,UICollectionViewDelegate,UICollecti
             
             debugPrint("obj......",obj)
             cell.lblTitle.text = String.getString(obj.title)
-            cell.imgsave.downlodeImage(serviceurl: "\(imgUrl)\(String.getString(obj.oppimage.first?.imageurl))", placeHolder: UIImage(named: "truck"))
+            cell.imgsave.downlodeImage(serviceurl: "\(imgUrl)\(String.getString(obj.oppimage.first?.imageurl))", placeHolder: UIImage(named: "Frame 726"))
             return cell
             
         default:
@@ -157,7 +157,6 @@ extension SavedOpportunitiesVC{
             }
         }
     }
-    
     //    MarkinterestedOppList
     
     func getallinterestedopportunityapi(){

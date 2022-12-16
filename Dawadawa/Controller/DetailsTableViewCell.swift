@@ -66,6 +66,8 @@ class DetailsTableViewCell: UITableViewCell,UITextViewDelegate {
     @IBOutlet weak var btnChat: UIButton!
     @IBOutlet weak var viewSave: UIView!
     
+    weak var celldelegate: DocumentCollectionViewCellDelegate?
+    
     
     //    Comment Section
     
@@ -80,6 +82,7 @@ class DetailsTableViewCell: UITableViewCell,UITextViewDelegate {
     var imgUrl = ""
     var userTimeLine = [SocialPostData]()
     var liked = 0
+    
     var img = [oppr_image](){
         didSet{
             pageControl.isHidden = true
@@ -139,7 +142,6 @@ class DetailsTableViewCell: UITableViewCell,UITextViewDelegate {
     
     @IBAction func btnChattapped(_ sender: UIButton){
         self.callback?("Chat",sender)
-        
     }
     
     
@@ -214,7 +216,7 @@ extension DetailsTableViewCell: UICollectionViewDelegate,UICollectionViewDataSou
             let imageurl = "\(imgUrl)\(String.getString(obj))"
             let imgUrl = URL(string: "\(imgUrl)\(String.getString(obj))")
             print("-=imagebaseurl=-=-\(imageurl)")
-            cell.imgOpportunity.sd_setImage(with: imgUrl, placeholderImage: UIImage(named: "baba"))
+            cell.imgOpportunity.sd_setImage(with: imgUrl, placeholderImage: UIImage(named: "Frame 726"))
            // cell.imgOpportunity.downlodeImage(serviceurl: imageurl, placeHolder: UIImage(named: "baba"))
             cell.imgOpportunity.seeFullImage()
             return cell
@@ -224,6 +226,7 @@ extension DetailsTableViewCell: UICollectionViewDelegate,UICollectionViewDataSou
             let cell = DocumentCollectionView.dequeueReusableCell(withReuseIdentifier: "DocumentCollectionViewCell", for: indexPath) as! DocumentCollectionViewCell
             let obj = doc[indexPath.item].oppr_document
             cell.lblDocument.text = String.getString(obj)
+            cell.callback?(indexPath.row) // get the index from table view cell using call back
             
             return cell
             
@@ -252,6 +255,11 @@ extension DetailsTableViewCell: UICollectionViewDelegate,UICollectionViewDataSou
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         pageControl.currentPage = Int(scrollView.contentOffset.x) / Int(scrollView.frame.width)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+            let cell = DocumentCollectionView.cellForItem(at: indexPath) as! DocumentCollectionViewCell
+            self.celldelegate?.collectionView(collectionviewcell: cell, index: indexPath.item, didTappedInTableViewCell: self)
+        }
 }
 
 

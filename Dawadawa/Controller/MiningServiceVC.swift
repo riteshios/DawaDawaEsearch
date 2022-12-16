@@ -419,8 +419,6 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
             self.viewPremium.backgroundColor = .white
             self.lblPremium.textColor =  UIColor(red: 21, green: 114, blue: 161)
             self.isSelectopp_planBasic = true
-            
-            
         }
     }
     
@@ -600,7 +598,7 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
                 else{
                     let imageurl = "\(self.imgUrl)/\(String.getString(imgurl))"
                     print("-=imageurl=-=-\(imageurl)")
-                    cell.image.downlodeImage(serviceurl: imageurl, placeHolder: UIImage(named: "baba"))
+                    cell.image.downlodeImage(serviceurl: imageurl, placeHolder: UIImage(named: "Frame 726"))
                 }
                 
                 
@@ -616,8 +614,6 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
                 cell.callback = {
                     self.imagearr.remove(at: indexPath.row)
                     self.UploadimageCollectionView.reloadData()
-                    
-                    
                 }
             }
             

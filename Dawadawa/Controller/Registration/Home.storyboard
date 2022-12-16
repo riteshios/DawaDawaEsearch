@@ -13175,7 +13175,7 @@ this opportunity?</string>
                                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z6U-nX-hxo">
                                                                                     <rect key="frame" x="0.0" y="0.0" width="169" height="128"/>
                                                                                     <subviews>
-                                                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="truck" translatesAutoresizingMaskIntoConstraints="NO" id="B3t-qP-hlk">
+                                                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Frame 726" translatesAutoresizingMaskIntoConstraints="NO" id="B3t-qP-hlk">
                                                                                             <rect key="frame" x="0.0" y="0.0" width="169" height="135"/>
                                                                                             <constraints>
                                                                                                 <constraint firstAttribute="height" constant="135" id="5oB-i8-6O1"/>
@@ -13315,7 +13315,7 @@ this opportunity?</string>
                                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Fn-pe-LCK">
                                                                                     <rect key="frame" x="0.0" y="0.0" width="169" height="128"/>
                                                                                     <subviews>
-                                                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="truck" translatesAutoresizingMaskIntoConstraints="NO" id="Rd3-UQ-EqL">
+                                                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Frame 726" translatesAutoresizingMaskIntoConstraints="NO" id="Rd3-UQ-EqL">
                                                                                             <rect key="frame" x="0.0" y="0.0" width="169" height="135"/>
                                                                                             <constraints>
                                                                                                 <constraint firstAttribute="height" constant="135" id="rJU-lT-hHq"/>
@@ -16187,8 +16187,26 @@ this Chat?</string>
         </scene>
     </scenes>
     <designables>
+        <designable name="Au9-O0-cbA">
+            <size key="intrinsicContentSize" width="120" height="20"/>
+        </designable>
+        <designable name="VSf-iM-2vh">
+            <size key="intrinsicContentSize" width="259" height="44"/>
+        </designable>
+        <designable name="fV5-fA-npc">
+            <size key="intrinsicContentSize" width="120" height="20"/>
+        </designable>
         <designable name="hYJ-9L-6ep">
             <size key="intrinsicContentSize" width="-1" height="49"/>
+        </designable>
+        <designable name="ozH-Xo-8GJ">
+            <size key="intrinsicContentSize" width="120" height="20"/>
+        </designable>
+        <designable name="r55-Lk-l5f">
+            <size key="intrinsicContentSize" width="259" height="44"/>
+        </designable>
+        <designable name="ybI-DQ-vGn">
+            <size key="intrinsicContentSize" width="-1" height="65"/>
         </designable>
     </designables>
     <resources>
@@ -16199,6 +16217,7 @@ this Chat?</string>
         <image name="Frame 162" width="24" height="24"/>
         <image name="Frame 176" width="414" height="171"/>
         <image name="Frame 65" width="24" height="24"/>
+        <image name="Frame 726" width="167" height="135"/>
         <image name="IND" width="16" height="16"/>
         <image name="Mapsicle Map" width="414" height="311"/>
         <image name="NoOpp" width="410.33334350585938" height="400.66665649414062"/>
@@ -16259,7 +16278,6 @@ this Chat?</string>
         <image name="setting-2" width="24" height="24"/>
         <image name="subscription" width="24" height="24"/>
         <image name="trash" width="100" height="100"/>
-        <image name="truck" width="150" height="135"/>
         <image name="user-square" width="24" height="24"/>
         <image name="viewdetail" width="21" height="21"/>
         <image name="warning-2" width="100" height="100"/>

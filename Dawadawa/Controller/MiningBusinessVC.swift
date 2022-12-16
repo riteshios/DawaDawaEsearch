@@ -564,9 +564,8 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
                 else{
                 let imageurl = "\(self.imgUrl)/\(String.getString(imgurl))"
                 print("-=imageurl=-=-\(imageurl)")
-                cell.image.downlodeImage(serviceurl: imageurl, placeHolder: UIImage(named: "baba"))
+                cell.image.downlodeImage(serviceurl: imageurl, placeHolder: UIImage(named: "Frame 726"))
                 }
-                
                 
                 cell.callback = {
                     self.imgarray.remove(at: indexPath.row)

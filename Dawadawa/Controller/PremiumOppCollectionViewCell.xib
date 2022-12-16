@@ -29,7 +29,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="73O-Hj-qRM">
                                 <rect key="frame" x="0.0" y="0.0" width="169" height="135"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="truck" translatesAutoresizingMaskIntoConstraints="NO" id="eYb-tz-bkP">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Frame 726" translatesAutoresizingMaskIntoConstraints="NO" id="eYb-tz-bkP">
                                         <rect key="frame" x="0.0" y="0.0" width="169" height="135"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="135" id="WkY-Rh-EYj"/>
@@ -102,8 +102,8 @@
         </collectionViewCell>
     </objects>
     <resources>
+        <image name="Frame 726" width="167" height="135"/>
         <image name="circlecrown" width="20" height="20"/>
-        <image name="truck" width="150" height="135"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

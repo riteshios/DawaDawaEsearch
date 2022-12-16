@@ -5,10 +5,11 @@
 import UIKit
 import StripeUICore
 
-class DetailScreenVC: UIViewController{
+class DetailScreenVC: UIViewController,DocumentCollectionViewCellDelegate{
     
     @IBOutlet weak var tblviewDetail: UITableView!
     @IBOutlet weak var lblDetailScreen: UILabel!
+    
     var imgUrl = ""
     var userTimeLine: SocialPostData?
     var img = [oppr_image]()
@@ -35,6 +36,9 @@ class DetailScreenVC: UIViewController{
     
     @IBAction func btnBackTapped(_ sender: UIButton) {
         kSharedAppDelegate?.makeRootViewController()
+//        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+//        let vc = storyBoard.instantiateViewController(identifier:"WebViewVC") as! WebViewVC
+//        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 
@@ -48,7 +52,8 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
         if section == 0{
             return 1
             
-        }else{
+        }
+        else{
             return self.userTimeLine?.usercomment[section - 1].subcomment.count ?? 0
         }
     }
@@ -149,7 +154,7 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
             //            cell.viewLine.isHidden = true
             cell.SocialPostCollectionView.tag = indexPath.section
             cell.DocumentCollectionView.tag = indexPath.section
-            
+            cell.celldelegate = self
             cell.lblUserName.text = String.getString(self.userTimeLine?.userdetail?.name)
             cell.lblDescribtion.text = String.getString(self.userTimeLine?.description)
             cell.lblEmail.text = String.getString(self.userTimeLine?.userdetail?.email)
@@ -304,14 +309,25 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                     self.navigationController?.pushViewController(vc, animated: true)
                 }
                 if txt == "Like"{
-                    //  self.likeOpportunityapi(oppr_id: oppid ?? 0)
-                    self.likeOpportunityapi(oppr_id: Int.getInt(self.userTimeLine?.id) ?? 0) { countLike in
+                    let oppid = Int.getInt(self.userTimeLine?.id)
+                    debugPrint("oppid--=-=-=-",oppid)
+                   
+                    self.likeOpportunityapi(oppr_id: oppid ?? 0) { countLike,sucess  in
                         self.userTimeLine?.likes = Int.getInt(countLike)
+                        debugPrint("Int.getInt(countLike)",Int.getInt(countLike))
                         cell.lblLikeCount.text = String.getString(self.userTimeLine?.likes) + " " + "likes"
+                        
+                        if sucess == 200{
+                            cell.imglike.image = UIImage(named: "dil")
+                            cell.lbllike.text = "Liked"
+                            cell.lbllike.textColor = .red
+                        }
+                        else if sucess == 400{
+                            cell.imglike.image = UIImage(named: "unlike")
+                            cell.lbllike.text = "Like"
+                            cell.lbllike.textColor = UIColor(hexString: "#A6A6A6")
+                        }
                     }
-                    cell.imglike.image = UIImage(named: "dil")
-                    cell.lbllike.text = "Liked"
-                    cell.lbllike.textColor = .red
                 }
                 
                 if txt == "Rate"{
@@ -466,6 +482,7 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
         }
     }
 
+    
 func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
     return UITableView.automaticDimension
     
@@ -479,12 +496,18 @@ func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) 
 func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return UITableView.automaticDimension
     }
+    
+    func collectionView(collectionviewcell: DocumentCollectionViewCell?, index: Int, didTappedInTableViewCell: DetailsTableViewCell) {
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyBoard.instantiateViewController(identifier:"WebViewVC") as! WebViewVC
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
 }
 
 // MARK: - APi call
 extension DetailScreenVC{
     
-    //    Api Detail Opportunity
+    //  Api Detail Opportunity
     
     func getalldetail(){
         CommonUtils.showHudWithNoInteraction(show: true)
@@ -685,7 +708,7 @@ extension DetailScreenVC{
     
     //    Api like Opportunity
     
-    func likeOpportunityapi(oppr_id:Int,completion: @escaping(_ countLike: String)->Void){
+    func likeOpportunityapi(oppr_id:Int,completion: @escaping(_ countLike: String,_ Sucesscode: Int)->Void){
         CommonUtils.showHud(show: true)
         
         
@@ -725,14 +748,14 @@ extension DetailScreenVC{
                         
                         //                        self?.count = String.getString(dictResult["count"])
                         //                        debugPrint("likecount=-=-=-=",self?.count)
-                        completion(String.getString(dictResult["count"]))
-                        
+                        completion(String.getString(dictResult["count"]),Int.getInt(dictResult["status"]))
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         
                     }
                     
                     else if  Int.getInt(dictResult["status"]) == 400{
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        completion(String.getString(dictResult["count"]),Int.getInt(dictResult["status"]))
+                        CommonUtils.showError(.info, String.getString("This Opportunity is unlike by You"))
                     }
                     
                 default:

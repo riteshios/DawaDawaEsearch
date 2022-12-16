@@ -16,7 +16,10 @@ class WebViewVC: UIViewController {
         super.viewDidLoad()
         debugPrint("strurl=",strurl)
         debugPrint("head=",head)
-        
+        self.openwebweb()
+    }
+    
+    func openwebweb(){
         guard let url = URL(string: strurl) else{
             return
         }

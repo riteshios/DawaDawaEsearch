@@ -755,7 +755,6 @@ extension ViewAllInterestedVC{
     func likeOpportunityapi(oppr_id:Int,completion: @escaping(_ countLike: String,_ Sucesscode: Int)->Void){
         CommonUtils.showHud(show: true)
         
-        
         if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
             let endToken = kSharedUserDefaults.getLoggedInAccessToken()
             let septoken = endToken.components(separatedBy: " ")
@@ -771,30 +770,26 @@ extension ViewAllInterestedVC{
         ]
         
         debugPrint("user_id......",Int.getInt(UserData.shared.id))
-        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.klikeopportunity, requestMethod: .POST,
-                                                               requestParameters:params, withProgressHUD: false)
+        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.klikeopportunity, requestMethod: .POST, requestParameters:params, withProgressHUD: false)
         {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
             
             CommonUtils.showHudWithNoInteraction(show: false)
-            
             if errorType == .requestSuccess {
-                
                 let dictResult = kSharedInstance.getDictionary(result)
-                
                 switch Int.getInt(statusCode) {
                 case 200:
                     //                    self?.statuslike = Int.getInt(dictResult["status"])
                     if Int.getInt(dictResult["status"]) == 200{
                         
-                        
                         let endToken = kSharedUserDefaults.getLoggedInAccessToken()
                         let septoken = endToken.components(separatedBy: " ")
+                        
                         if septoken[0] == "Bearer"{
                             kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
                         }
                         
-                        //                        self?.count = String.getString(dictResult["count"])
-                        //                        debugPrint("likecount=-=-=-=",self?.count)
+                        //      self?.count = String.getString(dictResult["count"])
+                        //      debugPrint("likecount=-=-=-=",self?.count)
                         completion(String.getString(dictResult["count"]),Int.getInt(dictResult["status"]))
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
