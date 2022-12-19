@@ -30,7 +30,13 @@ class FlagPostPopUPVC: UIViewController {
     
     @IBAction func btnReportTapped(_ sender: UIButton) {
         if self.textviewReason.text == ""{
-            self.showSimpleAlert(message: "Please Enter Reason for Flag")
+            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                self.showSimpleAlert(message: "Please Enter Reason for Flag")
+            }
+            else{
+                self.showSimpleAlert(message: "الرجاء إدخال سبب العلم")
+            }
+           
         }
         else{
             self.flagopportunityapi()

@@ -493,7 +493,13 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
             return
         }
         else if self.isBusinessMiningType == false{
-            self.showSimpleAlert(message: "Please Select the Business Mining Type")
+            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                self.showSimpleAlert(message: "Please Select the Business Mining Type")
+            }
+            else{
+                self.showSimpleAlert(message: "يرجى تحديد نوع التعدين للأعمال")
+            }
+           
             return
         }
         else if String.getString(self.txtFieldBusinessMiningBlock.text).isEmpty
@@ -503,11 +509,22 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
         }
         
         else if self.isSelectState == false{
-            self.showSimpleAlert(message: "Please Select the State")
+            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                self.showSimpleAlert(message: "Please Select the State")
+            }
+            else{
+                self.showSimpleAlert(message: "يرجى تحديد الولاية")
+            }
             return
         }
         else if self.isSelectLocality == false{
-            self.showSimpleAlert(message: "Please Select the Locality")
+            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                self.showSimpleAlert(message: "Please Select the Locality")
+            }
+            else{
+                self.showSimpleAlert(message: "الرجاء تحديد المنطقة")
+            }
+           
             return
         }
         
@@ -543,15 +560,33 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
         //            return
         //        }
         else if self.isSelectLookingFor == false{
-            self.showSimpleAlert(message: "Please Select looking For")
+            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                self.showSimpleAlert(message: "Please Select looking For")
+            }
+            else{
+                self.showSimpleAlert(message: "يرجى تحديد البحث عن")
+            }
+           
             return
         }
         else if self.isSelectopp_planBasic == false && self.isSelectopp_planPremium == false && self.isSelectopp_planFeatured == false{
-            self.showSimpleAlert(message: "Please Select Opportunity Plan")
+            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                self.showSimpleAlert(message: "Please Select Opportunity Plan")
+            }
+            else{
+                self.showSimpleAlert(message: "يرجى تحديد خطة الفرصة")
+            }
+           
             return
         }
         else if self.isSelectopp_planPremium == true && self.isSelectimage == false && self.imagearr.count == 0{
-            self.showSimpleAlert(message: "Please add at least one opportunity photo")
+            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                self.showSimpleAlert(message: "Please add at least one opportunity photo")
+            }
+            else{
+                self.showSimpleAlert(message: "الرجاء إضافة صورة فرصة واحدة على الأقل")
+            }
+            
             return
         }
         self.view.endEditing(true)

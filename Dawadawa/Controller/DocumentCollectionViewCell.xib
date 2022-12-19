@@ -42,7 +42,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="294" height="60"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <connections>
-                                    <action selector="btnDocumentTapped:" destination="lHx-GM-N2O" eventType="touchUpInside" id="C64-wu-vSB"/>
+                                    <action selector="btnDocumentTapped:" destination="lHx-GM-N2O" eventType="touchUpInside" id="gBw-9u-PpQ"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -81,7 +81,7 @@
                 <constraint firstItem="czk-Zb-V9e" firstAttribute="top" secondItem="lHx-GM-N2O" secondAttribute="top" id="sAg-9Z-MEq"/>
             </constraints>
             <connections>
-                <outlet property="lblDocument" destination="2nc-Sc-cUc" id="SSX-No-Aze"/>
+                <outlet property="lblDocument" destination="2nc-Sc-cUc" id="czU-f7-bIT"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="69.642857142857139"/>
         </collectionViewCell>

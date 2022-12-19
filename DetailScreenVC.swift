@@ -36,9 +36,6 @@ class DetailScreenVC: UIViewController,DocumentCollectionViewCellDelegate{
     
     @IBAction func btnBackTapped(_ sender: UIButton) {
         kSharedAppDelegate?.makeRootViewController()
-//        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-//        let vc = storyBoard.instantiateViewController(identifier:"WebViewVC") as! WebViewVC
-//        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 
@@ -120,7 +117,13 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                     
                 }else if txt == "post"{
                     if self.txtcomment == ""{
-                        self.showSimpleAlert(message: "Please add reply")
+                        if kSharedUserDefaults.getlanguage() as? String == "en"{
+                            self.showSimpleAlert(message: "Please add reply")
+                        }
+                        else{
+                            self.showSimpleAlert(message: "الرجاء إضافة الرد")
+                        }
+                       
                     }else{
                         self.commentreplyapi(oppr_id: Int.getInt(self.userTimeLine?.id) , commentid:Int.getInt(obj?.id)) { usersubComment in
                             view.textview.text = ""
@@ -151,17 +154,93 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
         if indexPath.section == 0{
             let cell = self.tblviewDetail.dequeueReusableCell(withIdentifier: "DetailsTableViewCell") as! DetailsTableViewCell
             
-            //            cell.viewLine.isHidden = true
+            //  cell.viewLine.isHidden = true
             cell.SocialPostCollectionView.tag = indexPath.section
             cell.DocumentCollectionView.tag = indexPath.section
             cell.celldelegate = self
             cell.lblUserName.text = String.getString(self.userTimeLine?.userdetail?.name)
             cell.lblDescribtion.text = String.getString(self.userTimeLine?.description)
-            cell.lblEmail.text = String.getString(self.userTimeLine?.userdetail?.email)
             cell.lblTitle.text = String.getString(self.userTimeLine?.title)
             cell.viewAddComment.isHidden = self.userTimeLine?.isComment == false ? true : false
             cell.heightAddComment.constant = self.userTimeLine?.isComment == false ? 0 : 55
             //          cell.heightViewAddComment.constant = self.userTimeLine?.isComment == false ? 0 : 55
+            
+            if UserData.shared.user_type == "0"{// Investor
+                if kSharedUserDefaults.getpayment_type() as? String == "Basic Plan"{
+                    cell.lblLocationONMap.text = "Not for basic Plan"
+                    cell.lblLocationONMap.textColor = UIColor.gray
+                    cell.lbblWhatsappNumber.text = "Not for basic Plan"
+                    cell.lbblWhatsappNumber.textColor = UIColor.gray
+                    cell.llbMobileNumber.text = "Not for basic Plan"
+                    cell.llbMobileNumber.textColor = UIColor.gray
+                    cell.DocumentCollectionView.isHidden = true
+                    cell.lblEmail.text = "Not for basic Plan"
+                    cell.lblEmail.textColor = UIColor.gray
+                    cell.heightDocumentcollectionview.constant = 0
+                    
+                }
+                else if kSharedUserDefaults.getpayment_type() as? String == "Silver Plan"{
+                    cell.lblLocationONMap.text = "Not for Silver Plan"
+                    cell.lblLocationONMap.textColor = UIColor.gray
+                    cell.lbblWhatsappNumber.text = "Not for Silver Plan"
+                    cell.lbblWhatsappNumber.textColor = UIColor.gray
+                    cell.llbMobileNumber.text = "Not for Silver Plan"
+                    cell.llbMobileNumber.textColor = UIColor.gray
+                    cell.DocumentCollectionView.isHidden = true
+                    cell.lblEmail.text = "Not forSilver Plan"
+                    cell.lblEmail.textColor = UIColor.gray
+                    cell.heightDocumentcollectionview.constant = 0
+                    
+                }
+                else if kSharedUserDefaults.getpayment_type() as? String == "Gold Plan"{
+                    cell.lblEmail.text = String.getString(self.userTimeLine?.userdetail?.email)
+                    cell.llbMobileNumber.text =  String.getString(self.userTimeLine?.mobile_num)
+                    cell.DocumentCollectionView.isHidden = false
+                    cell.heightDocumentcollectionview.constant = self.userTimeLine?.oppdocument.count == 0 ? 0 : 60
+                    
+                    if String.getString(self.userTimeLine?.location_name) != ""{
+                        cell.lblLocationName.text = String.getString(self.userTimeLine?.location_name)
+                        cell.lblLocationName.textColor = UIColor.black
+                    }
+                    else{
+                        cell.lblLocationName.text = "Location not available"
+                        cell.lblLocationName.textColor = UIColor.gray
+                    }
+                    if String.getString(self.userTimeLine?.whatsaap_num) != ""{
+                        cell.lbblWhatsappNumber.text = String.getString(self.userTimeLine?.whatsaap_num)
+                        cell.lbblWhatsappNumber.textColor = UIColor.black
+                    }
+                    else{
+                        cell.lbblWhatsappNumber.text = "Not available"
+                        cell.lbblWhatsappNumber.textColor = UIColor.gray
+                    }
+                }
+            }
+            
+            else{
+                
+                cell.lblEmail.text = String.getString(self.userTimeLine?.userdetail?.email)
+                cell.llbMobileNumber.text =  String.getString(self.userTimeLine?.mobile_num)
+                cell.heightDocumentcollectionview.constant = self.userTimeLine?.oppdocument.count == 0 ? 0 : 60
+                if String.getString(self.userTimeLine?.location_name) != ""{
+                    cell.lblLocationName.text = String.getString(self.userTimeLine?.location_name)
+                    cell.lblLocationName.textColor = UIColor.black
+                }
+                else{
+                    cell.lblLocationName.text = "Location not available"
+                    cell.lblLocationName.textColor = UIColor.gray
+                }
+                if String.getString(self.userTimeLine?.whatsaap_num) != ""{
+                    cell.lbblWhatsappNumber.text = String.getString(self.userTimeLine?.whatsaap_num)
+                    cell.lbblWhatsappNumber.textColor = UIColor.black
+                }
+                else{
+                    cell.lbblWhatsappNumber.text = "Not available"
+                    cell.lbblWhatsappNumber.textColor = UIColor.gray
+                }
+                
+            }
+            
             cell.lblCategory.text = String.getString(self.userTimeLine?.category_name)
             cell.lblSub_category.text = String.getString(self.userTimeLine?.subcategory_name)
             
@@ -188,7 +267,7 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
             else{
                 cell.lblBusinessminingType.text = String.getString(self.userTimeLine?.business_mining_type)
             }
-            cell.llbMobileNumber.text =  String.getString(self.userTimeLine?.mobile_num)
+           
             cell.lblRating.text = String.getString(self.userTimeLine?.opr_rating)
             cell.imgOpp_plan.image = self.userTimeLine?.opp_plan == "Featured" ? UIImage(named: "Star Filled") : self.userTimeLine?.opp_plan == "Premium" ? UIImage(named: "Crown") : UIImage(named: "Folded Booklet")
             
@@ -202,14 +281,6 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                 cell.lblLookingFor.text = "Looking for Service Provider"
             }
             
-            if String.getString(self.userTimeLine?.location_name) != ""{
-                cell.lblLocationName.text = String.getString(self.userTimeLine?.location_name)
-                cell.lblLocationName.textColor = UIColor.black
-            }
-            else{
-                cell.lblLocationName.text = "Location not available"
-                cell.lblLocationName.textColor = UIColor.gray
-            }
             
             if String.getString(self.userTimeLine?.location_map) != ""{
                 cell.lblLocationONMap.text = String.getString(self.userTimeLine?.location_map)
@@ -220,39 +291,30 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                 cell.lblLocationONMap.textColor = UIColor.gray
             }
             
-            if String.getString(self.userTimeLine?.whatsaap_num) != ""{
-                cell.lbblWhatsappNumber.text = String.getString(self.userTimeLine?.whatsaap_num)
-                cell.lbblWhatsappNumber.textColor = UIColor.black
-            }
-            else{
-                cell.lbblWhatsappNumber.text = "Not available"
-                cell.lbblWhatsappNumber.textColor = UIColor.gray
-            }
-            
             if String.getString(self.userTimeLine?.plan_name) == "Basic Plan"{
-                cell.lblLocationONMap.text = "Not for basic Plan"
-                cell.lblLocationONMap.textColor = UIColor.gray
-                cell.lbblWhatsappNumber.text = "Not for basic Plan"
-                cell.lbblWhatsappNumber.textColor = UIColor.gray
-                cell.llbMobileNumber.text = "Not for basic Plan"
-                cell.llbMobileNumber.textColor = UIColor.gray
-                cell.DocumentCollectionView.isHidden = true
-                cell.lblEmail.text = "Not for basic Plan"
-                cell.lblEmail.textColor = UIColor.gray
-                cell.heightDocumentcollectionview.constant = 0
+//                cell.lblLocationONMap.text = "Not for basic Plan"
+//                cell.lblLocationONMap.textColor = UIColor.gray
+//                cell.lbblWhatsappNumber.text = "Not for basic Plan"
+//                cell.lbblWhatsappNumber.textColor = UIColor.gray
+//                cell.llbMobileNumber.text = "Not for basic Plan"
+//                cell.llbMobileNumber.textColor = UIColor.gray
+//                cell.DocumentCollectionView.isHidden = true
+//                cell.lblEmail.text = "Not for basic Plan"
+//                cell.lblEmail.textColor = UIColor.gray
+//                cell.heightDocumentcollectionview.constant = 0
             }
             
             else if String.getString(self.userTimeLine?.plan_name) == "Silver Plan"{
-                cell.lblLocationONMap.text = "Not for Silver Plan"
-                cell.lblLocationONMap.textColor = UIColor.gray
-                cell.lbblWhatsappNumber.text = "Not for Silver Plan"
-                cell.lbblWhatsappNumber.textColor = UIColor.gray
-                cell.llbMobileNumber.text = "Not for Silver Plan"
-                cell.llbMobileNumber.textColor = UIColor.gray
-                cell.DocumentCollectionView.isHidden = true
-                cell.lblEmail.text = "Not forSilver Plan"
-                cell.lblEmail.textColor = UIColor.gray
-                cell.heightDocumentcollectionview.constant = 0
+//                cell.lblLocationONMap.text = "Not for Silver Plan"
+//                cell.lblLocationONMap.textColor = UIColor.gray
+//                cell.lbblWhatsappNumber.text = "Not for Silver Plan"
+//                cell.lbblWhatsappNumber.textColor = UIColor.gray
+//                cell.llbMobileNumber.text = "Not for Silver Plan"
+//                cell.llbMobileNumber.textColor = UIColor.gray
+//                cell.DocumentCollectionView.isHidden = true
+//                cell.lblEmail.text = "Not forSilver Plan"
+//                cell.lblEmail.textColor = UIColor.gray
+//                cell.heightDocumentcollectionview.constant = 0
             }
             
             let imguserurl = String.getString(self.userTimeLine?.userdetail?.image)
@@ -262,7 +324,6 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
             cell.imgUrl = self.imgUrl
             cell.doc = self.userTimeLine?.oppdocument ?? [] // Pass Doc for collection view
             cell.lblLikeCount.text = String.getString(self.userTimeLine?.likes) + " " + "Likes"
-            cell.heightDocumentcollectionview.constant = self.userTimeLine?.oppdocument.count == 0 ? 0 : 60
             
             if String.getString(self.userTimeLine?.is_user_like) == "1"{
                 cell.imglike.image = UIImage(named: "dil")
@@ -279,7 +340,6 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                 cell.imgsave.image = UIImage(named: "saveopr")
                 cell.lblSave.text = "Saved"
                 cell.lblSave.textColor = UIColor(hexString: "#1572A1")
-                
             }
             else{
                 cell.imgsave.image = UIImage(named: "save-3")
@@ -311,7 +371,7 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                 if txt == "Like"{
                     let oppid = Int.getInt(self.userTimeLine?.id)
                     debugPrint("oppid--=-=-=-",oppid)
-                   
+                    
                     self.likeOpportunityapi(oppr_id: oppid ?? 0) { countLike,sucess  in
                         self.userTimeLine?.likes = Int.getInt(countLike)
                         debugPrint("Int.getInt(countLike)",Int.getInt(countLike))
@@ -425,7 +485,13 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                 
                 if txt == "AddComment"{
                     if cell.txtviewComment.text == ""{
-                        self.showSimpleAlert(message: "Please add comment ")
+                        if kSharedUserDefaults.getlanguage() as? String == "en"{
+                            self.showSimpleAlert(message: "Please add comment")
+                        }
+                        else{
+                            self.showSimpleAlert(message: "الرجاء إضافة تعليق")
+                        }
+                        
                     }
                     else{
                         self.commentoppoertunityapi(oppr_id: Int.getInt(self.userTimeLine?.id) ?? 0) { userComment in
@@ -481,27 +547,26 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
             return cell
         }
     }
-
-    
-func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-    return UITableView.automaticDimension
-    
-}
-
-func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-    return UITableView.automaticDimension
-    
-}
-
-func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return UITableView.automaticDimension
-    }
     
     func collectionView(collectionviewcell: DocumentCollectionViewCell?, index: Int, didTappedInTableViewCell: DetailsTableViewCell) {
-        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyBoard.instantiateViewController(identifier:"WebViewVC") as! WebViewVC
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "DocumentWebView") as! DocumentWebView
         self.navigationController?.pushViewController(vc, animated: true)
     }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return UITableView.automaticDimension
+        
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return UITableView.automaticDimension
+        
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+    
 }
 
 // MARK: - APi call

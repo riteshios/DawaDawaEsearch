@@ -268,7 +268,13 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
                             
                             if txt == "Update"{
                                 if UserData.shared.isskiplogin == true{
-                                    self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                                    if kSharedUserDefaults.getlanguage() as? String == "en"{
+                                        self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                                    }
+                                    else{
+                                        self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
+                                    }
+                                   
                                 }
                                 else{
                                     let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
@@ -314,7 +320,13 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
                             
                             if txt == "Flag"{
                                 if UserData.shared.isskiplogin == true{
-                                    self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                                    if kSharedUserDefaults.getlanguage() as? String == "en"{
+                                        self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                                    }
+                                    else{
+                                        self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
+                                    }
+                                   
                                 }
                                 else{
                                     let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
@@ -326,7 +338,13 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
                             
                             if txt == "Report"{
                                 if UserData.shared.isskiplogin == true{
-                                    self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                                    if kSharedUserDefaults.getlanguage() as? String == "en"{
+                                        self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                                    }
+                                    else{
+                                        self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
+                                    }
+                                   
                                 }
                                 else{
                                     kSharedAppDelegate?.makeRootViewController()
@@ -388,7 +406,13 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
                 
                 if txt == "AddComment"{
                     if cell.txtviewComment.text == ""{
-                        self.showSimpleAlert(message: "Please add comment ")
+                        if kSharedUserDefaults.getlanguage() as? String == "en"{
+                            self.showSimpleAlert(message: "Please add comment")
+                        }
+                        else{
+                            self.showSimpleAlert(message: "الرجاء إضافة تعليق")
+                        }
+                        
                     }
                     else{
                         let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)

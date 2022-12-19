@@ -525,7 +525,13 @@ class FilterVC: UIViewController {
             self.lblLastmonth.textColor = UIColor(red: 21, green: 114, blue: 161)
             self.viewToday.backgroundColor = UIColor(red: 241, green: 249, blue: 253)
             self.lblToday.textColor =  UIColor(red: 21, green: 114, blue: 161)
-            self.showSimpleAlert(message: "Please Choose Start date to Last date")
+            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                self.showSimpleAlert(message: "Please Choose Start date to Last date")
+            }
+            else{
+                self.showSimpleAlert(message: "الرجاء اختيار تاريخ البدء إلى آخر تاريخ")
+            }
+           
             filteredArray.append("Custom range")
             for i in 0 ..< filteredArray.count - 1{
                 if filteredArray[i] == "Last week"{

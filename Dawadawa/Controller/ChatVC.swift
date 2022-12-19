@@ -82,7 +82,13 @@ class ChatVC: UIViewController{
     
     @IBAction func btnSendTapped(_ sender: UIButton) {
         if self.txtViewMessage.text == ""{
-            self.showSimpleAlert(message: "Please Enter Your Message")
+            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                self.showSimpleAlert(message: "أدرج رسالتك من فضلك")
+            }
+            else{
+                
+            }
+           
         }
         else{
             //   self.tableViewScrollToBottom(animated: true)

@@ -12,6 +12,7 @@ import IQKeyboardManagerSwift
 class SeeMoreCommentCell: UITableViewCell, UITableViewDelegate, UITableViewDataSource,UITextViewDelegate{
     
     //    MARK: - Properties
+    
 //    weak var celldelegate: subCommentCellDelegate?
     @IBOutlet weak var topsubTableview: NSLayoutConstraint!
     @IBOutlet weak var tblviewSubComment: UITableView!
@@ -130,5 +131,6 @@ class SeeMoreCommentCell: UITableViewCell, UITableViewDelegate, UITableViewDataS
 //        let obj = subcomment[indexPath.row]
 //        self.celldelegate?.tableView(tblView: cell, index: indexPath.row, result: String.getString(obj.usersubcommentdetails?.id), didTappedInTableViewCell: self)
 //    }
+    
 }
 

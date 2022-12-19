@@ -158,12 +158,23 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                 cell.callbacknavigation = { txt in
                     if txt == "ViewAll"{
                         if UserData.shared.isskiplogin == true{
-                            self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                                self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                            }
+                            else{
+                                self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
+                            }
+                            
                         }
                         else{
                             
                             if kSharedUserDefaults.getpayment_type() as? String == "Basic Plan"{
-                                self.showSimpleAlert(message: "Please Upgrade the Plan for Premium and Featured Opportunities")
+                                if kSharedUserDefaults.getlanguage() as? String == "en"{
+                                    self.showSimpleAlert(message: "Please Upgrade the Plan for Premium and Featured Opportunities")
+                                }
+                                else{
+                                    self.showSimpleAlert(message: "يرجى ترقية خطة الفرص المميزة والمميزة")
+                                }
                             }
                             else{
                                 let vc = self.storyboard!.instantiateViewController(withIdentifier: PremiumOpportunitiesVC.getStoryboardID()) as! PremiumOpportunitiesVC
@@ -277,7 +288,12 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                 
                 if txt == "Chat"{
                     if UserData.shared.isskiplogin == true{
-                        self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                        if kSharedUserDefaults.getlanguage() as? String == "en"{
+                            self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                        }
+                        else{
+                            self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
+                        }
                     }
                     else{
                         let userid = Int.getInt(userTimeLine[indexPath.row].user_id)
@@ -291,7 +307,13 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                 
                 if txt == "viewDetails"{
                     if UserData.shared.isskiplogin == true{
-                        self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                        if kSharedUserDefaults.getlanguage() as? String == "en"{
+                            self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                        }
+                        else{
+                            self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
+                        }
+                        
                     }
                     else{
                         let oppid = Int.getInt(userTimeLine[indexPath.row].id)
@@ -333,7 +355,13 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                     
                     //                    if cell.btnlike.isSelected == true{
                     if UserData.shared.isskiplogin == true{
-                        self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                        if kSharedUserDefaults.getlanguage() as? String == "en"{
+                            self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                        }
+                        else{
+                            self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
+                        }
+                        
                     }
                     else{
                         let oppid = userTimeLine[indexPath.row].id
@@ -363,7 +391,13 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                 
                 if txt == "Share"{
                     if UserData.shared.isskiplogin == true{
-                        self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                        if kSharedUserDefaults.getlanguage() as? String == "en"{
+                            self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                        }
+                        else{
+                            self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
+                        }
+                        
                     }
                     else{
                         let image = obj.share_link
@@ -376,7 +410,13 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                 
                 if txt == "Rate"{
                     if UserData.shared.isskiplogin == true{
-                        self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                        if kSharedUserDefaults.getlanguage() as? String == "en"{
+                            self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                        }
+                        else{
+                            self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
+                        }
+                        
                     }
                     else{
                         let oppid = userTimeLine[indexPath.row].id
@@ -394,7 +434,13 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                 
                 if txt == "Save"{
                     if UserData.shared.isskiplogin == true{
-                        self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                        if kSharedUserDefaults.getlanguage() as? String == "en"{
+                            self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                        }
+                        else{
+                            self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
+                        }
+                       
                     }else{
                         if sender.isSelected{
                             if String.getString(obj.is_saved) == "0"{
@@ -434,7 +480,13 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                             
                             if txt == "Update"{
                                 if UserData.shared.isskiplogin == true{
-                                    self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                                    if kSharedUserDefaults.getlanguage() as? String == "en"{
+                                        self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                                    }
+                                    else{
+                                        self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
+                                    }
+                                   
                                 }
                                 else{
                                     let oppid = Int.getInt(userTimeLine[indexPath.row].id)
@@ -484,7 +536,13 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                             
                             if txt == "Chatwithuser"{
                                 if UserData.shared.isskiplogin == true{
-                                    self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                                    if kSharedUserDefaults.getlanguage() as? String == "en"{
+                                        self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                                    }
+                                    else{
+                                        self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
+                                    }
+                                   
                                 }
                                 else{
                                     let userid = Int.getInt(userTimeLine[indexPath.row].user_id)
@@ -505,7 +563,12 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                             
                             if txt == "MarkasInterested"{
                                 if UserData.shared.isskiplogin == true{
-                                    self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                                    if kSharedUserDefaults.getlanguage() as? String == "en"{
+                                        self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                                    }
+                                    else{
+                                        self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
+                                    }
                                 }
                                 else{
                                     let oppid = Int.getInt(userTimeLine[indexPath.row].id)
@@ -516,7 +579,12 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                             
                             if txt == "Flag"{
                                 if UserData.shared.isskiplogin == true{
-                                    self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                                    if kSharedUserDefaults.getlanguage() as? String == "en"{
+                                        self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                                    }
+                                    else{
+                                        self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
+                                    }
                                 }
                                 else{
                                     self.dismiss(animated: false){
@@ -533,7 +601,12 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                             
                             if txt == "Report"{
                                 if UserData.shared.isskiplogin == true{
-                                    self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                                    if kSharedUserDefaults.getlanguage() as? String == "en"{
+                                        self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                                    }
+                                    else{
+                                        self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
+                                    }
                                 }
                                 else{
                                     self.dismiss(animated: false){
@@ -549,7 +622,12 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                             
                             if txt == "viewdetails"{
                                 if UserData.shared.isskiplogin == true{
-                                    self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                                    if kSharedUserDefaults.getlanguage() as? String == "en"{
+                                        self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                                    }
+                                    else{
+                                        self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
+                                    }
                                 }
                                 else{
                                     let oppid = Int.getInt(userTimeLine[indexPath.row].id)
@@ -569,7 +647,12 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                 
                 if txt == "reply"{
                     if UserData.shared.isskiplogin == true{
-                        self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                        if kSharedUserDefaults.getlanguage() as? String == "en"{
+                            self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                        }
+                        else{
+                            self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
+                        }
                     }
                     else{
                         let oppid = Int.getInt(userTimeLine[indexPath.row].id)
@@ -583,7 +666,12 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                 
                 if txt == "Seemorecomment"{
                     if UserData.shared.isskiplogin == true{
-                        self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                        if kSharedUserDefaults.getlanguage() as? String == "en"{
+                            self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                        }
+                        else{
+                            self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
+                        }
                     }
                     else{
                         let oppid = Int.getInt(userTimeLine[indexPath.row].id)
@@ -597,7 +685,12 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                 
                 if txt == "ClickComment"{
                     if UserData.shared.isskiplogin == true{
-                        self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                        if kSharedUserDefaults.getlanguage() as? String == "en"{
+                            self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                        }
+                        else{
+                            self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
+                        }
                     }
                     else{
                         if sender.isSelected{
@@ -624,7 +717,13 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                 
                 if txt == "AddComment"{
                     if cell.txtviewComment.text == ""{
-                        self.showSimpleAlert(message: "Please add comment ")
+                        if kSharedUserDefaults.getlanguage() as? String == "en"{
+                            self.showSimpleAlert(message: "Please add comment ")
+                        }
+                        else{
+                            self.showSimpleAlert(message: "الرجاء إضافة تعليق")
+                        }
+                        
                     }
                     else{
                         let oppid = Int.getInt(userTimeLine[indexPath.row].id)

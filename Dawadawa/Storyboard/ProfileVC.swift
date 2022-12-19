@@ -251,7 +251,12 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
             cell.callbackbtnSelect = { txt in
                 if txt == "All"{
                     if UserData.shared.isskiplogin == true{
-                        self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                        if kSharedUserDefaults.getlanguage() as? String == "en"{
+                            self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                        }
+                        else{
+                            self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
+                        }
                         self.imgNoOpp.isHidden = false
                     }
                     else{
@@ -262,7 +267,12 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                 }
                 if txt == "Premium"{
                     if UserData.shared.isskiplogin == true{
-                        self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                        if kSharedUserDefaults.getlanguage() as? String == "en"{
+                            self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                        }
+                        else{
+                            self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
+                        }
                         self.imgNoOpp.isHidden = false
                     }
                     else{
@@ -273,7 +283,12 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                 }
                 if txt == "Featured"{
                     if UserData.shared.isskiplogin == true{
-                        self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                        if kSharedUserDefaults.getlanguage() as? String == "en"{
+                            self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                        }
+                        else{
+                            self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
+                        }
                         self.imgNoOpp.isHidden = false
                     }
                     else{
@@ -581,7 +596,12 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                 
                 if txt == "AddComment"{
                     if cell.txtviewComment.text == ""{
-                        self.showSimpleAlert(message: "Please add comment ")
+                        if kSharedUserDefaults.getlanguage() as? String == "en"{
+                            self.showSimpleAlert(message: "Please add comment ")
+                        }
+                        else{
+                            self.showSimpleAlert(message: "الرجاء إضافة تعليق")
+                        }
                     }
                     else{
                         let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)

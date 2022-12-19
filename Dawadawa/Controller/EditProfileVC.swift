@@ -218,7 +218,13 @@ class EditProfileVC: UIViewController {
         }
         else if !String.getString(txtFieldWhatsappNumber.text).isPhoneNumber()
         {
-            self.showSimpleAlert(message: "Please Enter valid Whatsapp Number")
+            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                self.showSimpleAlert(message: "Please Enter valid Whatsapp Number")
+            }
+            else{
+                self.showSimpleAlert(message: "الرجاء إدخال رقم Whatsapp صالح")
+            }
+            
             return
         }
         //        else if !String.getString(textfieldDATE.text).isdob(){
@@ -346,7 +352,13 @@ class EditProfileVC: UIViewController {
     
     @IBAction func buttonTappedState(_ sender:UIButton){
         if self.labelCountry.text == "Country"{
-            self.showSimpleAlert(message: "Please Select Country")
+            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                self.showSimpleAlert(message: "Please Select Country")
+            }
+            else{
+                self.showSimpleAlert(message: "يرجى تحديد الدولة")
+            }
+            
             return
         }else{
             let storyBoard = UIStoryboard(name: "Main", bundle: nil)

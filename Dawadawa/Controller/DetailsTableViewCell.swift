@@ -8,8 +8,8 @@ import IQKeyboardManagerSwift
 
 class DetailsTableViewCell: UITableViewCell,UITextViewDelegate {
     
-//    MARK: - Properties
-
+    //    MARK: - Properties
+    
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var SocialPostCollectionView: UICollectionView!
     @IBOutlet weak var DocumentCollectionView: UICollectionView!
@@ -68,13 +68,12 @@ class DetailsTableViewCell: UITableViewCell,UITextViewDelegate {
     
     weak var celldelegate: DocumentCollectionViewCellDelegate?
     
-    
     //    Comment Section
     
     @IBOutlet weak var btnClickComment: UIButton!
     @IBOutlet weak var imageUser: UIImageView!
     @IBOutlet weak var txtviewComment: IQTextView!
-   
+    
     @IBOutlet weak var viewAddComment: UIView!
     
     @IBOutlet weak var heightViewAddComment: NSLayoutConstraint!
@@ -96,7 +95,7 @@ class DetailsTableViewCell: UITableViewCell,UITextViewDelegate {
         }
     }
     
-//    MARK: - Life Cycle
+    //    MARK: - Life Cycle
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -112,10 +111,10 @@ class DetailsTableViewCell: UITableViewCell,UITextViewDelegate {
         
         self.txtviewComment.delegate = self
         self.viewAddComment.isHidden = true
-     //   self.heightViewAddComment.constant = 0
+        //   self.heightViewAddComment.constant = 0
         self.imgOppFlag.isHidden = true
-//        self.imgredCircle.isHidden = true
-//        self.lblcloseOpportunity.isHidden = true
+        //        self.imgredCircle.isHidden = true
+        //        self.lblcloseOpportunity.isHidden = true
     }
     
     
@@ -193,7 +192,6 @@ extension DetailsTableViewCell: UICollectionViewDelegate,UICollectionViewDataSou
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-      
         
         switch section{
         case 0:
@@ -211,13 +209,14 @@ extension DetailsTableViewCell: UICollectionViewDelegate,UICollectionViewDataSou
             
         case 0:
             let cell = SocialPostCollectionView.dequeueReusableCell(withReuseIdentifier: "SocialPostCollectionViewCell", for: indexPath) as! SocialPostCollectionViewCell
+            
             let obj = img[indexPath.item].imageurl
             print("-=-imgurl-=-\(String(describing: obj))")
             let imageurl = "\(imgUrl)\(String.getString(obj))"
             let imgUrl = URL(string: "\(imgUrl)\(String.getString(obj))")
             print("-=imagebaseurl=-=-\(imageurl)")
             cell.imgOpportunity.sd_setImage(with: imgUrl, placeholderImage: UIImage(named: "Frame 726"))
-           // cell.imgOpportunity.downlodeImage(serviceurl: imageurl, placeHolder: UIImage(named: "baba"))
+            // cell.imgOpportunity.downlodeImage(serviceurl: imageurl, placeHolder: UIImage(named: "baba"))
             cell.imgOpportunity.seeFullImage()
             return cell
             
@@ -226,13 +225,14 @@ extension DetailsTableViewCell: UICollectionViewDelegate,UICollectionViewDataSou
             let cell = DocumentCollectionView.dequeueReusableCell(withReuseIdentifier: "DocumentCollectionViewCell", for: indexPath) as! DocumentCollectionViewCell
             let obj = doc[indexPath.item].oppr_document
             cell.lblDocument.text = String.getString(obj)
+            
             cell.callback?(indexPath.row) // get the index from table view cell using call back
             
             return cell
             
         default:
             return UICollectionViewCell()
-
+            
         }
         
         
@@ -243,7 +243,7 @@ extension DetailsTableViewCell: UICollectionViewDelegate,UICollectionViewDataSou
         switch indexPath.section{
         case 0:
             return CGSize(width: SocialPostCollectionView.frame.size.width, height: 225)
-         
+            
         case 1:
             return CGSize(width: SocialPostCollectionView.frame.size.width , height: 60)
             
@@ -252,14 +252,16 @@ extension DetailsTableViewCell: UICollectionViewDelegate,UICollectionViewDataSou
         }
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = DocumentCollectionView.cellForItem(at: indexPath) as! DocumentCollectionViewCell
+        self.celldelegate?.collectionView(collectionviewcell: cell, index: indexPath.item, didTappedInTableViewCell: self)
+    }
+    
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         pageControl.currentPage = Int(scrollView.contentOffset.x) / Int(scrollView.frame.width)
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-            let cell = DocumentCollectionView.cellForItem(at: indexPath) as! DocumentCollectionViewCell
-            self.celldelegate?.collectionView(collectionviewcell: cell, index: indexPath.item, didTappedInTableViewCell: self)
-        }
+    
 }
 
 

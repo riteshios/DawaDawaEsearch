@@ -9,6 +9,7 @@ class WebViewVC: UIViewController {
     
     @IBOutlet weak var lblheading: UILabel!
     @IBOutlet weak var webkit: WKWebView!
+    
     var strurl = ""
     var head = ""
     

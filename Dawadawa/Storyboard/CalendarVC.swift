@@ -67,7 +67,6 @@ class CalendarVC: UIViewController {
     @IBAction func buttonDone(_ sender: UIButton) {
         if self.date == "" {
            
-            
             self.showSimpleAlert(message: "Please select date")
            
         }

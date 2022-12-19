@@ -129,6 +129,7 @@
 		04BFFB68289250BA0086DCC1 /* FilterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BFFB67289250BA0086DCC1 /* FilterVC.swift */; };
 		04C19DE1291A55F80024CD04 /* FlagPostPopUPVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C19DE0291A55F80024CD04 /* FlagPostPopUPVC.swift */; };
 		04C495BA290FE0BD001F01FD /* ChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C495B9290FE0BD001F01FD /* ChatVC.swift */; };
+		04C5796E29502CCE002D4878 /* DocumentWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C5796D29502CCE002D4878 /* DocumentWebView.swift */; };
 		04C848A828B75E8200505AB0 /* DetailScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C848A728B75E8200505AB0 /* DetailScreenVC.swift */; };
 		04C848AC28B7ABB400505AB0 /* SeeMoreCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C848AA28B7ABB400505AB0 /* SeeMoreCommentCell.swift */; };
 		04C848AD28B7ABB400505AB0 /* SeeMoreCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C848AB28B7ABB400505AB0 /* SeeMoreCommentCell.xib */; };
@@ -811,6 +812,7 @@
 		04BFFB67289250BA0086DCC1 /* FilterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FilterVC.swift; path = Dawadawa/Storyboard/FilterVC.swift; sourceTree = SOURCE_ROOT; };
 		04C19DE0291A55F80024CD04 /* FlagPostPopUPVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FlagPostPopUPVC.swift; path = Dawadawa/Storyboard/FlagPostPopUPVC.swift; sourceTree = SOURCE_ROOT; };
 		04C495B9290FE0BD001F01FD /* ChatVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatVC.swift; sourceTree = "<group>"; };
+		04C5796D29502CCE002D4878 /* DocumentWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DocumentWebView.swift; path = Dawadawa/Storyboard/DocumentWebView.swift; sourceTree = SOURCE_ROOT; };
 		04C848A728B75E8200505AB0 /* DetailScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailScreenVC.swift; sourceTree = SOURCE_ROOT; };
 		04C848AA28B7ABB400505AB0 /* SeeMoreCommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeMoreCommentCell.swift; sourceTree = "<group>"; };
 		04C848AB28B7ABB400505AB0 /* SeeMoreCommentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SeeMoreCommentCell.xib; sourceTree = "<group>"; };
@@ -1709,6 +1711,7 @@
 		04C848A928B7AB4100505AB0 /* DetailScreen */ = {
 			isa = PBXGroup;
 			children = (
+				04C5796D29502CCE002D4878 /* DocumentWebView.swift */,
 				0421E86728DAE3B100CB7B38 /* DetailsTableViewCell.swift */,
 				0421E86828DAE3B100CB7B38 /* DetailsTableViewCell.xib */,
 				04B2586A28DC68190015F5AD /* DocumentCollectionViewCell.swift */,
@@ -3421,6 +3424,7 @@
 				447DCE5C2851CB1300C40DDD /* NotificationHalper.swift in Sources */,
 				04F84533286AC52C0081120F /* PasswordChangedSuccessfullyPopUpVC.swift in Sources */,
 				0498BF9628D04F2700162B58 /* BuyPlanVC.swift in Sources */,
+				04C5796E29502CCE002D4878 /* DocumentWebView.swift in Sources */,
 				447DCC6F2851CB1100C40DDD /* Locale+Extensions.swift in Sources */,
 				447DCC6C2851CB1100C40DDD /* UIAlertController+Extensions.swift in Sources */,
 				04D0AB35287ED8B500DB0F23 /* UploadDocumentCollectionViewCell.swift in Sources */,

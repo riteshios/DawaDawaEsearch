@@ -447,7 +447,13 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
 //            return
 //        }
          if self.isSelectSubcategory == false{
-            self.showSimpleAlert(message: "Please Select the Subcategory")
+             if kSharedUserDefaults.getlanguage() as? String == "en"{
+                 self.showSimpleAlert(message: "Please Select the Subcategory")
+             }
+             else{
+                 self.showSimpleAlert(message: "الرجاء تحديد الفئة الفرعية")
+             }
+           
             return
         }
         else if String.getString(self.txtFieldTitle.text).isEmpty
@@ -461,15 +467,33 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
             return
         }
         else if self.isSelectServiceType == false{
-            self.showSimpleAlert(message: "Please Select Service Type")
+            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                self.showSimpleAlert(message: "Please Select Service Type")
+            }
+            else{
+                self.showSimpleAlert(message: "الرجاء تحديد نوع الخدمة")
+            }
+            
             return
         }
         else if self.isSelectState == false{
-            self.showSimpleAlert(message: "Please Select the State")
+            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                self.showSimpleAlert(message: "Please Select the State")
+            }
+            else{
+                self.showSimpleAlert(message: "يرجى تحديد الولاية")
+            }
+            
             return
         }
         else if self.isSelectLocality == false{
-            self.showSimpleAlert(message: "Please Select the Locality")
+            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                self.showSimpleAlert(message: "Please Select the Locality")
+            }
+            else{
+                self.showSimpleAlert(message: "الرجاء تحديد المنطقة")
+            }
+           
             return
         }
         
@@ -504,15 +528,32 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
 //            return
 //        }
         else if self.isSelectLookingFor == false{
-            self.showSimpleAlert(message: "Please Select looking For")
+            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                self.showSimpleAlert(message: "Please Select looking For")
+            }
+            else{
+                self.showSimpleAlert(message: "يرجى تحديد البحث عن")
+            }
+           
             return
         }
         else if self.isSelectopp_planBasic == false && self.isSelectopp_planPremium == false && self.isSelectopp_planFeatured == false{
-            self.showSimpleAlert(message: "Please Select Opportunity Plan")
+            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                self.showSimpleAlert(message: "Please Select Opportunity Plan")
+            }
+            else{
+                self.showSimpleAlert(message: "يرجى تحديد خطة الفرصة")
+            }
+           
             return
         }
         else if self.isSelectopp_planPremium == true && self.isSelectimage == false && self.imagearr.count == 0{
-            self.showSimpleAlert(message: "Please add at least one opportunity photo")
+            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                self.showSimpleAlert(message: "Please add at least one opportunity photo")
+            }
+            else{
+                self.showSimpleAlert(message: "الرجاء إضافة صورة فرصة واحدة على الأقل")
+            }
             return
         }
         self.view.endEditing(true)

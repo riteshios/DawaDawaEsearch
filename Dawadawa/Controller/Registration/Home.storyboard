@@ -16185,28 +16185,74 @@ this Chat?</string>
             </objects>
             <point key="canvasLocation" x="696" y="549"/>
         </scene>
+        <!--Document Web View-->
+        <scene sceneID="0IJ-rF-QLa">
+            <objects>
+                <viewController storyboardIdentifier="DocumentWebView" id="VPV-je-b9a" customClass="DocumentWebView" customModule="Dawadawa" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="HuS-sW-U5F">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lrk-ox-tdu">
+                                <rect key="frame" x="10" y="10" width="24" height="24"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="arrow-left"/>
+                                <connections>
+                                    <action selector="btnBackTapped:" destination="VPV-je-b9a" eventType="touchUpInside" id="lew-IP-Vwh"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iT1-Oh-oj1">
+                                <rect key="frame" x="177.66666666666666" y="8" width="59" height="28"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mil-b6-ncV">
+                                <rect key="frame" x="0.0" y="50" width="414" height="30"/>
+                                <color key="backgroundColor" systemColor="systemGray4Color"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Kat-hO-40q"/>
+                                </constraints>
+                            </view>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6eb-lm-YBQ">
+                                <rect key="frame" x="0.0" y="80" width="414" height="656"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Trp-Ki-Rhe"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="mil-b6-ncV" firstAttribute="leading" secondItem="Trp-Ki-Rhe" secondAttribute="leading" id="0EK-pw-cN9"/>
+                            <constraint firstItem="iT1-Oh-oj1" firstAttribute="centerX" secondItem="HuS-sW-U5F" secondAttribute="centerX" id="5e4-41-qyP"/>
+                            <constraint firstItem="Trp-Ki-Rhe" firstAttribute="bottom" secondItem="6eb-lm-YBQ" secondAttribute="bottom" id="K5U-6F-old"/>
+                            <constraint firstItem="Lrk-ox-tdu" firstAttribute="leading" secondItem="Trp-Ki-Rhe" secondAttribute="leading" constant="10" id="Yov-WF-7Vd"/>
+                            <constraint firstItem="6eb-lm-YBQ" firstAttribute="top" secondItem="mil-b6-ncV" secondAttribute="bottom" id="dTQ-Gc-02e"/>
+                            <constraint firstItem="6eb-lm-YBQ" firstAttribute="leading" secondItem="Trp-Ki-Rhe" secondAttribute="leading" id="efW-Pp-HHT"/>
+                            <constraint firstItem="iT1-Oh-oj1" firstAttribute="centerY" secondItem="Lrk-ox-tdu" secondAttribute="centerY" id="lw8-nr-gfV"/>
+                            <constraint firstItem="Trp-Ki-Rhe" firstAttribute="trailing" secondItem="mil-b6-ncV" secondAttribute="trailing" id="qsg-uJ-xUn"/>
+                            <constraint firstItem="Lrk-ox-tdu" firstAttribute="top" secondItem="Trp-Ki-Rhe" secondAttribute="top" constant="10" id="rfO-hm-USi"/>
+                            <constraint firstItem="mil-b6-ncV" firstAttribute="top" secondItem="iT1-Oh-oj1" secondAttribute="bottom" constant="14" id="swa-NJ-n09"/>
+                            <constraint firstItem="Trp-Ki-Rhe" firstAttribute="trailing" secondItem="6eb-lm-YBQ" secondAttribute="trailing" id="vjG-hp-WMC"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="lblheading" destination="iT1-Oh-oj1" id="BI8-Mq-7Gs"/>
+                        <outlet property="webkit" destination="6eb-lm-YBQ" id="c8e-wa-WBE"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="a2o-ee-DBt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="8893" y="549"/>
+        </scene>
     </scenes>
     <designables>
-        <designable name="Au9-O0-cbA">
-            <size key="intrinsicContentSize" width="120" height="20"/>
-        </designable>
-        <designable name="VSf-iM-2vh">
-            <size key="intrinsicContentSize" width="259" height="44"/>
-        </designable>
-        <designable name="fV5-fA-npc">
-            <size key="intrinsicContentSize" width="120" height="20"/>
-        </designable>
         <designable name="hYJ-9L-6ep">
             <size key="intrinsicContentSize" width="-1" height="49"/>
-        </designable>
-        <designable name="ozH-Xo-8GJ">
-            <size key="intrinsicContentSize" width="120" height="20"/>
-        </designable>
-        <designable name="r55-Lk-l5f">
-            <size key="intrinsicContentSize" width="259" height="44"/>
-        </designable>
-        <designable name="ybI-DQ-vGn">
-            <size key="intrinsicContentSize" width="-1" height="65"/>
         </designable>
     </designables>
     <resources>
@@ -16292,6 +16338,9 @@ this Chat?</string>
         </systemColor>
         <systemColor name="systemGray2Color">
             <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGray4Color">
+            <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray5Color">
             <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

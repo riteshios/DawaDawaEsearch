@@ -167,7 +167,13 @@ extension ViewAllInterestedVC:UITableViewDelegate,UITableViewDataSource{
             if txt == "Like"{
 //                if cell.btnlike.isSelected == true{
                     if UserData.shared.isskiplogin == true{
-                        self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                        if kSharedUserDefaults.getlanguage() as? String == "en"{
+                            self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                        }
+                        else{
+                            self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
+                        }
+                        
                     }
                     else{
                         let oppid = self.userTimeLine[indexPath.row].id
@@ -247,7 +253,12 @@ extension ViewAllInterestedVC:UITableViewDelegate,UITableViewDataSource{
                         
                         if txt == "Update"{
                             if UserData.shared.isskiplogin == true{
-                                self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                                if kSharedUserDefaults.getlanguage() as? String == "en"{
+                                    self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                                }
+                                else{
+                                    self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
+                                }
                             }
                             else{
                                 let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
@@ -298,7 +309,12 @@ extension ViewAllInterestedVC:UITableViewDelegate,UITableViewDataSource{
                         
                         if txt == "Chatwithuser"{
                             if UserData.shared.isskiplogin == true{
-                                self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                                if kSharedUserDefaults.getlanguage() as? String == "en"{
+                                    self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                                }
+                                else{
+                                    self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
+                                }
                             }
                             else{
                                 let userid = Int.getInt(self.userTimeLine[indexPath.row].user_id)
@@ -320,7 +336,12 @@ extension ViewAllInterestedVC:UITableViewDelegate,UITableViewDataSource{
                         
                         if txt == "Flag"{
                             if UserData.shared.isskiplogin == true{
-                                self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                                if kSharedUserDefaults.getlanguage() as? String == "en"{
+                                    self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                                }
+                                else{
+                                    self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
+                                }
                             }
                             else{
                                 let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
@@ -332,7 +353,12 @@ extension ViewAllInterestedVC:UITableViewDelegate,UITableViewDataSource{
                         
                         if txt == "Report"{
                             if UserData.shared.isskiplogin == true{
-                                self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                                if kSharedUserDefaults.getlanguage() as? String == "en"{
+                                    self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                                }
+                                else{
+                                    self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
+                                }
                             }
                             else{
                                 self.dismiss(animated: false){
@@ -348,7 +374,12 @@ extension ViewAllInterestedVC:UITableViewDelegate,UITableViewDataSource{
                         
                         if txt == "viewdetails"{
                             if UserData.shared.isskiplogin == true{
-                                self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                                if kSharedUserDefaults.getlanguage() as? String == "en"{
+                                    self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                                }
+                                else{
+                                    self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
+                                }
                             }
                             else{
                                 let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
@@ -410,7 +441,13 @@ extension ViewAllInterestedVC:UITableViewDelegate,UITableViewDataSource{
             
             if txt == "AddComment"{
                 if cell.txtviewComment.text == ""{
-                    self.showSimpleAlert(message: "Please add comment ")
+                    if kSharedUserDefaults.getlanguage() as? String == "en"{
+                        self.showSimpleAlert(message: "")
+                    }
+                    else{
+                        self.showSimpleAlert(message: "الرجاء إضافة تعليق")
+                    }
+                   
                 }
                 else{
                     let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)

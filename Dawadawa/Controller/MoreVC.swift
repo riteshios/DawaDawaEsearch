@@ -72,7 +72,12 @@ class MoreVC: UIViewController {
             self.viewEditProfile.backgroundColor = UIColor.init(red: 241/255, green: 249/255, blue: 253/255, alpha: 1)
         }
         if UserData.shared.isskiplogin == true{
-            self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+            }
+            else{
+                self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
+            }
         }
         else{
         self.callback?("EditProfile")
@@ -86,7 +91,12 @@ class MoreVC: UIViewController {
             self.viewChangePassword.backgroundColor = UIColor.init(red: 241/255, green: 249/255, blue: 253/255, alpha: 1)
         }
         if UserData.shared.isskiplogin == true{
-            self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+            }
+            else{
+                self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
+            }
         }
         else{
         self.getoptapi()
@@ -98,7 +108,12 @@ class MoreVC: UIViewController {
             self.viewSavedOpportunies.backgroundColor = UIColor.init(red: 241/255, green: 249/255, blue: 253/255, alpha: 1)
         }
         if UserData.shared.isskiplogin == true{
-            self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+            }
+            else{
+                self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
+            }
         }
         else{
             self.callback?("SaveOpportunity")
@@ -111,7 +126,12 @@ class MoreVC: UIViewController {
             self.viewInterestedOpportunities.backgroundColor = UIColor.init(red: 241/255, green: 249/255, blue: 253/255, alpha: 1)
         }
         if UserData.shared.isskiplogin == true{
-            self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+            }
+            else{
+                self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
+            }
         }
         else{
             self.callback?("InterestedOpportunities")

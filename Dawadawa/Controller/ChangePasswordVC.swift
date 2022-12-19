@@ -46,7 +46,13 @@ class ChangePasswordVC: UIViewController {
     
     func fieldValidations(){
         if String.getString(self.txtFieldNewPassword.text).isEmpty{
-            self.showSimpleAlert(message: "Please Enter New Password")
+            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                self.showSimpleAlert(message: "Please Enter New Password")
+            }
+            else{
+                self.showSimpleAlert(message: "الرجاء إدخال كلمة مرور جديدة")
+            }
+           
             return
         }else if !String.getString(self.txtFieldNewPassword.text).isPasswordValidate(){
             self.showSimpleAlert(message: Notifications.kValidPassword)

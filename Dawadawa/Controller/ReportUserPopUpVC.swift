@@ -58,7 +58,13 @@ class ReportUserPopUpVC: UIViewController {
     
     @IBAction func btnReportTapped(_ sender: UIButton){
         if self.TextViewReportIssue.text == ""{
-            self.showSimpleAlert(message: "The report issue field is required.")
+            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                self.showSimpleAlert(message: "The report issue field is required.")
+            }
+            else{
+                self.showSimpleAlert(message: "حقل إصدار التقرير مطلوب")
+            }
+            
         }
         else{
             self.reportuserapi()
