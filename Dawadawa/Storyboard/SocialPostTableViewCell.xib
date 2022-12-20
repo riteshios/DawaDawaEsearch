@@ -742,7 +742,9 @@
                 <outlet property="btnClickComment" destination="p8M-PC-Ljt" id="q01-cC-GNx"/>
                 <outlet property="btnDescription" destination="ZXe-eR-a0n" id="QhQ-CY-aKx"/>
                 <outlet property="btnProfileimage" destination="uel-i3-6NV" id="fCp-hC-D4A"/>
+                <outlet property="btnReply" destination="TeG-Qk-02U" id="HLG-SX-M2I"/>
                 <outlet property="btnSave" destination="6ue-Uh-RMM" id="eLh-0h-jFf"/>
+                <outlet property="btnSeemoreComment" destination="rXd-Ed-SWr" id="hbY-6r-b6r"/>
                 <outlet property="btnShare" destination="9NH-Yq-NKr" id="QuT-gG-Egd"/>
                 <outlet property="btnlike" destination="W05-Qz-8CE" id="RoN-yl-ly8"/>
                 <outlet property="btnviewDetails" destination="Gmx-ui-x0B" id="H97-cB-2yX"/>
@@ -757,10 +759,12 @@
                 <outlet property="imglike" destination="Thv-qM-E3K" id="dT8-Ed-Bt1"/>
                 <outlet property="imgredCircle" destination="E2N-yB-oj1" id="20x-SR-f6q"/>
                 <outlet property="imgsave" destination="634-6R-FaE" id="riU-IY-HIP"/>
+                <outlet property="lblComment" destination="8KF-ic-5v5" id="r5r-l2-uHB"/>
                 <outlet property="lblDescribtion" destination="c7e-ku-l4v" id="lDZ-54-A5J"/>
                 <outlet property="lblLikeCount" destination="11V-Vy-LGe" id="A1A-V7-trN"/>
                 <outlet property="lblRating" destination="ZKw-hf-Nla" id="20b-QL-NxK"/>
                 <outlet property="lblSave" destination="a3U-sN-cao" id="gKs-eS-4tG"/>
+                <outlet property="lblShare" destination="X6G-m3-NPr" id="MoM-tE-LVj"/>
                 <outlet property="lblTitle" destination="eXK-Ye-5Om" id="ZJC-6a-8RK"/>
                 <outlet property="lblUserName" destination="LgE-K4-rkL" id="peM-tm-WBp"/>
                 <outlet property="lblcloseOpportunity" destination="2JA-SH-CrE" id="PuF-ap-1fn"/>

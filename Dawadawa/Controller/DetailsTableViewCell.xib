@@ -801,6 +801,7 @@
                 <outlet property="lblBusinessName" destination="hAZ-go-7q0" id="nLJ-lj-fVX"/>
                 <outlet property="lblBusinessminingType" destination="6wp-Lp-nxT" id="Utx-pi-ayP"/>
                 <outlet property="lblCategory" destination="3vR-gV-iq4" id="MZ5-Fp-is5"/>
+                <outlet property="lblComment" destination="ESX-Cl-n5b" id="tLS-WA-Px1"/>
                 <outlet property="lblDescribtion" destination="b9e-Y7-QDg" id="l69-6B-VwK"/>
                 <outlet property="lblEmail" destination="oU5-zB-ZiC" id="wuT-w2-2M3"/>
                 <outlet property="lblLikeCount" destination="J0g-6M-RZz" id="XVm-GW-lcW"/>
@@ -809,6 +810,7 @@
                 <outlet property="lblLookingFor" destination="N4i-es-Whg" id="WUz-YT-fv3"/>
                 <outlet property="lblRating" destination="9su-cG-OSB" id="QdY-uZ-F0v"/>
                 <outlet property="lblSave" destination="tYF-Bn-hDn" id="eZE-my-yts"/>
+                <outlet property="lblShare" destination="RMK-lx-FDg" id="wxG-Da-H5i"/>
                 <outlet property="lblSub_category" destination="KsT-xi-acz" id="WnD-Pm-auw"/>
                 <outlet property="lblTitle" destination="Bx4-p3-Gtc" id="hxh-t6-73w"/>
                 <outlet property="lblUserName" destination="ORk-sy-h2U" id="kZt-NG-hMh"/>

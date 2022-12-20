@@ -34,6 +34,8 @@ class DetailsTableViewCell: UITableViewCell,UITextViewDelegate {
     @IBOutlet weak var btnlike: UIButton!
     @IBOutlet weak var lbllike: UILabel!
     
+    @IBOutlet weak var lblShare: UILabel!
+    
     @IBOutlet weak var imgsave: UIImageView!
     @IBOutlet weak var btnSave: UIButton!
     @IBOutlet weak var lblSave: UILabel!
@@ -71,6 +73,7 @@ class DetailsTableViewCell: UITableViewCell,UITextViewDelegate {
     //    Comment Section
     
     @IBOutlet weak var btnClickComment: UIButton!
+    @IBOutlet weak var lblComment: UILabel!
     @IBOutlet weak var imageUser: UIImageView!
     @IBOutlet weak var txtviewComment: IQTextView!
     
@@ -98,7 +101,7 @@ class DetailsTableViewCell: UITableViewCell,UITextViewDelegate {
     //    MARK: - Life Cycle
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        self.setuplanguage()
         SocialPostCollectionView.delegate = self
         SocialPostCollectionView.dataSource = self
         DocumentCollectionView.delegate = self
@@ -260,8 +263,18 @@ extension DetailsTableViewCell: UICollectionViewDelegate,UICollectionViewDataSou
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         pageControl.currentPage = Int(scrollView.contentOffset.x) / Int(scrollView.frame.width)
     }
-    
-    
 }
+
+// MARK: - Localisation
+
+extension DetailsTableViewCell{
+    func setuplanguage(){
+        lbllike.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Like", comment: "")
+        lblComment.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Comment", comment: "")
+        lblShare.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Share", comment: "")
+        lblSave.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Save", comment: "")
+    }
+}
+
 
 

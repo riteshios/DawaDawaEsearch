@@ -140,7 +140,7 @@
 "Cancel" = "يلغي";
 
 // MARK: - SettingVC
-
+"Settings" = "إعدادات";
 "About Us" = "معلومات عنا";
 "Subscriptions" = "الاشتراكات";
 "Terms & Conditions" = "البنود و الظروف";
@@ -203,8 +203,10 @@
 
 "Chat with user" = "الدردشة مع المستخدم";
 "Copy Link" = "انسخ الرابط";
+"Mark as interested" = "وضع علامة كمهتم";
 "Flag Post" = "وضع علامة على المشاركة";
 "Report User" = "أبلغ عن مستخدم";
+"View Details" = "عرض التفاصيل";
 
 // MARK: - FlagPostPopUPVC
 
@@ -234,6 +236,7 @@
 // MARK: - HomeVC
 
 "Hello," = "مرحبًا,";
+"Search Opportunities" = "فرص البحث";
 
 // MARK: - SearchVC
 
@@ -436,3 +439,22 @@
 // MARK: - ViewAllInterestedVC
 
 "Interested" = "يستفد";
+
+// MARK: - FilterTVCell
+
+"Filters" = "المرشحات";
+"Clear" = "صافي";
+// MARK: - ViewPostTableViewCell
+
+"Premium opportunities" = "فرص متميزة";
+"View all" = "مشاهدة الكل";
+
+// MARK: - SocialPostTableViewCell
+
+"Like" = "مثل";
+"Comment" = "تعليق";
+"Share" = "يشارك";
+"Save" = "يحفظ";
+"Reply" = "رد";
+"See more comments" = "مشاهدة المزيد من التعليقات";
+"This opportunity has been closed" = "تم إغلاق هذه الفرصة";

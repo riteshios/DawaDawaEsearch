@@ -8,6 +8,7 @@ class SettingVC: UIViewController {
     //    MARK: - Properties
     
     @IBOutlet weak var lblDropDownMenu: UILabel!
+    @IBOutlet weak var lblSetting: UILabel!
     @IBOutlet weak var imgDropDownMenu: UIImageView!
     @IBOutlet weak var btndrop: UIButton!
     
@@ -31,7 +32,7 @@ class SettingVC: UIViewController {
         }
         else{
             self.imgDropDownMenu.image = UIImage(named: "sudan")
-            self.lblDropDownMenu.text = "Arabic"
+            self.lblDropDownMenu.text = "عربي"
         }
     }
     
@@ -280,6 +281,7 @@ extension SettingVC{
 
 extension SettingVC{
     func setuplanguage(){
+        lblSetting.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Settings", comment: "")
         lblAboutus.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "About Us", comment: "")
         lblSubscription.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Subscriptions", comment: "")
         lbltermsamdcondition.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Terms & Conditions", comment: "")

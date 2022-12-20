@@ -1,4 +1,3 @@
-//
 //  HomeSocialMoreSelfVC.swift
 //  Dawadawa
 //  Created by Ritesh Gupta on 30/08/22.
@@ -18,6 +17,7 @@ class HomeSocialMoreSelfVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setuplanguage()
         self.setup()
     }
     

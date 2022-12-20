@@ -1,12 +1,8 @@
 import UIKit
 
-
 enum Storyboard: String{
-    
-    
     case kMain = "Main"
     case KHome = "Home"
-   
 }
 
 extension UIViewController {

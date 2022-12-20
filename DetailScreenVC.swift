@@ -272,22 +272,43 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
             cell.imgOpp_plan.image = self.userTimeLine?.opp_plan == "Featured" ? UIImage(named: "Star Filled") : self.userTimeLine?.opp_plan == "Premium" ? UIImage(named: "Crown") : UIImage(named: "Folded Booklet")
             
             if String.getString(self.userTimeLine?.looking_for) == "0"{
-                cell.lblLookingFor.text = "Looking for Investor"
+                if kSharedUserDefaults.getlanguage() as? String == "en"{
+                    cell.lblLookingFor.text = "Looking for Investor"
+                }
+                else{
+                    cell.lblLookingFor.text = "تبحث عن مستثمر"
+                }
             }
             else if String.getString(self.userTimeLine?.looking_for) == "1"{
-                cell.lblLookingFor.text = "Looking for Business Owner"
+                if kSharedUserDefaults.getlanguage() as? String == "en"{
+                    cell.lblLookingFor.text = "Looking for Business Owner"
+                }
+                else{
+                    cell.lblLookingFor.text = "أبحث عن صاحب عمل"
+                }
             }
             else if String.getString(self.userTimeLine?.looking_for) == "2"{
-                cell.lblLookingFor.text = "Looking for Service Provider"
+                if kSharedUserDefaults.getlanguage() as? String == "en"{
+                    cell.lblLookingFor.text = "Looking for Service Provider"
+                }
+                else{
+                    cell.lblLookingFor.text = "أبحث عن مزود الخدمة"
+                }
             }
-            
             
             if String.getString(self.userTimeLine?.location_map) != ""{
                 cell.lblLocationONMap.text = String.getString(self.userTimeLine?.location_map)
                 cell.lblLocationONMap.textColor = UIColor.black
             }
+            
             else{
-                cell.lblLocationONMap.text = "Location on map not available"
+                if kSharedUserDefaults.getlanguage() as? String == "en"{
+                    cell.lblLocationONMap.text = "Location on map not available"
+                }
+                else{
+                    cell.lblLocationONMap.text = "الموقع على الخريطة غير متوفر"
+                }
+               
                 cell.lblLocationONMap.textColor = UIColor.gray
             }
             
@@ -327,23 +348,46 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
             
             if String.getString(self.userTimeLine?.is_user_like) == "1"{
                 cell.imglike.image = UIImage(named: "dil")
-                cell.lbllike.text = "Liked"
-                cell.lbllike.textColor = .red
+                if kSharedUserDefaults.getlanguage() as? String == "en"{
+                    cell.lbllike.text = "Liked"
+                }
+                else{
+                    cell.lbllike.text = "احب"
+                }
                 
+                cell.lbllike.textColor = .red
             }
             else{
                 cell.imglike.image = UIImage(named: "unlike")
-                cell.lbllike.text = "Like"
+                if kSharedUserDefaults.getlanguage() as? String == "en"{
+                    cell.lbllike.text = "Like"
+                }
+                else{
+                    cell.lbllike.text = "مثل"
+                }
+               
                 cell.lbllike.textColor = UIColor(hexString: "#A6A6A6")
             }
             if String.getString(self.userTimeLine?.is_saved) == "1"{
                 cell.imgsave.image = UIImage(named: "saveopr")
-                cell.lblSave.text = "Saved"
+                if kSharedUserDefaults.getlanguage() as? String == "en"{
+                    cell.lblSave.text = "Saved"
+                }
+                else{
+                    cell.lbllike.text = "تم الحفظ"
+                }
+                
                 cell.lblSave.textColor = UIColor(hexString: "#1572A1")
             }
             else{
                 cell.imgsave.image = UIImage(named: "save-3")
-                cell.lblSave.text = "Save"
+                if kSharedUserDefaults.getlanguage() as? String == "en"{
+                    cell.lblSave.text = "Save"
+                }
+                else{
+                    cell.lbllike.text = "يحفظ"
+                }
+                
                 cell.lblSave.textColor = UIColor(hexString: "#A6A6A6")
             }
             if Int.getInt(self.userTimeLine?.oppimage.count) == 0{
@@ -379,12 +423,23 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                         
                         if sucess == 200{
                             cell.imglike.image = UIImage(named: "dil")
-                            cell.lbllike.text = "Liked"
+                            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                                cell.lbllike.text = "Liked"
+                            }
+                            else{
+                                cell.lbllike.text = "احب"
+                            }
                             cell.lbllike.textColor = .red
                         }
                         else if sucess == 400{
                             cell.imglike.image = UIImage(named: "unlike")
-                            cell.lbllike.text = "Like"
+                            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                                cell.lbllike.text = "Like"
+                            }
+                            else{
+                                cell.lbllike.text = "مثل"
+                            }
+                           
                             cell.lbllike.textColor = UIColor(hexString: "#A6A6A6")
                         }
                     }
@@ -411,7 +466,13 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                             debugPrint("saveoppid=-=-=",oppid)
                             self.saveoppoertunityapi(oppr_id: oppid)
                             cell.imgsave.image = UIImage(named: "saveopr")
-                            cell.lblSave.text = "Saved"
+                            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                                cell.lblSave.text = "Saved"
+                            }
+                            else{
+                                cell.lblSave.text = "تم الحفظ"
+                            }
+                            
                             cell.lblSave.textColor = UIColor(hexString: "#1572A1")
                             self.getalldetail()
                         }
@@ -419,7 +480,13 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                             let oppid = Int.getInt(self.userTimeLine?.id)
                             self.unsaveoppoertunityapi(oppr_id: oppid)
                             cell.imgsave.image = UIImage(named: "save-3")
-                            cell.lblSave.text = "Save"
+                            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                                cell.lblSave.text = "Save"
+                            }
+                            else{
+                                cell.lblSave.text = "يحفظ"
+                            }
+                           
                             cell.lblSave.textColor = UIColor(hexString: "#A6A6A6")
                             self.getalldetail()
                         }
@@ -428,7 +495,12 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                         let oppid = Int.getInt(self.userTimeLine?.id)
                         self.unsaveoppoertunityapi(oppr_id: oppid)
                         cell.imgsave.image = UIImage(named: "save-3")
-                        cell.lblSave.text = "Save"
+                        if kSharedUserDefaults.getlanguage() as? String == "en"{
+                            cell.lblSave.text = "Save"
+                        }
+                        else{
+                            cell.lblSave.text = "يحفظ"
+                        }
                         cell.lblSave.textColor = UIColor(hexString: "#A6A6A6")
                         self.getalldetail()
                     }
@@ -458,7 +530,7 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                         }
                         
                         if txt == "Flag"{
-                            //                            let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
+                            //   let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
                             self.flagopportunityapi(oppr_id: Int.getInt(self.userTimeLine?.id) ?? 0)
                         }
                         
@@ -820,7 +892,12 @@ extension DetailScreenVC{
                     
                     else if  Int.getInt(dictResult["status"]) == 400{
                         completion(String.getString(dictResult["count"]),Int.getInt(dictResult["status"]))
-                        CommonUtils.showError(.info, String.getString("This Opportunity is unlike by You"))
+                        if kSharedUserDefaults.getlanguage() as? String == "en"{
+                            CommonUtils.showError(.info, String.getString("This Opportunity is unlike by You"))
+                        }
+                        else{
+                            CommonUtils.showError(.info, String.getString("هذه الفرصة تختلف عنك"))
+                        }
                     }
                     
                 default:

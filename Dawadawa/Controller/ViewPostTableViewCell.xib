@@ -111,7 +111,9 @@
             <viewLayoutGuide key="safeArea" id="apR-gY-DJA"/>
             <connections>
                 <outlet property="ColllectionViewPremiumOpp" destination="Fnt-Ip-fdj" id="7wy-OU-dh6"/>
+                <outlet property="btnViewAll" destination="A0c-am-RGf" id="FAm-JN-qiH"/>
                 <outlet property="heightViewCollectionview" destination="CFu-cB-shi" id="tYg-pj-33N"/>
+                <outlet property="lblPremium_opp" destination="HyL-G1-vX5" id="Ou8-0n-Hzh"/>
             </connections>
             <point key="canvasLocation" x="274.63768115942031" y="271.54017857142856"/>
         </tableViewCell>

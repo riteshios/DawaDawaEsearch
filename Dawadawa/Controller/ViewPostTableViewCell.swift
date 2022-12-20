@@ -6,6 +6,8 @@ import UIKit
 
 class ViewPostTableViewCell: UITableViewCell{
     
+    @IBOutlet weak var lblPremium_opp: UILabel!
+    @IBOutlet weak var btnViewAll: UIButton!
     @IBOutlet weak var ColllectionViewPremiumOpp: UICollectionView!
     var callbacknavigation:((String)->())?
     
@@ -18,6 +20,7 @@ class ViewPostTableViewCell: UITableViewCell{
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.setuplanguage()
         ColllectionViewPremiumOpp.delegate = self
         ColllectionViewPremiumOpp.dataSource = self
         ColllectionViewPremiumOpp.register(UINib(nibName: "PremiumOppCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PremiumOppCollectionViewCell")
@@ -118,5 +121,14 @@ extension ViewPostTableViewCell{
             }
         }
         
+    }
+}
+
+// MARK: - Localisation
+
+extension ViewPostTableViewCell{
+    func setuplanguage(){
+        lblPremium_opp.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Premium opportunities", comment: "")
+        btnViewAll.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "View all", comment: ""), for: .normal)
     }
 }

@@ -326,7 +326,12 @@ extension ViewAllSavedVC:UITableViewDelegate,UITableViewDataSource{
                             let share_link = String.getString(self.userTimeLine[indexPath.row].share_link)
                             UIPasteboard.general.string = share_link
                             print("share_link\(share_link)")
-                            CommonUtils.showError(.info, String.getString("Link Copied"))
+                            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                                CommonUtils.showError(.info, String.getString("Link Copied"))
+                            }
+                            else{
+                                CommonUtils.showError(.info, String.getString("تم نسخ الرابط"))
+                            }
                         }
                         
                         if txt == "MarkasInterested"{
@@ -851,7 +856,12 @@ extension ViewAllSavedVC{
                     }
                     
                     else if  Int.getInt(dictResult["status"]) == 400{
-                        CommonUtils.showError(.info, String.getString("This Opportunity is unlike by You"))
+                        if kSharedUserDefaults.getlanguage() as? String == "en"{
+                            CommonUtils.showError(.info, String.getString("This Opportunity is unlike by You"))
+                        }
+                        else{
+                            CommonUtils.showError(.info, String.getString("هذه الفرصة تختلف عنك"))
+                        }
 //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     

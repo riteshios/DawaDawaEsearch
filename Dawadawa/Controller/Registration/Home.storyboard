@@ -1203,6 +1203,7 @@
                         <outlet property="lblAboutus" destination="Ti1-82-MoC" id="9gQ-GN-Al5"/>
                         <outlet property="lblDropDownMenu" destination="cuk-r1-TVb" id="QSP-gZ-J3Q"/>
                         <outlet property="lblFaq" destination="mL4-fN-p0S" id="1hx-iq-v3D"/>
+                        <outlet property="lblSetting" destination="7F1-DE-HQ2" id="nH7-c8-ikO"/>
                         <outlet property="lblSubscription" destination="oWr-cl-kTO" id="wgu-sW-sXY"/>
                         <outlet property="lblprivacypolicy" destination="pBh-Gf-jzE" id="gm5-Mh-Sfy"/>
                         <outlet property="lbltermsamdcondition" destination="0fO-S7-TNq" id="I19-LU-KXr"/>
@@ -14393,6 +14394,7 @@ this opportunity?</string>
                         <outlet property="lblChatwithuser" destination="Diw-xD-sLF" id="J56-1X-cEB"/>
                         <outlet property="lblCopylink" destination="XAu-gf-HDg" id="LJT-hY-zuJ"/>
                         <outlet property="lblFlag" destination="iJn-vE-Kni" id="QiG-dg-6I2"/>
+                        <outlet property="lblMarkasinter" destination="vaM-LB-4gS" id="19g-eK-iVF"/>
                         <outlet property="lblReportUSer" destination="iUg-ZA-yIP" id="DXX-i5-pOE"/>
                         <outlet property="lblViewDetails" destination="WzI-0K-cdv" id="hhz-GF-iis"/>
                         <outlet property="viewBG" destination="uW7-Jn-0dD" id="DzZ-TX-43W"/>
@@ -16086,7 +16088,7 @@ this Chat?</string>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                                     <inset key="titleEdgeInsets" minX="50" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                                    <state key="normal" title="Search Opportunities">
+                                                                    <state key="normal">
                                                                         <color key="titleColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     </state>
                                                                     <connections>
@@ -16173,6 +16175,7 @@ this Chat?</string>
                     </tabBarItem>
                     <connections>
                         <outlet property="ImgUser" destination="dza-Oa-YfR" id="pwV-la-QhU"/>
+                        <outlet property="btnSearchOpportunity" destination="cJ5-EJ-g9i" id="uia-Ws-9uE"/>
                         <outlet property="imgNotification" destination="k21-u5-4f6" id="fwS-cu-OX5"/>
                         <outlet property="lblCountNotification" destination="L91-TG-hKP" id="rXW-B3-L0s"/>
                         <outlet property="lblHello" destination="bhl-1B-1LH" id="1BE-kt-QMJ"/>

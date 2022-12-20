@@ -22,6 +22,8 @@ class HomeVC: UIViewController,UITabBarControllerDelegate{
     
     @IBOutlet weak var viewSearch: UIView!
     
+    @IBOutlet weak var btnSearchOpportunity: UIButton!
+    
     @IBOutlet weak var lblUserName: UILabel!
     @IBOutlet weak var ImgUser: UIImageView!
     
@@ -168,12 +170,19 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                         }
                         else{
                             
-                            if kSharedUserDefaults.getpayment_type() as? String == "Basic Plan"{
-                                if kSharedUserDefaults.getlanguage() as? String == "en"{
-                                    self.showSimpleAlert(message: "Please Upgrade the Plan for Premium and Featured Opportunities")
+                            if UserData.shared.user_type == "0"{// Investor
+                                if kSharedUserDefaults.getpayment_type() as? String == "Basic Plan"{
+                                    if kSharedUserDefaults.getlanguage() as? String == "en"{
+                                        self.showSimpleAlert(message: "Please Upgrade the Plan for Premium and Featured Opportunities")
+                                    }
+                                    else{
+                                        self.showSimpleAlert(message: "يرجى ترقية خطة الفرص المميزة والمميزة")
+                                    }
                                 }
                                 else{
-                                    self.showSimpleAlert(message: "يرجى ترقية خطة الفرص المميزة والمميزة")
+                                    let vc = self.storyboard!.instantiateViewController(withIdentifier: PremiumOpportunitiesVC.getStoryboardID()) as! PremiumOpportunitiesVC
+                                    vc.camefrom = "home"
+                                    self.navigationController?.pushViewController(vc, animated: true)
                                 }
                             }
                             else{
@@ -230,24 +239,48 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
             
             if String.getString(obj.is_user_like) == "1"{
                 cell.imglike.image = UIImage(named: "dil")
-                cell.lbllike.text = "Liked"
+                if kSharedUserDefaults.getlanguage() as? String == "en"{
+                    cell.lbllike.text = "Liked"
+                }
+                else{
+                    cell.lbllike.text = "احب"
+                }
+               
                 cell.lbllike.textColor = .red
                 
             }
             else{
                 cell.imglike.image = UIImage(named: "unlike")
-                cell.lbllike.text = "Like"
+                if kSharedUserDefaults.getlanguage() as? String == "en"{
+                    cell.lbllike.text = "Like"
+                }
+                else{
+                    cell.lbllike.text = "مثل"
+                }
+                
                 cell.lbllike.textColor = UIColor(hexString: "#A6A6A6")
             }
             
             if String.getString(obj.is_saved) == "1"{
                 cell.imgsave.image = UIImage(named: "saveopr")
-                cell.lblSave.text = "Saved"
+                if kSharedUserDefaults.getlanguage() as? String == "en"{
+                    cell.lblSave.text = "Saved"
+                }
+                else{
+                    cell.lblSave.text = "تم الحفظ"
+                }
+               
                 cell.lblSave.textColor = UIColor(hexString: "#1572A1")
             }
             else{
                 cell.imgsave.image = UIImage(named: "save-3")
-                cell.lblSave.text = "Save"
+                if kSharedUserDefaults.getlanguage() as? String == "en"{
+                    cell.lblSave.text = "Save"
+                }
+                else{
+                    cell.lblSave.text = "يحفظ"
+                }
+               
                 cell.lblSave.textColor = UIColor(hexString: "#A6A6A6")
             }
             
@@ -375,12 +408,24 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                             
                             if sucess == 200{
                                 cell.imglike.image = UIImage(named: "dil")
-                                cell.lbllike.text = "Liked"
+                                if kSharedUserDefaults.getlanguage() as? String == "en"{
+                                    cell.lbllike.text = "Liked"
+                                }
+                                else{
+                                    cell.lbllike.text = "احب"
+                                }
+                                
                                 cell.lbllike.textColor = .red
                             }
                             else if sucess == 400{
                                 cell.imglike.image = UIImage(named: "unlike")
-                                cell.lbllike.text = "Like"
+                                if kSharedUserDefaults.getlanguage() as? String == "en"{
+                                    cell.lbllike.text = "Like"
+                                }
+                                else{
+                                    cell.lbllike.text = "مثل"
+                                }
+                               
                                 cell.lbllike.textColor = UIColor(hexString: "#A6A6A6")
                             }
                         }
@@ -440,7 +485,7 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                         else{
                             self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
                         }
-                       
+                        
                     }else{
                         if sender.isSelected{
                             if String.getString(obj.is_saved) == "0"{
@@ -448,14 +493,25 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                                 debugPrint("saveoppid=-=-=",oppid)
                                 self.saveoppoertunityapi(oppr_id: oppid)
                                 cell.imgsave.image = UIImage(named: "saveopr")
-                                cell.lblSave.text = "Saved"
+                                if kSharedUserDefaults.getlanguage() as? String == "en"{
+                                    cell.lblSave.text = "Saved"
+                                }
+                                else{
+                                    cell.lblSave.text = "تم الحفظ"
+                                }
                                 cell.lblSave.textColor = UIColor(hexString: "#1572A1")
                             }
                             else{
                                 let oppid = Int.getInt(userTimeLine[indexPath.row].id)
                                 self.unsaveoppoertunityapi(oppr_id: oppid)
                                 cell.imgsave.image = UIImage(named: "save-3")
-                                cell.lblSave.text = "Save"
+                                if kSharedUserDefaults.getlanguage() as? String == "en"{
+                                    cell.lblSave.text = "Save"
+                                }
+                                else{
+                                    cell.lblSave.text = "يحفظ"
+                                }
+                                
                                 cell.lblSave.textColor = UIColor(hexString: "#A6A6A6")
                             }
                         }
@@ -463,7 +519,12 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                             let oppid = Int.getInt(userTimeLine[indexPath.row].id)
                             self.unsaveoppoertunityapi(oppr_id: oppid)
                             cell.imgsave.image = UIImage(named: "save-3")
-                            cell.lblSave.text = "Save"
+                            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                                cell.lblSave.text = "Save"
+                            }
+                            else{
+                                cell.lblSave.text = "يحفظ"
+                            }
                             cell.lblSave.textColor = UIColor(hexString: "#A6A6A6")
                         }
                     }
@@ -486,7 +547,7 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                                     else{
                                         self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
                                     }
-                                   
+                                    
                                 }
                                 else{
                                     let oppid = Int.getInt(userTimeLine[indexPath.row].id)
@@ -542,7 +603,7 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                                     else{
                                         self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
                                     }
-                                   
+                                    
                                 }
                                 else{
                                     let userid = Int.getInt(userTimeLine[indexPath.row].user_id)
@@ -558,7 +619,13 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                                 let share_link = String.getString(userTimeLine[indexPath.row].share_link)
                                 UIPasteboard.general.string = share_link
                                 print("share_link\(share_link)")
-                                CommonUtils.showError(.info, String.getString("Link Copied"))
+                                if kSharedUserDefaults.getlanguage() as? String == "en"{
+                                    CommonUtils.showError(.info, String.getString("Link Copied"))
+                                }
+                                else{
+                                    CommonUtils.showError(.info, String.getString("تم نسخ الرابط"))
+                                }
+                                
                             }
                             
                             if txt == "MarkasInterested"{
@@ -1075,8 +1142,13 @@ extension HomeVC{
                     
                     else if  Int.getInt(dictResult["status"]) == 400{
                         completion(String.getString(dictResult["count"]), Int.getInt(dictResult["status"]))
-                        CommonUtils.showError(.info, String.getString("This Opportunity is unlike by You"))
-//                        CommonUtils.showError(.info, String.getString("This Opportunity is unlike by You"))
+                        if kSharedUserDefaults.getlanguage() as? String == "en"{
+                            CommonUtils.showError(.info, String.getString("This Opportunity is unlike by You"))
+                        }
+                        else{
+                            CommonUtils.showError(.info, String.getString("هذه الفرصة تختلف عنك"))
+                        }
+                        
                         //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
@@ -1532,7 +1604,6 @@ extension HomeVC{
                             vc.imgarray  = self?.UserTimeLineOppdetails?.oppimage ?? []
                             vc.docarray = self?.UserTimeLineOppdetails?.oppdocument ?? []
                             debugPrint("imgaraay=-=-=-==-=", vc.imgarray)
-                            
                         }
                         
                         else if Int.getInt(self?.UserTimeLineOppdetails?.category_id) == 3{
@@ -1547,7 +1618,6 @@ extension HomeVC{
                             vc.imgarray  = self?.UserTimeLineOppdetails?.oppimage ?? []
                             vc.docarray = self?.UserTimeLineOppdetails?.oppdocument ?? []
                             debugPrint("imgaraay=-=-=-==-=", vc.imgarray)
-                            
                         }
                         
                         else if Int.getInt(self?.UserTimeLineOppdetails?.category_id) == 4{
@@ -1601,6 +1671,7 @@ extension HomeVC{
         //passing userid in api url
         TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName: ServiceName.kcountNotification, requestMethod: .GET, requestParameters:[:], withProgressHUD: false) { (result:Any?, error:Error?, errorType:ErrorType?,statusCode:Int?) in
             CommonUtils.showHudWithNoInteraction(show: false)
+            
             if errorType == .requestSuccess {
                 let dictResult = kSharedInstance.getDictionary(result)
                 
@@ -1651,6 +1722,7 @@ extension NSMutableAttributedString {
 extension HomeVC{
     func setuplanguage(){
         lblHello.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Hello,", comment: "")
+        btnSearchOpportunity.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "Search Opportunities", comment: ""), for: .normal)
     }
 }
 

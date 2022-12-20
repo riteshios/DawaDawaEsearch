@@ -12,6 +12,7 @@ class HomeSocialMoreVC: UIViewController {
     @IBOutlet weak var viewBG:UIView!
     @IBOutlet weak var lblChatwithuser: UILabel!
     @IBOutlet weak var lblCopylink: UILabel!
+    @IBOutlet weak var lblMarkasinter: UILabel!
     @IBOutlet weak var lblFlag: UILabel!
     @IBOutlet weak var lblReportUSer: UILabel!
     @IBOutlet weak var lblViewDetails: UILabel!
@@ -86,7 +87,9 @@ extension HomeSocialMoreVC{
     func setuplanguage(){
         lblChatwithuser.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Chat with user", comment: "")
         lblCopylink.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Copy link", comment: "")
+        lblMarkasinter.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Mark as interested", comment: "")
         lblFlag.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Flag post", comment: "")
         lblReportUSer.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Report user", comment: "")
+        lblViewDetails.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "View Details", comment: "")
     }
 }

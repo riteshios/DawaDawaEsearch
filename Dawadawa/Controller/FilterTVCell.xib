@@ -168,6 +168,8 @@
                 <outlet property="buttonClear" destination="Gfy-dD-kcL" id="LG8-W5-7p8"/>
                 <outlet property="buttonFilter" destination="jDK-7p-Whe" id="MWU-p6-yPI"/>
                 <outlet property="collectionview" destination="bSU-Do-LgV" id="o0C-bi-MFS"/>
+                <outlet property="lblClear" destination="P2Q-ZG-O0T" id="BZR-km-jK0"/>
+                <outlet property="lblFilter" destination="IF5-AU-nEb" id="UVk-Hc-b9b"/>
                 <outlet property="viewBG" destination="Arv-e3-cS0" id="uhC-eF-vOw"/>
             </connections>
             <point key="canvasLocation" x="121.37404580152672" y="34.507042253521128"/>

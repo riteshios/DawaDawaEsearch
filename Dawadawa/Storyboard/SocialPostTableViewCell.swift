@@ -16,6 +16,7 @@ class SocialPostTableViewCell: UITableViewCell,UITextViewDelegate {
     @IBOutlet weak var lblUserName: UILabel!
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var lblDescribtion: UILabel!
+   
     @IBOutlet weak var lblcloseOpportunity: UILabel!
     @IBOutlet weak var Imageuser: UIImageView!
     @IBOutlet weak var imgredCircle: UIImageView!
@@ -29,6 +30,7 @@ class SocialPostTableViewCell: UITableViewCell,UITextViewDelegate {
     @IBOutlet weak var lbllike: UILabel!
     
     @IBOutlet weak var btnShare: UIButton!
+    @IBOutlet weak var lblShare: UILabel!
     
     @IBOutlet weak var imgsave: UIImageView!
     @IBOutlet weak var btnSave: UIButton!
@@ -46,9 +48,11 @@ class SocialPostTableViewCell: UITableViewCell,UITextViewDelegate {
     @IBOutlet weak var btnDescription: UIButton!
     
     @IBOutlet weak var viewSave: UIView!
+    
     //    Comment Section
     
     @IBOutlet weak var btnClickComment: UIButton!
+    @IBOutlet weak var lblComment: UILabel!
     @IBOutlet weak var imageUser: UIImageView!
     @IBOutlet weak var txtviewComment: IQTextView!
     @IBOutlet weak var imageCommentUser: UIImageView!
@@ -63,6 +67,8 @@ class SocialPostTableViewCell: UITableViewCell,UITextViewDelegate {
     @IBOutlet weak var VerticalspacingSubComment: NSLayoutConstraint!
     @IBOutlet weak var heightViewAddComment: NSLayoutConstraint!
     @IBOutlet weak var heightViewComment: NSLayoutConstraint!
+    @IBOutlet weak var btnReply: UIButton!
+    @IBOutlet weak var btnSeemoreComment: UIButton!
     @IBOutlet weak var btnUserComment: UIButton!
     @IBOutlet weak var btnUserSubComment: UIButton!
     
@@ -80,7 +86,7 @@ class SocialPostTableViewCell: UITableViewCell,UITextViewDelegate {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        self.setuplanguage()
         SocialPostCollectionView.delegate = self
         SocialPostCollectionView.dataSource = self
         SocialPostCollectionView.register(UINib(nibName: "SocialPostCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "SocialPostCollectionViewCell")
@@ -216,3 +222,16 @@ extension SocialPostTableViewCell: UICollectionViewDelegate,UICollectionViewData
     }
 }
 
+// MARK: - Localisation
+
+extension SocialPostTableViewCell{
+    func setuplanguage(){
+        lblcloseOpportunity.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "This opportunity has been closed", comment: "")
+        lbllike.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Like", comment: "")
+        lblComment.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Comment", comment: "")
+        lblShare.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Share", comment: "")
+        lblSave.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Save", comment: "")
+        btnReply.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "Reply", comment: ""), for: .normal)
+        btnSeemoreComment.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "See more comments", comment: ""), for: .normal)
+    }
+}

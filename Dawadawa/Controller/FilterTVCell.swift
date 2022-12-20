@@ -7,6 +7,8 @@ import UIKit
 class FilterTVCell: UITableViewCell {
     
     @IBOutlet weak var collectionview: UICollectionView!
+    @IBOutlet weak var lblFilter: UILabel!
+    @IBOutlet weak var lblClear: UILabel!
     
     @IBOutlet weak var buttonClear: UIButton!
     @IBOutlet weak var buttonFilter: UIButton!
@@ -19,6 +21,7 @@ class FilterTVCell: UITableViewCell {
     }
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.setuplanguage()
         collectionview.delegate = self
         collectionview.dataSource = self
         collectionview.register(UINib(nibName: "FilterDataCVCell", bundle: nil), forCellWithReuseIdentifier: "FilterDataCVCell")
@@ -48,4 +51,13 @@ extension FilterTVCell : UICollectionViewDelegate, UICollectionViewDataSource, U
             label.sizeToFit()
             return CGSize(width: label.frame.width + 20, height: 40)
         }
+}
+
+// MARK: - Localisation
+
+extension FilterTVCell{
+    func setuplanguage(){
+        lblFilter.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Filters", comment: "")
+        lblClear.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Clear", comment: "")
+    }
 }

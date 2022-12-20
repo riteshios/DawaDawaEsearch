@@ -141,6 +141,7 @@
 
 // MARK: - SettingVC
 
+"Settings" = "Settings";
 "About Us" = "About Us";
 "Subscriptions" = "Subscriptions";
 "Terms & Conditions" = "Terms & Conditions";
@@ -204,8 +205,10 @@
 
 "Chat with user" = "Chat with user";
 "Copy link" = "Copy link";
+"Mark as interested" = "Mark as interested";
 "Flag post" = "Flag post";
 "Report user" = "Report user";
+"View Details" = "View Details";
 
 // MARK: - FlagPostPopUPVC
 
@@ -235,6 +238,7 @@
 // MARK: - HomeVC
 
 "Hello," = "Hello,";
+"Search Opportunities" = "Search Opportunities";
 
 // MARK: - SearchVC
 
@@ -437,3 +441,23 @@
 // MARK: - ViewAllInterestedVC
 
 "Interested" = "Interested";
+
+// MARK: - FilterTVCell
+
+"Filters" = "Filters";
+"Clear" = "Clear";
+
+// MARK: - ViewPostTableViewCell
+
+"Premium opportunities" = "Premium opportunities";
+"View all" = "View all";
+
+// MARK: - SocialPostTableViewCell
+
+"Like" = "Like";
+"Comment" = "Comment";
+"Share" = "Share";
+"Save" = "Save";
+"Reply" = "Reply";
+"See more comments" = "See more comments";
+"This opportunity has been closed" = "This opportunity has been closed";

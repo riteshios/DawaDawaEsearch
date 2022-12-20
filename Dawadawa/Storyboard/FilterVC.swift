@@ -818,7 +818,6 @@ extension FilterVC: UITableViewDelegate,UITableViewDataSource{
                     break
                 }
             }
-            
         }
     }
     
@@ -1388,8 +1387,7 @@ extension FilterVC{
             "end_date":String.getString(self.txtfieldEndDate.text)
         ]
         // Added user id in api url
-        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kfilter, requestMethod: .POST,
-                                                               requestParameters:params, withProgressHUD: false)
+        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kfilter, requestMethod: .POST, requestParameters:params, withProgressHUD: false)
         {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
             
             CommonUtils.showHudWithNoInteraction(show: false)
