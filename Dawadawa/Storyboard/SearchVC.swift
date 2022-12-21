@@ -151,23 +151,44 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
         
         if String.getString(obj.is_user_like) == "1"{
             cell.imglike.image = UIImage(named: "dil")
-            cell.lbllike.text = "Liked"
+            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                cell.lbllike.text = "Liked"
+            }
+            else{
+                cell.lbllike.text = "احب"
+            }
+            
             cell.lbllike.textColor = .red
         }
         else{
             cell.imglike.image = UIImage(named: "unlike")
-            cell.lbllike.text = "Like"
+            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                cell.lbllike.text = "Like"
+            }
+            else{
+                cell.lbllike.text = "مثل"
+            }
             cell.lbllike.textColor = UIColor(hexString: "#A6A6A6")
         }
         
         if String.getString(obj.is_saved) == "1"{
             cell.imgsave.image = UIImage(named: "saveopr")
-            cell.lblSave.text = "Saved"
+            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                cell.lblSave.text = "Saved"
+            }
+            else{
+                cell.lblSave.text = "تم الحفظ"
+            }
             cell.lblSave.textColor = UIColor(hexString: "#1572A1")
         }
         else{
             cell.imgsave.image = UIImage(named: "save-3")
-            cell.lblSave.text = "Save"
+            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                cell.lblSave.text = "Save"
+            }
+            else{
+                cell.lblSave.text = "يحفظ"
+            }
             cell.lblSave.textColor = UIColor(hexString: "#A6A6A6")
         }
         
@@ -257,12 +278,22 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
                         
                         if sucess == 200{
                             cell.imglike.image = UIImage(named: "dil")
-                            cell.lbllike.text = "Liked"
+                            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                                cell.lbllike.text = "Liked"
+                            }
+                            else{
+                                cell.lbllike.text = "احب"
+                            }
                             cell.lbllike.textColor = .red
                         }
                         else if sucess == 400{
                             cell.imglike.image = UIImage(named: "unlike")
-                            cell.lbllike.text = "Like"
+                            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                                cell.lbllike.text = "Like"
+                            }
+                            else{
+                                cell.lbllike.text = "مثل"
+                            }
                             cell.lbllike.textColor = UIColor(hexString: "#A6A6A6")
                         }
                     }
@@ -291,26 +322,39 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
                         debugPrint("saveoppid=-=-=",oppid)
                         self.saveoppoertunityapi(oppr_id: oppid)
                         cell.imgsave.image = UIImage(named: "saveopr")
-                        cell.lblSave.text = "Saved"
+                        if kSharedUserDefaults.getlanguage() as? String == "en"{
+                            cell.lblSave.text = "Saved"
+                        }
+                        else{
+                            cell.lblSave.text = "تم الحفظ"
+                        }
                         cell.lblSave.textColor = UIColor(hexString: "#1572A1")
                     }
                     else{
                         let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
                         self.unsaveoppoertunityapi(oppr_id: oppid)
                         cell.imgsave.image = UIImage(named: "save-3")
-                        cell.lblSave.text = "Save"
+                        if kSharedUserDefaults.getlanguage() as? String == "en"{
+                            cell.lblSave.text = "Save"
+                        }
+                        else{
+                            cell.lblSave.text = "يحفظ"
+                        }
                         cell.lblSave.textColor = UIColor(hexString: "#A6A6A6")
                     }
-                    
                 }
                 else{
                     let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
                     self.unsaveoppoertunityapi(oppr_id: oppid)
                     cell.imgsave.image = UIImage(named: "save-3")
-                    cell.lblSave.text = "Save"
+                    if kSharedUserDefaults.getlanguage() as? String == "en"{
+                        cell.lblSave.text = "Save"
+                    }
+                    else{
+                        cell.lblSave.text = "يحفظ"
+                    }
                     cell.lblSave.textColor = UIColor(hexString: "#A6A6A6")
                 }
-                
             }
             
             if txt == "More" {
@@ -757,8 +801,7 @@ extension SearchVC{
         ]
         
         debugPrint("user_id......",Int.getInt(UserData.shared.id))
-        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.klikeopportunity, requestMethod: .POST,
-                                                               requestParameters:params, withProgressHUD: false)
+        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.klikeopportunity, requestMethod: .POST,requestParameters:params, withProgressHUD: false)
         {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
             
             CommonUtils.showHudWithNoInteraction(show: false)
@@ -779,8 +822,8 @@ extension SearchVC{
                             kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
                         }
                         
-                        //                        self?.count = String.getString(dictResult["count"])
-                        //                        debugPrint("likecount=-=-=-=",self?.count)
+                        //     self?.count = String.getString(dictResult["count"])
+                        //     debugPrint("likecount=-=-=-=",self?.count)
                         completion(String.getString(dictResult["count"]),Int.getInt(dictResult["status"]))
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
@@ -793,7 +836,7 @@ extension SearchVC{
                         else{
                             CommonUtils.showError(.info, String.getString("هذه الفرصة تختلف عنك"))
                         }
-                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                 default:

@@ -61,6 +61,8 @@ class HomeSocialMoreSelfVC: UIViewController {
     }
 }
 
+// MARK: - Localisation
+
 extension HomeSocialMoreSelfVC{
     func setuplanguage(){
         lblupdate.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Update", comment: "")
@@ -68,5 +70,4 @@ extension HomeSocialMoreSelfVC{
         lblCopylink.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Copy Link", comment: "")
         lblViewDetails.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "View Details", comment: "")
     }
-    
 }

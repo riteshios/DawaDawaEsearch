@@ -105,13 +105,23 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
             }
             if String.getString(obj.is_user_like) == "1"{
                 cell.imglike.image = UIImage(named: "dil")
-                cell.lbllike.text = "Liked"
+                if kSharedUserDefaults.getlanguage() as? String == "en"{
+                    cell.lbllike.text = "Liked"
+                }
+                else{
+                    cell.lbllike.text = "احب"
+                }
                 cell.lbllike.textColor = .red
                 
             }
             else{
                 cell.imglike.image = UIImage(named: "unlike")
-                cell.lbllike.text = "Like"
+                if kSharedUserDefaults.getlanguage() as? String == "en"{
+                    cell.lbllike.text = "Like"
+                }
+                else{
+                    cell.lbllike.text = "مثل"
+                }
                 cell.lbllike.textColor = UIColor(hexString: "#A6A6A6")
             }
             if String.getString(obj.is_saved) == "1"{
@@ -121,7 +131,12 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
             }
             else{
                 cell.imgsave.image = UIImage(named: "save-3")
-                cell.lblSave.text = "Save"
+                if kSharedUserDefaults.getlanguage() as? String == "en"{
+                    cell.lblSave.text = "Saved"
+                }
+                else{
+                    cell.lblSave.text = "تم الحفظ"
+                }
                 cell.lblSave.textColor = UIColor(hexString: "#A6A6A6")
             }
             
@@ -204,12 +219,22 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
                         
                         if sucess == 200{
                             cell.imglike.image = UIImage(named: "dil")
-                            cell.lbllike.text = "Liked"
+                            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                                cell.lbllike.text = "Liked"
+                            }
+                            else{
+                                cell.lbllike.text = "احب"
+                            }
                             cell.lbllike.textColor = .red
                         }
                         else if sucess == 400{
                             cell.imglike.image = UIImage(named: "unlike")
-                            cell.lbllike.text = "Like"
+                            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                                cell.lbllike.text = "Like"
+                            }
+                            else{
+                                cell.lbllike.text = "مثل"
+                            }
                             cell.lbllike.textColor = UIColor(hexString: "#A6A6A6")
                         }
                     }
@@ -231,29 +256,42 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
                 
                 if txt == "Save"{
                     if tapped.isSelected{
-                        
                         if String.getString(obj.is_saved) == "0"{
                             let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
                             debugPrint("saveoppid=-=-=",oppid)
                             self.saveoppoertunityapi(oppr_id: oppid)
                             cell.imgsave.image = UIImage(named: "saveopr")
-                            cell.lblSave.text = "Saved"
+                            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                                cell.lblSave.text = "Saved"
+                            }
+                            else{
+                                cell.lblSave.text = "تم الحفظ"
+                            }
                             cell.lblSave.textColor = UIColor(hexString: "#1572A1")
                         }
                         else{
                             let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
                             self.unsaveoppoertunityapi(oppr_id: oppid)
                             cell.imgsave.image = UIImage(named: "save-3")
-                            cell.lblSave.text = "Save"
+                            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                                cell.lblSave.text = "Save"
+                            }
+                            else{
+                                cell.lblSave.text = "يحفظ"
+                            }
                             cell.lblSave.textColor = UIColor(hexString: "#A6A6A6")
                         }
-                        
                     }
                     else{
                         let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
                         self.unsaveoppoertunityapi(oppr_id: oppid)
                         cell.imgsave.image = UIImage(named: "save-3")
-                        cell.lblSave.text = "Save"
+                        if kSharedUserDefaults.getlanguage() as? String == "en"{
+                            cell.lblSave.text = "Save"
+                        }
+                        else{
+                            cell.lblSave.text = "يحفظ"
+                        }
                         cell.lblSave.textColor = UIColor(hexString: "#A6A6A6")
                     }
                 }
@@ -997,7 +1035,6 @@ extension PremiumOpportunitiesVC{
             }
         }
         
-        
         let params:[String : Any] = [
             //            "user_id":Int.getInt(UserData.shared.id),
             "opr_id":oppr_id,
@@ -1005,8 +1042,7 @@ extension PremiumOpportunitiesVC{
         ]
         
         debugPrint("opr_id......",oppr_id)
-        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kflagpost, requestMethod: .POST,
-                                                               requestParameters:params, withProgressHUD: false)
+        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kflagpost, requestMethod: .POST, requestParameters:params, withProgressHUD: false)
         {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
             
             CommonUtils.showHudWithNoInteraction(show: false)
@@ -1028,12 +1064,10 @@ extension PremiumOpportunitiesVC{
                         
                         
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                        //                        kSharedAppDelegate?.makeRootViewController()
+                        //   kSharedAppDelegate?.makeRootViewController()
                         
                     }
-                    
                     else if  Int.getInt(dictResult["responsecode"]) == 400{
-                        
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     

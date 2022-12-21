@@ -23,11 +23,11 @@ class ProileSocialMoreVC: UIViewController {
        
     }
     func setup(){
+        self.setuplanguage()
         Viewmain.clipsToBounds = true
         Viewmain.layer.cornerRadius = 25
         Viewmain.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
         Viewmain.addShadowWithBlurOnView(Viewmain, spread: 0, blur: 10, color: .black, opacity: 0.16, OffsetX: 0, OffsetY: 1)
-       
     }
     
 //    MARK: - @IBAction
@@ -39,6 +39,7 @@ class ProileSocialMoreVC: UIViewController {
     
     @IBAction func btnCopyLinkTapped(_ sender: UIButton) {
         self.callback?("CopyLink")
+        self.dismiss(animated: true)
     }
     
     @IBAction func btnUpdateTapped(_ sender: UIButton) {

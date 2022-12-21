@@ -72,7 +72,7 @@ class ProfileVC: UIViewController {
                 guard let data = data, error == nil else { return }
                 
                 DispatchQueue.main.async { /// execute on main thread
-//                    self.ImageProfile.image = UIImage(data: data)
+                    //                    self.ImageProfile.image = UIImage(data: data)
                     self.ImageProfile.sd_setImage(with: url, placeholderImage:UIImage(named: "Boss") )
                 }
             }
@@ -90,7 +90,7 @@ class ProfileVC: UIViewController {
             self.uploadImage(image: self.ImageProfile.image ?? UIImage())
         }
     }
-
+    
     @IBAction func btnMoreTapped(_ sender: UIButton) {
         
         let vc = self.storyboard?.instantiateViewController(withIdentifier: MoreVC.getStoryboardID()) as! MoreVC
@@ -216,36 +216,64 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
             let cell = self.tblViewSocialPost.dequeueReusableCell(withIdentifier: "OpportunitypostedTableViewCell") as! OpportunitypostedTableViewCell
             
             if UserData.shared.isskiplogin == true{
-//                cell.imgOppPosted.isHidden = true
+                //                cell.imgOppPosted.isHidden = true
             }
             else{
                 if UserData.shared.user_type == "0"{
                     cell.lblshowdata.text = String.getString(self.datadashboard?.expiry_date)
                     cell.lbltotalused.isHidden = true
-                    cell.lblDate.text = "Expiration Date"
+                    if kSharedUserDefaults.getlanguage() as? String == "en"{
+                        cell.lblDate.text = "Expiration Date"
+                        cell.lblPlan.text = "Subscription Plan"
+                        cell.lblOpportunity.text = "Saved Opportunity"
+                    }
+                    else{
+                        cell.lblDate.text = "تاريخ الإنتهاء"
+                        cell.lblPlan.text = "خطة الاشتراك"
+                        cell.lblOpportunity.text = "فرصة محفوظة"
+                    }
+                    
                     cell.lblshowplan.text = String.getString(self.datadashboard?.plan_type)
-                    cell.lblPlan.text = "Subscription Plan"
                     cell.lblshowOpportunity.text = String.getString(self.datadashboard?.no_saved)
-                    cell.lblOpportunity.text = "Saved Opportunity"
+                    
                 }
                 else if UserData.shared.user_type == "1"{
                     cell.lblshowdata.text = String.getString(self.datadashboard?.total_create)
                     cell.lbltotalused.text = String.getString(self.datadashboard?.total_used) + "/"
                     debugPrint("cell.lbltotalused.text===",String.getString(self.datadashboard?.total_used))
-                    cell.lblDate.text = "Total Create"
+                    if kSharedUserDefaults.getlanguage() as? String == "en"{
+                        cell.lblDate.text = "Total Create"
+                        cell.lblPlan.text = "Total views"
+                        cell.lblOpportunity.text = "Flagged Opportunities"
+                    }
+                    else{
+                        cell.lblDate.text = "إجمالي الإنشاء"
+                        cell.lblPlan.text = "عدد المشاهدات"
+                        cell.lblOpportunity.text = "الفرص التي تم وضع علامة عليها"
+                    }
+                    
                     cell.lblshowplan.text = String.getString(self.datadashboard?.no_view)
-                    cell.lblPlan.text = "Total views"
                     cell.lblshowOpportunity.text = String.getString(self.datadashboard?.no_flag)
-                    cell.lblOpportunity.text = "Flagged Opportunities"
+                    
                 }
                 else if UserData.shared.user_type == "2"{
                     cell.lblshowdata.text = String.getString(self.datadashboard?.total_create)
-                    cell.lblDate.text = "Total Create"
+                    if kSharedUserDefaults.getlanguage() as? String == "en"{
+                        cell.lblDate.text = "Total Create"
+                        cell.lblPlan.text = "Total views"
+                        cell.lblOpportunity.text = "Flagged Opportunities"
+                    }
+                    else{
+                        cell.lblDate.text = "إجمالي الإنشاء"
+                        cell.lblPlan.text = "عدد المشاهدات"
+                        cell.lblOpportunity.text = "الفرص التي تم وضع علامة عليها"
+                    }
+                    
                     cell.lbltotalused.isHidden = true
                     cell.lblshowplan.text = String.getString(self.datadashboard?.no_view)
-                    cell.lblPlan.text = "Total views"
+                    
                     cell.lblshowOpportunity.text = String.getString(self.datadashboard?.no_flag)
-                    cell.lblOpportunity.text = "Flagged Opportunities"
+                    
                 }
             }
             cell.callbackbtnSelect = { txt in
@@ -337,24 +365,44 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
             
             if String.getString(obj.is_user_like) == "1"{
                 cell.imglike.image = UIImage(named: "dil")
-                cell.lbllike.text = "Liked"
+                if kSharedUserDefaults.getlanguage() as? String == "en"{
+                    cell.lbllike.text = "Liked"
+                }
+                else{
+                    cell.lbllike.text = "احب"
+                }
                 cell.lbllike.textColor = .red
                 
             }
             else{
                 cell.imglike.image = UIImage(named: "unlike")
-                cell.lbllike.text = "Like"
+                if kSharedUserDefaults.getlanguage() as? String == "en"{
+                    cell.lbllike.text = "Like"
+                }
+                else{
+                    cell.lbllike.text = "مثل"
+                }
                 cell.lbllike.textColor = UIColor(hexString: "#A6A6A6")
             }
             
             if String.getString(obj.is_saved) == "1"{
                 cell.imgsave.image = UIImage(named: "saveopr")
-                cell.lblSave.text = "Saved"
+                if kSharedUserDefaults.getlanguage() as? String == "en"{
+                    cell.lblSave.text = "Saved"
+                }
+                else{
+                    cell.lblSave.text = "تم الحفظ"
+                }
                 cell.lblSave.textColor = UIColor(hexString: "#1572A1")
             }
             else{
                 cell.imgsave.image = UIImage(named: "save-3")
-                cell.lblSave.text = "Save"
+                if kSharedUserDefaults.getlanguage() as? String == "en"{
+                    cell.lblSave.text = "Save"
+                }
+                else{
+                    cell.lblSave.text = "يحفظ"
+                }
                 cell.lblSave.textColor = UIColor(hexString: "#A6A6A6")
             }
             if obj.oppimage.count == 0{
@@ -396,19 +444,29 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                 if txt == "Like"{
                     let oppid = self.userTimeLine[indexPath.row].id
                     debugPrint("oppid--=-=-=-",oppid)
-                 
+                    
                     self.likeOpportunityapi(oppr_id: oppid ?? 0) { countLike,sucess  in
                         obj.likes = Int.getInt(countLike)
                         cell.lblLikeCount.text = String.getString(obj.likes) + " " + "likes"
                         
                         if sucess == 200{
                             cell.imglike.image = UIImage(named: "dil")
-                            cell.lbllike.text = "Liked"
+                            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                                cell.lbllike.text = "Liked"
+                            }
+                            else{
+                                cell.lbllike.text = "احب"
+                            }
                             cell.lbllike.textColor = .red
                         }
                         else if sucess == 400{
                             cell.imglike.image = UIImage(named: "unlike")
-                            cell.lbllike.text = "Like"
+                            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                                cell.lbllike.text = "Like"
+                            }
+                            else{
+                                cell.lbllike.text = "مثل"
+                            }
                             cell.lbllike.textColor = UIColor(hexString: "#A6A6A6")
                         }
                     }
@@ -448,14 +506,24 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                             debugPrint("saveoppid=-=-=",oppid)
                             self.saveoppoertunityapi(oppr_id: oppid)
                             cell.imgsave.image = UIImage(named: "saveopr")
-                            cell.lblSave.text = "Saved"
+                            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                                cell.lblSave.text = "Saved"
+                            }
+                            else{
+                                cell.lblSave.text = "تم الحفظ"
+                            }
                             cell.lblSave.textColor = UIColor(hexString: "#1572A1")
                         }
                         else{
                             let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
                             self.unsaveoppoertunityapi(oppr_id: oppid)
                             cell.imgsave.image = UIImage(named: "save-3")
-                            cell.lblSave.text = "Save"
+                            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                                cell.lblSave.text = "Save"
+                            }
+                            else{
+                                cell.lblSave.text = "يحفظ"
+                            }
                             cell.lblSave.textColor = UIColor(hexString: "#A6A6A6")
                         }
                     }
@@ -464,11 +532,16 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                         let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
                         self.unsaveoppoertunityapi(oppr_id: oppid)
                         cell.imgsave.image = UIImage(named: "save-3")
-                        cell.lblSave.text = "Save"
+                        if kSharedUserDefaults.getlanguage() as? String == "en"{
+                            cell.lblSave.text = "Save"
+                        }
+                        else{
+                            cell.lblSave.text = "يحفظ"
+                        }
                         cell.lblSave.textColor = UIColor(hexString: "#A6A6A6")
                     }
                 }
-                                      
+                
                 if txt == "More" {
                     let vc = self.storyboard?.instantiateViewController(withIdentifier: ProileSocialMoreVC.getStoryboardID()) as! ProileSocialMoreVC
                     vc.modalTransitionStyle = .crossDissolve
@@ -493,11 +566,9 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                         }
                         
                         if txt == "Update"{
-                            
                             let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
                             debugPrint("oppid+++++++",oppid)
                             self.opportunitydetailsapi(oppr_id: oppid)
-                            
                         }
                         if txt == "Delete"{
                             self.dismiss(animated: false){
@@ -768,7 +839,7 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
             else{
                 return 180
             }
-
+            
         case 1:
             return UITableView.automaticDimension
             
@@ -870,7 +941,7 @@ extension ProfileVC{
                 
                 switch Int.getInt(statusCode) {
                 case 200:
-            
+                    
                     if Int.getInt(dictResult["status"]) == 200{
                         
                         let endToken = kSharedUserDefaults.getLoggedInAccessToken()
@@ -920,7 +991,7 @@ extension ProfileVC{
                 kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
             }
         }
-    
+        
         let params:[String : Any] = [
             "user_id":Int.getInt(UserData.shared.id),
             "id":1
@@ -1180,7 +1251,7 @@ extension ProfileVC{
                         else{
                             CommonUtils.showError(.info, String.getString("هذه الفرصة تختلف عنك"))
                         }
-//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                 default:
@@ -1531,7 +1602,6 @@ extension ProfileVC{
     func opportunitydetailsapi(oppr_id:Int){
         CommonUtils.showHud(show: true)
         
-        
         if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
             let endToken = kSharedUserDefaults.getLoggedInAccessToken()
             let septoken = endToken.components(separatedBy: " ")
@@ -1541,16 +1611,13 @@ extension ProfileVC{
             }
         }
         
-        
         let params:[String : Any] = [
             "oppr_id":oppr_id,
             "user_id":UserData.shared.id
-            
         ]
         
         debugPrint("oppr_id...===...",oppr_id)
-        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kopportunitydetails, requestMethod: .POST,
-                                                               requestParameters:params, withProgressHUD: false)
+        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kopportunitydetails, requestMethod: .POST, requestParameters:params, withProgressHUD: false)
         {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
             
             CommonUtils.showHudWithNoInteraction(show: false)
@@ -1619,8 +1686,6 @@ extension ProfileVC{
                             vc.imgarray  = self?.UserTimeLineOppdetails?.oppimage ?? []
                             vc.docarray = self?.UserTimeLineOppdetails?.oppdocument ?? []
                             debugPrint("imgaraay=-=-=-==-=", vc.imgarray)
-                            
-                            
                         }
                         else if Int.getInt(self?.UserTimeLineOppdetails?.category_id) == 4{
                             let vc = self?.storyboard?.instantiateViewController(withIdentifier: MiningServiceVC.getStoryboardID()) as! MiningServiceVC
@@ -1634,9 +1699,7 @@ extension ProfileVC{
                             vc.imgarray  = self?.UserTimeLineOppdetails?.oppimage ?? []
                             vc.docarray = self?.UserTimeLineOppdetails?.oppdocument ?? []
                             debugPrint("imgaraay=-=-=-==-=", vc.imgarray)
-                            
                         }
-                        
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
@@ -1657,7 +1720,6 @@ extension ProfileVC{
             
         }
     }
-    
 }
 
 

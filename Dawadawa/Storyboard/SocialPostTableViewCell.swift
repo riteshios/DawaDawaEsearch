@@ -2,7 +2,6 @@
 //  Dawadawa
 //  Created by Ritesh Gupta on 20/07/22.
 
-
 import UIKit
 import IQKeyboardManagerSwift
 
@@ -71,7 +70,6 @@ class SocialPostTableViewCell: UITableViewCell,UITextViewDelegate {
     @IBOutlet weak var btnSeemoreComment: UIButton!
     @IBOutlet weak var btnUserComment: UIButton!
     @IBOutlet weak var btnUserSubComment: UIButton!
-    
     
     var imgUrl = ""
     var userTimeLine = [SocialPostData]()
@@ -226,6 +224,7 @@ extension SocialPostTableViewCell: UICollectionViewDelegate,UICollectionViewData
 
 extension SocialPostTableViewCell{
     func setuplanguage(){
+        self.txtviewComment.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Can we connect? I need service", comment: "")
         lblcloseOpportunity.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "This opportunity has been closed", comment: "")
         lbllike.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Like", comment: "")
         lblComment.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Comment", comment: "")

@@ -1,15 +1,15 @@
-//
 //  PremiumOppTableViewCell.swift
 //  Dawadawa
-//
 //  Created by Ritesh Gupta on 21/07/22.
-//
 
 import UIKit
 
 class PremiumOppTableViewCell: UITableViewCell {
 
     @IBOutlet weak var ColllectionViewPremiumOpp: UICollectionView!
+    @IBOutlet weak var lblPremium_opp: UILabel!
+    @IBOutlet weak var btnViewall: UIButton!
+    
     var imgUrl = ""
     var userTimeLine = [SocialPostData]()
     var img = [oppr_image]()
@@ -18,12 +18,11 @@ class PremiumOppTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
         self.getallpremium()
+        self.setuplanguage()
         ColllectionViewPremiumOpp.delegate = self
         ColllectionViewPremiumOpp.dataSource = self
         ColllectionViewPremiumOpp.register(UINib(nibName: "PremiumOppCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PremiumOppCollectionViewCell")
-      
     }
 
     @IBAction func btnViewAllTapped(_ sender: UIButton) {
@@ -114,7 +113,15 @@ extension PremiumOppTableViewCell{
                 CommonUtils.showToastForDefaultError()
             }
         }
-        
+    }
+}
+
+// MARK: - Localisation
+
+extension PremiumOppTableViewCell{
+    func setuplanguage(){
+        self.lblPremium_opp.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Premium Opportunities", comment: "")
+        self.btnViewall.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "View all", comment: ""), for: .normal)
     }
 }
 

@@ -32,6 +32,7 @@ class OpportunitypostedTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.setuplanguage()
         self.viewAllline.isHidden = false
         self.lblAll.textColor = UIColor(red: 21, green: 114, blue: 161)
         self.viewPremiumLine.isHidden = true
@@ -86,5 +87,15 @@ class OpportunitypostedTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
+    }
+}
+
+// MARK: - Localisation
+
+extension OpportunitypostedTableViewCell{
+    func setuplanguage(){
+        lblAll.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "All", comment: "")
+        lblpremium.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Premium", comment: "")
+        lblFeatured.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Featured", comment: "")
     }
 }

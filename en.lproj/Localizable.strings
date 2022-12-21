@@ -461,3 +461,14 @@
 "Reply" = "Reply";
 "See more comments" = "See more comments";
 "This opportunity has been closed" = "This opportunity has been closed";
+"Can we connect? I need service" = "Can we connect? I need service";
+
+// MARK: - PopularSearchTableViewCell
+
+"Popular searches" = "Popular searches";
+
+// MARK: - OpportunitypostedTableViewCell
+
+"All" = "All";
+"Premium" = "Premium";
+"Featured" = "Featured";

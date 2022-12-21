@@ -458,3 +458,14 @@
 "Reply" = "رد";
 "See more comments" = "مشاهدة المزيد من التعليقات";
 "This opportunity has been closed" = "تم إغلاق هذه الفرصة";
+"Can we connect? I need service" = "هل يمكننا الاتصال؟ أحتاج خدمة";
+
+// MARK: - PopularSearchTableViewCell
+
+"Popular searches" = "عمليات البحث الشعبية";
+
+// MARK: - OpportunitypostedTableViewCell
+
+"All" = "الجميع";
+"Premium" = "الممتازة";
+"Featured" = "متميز";
