@@ -1,6 +1,7 @@
 //  RockPitOpportunityVC.swift
 //  Dawadawa
 //  Created by Ritesh Gupta on 07/07/22.
+
 import UIKit
 import SKFloatingTextField
 import Alamofire
@@ -532,7 +533,6 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
         self.createopportunityapi()
     }
     
-    
     // MARK: - Collection view
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -624,7 +624,6 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
     }
     //  MARK: - Document Picker
     
-    
     func openFileBrowser() {
         
         let alert:UIAlertController=UIAlertController(title: "Choose File", message: nil, preferredStyle: UIAlertController.Style.actionSheet)
@@ -694,9 +693,8 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
         self.docummentarray.append(url.lastPathComponent)
         print("doc documentarrCount=-=-=\(documentarr.count)")
         self.UploaddocumentCollectionView.reloadData()
-        
-        
     }
+    
     func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
         self.dismiss(animated: true, completion: nil)
     }
@@ -744,7 +742,6 @@ extension RockPitOpportunityVC : SKFlaotingTextFieldDelegate {
         print("begin editing")
     }
 }
-
 
 //MARK: - API Call
 extension RockPitOpportunityVC{
@@ -827,14 +824,11 @@ extension RockPitOpportunityVC{
     //    Sub-Category API
     func subcategoryapi(language:String, completionBlock: @escaping (_ success: Int, _ catdata : [getSubCartegoryModel]?, _ message: String) -> Void) {
         
-        
         let headers : HTTPHeaders = ["Authorization": "Bearer " + kSharedUserDefaults.getLoggedInAccessToken(), "Accept-Language": language]
         debugPrint("headers......\(headers)")
         
         var params = Dictionary<String, String>()
         params.updateValue("1", forKey: "category_id")
-        
-        
         
         //
         let url = kBASEURL + ServiceName.ksubcategory
@@ -861,7 +855,6 @@ extension RockPitOpportunityVC{
             case .failure(let error):
                 completionBlock(0,nil,error.localizedDescription)
             }
-            
         }
     }
     //    parser
@@ -871,8 +864,6 @@ extension RockPitOpportunityVC{
         let kStatus = "status"
         let kMessage = "message"
         let kCategories = "Categories"
-        
-        
         
         var responsecode = 0
         var status = 0
@@ -907,12 +898,10 @@ extension RockPitOpportunityVC{
     // State API
     func stateapi(language:String, completionBlock: @escaping (_ success: Int, _ statedata : [getStateModel]?, _ message: String) -> Void) {
         
-        
         let headers : HTTPHeaders = ["Authorization": "Bearer " + kSharedUserDefaults.getLoggedInAccessToken(), "Accept-Language": language]
         debugPrint("headers......\(headers)")
         
         var params = Dictionary<String, String>()
-        
         
         let url = kBASEURL + ServiceName.kgetstate
         //
@@ -949,9 +938,7 @@ extension RockPitOpportunityVC{
         let kStatus = "status"
         let kMessage = "message"
         let kState = "state"
-        
-        
-        
+
         var responsecode = 0
         var status = 0
         var message = ""
@@ -1061,13 +1048,10 @@ extension RockPitOpportunityVC{
     
     func LookingForapi(language:String, completionBlock: @escaping (_ success: Int, _ lookingfordata : [getLookingForModel]?, _ message: String) -> Void) {
         
-        
         let headers : HTTPHeaders = ["Authorization": "Bearer " + kSharedUserDefaults.getLoggedInAccessToken(), "Accept-Language": language]
         debugPrint("headers......\(headers)")
         
         var params = Dictionary<String, String>()
-        
-        
         let url = kBASEURL + ServiceName.kgetlookingfor
         //
         //        print("============\(params)")
@@ -1080,11 +1064,9 @@ extension RockPitOpportunityVC{
                     let json = JSON(value)
                     
                     print(" Looking For json is:\n\(json)")
-                    
                     let parser = getLookingforParser(json: json)
-                    
-                    
                     completionBlock(parser.status,parser.bmy,parser.message)
+                    
                 }else{
                     completionBlock(0,nil,response.result.error?.localizedDescription ?? "Some thing went wrong")
                 }
@@ -1092,7 +1074,6 @@ extension RockPitOpportunityVC{
             case .failure(let error):
                 completionBlock(0,nil,error.localizedDescription)
             }
-            
         }
     }
     
@@ -1103,8 +1084,6 @@ extension RockPitOpportunityVC{
         let kStatus = "status"
         let kMessage = "message"
         let kbmy = "bmy"
-        
-        
         
         var responsecode = 0
         var status = 0
@@ -1135,8 +1114,6 @@ extension RockPitOpportunityVC{
             super.init()
         }
     }
-    
-    
     //    Create Opportunity Api
     
     func createopportunityapi(){
@@ -1192,7 +1169,6 @@ extension RockPitOpportunityVC{
         
         debugPrint("filenames[]......",self.imagearr)
         debugPrint("opportunity_documents[]......",self.documentarr)
-        
         
         TANetworkManager.sharedInstance.requestMultiPartwithlanguage(withServiceName:ServiceName.kcreateopportunity , requestMethod: .post, requestImages: [:], requestdoc: [:],requestVideos: [:], requestData:params, req: self.imagearr, req:self.documentarr)
         {(result:Any?, error:Error?, errortype:ErrorType?, statusCode:Int?) in
@@ -1310,7 +1286,6 @@ extension RockPitOpportunityVC{
         debugPrint("image[]......",self.imagearr)
         debugPrint("opportunity_documents[]......",self.documentarr)
         
-        
         TANetworkManager.sharedInstance.UpdatetMultiPartwithlanguage(withServiceName:ServiceName.kupdateopportunity , requestMethod: .post, requestImages: [:], requestdoc: [:],requestVideos: [:], requestData:params, req: self.imagearr, req:self.documentarr)
         { (result:Any?, error:Error?, errortype:ErrorType?, statusCode:Int?) in
             CommonUtils.showHudWithNoInteraction(show: false)
@@ -1384,17 +1359,13 @@ extension RockPitOpportunityVC{
                         if septoken[0] == "Bearer"{
                             kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
                         }
-                        
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                        
                     }
                     
                     else if  Int.getInt(dictResult["status"]) == 404{
-                        
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         // kSharedAppDelegate?.makeRootViewController()
                     }
-                    
                 default:
                     CommonUtils.showError(.info, String.getString(dictResult["message"]))
                 }

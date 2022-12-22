@@ -15,11 +15,15 @@ class HomeSocialMoreSelfVC: UIViewController {
     @IBOutlet weak var lblCopylink: UILabel!
     @IBOutlet weak var lblViewDetails: UILabel!
     
+    
+//    MARK: - Life Cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setuplanguage()
         self.setup()
     }
+    
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first{

@@ -22,13 +22,14 @@ class HomeSocialMoreVC: UIViewController {
     var hascamefrom = ""
     
 //    MARK: - Life Cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setuplanguage()
         self.setup()
         if hascamefrom == "DetailPage"{
             self.viewViewDetails.isHidden = true
-//            self.HeightviewMain.constant = 380
+            self.HeightviewMain.constant = 370
         }
     }
     

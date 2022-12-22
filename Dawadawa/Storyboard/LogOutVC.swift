@@ -10,6 +10,8 @@ class LogOutVC: UIViewController {
     @IBOutlet weak var lblSubHeading: UILabel!
     @IBOutlet weak var lblCancel: UILabel!
     @IBOutlet weak var lblSecondLogout: UILabel!
+    @IBOutlet weak var viewCancel: UIView!
+    @IBOutlet weak var viewLogout: UIView!
     
     @IBOutlet weak var btnLogOut: UIButton!
     var callbacklogout:((String)->())?
@@ -17,6 +19,8 @@ class LogOutVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.languagesetup()
+        viewCancel.addShadowWithBlurOnView(viewCancel, spread: 0, blur: 10, color: .black, opacity: 0.16, OffsetX: 0, OffsetY: 1)
+        viewLogout.addShadowWithBlurOnView(viewLogout, spread: 0, blur: 10, color: .black, opacity: 0.16, OffsetX: 0, OffsetY: 1)
     }
     
 //    MARK: - @IBAction

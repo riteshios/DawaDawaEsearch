@@ -11,11 +11,15 @@ class ClosePopUpVC: UIViewController {
     @IBOutlet weak var lblSubheading: UILabel!
     @IBOutlet weak var lblCancel: UILabel!
     @IBOutlet weak var lblClose: UILabel!
+    @IBOutlet weak var viewCancel: UIView!
+    @IBOutlet weak var viewClose: UIView!
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setuplanguage()
+        viewCancel.addShadowWithBlurOnView(viewCancel, spread: 0, blur: 10, color: .black, opacity: 0.16, OffsetX: 0, OffsetY: 1)
+        viewClose.addShadowWithBlurOnView(viewClose, spread: 0, blur: 10, color: .black, opacity: 0.16, OffsetX: 0, OffsetY: 1)
 
     }
     

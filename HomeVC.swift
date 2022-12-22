@@ -100,7 +100,6 @@ class HomeVC: UIViewController,UITabBarControllerDelegate{
             task.resume()
         }
     }
-    
     //        override func viewDidAppear(_ animated: Bool) {
     //            super.viewDidAppear(animated)
     //            self.tabBarController?.tabBar.isHidden = false
@@ -166,7 +165,6 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                             else{
                                 self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
                             }
-                            
                         }
                         else{
                             
@@ -209,7 +207,7 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
             cell.SocialPostCollectionView.tag = indexPath.section
             cell.lblUserName.text = String.getString(obj.userdetail?.name)
             debugPrint("username.....", cell.lblUserName.text)
-            cell.lblTitle.text = String.getString(obj.title)
+//            cell.lblTitle.text = String.getString(obj.title)
             cell.lblDescribtion.text = String.getString(obj.description)
             cell.lblRating.text = String.getString(obj.opr_rating)
             
@@ -227,12 +225,11 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
             
             cell.imgOpp_plan.image = obj.opp_plan == "Featured" ? UIImage(named: "Star Filled") : obj.opp_plan == "Premium" ? UIImage(named: "Crown") : UIImage(named: "Folded Booklet")
             
-            
             if Int.getInt(obj.close_opr) == 0{
                 cell.lblTitle.text = String.getString(obj.title)
                 cell.lblTitle.textColor = .black
             }
-            else{
+            else {
                 cell.imgredCircle.isHidden = false
                 cell.lblcloseOpportunity.isHidden = false
             }
@@ -257,7 +254,6 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                 else{
                     cell.lbllike.text = "مثل"
                 }
-                
                 cell.lbllike.textColor = UIColor(hexString: "#A6A6A6")
             }
             
@@ -533,7 +529,6 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                 if txt == "More" {
                     
                     if UserData.shared.id == Int.getInt(obj.user_id){
-                        
                         let vc = self.storyboard?.instantiateViewController(withIdentifier: HomeSocialMoreSelfVC.getStoryboardID()) as! HomeSocialMoreSelfVC
                         vc.modalTransitionStyle = .crossDissolve
                         vc.modalPresentationStyle = .overCurrentContext

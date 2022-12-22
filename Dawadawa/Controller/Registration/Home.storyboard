@@ -1316,7 +1316,7 @@
                                                         </connections>
                                                     </button>
                                                 </subviews>
-                                                <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="0.59206830626888218" colorSpace="calibratedRGB"/>
+                                                <color key="backgroundColor" systemColor="systemGray6Color"/>
                                                 <constraints>
                                                     <constraint firstItem="3iT-QR-vaJ" firstAttribute="top" secondItem="utd-Ct-x03" secondAttribute="top" id="08u-a8-YUp"/>
                                                     <constraint firstAttribute="trailing" secondItem="vTj-RZ-Hv2" secondAttribute="trailing" id="0jo-Ni-5Qu"/>
@@ -1413,11 +1413,13 @@
                         <outlet property="lblLogout" destination="gQO-0z-2Wk" id="6Q2-8d-pTh"/>
                         <outlet property="lblSecondLogout" destination="MHx-YE-K66" id="p2W-Fs-lCw"/>
                         <outlet property="lblSubHeading" destination="1aH-vl-4NG" id="isL-oF-ATK"/>
+                        <outlet property="viewCancel" destination="utd-Ct-x03" id="Jfl-LF-8Kg"/>
+                        <outlet property="viewLogout" destination="2t9-fZ-fbq" id="2hz-aB-cwb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aQJ-5o-GoM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5677" y="549"/>
+            <point key="canvasLocation" x="5703" y="549"/>
         </scene>
         <!--Current LocationVC-->
         <scene sceneID="zfA-Az-Syv">
@@ -10428,7 +10430,7 @@ this opportunity?</string>
                                                         </connections>
                                                     </button>
                                                 </subviews>
-                                                <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="0.59206830629999996" colorSpace="calibratedRGB"/>
+                                                <color key="backgroundColor" systemColor="systemGray6Color"/>
                                                 <constraints>
                                                     <constraint firstItem="l5N-X1-bn4" firstAttribute="top" secondItem="ej7-6o-gss" secondAttribute="top" id="3EA-tV-cfd"/>
                                                     <constraint firstItem="l5N-X1-bn4" firstAttribute="leading" secondItem="ej7-6o-gss" secondAttribute="leading" id="XQL-uR-ZGU"/>
@@ -10521,6 +10523,8 @@ this opportunity?</string>
                         <outlet property="lblClose" destination="UU3-gr-h6w" id="Hiu-JX-C2W"/>
                         <outlet property="lblCloseOpp" destination="hS9-gj-oBq" id="1hs-Q7-QBS"/>
                         <outlet property="lblSubheading" destination="flh-rX-IaU" id="vkV-c4-jhe"/>
+                        <outlet property="viewCancel" destination="ej7-6o-gss" id="PYK-EL-pi8"/>
+                        <outlet property="viewClose" destination="7w9-Gb-1fa" id="02I-8o-0vT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bM1-Xk-YJy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -15330,7 +15334,7 @@ this Chat?</string>
                                                         </connections>
                                                     </button>
                                                 </subviews>
-                                                <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="0.59206830629999996" colorSpace="calibratedRGB"/>
+                                                <color key="backgroundColor" systemColor="systemGray6Color"/>
                                                 <constraints>
                                                     <constraint firstItem="OUb-PQ-lDb" firstAttribute="top" secondItem="Ewn-aa-fr6" secondAttribute="top" id="0wJ-wk-wYL"/>
                                                     <constraint firstItem="H7l-tr-3TX" firstAttribute="top" secondItem="Ewn-aa-fr6" secondAttribute="top" id="Agq-yu-yeH"/>
@@ -15425,6 +15429,8 @@ this Chat?</string>
                         <outlet property="lblDelete" destination="bAP-7d-pVS" id="he9-wP-l6G"/>
                         <outlet property="lblHeading" destination="oXm-XW-BcZ" id="4Mv-hy-oyb"/>
                         <outlet property="lblSubheading" destination="Qws-Rp-dik" id="X6D-k1-4sq"/>
+                        <outlet property="viewCancel" destination="Ewn-aa-fr6" id="ipf-TK-Swr"/>
+                        <outlet property="viewDelete" destination="gVl-ER-dII" id="ZqQ-65-DdF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KKw-7d-huJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
