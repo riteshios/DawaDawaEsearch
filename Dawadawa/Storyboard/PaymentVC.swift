@@ -16,7 +16,6 @@ class PaymentVC: UIViewController {
     var paymentIntentClientSecret = ""
     var price = ""
     
-    
     var indexcount = 0
     var subsdata = [Subscription_data]()
     var payment_terms = 0
@@ -63,62 +62,42 @@ class PaymentVC: UIViewController {
     @IBAction func buttonTappedPa(_ sender:UIButton){
         
         //        let paymentIntentClientSecret = paymentIntentClientSecret
-        
         //        else {
-        
         //                    return;
-        
         //                }
         
         let cardParams = txtfieldcardNumber.cardParams
-        
         let paymentMethodParams = STPPaymentMethodParams(card: cardParams, billingDetails: nil, metadata: nil)
-        
         let paymentIntentParams = STPPaymentIntentParams(clientSecret: paymentIntentClientSecret)
-        
         paymentIntentParams.paymentMethodParams = paymentMethodParams
-        
-        
-        
+    
         // Submit the payment
         
         let paymentHandler = STPPaymentHandler.shared()
-        
         paymentHandler.confirmPayment(paymentIntentParams, with: self) { (status, paymentIntent, error) in
-            
             switch (status) {
                 
             case .failed:
-                
                 print("Payment failed")
-                
                 print(error)
-                
                 break
                 
             case .canceled:
-                
                 print("Payment canceled")
-                
                 break
                 
             case .succeeded:
-                
                 print("Payment succeeded")
                 debugPrint(paymentIntent?.amount)
                 debugPrint(paymentIntent?.description)
                 debugPrint(paymentIntent?.paymentMethodId)
                 
                 self.storepaymentapi(message: paymentIntent!)
-                
                 break
                 
             @unknown default:
-                
                 fatalError()
-                
                 break
-                
             }
         }
     }
@@ -150,15 +129,11 @@ extension PaymentVC{
                                     "Authorization": kSharedUserDefaults.getLoggedInAccessToken()
         ]
         debugPrint("accessToken=-=-=",headers)
-        
         let url = "\(kBASEURL)api/stripeSeceret"
-        
         debugPrint(url)
         
         Alamofire.request(url, method: .post, parameters: speciDict, encoding:  JSONEncoding.default, headers: headers).responseJSON { response in
-            
             print(response)
-            
             if response.response != nil {
                 
                 if let value = response.result.value {
@@ -222,9 +197,7 @@ extension PaymentVC{
             CommonUtils.showHudWithNoInteraction(show: false)
             
             if errorType == .requestSuccess {
-                
                 let dictResult = kSharedInstance.getDictionary(result)
-                
                 switch Int.getInt(statusCode) {
                 case 200:
                     

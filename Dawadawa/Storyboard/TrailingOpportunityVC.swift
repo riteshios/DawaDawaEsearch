@@ -1317,10 +1317,11 @@ extension TrailingOpportunityVC{
             "location_map":String.getString(self.lblLocationOnMap.text),
             "latitude":String.getString(self.latitude),
             "longitude":String.getString(self.longitude),
+            "opr_status":3 // detail wale api se milega isko implement krna h
             //            "cat_type_id":"0"
         ]
         
-        let uploadimage:[String:Any] = ["filenames[]":self.imagearr]
+        let uploadimage:[String:Any] = ["image[]":self.imagearr]
         let uploaddocument:[String:Any] = ["opportunity_documents[]":self.documentarr]
         
         debugPrint("image[]......",self.imagearr)

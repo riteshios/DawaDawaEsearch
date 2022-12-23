@@ -452,7 +452,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
             else{
                 self.showSimpleAlert(message: "الرجاء تحديد الفئة الفرعية")
             }
-          
+            
             return
         }
         else if String.getString(self.txtFieldTitle.text).isEmpty
@@ -481,7 +481,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
             else{
                 self.showSimpleAlert(message: "الرجاء تحديد المنطقة")
             }
-           
+            
             return
         }
         
@@ -516,7 +516,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
             else{
                 self.showSimpleAlert(message: "يرجى تحديد خطة الفرصة")
             }
-           
+            
             return
         }
         else if self.isSelectopp_planPremium == true && self.isSelectimage == false && self.imagearr.count == 0{
@@ -674,7 +674,6 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
         debugPrint("url = ",url.absoluteString)
         debugPrint("url = ",url.absoluteURL)
         
-        
         //          self.urlAttachemnt = url
         //          if self.sizePerMB(url: url) > 500
         //          {
@@ -685,7 +684,6 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
         //
         //          }
         
-        
         // self.doc = (url)
         //        print("doc path=-=-=\(doc)")
         self.documentarr.append(url)
@@ -694,10 +692,10 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
         print("doc documentarrCount=-=-=\(documentarr.count)")
         self.UploaddocumentCollectionView.reloadData()
     }
-    
     func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
         self.dismiss(animated: true, completion: nil)
     }
+    
     func savePdf(url:URL, fileName:String) {
         
     }
@@ -818,7 +816,6 @@ extension RockPitOpportunityVC{
             }
         }
     }
-    
 }
 extension RockPitOpportunityVC{
     //    Sub-Category API
@@ -845,8 +842,6 @@ extension RockPitOpportunityVC{
                     print("Sub-Category Details json is:\n\(json)")
                     
                     let parser = getSubCategoryParser(json: json)
-                    
-                    
                     completionBlock(parser.status,parser.Subcategories,parser.message)
                 }else{
                     completionBlock(0,nil,response.result.error?.localizedDescription ?? "Some thing went wrong")
@@ -902,9 +897,8 @@ extension RockPitOpportunityVC{
         debugPrint("headers......\(headers)")
         
         var params = Dictionary<String, String>()
-        
         let url = kBASEURL + ServiceName.kgetstate
-        //
+        
         //        print("============\(params)")
         print(url)
         
@@ -915,19 +909,17 @@ extension RockPitOpportunityVC{
                     let json = JSON(value)
                     
                     print(" State Details json is:\n\(json)")
-                    
                     let parser = getstateParser(json: json)
-                    
-                    
                     completionBlock(parser.status,parser.State,parser.message)
-                }else{
+                    
+                }
+                else{
                     completionBlock(0,nil,response.result.error?.localizedDescription ?? "Some thing went wrong")
                 }
                 
             case .failure(let error):
                 completionBlock(0,nil,error.localizedDescription)
             }
-            
         }
     }
     
@@ -938,7 +930,7 @@ extension RockPitOpportunityVC{
         let kStatus = "status"
         let kMessage = "message"
         let kState = "state"
-
+        
         var responsecode = 0
         var status = 0
         var message = ""
@@ -971,7 +963,6 @@ extension RockPitOpportunityVC{
     
     //     Locality Api
     func localityapi(language:String, completionBlock: @escaping (_ success: Int, _ localdata : [getLocalityModel]?, _ message: String) -> Void) {
-        
         
         let headers : HTTPHeaders = ["Authorization": "Bearer " + kSharedUserDefaults.getLoggedInAccessToken(), "Accept-Language": language]
         debugPrint("headers......\(headers)")
@@ -1126,7 +1117,7 @@ extension RockPitOpportunityVC{
                 let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
                 kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
             }
-            //            headers["token"] = kSharedUserDefaults.getLoggedInAccessToken()
+//              headers["token"] = kSharedUserDefaults.getLoggedInAccessToken()
         }
         
         let userid = Int(UserData.shared.id ?? 0)  // For Remove Optional
@@ -1277,10 +1268,11 @@ extension RockPitOpportunityVC{
             "looking_for":"\(String(describing: lookingforid))",
             "plan":String.getString(plan),
             "latitude":String.getString(self.latitude),
-            "longitude":String.getString(self.longitude)
+            "longitude":String.getString(self.longitude),
+            "opr_status":3 // detail wale api se milega isko implement krna h
         ]
         
-        let uploadimage:[String:Any] = ["filenames[]":self.imagearr]
+        let uploadimage:[String:Any] = ["image[]":self.imagearr]
         let uploaddocument:[String:Any] = ["opportunity_documents[]":self.documentarr]
         
         debugPrint("image[]......",self.imagearr)
