@@ -939,10 +939,7 @@ public class TANetworkManager {
                     if let data =  try? Data.init(contentsOf: doc)
 {
                         print("==========pdf=========\(data)")
-
                         multipartFormData.append(data, withName: "opportunity_documents[]", fileName: "data.pdf", mimeType: "application/pdf")
-
-                        
 
                     }
                 }

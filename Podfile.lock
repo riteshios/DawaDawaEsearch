@@ -515,16 +515,26 @@ PODS:
     - SDWebImage/Core (= 4.4.8)
   - SDWebImage/Core (4.4.8)
   - SKFloatingTextField (1.0.1)
-  - Stripe (21.9.1):
-    - Stripe/Stripe3DS2 (= 21.9.1)
-    - StripeCore (= 21.9.1)
-    - StripeUICore (= 21.9.1)
-  - Stripe/Stripe3DS2 (21.9.1):
-    - StripeCore (= 21.9.1)
-    - StripeUICore (= 21.9.1)
-  - StripeCore (21.9.1)
-  - StripeUICore (21.9.1):
-    - StripeCore (= 21.9.1)
+  - Stripe (23.0.0):
+    - StripeApplePay (= 23.0.0)
+    - StripeCore (= 23.0.0)
+    - StripePayments (= 23.0.0)
+    - StripePaymentsUI (= 23.0.0)
+    - StripeUICore (= 23.0.0)
+  - StripeApplePay (23.0.0):
+    - StripeCore (= 23.0.0)
+  - StripeCore (23.0.0)
+  - StripePayments (23.0.0):
+    - StripeCore (= 23.0.0)
+    - StripePayments/Stripe3DS2 (= 23.0.0)
+  - StripePayments/Stripe3DS2 (23.0.0):
+    - StripeCore (= 23.0.0)
+  - StripePaymentsUI (23.0.0):
+    - StripeCore (= 23.0.0)
+    - StripePayments (= 23.0.0)
+    - StripeUICore (= 23.0.0)
+  - StripeUICore (23.0.0):
+    - StripeCore (= 23.0.0)
   - STTabbar (0.1.0)
   - SVProgressHUD (2.2.5)
   - SwiftMessages (9.0.6):
@@ -593,7 +603,10 @@ SPEC REPOS:
     - SDWebImage
     - SKFloatingTextField
     - Stripe
+    - StripeApplePay
     - StripeCore
+    - StripePayments
+    - StripePaymentsUI
     - StripeUICore
     - STTabbar
     - SVProgressHUD
@@ -634,15 +647,18 @@ SPEC CHECKSUMS:
   RangeSeekSlider: 650b11fa1edcb92e1e0ede797669d98622570fb5
   SDWebImage: 783af2c3fa36291a250030c4752ee370a9a51d13
   SKFloatingTextField: 6393b15bc7a3d8399e592e5fe50ed4a5376d8a82
-  Stripe: 22c1b8da5ee20a1aaf40fd198160efa72e71644a
-  StripeCore: 91ea038ac0abbb72f11014044dfd1e5d39089714
-  StripeUICore: 7edf64b24c9c178bfd97e988f2cffdbb7a7628b0
+  Stripe: 3f2e6ecf0bca1cf51e0aa2d8ac000dcde862a1e3
+  StripeApplePay: 872cd6bee754b395c0cb33e64dd4ed887142dbf7
+  StripeCore: 6ee53ff749d64fd9db3f06ae4c385fdd3f8580a2
+  StripePayments: 6e580aac69d1923607a40f506602f5770f8eb2bc
+  StripePaymentsUI: cadc1c4d4daa4335dc0a996af5ead287505b7075
+  StripeUICore: 55b2660a2cad2fe055a05f59297caa4ae50acf74
   STTabbar: fe93da755010233b348b2d0147c43bb1bef290fa
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftMessages: f0c7ef4705a570ad6c5e208b611f4333e660ed92
   SwiftyGif: 6c3eafd0ce693cad58bb63d2b2fb9bacb8552780
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
 
-PODFILE CHECKSUM: b1831996b24d731ed68976889fb20113f9ff3ec3
+PODFILE CHECKSUM: 865ace4d0d611315b7567a9824ea88e00a5e1bf2
 
 COCOAPODS: 1.11.3

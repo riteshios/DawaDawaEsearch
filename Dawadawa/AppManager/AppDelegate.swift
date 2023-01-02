@@ -284,7 +284,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         
         let window = UIApplication.shared.windows.first
         
-        let storybaord = UIStoryboard(name: "Main", bundle: nil)
+        let storybaord = UIStoryboard(name: "Home", bundle: nil)
         
         window?.rootViewController  = storybaord.instantiateViewController(withIdentifier: "NotifiactionViewController")
         

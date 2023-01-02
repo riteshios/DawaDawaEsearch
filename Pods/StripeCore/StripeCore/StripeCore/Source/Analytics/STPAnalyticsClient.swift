@@ -15,7 +15,7 @@ import UIKit
 
 @_spi(STP) public protocol STPAnalyticsClientProtocol {
     func addClass<T: STPAnalyticsProtocol>(toProductUsageIfNecessary klass: T.Type)
-    func log(analytic: Analytic)
+    func log(analytic: Analytic, apiClient: STPAPIClient)
 }
 
 @_spi(STP) public class STPAnalyticsClient: NSObject, STPAnalyticsClientProtocol {
@@ -26,19 +26,19 @@ import UIKit
     private(set) var urlSession: URLSession = URLSession(
         configuration: StripeAPIConfiguration.sharedUrlSessionConfiguration)
 
-    /// Determines the `publishable_key` value sent in analytics
-    public var publishableKeyProvider: PublishableKeyProvider?
-
     @objc public class func tokenType(fromParameters parameters: [AnyHashable: Any]) -> String? {
         let parameterKeys = parameters.keys
 
+        // Before SDK 23.0.0, this returned "card" for some Apple Pay payments.
+        if parameterKeys.contains("pk_token") {
+            return "apple_pay"
+        }
         // these are currently mutually exclusive, so we can just run through and find the first match
         let tokenTypes = ["account", "bank_account", "card", "pii", "cvc_update"]
         if let type = tokenTypes.first(where: { parameterKeys.contains($0) }) {
             return type
-        } else {
-            return parameterKeys.contains("pk_token") ? "apple_pay" : nil
         }
+        return nil
     }
 
     public func addClass<T: STPAnalyticsProtocol>(toProductUsageIfNecessary klass: T.Type) {
@@ -80,8 +80,7 @@ import UIKit
             return
         }
 
-        let request: NSMutableURLRequest = NSMutableURLRequest(url: url)
-
+        var request = URLRequest(url: url)
         request.stp_addParameters(toURL: payload)
         let task: URLSessionDataTask = urlSession.dataTask(with: request as URLRequest)
         task.resume()
@@ -92,9 +91,10 @@ import UIKit
      additional info, and product usage dictionary.
 
      - Parameter analytic: The analytic to log.
+     - Parameter apiClient: The STPAPIClient instance with which this payload should be associated (i.e. publishable key). Defaults to STPAPIClient.shared
      */
-    func payload(from analytic: Analytic) -> [String: Any] {
-        var payload = commonPayload()
+    func payload(from analytic: Analytic, apiClient: STPAPIClient = .shared) -> [String: Any] {
+        var payload = commonPayload(apiClient)
 
         payload["event"] = analytic.event.rawValue
         payload["additional_info"] = additionalInfo()
@@ -114,15 +114,16 @@ import UIKit
      additional info, and product usage dictionary.
 
      - Parameter analytic: The analytic to log.
+     - Parameter apiClient: The STPAPIClient instance with which this payload should be associated (i.e. publishable key). Defaults to STPAPIClient.shared
      */
-    public func log(analytic: Analytic) {
+    public func log(analytic: Analytic, apiClient: STPAPIClient = .shared) {
         logPayload(payload(from: analytic))
     }
 }
 
 // MARK: - Helpers
 extension STPAnalyticsClient {
-    public func commonPayload() -> [String: Any] {
+    public func commonPayload(_ apiClient: STPAPIClient) -> [String: Any] {
         var payload: [String: Any] = [:]
         payload["bindings_version"] = StripeAPIConfiguration.STPSDKVersion
         payload["analytics_ua"] = "analytics.stripeios-1.0"
@@ -135,7 +136,9 @@ extension STPAnalyticsClient {
         }
         payload["app_name"] = Bundle.stp_applicationName() ?? ""
         payload["app_version"] = Bundle.stp_applicationVersion() ?? ""
-        payload["publishable_key"] = publishableKeyProvider?.sanitizedPublishableKey ?? "unknown"
+        payload["plugin_type"] = PluginDetector.shared.pluginType?.rawValue
+        payload["install"] = InstallMethod.current.rawValue
+        payload["publishable_key"] = apiClient.sanitizedPublishableKey ?? "unknown"
         
         return payload
     }

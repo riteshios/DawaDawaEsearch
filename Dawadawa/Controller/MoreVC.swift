@@ -216,7 +216,7 @@ extension MoreVC{
         lblSavedOpportunity.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Saved Opportunities", comment: "")
         lblInterestedOpportunity.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Interested Opportunities", comment: "")
         lblContactUs.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Contact Us", comment: "")
-        lblLogout.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Log Out", comment: "")
+        lblLogout.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Logout", comment: "")
     }
 }
 

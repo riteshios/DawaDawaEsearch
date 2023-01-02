@@ -5,7 +5,6 @@ class SearchVC: UIViewController,UITextFieldDelegate{
     @IBOutlet weak var tblViewSearchOpp: UITableView!
     @IBOutlet weak var txtfieldSearch: UITextField!
     @IBOutlet weak var imgNotfound: UIImageView!
-    
     @IBOutlet weak var viewSearch: UIView!
     
     var imgUrl = ""
@@ -39,14 +38,13 @@ class SearchVC: UIViewController,UITextFieldDelegate{
     //    }
     
     func setup(){
+        
         tblViewSearchOpp.register(UINib(nibName: "PopularSearchTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "PopularSearchTableViewCell")
-        
         tblViewSearchOpp.register(UINib(nibName: "PremiumOppTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "PremiumOppTableViewCell")
-        
         tblViewSearchOpp.register(UINib(nibName: "SocialPostTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "SocialPostTableViewCell")
         
         txtfieldSearch.delegate = self
-        txtfieldSearch.returnKeyType = .done
+        txtfieldSearch.returnKeyType = .search
     }
 }
 extension SearchVC:UITableViewDelegate,UITableViewDataSource{

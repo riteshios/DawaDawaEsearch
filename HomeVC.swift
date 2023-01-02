@@ -35,7 +35,7 @@ class HomeVC: UIViewController,UITabBarControllerDelegate{
         super.viewDidLoad()
         tabBarController?.delegate = self
         self.setuplanguage()
-        self.imgNotification.isHidden = true
+      //  self.imgNotification.isHidden = true
         debugPrint("nameid",UserData.shared.id)
         debugPrint("nameid",UserData.shared.name)
         if UserData.shared.isskiplogin == true{
@@ -1683,13 +1683,13 @@ extension HomeVC{
                         print("count=-==\(count)")
                         
                         self.lblCountNotification.text = count
-                        self.imgNotification.isHidden = false
+                      //  self.imgNotification.isHidden = false
                         //  CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         
                     }
                     else if  Int.getInt(dictResult["status"]) == 400{
-                        self.imgNotification.isHidden = false
-                        self.imgNotification.image = UIImage(named: "notification-bing-1")
+                       // self.imgNotification.isHidden = false
+                      //  self.imgNotification.image = UIImage(named: "notification-bing-1")
                     }
                     
                 default:

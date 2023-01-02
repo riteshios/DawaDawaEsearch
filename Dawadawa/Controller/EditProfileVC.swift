@@ -15,6 +15,7 @@ class EditProfileVC: UIViewController {
     @IBOutlet weak var txtFieldEmailAddress: SKFloatingTextField!
     @IBOutlet weak var txtFieldFirstName: SKFloatingTextField!
     @IBOutlet weak var txtFieldLastName: SKFloatingTextField!
+    
     //    @IBOutlet weak var txtFieldDOB: SKFloatingTextField!
     @IBOutlet weak var txtFieldWhatsappNumber: SKFloatingTextField!
     @IBOutlet weak var txtfieldEnterAbout: IQTextView!
@@ -34,8 +35,6 @@ class EditProfileVC: UIViewController {
     
     @IBOutlet weak var btnEnglish: UIButton!
     @IBOutlet weak var btnArabic: UIButton!
-    
-    
     @IBOutlet weak var lblEditProfile: UILabel!
     @IBOutlet weak var lblPhone: UILabel!
     @IBOutlet weak var lblChangePhone: UILabel!

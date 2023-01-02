@@ -68,15 +68,18 @@ class BuyPlanVC: UIViewController {
 }
 // MARK: - Collection
 
-extension BuyPlanVC:UICollectionViewDelegate,UICollectionViewDataSource{
+extension BuyPlanVC:UICollectionViewDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return subsdata.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = PlanCollectionView.dequeueReusableCell(withReuseIdentifier: "PlanCollectionViewCell", for: indexPath) as! PlanCollectionViewCell
-        cell.subsdata = self.subsdata
-        cell.cellnumbercount(num: indexPath.row)
+        cell.subsdata = self.subsdata[indexPath.row]
+        let imgUrl = URL(string: self.subsdata[indexPath.row].image)
+        cell.imgBG.sd_setImage(with: imgUrl)
+        cell.descData = self.subsdata[indexPath.item].description
+       cell.cellnumbercount(num: indexPath.row)
         return cell
     }
     
@@ -87,6 +90,11 @@ extension BuyPlanVC:UICollectionViewDelegate,UICollectionViewDataSource{
             self.indexpathcount = indexPath?[1] ?? 0
         }
     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: PlanCollectionView.frame.size.width, height:  PlanCollectionView.frame.size.height)
+    }
+    
 }
 
 extension BuyPlanVC{

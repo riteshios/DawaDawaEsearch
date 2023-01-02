@@ -44,7 +44,18 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
     @IBOutlet weak var btnPremium: UIButton!
     
     @IBOutlet weak var viewCreateOpportunity: UIView!
-    @IBOutlet weak var viewSelectCategoryTop: NSLayoutConstraint!
+    //@IBOutlet weak var viewSelectCategoryTop: NSLayoutConstraint!
+    
+    
+    @IBOutlet weak var viewImage:UIView!
+    @IBOutlet weak var heightViewImage:NSLayoutConstraint!
+    @IBOutlet weak var viewAddMoreImg:UIView!
+    @IBOutlet weak var heightViewMoreImg:NSLayoutConstraint!
+    @IBOutlet weak var heightDocCollectionView:NSLayoutConstraint!
+    @IBOutlet weak var viewMoreDoc:UIView!
+    @IBOutlet weak var hieghtViewMoreDoc:NSLayoutConstraint!
+    
+    
     @IBOutlet weak var btnSelectImage: UIButton!
     @IBOutlet weak var btnMoreImage: UIButton!
     @IBOutlet weak var btnSelectDocument: UIButton!
@@ -114,18 +125,33 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
         
         if isedit == "True"{
             if self.userTimeLineoppdetails?.oppimage.count == 0{
-                self.viewSelectCategoryTop.constant = 10
+                self.initialSetup()
                 self.fetchdata()
             }
             else{
-                self.viewSelectCategoryTop.constant = 420
+               // self.viewSelectCategoryTop.constant = 420
                 self.fetchdata()
             }
+        }else{
+            self.initialSetup()
         }
         self.UploadimageCollectionView.reloadData()
     }
     
     //    MARK: - Life Cyclye
+    
+    func initialSetup(){
+        self.viewImage.isHidden = true
+        self.hieghtViewMoreDoc.constant = 0
+        self.viewAddMoreImg.isHidden = true
+        self.heightViewMoreImg.constant = 0
+        self.UploaddocumentCollectionView.isHidden = true
+        self.heightDocCollectionView.constant = 0
+        self.viewMoreDoc.isHidden = true
+        self.hieghtViewMoreDoc.constant = 0
+    }
+    
+    
     
     func setup(){
         self.txtFieldMobileNumber.keyBoardType = .numberPad
@@ -166,6 +192,8 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
     }
     
     func fetchdata(){
+        
+        
         
         self.UploadimageCollectionView.reloadData()
         self.UploaddocumentCollectionView.reloadData()
@@ -244,7 +272,8 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
             //            }
             if txt == "Quit"{
                 vc.dismiss(animated: false){
-                    kSharedAppDelegate?.makeRootViewController()
+                    self.navigationController?.popViewController(animated: true)
+                   // kSharedAppDelegate?.makeRootViewController()
                 }
             }
         }
@@ -258,6 +287,12 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
                 ImagePickerHelper.shared.showPickerController {
                     image, url in
                     self.imagearr.append(image ?? UIImage())
+                    
+                    self.viewImage.isHidden = self.imagearr.count != 0 ? false : true
+                    self.heightViewImage.constant = self.imagearr.count != 0 ? 236 : 0
+                    self.viewAddMoreImg.isHidden = self.imagearr.count != 0 ? false : true
+                    self.heightViewMoreImg.constant = self.imagearr.count != 0 ? 60 : 0
+                    
                     self.UploadimageCollectionView.reloadData()
                 }
                 
@@ -266,7 +301,7 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
             else{
                 btnSelectImage.isEnabled = false
             }
-            self.viewSelectCategoryTop.constant = 420  // 310
+          //  self.viewSelectCategoryTop.constant = 420  // 310
             self.isSelectimage = true
         }
     }
@@ -307,7 +342,7 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
             if documentarr.count == 0{
                 btnSelectDocument.isEnabled = true
                 self.openFileBrowser()
-                self.viewSelectCategoryTop.constant = 420
+             //   self.viewSelectCategoryTop.constant = 420
             }
             else{
                 btnSelectDocument.isEnabled = false
@@ -335,6 +370,7 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
     @IBAction func btnSelectSubCategoryTapped(_ sender: UIButton) {
         kSharedAppDelegate?.dropDown(dataSource: getSubCategorylist.map{String.getString($0.sub_cat_name)}, text: btnSubCategory) { (index, item) in
             self.lblSubCategory.text = item
+            self.subcatid = self.getSubCategorylist[index].id
             self.isSelectSubcategory = true
         }
     }
@@ -583,7 +619,8 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
             }
             
             
-        default: return 5
+        default:
+            return 5
         }
     }
     
@@ -656,10 +693,25 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
         }
             return cell
             
-        default: return UICollectionViewCell()
+        default:
+            return UICollectionViewCell()
             
         }
     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        switch collectionView{
+        case self.UploadimageCollectionView:
+            return CGSize(width: self.UploadimageCollectionView.frame.size.width, height: 235)
+          
+        case self.UploaddocumentCollectionView:
+            return CGSize(width: self.UploaddocumentCollectionView.frame.size.width, height: 45)
+            
+        default :
+            return CGSize()
+        }
+    }
+    
     //  MARK: - Document Picker
     
     
@@ -734,6 +786,12 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
         
         //        print("doc path=-=-=\(doc)")
         self.documentarr.append(url)
+        
+        self.UploaddocumentCollectionView.isHidden = self.documentarr.count != 0 ? false : true
+        self.heightDocCollectionView.constant = self.documentarr.count != 0 ? 60 : 0
+        self.viewMoreDoc.isHidden = self.documentarr.count != 0 ? false : true
+        self.hieghtViewMoreDoc.constant = self.documentarr.count != 0 ? 60 : 0
+        
         self.docummentarray.append(url.lastPathComponent)
         print("doc documentarr=-=-=\(documentarr)")
         self.UploaddocumentCollectionView.reloadData()

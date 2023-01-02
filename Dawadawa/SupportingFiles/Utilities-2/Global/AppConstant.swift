@@ -154,7 +154,7 @@ struct ServiceName {
     static let kuserdata               =           "api/userData"
     
     // Payment And Subscription
-    static let kgetsubscriptionplan    =           "api/getSubscriptionPlan/\(user_type)"
+    static let kgetsubscriptionplan    =           "api/getSubscriptionPlan/"
     static let kstorepayment           =           "api/storePayment"
     static let kgetactiveplan          =           "api/investorActivePlan/"
     static let kgettransactionhistory  =           "api/getTransactionHistory/"

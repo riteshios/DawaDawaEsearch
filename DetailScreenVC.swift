@@ -14,7 +14,7 @@ class DetailScreenVC: UIViewController,DocumentCollectionViewCellDelegate{
     var imgUrl = ""
     var UserTimeLineOppdetails:SocialPostData?
     var userTimeLine: SocialPostData?
-    var img = [oppr_image]()
+    //  var img = [oppr_image]()
     var oppid = 0
     
     var txtcomment = " "
@@ -37,7 +37,10 @@ class DetailScreenVC: UIViewController,DocumentCollectionViewCellDelegate{
     }
     
     @IBAction func btnBackTapped(_ sender: UIButton) {
-        kSharedAppDelegate?.makeRootViewController()
+        
+        self.navigationController?.popViewController(animated: true)
+        
+        // kSharedAppDelegate?.makeRootViewController()
     }
 }
 
@@ -83,7 +86,6 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                     self.navigationController?.pushViewController(vc, animated: true)
                 }
             }
-            
             return view
         }
     }
@@ -125,7 +127,7 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                         else{
                             self.showSimpleAlert(message: "الرجاء إضافة الرد")
                         }
-                       
+                        
                     }else{
                         self.commentreplyapi(oppr_id: Int.getInt(self.userTimeLine?.id) , commentid:Int.getInt(obj?.id)) { usersubComment in
                             view.textview.text = ""
@@ -157,8 +159,8 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
             let cell = self.tblviewDetail.dequeueReusableCell(withIdentifier: "DetailsTableViewCell") as! DetailsTableViewCell
             
             //  cell.viewLine.isHidden = true
-            cell.SocialPostCollectionView.tag = indexPath.section
-            cell.DocumentCollectionView.tag = indexPath.section
+            //  cell.SocialPostCollectionView.tag = indexPath.section
+            // cell.DocumentCollectionView.tag = indexPath.section
             cell.celldelegate = self
             cell.lblUserName.text = String.getString(self.userTimeLine?.userdetail?.name)
             cell.lblDescribtion.text = String.getString(self.userTimeLine?.description)
@@ -192,8 +194,8 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                     cell.lblEmail.text = "Not forSilver Plan"
                     cell.lblEmail.textColor = UIColor.gray
                     cell.heightDocumentcollectionview.constant = 0
-                    
                 }
+                
                 else if kSharedUserDefaults.getpayment_type() as? String == "Gold Plan"{
                     cell.lblEmail.text = String.getString(self.userTimeLine?.userdetail?.email)
                     cell.llbMobileNumber.text =  String.getString(self.userTimeLine?.mobile_num)
@@ -269,7 +271,7 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
             else{
                 cell.lblBusinessminingType.text = String.getString(self.userTimeLine?.business_mining_type)
             }
-           
+            
             cell.lblRating.text = String.getString(self.userTimeLine?.opr_rating)
             cell.imgOpp_plan.image = self.userTimeLine?.opp_plan == "Featured" ? UIImage(named: "Star Filled") : self.userTimeLine?.opp_plan == "Premium" ? UIImage(named: "Crown") : UIImage(named: "Folded Booklet")
             
@@ -310,42 +312,43 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                 else{
                     cell.lblLocationONMap.text = "الموقع على الخريطة غير متوفر"
                 }
-               
+                
                 cell.lblLocationONMap.textColor = UIColor.gray
             }
             
             if String.getString(self.userTimeLine?.plan_name) == "Basic Plan"{
-//                cell.lblLocationONMap.text = "Not for basic Plan"
-//                cell.lblLocationONMap.textColor = UIColor.gray
-//                cell.lbblWhatsappNumber.text = "Not for basic Plan"
-//                cell.lbblWhatsappNumber.textColor = UIColor.gray
-//                cell.llbMobileNumber.text = "Not for basic Plan"
-//                cell.llbMobileNumber.textColor = UIColor.gray
-//                cell.DocumentCollectionView.isHidden = true
-//                cell.lblEmail.text = "Not for basic Plan"
-//                cell.lblEmail.textColor = UIColor.gray
-//                cell.heightDocumentcollectionview.constant = 0
+                //                cell.lblLocationONMap.text = "Not for basic Plan"
+                //                cell.lblLocationONMap.textColor = UIColor.gray
+                //                cell.lbblWhatsappNumber.text = "Not for basic Plan"
+                //                cell.lbblWhatsappNumber.textColor = UIColor.gray
+                //                cell.llbMobileNumber.text = "Not for basic Plan"
+                //                cell.llbMobileNumber.textColor = UIColor.gray
+                //                cell.DocumentCollectionView.isHidden = true
+                //                cell.lblEmail.text = "Not for basic Plan"
+                //                cell.lblEmail.textColor = UIColor.gray
+                //                cell.heightDocumentcollectionview.constant = 0
             }
             
             else if String.getString(self.userTimeLine?.plan_name) == "Silver Plan"{
-//                cell.lblLocationONMap.text = "Not for Silver Plan"
-//                cell.lblLocationONMap.textColor = UIColor.gray
-//                cell.lbblWhatsappNumber.text = "Not for Silver Plan"
-//                cell.lbblWhatsappNumber.textColor = UIColor.gray
-//                cell.llbMobileNumber.text = "Not for Silver Plan"
-//                cell.llbMobileNumber.textColor = UIColor.gray
-//                cell.DocumentCollectionView.isHidden = true
-//                cell.lblEmail.text = "Not forSilver Plan"
-//                cell.lblEmail.textColor = UIColor.gray
-//                cell.heightDocumentcollectionview.constant = 0
+                //                cell.lblLocationONMap.text = "Not for Silver Plan"
+                //                cell.lblLocationONMap.textColor = UIColor.gray
+                //                cell.lbblWhatsappNumber.text = "Not for Silver Plan"
+                //                cell.lbblWhatsappNumber.textColor = UIColor.gray
+                //                cell.llbMobileNumber.text = "Not for Silver Plan"
+                //                cell.llbMobileNumber.textColor = UIColor.gray
+                //                cell.DocumentCollectionView.isHidden = true
+                //                cell.lblEmail.text = "Not forSilver Plan"
+                //                cell.lblEmail.textColor = UIColor.gray
+                //                cell.heightDocumentcollectionview.constant = 0
             }
             
             let imguserurl = String.getString(self.userTimeLine?.userdetail?.image)
             debugPrint("socialprofile......",imguserurl)
             cell.Imageuser.downlodeImage(serviceurl: imguserurl , placeHolder: UIImage(named: "Boss"))
-            cell.img = self.userTimeLine?.oppimage ?? [] // Collection View k liye image pass kr rhe h
+            cell.img = self.userTimeLine?.oppimage ?? [] // Collection View k liye image pass kr rhe
             cell.imgUrl = self.imgUrl
             cell.doc = self.userTimeLine?.oppdocument ?? [] // Pass Doc for collection view
+            
             cell.lblLikeCount.text = String.getString(self.userTimeLine?.likes) + " " + "Likes"
             
             if String.getString(self.userTimeLine?.is_user_like) == "1"{
@@ -367,7 +370,7 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                 else{
                     cell.lbllike.text = "مثل"
                 }
-               
+                
                 cell.lbllike.textColor = UIColor(hexString: "#A6A6A6")
             }
             if String.getString(self.userTimeLine?.is_saved) == "1"{
@@ -441,7 +444,6 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                             else{
                                 cell.lbllike.text = "مثل"
                             }
-                           
                             cell.lbllike.textColor = UIColor(hexString: "#A6A6A6")
                         }
                     }
@@ -458,8 +460,8 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                         self.getalldetail()
                     }
                     self.present(vc, animated: false)
-                    
                 }
+                
                 if txt == "Save"{
                     if tapped.isSelected{
                         if String.getString(self.userTimeLine?.is_saved) == "0"{
@@ -486,7 +488,7 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                             else{
                                 cell.lblSave.text = "يحفظ"
                             }
-                           
+                            
                             cell.lblSave.textColor = UIColor(hexString: "#A6A6A6")
                             self.getalldetail()
                         }
@@ -505,7 +507,7 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                         self.getalldetail()
                     }
                 }
-
+                
                 if txt == "More" {
                     let obj = self.userTimeLine
                     if UserData.shared.id == Int.getInt(obj?.user_id){
@@ -516,7 +518,7 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                             
                             if txt == "Dismiss"{
                                 self.dismiss(animated: true)
-                                //                        self.listoppoertunityapi()
+                                //              self.listoppoertunityapi()
                             }
                             
                             if txt == "CopyLink"{
@@ -536,6 +538,7 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                                 debugPrint("oppid+++++++",oppid)
                                 self.opportunitydetailsapi(oppr_id: oppid)
                             }
+                            
                             if txt == "Delete"{
                                 self.dismiss(animated: false){
                                     let vc = self.storyboard?.instantiateViewController(withIdentifier: DeleteOpportunityPopUPVC.getStoryboardID()) as! DeleteOpportunityPopUPVC
@@ -546,14 +549,12 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                                         if txt == "Delete"{
                                             vc.dismiss(animated: false) {
                                                 let oppid = Int.getInt(self.userTimeLine?.id)
-//                                                self.userTimeLine.remove(at: indexPath.row)
+                                                // self.userTimeLine.remove(at: indexPath.row)
                                                 self.deletepostoppoertunityapi(oppr_id: oppid)
                                                 debugPrint("oppid......",oppid)
-                                                
                                                 //     let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProfileVC") as! ProfileVC
                                                 //                                        self.navigationController?.popViewController(animated: true)
                                             }
-                                            
                                         }
                                     }
                                     self.present(vc, animated: false)
@@ -585,7 +586,6 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                         self.present(vc, animated: false)
                     }
                     
-                    
                     else{
                         
                         let vc = self.storyboard?.instantiateViewController(withIdentifier: HomeSocialMoreVC.getStoryboardID()) as! HomeSocialMoreVC
@@ -602,8 +602,8 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                                     else{
                                         self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
                                     }
-                                    
                                 }
+                                
                                 else{
                                     let userid = Int.getInt(self.userTimeLine?.user_id)
                                     let vc = self.storyboard?.instantiateViewController(withIdentifier: ChatVC.getStoryboardID()) as! ChatVC
@@ -624,7 +624,6 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                                 else{
                                     CommonUtils.showError(.info, String.getString("تم نسخ الرابط"))
                                 }
-                                
                             }
                             
                             if txt == "MarkasInterested"{
@@ -674,6 +673,7 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                                         self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
                                     }
                                 }
+                                
                                 else{
                                     self.dismiss(animated: false){
                                         let vc = self.storyboard?.instantiateViewController(withIdentifier: ReportUserPopUpVC.getStoryboardID()) as! ReportUserPopUpVC
@@ -924,7 +924,7 @@ extension DetailScreenVC{
                         
                     }
                     else if  Int.getInt(dictResult["responsecode"]) == 400{
-                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        // CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
@@ -993,7 +993,7 @@ extension DetailScreenVC{
                     }
                     
                     else if  Int.getInt(dictResult["responsecode"]) == 400{
-                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //  CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
@@ -1006,7 +1006,6 @@ extension DetailScreenVC{
             } else {
                 CommonUtils.showToastForDefaultError()
             }
-            
         }
     }
     
@@ -1014,7 +1013,6 @@ extension DetailScreenVC{
     
     func likeOpportunityapi(oppr_id:Int,completion: @escaping(_ countLike: String,_ Sucesscode: Int)->Void){
         CommonUtils.showHud(show: true)
-        
         
         if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
             let endToken = kSharedUserDefaults.getLoggedInAccessToken()
@@ -1024,6 +1022,7 @@ extension DetailScreenVC{
                 kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
             }
         }
+        
         let params:[String : Any] = [
             "user_id":Int.getInt(UserData.shared.id),
             "opr_id":oppr_id
@@ -1034,11 +1033,8 @@ extension DetailScreenVC{
         {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
             
             CommonUtils.showHudWithNoInteraction(show: false)
-            
             if errorType == .requestSuccess {
-                
                 let dictResult = kSharedInstance.getDictionary(result)
-                
                 switch Int.getInt(statusCode) {
                 case 200:
                     //                    self?.statuslike = Int.getInt(dictResult["status"])
@@ -1049,8 +1045,8 @@ extension DetailScreenVC{
                             kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
                         }
                         
-                        //                        self?.count = String.getString(dictResult["count"])
-                        //                        debugPrint("likecount=-=-=-=",self?.count)
+                        //                 self?.count = String.getString(dictResult["count"])
+                        //                 debugPrint("likecount=-=-=-=",self?.count)
                         completion(String.getString(dictResult["count"]),Int.getInt(dictResult["status"]))
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         
@@ -1141,7 +1137,7 @@ extension DetailScreenVC{
     
     func unsaveoppoertunityapi(oppr_id:Int){
         CommonUtils.showHud(show: true)
-    
+        
         if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
             let endToken = kSharedUserDefaults.getLoggedInAccessToken()
             let septoken = endToken.components(separatedBy: " ")
@@ -1157,16 +1153,13 @@ extension DetailScreenVC{
         ]
         
         debugPrint("user_id......",Int.getInt(UserData.shared.id))
-        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kunsavedopp, requestMethod: .POST,
-                                                               requestParameters:params, withProgressHUD: false)
+        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kunsavedopp, requestMethod: .POST, requestParameters:params, withProgressHUD: false)
         {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
             
             CommonUtils.showHudWithNoInteraction(show: false)
             
             if errorType == .requestSuccess {
-                
                 let dictResult = kSharedInstance.getDictionary(result)
-                
                 switch Int.getInt(statusCode) {
                 case 200:
                     
@@ -1280,8 +1273,7 @@ extension DetailScreenVC{
         ]
         
         debugPrint("oppr_id...===...",oppr_id)
-        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kopportunitydetails, requestMethod: .POST,
-                                                               requestParameters:params, withProgressHUD: false)
+        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kopportunitydetails, requestMethod: .POST, requestParameters:params, withProgressHUD: false)
         {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
             
             CommonUtils.showHudWithNoInteraction(show: false)
@@ -1320,9 +1312,8 @@ extension DetailScreenVC{
                             vc.imgarray  = self?.UserTimeLineOppdetails?.oppimage ?? []
                             vc.docarray = self?.UserTimeLineOppdetails?.oppdocument ?? []
                             debugPrint("imgaraay=-=-=-==-=", vc.imgarray)
-                            
-                            
                         }
+                        
                         else if Int.getInt(self?.UserTimeLineOppdetails?.category_id) == 2{
                             let vc = self?.storyboard?.instantiateViewController(withIdentifier: TrailingOpportunityVC.getStoryboardID()) as! TrailingOpportunityVC
                             self?.navigationController?.pushViewController(vc, animated: true)
@@ -1369,7 +1360,6 @@ extension DetailScreenVC{
                     }
                     
                     else if  Int.getInt(dictResult["status"]) == 400{
-                        
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
@@ -1528,8 +1518,7 @@ extension DetailScreenVC{
         ]
         
         debugPrint("opr_id......",oppr_id)
-        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kflagpost, requestMethod: .POST,
-                                                               requestParameters:params, withProgressHUD: false)
+        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kflagpost, requestMethod: .POST, requestParameters:params, withProgressHUD: false)
         {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
             
             CommonUtils.showHudWithNoInteraction(show: false)
@@ -1548,15 +1537,12 @@ extension DetailScreenVC{
                         if septoken[0] == "Bearer"{
                             kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
                         }
-                        
-                        
+                
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         kSharedAppDelegate?.makeRootViewController()
-                        
                     }
                     
                     else if  Int.getInt(dictResult["status"]) == 400{
-                        
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     

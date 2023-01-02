@@ -6,11 +6,18 @@ import UIKit
 
 class PlanCollectionViewCell: UICollectionViewCell{
     
+    @IBOutlet weak var imgBG: UIImageView!
     @IBOutlet weak var PlantableView: UITableView!
     
     var planimage = [UIImage(named: "Ok"),UIImage(named: "Star Filled"),UIImage(named: "Crown")]
     
-    var subsdata = [Subscription_data](){
+    var subsdata:Subscription_data?{
+        didSet{
+            self.PlantableView.reloadData()
+        }
+    }
+    
+    var descData = [description_plan](){
         didSet{
             self.PlantableView.reloadData()
         }
@@ -48,14 +55,19 @@ extension PlanCollectionViewCell: UITableViewDelegate,UITableViewDataSource {
         switch section{
         case 0:
 
-            return subsdata.count == 0 ? 0 : 1
+            return 1
             
         case 1:
-            if subsdata.count != 0{
-                return subsdata[cellnumber].description.count
-            }else{
-                return 0
-            }
+            
+           return self.descData.count
+//            if subsdata.count != 0{
+//
+//                return subsdata[cellnumber].description.count
+//            }else{
+//                return 0
+//            }
+            
+            
         default:
             return 0
         }
@@ -67,13 +79,13 @@ extension PlanCollectionViewCell: UITableViewDelegate,UITableViewDataSource {
             let cell = self.PlantableView.dequeueReusableCell(withIdentifier: "PlanTableViewCell") as! PlanTableViewCell
             
             //          cell.lblPlan.text = self.plan[cellnumber]
-            let obj = self.subsdata[cellnumber]
-            cell.lblPlan.text = String.getString(obj.title)
+            let obj = self.subsdata
+            cell.lblPlan.text = String.getString(obj?.title)
             
             if UserData.shared.user_type == "0"{
-                cell.lblPricePerMonth.text = String.getString(obj.price_month)
-                cell.lblCutPricePerYear.text = String.getString(obj.cut_year_price)
-                cell.lblPricePerYear.text = String.getString(obj.price_year)
+                cell.lblPricePerMonth.text = "$" + String.getString(obj?.price_month)
+                cell.lblCutPricePerYear.text = "$" + String.getString(obj?.cut_year_price)
+                cell.lblPricePerYear.text = "$" + String.getString(obj?.price_year)
                
             }
             else if UserData.shared.user_type == "1"{
@@ -81,16 +93,18 @@ extension PlanCollectionViewCell: UITableViewDelegate,UITableViewDataSource {
                 cell.lblYear.isHidden = true
                 cell.lblPricePerYear.isHidden = true
                 cell.viewLine.isHidden = true
-                cell.lblPricePerMonth.text = "$\(String.getString(obj.price_month))"
-                cell.lblCutPricePerYear.text = "No. of create: - \(String.getString(obj.no_create))"
+                cell.lblPricePerMonth.text = "$\(String.getString(obj?.price_month))"
+                cell.lblCutPricePerYear.text = "No. of create: - \(String.getString(obj?.no_create))"
             }
             else if UserData.shared.user_type == "2"{
                 cell.lblMonth.isHidden = true
                 cell.lblYear.isHidden = true
                 cell.lblPricePerYear.isHidden = true
                 cell.viewLine.isHidden = true
-                cell.lblPricePerMonth.text = "$\(String.getString(obj.price_month))"
-                cell.lblCutPricePerYear.text = "No. of create: - \(String.getString(obj.no_create))"
+                cell.lblPricePerMonth.text = "$\(String.getString(obj?.price_month))"
+                cell.lblCutPricePerYear.text = "No. of create: - \(String.getString(obj?.no_create))"
+                
+                
             }
             return cell
             
@@ -98,13 +112,15 @@ extension PlanCollectionViewCell: UITableViewDelegate,UITableViewDataSource {
             
             let cell = self.PlantableView.dequeueReusableCell(withIdentifier: "PlanListTableViewCell") as! PlanListTableViewCell
             
-            let obj = self.subsdata[cellnumber].description[indexPath.row]
-            
-            
-            cell.imgPlan.image = planimage[cellnumber]
+         //   let obj = self.subsdata[cellnumber].description[indexPath.row]
+            let obj = self.descData[indexPath.row]
+            let imgUrl = URL(string: String.getString(subsdata?.image))
+           // cell.imgPlan.image = planimage[cellnumber]
+          //  cell.imgPlan.sd_setImage(with: imgUrl, placeholderImage: UIImage(named: "Ok"))
             cell.lblPlan.text = String.getString(obj.key)
             
             return cell
+            
             
         default:
             return UITableViewCell()
@@ -202,10 +218,10 @@ extension UIViewController{
             }
         }
         
-        let url =  ServiceName.kgetsubscriptionplan + "\(UserData.shared.user_type)"
+        let url =  ServiceName.kgetsubscriptionplan + "\(String.getString(UserData.shared.user_type))"
         debugPrint("urlhistory==",url)
         
-        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName: ServiceName.kgetsubscriptionplan, requestMethod: .GET, requestParameters:[:], withProgressHUD: false) { (result:Any?, error:Error?, errorType:ErrorType?,statusCode:Int?) in
+        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName: url, requestMethod: .GET, requestParameters:[:], withProgressHUD: false) { (result:Any?, error:Error?, errorType:ErrorType?,statusCode:Int?) in
             CommonUtils.showHudWithNoInteraction(show: false)
             if errorType == .requestSuccess {
                 let dictResult = kSharedInstance.getDictionary(result)

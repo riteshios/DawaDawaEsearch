@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -48,24 +48,24 @@
                                                 </userDefinedRuntimeAttributes>
                                             </imageView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zOH-KM-GdN">
-                                                <rect key="frame" x="35" y="32" width="22" height="22"/>
+                                                <rect key="frame" x="34" y="34" width="24" height="24"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Crown" translatesAutoresizingMaskIntoConstraints="NO" id="mSp-k1-hDp">
-                                                        <rect key="frame" x="6" y="6" width="10" height="10"/>
+                                                        <rect key="frame" x="3" y="3" width="18" height="18"/>
                                                     </imageView>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemGray5Color"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="bottom" secondItem="mSp-k1-hDp" secondAttribute="bottom" constant="6" id="FZ2-Is-7lR"/>
-                                                    <constraint firstItem="mSp-k1-hDp" firstAttribute="leading" secondItem="zOH-KM-GdN" secondAttribute="leading" constant="6" id="OKd-PJ-8Hh"/>
-                                                    <constraint firstAttribute="trailing" secondItem="mSp-k1-hDp" secondAttribute="trailing" constant="6" id="UKI-Et-UR3"/>
-                                                    <constraint firstAttribute="height" constant="22" id="e3b-ND-JTd"/>
-                                                    <constraint firstItem="mSp-k1-hDp" firstAttribute="top" secondItem="zOH-KM-GdN" secondAttribute="top" constant="6" id="kZe-Te-0hv"/>
-                                                    <constraint firstAttribute="width" constant="22" id="tYZ-SC-ECo"/>
+                                                    <constraint firstAttribute="bottom" secondItem="mSp-k1-hDp" secondAttribute="bottom" constant="3" id="FZ2-Is-7lR"/>
+                                                    <constraint firstItem="mSp-k1-hDp" firstAttribute="leading" secondItem="zOH-KM-GdN" secondAttribute="leading" constant="3" id="OKd-PJ-8Hh"/>
+                                                    <constraint firstAttribute="trailing" secondItem="mSp-k1-hDp" secondAttribute="trailing" constant="3" id="UKI-Et-UR3"/>
+                                                    <constraint firstAttribute="height" constant="24" id="e3b-ND-JTd"/>
+                                                    <constraint firstItem="mSp-k1-hDp" firstAttribute="top" secondItem="zOH-KM-GdN" secondAttribute="top" constant="3" id="kZe-Te-0hv"/>
+                                                    <constraint firstAttribute="width" constant="24" id="tYZ-SC-ECo"/>
                                                 </constraints>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius1">
-                                                        <real key="value" value="11"/>
+                                                        <real key="value" value="12"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
@@ -79,7 +79,7 @@
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstItem="zOH-KM-GdN" firstAttribute="leading" secondItem="vUg-me-atb" secondAttribute="leading" constant="35" id="5SK-kT-eba"/>
+                                            <constraint firstAttribute="trailing" secondItem="zOH-KM-GdN" secondAttribute="trailing" constant="2" id="11b-8m-u1O"/>
                                             <constraint firstItem="uel-i3-6NV" firstAttribute="leading" secondItem="vUg-me-atb" secondAttribute="leading" id="96j-Iz-xbx"/>
                                             <constraint firstAttribute="height" constant="60" id="ATD-as-M2O"/>
                                             <constraint firstAttribute="trailing" secondItem="uel-i3-6NV" secondAttribute="trailing" id="CLp-y0-SD0"/>
@@ -90,7 +90,7 @@
                                             <constraint firstItem="FJx-Mb-Rlw" firstAttribute="leading" secondItem="vUg-me-atb" secondAttribute="leading" id="c1U-mc-Y0J"/>
                                             <constraint firstAttribute="bottom" secondItem="uel-i3-6NV" secondAttribute="bottom" id="eUL-Jv-V2f"/>
                                             <constraint firstItem="uel-i3-6NV" firstAttribute="top" secondItem="vUg-me-atb" secondAttribute="top" id="gIO-2d-8vc"/>
-                                            <constraint firstItem="zOH-KM-GdN" firstAttribute="top" secondItem="vUg-me-atb" secondAttribute="top" constant="32" id="q4B-fS-KtQ"/>
+                                            <constraint firstAttribute="bottom" secondItem="zOH-KM-GdN" secondAttribute="bottom" constant="2" id="onW-Nl-Rwm"/>
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Owner abdjnadc" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LgE-K4-rkL">
@@ -226,7 +226,7 @@
                                 </collectionViewFlowLayout>
                             </collectionView>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" hidesForSinglePage="YES" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="Mtw-CB-bdI">
-                                <rect key="frame" x="130" y="315.5" width="155.5" height="18"/>
+                                <rect key="frame" x="149.5" y="315.5" width="116.5" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="18" id="0sn-Vg-HXQ"/>
                                 </constraints>
@@ -1999,7 +1999,7 @@ AAAAAAAAAGgAAAAAAAAAAAAAAAAAAIKkA
         <image name="share-1" width="20" height="20"/>
         <image name="viewdetails-1" width="20" height="19.5"/>
         <systemColor name="labelColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="opaqueSeparatorColor">
             <color red="0.77647058823529413" green="0.77647058823529413" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

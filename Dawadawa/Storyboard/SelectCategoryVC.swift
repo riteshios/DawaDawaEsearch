@@ -57,7 +57,7 @@ class SelectCategoryVC: UIViewController,UITableViewDelegate,UITableViewDataSour
         //        cell.SelectCategoryImage.image = obj.cat_image
         return cell
         
-        return UITableViewCell()
+       // return UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
@@ -76,7 +76,8 @@ class SelectCategoryVC: UIViewController,UITableViewDelegate,UITableViewDataSour
             self.navigationController?.pushViewController(vc!, animated: true)
             
             
-        default: break
+        default:
+            break
             
             
         }

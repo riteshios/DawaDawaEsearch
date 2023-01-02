@@ -34,6 +34,13 @@ extension String {
          return passwordText.evaluate(with:self)
     }
     
+    func isValidTitle() -> Bool{
+        let passwordRegix = "^[A-Za-z][A-Za-z0-9_ ]{3,50}$"
+         let passwordText  = NSPredicate(format:"SELF MATCHES %@",passwordRegix)
+         return passwordText.evaluate(with:self)
+    }
+    
+    
     func isBackSpace()->Bool {
         if let char = self.cString(using: String.Encoding.utf8) {
             let isBackSpace = strcmp(char, "\\b")

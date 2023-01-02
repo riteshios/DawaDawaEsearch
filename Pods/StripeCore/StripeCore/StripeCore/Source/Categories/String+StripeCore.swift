@@ -3,6 +3,7 @@
 //  StripeCore
 //
 //  Created by Mel Ludowise on 9/16/21.
+//  Copyright © 2021 Stripe, Inc. All rights reserved.
 //
 
 import Foundation
@@ -15,4 +16,19 @@ import Foundation
     var isSecretKey: Bool {
         return self.hasPrefix("sk_")
     }
+    
+    var nonEmpty: String? {
+       stringIfHasContentsElseNil(self)
+    }
+}
+
+@_spi(STP) public func stringIfHasContentsElseNil(_ string: String?) ->  // MARK: -
+    String?
+{
+    guard let string = string,
+        !string.isEmpty
+    else {
+        return nil
+    }
+    return string
 }

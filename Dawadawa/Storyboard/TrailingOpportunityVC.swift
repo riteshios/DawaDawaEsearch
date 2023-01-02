@@ -42,7 +42,16 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
     @IBOutlet weak var btnPremium: UIButton!
     
     @IBOutlet weak var viewCreateOpportunity: UIView!
-    @IBOutlet weak var viewSelectCategoryTop: NSLayoutConstraint!
+    
+    
+    @IBOutlet weak var viewImage:UIView!
+    @IBOutlet weak var heightViewImage:NSLayoutConstraint!
+    @IBOutlet weak var viewAddMoreImage:UIView!
+    @IBOutlet weak var heightViewMoreImage:NSLayoutConstraint!
+    @IBOutlet weak var heightDocCollectionView:NSLayoutConstraint!
+    @IBOutlet weak var viewAddMoreDoc:UIView!
+    @IBOutlet weak var heightViewMoreDoc:NSLayoutConstraint!
+    
     @IBOutlet weak var btnSelectImage: UIButton!
     @IBOutlet weak var btnMoreImage: UIButton!
     @IBOutlet weak var btnSelectDocument: UIButton!
@@ -120,17 +129,32 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
         }
         if isedit == "True"{
             if self.userTimeLineoppdetails?.oppimage.count == 0{
-                self.viewSelectCategoryTop.constant = 10
+                
+                self.initialSetup()
                 self.fetdata()
             }
             else{
-                self.viewSelectCategoryTop.constant = 420
                 self.fetdata()
             }
+        }else{
+            
+            self.initialSetup()
         }
         
         self.UploadimageCollectionView.reloadData()
     }
+    
+    func initialSetup(){
+        self.viewImage.isHidden = true
+        self.heightViewMoreImage.constant = 0
+        self.heightViewImage.constant = 0
+        self.viewAddMoreImage.isHidden = true
+        self.UploaddocumentCollectionView.isHidden = true
+        self.heightDocCollectionView.constant = 0
+        self.viewAddMoreDoc.isHidden = true
+        self.heightViewMoreDoc.constant = 0
+    }
+    
     
     func setup(){
         self.txtFieldMobileNumber.keyBoardType = .numberPad
@@ -173,8 +197,9 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
     
     func fetdata(){
         
-        self.UploadimageCollectionView.reloadData()
-        self.UploaddocumentCollectionView.reloadData()
+       
+        
+       
         self.btnCreate_UpdateOpp.setTitle("Update opportunity", for: .normal)
         self.lblSubCategory.text = self.userTimeLineoppdetails?.subcategory_name
         self.txtFieldTitle.text = self.userTimeLineoppdetails?.title
@@ -209,6 +234,11 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
         else if String.getString(self.userTimeLineoppdetails?.opp_plan) == "Premium"{
             self.viewPremium.backgroundColor = UIColor(red: 21, green: 114, blue: 161)
             self.lblPremium.textColor = .white
+        }
+        
+        DispatchQueue.main.async {
+            self.UploadimageCollectionView.reloadData()
+            self.UploaddocumentCollectionView.reloadData()
         }
         self.setup()
     }
@@ -252,7 +282,8 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
             //            }
             if txt == "Quit"{
                 vc.dismiss(animated: false){
-                    kSharedAppDelegate?.makeRootViewController()
+                    self.navigationController?.popViewController(animated: true)
+                  //  kSharedAppDelegate?.makeRootViewController()
                 }
             }
         }
@@ -266,7 +297,12 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
                 ImagePickerHelper.shared.showPickerController {
                     image, url in
                     self.imagearr.append(image ?? UIImage())
+                    self.viewImage.isHidden = self.imagearr.count != 0 ? false : true
+                    self.heightViewImage.constant = self.imagearr.count != 0 ? 236 : 0
+                    self.viewAddMoreImage.isHidden = self.imagearr.count != 0 ? false : true
+                    self.heightViewMoreImage.constant = self.imagearr.count != 0 ? 60 : 0
                     self.UploadimageCollectionView.reloadData()
+                    
                 }
                 
                 debugPrint("imagearraycount..........",self.imagearr.count)
@@ -275,7 +311,7 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
             else{
                 btnSelectImage.isEnabled = false
             }
-            self.viewSelectCategoryTop.constant = 420  // 310
+           // self.viewSelectCategoryTop.constant = 420  // 310
             
         }
     }
@@ -317,7 +353,7 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
             if documentarr.count == 0{
                 btnSelectDocument.isEnabled = true
                 self.openFileBrowser()
-                self.viewSelectCategoryTop.constant = 420
+               // self.viewSelectCategoryTop.constant = 420
             }
             else{
                 btnSelectDocument.isEnabled = false
@@ -465,7 +501,7 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
             self.showSimpleAlert(message: Notifications.ktitle)
             return
         }
-        else if !String.getString(self.txtFieldTitle.text).isValidUserName()
+        else if !String.getString(self.txtFieldTitle.text).isValidTitle()
         {
             self.showSimpleAlert(message: Notifications.KValidtitle)
             return
@@ -568,7 +604,8 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
                 return self.docummentarray.count
             }
             
-        default: return 5
+        default:
+            return 5
         }
     }
     
@@ -648,6 +685,20 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
         }
         return UICollectionViewCell()
     }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        switch collectionView{
+        case self.UploadimageCollectionView:
+            return CGSize(width: self.UploadimageCollectionView.frame.size.width, height: 235)
+          
+        case self.UploaddocumentCollectionView:
+            return CGSize(width: self.UploaddocumentCollectionView.frame.size.width, height: 45)
+            
+        default :
+            return CGSize()
+        }
+    }
     //  MARK: - Document Picker
     
     
@@ -719,9 +770,19 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
         // self.doc = (url)
         print("doc path=-=-=\(doc)")
         self.documentarr.append(url)
+        
+        self.UploaddocumentCollectionView.isHidden = self.documentarr.count != 0 ? false : true
+        self.heightDocCollectionView.constant = self.documentarr.count != 0 ? 60 : 0
+        self.viewAddMoreDoc.isHidden = self.documentarr.count != 0 ? false : true
+        self.heightViewMoreDoc.constant = self.documentarr.count != 0 ? 60 : 0
+        
         self.docummentarray.append(url.lastPathComponent)
         print("doc documentarr=-=-=\(documentarr)")
+        
+        DispatchQueue.main.async {
         self.UploaddocumentCollectionView.reloadData()
+        }
+       
         
         
     }
@@ -1331,6 +1392,7 @@ extension TrailingOpportunityVC{
         TANetworkManager.sharedInstance.UpdatetMultiPartwithlanguage(withServiceName:ServiceName.kupdateopportunity , requestMethod: .post, requestImages: [:], requestdoc: [:],requestVideos: [:], requestData:params, req: self.imagearr, req:self.documentarr)
         { (result:Any?, error:Error?, errortype:ErrorType?, statusCode:Int?) in
             CommonUtils.showHudWithNoInteraction(show: false)
+            
             if errortype == .requestSuccess {
                 debugPrint("result=====",result)
                 let dictResult = kSharedInstance.getDictionary(result)
@@ -1389,5 +1451,21 @@ extension TrailingOpportunityVC{
         lblFeature.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Featured", comment: "")
         lblPremium.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Premium", comment: "")
         btnCreateOpp.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "Create opportunity", comment: ""), for: .normal)
+    }
+}
+
+
+extension UIViewController {
+    func load(url: URL , completionHandler: @escaping((_ img:UIImage) -> Void)) {
+        DispatchQueue.global().async { [weak self] in
+            if let data = try? Data(contentsOf: url) {
+                if let image = UIImage(data: data) {
+                    DispatchQueue.main.async {
+                        completionHandler(image)
+                      //  self?.image = image
+                    }
+                }
+            }
+        }
     }
 }

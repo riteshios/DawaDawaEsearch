@@ -24,7 +24,10 @@ ${BUILT_PRODUCTS_DIR}/SKFloatingTextField/SKFloatingTextField.framework
 ${BUILT_PRODUCTS_DIR}/STTabbar/STTabbar.framework
 ${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework
 ${BUILT_PRODUCTS_DIR}/Stripe/Stripe.framework
+${BUILT_PRODUCTS_DIR}/StripeApplePay/StripeApplePay.framework
 ${BUILT_PRODUCTS_DIR}/StripeCore/StripeCore.framework
+${BUILT_PRODUCTS_DIR}/StripePayments/StripePayments.framework
+${BUILT_PRODUCTS_DIR}/StripePaymentsUI/StripePaymentsUI.framework
 ${BUILT_PRODUCTS_DIR}/StripeUICore/StripeUICore.framework
 ${BUILT_PRODUCTS_DIR}/SwiftMessages/SwiftMessages.framework
 ${BUILT_PRODUCTS_DIR}/SwiftyGif/SwiftyGif.framework

@@ -190,17 +190,17 @@ class DetailsTableViewCell: UITableViewCell,UITextViewDelegate {
 extension DetailsTableViewCell: UICollectionViewDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     
     //    Collection View
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 2
-    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        switch section{
-        case 0:
+        switch collectionView{
+        case self.SocialPostCollectionView:
             return self.img.count
-        case 1:
+           
+            
+        case self.DocumentCollectionView:
             return self.doc.count
+            
         default:
             return 0
         }
@@ -208,9 +208,10 @@ extension DetailsTableViewCell: UICollectionViewDelegate,UICollectionViewDataSou
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        switch indexPath.section{
+        switch collectionView{
             
-        case 0:
+            case self.SocialPostCollectionView:
+            
             let cell = SocialPostCollectionView.dequeueReusableCell(withReuseIdentifier: "SocialPostCollectionViewCell", for: indexPath) as! SocialPostCollectionViewCell
             
             let obj = img[indexPath.item].imageurl
@@ -220,10 +221,11 @@ extension DetailsTableViewCell: UICollectionViewDelegate,UICollectionViewDataSou
             print("-=imagebaseurl=-=-\(imageurl)")
             cell.imgOpportunity.sd_setImage(with: imgUrl, placeholderImage: UIImage(named: "Frame 726"))
             // cell.imgOpportunity.downlodeImage(serviceurl: imageurl, placeHolder: UIImage(named: "baba"))
+          
             cell.imgOpportunity.seeFullImage()
             return cell
             
-        case 1:
+        case self.DocumentCollectionView:
             
             let cell = DocumentCollectionView.dequeueReusableCell(withReuseIdentifier: "DocumentCollectionViewCell", for: indexPath) as! DocumentCollectionViewCell
             let obj = doc[indexPath.item].oppr_document
@@ -243,12 +245,14 @@ extension DetailsTableViewCell: UICollectionViewDelegate,UICollectionViewDataSou
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        switch indexPath.section{
-        case 0:
+        
+        switch collectionView{
+
+        case self.SocialPostCollectionView:
             return CGSize(width: SocialPostCollectionView.frame.size.width, height: 225)
             
-        case 1:
-            return CGSize(width: SocialPostCollectionView.frame.size.width , height: 60)
+        case self.DocumentCollectionView:
+            return CGSize(width: SocialPostCollectionView.frame.size.width, height: 60)
             
         default:
             return CGSize()
