@@ -6,21 +6,33 @@ import UIKit
 import WebKit
 
 
-class DocumentWebView: UIViewController {
+class DocumentWebView: UIViewController, WKNavigationDelegate {
     
     @IBOutlet weak var lblheading: UILabel!
     @IBOutlet weak var webkit: WKWebView!
-    var docurl  = "https://demo4esl.com/dawadawa/public/front_assets/assets/media/opportunity_documents/EJAZ%20AHMED.pdf"
-    var heading = ""
+    var opr_doc  = "https://demo4esl.com/dawadawa/public/front_assets/assets/media/opportunity_documents/"
+    var doclink  = ""
+    var heading  = "Document"
     
 // MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.webkit.navigationDelegate = self
+        self.doc()
+    }
+    
+    func doc(){
+        CommonUtils.showHudWithNoInteraction(show: true)
+        let docurl   = "\(self.opr_doc)\(self.doclink)"
         self.lblheading.text = self.heading
         webkit.load(URLRequest(url: URL(string: docurl)!))
-       
+    }
+    
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        CommonUtils.showHudWithNoInteraction(show: false)
+        print("Loder Stop")
+        // or what you want
     }
     
     @IBAction func btnBackTapped(_ sender: UIButton) {

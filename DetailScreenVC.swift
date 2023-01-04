@@ -7,6 +7,7 @@ import StripeUICore
 
 class DetailScreenVC: UIViewController,DocumentCollectionViewCellDelegate{
     
+    
     @IBOutlet weak var tblviewDetail: UITableView!
     @IBOutlet weak var lblDetailScreen: UILabel!
     
@@ -518,7 +519,7 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                             
                             if txt == "Dismiss"{
                                 self.dismiss(animated: true)
-                                //              self.listoppoertunityapi()
+                                //      self.listoppoertunityapi()
                             }
                             
                             if txt == "CopyLink"{
@@ -552,7 +553,7 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                                                 // self.userTimeLine.remove(at: indexPath.row)
                                                 self.deletepostoppoertunityapi(oppr_id: oppid)
                                                 debugPrint("oppid......",oppid)
-                                                //     let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProfileVC") as! ProfileVC
+                                                //  let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProfileVC") as! ProfileVC
                                                 //                                        self.navigationController?.popViewController(animated: true)
                                             }
                                         }
@@ -790,6 +791,7 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
     
     func collectionView(collectionviewcell: DocumentCollectionViewCell?, index: Int, didTappedInTableViewCell: DetailsTableViewCell) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "DocumentWebView") as! DocumentWebView
+        vc.doclink = doc_url
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

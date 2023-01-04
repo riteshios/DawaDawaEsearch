@@ -197,9 +197,21 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
     
     func fetdata(){
         
-       
+        DispatchQueue.main.async {
+            self.UploadimageCollectionView.reloadData()
+            self.UploaddocumentCollectionView.reloadData()
+        }
         
-       
+        self.viewImage.isHidden = self.imgarray.count != 0 ? false : true
+        self.heightViewImage.constant = self.imgarray.count != 0 ? 236 : 0
+        self.viewAddMoreImage.isHidden = self.imgarray.count != 0 ? false : true
+        self.heightViewMoreImage.constant = self.imgarray.count != 0 ? 60 : 0
+    
+        self.UploaddocumentCollectionView.isHidden = self.docarray.count != 0 ? false : true
+        self.heightDocCollectionView.constant = self.docarray.count != 0 ? 60 : 0
+        self.viewAddMoreDoc.isHidden = self.docarray.count != 0 ? false : true
+        self.heightViewMoreDoc.constant = self.docarray.count != 0 ? 60 : 0
+        
         self.btnCreate_UpdateOpp.setTitle("Update opportunity", for: .normal)
         self.lblSubCategory.text = self.userTimeLineoppdetails?.subcategory_name
         self.txtFieldTitle.text = self.userTimeLineoppdetails?.title
@@ -234,11 +246,6 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
         else if String.getString(self.userTimeLineoppdetails?.opp_plan) == "Premium"{
             self.viewPremium.backgroundColor = UIColor(red: 21, green: 114, blue: 161)
             self.lblPremium.textColor = .white
-        }
-        
-        DispatchQueue.main.async {
-            self.UploadimageCollectionView.reloadData()
-            self.UploaddocumentCollectionView.reloadData()
         }
         self.setup()
     }

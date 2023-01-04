@@ -208,10 +208,21 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
     
     func fetchdata(){
         
-        self.UploadimageCollectionView.reloadData()
-        self.UploaddocumentCollectionView.reloadData()
-       
+        DispatchQueue.main.async {
+            self.UploadimageCollectionView.reloadData()
+            self.UploaddocumentCollectionView.reloadData()
+        }
         
+        self.viewImage.isHidden = self.imgarray.count != 0 ? false : true
+        self.heightViewImage.constant = self.imgarray.count != 0 ? 236 : 0
+        self.viewAddMoreImg.isHidden = self.imgarray.count != 0 ? false : true
+        self.heightViewMoreImg.constant = self.imgarray.count != 0 ? 60 : 0
+        
+        self.UploaddocumentCollectionView.isHidden = self.docarray.count != 0 ? false : true
+        self.heightDocCollectionView.constant = self.docarray.count != 0 ? 60 : 0
+        self.viewMoreDoc.isHidden = self.docarray.count != 0 ? false : true
+        self.hieghtViewMoreDoc.constant = self.docarray.count != 0 ? 60 : 0
+       
         self.btnCreate_UpdateOpp.setTitle("Update opportunity", for: .normal)
         self.lblSubCategory.text = self.userTimeLineoppdetails?.subcategory_name
         self.txtFieldTitle.text = self.userTimeLineoppdetails?.title
@@ -1395,12 +1406,11 @@ extension MiningServiceVC{
             "sub_category":"\(String(describing: subcatid))",
             "title":String.getString(self.txtFieldTitle.text),
             "business_name":String.getString(self.txtFieldBusinessName.text),
-            "business_mining_type":"\(String(describing: businesstypeid))",
+            "business_mining_type":String.getString(self.lblBusinesstype.text),
             "business_mining_block":String.getString(self.txtFieldBusinessMiningBlock.text),
             "opp_state":"\(String(describing: stateid))",
             "opp_locality":"\(String(describing: localityid))",
             "location_name":String.getString(self.txtFieldLocationName.text),
-            
             "description":String.getString(self.TextViewDescription.text),
             "mobile_num":String.getString(self.txtFieldMobileNumber.text),
             "whatsaap_num":String.getString(self.txtFieldWhatsappNumber.text),

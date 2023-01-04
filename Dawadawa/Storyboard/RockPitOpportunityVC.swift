@@ -138,6 +138,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
               //  self.viewSelectCategoryTop.constant = 10
                 self.fetdata()
             }
+            
             else{
               //  self.viewSelectCategoryTop.constant = 420
                 self.fetdata()
@@ -205,8 +206,21 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
     
     func fetdata(){
         
-        self.UploadimageCollectionView.reloadData()
-        self.UploaddocumentCollectionView.reloadData()
+        DispatchQueue.main.async {
+            self.UploadimageCollectionView.reloadData()
+            self.UploaddocumentCollectionView.reloadData()
+        }
+       
+        self.viewImage.isHidden = self.imgarray.count != 0 ? false : true
+        self.heightViewImage.constant = self.imgarray.count != 0 ? 236 : 0
+        self.viewAddImageMore.isHidden = self.imgarray.count != 0 ? false : true
+        self.heightViewAddImageMore.constant = self.imgarray.count != 0 ? 60 : 0
+        
+        self.UploaddocumentCollectionView.isHidden = self.docarray.count != 0 ? false : true
+        self.heightCollectionView.constant = self.docarray.count != 0 ? 60 : 0
+        self.viewAddMoreDocument.isHidden = self.docarray.count != 0 ? false : true
+        self.heightAddMoreDocument.constant = self.docarray.count != 0 ? 60 : 0
+        
         self.btnCreate_UpdateOpp.setTitle("Update opportunity", for: .normal)
         self.lblSubCategory.text = self.userTimeLineoppdetails?.subcategory_name
         self.txtFieldTitle.text = self.userTimeLineoppdetails?.title

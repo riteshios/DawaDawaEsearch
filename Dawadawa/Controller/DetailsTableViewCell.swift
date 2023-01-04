@@ -6,6 +6,7 @@ import UIKit
 import IQKeyboardManagerSwift
 
 
+var doc_url = ""
 class DetailsTableViewCell: UITableViewCell,UITextViewDelegate {
     
     //    MARK: - Properties
@@ -260,9 +261,21 @@ extension DetailsTableViewCell: UICollectionViewDelegate,UICollectionViewDataSou
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell = DocumentCollectionView.cellForItem(at: indexPath) as! DocumentCollectionViewCell
-        self.celldelegate?.collectionView(collectionviewcell: cell, index: indexPath.item, didTappedInTableViewCell: self)
+        switch collectionView{
+
+        case self.DocumentCollectionView:
+            let opr_doc = doc[indexPath.item].oppr_document ?? ""
+            doc_url = opr_doc
+            print("docurl=-0=\(doc_url)")
+            let cell = DocumentCollectionView.cellForItem(at: indexPath) as! DocumentCollectionViewCell
+            self.celldelegate?.collectionView(collectionviewcell: cell, index: indexPath.item, didTappedInTableViewCell: self)
+            return
+            
+        default:
+            return
+        }
     }
+
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         pageControl.currentPage = Int(scrollView.contentOffset.x) / Int(scrollView.frame.width)

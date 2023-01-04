@@ -1181,16 +1181,13 @@ extension HomeVC{
         ]
         
         debugPrint("user_id......",Int.getInt(UserData.shared.id))
-        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kaddcomment, requestMethod: .POST,
-                                                               requestParameters:params, withProgressHUD: false)
+        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kaddcomment, requestMethod: .POST, requestParameters:params, withProgressHUD: false)
         {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
             
             CommonUtils.showHudWithNoInteraction(show: false)
-            
             if errorType == .requestSuccess {
                 
                 let dictResult = kSharedInstance.getDictionary(result)
-                
                 switch Int.getInt(statusCode) {
                 case 200:
                     
@@ -1210,10 +1207,9 @@ extension HomeVC{
                         debugPrint("CommentData=-=-=0-=",completion(self!.comment))
                         
                         CommonUtils.showError(.info, String.getString(dictResult["Opportunity"]))
-                        
                     }
                     
-                    else if  Int.getInt(dictResult["responsecode"]) == 400{
+                    else if  Int.getInt(dictResult["status"]) == 400{
                         //  CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
@@ -1502,13 +1498,10 @@ extension HomeVC{
                         print("DataAllPremiumPost===\(userTimeLine)")
                         
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                        
-                        
                     }
                     else if  Int.getInt(dictResult["status"]) == 400{
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
-                    
                     
                 default:
                     CommonUtils.showError(.error, String.getString(dictResult["message"]))

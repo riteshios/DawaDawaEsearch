@@ -193,10 +193,21 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
     
     func fetchdata(){
         
+        DispatchQueue.main.async {
+            self.UploadimageCollectionView.reloadData()
+            self.UploaddocumentCollectionView.reloadData()
+        }
         
+        self.viewImage.isHidden = self.imgarray.count != 0 ? false : true
+        self.heightViewImage.constant = self.imgarray.count != 0 ? 236 : 0
+        self.viewAddMoreImg.isHidden = self.imgarray.count != 0 ? false : true
+        self.heightViewMoreImg.constant = self.imgarray.count != 0 ? 60 : 0
         
-        self.UploadimageCollectionView.reloadData()
-        self.UploaddocumentCollectionView.reloadData()
+        self.UploaddocumentCollectionView.isHidden = self.docarray.count != 0 ? false : true
+        self.heightDocCollectionView.constant = self.docarray.count != 0 ? 60 : 0
+        self.viewMoreDoc.isHidden = self.docarray.count != 0 ? false : true
+        self.hieghtViewMoreDoc.constant = self.docarray.count != 0 ? 60 : 0
+        
         self.btnCreate_UpdateOpp.setTitle("Update opportunity", for: .normal)
         self.lblSubCategory.text = self.userTimeLineoppdetails?.subcategory_name
         self.txtFieldTitle.text = self.userTimeLineoppdetails?.title

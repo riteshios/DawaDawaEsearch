@@ -65,9 +65,7 @@ class PaymentVC: UIViewController {
         //        let paymentIntentClientSecret = paymentIntentClientSecret
         
         //        else {
-        
-        //                    return;
-        
+        //                 return;
         //                }
         
         let cardParams = txtfieldcardNumber.cardParams
@@ -148,9 +146,7 @@ extension PaymentVC{
                 
                 if let value = response.result.value {
                     let json = JSON(value)
-                    
                     print(" team List json is:\n\(json)")
-                    
                     let parser = SecretKeyParser(json)
                     outputBlock(parser.clientSecret)
                     
@@ -168,7 +164,6 @@ extension PaymentVC{
     
     func storepaymentapi(message:STPPaymentIntent){
         CommonUtils.showHud(show: true)
-        
         
         if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
             let endToken = kSharedUserDefaults.getLoggedInAccessToken()

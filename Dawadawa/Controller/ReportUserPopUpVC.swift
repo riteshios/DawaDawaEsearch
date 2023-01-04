@@ -99,8 +99,7 @@ extension ReportUserPopUpVC{
         ]
         
         debugPrint("report_check.....",self.reportcheck)
-        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kreportuser, requestMethod: .POST,
-                                                               requestParameters:params, withProgressHUD: false)
+        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kreportuser, requestMethod: .POST,requestParameters:params, withProgressHUD: false)
         {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
             
             CommonUtils.showHudWithNoInteraction(show: false)
@@ -119,9 +118,7 @@ extension ReportUserPopUpVC{
                         if septoken[0] == "Bearer"{
                             kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
                         }
-                        
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                        
                     }
                     
                     else if  Int.getInt(dictResult["responsecode"]) == 401{
