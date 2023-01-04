@@ -920,7 +920,7 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                 self.tblViewViewPost?.endUpdates()
             }
             
-            //                cell.layoutIfNeeded()
+            //    cell.layoutIfNeeded()
             return cell
         default:
             return UITableViewCell()

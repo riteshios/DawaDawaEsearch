@@ -44,7 +44,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
     @IBOutlet weak var btnPremium: UIButton!
     
     @IBOutlet weak var viewCreateOpportunity: UIView!
-   // @IBOutlet weak var viewSelectCategoryTop: NSLayoutConstraint!
+    // @IBOutlet weak var viewSelectCategoryTop: NSLayoutConstraint!
     
     
     @IBOutlet weak var viewImage:UIView!
@@ -135,12 +135,12 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
         if isedit == "True"{
             if self.userTimeLineoppdetails?.oppimage.count == 0{
                 self.initialSetup()
-              //  self.viewSelectCategoryTop.constant = 10
+                //  self.viewSelectCategoryTop.constant = 10
                 self.fetdata()
             }
             
             else{
-              //  self.viewSelectCategoryTop.constant = 420
+                //  self.viewSelectCategoryTop.constant = 420
                 self.fetdata()
             }
         }else{
@@ -210,7 +210,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
             self.UploadimageCollectionView.reloadData()
             self.UploaddocumentCollectionView.reloadData()
         }
-       
+        
         self.viewImage.isHidden = self.imgarray.count != 0 ? false : true
         self.heightViewImage.constant = self.imgarray.count != 0 ? 236 : 0
         self.viewAddImageMore.isHidden = self.imgarray.count != 0 ? false : true
@@ -292,7 +292,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
             if txt == "Quit"{
                 vc.dismiss(animated: false){
                     self.navigationController?.popViewController(animated: true)
-                   // kSharedAppDelegate?.makeRootViewController()
+                    // kSharedAppDelegate?.makeRootViewController()
                 }
             }
         }
@@ -303,17 +303,17 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
         if self.btnSelectImage.isSelected == true{
             if imagearr.count == 0{
                 btnSelectImage.isEnabled = true
-                ImagePickerHelper.shared.showPickerController {
-                    image, url in
-                    self.imagearr.append(image ?? UIImage())
-                    print("imgArr .count...",self.imagearr)
-                    self.viewImage.isHidden = self.imagearr.count != 0 ? false : true
-                    self.heightViewImage.constant = self.imagearr.count != 0 ? 236 : 0
-                    self.viewAddImageMore.isHidden = self.imagearr.count != 0 ? false : true
-                    self.heightViewAddImageMore.constant = self.imagearr.count != 0 ? 60 : 0
-                    
-                    self.UploadimageCollectionView.reloadData()
-                }
+                    ImagePickerHelper.shared.showPickerController {
+                        image, url in
+                        self.imagearr.append(image ?? UIImage())
+                        print("imgArr .count...",self.imagearr)
+                        self.viewImage.isHidden = self.imagearr.count != 0 ? false : true
+                        self.heightViewImage.constant = self.imagearr.count != 0 ? 236 : 0
+                        self.viewAddImageMore.isHidden = self.imagearr.count != 0 ? false : true
+                        self.heightViewAddImageMore.constant = self.imagearr.count != 0 ? 60 : 0
+                        
+                        self.UploadimageCollectionView.reloadData()
+                    }
                 
                 debugPrint("imagearraycount..........",self.imagearr.count)
             }
@@ -321,7 +321,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
             else{
                 btnSelectImage.isEnabled = false
             }
-          //  self.viewSelectCategoryTop.constant = 420  // 310
+            //  self.viewSelectCategoryTop.constant = 420  // 310
             self.isSelectimage = true
         }
     }
@@ -362,15 +362,15 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
             if documentarr.count == 0{
                 btnSelectDocument.isEnabled = true
                 self.openFileBrowser()
-             //   self.viewSelectCategoryTop.constant = 420
+                //   self.viewSelectCategoryTop.constant = 420
             }
             else{
                 btnSelectDocument.isEnabled = false
             }
         }
         self.isSelectDocument = true
-        
     }
+    
     @IBAction func btnAddMoreDocumentTapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         if self.btnMoreDocument.isSelected == true{
@@ -613,6 +613,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch collectionView{
+            
         case self.UploadimageCollectionView:
             let cell = UploadimageCollectionView.dequeueReusableCell(withReuseIdentifier: "UploadImageCollectionViewCell", for: indexPath) as! UploadImageCollectionViewCell
             
@@ -659,6 +660,8 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
                 
                 cell.callbackclose = {
                     self.docarray.remove(at: indexPath.row)
+                    let docid = Int.getInt(self.userTimeLineoppdetails?.oppdocument[indexPath.row].id)
+                    self.deletedocumentapi(docid: docid)
                     self.UploaddocumentCollectionView.reloadData()
                     
                 }
@@ -1191,7 +1194,7 @@ extension RockPitOpportunityVC{
                 let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
                 kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
             }
-//              headers["token"] = kSharedUserDefaults.getLoggedInAccessToken()
+            //              headers["token"] = kSharedUserDefaults.getLoggedInAccessToken()
         }
         
         let userid = Int(UserData.shared.id ?? 0)  // For Remove Optional
@@ -1308,7 +1311,7 @@ extension RockPitOpportunityVC{
                 let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
                 kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
             }
-            //            headers["token"] = kSharedUserDefaults.getLoggedInAccessToken()
+            //  headers["token"] = kSharedUserDefaults.getLoggedInAccessToken()
         }
         
         let oppid = Int(self.oppid ?? 0) // For remove optional
@@ -1443,6 +1446,63 @@ extension RockPitOpportunityVC{
             }
         }
     }
+    
+    //    Delete Document Api
+    
+//    func deletedocumentapi(docid:Int){
+//        CommonUtils.showHud(show: true)
+//
+//        if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
+//            let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+//            let septoken = endToken.components(separatedBy: " ")
+//            if septoken[0] != "Bearer"{
+//                let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
+//                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
+//            }
+//        }
+//
+//        let params:[String : Any] = [
+//            "oppr_id":docid  // its image id
+//        ]
+//
+//        debugPrint("imageid......",docid)
+//        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kdeleteoppimage, requestMethod: .POST,requestParameters:params, withProgressHUD: false)
+//        {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
+//
+//            CommonUtils.showHudWithNoInteraction(show: false)
+//
+//            if errorType == .requestSuccess {
+//
+//                let dictResult = kSharedInstance.getDictionary(result)
+//
+//                switch Int.getInt(statusCode) {
+//                case 200:
+//
+//                    if Int.getInt(dictResult["status"]) == 200{
+//
+//                        let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+//                        let septoken = endToken.components(separatedBy: " ")
+//                        if septoken[0] == "Bearer"{
+//                            kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
+//                        }
+//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+//                    }
+//
+//                    else if  Int.getInt(dictResult["status"]) == 404{
+//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+//                        // kSharedAppDelegate?.makeRootViewController()
+//                    }
+//                default:
+//                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
+//                }
+//            } else if errorType == .noNetwork {
+//                CommonUtils.showToastForInternetUnavailable()
+//
+//            } else {
+//                CommonUtils.showToastForDefaultError()
+//            }
+//        }
+//    }
 }
 
 // MARK: - Localisation
@@ -1475,6 +1535,7 @@ extension RockPitOpportunityVC{
 
 
 extension UIViewController{
+    //    Delete image api
     func deleteimageapi(imageid:Int, completionHendler: @escaping((_ sts:Int)->Void)){
         CommonUtils.showHud(show: true)
         
@@ -1507,8 +1568,60 @@ extension UIViewController{
                     
                     completionHendler(Int.getInt(dictResult["status"]))
                     if Int.getInt(dictResult["status"]) == 200{
-                       
                         
+                        let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+                        let septoken = endToken.components(separatedBy: " ")
+                        if septoken[0] == "Bearer"{
+                            kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
+                        }
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    }
+                    
+                    else if  Int.getInt(dictResult["status"]) == 404{
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        // kSharedAppDelegate?.makeRootViewController()
+                    }
+                default:
+                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                }
+            } else if errorType == .noNetwork {
+                CommonUtils.showToastForInternetUnavailable()
+                
+            } else {
+                CommonUtils.showToastForDefaultError()
+            }
+        }
+    }
+    
+    //    Delete Document Api
+    
+    func deletedocumentapi(docid:Int){
+        CommonUtils.showHud(show: true)
+        
+        if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
+            let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+            let septoken = endToken.components(separatedBy: " ")
+            if septoken[0] != "Bearer"{
+                let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
+                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
+            }
+        }
+        
+        let params:[String : Any] = [
+            "oppr_id":docid  // its document id
+        ]
+        
+        debugPrint("imageid......",docid)
+        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kdeleteoppdoc, requestMethod: .POST,requestParameters:params, withProgressHUD: false)
+        {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
+            CommonUtils.showHudWithNoInteraction(show: false)
+            
+            if errorType == .requestSuccess {
+                let dictResult = kSharedInstance.getDictionary(result)
+                switch Int.getInt(statusCode) {
+                case 200:
+                    
+                    if Int.getInt(dictResult["status"]) == 200{
                         let endToken = kSharedUserDefaults.getLoggedInAccessToken()
                         let septoken = endToken.components(separatedBy: " ")
                         if septoken[0] == "Bearer"{

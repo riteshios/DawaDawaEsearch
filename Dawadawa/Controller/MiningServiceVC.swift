@@ -694,6 +694,8 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
                 cell.image.image = imagearr[indexPath.row]
                 cell.callback = {
                     self.imagearr.remove(at: indexPath.row)
+                    let imgid = Int.getInt(self.userTimeLineoppdetails?.oppimage[indexPath.row].id)
+                    self.deleteimageapi(imageid: imgid)
                     self.UploadimageCollectionView.reloadData()
                 }
             }
@@ -1555,6 +1557,60 @@ extension MiningServiceVC{
             }
         }
     }
+    
+    //    Delete image Api
+           
+           func deleteimageapi(imageid:Int){
+               CommonUtils.showHud(show: true)
+               
+               if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
+                   let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+                   let septoken = endToken.components(separatedBy: " ")
+                   if septoken[0] != "Bearer"{
+                       let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
+                       kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
+                   }
+               }
+               
+               let params:[String : Any] = [
+                   "oppr_id":imageid  // its image id
+               ]
+               
+               debugPrint("imageid......",imageid)
+               TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kdeleteoppimage, requestMethod: .POST,requestParameters:params, withProgressHUD: false)
+               {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
+                   
+                   CommonUtils.showHudWithNoInteraction(show: false)
+                   
+                   if errorType == .requestSuccess {
+                       let dictResult = kSharedInstance.getDictionary(result)
+                       switch Int.getInt(statusCode) {
+                       case 200:
+                           if Int.getInt(dictResult["status"]) == 200{
+                               
+                               let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+                               let septoken = endToken.components(separatedBy: " ")
+                               if septoken[0] == "Bearer"{
+                                   kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
+                               }
+                               CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                           }
+                           
+                           else if  Int.getInt(dictResult["status"]) == 404{
+                               CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                               // kSharedAppDelegate?.makeRootViewController()
+                           }
+                       default:
+                           CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                       }
+                   } else if errorType == .noNetwork {
+                       CommonUtils.showToastForInternetUnavailable()
+                       
+                   } else {
+                       CommonUtils.showToastForDefaultError()
+                   }
+               }
+           }
 }
 // MARK: - Localisation
 extension MiningServiceVC{

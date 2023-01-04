@@ -47,8 +47,6 @@ class SocialPostData {
     var oppdocument = [oppr_document]()  // Array of dictionary
     var usercomment = [user_comment]() // Array of dictionary
     
-    
-    
     init(data: [String: Any]) {
         self.id = Int.getInt(data["id"])
         self.user_id = Int.getInt(data["user_id"])
