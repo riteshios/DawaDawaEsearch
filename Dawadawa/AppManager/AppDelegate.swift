@@ -74,9 +74,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if isUniversalLinkClick {
             // app opened via clicking a universal link.
             let window = UIApplication.shared.windows.first
-            
             let storybaord = UIStoryboard(name: "Home", bundle: nil)
-            
             window?.rootViewController  = storybaord.instantiateViewController(withIdentifier: "DetailScreenVC")
             
             window?.makeKeyAndVisible()
@@ -88,9 +86,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             window?.makeKeyAndVisible()
         }
         return true
-        
     }
-    
     
     // MARK: UISceneSession Lifecycle
     

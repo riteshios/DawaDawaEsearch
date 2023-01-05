@@ -231,6 +231,7 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
             }
             else {
                 cell.imgredCircle.isHidden = false
+                cell.lblTitle.text = String.getString(obj.title)
                 cell.lblcloseOpportunity.isHidden = false
             }
             
@@ -342,8 +343,8 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                         else{
                             self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
                         }
-                        
                     }
+                    
                     else{
                         let oppid = Int.getInt(userTimeLine[indexPath.row].id)
                         debugPrint("detailsppid=-=-=",oppid)
@@ -382,7 +383,7 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                 
                 if txt == "Like"{
                     
-                    //                    if cell.btnlike.isSelected == true{
+                    // if cell.btnlike.isSelected == true{
                     if UserData.shared.isskiplogin == true{
                         if kSharedUserDefaults.getlanguage() as? String == "en"{
                             self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
@@ -438,7 +439,6 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                         else{
                             self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
                         }
-                        
                     }
                     else{
                         let image = obj.share_link
@@ -457,8 +457,8 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                         else{
                             self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
                         }
-                        
                     }
+                    
                     else{
                         let oppid = userTimeLine[indexPath.row].id
                         let vc = self.storyboard?.instantiateViewController(withIdentifier: RateOpportunityPopUPVC.getStoryboardID()) as! RateOpportunityPopUPVC
@@ -542,8 +542,8 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                                     else{
                                         self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
                                     }
-                                    
                                 }
+                                
                                 else{
                                     let oppid = Int.getInt(userTimeLine[indexPath.row].id)
                                     debugPrint("oppid+++++++",oppid)
@@ -785,7 +785,6 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                         else{
                             self.showSimpleAlert(message: "الرجاء إضافة تعليق")
                         }
-                        
                     }
                     else{
                         let oppid = Int.getInt(userTimeLine[indexPath.row].id)
@@ -811,7 +810,6 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                             
                             attributedString.setColorForText(textToFind: first, withColor: UIColor.black)
                             attributedString.setColorForText(textToFind: second, withColor: UIColor.gray)
-                            
                             
                             cell.lblusernameandcomment.attributedText = attributedString
                             self.getallopportunity()
@@ -861,20 +859,19 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                 cell.viewcomment.isHidden = true
                 cell.heightViewComment.constant  = 0
                 cell.bottomspacingReply.constant = -90
-                //                cell.bottomlblSubcomment.constant = -50
+                //  cell.bottomlblSubcomment.constant = -50
                 
             }
             else{
                 cell.viewcomment.isHidden = false
                 cell.bottomspacingReply.constant = 0
-                
             }
             
             if obj.usercomment.first?.subcomment.count == 0 {
                 cell.imageSubcommentUser.isHidden = true
                 cell.lblsubUserNameandComment.isHidden = true
                 cell.VerticalspacingSubComment.constant = 0
-                //                cell.bottomlblSubcomment.constant = 10
+                //   cell.bottomlblSubcomment.constant = 10
             }
             else{
                 cell.imageSubcommentUser.isHidden = false

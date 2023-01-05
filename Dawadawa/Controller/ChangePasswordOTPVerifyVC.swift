@@ -33,9 +33,9 @@ class ChangePasswordOTPVerifyVC: UIViewController {
     
     var callbackotp:(()->())?
     var otp = ""
-
-   
-//     MARK: - Life Cycle
+    
+    
+    //     MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setuplanguage()
@@ -68,7 +68,7 @@ class ChangePasswordOTPVerifyVC: UIViewController {
         self.lblSubHeading.text = "Password change code is sent on your email address \(String.getString(UserData.shared.email))"
         self.viewVerify.backgroundColor = UIColor(hexString: "#A6A6A6")
     }
-    func changebordercolor(){
+    func changebordercolor_tored(){
         
         self.viewOtp1.borderColor = UIColor(hexString: "#FF4C4D")
         self.viewOtp2.borderColor = UIColor(hexString: "#FF4C4D")
@@ -77,7 +77,7 @@ class ChangePasswordOTPVerifyVC: UIViewController {
         self.viewOtp5.borderColor = UIColor(hexString: "#FF4C4D")
         self.viewOtp6.borderColor = UIColor(hexString: "#FF4C4D")
     }
-// MARK: - @IBAction
+    // MARK: - @IBAction
     
     @IBAction func btnVerifyOtpTaooed(_ sender: UIButton) {
         self.otp = String.getString(self.txtfieldOtp1.text) + String.getString(self.txtfieldOtp2.text) + String.getString(self.txtfieldOtp3.text) + String.getString(self.txtfieldOtp4.text) +
@@ -98,26 +98,34 @@ class ChangePasswordOTPVerifyVC: UIViewController {
     @IBAction func btnResendOtpTapped(_sender: UIButton){
         self.resendOtpApi()
     }
+    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
         if (string.count == 1){
             if textField == txtfieldOtp1 {
                 txtfieldOtp2?.becomeFirstResponder()
+                self.viewOtp1.borderColor = UIColor(hexString: "#1572A1")
             }
             if textField == txtfieldOtp2 {
                 txtfieldOtp3?.becomeFirstResponder()
+                self.viewOtp2.borderColor = UIColor(hexString: "#1572A1")
             }
             if textField == txtfieldOtp3 {
                 txtfieldOtp4?.becomeFirstResponder()
+                self.viewOtp3.borderColor = UIColor(hexString: "#1572A1")
             }
             if textField == txtfieldOtp4 {
                 txtfieldOtp5?.becomeFirstResponder()
+                self.viewOtp4.borderColor = UIColor(hexString: "#1572A1")
             }
             if textField == txtfieldOtp5{
                 txtfieldOtp6?.becomeFirstResponder()
+                self.viewOtp5.borderColor = UIColor(hexString: "#1572A1")
             }
             if textField == txtfieldOtp6{
                 txtfieldOtp6?.resignFirstResponder()
+                self.viewOtp6.borderColor = UIColor(hexString: "#1572A1")
+                self.viewVerify.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
             }
             
             textField.text? = string
@@ -125,21 +133,28 @@ class ChangePasswordOTPVerifyVC: UIViewController {
         }else{
             if textField == txtfieldOtp1 {
                 txtfieldOtp1?.becomeFirstResponder()
+                self.viewOtp1.borderColor = UIColor.gray
+                self.viewVerify.backgroundColor = UIColor(hexString: "#A6A6A6")
             }
             if textField == txtfieldOtp2 {
                 txtfieldOtp1.becomeFirstResponder()
+                self.viewOtp2.borderColor = UIColor.gray
             }
             if textField == txtfieldOtp3 {
                 txtfieldOtp2?.becomeFirstResponder()
+                self.viewOtp3.borderColor = UIColor.gray
             }
             if textField == txtfieldOtp4 {
                 txtfieldOtp3?.becomeFirstResponder()
+                self.viewOtp4.borderColor = UIColor.gray
             }
             if textField == txtfieldOtp5{
                 txtfieldOtp4?.becomeFirstResponder()
+                self.viewOtp5.borderColor = UIColor.gray
             }
             if textField == txtfieldOtp6{
                 txtfieldOtp5?.becomeFirstResponder()
+                self.viewOtp6.borderColor = UIColor.gray
             }
             textField.text? = string
             return false
@@ -149,30 +164,30 @@ class ChangePasswordOTPVerifyVC: UIViewController {
 }
 extension ChangePasswordOTPVerifyVC: UITextFieldDelegate{
     func textFieldDidBeginEditing(_ textField: UITextField){
-        switch textField{
-        case self.txtfieldOtp1:
-            self.viewOtp1.borderColor = UIColor(hexString: "#1572A1")
-            //            self.textFieldPhoneNumber.textColor = UIColor(hexStrin
-            
-        case self.txtfieldOtp2:
-            self.viewOtp2.borderColor = UIColor(hexString: "#1572A1")
-            
-        case self.txtfieldOtp3:
-            self.viewOtp3.borderColor = UIColor(hexString: "#1572A1")
-            
-        case self.txtfieldOtp4:
-            self.viewOtp4.borderColor = UIColor(hexString: "#1572A1")
-            
-        case self.txtfieldOtp5:
-            self.viewOtp5.borderColor = UIColor(hexString: "#1572A1")
-            
-        case self.txtfieldOtp6:
-            self.viewOtp6.borderColor = UIColor(hexString: "#1572A1")
-            self.viewVerify.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
-            
-        default:
-            return
-        }
+//        switch textField{
+//        case self.txtfieldOtp1:
+//            self.viewOtp1.borderColor = UIColor(hexString: "#1572A1")
+//            //       self.textFieldPhoneNumber.textColor = UIColor(hexStrin
+//
+//        case self.txtfieldOtp2:
+//            self.viewOtp2.borderColor = UIColor(hexString: "#1572A1")
+//
+//        case self.txtfieldOtp3:
+//            self.viewOtp3.borderColor = UIColor(hexString: "#1572A1")
+//
+//        case self.txtfieldOtp4:
+//            self.viewOtp4.borderColor = UIColor(hexString: "#1572A1")
+//
+//        case self.txtfieldOtp5:
+//            self.viewOtp5.borderColor = UIColor(hexString: "#1572A1")
+//
+//        case self.txtfieldOtp6:
+//            self.viewOtp6.borderColor = UIColor(hexString: "#1572A1")
+//            self.viewVerify.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
+//
+//        default:
+//            return
+//        }
     }
 }
 
@@ -206,7 +221,7 @@ extension ChangePasswordOTPVerifyVC{
                         self?.callbackotp?()
                     }
                     else if  Int.getInt(dictResult["status"]) == 400{
-                        self?.changebordercolor()
+                        self?.changebordercolor_tored()
                         self?.lblWrongOtp.isHidden = false
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
@@ -233,8 +248,7 @@ extension ChangePasswordOTPVerifyVC{
             "email":UserData.shared.email
         ]
         
-        TANetworkManager.sharedInstance.requestApi(withServiceName:ServiceName.kresendotp,                                                   requestMethod: .POST,
-                                                   requestParameters:params, withProgressHUD: false)
+        TANetworkManager.sharedInstance.requestApi(withServiceName:ServiceName.kresendotp, requestMethod: .POST, requestParameters:params, withProgressHUD: false)
         {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
             
             CommonUtils.showHudWithNoInteraction(show: false)

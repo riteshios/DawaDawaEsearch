@@ -304,6 +304,12 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
                 ImagePickerHelper.shared.showPickerController {
                     image, url in
                     self.imagearr.append(image ?? UIImage())
+                    
+                    let obj = oppr_image(data: [:])
+                    obj.imageurl = ""
+                    obj.img = image
+                    self.imgarray.append(obj)
+                    
                     self.viewImage.isHidden = self.imagearr.count != 0 ? false : true
                     self.heightViewImage.constant = self.imagearr.count != 0 ? 236 : 0
                     self.viewAddMoreImage.isHidden = self.imagearr.count != 0 ? false : true

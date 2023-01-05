@@ -306,15 +306,19 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
                     ImagePickerHelper.shared.showPickerController {
                         image, url in
                         self.imagearr.append(image ?? UIImage())
-                        print("imgArr .count...",self.imagearr)
+                        print("imgArr .count...",self.imagearr.count)
+                        
+                        let obj = oppr_image(data: [:])
+                        obj.imageurl = ""
+                        obj.img = image
+                        self.imgarray.append(obj)
+                        
                         self.viewImage.isHidden = self.imagearr.count != 0 ? false : true
                         self.heightViewImage.constant = self.imagearr.count != 0 ? 236 : 0
                         self.viewAddImageMore.isHidden = self.imagearr.count != 0 ? false : true
                         self.heightViewAddImageMore.constant = self.imagearr.count != 0 ? 60 : 0
-                        
                         self.UploadimageCollectionView.reloadData()
                     }
-                
                 debugPrint("imagearraycount..........",self.imagearr.count)
             }
             
@@ -351,6 +355,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
                         self.imagearr.append(image ?? UIImage())
                         self.UploadimageCollectionView.reloadData()
                     }
+                    print("imgArr addmore.count...",self.imagearr)
                 }
             }
         }
