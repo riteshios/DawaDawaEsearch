@@ -105,6 +105,7 @@
 		04A71CA92939DEE700C29394 /* EnterResidenceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A71CA82939DEE700C29394 /* EnterResidenceVC.swift */; };
 		04A73F3E2876B64E00A46E12 /* SelectCategoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A73F3D2876B64E00A46E12 /* SelectCategoryVC.swift */; };
 		04A73F402876E05C00A46E12 /* RockPitOpportunityVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A73F3F2876E05C00A46E12 /* RockPitOpportunityVC.swift */; };
+		04A8E5FF2967F986009EBFEB /* Global Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A8E5FE2967F986009EBFEB /* Global Api.swift */; };
 		04A9958C28A370FD00FC75C9 /* SaveOpportunityMoreVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A9958B28A370FD00FC75C9 /* SaveOpportunityMoreVC.swift */; };
 		04AE6FB8293A007B00B27B9C /* EnterPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AE6FB7293A007B00B27B9C /* EnterPasswordVC.swift */; };
 		04AF23BE28C08DF90053471D /* RateOpportunityPopUPVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AF23BD28C08DF90053471D /* RateOpportunityPopUPVC.swift */; };
@@ -788,6 +789,7 @@
 		04A71CA82939DEE700C29394 /* EnterResidenceVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterResidenceVC.swift; sourceTree = "<group>"; };
 		04A73F3D2876B64E00A46E12 /* SelectCategoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SelectCategoryVC.swift; path = Dawadawa/Storyboard/SelectCategoryVC.swift; sourceTree = SOURCE_ROOT; };
 		04A73F3F2876E05C00A46E12 /* RockPitOpportunityVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RockPitOpportunityVC.swift; path = Dawadawa/Storyboard/RockPitOpportunityVC.swift; sourceTree = SOURCE_ROOT; };
+		04A8E5FE2967F986009EBFEB /* Global Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Global Api.swift"; path = "Dawadawa/Global_API/Global Api.swift"; sourceTree = SOURCE_ROOT; };
 		04A9958B28A370FD00FC75C9 /* SaveOpportunityMoreVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SaveOpportunityMoreVC.swift; path = Dawadawa/Storyboard/SaveOpportunityMoreVC.swift; sourceTree = SOURCE_ROOT; };
 		04AE6FB7293A007B00B27B9C /* EnterPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EnterPasswordVC.swift; path = Dawadawa/Storyboard/EnterPasswordVC.swift; sourceTree = SOURCE_ROOT; };
 		04AF23BD28C08DF90053471D /* RateOpportunityPopUPVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateOpportunityPopUPVC.swift; sourceTree = "<group>"; };
@@ -1626,6 +1628,14 @@
 				04A73F3F2876E05C00A46E12 /* RockPitOpportunityVC.swift */,
 			);
 			name = RockPitOpportunity;
+			sourceTree = "<group>";
+		};
+		04A8E6032967F9D4009EBFEB /* Global_API */ = {
+			isa = PBXGroup;
+			children = (
+				04A8E5FE2967F986009EBFEB /* Global Api.swift */,
+			);
+			path = Global_API;
 			sourceTree = "<group>";
 		};
 		04AF23BC28C08DB40053471D /* RateScreen */ = {
@@ -2560,6 +2570,7 @@
 			isa = PBXGroup;
 			children = (
 				047ED00728E5ADE800D13A20 /* Dawadawa.entitlements */,
+				04A8E6032967F9D4009EBFEB /* Global_API */,
 				44C286D52851B63E007AF36F /* AppManager */,
 				44C286D82851B682007AF36F /* Model */,
 				44C286D72851B675007AF36F /* Storyboard */,
@@ -3396,6 +3407,7 @@
 				447DCE602851CB1300C40DDD /* AlertView.swift in Sources */,
 				447DCC892851CB1100C40DDD /* UIApplication.swift in Sources */,
 				0489D1A22892CAB200725664 /* SubCategorylabelTableViewCell.swift in Sources */,
+				04A8E5FF2967F986009EBFEB /* Global Api.swift in Sources */,
 				447DCC7F2851CB1100C40DDD /* UIviewCornerRadius.swift in Sources */,
 				04B9190C286B1372009ABAE4 /* ChangeEmailVC.swift in Sources */,
 				0464E3362910F94B00EC10E3 /* MyChatTableViewCell.swift in Sources */,

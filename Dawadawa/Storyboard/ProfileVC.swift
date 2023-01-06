@@ -550,7 +550,7 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                         
                         if txt == "Dismiss"{
                             self.dismiss(animated: true)
-                            //                        self.listoppoertunityapi()
+                            //   self.listoppoertunityapi()
                         }
                         
                         if txt == "CopyLink"{
@@ -584,7 +584,7 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                                             self.deletepostoppoertunityapi(oppr_id: oppid)
                                             debugPrint("oppid......",oppid)
                                             
-                                            //     let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProfileVC") as! ProfileVC
+                                            //  let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProfileVC") as! ProfileVC
                                             //                                        self.navigationController?.popViewController(animated: true)
                                         }
                                         
@@ -607,7 +607,7 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                                             self.closeopportunityapi(opr_id: oppid)
                                             debugPrint("oppidclose......",oppid)
                                             
-                                            //                                        let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProfileVC") as! ProfileVC
+                                            //  let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProfileVC") as! ProfileVC
                                             //                                        self.navigationController?.popViewController(animated: true)
                                         }
                                         
@@ -617,15 +617,18 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                             }
                             
                         }
-                        
-                        
+                        if txt == "ViewDetail"{
+                            let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
+                            debugPrint("detailsppid=-=-=",oppid)
+                            let vc = self.storyboard?.instantiateViewController(withIdentifier: DetailScreenVC.getStoryboardID()) as! DetailScreenVC
+                            vc.oppid = oppid
+                            self.navigationController?.pushViewController(vc, animated: true)
+                        }
                     }
                     self.present(vc, animated: false)
                 }
                 
-                
                 //                       COMMENT PART
-                
                 
                 
                 if txt == "reply"{

@@ -2,7 +2,6 @@
 //  Dawadawa
 //  Created by Ritesh Gupta on 22/07/22.
 
-
 import UIKit
 
 class ProileSocialMoreVC: UIViewController {
@@ -11,17 +10,24 @@ class ProileSocialMoreVC: UIViewController {
 
     @IBOutlet weak var Viewmain: UIView!
     @IBOutlet weak var viewBG: UIView!
+    @IBOutlet weak var viewViewDetails: UIView!
     
     @IBOutlet weak var lblCopylink: UILabel!
     @IBOutlet weak var lblUpdate: UILabel!
     @IBOutlet weak var lblDelete: UILabel!
     @IBOutlet weak var lblClose: UILabel!
     
+    @IBOutlet weak var HeightviewMain: NSLayoutConstraint
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setup()
-       
+        if hascamefrom == "DetailPage"{
+            self.viewViewDetails.isHidden = true
+            self.HeightviewMain.constant = 320
+        }
     }
+    
     func setup(){
         self.setuplanguage()
         Viewmain.clipsToBounds = true
@@ -54,6 +60,11 @@ class ProileSocialMoreVC: UIViewController {
         self.callback?("Close")
     }
     
+    @IBAction func btnViewdetails(_ sender: UIButton){
+        self.callback?("ViewDetail")
+    }
+    
+
 }
 // MARK: - LOcalisation
 

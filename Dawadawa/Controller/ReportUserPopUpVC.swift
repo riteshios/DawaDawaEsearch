@@ -16,7 +16,10 @@ class ReportUserPopUpVC: UIViewController {
     @IBOutlet weak var btnReport: UIButton!
     
     var userid = 0
-    var reportcheck = ""
+//    var reportcheck = ""
+    var selectedreport = ""
+    var reportcheck:[String] = []
+
     
     override func viewDidLoad() {
         
@@ -39,21 +42,98 @@ class ReportUserPopUpVC: UIViewController {
     
     @IBAction func btnReason1Tapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
-        self.reportcheck.append("one")
+        if sender.isSelected == true{
+            self.reportcheck.append("one")
+            
+            let check = self.reportcheck.joined(separator: ",")
+            self.selectedreport = check
+            
+            print("selectedreport=--=\(selectedreport)")
+            
+        }
+        else if sender.isSelected == false{
+            if reportcheck.contains("one") == true{
+                self.reportcheck.removeAll{ $0 == "one"}
+               
+                let check = self.reportcheck.joined(separator: ",")
+                self.selectedreport = check
+                
+                print("selectedreport=--=\(selectedreport)")
+               
+            }
+        }
     }
+    
     @IBAction func btnReason2Tapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
-        self.reportcheck.append(",two")
+        if sender.isSelected == true{
+            self.reportcheck.append("two")
+            
+            let check = self.reportcheck.joined(separator: ",")
+            self.selectedreport = check
+            
+            print("selectedreport=--=\(selectedreport)")
+            
+        }
+        else if sender.isSelected == false{
+            if reportcheck.contains("two") == true{
+                self.reportcheck.removeAll{ $0 == "two"}
+               
+                let check = self.reportcheck.joined(separator: ",")
+                self.selectedreport = check
+                
+                print("selectedreport=--=\(selectedreport)")
+               
+            }
+        }
     }
     
     @IBAction func btnReason3Tapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
-        self.reportcheck.append(",three")
+        if sender.isSelected == true{
+            self.reportcheck.append("three")
+            
+            let check = self.reportcheck.joined(separator: ",")
+            self.selectedreport = check
+            
+            print("selectedreport=--=\(selectedreport)")
+            
+        }
+        else if sender.isSelected == false{
+            if reportcheck.contains("three") == true{
+                self.reportcheck.removeAll{ $0 == "three"}
+               
+                let check = self.reportcheck.joined(separator: ",")
+                self.selectedreport = check
+                
+                print("selectedreport=--=\(selectedreport)")
+               
+            }
+        }
     }
     
     @IBAction func btnReason4Tapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
-        self.reportcheck.append(",four")
+        if sender.isSelected == true{
+            self.reportcheck.append("four")
+            
+            let check = self.reportcheck.joined(separator: ",")
+            self.selectedreport = check
+            
+            print("selectedreport=--=\(selectedreport)")
+            
+        }
+        else if sender.isSelected == false{
+            if reportcheck.contains("four") == true{
+                self.reportcheck.removeAll{ $0 == "four"}
+               
+                let check = self.reportcheck.joined(separator: ",")
+                self.selectedreport = check
+                
+                print("selectedreport=--=\(selectedreport)")
+               
+            }
+        }
     }
     
     @IBAction func btnReportTapped(_ sender: UIButton){

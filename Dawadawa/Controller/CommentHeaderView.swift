@@ -1,9 +1,6 @@
-//
 //  CommentHeaderView.swift
 //  Dawadawa
-//
 //  Created by ESEARCH05 on 29/11/22.
-//
 
 import UIKit
 
@@ -17,5 +14,4 @@ class CommentHeaderView: UITableViewHeaderFooterView {
     @IBAction func buttonTappedShowDetail(_ sender:UIButton){
         self.callBack?("detail")
     }
-
 }

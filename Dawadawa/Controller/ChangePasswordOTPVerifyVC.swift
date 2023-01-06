@@ -42,13 +42,13 @@ class ChangePasswordOTPVerifyVC: UIViewController {
         self.setup()
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let touch = touches.first{
-            if viewBG == touch.view{
-                self.dismiss(animated: true)
-            }
-        }
-    }
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        if let touch = touches.first{
+//            if viewBG == touch.view{
+//                self.dismiss(animated: true)
+//            }
+//        }
+//    }
     
     func setup(){
         self.txtfieldOtp1.delegate = self
@@ -163,7 +163,9 @@ class ChangePasswordOTPVerifyVC: UIViewController {
     
 }
 extension ChangePasswordOTPVerifyVC: UITextFieldDelegate{
+    
     func textFieldDidBeginEditing(_ textField: UITextField){
+        
 //        switch textField{
 //        case self.txtfieldOtp1:
 //            self.viewOtp1.borderColor = UIColor(hexString: "#1572A1")
@@ -193,43 +195,39 @@ extension ChangePasswordOTPVerifyVC: UITextFieldDelegate{
 
 
 // MARK: - API Call
+
 extension ChangePasswordOTPVerifyVC{
-    
-    
+
     func verifyotpapi(){
-        
         CommonUtils.showHud(show: true)
-        
         let params:[String : Any] = [
             "email":UserData.shared.email,
             "otp":self.otp]
         
-        
-        TANetworkManager.sharedInstance.requestApi(withServiceName:ServiceName.kOtpVerify, requestMethod: .POST,
-                                                   requestParameters:params, withProgressHUD: false)
+        TANetworkManager.sharedInstance.requestApi(withServiceName:ServiceName.kOtpVerify, requestMethod: .POST, requestParameters:params, withProgressHUD: false)
         {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
-            
             CommonUtils.showHudWithNoInteraction(show: false)
-            
             if errorType == .requestSuccess {
-                
                 let dictResult = kSharedInstance.getDictionary(result)
-                
                 switch Int.getInt(statusCode) {
+                    
                 case 200:
                     if Int.getInt(dictResult["status"]) == 200{
                         self?.callbackotp?()
                     }
+                    
                     else if  Int.getInt(dictResult["status"]) == 400{
                         self?.changebordercolor_tored()
                         self?.lblWrongOtp.isHidden = false
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
+                    
                     else if Int.getInt(dictResult["status"]) == 403{
                         let response = kSharedInstance.getDictionary(dictResult["response"])
                         let msg = kSharedInstance.getStringArray(response["otp"])
                         CommonUtils.showError(.info, msg[0])// msg is on 0th index
                     }
+                    
                 default:
                     CommonUtils.showError(.info, String.getString(dictResult["message"]))
                 }
@@ -265,11 +263,10 @@ extension ChangePasswordOTPVerifyVC{
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                 default:
-                    
                     CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                    
                 }
             }
+            
             else if errorType == .noNetwork {
                 CommonUtils.showToastForInternetUnavailable()
                 

@@ -428,10 +428,15 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
                                     }
                                 }
                                 else{
-                                    let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
-                                    self.flagopportunityapi(oppr_id: oppid)
-                                    self.dismiss(animated: true)
-                                    cell.imgOppFlag.isHidden = false
+                                    self.dismiss(animated: false){
+                                        let vc = self.storyboard?.instantiateViewController(withIdentifier: FlagPostPopUPVC.getStoryboardID()) as! FlagPostPopUPVC
+                                        vc.modalTransitionStyle = .crossDissolve
+                                        vc.modalPresentationStyle = .overCurrentContext
+                                        let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
+                                        vc.oppid = oppid
+                                        self.present(vc, animated: false)
+                                        cell.imgOppFlag.isHidden = false
+                                    }
                                 }
                             }
                             
@@ -445,7 +450,14 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
                                     }
                                 }
                                 else{
-                                    kSharedAppDelegate?.makeRootViewController()
+                                    self.dismiss(animated: false){
+                                        let vc = self.storyboard?.instantiateViewController(withIdentifier: ReportUserPopUpVC.getStoryboardID()) as! ReportUserPopUpVC
+                                        vc.modalTransitionStyle = .crossDissolve
+                                        vc.modalPresentationStyle = .overCurrentContext
+                                        let userid = Int.getInt(self.userTimeLine[indexPath.row].user_id)
+                                        vc.userid = userid
+                                        self.present(vc, animated: false)
+                                    }
                                 }
                             }
                         }
@@ -1081,72 +1093,6 @@ extension SearchVC{
                     
                     else if  Int.getInt(dictResult["status"]) == 201{
                         //  CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                    }
-                    
-                default:
-                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                }
-            } else if errorType == .noNetwork {
-                CommonUtils.showToastForInternetUnavailable()
-                
-            } else {
-                CommonUtils.showToastForDefaultError()
-            }
-        }
-    }
-    
-    // Api flag Opportunity
-    
-    func flagopportunityapi(oppr_id:Int){
-        CommonUtils.showHud(show: true)
-        
-        
-        if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
-            let endToken = kSharedUserDefaults.getLoggedInAccessToken()
-            let septoken = endToken.components(separatedBy: " ")
-            if septoken[0] != "Bearer"{
-                let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
-                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
-            }
-        }
-        
-        
-        let params:[String : Any] = [
-            //            "user_id":Int.getInt(UserData.shared.id),
-            "opr_id":oppr_id,
-            "user_id":UserData.shared.id
-        ]
-        
-        debugPrint("opr_id......",oppr_id)
-        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kflagpost, requestMethod: .POST,
-                                                               requestParameters:params, withProgressHUD: false)
-        {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
-            
-            CommonUtils.showHudWithNoInteraction(show: false)
-            
-            if errorType == .requestSuccess {
-                
-                let dictResult = kSharedInstance.getDictionary(result)
-                
-                switch Int.getInt(statusCode) {
-                case 200:
-                    
-                    if Int.getInt(dictResult["responsecode"]) == 200{
-                        
-                        let endToken = kSharedUserDefaults.getLoggedInAccessToken()
-                        let septoken = endToken.components(separatedBy: " ")
-                        if septoken[0] == "Bearer"{
-                            kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
-                        }
-                        
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                        //    kSharedAppDelegate?.makeRootViewController()
-                        
-                    }
-                    
-                    else if  Int.getInt(dictResult["responsecode"]) == 400{
-                        
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     

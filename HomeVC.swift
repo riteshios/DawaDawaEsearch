@@ -153,7 +153,7 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                 if cameFrom != "FilterData"{
                     // cell.heightMainView.constant = 100
                     cell.heightViewCollectionview.constant = 50
-                    //                    cell.heightCollectionView.constant = 0
+                    // cell.heightCollectionView.constant = 0
                 }
             }else{
                 cell.callbacknavigation = { txt in
@@ -675,8 +675,8 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                                         let vc = self.storyboard?.instantiateViewController(withIdentifier: ReportUserPopUpVC.getStoryboardID()) as! ReportUserPopUpVC
                                         vc.modalTransitionStyle = .crossDissolve
                                         vc.modalPresentationStyle = .overCurrentContext
-                                        let oppid = Int.getInt(userTimeLine[indexPath.row].user_id)
-                                        vc.userid = oppid
+                                        let userid = Int.getInt(userTimeLine[indexPath.row].user_id)
+                                        vc.userid = userid
                                         self.present(vc, animated: false)
                                     }
                                 }

@@ -19,6 +19,7 @@ class FilterTVCell: UITableViewCell {
             collectionview.reloadData()
         }
     }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.setuplanguage()

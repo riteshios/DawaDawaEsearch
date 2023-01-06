@@ -494,6 +494,7 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                             self.getalldetail()
                         }
                     }
+                    
                     else{
                         let oppid = Int.getInt(self.userTimeLine?.id)
                         self.unsaveoppoertunityapi(oppr_id: oppid)
