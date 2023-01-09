@@ -516,6 +516,7 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                         let vc = self.storyboard?.instantiateViewController(withIdentifier: ProileSocialMoreVC.getStoryboardID()) as! ProileSocialMoreVC
                         vc.modalTransitionStyle = .crossDissolve
                         vc.modalPresentationStyle = .overCurrentContext
+                        vc.hascamefrom = "DetailPage"
                         vc.callback = { txt in
                             
                             if txt == "Dismiss"{
@@ -591,9 +592,9 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                     else{
                         
                         let vc = self.storyboard?.instantiateViewController(withIdentifier: HomeSocialMoreVC.getStoryboardID()) as! HomeSocialMoreVC
-                        vc.hascamefrom = "DetailPage"
                         vc.modalTransitionStyle = .crossDissolve
                         vc.modalPresentationStyle = .overCurrentContext
+                        vc.hascamefrom = "DetailPage"
                         vc.callback = { txt in
                             
                             if txt == "Chatwithuser"{

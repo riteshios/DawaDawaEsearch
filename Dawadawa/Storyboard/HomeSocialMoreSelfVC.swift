@@ -24,7 +24,6 @@ class HomeSocialMoreSelfVC: UIViewController {
         self.setup()
     }
     
-    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first{
             if viewBG == touch.view{

@@ -17,14 +17,13 @@ class ProileSocialMoreVC: UIViewController {
     @IBOutlet weak var lblDelete: UILabel!
     @IBOutlet weak var lblClose: UILabel!
     
-    @IBOutlet weak var HeightviewMain: NSLayoutConstraint
+    var hascamefrom = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setup()
-        if hascamefrom == "DetailPage"{
+        if self.hascamefrom == "DetailPage"{
             self.viewViewDetails.isHidden = true
-            self.HeightviewMain.constant = 320
         }
     }
     

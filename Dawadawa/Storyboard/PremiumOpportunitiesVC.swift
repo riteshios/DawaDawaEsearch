@@ -405,14 +405,12 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
                 
                 //                       COMMENT PART
                 
-                
-                
                 if txt == "reply"{
                     
                     let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
                     debugPrint("detailsppid=-=-=",oppid)
                     let vc = self.storyboard?.instantiateViewController(withIdentifier: DetailScreenVC.getStoryboardID()) as! DetailScreenVC
-                    
+    
                     vc.oppid = oppid
                     self.navigationController?.pushViewController(vc, animated: true)
                 }
@@ -426,8 +424,6 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
                     self.navigationController?.pushViewController(vc, animated: true)
                     
                 }
-                
-                
                 
                 if txt == "ClickComment"{
                     if tapped.isSelected{
