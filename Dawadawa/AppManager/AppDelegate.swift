@@ -445,12 +445,7 @@ extension AppDelegate: MessagingDelegate {
             kSharedUserDefaults.setDeviceToken(deviceToken: fcmToken!)
             
         }
-        
     }
-    
-    
-    
-    
     
     func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingDelegate) {
         
