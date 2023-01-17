@@ -12,7 +12,7 @@ class ProfileVC: UIViewController {
     @IBOutlet weak var lblFullName: UILabel!
     @IBOutlet weak var lblMobileNumber: UILabel!
     @IBOutlet weak var lblEmail: UILabel!
-    @IBOutlet weak var imgNoOpp: UIImageView!
+    @IBOutlet weak var viewNoOpp: UIView!
     
     var oppid:Int?
     var imgUrl = ""
@@ -35,7 +35,7 @@ class ProfileVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.imgNoOpp.isHidden = true
+        self.viewNoOpp.isHidden = true
         
         //        self.listoppoertunityapi()
         tblViewSocialPost.register(UINib(nibName: "OpportunitypostedTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "OpportunitypostedTableViewCell")
@@ -45,7 +45,7 @@ class ProfileVC: UIViewController {
             print("Guest User")
             self.lblMobileNumber.isHidden = true
             self.lblEmail.isHidden = true
-            self.imgNoOpp.isHidden = false
+            self.viewNoOpp.isHidden = false
         }
         else{
             self.fetchdata()
@@ -84,11 +84,21 @@ class ProfileVC: UIViewController {
     // MARK: - @IBAction
     
     @IBAction func btnEditImage(_ sender: UIButton) {
-        ImagePickerHelper.shared.showPickerController { image, url in
-            self.isProfileImageSelected = true
-            self.ImageProfile.image = image
-            self.uploadImage(image: self.ImageProfile.image ?? UIImage())
+        if UserData.shared.isskiplogin == true{
+            self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
         }
+        else{
+            ImagePickerHelper.shared.showPickerController { image, url in
+                self.isProfileImageSelected = true
+                self.ImageProfile.image = image
+                self.uploadImage(image: self.ImageProfile.image ?? UIImage())
+            }
+        }
+    }
+    
+    @IBAction func btnLoginTapped(_ sender: UIButton) {
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WelcomeScreenVC") as! WelcomeScreenVC
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @IBAction func btnMoreTapped(_ sender: UIButton) {
@@ -285,7 +295,7 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                         else{
                             self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
                         }
-                        self.imgNoOpp.isHidden = false
+                        self.viewNoOpp.isHidden = false
                     }
                     else{
                         self.isbtnAllSelect  = true
@@ -301,7 +311,7 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                         else{
                             self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
                         }
-                        self.imgNoOpp.isHidden = false
+                        self.viewNoOpp.isHidden = false
                     }
                     else{
                         self.isbtnPremiumSelect = true
@@ -317,7 +327,7 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                         else{
                             self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
                         }
-                        self.imgNoOpp.isHidden = false
+                        self.viewNoOpp.isHidden = false
                     }
                     else{
                         self.isbtnFeaturedSelect = true
@@ -1029,7 +1039,7 @@ extension ProfileVC{
                         //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         self?.tblViewSocialPost.reloadData()
                         CommonUtils.showHudWithNoInteraction(show: false)
-                        self?.imgNoOpp.isHidden = true
+                        self?.viewNoOpp.isHidden = true
                         
                     }
                     
@@ -1099,7 +1109,7 @@ extension ProfileVC{
                         print("DataAllPost====-=\(self?.userTimeLine)")
                         
                         self?.tblViewSocialPost.reloadData()
-                        self?.imgNoOpp.isHidden = true
+                        self?.viewNoOpp.isHidden = true
                         
                     }
                     
@@ -1171,7 +1181,7 @@ extension ProfileVC{
                         
                         
                         self?.tblViewSocialPost.reloadData()
-                        self?.imgNoOpp.isHidden = true
+                        self?.viewNoOpp.isHidden = true
                         
                     }
                     

@@ -7,158 +7,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "AA6A01B5-BC2C-449D-9CFF-726B94868174"
+            uuid = "3620BC97-7B8F-424C-84EE-0FF6D8297FFB"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Dawadawa/Storyboard/FilterVC.swift"
+            filePath = "Dawadawa/SupportingFiles/Utilities-2/Extensions/UIImageView/UIImageViewCornerRadius.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "121"
-            endingLineNumber = "121"
-            landmarkName = "FilterVC"
-            landmarkType = "3">
-            <Locations>
-               <Location
-                  uuid = "AA6A01B5-BC2C-449D-9CFF-726B94868174 - b9f47221854b489f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Dawadawa.FilterVC.selectedservicetypesids.modify : Swift.Array&lt;Swift.String&gt;"
-                  moduleName = "Dawadawa"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/alekh/Documents/Ritesh/DawaDawaEsearch/%3Ccompiler-generated%3E"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0"
-                  offsetFromSymbolStart = "10">
-               </Location>
-               <Location
-                  uuid = "AA6A01B5-BC2C-449D-9CFF-726B94868174 - 8c3c75cc328b8ffb"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Dawadawa.FilterVC.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; Dawadawa.FilterVC"
-                  moduleName = "Dawadawa"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/alekh/Documents/Ritesh/DawaDawaEsearch/Dawadawa/Storyboard/FilterVC.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "121"
-                  endingLineNumber = "121"
-                  offsetFromSymbolStart = "1320">
-               </Location>
-               <Location
-                  uuid = "AA6A01B5-BC2C-449D-9CFF-726B94868174 - 7386bee896e9da92"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Dawadawa.FilterVC.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;Dawadawa.FilterVC&gt;"
-                  moduleName = "Dawadawa"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/alekh/Documents/Ritesh/DawaDawaEsearch/Dawadawa/Storyboard/FilterVC.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "121"
-                  endingLineNumber = "121"
-                  offsetFromSymbolStart = "1312">
-               </Location>
-            </Locations>
+            startingLineNumber = "32"
+            endingLineNumber = "32"
+            landmarkName = "UIImageView"
+            landmarkType = "21">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "6276F702-D8BB-4552-AED8-BA1560CE963E"
+            uuid = "7947B6B9-D273-4E5A-8FDC-A50984FE8C80"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Dawadawa/Storyboard/FilterVC.swift"
+            filePath = "Dawadawa/SupportingFiles/Utilities-2/Global/CommonUtils.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "135"
-            endingLineNumber = "135"
-            landmarkName = "FilterVC"
-            landmarkType = "3">
-            <Locations>
-               <Location
-                  uuid = "6276F702-D8BB-4552-AED8-BA1560CE963E - 1fcfe86f4d864d17"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Dawadawa.FilterVC.selectedservicetype.modify : Swift.String"
-                  moduleName = "Dawadawa"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/alekh/Documents/Ritesh/DawaDawaEsearch/%3Ccompiler-generated%3E"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0"
-                  offsetFromSymbolStart = "10">
-               </Location>
-               <Location
-                  uuid = "6276F702-D8BB-4552-AED8-BA1560CE963E - 8c3c75cc328b8da9"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Dawadawa.FilterVC.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; Dawadawa.FilterVC"
-                  moduleName = "Dawadawa"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/alekh/Documents/Ritesh/DawaDawaEsearch/Dawadawa/Storyboard/FilterVC.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "135"
-                  endingLineNumber = "135"
-                  offsetFromSymbolStart = "1561">
-               </Location>
-               <Location
-                  uuid = "6276F702-D8BB-4552-AED8-BA1560CE963E - 7386bee896e9d8c0"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Dawadawa.FilterVC.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;Dawadawa.FilterVC&gt;"
-                  moduleName = "Dawadawa"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/alekh/Documents/Ritesh/DawaDawaEsearch/Dawadawa/Storyboard/FilterVC.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "135"
-                  endingLineNumber = "135"
-                  offsetFromSymbolStart = "1552">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "EA6CE7BB-5126-4916-ACAB-C7FB283CEC77"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Dawadawa/Storyboard/HomeSocialMoreSelfVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "22"
-            endingLineNumber = "22"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "BB3398AF-C97E-4757-A305-471CD3DD1A73"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Dawadawa/Storyboard/HomeSocialMoreVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "27"
-            endingLineNumber = "27"
-            landmarkName = "viewDidLoad()"
+            startingLineNumber = "179"
+            endingLineNumber = "179"
+            landmarkName = "showToastForDefaultError()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

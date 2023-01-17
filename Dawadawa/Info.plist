@@ -5,6 +5,8 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
+			<key>CFBundleIdentifier</key>
+			<string></string>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
@@ -30,6 +32,11 @@
 			<string>applinks:https://demo4esl.com/dawadawa</string>
 		</array>
 	</dict>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>allow Arbitrary Loads</key>
+		<true/>
+	</dict>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -48,13 +55,6 @@
 				</dict>
 			</array>
 		</dict>
-	</dict>
-	<key>UIUserInterfaceStyle</key>
-	<string>light</string>
-	<key>NSAppTransportSecurity</key>
-	<dict>
-		<key>allow Arbitrary Loads</key>
-		<true/>
 	</dict>
 </dict>
 </plist>

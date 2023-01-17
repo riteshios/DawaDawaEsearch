@@ -25,7 +25,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let navigator = Navigator()
     let gcmMessageIDKey = "gcmMessageIDKey"
     
-    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         IQKeyboardManager.shared.enable = true
         window = UIWindow(frame: UIScreen.main.bounds)
@@ -57,7 +56,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             application.registerUserNotificationSettings(settings)
             
         }
-        
         
         //        FirebaseApp.configure()
         
@@ -155,7 +153,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     
-    func dropDown(dataSource:[String] , text:UIView , completion: @escaping ( _ index: Int ,    _ item: String) -> ()) -> Void {
+    func dropDown(dataSource:[String] , text:UIView , completion: @escaping ( _ index: Int , _ item: String) -> ()) -> Void {
         let dropDown = DropDown()
         dropDown.anchorView = text
         dropDown.dataSource = dataSource
@@ -217,109 +215,72 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         
         let firebase = fcmToken
         kSharedUserDefaults.setDeviceToken(deviceToken: firebase)
-        
         print("Firebase registration token: \(String(describing: fcmToken))")
         
     }
     
     
     func clickOnNotificationBackGround(userInfo: NSDictionary) {
-        
         guard let dict = userInfo["aps"]  as? [String: Any], let _ = dict ["alert"] as? NSDictionary else {
-            
             print("Notification Parsing Error")
-            
             return
-            
         }
-        
     }
     
     // Receive displayed notifications for iOS 10 devices.
     
     func userNotificationCenter(_ center: UNUserNotificationCenter,
-                                
                                 willPresent notification: UNNotification,
-                                
                                 withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        
         let userInfo = notification.request.content.userInfo
         
-        
         if let messageID = userInfo[gcmMessageIDKey] {
-            
             print("Message ID: \(messageID)")
-            
         }
         
         print(userInfo)
-        
         completionHandler([[.alert, .sound]])
         
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter,
-                                
                                 didReceive response: UNNotificationResponse,
-                                
                                 withCompletionHandler completionHandler: @escaping () -> Void) {
-        
         let userInfo = response.notification.request.content.userInfo
         
         if let messageID = userInfo[gcmMessageIDKey] {
-            
             print("Message ID: \(messageID)")
-            
         }
         
         //
         
         let window = UIApplication.shared.windows.first
-        
         let storybaord = UIStoryboard(name: "Home", bundle: nil)
-        
         window?.rootViewController  = storybaord.instantiateViewController(withIdentifier: "NotifiactionViewController")
-        
         window?.makeKeyAndVisible()
-        
         
         print("userInfo------",userInfo)
         
         if let aps = userInfo["aps"] as? NSDictionary {
-            
             if let alert = aps["alert"] as? NSDictionary {
-                
                 if let body = alert["body"] as? NSString {
-                    
                     print("body--", body)
-                    
-                    
-                    
                 }
                 
                 else if let title = alert["title"] as? NSString {
-                    
                     print("body--", title)
-                    
                 }
-                
             }
-            
         }
         
-        
         completionHandler()
-        
     }
     
     func registerForPushNotifications() {
         
         UNUserNotificationCenter.current().delegate = self
-        
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) {
-            
             (granted, error) in
-            
             print("Permission granted: \(granted)")
             
             // 1. Check if permission granted
@@ -329,13 +290,9 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
             // 2. Attempt registration for remote notifications on the main thread
             
             DispatchQueue.main.async {
-                
                 UIApplication.shared.registerForRemoteNotifications()
-                
             }
-            
         }
-        
     }
     
     
@@ -344,13 +301,10 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         // 1. Convert device token to string
         
         let tokenParts = deviceToken.map { data -> String in
-            
             return String(format: "%02.2hhx", data)
-            
         }
         
         let token = tokenParts.joined()
-        
         
         // 2. Print device token to use for PNs payloads
         
@@ -372,39 +326,24 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         //        FirebaseApp.configure()
         
         if #available(iOS 10.0, *) {
-            
             let authOptions : UNAuthorizationOptions = [.alert, .badge, .sound]
-            
             UNUserNotificationCenter.current().requestAuthorization(
-                
                 options: authOptions,
-                
                 completionHandler: {_,_ in})
-            
             application.registerForRemoteNotifications()
-            
             UNUserNotificationCenter.current().delegate = self
-            
             Messaging.messaging().delegate = self
-            
-            
             
         } else {
             
             let settings: UIUserNotificationSettings = UIUserNotificationSettings.init(types: [.alert, .badge, .sound], categories: nil)
-            
             UIApplication.shared.registerUserNotificationSettings(settings)
-            
             UIApplication.shared.registerForRemoteNotifications()
-            
         }
         
         let fcmToken = String()
-        
         if(fcmToken != ""){
-            
             UIApplication.shared.registerForRemoteNotifications()
-            
         }
         
     }
@@ -416,29 +355,18 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         //Local Notification
         
         let center = UNUserNotificationCenter.current()
-        
         center.delegate = self
-        
         let options: UNAuthorizationOptions = [.alert, .sound, .badge]
-        
         center.requestAuthorization(options: options) { (granted, error) in
             
         }
-        
     }
-    
-    
-    
 }
 
 extension AppDelegate: MessagingDelegate {
-    
-    
-    
+
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
-        
         print("Firebase registration token: \(String(describing: fcmToken))")
-        
         if fcmToken != ""{
             
             //            fireBasetoken = fcmToken!
@@ -448,15 +376,11 @@ extension AppDelegate: MessagingDelegate {
     }
     
     func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingDelegate) {
-        
         print("Received data message: \(remoteMessage.description)")
-        
     }
     
     func messaging(_ messaging: Messaging, didRefreshRegistrationToken fcmToken: String) {
-        
         print("InstanceID token: \(fcmToken)")
-        
     }
 }
 

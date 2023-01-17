@@ -252,7 +252,7 @@
 		<key>StripeApplePay.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>55</integer>
+			<integer>51</integer>
 		</dict>
 		<key>StripeCore-StripeCore.xcscheme</key>
 		<dict>
@@ -276,12 +276,12 @@
 		<key>StripePayments-StripePayments.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>51</integer>
+			<integer>55</integer>
 		</dict>
 		<key>StripePayments.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>52</integer>
+			<integer>53</integer>
 		</dict>
 		<key>StripePaymentsUI-StripePaymentsUI.xcscheme_^#shared#^_</key>
 		<dict>
@@ -291,7 +291,7 @@
 		<key>StripePaymentsUI.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>53</integer>
+			<integer>52</integer>
 		</dict>
 		<key>StripeUICore-StripeUICore.xcscheme</key>
 		<dict>

@@ -13,7 +13,12 @@ extension UIViewController {
     
     func showSimpleAlert(message:String) {
            let alert = UIAlertController(title: kAppName, message: message,preferredStyle: UIAlertController.Style.alert)
-
+        
+        //Add imageview to alert  // if want to add logo in alert message
+//            let imgViewTitle = UIImageView(frame: CGRect(x: 57, y: 10, width: 30, height: 30))
+//            imgViewTitle.image = UIImage(named:"Frame 726")
+//            alert.view.addSubview(imgViewTitle)
+        
            alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { _ in
                //Cancel Action
            }))

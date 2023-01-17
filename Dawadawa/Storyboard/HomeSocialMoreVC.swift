@@ -46,7 +46,6 @@ class HomeSocialMoreVC: UIViewController {
         Viewmain.layer.cornerRadius = 25
         Viewmain.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
         Viewmain.addShadowWithBlurOnView(Viewmain, spread: 0, blur: 10, color: .black, opacity: 0.16, OffsetX: 0, OffsetY: 1)
-       
     }
     
 //    MARK: - @IBAction
