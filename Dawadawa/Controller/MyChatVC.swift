@@ -130,19 +130,17 @@ extension MyChatVC {
             "user_id":UserData.shared.id,
             "friend_id": 0
         ]
-        TANetworkManager.sharedInstance.requestApi(withServiceName:ServiceName.kaddfriend, requestMethod: .POST,
-                                                   requestParameters:params, withProgressHUD: false)
+        
+        TANetworkManager.sharedInstance.requestApi(withServiceName:ServiceName.kaddfriend, requestMethod: .POST, requestParameters:params, withProgressHUD: false)
         {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
             
             // CommonUtils.showHudWithNoInteraction(show: false)
             
             if errorType == .requestSuccess {
-                
                 let dictResult = kSharedInstance.getDictionary(result)
-                
                 switch Int.getInt(statusCode) {
-                case 200:
                     
+                case 200:
                     if Int.getInt(dictResult["status"]) == 200{
                         
                         let endToken = kSharedUserDefaults.getLoggedInAccessToken()
@@ -157,7 +155,7 @@ extension MyChatVC {
                         self?.searchData = self!.friendlist
                         
                         self?.tblviewMyChat?.reloadData()
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         
                     }
                     else if Int.getInt(dictResult["status"]) == 401{
@@ -171,7 +169,7 @@ extension MyChatVC {
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-                CommonUtils.showToastForDefaultError()
+//                CommonUtils.showToastForDefaultError()
             }
         }
     }
@@ -219,7 +217,7 @@ extension MyChatVC {
                         
                     }
                     else if Int.getInt(dictResult["status"]) == 400{
-                        CommonUtils.showError(.info, String.getString(dictResult["messages"]))
+//                        CommonUtils.showError(.info, String.getString(dictResult["messages"]))
                     }
                     
                 default:
@@ -229,7 +227,7 @@ extension MyChatVC {
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-                CommonUtils.showToastForDefaultError()
+//                CommonUtils.showToastForDefaultError()
             }
         }
     }

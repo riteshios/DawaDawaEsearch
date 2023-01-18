@@ -221,7 +221,7 @@ extension VerifyEmailOTPVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-                CommonUtils.showToastForDefaultError()
+//                CommonUtils.showToastForDefaultError()
             }
         }
     }
@@ -258,7 +258,7 @@ extension VerifyEmailOTPVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-                CommonUtils.showToastForDefaultError()
+//                CommonUtils.showToastForDefaultError()
             }
         }
     }

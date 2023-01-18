@@ -220,7 +220,7 @@ extension VerifyNewEmailOTPVC{
                     CommonUtils.showToastForInternetUnavailable()
                     
                 } else {
-                    CommonUtils.showToastForDefaultError()
+//                    CommonUtils.showToastForDefaultError()
                 }
             }
         }

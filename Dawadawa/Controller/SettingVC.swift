@@ -150,7 +150,7 @@ extension SettingVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-                CommonUtils.showToastForDefaultError()
+//                CommonUtils.showToastForDefaultError()
             }
         }
     }
@@ -191,7 +191,7 @@ extension SettingVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-                CommonUtils.showToastForDefaultError()
+//                CommonUtils.showToastForDefaultError()
             }
         }
     }
@@ -232,7 +232,7 @@ extension SettingVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-                CommonUtils.showToastForDefaultError()
+//                CommonUtils.showToastForDefaultError()
             }
         }
     }
@@ -273,7 +273,7 @@ extension SettingVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-                CommonUtils.showToastForDefaultError()
+//                CommonUtils.showToastForDefaultError()
             }
         }
     }

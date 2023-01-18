@@ -398,7 +398,7 @@ extension CreateAccountVC {
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-                CommonUtils.showToastForDefaultError()
+//                CommonUtils.showToastForDefaultError()
             }
         }
     }
@@ -446,7 +446,7 @@ extension CreateAccountVC {
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-                CommonUtils.showToastForDefaultError()
+//                CommonUtils.showToastForDefaultError()
             }
         }
     }
@@ -487,7 +487,7 @@ extension CreateAccountVC {
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-                CommonUtils.showToastForDefaultError()
+//                CommonUtils.showToastForDefaultError()
             }
         }
     }
@@ -527,7 +527,7 @@ extension CreateAccountVC {
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-                CommonUtils.showToastForDefaultError()
+//                CommonUtils.showToastForDefaultError()
             }
         }
     }

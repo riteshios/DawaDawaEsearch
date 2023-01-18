@@ -254,7 +254,7 @@ extension UIViewController{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-                CommonUtils.showToastForDefaultError()
+//                CommonUtils.showToastForDefaultError()
             }
         }
     }

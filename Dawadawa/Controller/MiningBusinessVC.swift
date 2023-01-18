@@ -1440,7 +1440,7 @@ extension MiningBusinessVC{
             } else if errortype == .noNetwork {
                 CommonUtils.showToastForInternetUnavailable()
             } else {
-                CommonUtils.showToastForDefaultError()
+//                CommonUtils.showToastForDefaultError()
             }
         }
     }
@@ -1534,7 +1534,7 @@ extension MiningBusinessVC{
             } else if errortype == .noNetwork {
                 CommonUtils.showToastForInternetUnavailable()
             } else {
-                CommonUtils.showToastForDefaultError()
+//                CommonUtils.showToastForDefaultError()
             }
         }
     }
@@ -1588,7 +1588,7 @@ extension MiningBusinessVC{
                    CommonUtils.showToastForInternetUnavailable()
                    
                } else {
-                   CommonUtils.showToastForDefaultError()
+//                   CommonUtils.showToastForDefaultError()
                }
            }
        }

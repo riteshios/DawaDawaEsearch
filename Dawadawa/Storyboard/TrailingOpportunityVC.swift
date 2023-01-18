@@ -1334,7 +1334,7 @@ extension TrailingOpportunityVC{
             } else if errortype == .noNetwork {
                 CommonUtils.showToastForInternetUnavailable()
             } else {
-                CommonUtils.showToastForDefaultError()
+//                CommonUtils.showToastForDefaultError()
             }
         }
     }
@@ -1430,7 +1430,7 @@ extension TrailingOpportunityVC{
             } else if errortype == .noNetwork {
                 CommonUtils.showToastForInternetUnavailable()
             } else {
-                CommonUtils.showToastForDefaultError()
+//                CommonUtils.showToastForDefaultError()
             }
         }
     }
@@ -1484,7 +1484,7 @@ extension TrailingOpportunityVC{
                    CommonUtils.showToastForInternetUnavailable()
                    
                } else {
-                   CommonUtils.showToastForDefaultError()
+//                   CommonUtils.showToastForDefaultError()
                }
            }
        }

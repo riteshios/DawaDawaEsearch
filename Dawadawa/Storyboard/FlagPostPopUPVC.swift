@@ -106,7 +106,7 @@ class FlagPostPopUPVC: UIViewController {
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-                CommonUtils.showToastForDefaultError()
+//                CommonUtils.showToastForDefaultError()
             }
             
         }

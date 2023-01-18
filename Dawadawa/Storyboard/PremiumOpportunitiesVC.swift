@@ -682,7 +682,7 @@ extension PremiumOpportunitiesVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-                CommonUtils.showToastForDefaultError()
+//                CommonUtils.showToastForDefaultError()
             }
         }
     }
@@ -755,11 +755,9 @@ extension PremiumOpportunitiesVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-                CommonUtils.showToastForDefaultError()
+//                CommonUtils.showToastForDefaultError()
             }
-            
         }
-        
     }
     
     //    Api comment opportunity
@@ -829,7 +827,7 @@ extension PremiumOpportunitiesVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-                CommonUtils.showToastForDefaultError()
+//                CommonUtils.showToastForDefaultError()
             }
             
         }
@@ -893,7 +891,7 @@ extension PremiumOpportunitiesVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-                CommonUtils.showToastForDefaultError()
+//                CommonUtils.showToastForDefaultError()
             }
             
         }
@@ -958,7 +956,7 @@ extension PremiumOpportunitiesVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-                CommonUtils.showToastForDefaultError()
+//                CommonUtils.showToastForDefaultError()
             }
             
         }
@@ -1020,7 +1018,7 @@ extension PremiumOpportunitiesVC{
                     CommonUtils.showToastForInternetUnavailable()
                     
                 } else {
-                    CommonUtils.showToastForDefaultError()
+//                    CommonUtils.showToastForDefaultError()
                 }
             }
         }
@@ -1157,7 +1155,7 @@ extension PremiumOpportunitiesVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-                CommonUtils.showToastForDefaultError()
+//                CommonUtils.showToastForDefaultError()
             }
             
         }

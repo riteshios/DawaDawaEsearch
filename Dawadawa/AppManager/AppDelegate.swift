@@ -152,7 +152,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.shared.windows.first?.makeKeyAndVisible()
     }
     
-    
     func dropDown(dataSource:[String] , text:UIView , completion: @escaping ( _ index: Int , _ item: String) -> ()) -> Void {
         let dropDown = DropDown()
         dropDown.anchorView = text
@@ -170,6 +169,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             completion(index,item)
         }
     }
+    
     func application(_ application: UIApplication,
                      continue userActivity: NSUserActivity,
                      restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {

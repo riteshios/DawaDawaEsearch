@@ -411,8 +411,7 @@ class FilterVC: UIViewController {
             self.oppstatus = 5
         }
     }
-    
-    
+
     @IBAction func btnTodayTapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         if self.btnToday.isSelected == true{
@@ -481,6 +480,7 @@ class FilterVC: UIViewController {
             }
         }
     }
+    
     @IBAction func btnLastmonthTapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         if self.btnLastmonth.isSelected == true{
@@ -678,7 +678,6 @@ extension FilterVC: UITableViewDelegate,UITableViewDataSource{
             
         default: return 0
         }
-        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -725,7 +724,6 @@ extension FilterVC: UITableViewDelegate,UITableViewDataSource{
                 let cell = self.tblViewOpportunitytype.dequeueReusableCell(withIdentifier: "SubCategorylabelTableViewCell") as! SubCategorylabelTableViewCell
                 return cell
                 
-                
             case 2:
                 let cell = self.tblViewOpportunitytype.dequeueReusableCell(withIdentifier: "SubcategoryTableViewCell") as! SubcategoryTableViewCell
                 
@@ -771,8 +769,6 @@ extension FilterVC: UITableViewDelegate,UITableViewDataSource{
         default:
             return 0
         }
-        
-        
     }
     
     
@@ -783,7 +779,7 @@ extension FilterVC: UITableViewDelegate,UITableViewDataSource{
         if sender.isSelected {
             obj.isselection = true
             self.selectedIds.append(String.getString(obj.id))
-            print(" selectedIds---\(self.selectedIds)")
+            print("selectedIds---\(self.selectedIds)")
             
             let ids = self.selectedIds.joined(separator: ",")
             self.selectedoptype = ids
@@ -889,15 +885,10 @@ extension FilterVC: UITableViewDelegate,UITableViewDataSource{
                     break
                 }
             }
-            
         }
     }
-    
-    
-    
-    
-    
 }
+
 // MARK: - RangeSeekSliderDelegate
 
 extension FilterVC: RangeSeekSliderDelegate {
@@ -1091,7 +1082,7 @@ extension FilterVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-                CommonUtils.showToastForDefaultError()
+//                CommonUtils.showToastForDefaultError()
             }
         }
     }
@@ -1142,7 +1133,7 @@ extension FilterVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-                CommonUtils.showToastForDefaultError()
+//                CommonUtils.showToastForDefaultError()
             }
         }
     }
@@ -1189,7 +1180,7 @@ extension FilterVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-                CommonUtils.showToastForDefaultError()
+//                CommonUtils.showToastForDefaultError()
             }
         }
     }
@@ -1321,16 +1312,15 @@ extension FilterVC{
                         let Categories = kSharedInstance.getArray(withDictionary: dictResult["Categories"])
                         self?.getfiltersubcatarr = Categories.map{getfiltersubcategoryModel(data: $0)}
                         
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         DispatchQueue.main.async {
                             self?.tblViewOpportunitytype.reloadData()
                         }
-                        
                     }
                     
                     else if  Int.getInt(dictResult["status"]) == 400{
                         self?.getfiltersubcatarr.removeAll()
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         DispatchQueue.main.async {
                             self?.tblViewOpportunitytype.reloadData()
                         }
@@ -1343,7 +1333,7 @@ extension FilterVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-                CommonUtils.showToastForDefaultError()
+//                CommonUtils.showToastForDefaultError()
             }
         }
     }
@@ -1386,6 +1376,7 @@ extension FilterVC{
             "start_date":String.getString(self.txtfieldStartDate.text),
             "end_date":String.getString(self.txtfieldEndDate.text)
         ]
+        
         // Added user id in api url
         TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kfilter, requestMethod: .POST, requestParameters:params, withProgressHUD: false)
         {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
@@ -1393,10 +1384,9 @@ extension FilterVC{
             CommonUtils.showHudWithNoInteraction(show: false)
             
             if errorType == .requestSuccess {
-                
                 let dictResult = kSharedInstance.getDictionary(result)
-                
                 switch Int.getInt(statusCode) {
+                    
                 case 200:
                     
                     if Int.getInt(dictResult["status"]) == 200{
@@ -1412,7 +1402,7 @@ extension FilterVC{
                         userTimeLine = Opportunity.map{SocialPostData(data: kSharedInstance.getDictionary($0))}
                         print("DataallSearchpost=\(userTimeLine)")
                         
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         
                         
                         //                        let vc = self?.storyboard?.instantiateViewController(withIdentifier: HomeVC.getStoryboardID()) as! HomeVC
@@ -1431,7 +1421,7 @@ extension FilterVC{
                     
                     else if  Int.getInt(dictResult["status"]) == 400{
                         
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                 default:
@@ -1441,7 +1431,7 @@ extension FilterVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-                CommonUtils.showToastForDefaultError()
+//                CommonUtils.showToastForDefaultError()
             }
         }
     }
@@ -1480,7 +1470,7 @@ extension FilterVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-                CommonUtils.showToastForDefaultError()
+//                CommonUtils.showToastForDefaultError()
             }
         }
     }
@@ -1497,16 +1487,12 @@ extension FilterVC{
             "category_id":catid
         ]
         
-        TANetworkManager.sharedInstance.requestlangApi(withServiceName:ServiceName.kguestfiltersubcategory, requestMethod: .POST,
-                                                       requestParameters:params, withProgressHUD: false)
+        TANetworkManager.sharedInstance.requestlangApi(withServiceName:ServiceName.kguestfiltersubcategory, requestMethod: .POST, requestParameters:params, withProgressHUD: false)
         {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
             
             CommonUtils.showHudWithNoInteraction(show: false)
-            
             if errorType == .requestSuccess {
-                
                 let dictResult = kSharedInstance.getDictionary(result)
-                
                 switch Int.getInt(statusCode) {
                 case 200:
                     
@@ -1515,16 +1501,15 @@ extension FilterVC{
                         let Categories = kSharedInstance.getArray(withDictionary: dictResult["Categories"])
                         self?.getfiltersubcatarr = Categories.map{getfiltersubcategoryModel(data: $0)}
                         
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         DispatchQueue.main.async {
                             self?.tblViewOpportunitytype.reloadData()
                         }
-                        
                     }
                     
                     else if  Int.getInt(dictResult["status"]) == 400{
                         
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                 default:
@@ -1534,7 +1519,7 @@ extension FilterVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-                CommonUtils.showToastForDefaultError()
+//                CommonUtils.showToastForDefaultError()
             }
         }
     }
@@ -1573,7 +1558,7 @@ extension FilterVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-                CommonUtils.showToastForDefaultError()
+//                CommonUtils.showToastForDefaultError()
             }
         }
     }
@@ -1607,7 +1592,7 @@ extension FilterVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-                CommonUtils.showToastForDefaultError()
+//                CommonUtils.showToastForDefaultError()
             }
         }
     }
@@ -1661,7 +1646,7 @@ extension FilterVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-                CommonUtils.showToastForDefaultError()
+//                CommonUtils.showToastForDefaultError()
             }
         }
     }
@@ -1720,7 +1705,7 @@ extension FilterVC{
                         userTimeLine = Opportunity.map{SocialPostData(data: kSharedInstance.getDictionary($0))}
                         print("DataallSearchpost=\(userTimeLine)")
                         
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         
                         //                        let vc = self?.storyboard?.instantiateViewController(withIdentifier: HomeVC.getStoryboardID()) as! HomeVC
                         //                        cameFrom = "FilterData"
@@ -1737,7 +1722,7 @@ extension FilterVC{
                     
                     else if  Int.getInt(dictResult["status"]) == 400{
                         
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                 default:
@@ -1747,7 +1732,7 @@ extension FilterVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-                CommonUtils.showToastForDefaultError()
+//                CommonUtils.showToastForDefaultError()
             }
         }
     }

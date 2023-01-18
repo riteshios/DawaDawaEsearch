@@ -91,7 +91,7 @@ extension PaymentForFeatureandPremiumPopUPVC {
                 CommonUtils.showToastForInternetUnavailable()
 
             } else {
-                CommonUtils.showToastForDefaultError()
+//                CommonUtils.showToastForDefaultError()
             }
         }
     }

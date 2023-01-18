@@ -28,7 +28,6 @@ class UIImageViewCornerRadius: UIImageViewBorderWidthAndColor {
   }
 }
 
-
 extension UIImageView {
     func seeFullImage() {
         self.isUserInteractionEnabled = true

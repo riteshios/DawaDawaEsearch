@@ -1464,7 +1464,7 @@ extension MiningServiceVC{
             } else if errortype == .noNetwork {
                 CommonUtils.showToastForInternetUnavailable()
             } else {
-                CommonUtils.showToastForDefaultError()
+//                CommonUtils.showToastForDefaultError()
             }
         }
     }
@@ -1556,7 +1556,7 @@ extension MiningServiceVC{
             } else if errortype == .noNetwork {
                 CommonUtils.showToastForInternetUnavailable()
             } else {
-                CommonUtils.showToastForDefaultError()
+//                CommonUtils.showToastForDefaultError()
             }
         }
     }
@@ -1610,7 +1610,7 @@ extension MiningServiceVC{
                        CommonUtils.showToastForInternetUnavailable()
                        
                    } else {
-                       CommonUtils.showToastForDefaultError()
+//                       CommonUtils.showToastForDefaultError()
                    }
                }
            }
