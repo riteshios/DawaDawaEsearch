@@ -103,100 +103,109 @@ class ProfileVC: UIViewController {
     
     @IBAction func btnMoreTapped(_ sender: UIButton) {
         
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: MoreVC.getStoryboardID()) as! MoreVC
-        vc.modalTransitionStyle = .crossDissolve
-        vc.modalPresentationStyle = .overCurrentContext
-        vc.callback = { txt in
-            if txt == "Dismiss"{
-                vc.dismiss(animated: false){
-                    self.dismiss(animated: true, completion: nil)
-                }
-            }
+        if UserData.shared.isskiplogin == true{
+            self.showSimpleAlert(message: "Not Available for Guest User Please Register or Login to get full access of Account Features.")
+        }
+
+        else{
             
-            if txt == "Setting"{
-                vc.dismiss(animated: false){
-                    let vc = self.storyboard?.instantiateViewController(identifier: SettingVC.getStoryboardID()) as! SettingVC
-                    self.navigationController?.pushViewController(vc, animated: true)
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: MoreVC.getStoryboardID()) as! MoreVC
+            vc.modalTransitionStyle = .crossDissolve
+            vc.modalPresentationStyle = .overCurrentContext
+            vc.callback = { txt in
+                if txt == "Dismiss"{
+                    vc.dismiss(animated: false){
+                        self.dismiss(animated: true, completion: nil)
+                    }
                 }
-            }
-            if txt == "EditProfile"{
-                vc.dismiss(animated: false){
-                    let vc = self.storyboard?.instantiateViewController(identifier: EditProfileVC.getStoryboardID()) as! EditProfileVC
-                    self.navigationController?.pushViewController(vc, animated: true)
+                
+                if txt == "Setting"{
+                    vc.dismiss(animated: false){
+                        let vc = self.storyboard?.instantiateViewController(identifier: SettingVC.getStoryboardID()) as! SettingVC
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    }
                 }
-            }
-            if txt == "ChangePassword"{
-                self.dismiss(animated: false){
-                    let vc = self.storyboard?.instantiateViewController(withIdentifier: ChangePasswordOTPVerifyVC.getStoryboardID()) as! ChangePasswordOTPVerifyVC
-                    vc.modalTransitionStyle = .crossDissolve
-                    vc.modalPresentationStyle = .overCurrentContext
-                    vc.callbackotp = {
-                        self.dismiss(animated: false){
-                            let vc = self.storyboard?.instantiateViewController(withIdentifier: ChangePasswordVC.getStoryboardID()) as! ChangePasswordVC
-                            vc.modalTransitionStyle = .crossDissolve
-                            vc.modalPresentationStyle = .overCurrentContext
-                            vc.callbackchangepassword = {
-                                self.dismiss(animated: false){
-                                    let vc = self.storyboard?.instantiateViewController(withIdentifier: PasswordChangedSuccessfullyPopUpVC.getStoryboardID()) as! PasswordChangedSuccessfullyPopUpVC
-                                    vc.modalTransitionStyle = .crossDissolve
-                                    vc.modalPresentationStyle = .overCurrentContext
-                                    vc.callbackpopuop = {
-                                        self.dismiss(animated: false){
-                                            let vc = self.storyboard?.instantiateViewController(withIdentifier:ProfileVC.getStoryboardID()) as! ProfileVC
-                                            self.navigationController?.pushViewController(vc, animated: false)
+                
+                if txt == "EditProfile"{
+                    vc.dismiss(animated: false){
+                        let vc = self.storyboard?.instantiateViewController(identifier: EditProfileVC.getStoryboardID()) as! EditProfileVC
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    }
+                }
+                
+                if txt == "ChangePassword"{
+                    self.dismiss(animated: false){
+                        let vc = self.storyboard?.instantiateViewController(withIdentifier: ChangePasswordOTPVerifyVC.getStoryboardID()) as! ChangePasswordOTPVerifyVC
+                        vc.modalTransitionStyle = .crossDissolve
+                        vc.modalPresentationStyle = .overCurrentContext
+                        vc.callbackotp = {
+                            self.dismiss(animated: false){
+                                let vc = self.storyboard?.instantiateViewController(withIdentifier: ChangePasswordVC.getStoryboardID()) as! ChangePasswordVC
+                                vc.modalTransitionStyle = .crossDissolve
+                                vc.modalPresentationStyle = .overCurrentContext
+                                vc.callbackchangepassword = {
+                                    self.dismiss(animated: false){
+                                        let vc = self.storyboard?.instantiateViewController(withIdentifier: PasswordChangedSuccessfullyPopUpVC.getStoryboardID()) as! PasswordChangedSuccessfullyPopUpVC
+                                        vc.modalTransitionStyle = .crossDissolve
+                                        vc.modalPresentationStyle = .overCurrentContext
+                                        vc.callbackpopuop = {
+                                            self.dismiss(animated: false){
+                                                let vc = self.storyboard?.instantiateViewController(withIdentifier:ProfileVC.getStoryboardID()) as! ProfileVC
+                                                self.navigationController?.pushViewController(vc, animated: false)
+                                            }
                                         }
+                                        self.present(vc, animated: false)
                                     }
-                                    self.present(vc, animated: false)
+                                }
+                                self.present(vc, animated: false)
+                            }
+                            
+                        }
+                        self.present(vc, animated: false)
+                    }
+                }
+                
+                if txt == "SaveOpportunity"{
+                    vc.dismiss(animated: false){
+                        let vc = self.storyboard?.instantiateViewController(identifier: SavedOpportunitiesVC.getStoryboardID()) as! SavedOpportunitiesVC
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    }
+                }
+                
+                if txt == "InterestedOpportunities"{
+                    vc.dismiss(animated: false){
+                        let vc = self.storyboard?.instantiateViewController(identifier: SavedOpportunitiesVC.getStoryboardID()) as! SavedOpportunitiesVC
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    }
+                }
+                
+                if txt == "ContactUs"{
+                    vc.dismiss(animated: false){
+                        let vc = self.storyboard?.instantiateViewController(identifier: ContactUsVC.getStoryboardID()) as! ContactUsVC
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    }
+                }
+                if txt == "Logout"{
+                    vc.dismiss(animated: false){
+                        let vc = self.storyboard?.instantiateViewController(withIdentifier: LogOutVC.getStoryboardID()) as! LogOutVC
+                        vc.modalTransitionStyle = .crossDissolve
+                        vc.modalPresentationStyle = .overCurrentContext
+                        vc.callbacklogout = { txt in
+                            
+                            if txt == "Logout"{
+                                vc.dismiss(animated: false) {
+                                    // self.logout()
+                                    let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WelcomeScreenVC") as! WelcomeScreenVC
+                                    self.navigationController?.pushViewController(vc, animated: true)
                                 }
                             }
-                            self.present(vc, animated: false)
                         }
-                        
+                        self.present(vc, animated: false)
                     }
-                    self.present(vc, animated: false)
                 }
             }
-            
-            if txt == "SaveOpportunity"{
-                vc.dismiss(animated: false){
-                    let vc = self.storyboard?.instantiateViewController(identifier: SavedOpportunitiesVC.getStoryboardID()) as! SavedOpportunitiesVC
-                    self.navigationController?.pushViewController(vc, animated: true)
-                }
-            }
-            
-            if txt == "InterestedOpportunities"{
-                vc.dismiss(animated: false){
-                    let vc = self.storyboard?.instantiateViewController(identifier: SavedOpportunitiesVC.getStoryboardID()) as! SavedOpportunitiesVC
-                    self.navigationController?.pushViewController(vc, animated: true)
-                }
-            }
-            
-            if txt == "ContactUs"{
-                vc.dismiss(animated: false){
-                    let vc = self.storyboard?.instantiateViewController(identifier: ContactUsVC.getStoryboardID()) as! ContactUsVC
-                    self.navigationController?.pushViewController(vc, animated: true)
-                }
-            }
-            if txt == "Logout"{
-                vc.dismiss(animated: false){
-                    let vc = self.storyboard?.instantiateViewController(withIdentifier: LogOutVC.getStoryboardID()) as! LogOutVC
-                    vc.modalTransitionStyle = .crossDissolve
-                    vc.modalPresentationStyle = .overCurrentContext
-                    vc.callbacklogout = { txt in
-                        
-                        if txt == "Logout"{
-                            vc.dismiss(animated: false) {
-                                // self.logout()
-                                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WelcomeScreenVC") as! WelcomeScreenVC
-                                self.navigationController?.pushViewController(vc, animated: true)
-                            }
-                        }
-                    }
-                    self.present(vc, animated: false)
-                }
-            }
+            self.present(vc, animated: false)
         }
-        self.present(vc, animated: false)
     }
 }
 // MARK: - Table View

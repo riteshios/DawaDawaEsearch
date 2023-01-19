@@ -750,7 +750,6 @@ extension EditProfileVC{
                     let data = kSharedInstance.getArray(withDictionary: dictResult["data"])
                     self?.country = data.map{Country(data: kSharedInstance.getDictionary($0))}
                     
-                    
                 default:
                     CommonUtils.showError(.info, String.getString(dictResult["msg"]))
                 }
