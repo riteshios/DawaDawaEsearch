@@ -60,8 +60,6 @@ class CountryStatePopUpVC: UIViewController, UITextFieldDelegate {
         }
         self.tableview.reloadData()
     }
- 
-
 }
 
 extension CountryStatePopUpVC : UITableViewDelegate, UITableViewDataSource{

@@ -396,6 +396,14 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                 
                 cell.lblSave.textColor = UIColor(hexString: "#A6A6A6")
             }
+            
+            if String.getString(self.userTimeLine?.is_flag) == "1"{
+                cell.imgOppFlag.isHidden = false
+            }
+            else{
+                cell.imgOppFlag.isHidden = true
+            }
+            
             if Int.getInt(self.userTimeLine?.oppimage.count) == 0{
                 cell.heightSocialPostCollectionView.constant = 0
             }
@@ -662,7 +670,9 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                                         let oppid = Int.getInt(self.userTimeLine?.id)
                                         vc.oppid = oppid
                                         self.present(vc, animated: false)
-                                        cell.imgOppFlag.isHidden = false
+                                        vc.callbackClosure = {
+                                            self.getalldetail()
+                                        }
                                     }
                                 }
                             }
@@ -858,11 +868,11 @@ extension DetailScreenVC{
                         
                         print("DataAlldetails===\(self?.userTimeLine)")
                         
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         self?.tblviewDetail.reloadData()
                     }
                     else if  Int.getInt(dictResult["status"]) == 400{
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                 default:
                     CommonUtils.showError(.error, String.getString(dictResult["message"]))
@@ -875,6 +885,7 @@ extension DetailScreenVC{
             }
         }
     }
+
     //    Api comment opportunity
     
     func commentoppoertunityapi(oppr_id:Int,completion: @escaping(_ viewH : [user_comment])->Void){

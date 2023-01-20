@@ -29,6 +29,7 @@ class LoginVC: UIViewController {
     
     @IBOutlet weak var lblFirstOR: UILabel!
     @IBOutlet weak var lblSecondOR: UILabel!
+    @IBOutlet weak var lblThirdOR: UILabel!
     
     var payment_type = ""
     
@@ -48,7 +49,7 @@ class LoginVC: UIViewController {
         viewMain.addShadowWithBlurOnView(viewMain, spread: 0, blur: 10, color: .black, opacity: 0.16, OffsetX: 0, OffsetY: 1)
         self.viewButtonLogin.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
         
-        self.setTextFieldUI(textField: txtFieldPhoneNumer, place: "Phone number/Email", floatingText: "Phone number/Email")
+        self.setTextFieldUI(textField: txtFieldPhoneNumer, place: "Phone number/  Email", floatingText: "Phone number/ Email")
         self.setTextFieldUI(textField: txtFieldPassword, place: "Password", floatingText: "Password")
     }
     //  MARK: - @IBAction
@@ -310,8 +311,9 @@ extension LoginVC{
         lblFacebook.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Facebook", comment: "")
         lblTwitter.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Twitter", comment: "")
         lblDontHaveAccount.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Don't have Account", comment: "")
-        lblFirstOR.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "or", comment: "")
+//        lblFirstOR.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "or", comment: "")
         lblSecondOR.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "or", comment: "")
+        lblThirdOR.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "or", comment: "")
         btnCreateAccount.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "Create account", comment: ""), for: .normal)
         btnForgotPassword.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "Forgot Password", comment: ""), for: .normal)
         btnSkipLogin.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "Skip login", comment: ""), for: .normal)

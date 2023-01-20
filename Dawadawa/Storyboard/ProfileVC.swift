@@ -104,7 +104,7 @@ class ProfileVC: UIViewController {
     @IBAction func btnMoreTapped(_ sender: UIButton) {
         
         if UserData.shared.isskiplogin == true{
-            self.showSimpleAlert(message: "Not Available for Guest User Please Register or Login to get full access of Account Features.")
+            self.showAlert()
         }
 
         else{

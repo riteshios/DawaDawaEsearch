@@ -655,8 +655,13 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                                         vc.modalPresentationStyle = .overCurrentContext
                                         let oppid = Int.getInt(userTimeLine[indexPath.row].id)
                                         vc.oppid = oppid
+                                        
+                                        vc.callbackClosure = {
+                                            self.getallopportunity()
+                                        }
                                         self.present(vc, animated: false)
-                                        cell.imgOppFlag.isHidden = false
+                                        
+//                                        cell.imgOppFlag.isHidden = false
                                     }
                                 }
                             }

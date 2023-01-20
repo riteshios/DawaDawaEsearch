@@ -414,7 +414,9 @@ extension ViewAllSavedVC:UITableViewDelegate,UITableViewDataSource{
                                     let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
                                     vc.oppid = oppid
                                     self.present(vc, animated: false)
-                                    cell.imgOppFlag.isHidden = false
+                                    vc.callbackClosure = {
+                                        self.getallsaveopportunity()
+                                    }
                                 }
                             }
                         }

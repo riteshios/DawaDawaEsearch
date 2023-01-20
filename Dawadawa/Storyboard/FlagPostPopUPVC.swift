@@ -11,6 +11,7 @@ class FlagPostPopUPVC: UIViewController {
     @IBOutlet weak var textviewReason: IQTextView!
     @IBOutlet weak var lblReasontoFlag: UILabel!
     @IBOutlet weak var btnReport: UIButton!
+    var callbackClosure:(()->())?
     
     var oppid = 0
     
@@ -22,6 +23,10 @@ class FlagPostPopUPVC: UIViewController {
         viewMain.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
         viewMain.addShadowWithBlurOnView(viewMain, spread: 0, blur: 10, color: .black, opacity: 0.16, OffsetX: 0, OffsetY: 1)
         
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        callbackClosure?()
     }
     
     @IBAction func btndismissTapped(_ sender: UIButton) {

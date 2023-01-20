@@ -373,7 +373,10 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
                                         let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
                                         vc.oppid = oppid
                                         self.present(vc, animated: false)
-                                        cell.imgOppFlag.isHidden = false
+                                        vc.callbackClosure = {
+                                            self.getallpremium()
+                                        }
+//                                        cell.imgOppFlag.isHidden = false
                                     }
                                 }
                             }
@@ -1046,8 +1049,7 @@ extension PremiumOpportunitiesVC{
         ]
         
         debugPrint("oppr_id...===...",oppr_id)
-        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kopportunitydetails, requestMethod: .POST,
-                                                               requestParameters:params, withProgressHUD: false)
+        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kopportunitydetails, requestMethod: .POST, requestParameters:params, withProgressHUD: false)
         {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
             
             CommonUtils.showHudWithNoInteraction(show: false)
@@ -1086,10 +1088,9 @@ extension PremiumOpportunitiesVC{
                             vc.imgarray  = self?.UserTimeLineOppdetails?.oppimage ?? []
                             vc.docarray = self?.UserTimeLineOppdetails?.oppdocument ?? []
                             debugPrint("imgaraay=-=-=-==-=", vc.imgarray)
-                            
-                            
-                            
+                
                         }
+                        
                         else if Int.getInt(self?.UserTimeLineOppdetails?.category_id) == 2{
                             let vc = self?.storyboard?.instantiateViewController(withIdentifier: TrailingOpportunityVC.getStoryboardID()) as! TrailingOpportunityVC
                             self?.navigationController?.pushViewController(vc, animated: true)
@@ -1133,14 +1134,9 @@ extension PremiumOpportunitiesVC{
                             vc.docarray = self?.UserTimeLineOppdetails?.oppdocument ?? []
                             debugPrint("imgaraay=-=-=-==-=", vc.imgarray)
                             
-                            
                         }
                         
-                        
-                        
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                        
-                        
                     }
                     
                     else if  Int.getInt(dictResult["status"]) == 400{
