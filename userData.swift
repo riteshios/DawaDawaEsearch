@@ -2,7 +2,6 @@
 //  Dawadawa
 //  Created by Ritesh Gupta on 23/06/22.
 
-
 import Foundation
 class UserData{
     static let shared = UserData()

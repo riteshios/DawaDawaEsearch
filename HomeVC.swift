@@ -111,8 +111,13 @@ class HomeVC: UIViewController,UITabBarControllerDelegate{
     }
     
     @IBAction func btnNotificationTapped(_ sender: UIButton) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "NotificationsVC") as! NotificationsVC
-        self.navigationController?.pushViewController(vc, animated: true)
+        if UserData.shared.isskiplogin == true{
+            self.showAlert()
+        }
+        else{
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "NotificationsVC") as! NotificationsVC
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
 }
 
@@ -952,6 +957,7 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
     private func scrollToTop() { // Scroll table view to Top
         let topRow = IndexPath(row: 0,section: 0)
         self.tblViewViewPost.scrollToRow(at: topRow,at: .bottom, animated: true ) // .top krne pr cell tk scroll krega or .bottom krne pr header tk scroll krega
+        self.getallopportunity()
     }
     
     @objc func buttonTappedFilter(_ sender:UIButton){

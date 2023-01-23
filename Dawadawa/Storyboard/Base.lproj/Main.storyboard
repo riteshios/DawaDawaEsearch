@@ -1650,7 +1650,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kLA-dV-2Nt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3989.8550724637685" y="-312.22826086956525"/>
+            <point key="canvasLocation" x="3990" y="-331"/>
         </scene>
         <!--EnterNameVC-->
         <scene sceneID="z9a-xT-T73">
@@ -2355,6 +2355,58 @@ last name</string>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Mn-m5-f4c">
                                                 <rect key="frame" x="0.0" y="136" width="414" height="784"/>
                                                 <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PE8-FU-5T3">
+                                                        <rect key="frame" x="228" y="20" width="170" height="39"/>
+                                                        <subviews>
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="downarrow" translatesAutoresizingMaskIntoConstraints="NO" id="zD0-k5-Vxd">
+                                                                <rect key="frame" x="140" y="15" width="15" height="9"/>
+                                                            </imageView>
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IND" translatesAutoresizingMaskIntoConstraints="NO" id="TvC-Ai-q4q">
+                                                                <rect key="frame" x="12" y="11" width="16" height="17"/>
+                                                            </imageView>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="English - IND" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pEB-c0-HeR">
+                                                                <rect key="frame" x="33" y="9.666666666666659" width="89" height="19.666666666666671"/>
+                                                                <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="16"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="amq-fQ-Y7u">
+                                                                <rect key="frame" x="0.0" y="0.0" width="170" height="39"/>
+                                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                <connections>
+                                                                    <action selector="btnDropTapped:" destination="Cey-Up-8bd" eventType="touchUpInside" id="w0l-Zo-hCt"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="bottom" secondItem="amq-fQ-Y7u" secondAttribute="bottom" id="1IY-He-vFl"/>
+                                                            <constraint firstAttribute="trailing" secondItem="amq-fQ-Y7u" secondAttribute="trailing" id="5bM-bn-vXx"/>
+                                                            <constraint firstAttribute="bottom" secondItem="TvC-Ai-q4q" secondAttribute="bottom" constant="11" id="G4X-Hy-DXw"/>
+                                                            <constraint firstItem="TvC-Ai-q4q" firstAttribute="top" secondItem="PE8-FU-5T3" secondAttribute="top" constant="11" id="OrW-hn-Unv"/>
+                                                            <constraint firstAttribute="width" constant="170" id="SOM-TY-pbq"/>
+                                                            <constraint firstAttribute="trailing" secondItem="zD0-k5-Vxd" secondAttribute="trailing" constant="15" id="ZH5-hZ-GMy"/>
+                                                            <constraint firstItem="amq-fQ-Y7u" firstAttribute="leading" secondItem="PE8-FU-5T3" secondAttribute="leading" id="a5e-m2-Vuz"/>
+                                                            <constraint firstItem="TvC-Ai-q4q" firstAttribute="leading" secondItem="PE8-FU-5T3" secondAttribute="leading" constant="12" id="dfH-5c-eOP"/>
+                                                            <constraint firstItem="zD0-k5-Vxd" firstAttribute="top" secondItem="PE8-FU-5T3" secondAttribute="top" constant="15" id="kYO-yK-5s3"/>
+                                                            <constraint firstItem="pEB-c0-HeR" firstAttribute="leading" secondItem="TvC-Ai-q4q" secondAttribute="trailing" constant="5" id="nBS-9O-7xa"/>
+                                                            <constraint firstAttribute="height" constant="39" id="npI-lc-88Z"/>
+                                                            <constraint firstItem="amq-fQ-Y7u" firstAttribute="top" secondItem="PE8-FU-5T3" secondAttribute="top" id="pzW-jp-bfB"/>
+                                                            <constraint firstAttribute="bottom" secondItem="zD0-k5-Vxd" secondAttribute="bottom" constant="15" id="rMs-iB-CJO"/>
+                                                            <constraint firstItem="pEB-c0-HeR" firstAttribute="centerY" secondItem="TvC-Ai-q4q" secondAttribute="centerY" id="vdy-Uz-bZd"/>
+                                                        </constraints>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius1">
+                                                                <real key="value" value="5"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth1">
+                                                                <real key="value" value="1"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor1">
+                                                                <color key="value" red="0.08235294118" green="0.44705882349999998" blue="0.63137254899999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </view>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DAWA-1" translatesAutoresizingMaskIntoConstraints="NO" id="tVr-aM-oC3">
                                                         <rect key="frame" x="16" y="60" width="382" height="267"/>
                                                         <constraints>
@@ -2493,12 +2545,14 @@ last name</string>
                                                 <constraints>
                                                     <constraint firstItem="tVr-aM-oC3" firstAttribute="leading" secondItem="1Mn-m5-f4c" secondAttribute="leading" constant="16" id="5ai-TD-NtM"/>
                                                     <constraint firstItem="eQ4-H8-8Lx" firstAttribute="top" secondItem="tVr-aM-oC3" secondAttribute="bottom" constant="40" id="6Vx-4k-N5B"/>
+                                                    <constraint firstItem="PE8-FU-5T3" firstAttribute="top" secondItem="1Mn-m5-f4c" secondAttribute="top" constant="20" id="A6b-Sk-Cax"/>
                                                     <constraint firstItem="ALI-8S-xoR" firstAttribute="top" secondItem="Bbo-Db-Hrh" secondAttribute="bottom" constant="30" id="B9g-fB-MaY"/>
                                                     <constraint firstItem="Bbo-Db-Hrh" firstAttribute="top" secondItem="d1h-uw-bbt" secondAttribute="bottom" constant="64" id="Bl2-a3-sHO"/>
                                                     <constraint firstItem="tVr-aM-oC3" firstAttribute="top" secondItem="1Mn-m5-f4c" secondAttribute="top" constant="60" id="I7Y-Pg-lSX"/>
                                                     <constraint firstItem="ALI-8S-xoR" firstAttribute="trailing" secondItem="Bbo-Db-Hrh" secondAttribute="trailing" id="LFQ-RJ-FXK"/>
                                                     <constraint firstAttribute="trailing" secondItem="tVr-aM-oC3" secondAttribute="trailing" constant="16" id="N0I-9Y-cmV"/>
                                                     <constraint firstItem="ALI-8S-xoR" firstAttribute="leading" secondItem="Bbo-Db-Hrh" secondAttribute="leading" id="OAP-it-0WQ"/>
+                                                    <constraint firstAttribute="trailing" secondItem="PE8-FU-5T3" secondAttribute="trailing" constant="16" id="aYt-RS-v43"/>
                                                     <constraint firstItem="d1h-uw-bbt" firstAttribute="leading" secondItem="1Mn-m5-f4c" secondAttribute="leading" constant="25" id="eMX-Cf-8xa"/>
                                                     <constraint firstItem="d1h-uw-bbt" firstAttribute="top" secondItem="eQ4-H8-8Lx" secondAttribute="bottom" constant="19.666666666666686" id="ovJ-lj-Edk"/>
                                                     <constraint firstItem="Bbo-Db-Hrh" firstAttribute="trailing" secondItem="d1h-uw-bbt" secondAttribute="trailing" id="uRn-14-zEJ"/>
@@ -2545,8 +2599,11 @@ last name</string>
                     <size key="freeformSize" width="414" height="920"/>
                     <connections>
                         <outlet property="btnSkiplogin" destination="bRP-oA-LdF" id="uIJ-yJ-d5V"/>
+                        <outlet property="btndrop" destination="amq-fQ-Y7u" id="Ajz-oc-8A6"/>
+                        <outlet property="imgDropDownMenu" destination="TvC-Ai-q4q" id="KVu-jG-Yn4"/>
                         <outlet property="lblDawadawa" destination="eQ4-H8-8Lx" id="Rc0-gK-1Rs"/>
                         <outlet property="lblDescription" destination="d1h-uw-bbt" id="I7D-oZ-rZL"/>
+                        <outlet property="lblDropDownMenu" destination="pEB-c0-HeR" id="tsS-3Q-hk4"/>
                         <outlet property="lbllogin" destination="y5P-Tz-2Nb" id="itl-JB-u42"/>
                         <outlet property="lblregister" destination="ovj-TX-Cny" id="mC4-HH-aYc"/>
                         <outlet property="viewLogin" destination="PUJ-cH-c1L" id="BQh-8y-aPh"/>
@@ -4036,6 +4093,7 @@ from the options below</string>
         <image name="DAWA-1" width="383" height="249"/>
         <image name="Frame 65" width="24" height="24"/>
         <image name="Group 85" width="95" height="93"/>
+        <image name="IND" width="16" height="16"/>
         <image name="Rectangle 100" width="15" height="15"/>
         <image name="Rectangle 101" width="11" height="11"/>
         <image name="State" width="43" height="45"/>
@@ -4044,6 +4102,7 @@ from the options below</string>
         <image name="arrow-left" width="24" height="24"/>
         <image name="country" width="43" height="45"/>
         <image name="dawadwa" width="86" height="84"/>
+        <image name="downarrow" width="15" height="8.6666669845581055"/>
         <image name="eye" width="16" height="16"/>
         <image name="eye-slash" width="16" height="16"/>
         <image name="eye.slash" catalog="system" width="128" height="86"/>

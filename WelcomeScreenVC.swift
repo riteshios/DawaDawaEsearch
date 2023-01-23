@@ -16,6 +16,10 @@ class WelcomeScreenVC: UIViewController {
     @IBOutlet weak var lblregister: UILabel!
     @IBOutlet weak var btnSkiplogin: UIButton!
     
+    @IBOutlet weak var btndrop: UIButton!
+    @IBOutlet weak var lblDropDownMenu: UILabel!
+    @IBOutlet weak var imgDropDownMenu: UIImageView!
+    
     
 
     override func viewDidLoad() {
@@ -23,6 +27,11 @@ class WelcomeScreenVC: UIViewController {
         self.setup()
         self.setuplanguage()
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
     }
     
 //     MARK: - Life Cycle
@@ -39,9 +48,53 @@ class WelcomeScreenVC: UIViewController {
         self.viewRegister.cornerRadius = 10
         self.viewLogin.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
         self.viewRegister.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
+            
+            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                self.imgDropDownMenu.image = UIImage(named: "IND")
+                self.lblDropDownMenu.text = "English-IND"
+            }
+            else{
+                self.imgDropDownMenu.image = UIImage(named: "sudan")
+                self.lblDropDownMenu.text = "عربي"
+            }
     }
     
+    
 //     MARK: - @IBAction
+    
+    @IBAction func btnDropTapped(_ sender: UIButton) {
+        let dataSource1 = ["English-IND","Arabic"]
+        kSharedAppDelegate?.dropDown(dataSource:dataSource1 , text: btndrop)
+        {(Index ,item) in
+            self.lblDropDownMenu.text = item
+            self.imgDropDownMenu.image = item == "English-IND" ? UIImage(named: "IND") : UIImage(named: "sudan")
+            
+            if self.lblDropDownMenu.text == "English-IND"{
+                self.setupUpdateView(languageCode: "en")
+                kSharedUserDefaults.setLanguage(language: "en")
+                self.setuplanguage()
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: "WelcomeScreenVC") as! WelcomeScreenVC
+                self.navigationController?.pushViewController(vc, animated: false)
+                
+//                kSharedAppDelegate?.makeRootViewController()
+                
+                //                       UserDefaults.standard.set("en", forKey: "Language")
+                //                       UIView.appearance().semanticContentAttribute = .forceLeftToRight
+            }
+            
+            else if self.lblDropDownMenu.text == "Arabic"{
+                self.setupUpdateView(languageCode: "ar")
+                kSharedUserDefaults.setLanguage(language: "ar")
+                self.setuplanguage()
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: "WelcomeScreenVC") as! WelcomeScreenVC
+                self.navigationController?.pushViewController(vc, animated: false)
+//                kSharedAppDelegate?.makeRootViewController()
+                //                       UserDefaults.standard.set("ar", forKey: "Language")
+                //                       UIView.appearance().semanticContentAttribute = .forceRightToLeft
+            }
+        }
+    }
+    
     
     @IBAction func btnLoginTapped(_ sender: UIButton) {
 //        if sender.isSelected == true{
@@ -72,6 +125,12 @@ extension WelcomeScreenVC{
         lbllogin.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Login", comment: "")
         lblregister.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Register", comment: "")
         btnSkiplogin.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "Skip Login", comment: ""), for: .normal)
+    }
+    
+    func setupUpdateView(languageCode code: String){
+        LocalizationSystem.sharedInstance.setLanguage(languageCode: code)
+        UIView.appearance().semanticContentAttribute =  code == "ar" ? .forceRightToLeft :  .forceLeftToRight
+        
     }
 }
 

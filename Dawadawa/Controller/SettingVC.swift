@@ -68,7 +68,6 @@ class SettingVC: UIViewController {
                 //                       UIView.appearance().semanticContentAttribute = .forceRightToLeft
             }
         }
-       
     }
     
     func setupUpdateView(languageCode code: String){
