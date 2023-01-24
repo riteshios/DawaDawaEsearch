@@ -32,6 +32,8 @@
 "Login" = "تسجيل الدخول";
 "Register" = "يسجل";
 "Skip Login" = "تخطي تسجيل الدخول";
+"English-IND" = "إنجليزي";
+"Arabic" = "عربي";
 
 // MARK: - EnterNameVC
 

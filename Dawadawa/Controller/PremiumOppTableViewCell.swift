@@ -53,9 +53,6 @@ extension PremiumOppTableViewCell: UICollectionViewDelegate,UICollectionViewData
         cell.imgPremium.downlodeImage(serviceurl: "\(imgUrl)\(String.getString(obj.oppimage.first?.imageurl))", placeHolder: UIImage(named: "truck"))
         return cell
     }
-   
-
-  
 }
 
 
@@ -72,7 +69,6 @@ extension PremiumOppTableViewCell{
                 kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
             }
         }
-        
         
         TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName: ServiceName.kgetpremium, requestMethod: .GET, requestParameters:[:], withProgressHUD: false) { (result:Any?, error:Error?, errorType:ErrorType?,statusCode:Int?) in
             CommonUtils.showHudWithNoInteraction(show: false)
@@ -94,15 +90,14 @@ extension PremiumOppTableViewCell{
                         self.userTimeLine = Opportunity.map{SocialPostData(data: kSharedInstance.getDictionary($0))}
                         print("DataAllPremiumPost===\(self.userTimeLine)")
                         
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         self.ColllectionViewPremiumOpp.reloadData()
                         
                     }
                     else if  Int.getInt(dictResult["status"]) == 400{
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
-                  
                 default:
                     CommonUtils.showError(.error, String.getString(dictResult["message"]))
                 }

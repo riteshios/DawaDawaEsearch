@@ -755,7 +755,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5h3-lo-mU7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4668.115942028986" y="-212.77173913043481"/>
+            <point key="canvasLocation" x="4668" y="-231"/>
         </scene>
         <!--Activation CodeVC-->
         <scene sceneID="2eA-EJ-5LY">
@@ -1071,7 +1071,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Qm-27-fyz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8867" y="-368"/>
+            <point key="canvasLocation" x="8806" y="-387"/>
         </scene>
         <!--Activated Successfully Pop UpVC-->
         <scene sceneID="BG3-rz-t5o">
@@ -1182,7 +1182,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W8N-CR-fa5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="9571" y="-368"/>
+            <point key="canvasLocation" x="9490" y="-387"/>
         </scene>
         <!--LoginVC-->
         <scene sceneID="Rol-5t-Zhf">
@@ -1900,7 +1900,7 @@ last name</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="483-nk-rxf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5342.0289855072469" y="-313.04347826086956"/>
+            <point key="canvasLocation" x="5339" y="-331"/>
         </scene>
         <!--ForgotPasswordVC-->
         <scene sceneID="K7h-PF-pKS">
@@ -2086,7 +2086,7 @@ last name</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4xQ-wM-XOM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="10287" y="-312"/>
+            <point key="canvasLocation" x="10174" y="-331"/>
         </scene>
         <!--ResetPasswordVC-->
         <scene sceneID="j0X-0l-mfz">
@@ -2269,7 +2269,7 @@ last name</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TUu-jD-Cxh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="10972" y="-312"/>
+            <point key="canvasLocation" x="10855" y="-333"/>
         </scene>
         <!--Web ViewVC-->
         <scene sceneID="se2-E1-DVj">
@@ -2333,7 +2333,7 @@ last name</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S1g-5e-Mze" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="11666.666666666668" y="-368.47826086956525"/>
+            <point key="canvasLocation" x="11541" y="-387"/>
         </scene>
         <!--WelcomeScreenVC-->
         <scene sceneID="rCS-lz-8JS">
@@ -2372,13 +2372,13 @@ last name</string>
                                                             </label>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="amq-fQ-Y7u">
                                                                 <rect key="frame" x="0.0" y="0.0" width="170" height="39"/>
+                                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                                 <connections>
                                                                     <action selector="btnDropTapped:" destination="Cey-Up-8bd" eventType="touchUpInside" id="w0l-Zo-hCt"/>
                                                                 </connections>
                                                             </button>
                                                         </subviews>
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="bottom" secondItem="amq-fQ-Y7u" secondAttribute="bottom" id="1IY-He-vFl"/>
                                                             <constraint firstAttribute="trailing" secondItem="amq-fQ-Y7u" secondAttribute="trailing" id="5bM-bn-vXx"/>
@@ -2413,6 +2413,61 @@ last name</string>
                                                             <constraint firstAttribute="height" constant="267" id="ccd-gF-iUg"/>
                                                         </constraints>
                                                     </imageView>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zqa-21-nc5">
+                                                        <rect key="frame" x="228" y="67" width="170" height="70"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9pz-Ji-GSt">
+                                                                <rect key="frame" x="2" y="2" width="166" height="35"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="35" id="QeI-HK-NTA"/>
+                                                                </constraints>
+                                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                <state key="normal" title="English-IND">
+                                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="btnEnglishLangTapped:" destination="Cey-Up-8bd" eventType="touchUpInside" id="gbV-dr-d6H"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I0P-0Z-GKA">
+                                                                <rect key="frame" x="2" y="33" width="166" height="35"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="35" id="Ml4-Ge-J9c"/>
+                                                                </constraints>
+                                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                <state key="normal" title="Arabic">
+                                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="btnArabicLangTapped:" destination="Cey-Up-8bd" eventType="touchUpInside" id="aPo-Hv-2Ed"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstItem="I0P-0Z-GKA" firstAttribute="leading" secondItem="zqa-21-nc5" secondAttribute="leading" constant="2" id="91j-fs-tht"/>
+                                                            <constraint firstItem="9pz-Ji-GSt" firstAttribute="leading" secondItem="zqa-21-nc5" secondAttribute="leading" constant="2" id="BnQ-lZ-bDc"/>
+                                                            <constraint firstAttribute="trailing" secondItem="I0P-0Z-GKA" secondAttribute="trailing" constant="2" id="LUI-E2-Pul"/>
+                                                            <constraint firstAttribute="bottom" secondItem="I0P-0Z-GKA" secondAttribute="bottom" constant="2" id="i5r-GV-2Od"/>
+                                                            <constraint firstAttribute="height" constant="70" id="p9Q-5Z-8aq"/>
+                                                            <constraint firstItem="9pz-Ji-GSt" firstAttribute="top" secondItem="zqa-21-nc5" secondAttribute="top" constant="2" id="pyW-gY-caf"/>
+                                                            <constraint firstAttribute="trailing" secondItem="9pz-Ji-GSt" secondAttribute="trailing" constant="2" id="uGf-2r-JkJ"/>
+                                                        </constraints>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius1">
+                                                                <real key="value" value="5"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                                                <color key="value" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                                                <size key="value" width="1" height="1"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                                                <real key="value" value="0.29999999999999999"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DawaDawa" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eQ4-H8-8Lx">
                                                         <rect key="frame" x="148.33333333333334" y="367" width="117.66666666666666" height="29.333333333333314"/>
                                                         <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="24"/>
@@ -2544,16 +2599,19 @@ last name</string>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstItem="tVr-aM-oC3" firstAttribute="leading" secondItem="1Mn-m5-f4c" secondAttribute="leading" constant="16" id="5ai-TD-NtM"/>
+                                                    <constraint firstItem="zqa-21-nc5" firstAttribute="trailing" secondItem="PE8-FU-5T3" secondAttribute="trailing" id="5hp-bh-h2O"/>
                                                     <constraint firstItem="eQ4-H8-8Lx" firstAttribute="top" secondItem="tVr-aM-oC3" secondAttribute="bottom" constant="40" id="6Vx-4k-N5B"/>
                                                     <constraint firstItem="PE8-FU-5T3" firstAttribute="top" secondItem="1Mn-m5-f4c" secondAttribute="top" constant="20" id="A6b-Sk-Cax"/>
                                                     <constraint firstItem="ALI-8S-xoR" firstAttribute="top" secondItem="Bbo-Db-Hrh" secondAttribute="bottom" constant="30" id="B9g-fB-MaY"/>
                                                     <constraint firstItem="Bbo-Db-Hrh" firstAttribute="top" secondItem="d1h-uw-bbt" secondAttribute="bottom" constant="64" id="Bl2-a3-sHO"/>
+                                                    <constraint firstItem="zqa-21-nc5" firstAttribute="top" secondItem="PE8-FU-5T3" secondAttribute="bottom" constant="8" symbolic="YES" id="Cnt-wt-8C1"/>
                                                     <constraint firstItem="tVr-aM-oC3" firstAttribute="top" secondItem="1Mn-m5-f4c" secondAttribute="top" constant="60" id="I7Y-Pg-lSX"/>
                                                     <constraint firstItem="ALI-8S-xoR" firstAttribute="trailing" secondItem="Bbo-Db-Hrh" secondAttribute="trailing" id="LFQ-RJ-FXK"/>
                                                     <constraint firstAttribute="trailing" secondItem="tVr-aM-oC3" secondAttribute="trailing" constant="16" id="N0I-9Y-cmV"/>
                                                     <constraint firstItem="ALI-8S-xoR" firstAttribute="leading" secondItem="Bbo-Db-Hrh" secondAttribute="leading" id="OAP-it-0WQ"/>
                                                     <constraint firstAttribute="trailing" secondItem="PE8-FU-5T3" secondAttribute="trailing" constant="16" id="aYt-RS-v43"/>
                                                     <constraint firstItem="d1h-uw-bbt" firstAttribute="leading" secondItem="1Mn-m5-f4c" secondAttribute="leading" constant="25" id="eMX-Cf-8xa"/>
+                                                    <constraint firstItem="zqa-21-nc5" firstAttribute="leading" secondItem="PE8-FU-5T3" secondAttribute="leading" id="j2l-R2-7Li"/>
                                                     <constraint firstItem="d1h-uw-bbt" firstAttribute="top" secondItem="eQ4-H8-8Lx" secondAttribute="bottom" constant="19.666666666666686" id="ovJ-lj-Edk"/>
                                                     <constraint firstItem="Bbo-Db-Hrh" firstAttribute="trailing" secondItem="d1h-uw-bbt" secondAttribute="trailing" id="uRn-14-zEJ"/>
                                                     <constraint firstAttribute="trailing" secondItem="d1h-uw-bbt" secondAttribute="trailing" constant="25" id="vWH-yj-ynG"/>
@@ -2598,14 +2656,17 @@ last name</string>
                     <navigationItem key="navigationItem" id="LGC-7K-itu"/>
                     <size key="freeformSize" width="414" height="920"/>
                     <connections>
+                        <outlet property="btnArabic" destination="I0P-0Z-GKA" id="vPK-rR-XgC"/>
+                        <outlet property="btnEnglish" destination="9pz-Ji-GSt" id="AhU-sB-Jm5"/>
                         <outlet property="btnSkiplogin" destination="bRP-oA-LdF" id="uIJ-yJ-d5V"/>
-                        <outlet property="btndrop" destination="amq-fQ-Y7u" id="Ajz-oc-8A6"/>
+                        <outlet property="btndrop" destination="amq-fQ-Y7u" id="8lR-J0-Fp7"/>
                         <outlet property="imgDropDownMenu" destination="TvC-Ai-q4q" id="KVu-jG-Yn4"/>
                         <outlet property="lblDawadawa" destination="eQ4-H8-8Lx" id="Rc0-gK-1Rs"/>
                         <outlet property="lblDescription" destination="d1h-uw-bbt" id="I7D-oZ-rZL"/>
                         <outlet property="lblDropDownMenu" destination="pEB-c0-HeR" id="tsS-3Q-hk4"/>
                         <outlet property="lbllogin" destination="y5P-Tz-2Nb" id="itl-JB-u42"/>
                         <outlet property="lblregister" destination="ovj-TX-Cny" id="mC4-HH-aYc"/>
+                        <outlet property="viewDrop" destination="zqa-21-nc5" id="176-Ur-Dxb"/>
                         <outlet property="viewLogin" destination="PUJ-cH-c1L" id="BQh-8y-aPh"/>
                         <outlet property="viewMain" destination="1Mn-m5-f4c" id="a2F-H3-kg5"/>
                         <outlet property="viewRegister" destination="nZD-X5-KjI" id="EOf-3r-7Jm"/>
@@ -2813,7 +2874,7 @@ would like to sign into DawaDawa.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fsY-YC-TDy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6036" y="-313"/>
+            <point key="canvasLocation" x="6038" y="-332"/>
         </scene>
         <!--EnterPhoneNumberVC-->
         <scene sceneID="LCP-ko-bGi">
@@ -3067,7 +3128,7 @@ would like to sign into DawaDawa.</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8lo-gq-3DT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="zAH-TT-2d2" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="6700.0000000000009" y="-312.22826086956525"/>
+            <point key="canvasLocation" x="6701" y="-331"/>
         </scene>
         <!--EnterResidenceVC-->
         <scene sceneID="BWf-gq-rVh">
@@ -3388,7 +3449,7 @@ from the options below</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r9o-XW-RMg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="K2Y-e9-SuS" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="7391" y="-312"/>
+            <point key="canvasLocation" x="7390" y="-331"/>
         </scene>
         <!--EnterPasswordVC-->
         <scene sceneID="h81-sF-6Hl">
@@ -3826,7 +3887,7 @@ from the options below</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fq3-OX-KYa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8145" y="-312"/>
+            <point key="canvasLocation" x="8100" y="-331"/>
         </scene>
         <!--Country State Pop UpVC-->
         <scene sceneID="Xdh-TJ-Sbv">
