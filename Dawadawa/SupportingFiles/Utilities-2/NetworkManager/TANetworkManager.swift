@@ -380,8 +380,8 @@ public class TANetworkManager {
             switch method
             {
             case .GET:
-                Alamofire.request(serviceUrl, method: .get, parameters: postData, encoding: URLEncoding.default, headers: headers).responseJSON(completionHandler:
-                                                                                                                                                    { (DataResponse) in
+                Alamofire.request(serviceUrl, method: .get, parameters: postData, encoding: URLEncoding.default, headers: headers).responseJSON(completionHandler:{ (DataResponse) in
+                    
                     SVProgressHUD.dismiss()
                     switch DataResponse.result
                     {

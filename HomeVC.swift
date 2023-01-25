@@ -212,8 +212,8 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
             cell.SocialPostCollectionView.tag = indexPath.section
             cell.lblUserName.text = String.getString(obj.userdetail?.name)
             debugPrint("username.....", cell.lblUserName.text)
-//            cell.lblTitle.text = String.getString(obj.title)
-            cell.lblDescribtion.text = String.getString(obj.description)
+            cell.lblTitle.text = String.getString(obj.title)
+//            cell.lblDescribtion.text = String.getString(obj.description)
             cell.lblRating.text = String.getString(obj.opr_rating)
             
             cell.img = obj.oppimage
@@ -226,7 +226,7 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
             let userUrl = URL(string: imguserurl)
             cell.Imageuser.sd_setImage(with: userUrl, placeholderImage:UIImage(named: "Boss") )
             
-            cell.lblLikeCount.text = String.getString(obj.likes) + " " + "Likes"
+//            cell.lblLikeCount.text = String.getString(obj.likes) + " " + "Likes"
             
             cell.imgOpp_plan.image = obj.opp_plan == "Featured" ? UIImage(named: "Star Filled") : obj.opp_plan == "Premium" ? UIImage(named: "Crown") : UIImage(named: "Folded Booklet")
             
@@ -235,9 +235,9 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                 cell.lblTitle.textColor = .black
             }
             else {
-                cell.imgredCircle.isHidden = false
-                cell.lblTitle.text = String.getString(obj.title)
-                cell.lblcloseOpportunity.isHidden = false
+//                cell.imgredCircle.isHidden = false
+//                cell.lblTitle.text = String.getString(obj.title)
+//                cell.lblcloseOpportunity.isHidden = false
             }
             
             if String.getString(obj.is_user_like) == "1"{
@@ -300,14 +300,14 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                 cell.heightSocialPostCollectionView.constant = 225
             }
             
-            if String.getString(obj.opr_rating) == ""{
-                cell.WidthViewRating.constant = 35
-                cell.lblRating.isHidden = true
-            }
-            else{
-                cell.WidthViewRating.constant = 58
-                cell.lblRating.isHidden = false
-            }
+//            if String.getString(obj.opr_rating) == ""{
+//                cell.WidthViewRating.constant = 35
+//                cell.lblRating.isHidden = true
+//            }
+//            else{
+//                cell.WidthViewRating.constant = 58
+//                cell.lblRating.isHidden = false
+//            }
             
             if UserData.shared.id == Int.getInt(obj.user_id){
                 cell.btnChat.isHidden = true
@@ -1516,7 +1516,6 @@ extension HomeVC{
     
     func opportunitydetailsapi(oppr_id:Int){
         CommonUtils.showHud(show: true)
-        
         
         if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
             let endToken = kSharedUserDefaults.getLoggedInAccessToken()

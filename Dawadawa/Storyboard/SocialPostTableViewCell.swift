@@ -99,8 +99,8 @@ class SocialPostTableViewCell: UITableViewCell,UITextViewDelegate {
         self.imageSubcommentUser.isHidden = true
         self.lblsubUserNameandComment.isHidden = true
         self.imgOppFlag.isHidden = true
-        self.imgredCircle.isHidden = true
-        self.lblcloseOpportunity.isHidden = true
+//        self.imgredCircle.isHidden = true
+//        self.lblcloseOpportunity.isHidden = true
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -225,7 +225,7 @@ extension SocialPostTableViewCell: UICollectionViewDelegate,UICollectionViewData
 extension SocialPostTableViewCell{
     func setuplanguage(){
         self.txtviewComment.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Can we connect? I need service", comment: "")
-        lblcloseOpportunity.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "This opportunity has been closed", comment: "")
+//        lblcloseOpportunity.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "This opportunity has been closed", comment: "")
         lbllike.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Like", comment: "")
         lblComment.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Comment", comment: "")
         lblShare.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Share", comment: "")
