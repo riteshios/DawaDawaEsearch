@@ -123,7 +123,7 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
             cell.lblUserName.text = String.getString(obj.userdetail?.name)
             debugPrint("username.....", cell.lblUserName.text)
             cell.lblTitle.text = String.getString(obj.title)
-            cell.lblDescribtion.text = String.getString(obj.description)
+//            cell.lblDescribtion.text = String.getString(obj.description)
             cell.lblRating.text = String.getString(obj.opr_rating)
             cell.img = obj.oppimage
             cell.imgUrl = self.imgUrl
@@ -133,7 +133,7 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
             
             cell.Imageuser.downlodeImage(serviceurl: imguserurl , placeHolder: UIImage(named: "Boss"))
             
-            cell.lblLikeCount.text = String.getString(obj.likes) + " " + "Likes"
+            cell.lblLikeCount.text = String.getString(obj.likes) //+ " " + "Likes"
             
             cell.imgOpp_plan.image = obj.opp_plan == "Featured" ? UIImage(named: "Star Filled") : obj.opp_plan == "Premium" ? UIImage(named: "Crown") : UIImage(named: "Folded Booklet")
             
@@ -141,10 +141,12 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
             if Int.getInt(obj.close_opr) == 0{
                 cell.lblTitle.text = String.getString(obj.title)
                 cell.lblTitle.textColor = .black
+                cell.lblcloseOpportunity.text = "Available"
+                cell.lblcloseOpportunity.textColor = UIColor(hexString: "#20D273")
             }
             else{
-                cell.imgredCircle.isHidden = false
-                cell.lblcloseOpportunity.isHidden = false
+                cell.lblcloseOpportunity.text = "Closed"
+                cell.lblcloseOpportunity.textColor = UIColor(hexString: "#FF4C4D")
             }
             
             if String.getString(obj.is_user_like) == "1"{
@@ -192,25 +194,26 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
             
             if String.getString(obj.is_flag) == "1"{
                 cell.imgOppFlag.isHidden = false
+                cell.LeadingOppType.constant = 17
+            
             }
             else{
                 cell.imgOppFlag.isHidden = true
+                cell.LeadingOppType.constant = -20
             }
             
-            if obj.oppimage.count == 0{
-                cell.heightSocialPostCollectionView.constant = 0
-            }
-            else{
-                cell.heightSocialPostCollectionView.constant = 225
-            }
+//            if obj.oppimage.count == 0{
+//                cell.heightSocialPostCollectionView.constant = 0
+//            }
+//            else{
+//                cell.heightSocialPostCollectionView.constant = 225
+//            }
             
             if String.getString(obj.opr_rating) == ""{
-                cell.WidthViewRating.constant = 35
-                cell.lblRating.isHidden = true
+                cell.lblRating.text = "0.0"
             }
             else{
-                cell.WidthViewRating.constant = 58
-                cell.lblRating.isHidden = false
+                cell.lblRating.text = String.getString(obj.opr_rating)
             }
             
             if UserData.shared.id == Int.getInt(obj.user_id){
@@ -233,6 +236,14 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
                     self.navigationController?.pushViewController(vc, animated: true)
                 }
                 if txt == "viewDetails"{
+                    let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
+                    debugPrint("detailsppid=-=-=",oppid)
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: DetailScreenVC.getStoryboardID()) as! DetailScreenVC
+                    vc.oppid = oppid
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
+                
+                if txt == "viewDetails2"{
                     let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
                     debugPrint("detailsppid=-=-=",oppid)
                     let vc = self.storyboard?.instantiateViewController(withIdentifier: DetailScreenVC.getStoryboardID()) as! DetailScreenVC
@@ -271,7 +282,7 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
                         self.likeOpportunityapi(oppr_id: oppid ?? 0) { countLike,sucess  in
                             obj.likes = Int.getInt(countLike)
                             debugPrint("Int.getInt(countLike)",Int.getInt(countLike))
-                            cell.lblLikeCount.text = String.getString(obj.likes) + " " + "likes"
+                            cell.lblLikeCount.text = String.getString(obj.likes) //+ " " + "likes"
                             
                             if sucess == 200{
                                 cell.imglike.image = UIImage(named: "dil")

@@ -45,6 +45,8 @@ class SocialPostTableViewCell: UITableViewCell,UITextViewDelegate {
     @IBOutlet weak var btnChat: UIButton!
     @IBOutlet weak var btnviewDetails: UIButton!
     @IBOutlet weak var btnDescription: UIButton!
+    @IBOutlet weak var LeadingOppType: NSLayoutConstraint!
+    
     
     @IBOutlet weak var viewSave: UIView!
     
@@ -173,6 +175,10 @@ class SocialPostTableViewCell: UITableViewCell,UITextViewDelegate {
         self.callback?("viewDetails",sender)
     }
     
+    @IBAction func btnViewDetailsTwoTapped(_ sender: UIButton){
+        self.callback?("viewDetails2",sender)
+    }
+    
     @IBAction func btnUserComment(_ sender: UIButton){
         self.callback?("Iconusercomment",sender)
         
@@ -204,9 +210,9 @@ extension SocialPostTableViewCell: UICollectionViewDelegate,UICollectionViewData
         let imageurl = "\(imgUrl)\(String.getString(obj))"
         print("imagebaseurl=-=-\(imageurl)")
         let userUrl = URL(string: imageurl)
-        cell.imgOpportunity.sd_setImage(with: userUrl, placeholderImage:UIImage(named: "Frame 726") )
+//        cell.imgOpportunity.sd_setImage(with: userUrl, placeholderImage:UIImage(named: "Banner"))
         cell.imgOpportunity.seeFullImage()
-        //        cell.imgOpportunity.downlodeImage(serviceurl: imageurl, placeHolder: UIImage(named: "baba"))
+                cell.imgOpportunity.downlodeImage(serviceurl: imageurl, placeHolder: UIImage(named: "Banner"))
         
         return cell
     }

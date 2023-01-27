@@ -226,18 +226,21 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
             let userUrl = URL(string: imguserurl)
             cell.Imageuser.sd_setImage(with: userUrl, placeholderImage:UIImage(named: "Boss") )
             
-//            cell.lblLikeCount.text = String.getString(obj.likes) + " " + "Likes"
+            cell.lblLikeCount.text = String.getString(obj.likes) //+ " " + "Likes"
             
             cell.imgOpp_plan.image = obj.opp_plan == "Featured" ? UIImage(named: "Star Filled") : obj.opp_plan == "Premium" ? UIImage(named: "Crown") : UIImage(named: "Folded Booklet")
             
             if Int.getInt(obj.close_opr) == 0{
                 cell.lblTitle.text = String.getString(obj.title)
                 cell.lblTitle.textColor = .black
+                cell.lblcloseOpportunity.text = "Available"
+                cell.lblcloseOpportunity.textColor = UIColor(hexString: "#20D273")
             }
             else {
 //                cell.imgredCircle.isHidden = false
 //                cell.lblTitle.text = String.getString(obj.title)
-//                cell.lblcloseOpportunity.isHidden = false
+                cell.lblcloseOpportunity.text = "Closed"
+                cell.lblcloseOpportunity.textColor = UIColor(hexString: "#FF4C4D")
             }
             
             if String.getString(obj.is_user_like) == "1"{
@@ -288,26 +291,27 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
             
             if String.getString(obj.is_flag) == "1"{
                 cell.imgOppFlag.isHidden = false
+                cell.LeadingOppType.constant = 17
+            
             }
             else{
                 cell.imgOppFlag.isHidden = true
+                cell.LeadingOppType.constant = -20
             }
             
-            if obj.oppimage.count == 0{
-                cell.heightSocialPostCollectionView.constant = 0
-            }
-            else{
-                cell.heightSocialPostCollectionView.constant = 225
-            }
-            
-//            if String.getString(obj.opr_rating) == ""{
-//                cell.WidthViewRating.constant = 35
-//                cell.lblRating.isHidden = true
+//            if obj.oppimage.count == 0{
+//                cell.heightSocialPostCollectionView.constant = 0
 //            }
 //            else{
-//                cell.WidthViewRating.constant = 58
-//                cell.lblRating.isHidden = false
+//                cell.heightSocialPostCollectionView.constant = 225
 //            }
+            
+            if String.getString(obj.opr_rating) == ""{
+                cell.lblRating.text = "0.0"
+            }
+            else{
+                cell.lblRating.text = String.getString(obj.opr_rating)
+            }
             
             if UserData.shared.id == Int.getInt(obj.user_id){
                 cell.btnChat.isHidden = true
@@ -349,7 +353,24 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                             self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
                         }
                     }
-                    
+                    else{
+                        let oppid = Int.getInt(userTimeLine[indexPath.row].id)
+                        debugPrint("detailsppid=-=-=",oppid)
+                        let vc = self.storyboard?.instantiateViewController(withIdentifier: DetailScreenVC.getStoryboardID()) as! DetailScreenVC
+                        vc.oppid = oppid
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    }
+                }
+                
+                if txt == "viewDetails2"{
+                    if UserData.shared.isskiplogin == true{
+                        if kSharedUserDefaults.getlanguage() as? String == "en"{
+                            self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                        }
+                        else{
+                            self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
+                        }
+                    }
                     else{
                         let oppid = Int.getInt(userTimeLine[indexPath.row].id)
                         debugPrint("detailsppid=-=-=",oppid)
@@ -406,7 +427,7 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                         self.likeOpportunityapi(oppr_id: oppid ?? 0) { countLike,sucess  in
                             obj.likes = Int.getInt(countLike)
                             debugPrint("Int.getInt(countLike)",Int.getInt(countLike))
-                            cell.lblLikeCount.text = String.getString(obj.likes) + " " + "likes"
+                            cell.lblLikeCount.text = String.getString(obj.likes) //+ " " + "likes"
                             
                             if sucess == 200{
                                 cell.imglike.image = UIImage(named: "dil")
