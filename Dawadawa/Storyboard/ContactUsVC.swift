@@ -1,11 +1,9 @@
-//
 //  ContactUsVC.swift
 //  Dawadawa
-//
 //  Created by Ritesh Gupta on 04/07/22.
-//
 
 import UIKit
+import GoogleMaps
 
 class ContactUsVC: UIViewController {
     
@@ -16,6 +14,9 @@ class ContactUsVC: UIViewController {
     @IBOutlet weak var lblContactUs: UILabel!
     @IBOutlet weak var lblSubheading: UILabel!
     @IBOutlet weak var btnSend: UIButton!
+    @IBOutlet weak var Mapview: GMSMapView!
+    
+    
     
     //    MARK: - Life Cycle
     
@@ -23,6 +24,13 @@ class ContactUsVC: UIViewController {
         super.viewDidLoad()
         self.setuplanguage()
         self.viewSend.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
+        
+        Mapview = GMSMapView.map(withFrame: .zero, camera: GMSCameraPosition.camera(withLatitude: 12.862807, longitude: 30.217636, zoom: 5.5))
+
+                //so the mapView is of width 200, height 200 and its center is same as center of the self.view
+//        Mapview?.center = self.view.center
+
+                self.view.addSubview(Mapview!)
     }
     
     //    MARK: - @IBAction
@@ -37,6 +45,15 @@ class ContactUsVC: UIViewController {
         {(Index ,item) in
             self.lblSelectqueryType.text = item
             
+        }
+    }
+    
+    @IBAction func btnphonenumberTapped(_ sender: UIButton){
+        let phoneNumber = "+966 8465 9556 45"
+        let numberUrl = URL(string: "tel://\(phoneNumber)")
+        if UIApplication.shared.canOpenURL(numberUrl) {
+            UIApplication.shared.open(numberUrl)
+            print("dialer=-=-")
         }
     }
 }

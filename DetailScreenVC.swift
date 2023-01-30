@@ -350,7 +350,7 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
             cell.imgUrl = self.imgUrl
             cell.doc = self.userTimeLine?.oppdocument ?? [] // Pass Doc for collection view
             
-            cell.lblLikeCount.text = String.getString(self.userTimeLine?.likes) + " " + "Likes"
+            cell.lblLikeCount.text = String.getString(self.userTimeLine?.likes)// + " " + "Likes"
             
             if String.getString(self.userTimeLine?.is_user_like) == "1"{
                 cell.imglike.image = UIImage(named: "dil")
@@ -404,12 +404,13 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                 cell.imgOppFlag.isHidden = true
             }
             
-            if Int.getInt(self.userTimeLine?.oppimage.count) == 0{
-                cell.heightSocialPostCollectionView.constant = 0
-            }
-            else{
-                cell.heightSocialPostCollectionView.constant = 225
-            }
+//            if Int.getInt(self.userTimeLine?.oppimage.count) == 0{
+//                cell.heightSocialPostCollectionView.constant = 0
+//            }
+//            else{
+//                cell.heightSocialPostCollectionView.constant = 225
+//            }
+            
             cell.callback = { txt, tapped in
                 
                 if txt == "Profileimage"{
@@ -433,7 +434,7 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                     self.likeOpportunityapi(oppr_id: oppid ?? 0) { countLike,sucess  in
                         self.userTimeLine?.likes = Int.getInt(countLike)
                         debugPrint("Int.getInt(countLike)",Int.getInt(countLike))
-                        cell.lblLikeCount.text = String.getString(self.userTimeLine?.likes) + " " + "likes"
+                        cell.lblLikeCount.text = String.getString(self.userTimeLine?.likes) // + " " + "likes"
                         
                         if sucess == 200{
                             cell.imglike.image = UIImage(named: "dil")

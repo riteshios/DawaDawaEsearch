@@ -41,4 +41,10 @@ class LoginSubscriptionPlanVC: UIViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
+    @IBAction func btnSkipfornow(_ sender: UIButton){
+        kSharedUserDefaults.getLoggedInUserDetails()
+        kSharedAppDelegate?.makeRootViewController()
+        
+    }
+    
 }

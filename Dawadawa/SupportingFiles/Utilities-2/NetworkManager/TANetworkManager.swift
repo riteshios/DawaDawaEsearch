@@ -14,12 +14,9 @@ public enum kHTTPMethod: String {
     case GET, POST, PUT, PATCH, DELETE
 }
 
-
 public enum ErrorType: Error {
     case noNetwork, requestSuccess, requestFailed, requestCancelled
 }
-
-
 
 public class TANetworkManager {
     

@@ -1,7 +1,5 @@
-//
 //  CurrentLocationVC.swift
 //  Dawadawa
-//
 //  Created by Ritesh Gupta on 05/09/22.
 
 import UIKit

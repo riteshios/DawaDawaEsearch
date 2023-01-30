@@ -96,6 +96,7 @@
 "Send code" = "Send code";
 "Email address" = "Email address";
 "Phone number" = "Phone number";
+"Phone number / Email Address" = "Phone number / Email Address";
 
 // MARK: - ResetPasswordVC
 

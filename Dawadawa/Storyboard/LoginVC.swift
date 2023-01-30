@@ -94,7 +94,7 @@ class LoginVC: UIViewController {
     //    }
     
     @IBAction func btnLoginTapped(_ sender: UIButton){
-        self.validation()
+        self.loginapi()
     }
     @IBAction func btnSkipLoginTapped(_ sender: UIButton) {
         UserData.shared.isskiplogin = true
@@ -127,7 +127,7 @@ class LoginVC: UIViewController {
             return
         }
         self.view.endEditing(true)
-        self.loginapi()
+//        self.loginapi()
     }
     //    func validation(){
     //        if String.getString(self.txtFieldPhoneNumer.text).isEmpty

@@ -199,12 +199,16 @@ extension SocialPostTableViewCell: UICollectionViewDelegate,UICollectionViewData
     
     //    Collection View
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.img.count
+        return self.img.count == 0 ? 1 : self.img.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = SocialPostCollectionView.dequeueReusableCell(withReuseIdentifier: "SocialPostCollectionViewCell", for: indexPath) as! SocialPostCollectionViewCell
-        
+        if self.img.count == 0{
+            cell.imgOpportunity.image = UIImage(named: "Banner")
+            
+        }else{
+            
         let obj = img[indexPath.item].imageurl
         print("imgurl-=-\(obj)")
         let imageurl = "\(imgUrl)\(String.getString(obj))"
@@ -212,9 +216,10 @@ extension SocialPostTableViewCell: UICollectionViewDelegate,UICollectionViewData
         let userUrl = URL(string: imageurl)
 //        cell.imgOpportunity.sd_setImage(with: userUrl, placeholderImage:UIImage(named: "Banner"))
         cell.imgOpportunity.seeFullImage()
-                cell.imgOpportunity.downlodeImage(serviceurl: imageurl, placeHolder: UIImage(named: "Banner"))
-        
+        cell.imgOpportunity.downlodeImage(serviceurl: imageurl, placeHolder: UIImage(named: "Banner"))
+        }
         return cell
+            
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

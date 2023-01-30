@@ -25,8 +25,8 @@ class ViewPostTableViewCell: UITableViewCell{
         ColllectionViewPremiumOpp.dataSource = self
         ColllectionViewPremiumOpp.register(UINib(nibName: "PremiumOppCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PremiumOppCollectionViewCell")
         self.getallpremium()
-        
     }
+    
     @IBAction func btnViewAll(_ sender: UIButton) {
         self.callbacknavigation?("ViewAll")
         

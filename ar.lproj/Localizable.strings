@@ -95,6 +95,7 @@
 "Send code" = "أرسل الرمز";
 "Email address" = "عنوان البريد الالكترونى";
 "Phone number" = "رقم الهاتف";
+"Phone number / Email Address" = "رقم الهاتف / عنوان البريد الإلكتروني";
 
 // MARK: - ResetPasswordVC
 

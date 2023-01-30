@@ -216,7 +216,6 @@ extension EnterPasswordVC : SKFlaotingTextFieldDelegate {
 
 extension EnterPasswordVC{
 
-    
 //    Create Account api
     func createAccountapi(){
 
@@ -272,20 +271,20 @@ extension EnterPasswordVC{
                         }
                         self.present(vc, animated: false)
                     }
-                    if Int.getInt(dictResult["status"]) == 400{
-                        let response = kSharedInstance.getDictionary(dictResult["response"])
-
-                        if let _ = response["email"] {
-                            let msg = kSharedInstance.getStringArray(response["email"])
-                            CommonUtils.showError(.info, msg[0])// msg is on 0th index
-                        }
-                        else if let _ = response["phone"] {
-                            let msg = kSharedInstance.getStringArray(response["phone"])
-                            CommonUtils.showError(.info, msg[0])// msg is on 0th index
-                        }
-                        //let msg = kSharedInstance.getStringArray(response["phone"])
-                        // CommonUtils.showError(.info, msg[0])// msg is on 0th index
-                    }
+//                    if Int.getInt(dictResult["status"]) == 400{
+//                        let response = kSharedInstance.getDictionary(dictResult["response"])
+//
+//                        if let _ = response["email"] {
+//                            let msg = kSharedInstance.getStringArray(response["email"])
+//                            CommonUtils.showError(.info, msg[0])// msg is on 0th index
+//                        }
+//                        else if let _ = response["phone"] {
+//                            let msg = kSharedInstance.getStringArray(response["phone"])
+//                            CommonUtils.showError(.info, msg[0])// msg is on 0th index
+//                        }
+//                        //let msg = kSharedInstance.getStringArray(response["phone"])
+//                        // CommonUtils.showError(.info, msg[0])// msg is on 0th index
+//                    }
 
                 default:
                     CommonUtils.showError(.info, String.getString(dictResult["message"]))

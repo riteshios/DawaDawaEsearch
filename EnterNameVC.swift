@@ -59,7 +59,12 @@ class EnterNameVC: UIViewController {
     }
     
     @IBAction func btnContinueTapped(_ sender: UIButton) {
-        self.validation()
+//        self.validation()
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "EnterEmailVC") as! EnterEmailVC
+        vc.name = self.txtFieldFirstName.text ?? ""
+        vc.lastame = self.txtFieldLastName.text ?? ""
+        vc.usertype = self.usertype
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
 //    MARK: - Validation

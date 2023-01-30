@@ -196,9 +196,8 @@ extension DetailsTableViewCell: UICollectionViewDelegate,UICollectionViewDataSou
         
         switch collectionView{
         case self.SocialPostCollectionView:
-            return self.img.count
-           
-            
+            return self.img.count == 0 ? 1 : self.img.count
+
         case self.DocumentCollectionView:
             return self.doc.count
             
@@ -215,16 +214,22 @@ extension DetailsTableViewCell: UICollectionViewDelegate,UICollectionViewDataSou
             
             let cell = SocialPostCollectionView.dequeueReusableCell(withReuseIdentifier: "SocialPostCollectionViewCell", for: indexPath) as! SocialPostCollectionViewCell
             
-            let obj = img[indexPath.item].imageurl
-            print("-=-imgurl-=-\(String(describing: obj))")
-            let imageurl = "\(imgUrl)\(String.getString(obj))"
-            let imgUrl = URL(string: "\(imgUrl)\(String.getString(obj))")
-            print("-=imagebaseurl=-=-\(imageurl)")
-            cell.imgOpportunity.sd_setImage(with: imgUrl, placeholderImage: UIImage(named: "Frame 726"))
-            // cell.imgOpportunity.downlodeImage(serviceurl: imageurl, placeHolder: UIImage(named: "baba"))
-          
-            cell.imgOpportunity.seeFullImage()
+            if self.img.count == 0{
+                cell.imgOpportunity.image = UIImage(named: "Banner")
+            }
+            else{
+                let obj = img[indexPath.item].imageurl
+                print("-=-imgurl-=-\(String(describing: obj))")
+                let imageurl = "\(imgUrl)\(String.getString(obj))"
+                let imgUrl = URL(string: "\(imgUrl)\(String.getString(obj))")
+                print("-=imagebaseurl=-=-\(imageurl)")
+                cell.imgOpportunity.sd_setImage(with: imgUrl, placeholderImage: UIImage(named: "Frame 726"))
+                // cell.imgOpportunity.downlodeImage(serviceurl: imageurl, placeHolder: UIImage(named: "baba"))
+              
+                cell.imgOpportunity.seeFullImage()
+            }
             return cell
+            
             
         case self.DocumentCollectionView:
             
