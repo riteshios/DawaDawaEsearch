@@ -6,7 +6,8 @@ import UIKit
 import STTabbar
 import IQKeyboardManagerSwift
 
-class HomeVC: UIViewController,UITabBarControllerDelegate{
+class HomeVC: UIViewController,UITabBarControllerDelegate,PremiumOppCollectionViewCellDelegate{
+  
     
     @IBOutlet weak var tblViewViewPost: UITableView!
     
@@ -153,6 +154,7 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
             let cell = self.tblViewViewPost.dequeueReusableCell(withIdentifier: "ViewPostTableViewCell") as! ViewPostTableViewCell
             
             cell.ColllectionViewPremiumOpp.tag = indexPath.section
+            cell.celldelegate = self
             
             if UserData.shared.isskiplogin == true{
                 if cameFrom != "FilterData"{
@@ -299,6 +301,7 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                 cell.LeadingOppType.constant = -20
             }
             
+            cell.heightSocialPostCollectionView.constant = 275
 //            if obj.oppimage.count == 0{
 //                cell.heightSocialPostCollectionView.constant = 0
 //            }
@@ -975,6 +978,14 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
         }
     }
     
+    func collectionView(collectionviewcell: PremiumOppCollectionViewCell?, index: Int, didTappedInTableViewCell: ViewPostTableViewCell) {
+        
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "DetailScreenVC") as! DetailScreenVC
+        vc.oppid = opppreid
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    
     private func scrollToTop() { // Scroll table view to Top
         let topRow = IndexPath(row: 0,section: 0)
         self.tblViewViewPost.scrollToRow(at: topRow,at: .bottom, animated: true ) // .top krne pr cell tk scroll krega or .bottom krne pr header tk scroll krega
@@ -1396,9 +1407,7 @@ extension HomeVC{
             CommonUtils.showHudWithNoInteraction(show: false)
             
             if errorType == .requestSuccess {
-                
                 let dictResult = kSharedInstance.getDictionary(result)
-                
                 switch Int.getInt(statusCode) {
                 case 200:
                     
@@ -1415,7 +1424,7 @@ extension HomeVC{
                     
                     else if  Int.getInt(dictResult["status"]) == 201{
                         //  CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                 default:

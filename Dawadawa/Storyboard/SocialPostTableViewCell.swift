@@ -223,7 +223,7 @@ extension SocialPostTableViewCell: UICollectionViewDelegate,UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: self.SocialPostCollectionView.frame.size.width, height: 225)
+        return CGSize(width: self.SocialPostCollectionView.frame.size.width, height: self.SocialPostCollectionView.frame.size.height)
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {

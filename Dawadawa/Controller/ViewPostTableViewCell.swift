@@ -4,6 +4,7 @@
 
 import UIKit
 
+var opppreid = 0
 class ViewPostTableViewCell: UITableViewCell{
     
     @IBOutlet weak var lblPremium_opp: UILabel!
@@ -14,9 +15,13 @@ class ViewPostTableViewCell: UITableViewCell{
     @IBOutlet weak var heightMainView: NSLayoutConstraint!
     @IBOutlet weak var heightViewCollectionview: NSLayoutConstraint!
     @IBOutlet weak var heightCollectionView: NSLayoutConstraint!
+    
     var imgUrl = ""
     var userTimeLine = [SocialPostData]()
     var img = [oppr_image]()
+    
+    weak var celldelegate: PremiumOppCollectionViewCellDelegate?
+
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -60,12 +65,26 @@ extension ViewPostTableViewCell: UICollectionViewDelegate,UICollectionViewDataSo
         return cell
     }
     
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+       
+           let oppid = userTimeLine[indexPath.row].id
+        opppreid = oppid ?? 0
+        
+            let cell = ColllectionViewPremiumOpp.cellForItem(at: indexPath) as! PremiumOppCollectionViewCell
+            self.celldelegate?.collectionView(collectionviewcell: cell, index: indexPath.item, didTappedInTableViewCell: self)
+            return
+        
+        }
+
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 185, height: 205)
     }
     
 }
 
+// MARK: - Api call
 
 extension ViewPostTableViewCell{
     //    Api opportunity premium

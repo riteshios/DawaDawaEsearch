@@ -30,6 +30,24 @@ class EnterResidenceVC: UIViewController {
         self.getCountryStateApi()
     }
     
+    
+    override func viewWillLayoutSubviews() {
+            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                DispatchQueue.main.async {
+                    self.txtfieldLocality.semanticContentAttribute = .forceLeftToRight
+                    self.txtfieldLocality.textAlignment = .left
+                }
+
+            } else {
+                DispatchQueue.main.async {
+                    self.txtfieldLocality.semanticContentAttribute = .forceRightToLeft
+                    self.txtfieldLocality.textAlignment = .right
+                }
+            }
+        }
+    
+//    MARK: - Life Cycle
+    
     func setup(){
         self.viewContinue.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
     }

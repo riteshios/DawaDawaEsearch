@@ -88,13 +88,11 @@ struct ServiceName {
     static let kgooglelogin           =       "api/google-login"
     static let knewemailotpverify     =       "api/change-email-otp-verify"
     
-    
     static let ktermsandcondition     =        "api/terms"
     static let kprivacypolicy         =         "api/privacy-policy"
     static let kAboutUs               =         "api/about"
     static let kFaq                   =         "api/faq"
    
-    
     static let kgetcategory           =        "api/category"
     static let ksubcategory           =        "api/sub-category"
     static let kgetstate              =        "api/state"

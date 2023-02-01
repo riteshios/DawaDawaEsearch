@@ -152,6 +152,7 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
                 cell.LeadingOppType.constant = -20
             }
             
+            cell.heightSocialPostCollectionView.constant = 275
 //            if obj.oppimage.count == 0{
 //                cell.heightSocialPostCollectionView.constant = 0
 //            }
@@ -681,12 +682,12 @@ extension PremiumOpportunitiesVC{
                         self.userTimeLine = Opportunity.map{SocialPostData(data: kSharedInstance.getDictionary($0))}
                         print("DataAllPremiumPost===\(self.userTimeLine)")
                         
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         self.tblViewPremiumOpp.reloadData()
                         
                     }
                     else if  Int.getInt(dictResult["status"]) == 400{
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                     
@@ -934,8 +935,7 @@ extension PremiumOpportunitiesVC{
         ]
         
         debugPrint("user_id......",Int.getInt(UserData.shared.id))
-        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kunsavedopp, requestMethod: .POST,
-                                                               requestParameters:params, withProgressHUD: false)
+        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kunsavedopp, requestMethod: .POST, requestParameters:params, withProgressHUD: false)
         {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
             
             CommonUtils.showHudWithNoInteraction(show: false)
@@ -1023,7 +1023,7 @@ extension PremiumOpportunitiesVC{
                         
                         else if  Int.getInt(dictResult["status"]) == 201{
                             //  CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                            CommonUtils.showError(.info, String.getString(dictResult["message"]))
+//                            CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         }
                         
                     default:

@@ -428,6 +428,7 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                 cell.lblSave.textColor = UIColor(hexString: "#A6A6A6")
             }
             
+            cell.heightSocialPostCollectionView.constant = 275
 //            if obj.oppimage.count == 0{
 //                cell.heightSocialPostCollectionView.constant = 0
 //            }
@@ -1134,7 +1135,7 @@ extension ProfileVC{
                     
                     else if  Int.getInt(dictResult["status"]) == 400{
                         
-                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //  CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                 default:
@@ -1172,8 +1173,8 @@ extension ProfileVC{
         ]
         
         debugPrint("user_id......",Int.getInt(UserData.shared.id))
-        TANetworkManager.sharedInstance.requestApi(withServiceName:ServiceName.klistopportunity, requestMethod: .POST,
-                                                   requestParameters:params, withProgressHUD: false)
+        TANetworkManager.sharedInstance.requestApi(withServiceName:ServiceName.klistopportunity, requestMethod: .POST, requestParameters:params, withProgressHUD: false)
+        
         {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
             
             CommonUtils.showHudWithNoInteraction(show: false)
@@ -1204,8 +1205,8 @@ extension ProfileVC{
                         
                     }
                     
-                    else if  Int.getInt(dictResult["status"]) == 400{
-                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    else if Int.getInt(dictResult["status"]) == 400{
+                        // CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                 default:

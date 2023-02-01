@@ -1,11 +1,13 @@
-//
 //  PremiumOppCollectionViewCell.swift
 //  Dawadawa
-//
 //  Created by Ritesh Gupta on 20/07/22.
-//
 
 import UIKit
+
+protocol PremiumOppCollectionViewCellDelegate: class {
+    func collectionView(collectionviewcell: PremiumOppCollectionViewCell?, index: Int, didTappedInTableViewCell: ViewPostTableViewCell)
+    // other delegate methods that you can define to perform action in viewcontroller
+}
 
 class PremiumOppCollectionViewCell: UICollectionViewCell {
     

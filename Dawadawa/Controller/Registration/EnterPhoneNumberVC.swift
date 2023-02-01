@@ -34,6 +34,24 @@ class EnterPhoneNumberVC: UIViewController {
         self.setuplanguage()
     }
     
+    
+    override func viewWillLayoutSubviews() {
+            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                DispatchQueue.main.async {
+                    self.txtfieldPhoneNumber.semanticContentAttribute = .forceLeftToRight
+                    self.txtfieldPhoneNumber.textAlignment = .left
+                }
+
+            } else {
+                DispatchQueue.main.async {
+                    self.txtfieldPhoneNumber.semanticContentAttribute = .forceRightToLeft
+                    self.txtfieldPhoneNumber.textAlignment = .right
+                }
+            }
+        }
+    
+//    MARK: - Life Cycle
+    
     func setup(){
         self.viewContinue.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
         self.setTextFieldUI(textField: txtfieldPhoneNumber, place: "Phone Number*", floatingText: "Phone Number")

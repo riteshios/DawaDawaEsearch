@@ -136,6 +136,7 @@ extension ViewAllSavedVC:UITableViewDelegate,UITableViewDataSource{
             cell.LeadingOppType.constant = -20
         }
         
+        cell.heightSocialPostCollectionView.constant = 275
 //        if obj.oppimage.count == 0{
 //            cell.heightSocialPostCollectionView.constant = 0
 //        }
@@ -920,7 +921,7 @@ extension ViewAllSavedVC{
                     
                     else if  Int.getInt(dictResult["status"]) == 201{
                         //  CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                 default:
@@ -1030,8 +1031,7 @@ extension ViewAllSavedVC{
         ]
         
         debugPrint("user_id......",Int.getInt(UserData.shared.id))
-        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kunsavedopp, requestMethod: .POST,
-                                                               requestParameters:params, withProgressHUD: false)
+        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kunsavedopp, requestMethod: .POST, requestParameters:params, withProgressHUD: false)
         {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
             
             CommonUtils.showHudWithNoInteraction(show: false)

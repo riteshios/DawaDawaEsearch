@@ -26,6 +26,24 @@ class EnterEmailVC: UIViewController {
         self.lblName.text = self.name
     }
     
+    override func viewWillLayoutSubviews() {
+            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                DispatchQueue.main.async {
+                    self.txtfldEmail.semanticContentAttribute = .forceLeftToRight
+                    self.txtfldEmail.textAlignment = .left
+                }
+
+            } else {
+                DispatchQueue.main.async {
+                    self.txtfldEmail.semanticContentAttribute = .forceRightToLeft
+                    self.txtfldEmail.textAlignment = .right
+                }
+            }
+        }
+    
+    
+//    MARK: - Life Cycle
+    
     func setup(){
         self.viewContinue.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
         self.setTextFieldUI(textField: txtfldEmail, place: "Email*", floatingText: "Email")

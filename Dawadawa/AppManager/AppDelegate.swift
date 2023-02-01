@@ -134,6 +134,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.shared.windows.first?.rootViewController = navC
         UIApplication.shared.windows.first?.makeKeyAndVisible()
     }
+    
+  
     func moveToLoginScreen(){
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyBoard.instantiateViewController(identifier:"WelcomeScreenVC") as! WelcomeScreenVC

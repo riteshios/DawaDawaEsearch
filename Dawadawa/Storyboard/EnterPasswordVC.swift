@@ -49,6 +49,21 @@ class EnterPasswordVC: UIViewController, UITextFieldDelegate {
         self.setup()
         self.setuplanguage()
     }
+    
+    override func viewWillLayoutSubviews() {
+            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                DispatchQueue.main.async {
+                    self.txtFieldPassword.semanticContentAttribute = .forceLeftToRight
+                    self.txtFieldPassword.textAlignment = .left
+                }
+
+            } else {
+                DispatchQueue.main.async {
+                    self.txtFieldConfirmPassword.semanticContentAttribute = .forceRightToLeft
+                    self.txtFieldConfirmPassword.textAlignment = .right
+                }
+            }
+        }
 //    MARK: - Life Cycle
     
     func setup(){
@@ -123,6 +138,7 @@ class EnterPasswordVC: UIViewController, UITextFieldDelegate {
         }
         else if self.isprivacypolicy == false{
             self.showSimpleAlert(message: "Please Select T&C and Privacy Policy")
+            return
         }
         self.view.endEditing(true)
         self.createAccountapi()

@@ -14,6 +14,7 @@ class LoginVC: UIViewController {
     @IBOutlet weak var viewButtonLogin: UIView!
     @IBOutlet weak var txtFieldPhoneNumer: SKFloatingTextField!
     @IBOutlet weak var txtFieldPassword: SKFloatingTextField!
+   
     
     @IBOutlet weak var lblLogin: UILabel!
     @IBOutlet weak var lblGoogle: UILabel!
@@ -31,6 +32,14 @@ class LoginVC: UIViewController {
     @IBOutlet weak var lblSecondOR: UILabel!
     @IBOutlet weak var lblThirdOR: UILabel!
     
+    @IBOutlet weak var viewDrop: UIView!
+    @IBOutlet weak var btndrop: UIButton!
+    @IBOutlet weak var btnEnglish: UIButton!
+    @IBOutlet weak var lblArabic: UILabel!
+    @IBOutlet weak var btnArabic: UIButton!
+    @IBOutlet weak var lblDropDownMenu: UILabel!
+    @IBOutlet weak var imgDropDownMenu: UIImageView!
+    
     var payment_type = ""
     
     override func viewDidLoad() {
@@ -39,6 +48,28 @@ class LoginVC: UIViewController {
         self.setuplanguage()
         txtFieldPassword.isSecureTextInput = true
     }
+    
+    override func viewWillLayoutSubviews() {
+            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                DispatchQueue.main.async {
+                    self.txtFieldPhoneNumer.semanticContentAttribute = .forceLeftToRight
+                    self.txtFieldPhoneNumer.textAlignment = .left
+                    self.txtFieldPassword.semanticContentAttribute = .forceLeftToRight
+                    self.txtFieldPassword.textAlignment = .left
+                }
+
+            } else {
+                DispatchQueue.main.async {
+                    self.txtFieldPhoneNumer.semanticContentAttribute = .forceRightToLeft
+                    self.txtFieldPhoneNumer.textAlignment = .right
+                    self.txtFieldPassword.semanticContentAttribute = .forceRightToLeft
+                    self.txtFieldPassword.textAlignment = .right
+                }
+            }
+        }
+    
+    
+    
     //    MARK: - LIfe Cycle
     
     func setup(){
@@ -49,10 +80,52 @@ class LoginVC: UIViewController {
         viewMain.addShadowWithBlurOnView(viewMain, spread: 0, blur: 10, color: .black, opacity: 0.16, OffsetX: 0, OffsetY: 1)
         self.viewButtonLogin.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
         
-        self.setTextFieldUI(textField: txtFieldPhoneNumer, place: "Phone number/  Email", floatingText: "Phone number/ Email")
         self.setTextFieldUI(textField: txtFieldPassword, place: "Password", floatingText: "Password")
+      
+        self.setTextFieldUI(textField: txtFieldPhoneNumer, place: "Phone number/Email", floatingText: "Phone number/Email")
+        self.viewDrop.isHidden = true
+        self.viewDrop.addShadowWithCornerRadius(viewDrop, cRadius: 5)
+        if kSharedUserDefaults.getlanguage() as? String == "en"{
+            self.imgDropDownMenu.image = UIImage(named: "IND")
+            self.lblDropDownMenu.text = "English-IND"
+            UITextField.appearance().semanticContentAttribute = .forceLeftToRight
+            
+        }
+        else{
+            self.imgDropDownMenu.image = UIImage(named: "sudan")
+            self.lblDropDownMenu.text = "عربي"
+            UITextField.appearance().semanticContentAttribute = .forceRightToLeft
+        }
+
     }
     //  MARK: - @IBAction
+    
+    @IBAction func btnDropTapped(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        if sender.isSelected{
+            self.viewDrop.isHidden = false
+        }
+        else{
+            self.viewDrop.isHidden = true
+        }
+    }
+    
+    @IBAction func btnEnglishLangTapped(_ sender: UIButton){
+        self.setupUpdateView(languageCode: "en")
+        kSharedUserDefaults.setLanguage(language: "en")
+       
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
+        self.navigationController?.pushViewController(vc, animated: false)
+    }
+    
+    @IBAction func btnArabicLangTapped(_ sender: UIButton){
+        self.setupUpdateView(languageCode: "ar")
+        kSharedUserDefaults.setLanguage(language: "ar")
+       
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
+        self.navigationController?.pushViewController(vc, animated: false)
+       
+    }
     
     @IBAction func btnGoogleTapped(_ sender: UIButton) {
         let signInConfig = GIDConfiguration.init(clientID: "636451100488-1k8eq045hd097ar24g78743ll5ufhhsn.apps.googleusercontent.com")
@@ -88,6 +161,7 @@ class LoginVC: UIViewController {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "ForgotPasswordVC") as! ForgotPasswordVC
         self.navigationController?.pushViewController(vc, animated: true)
     }
+    
     //    @IBAction func btnSecurePassword(_ sender: UIButton){
     //        sender.isSelected = !sender.isSelected
     //        txtFieldPassword.isSecureTextEntry.toggle()
@@ -155,10 +229,12 @@ class LoginVC: UIViewController {
     //        self.loginapi()
     //    }
 }
+
+// MARK: - SKFloating
 extension LoginVC{
-    
+
     func setTextFieldUI(textField:SKFloatingTextField,place:String ,floatingText:String){
-        
+
         textField.placeholder = place
         textField.activeBorderColor = .init(red: 21, green: 114, blue: 161)
         textField.floatingLabelText = floatingText
@@ -170,19 +246,19 @@ extension LoginVC{
         textField.setRoundTFUI()
         textField.delegate = self
         //floatingTextField.errorLabelText = "Error"
-        
+
     }
 }
 extension LoginVC : SKFlaotingTextFieldDelegate {
-    
+
     func textFieldDidEndEditing(textField: SKFloatingTextField) {
         print("end editing")
     }
-    
+
     func textFieldDidChangeSelection(textField: SKFloatingTextField) {
         print("changing text")
     }
-    
+
     func textFieldDidBeginEditing(textField: SKFloatingTextField) {
         print("begin editing")
     }
@@ -318,9 +394,16 @@ extension LoginVC{
         btnForgotPassword.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "Forgot Password", comment: ""), for: .normal)
         btnSkipLogin.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "Skip login", comment: ""), for: .normal)
         btnLogin.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "Login", comment: ""), for: .normal)
-        txtFieldPassword.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Password", comment: "")
-        txtFieldPassword.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Password", comment: "")
+        
         txtFieldPhoneNumer.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Phone number/Email*", comment: "")
         txtFieldPhoneNumer.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Phone number/Email*", comment: "")
+        txtFieldPassword.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Password", comment: "")
+        txtFieldPassword.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Password", comment: "")
+
+    }
+    
+    func setupUpdateView(languageCode code: String){
+        LocalizationSystem.sharedInstance.setLanguage(languageCode: code)
+        UIView.appearance().semanticContentAttribute =  code == "ar" ? .forceRightToLeft :  .forceLeftToRight
     }
 }

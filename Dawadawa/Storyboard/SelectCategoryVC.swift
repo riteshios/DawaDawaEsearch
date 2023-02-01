@@ -128,7 +128,7 @@ extension SelectCategoryVC{
                         }
                     }
                     else if  Int.getInt(dictResult["status"]) == 401{
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                     // CommonUtils.showError(.info, String.getString(dictResult["message"]))

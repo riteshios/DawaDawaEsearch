@@ -19,6 +19,7 @@ class WelcomeScreenVC: UIViewController {
     @IBOutlet weak var viewDrop: UIView!
     @IBOutlet weak var btndrop: UIButton!
     @IBOutlet weak var btnEnglish: UIButton!
+    @IBOutlet weak var lblArabic: UILabel!
     @IBOutlet weak var btnArabic: UIButton!
     @IBOutlet weak var lblDropDownMenu: UILabel!
     @IBOutlet weak var imgDropDownMenu: UIImageView!
@@ -80,6 +81,7 @@ class WelcomeScreenVC: UIViewController {
         kSharedUserDefaults.setLanguage(language: "en")
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "WelcomeScreenVC") as! WelcomeScreenVC
         self.navigationController?.pushViewController(vc, animated: false)
+        print("btnEnglish=-=-")
         
     }
     
@@ -88,6 +90,7 @@ class WelcomeScreenVC: UIViewController {
         kSharedUserDefaults.setLanguage(language: "ar")
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "WelcomeScreenVC") as! WelcomeScreenVC
         self.navigationController?.pushViewController(vc, animated: false)
+        print("btnArabic=-=-")
     }
     
     
@@ -120,8 +123,8 @@ extension WelcomeScreenVC{
         lbllogin.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Login", comment: "")
         lblregister.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Register", comment: "")
         btnSkiplogin.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "Skip Login", comment: ""), for: .normal)
-        btnEnglish.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "English-IND", comment: ""), for: .normal)
-        btnArabic.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "Arabic", comment: ""), for: .normal)
+//        btnEnglish.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "English-IND", comment: ""), for: .normal)
+        lblArabic.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Arabic", comment: "")
         
     }
     

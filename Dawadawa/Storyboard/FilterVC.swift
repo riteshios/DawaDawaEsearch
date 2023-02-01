@@ -1071,7 +1071,7 @@ extension FilterVC{
                         }
                     }
                     else if  Int.getInt(dictResult["status"]) == 401{
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                     // CommonUtils.showError(.info, String.getString(dictResult["message"]))
@@ -1122,7 +1122,7 @@ extension FilterVC{
                         }
                     }
                     else if  Int.getInt(dictResult["status"]) == 401{
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                     // CommonUtils.showError(.info, String.getString(dictResult["message"]))
@@ -1150,7 +1150,6 @@ extension FilterVC{
             }
         }
         
-        
         TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName: ServiceName.kgetstate, requestMethod: .GET, requestParameters:[:], withProgressHUD: false) { (result:Any?, error:Error?, errorType:ErrorType?,statusCode:Int?) in
             CommonUtils.showHudWithNoInteraction(show: false)
             if errorType == .requestSuccess {
@@ -1169,7 +1168,7 @@ extension FilterVC{
                         
                     }
                     else if  Int.getInt(dictResult["status"]) == 401{
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                     // CommonUtils.showError(.info, String.getString(dictResult["message"]))
@@ -1288,8 +1287,7 @@ extension FilterVC{
         ]
         
         //        debugPrint("SearchTextfield=-=-=-=-",String.getString(self.txtfieldSearch.text))
-        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kfiltersubcategory, requestMethod: .POST,
-                                                               requestParameters:params, withProgressHUD: false)
+        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kfiltersubcategory, requestMethod: .POST, requestParameters:params, withProgressHUD: false)
         {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
             
             CommonUtils.showHudWithNoInteraction(show: false)
@@ -1459,7 +1457,7 @@ extension FilterVC{
                         
                     }
                     else if  Int.getInt(dictResult["status"]) == 401{
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                     // CommonUtils.showError(.info, String.getString(dictResult["message"]))
@@ -1547,7 +1545,7 @@ extension FilterVC{
                         
                     }
                     else if  Int.getInt(dictResult["status"]) == 401{
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                     // CommonUtils.showError(.info, String.getString(dictResult["message"]))
@@ -1583,7 +1581,7 @@ extension FilterVC{
                         
                     }
                     else if  Int.getInt(dictResult["status"]) == 401{
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                 default:
                     CommonUtils.showError(.error, String.getString(dictResult["message"]))
@@ -1610,8 +1608,7 @@ extension FilterVC{
             
         ]
         // Added user id in api url
-        TANetworkManager.sharedInstance.requestlangApi(withServiceName:ServiceName.kguestlocality, requestMethod: .POST,
-                                                       requestParameters:params, withProgressHUD: false)
+        TANetworkManager.sharedInstance.requestlangApi(withServiceName:ServiceName.kguestlocality, requestMethod: .POST, requestParameters:params, withProgressHUD: false)
         {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
             
             CommonUtils.showHudWithNoInteraction(show: false)
@@ -1628,7 +1625,7 @@ extension FilterVC{
                         let localitys = kSharedInstance.getArray(withDictionary: dictResult["localitys"])
                         self?.getguestlocalitylist = localitys.map{getlocalityModel(data: $0)}
                         
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         DispatchQueue.main.async {
                             self?.tblViewOpportunitytype.reloadData()
                         }
@@ -1636,7 +1633,7 @@ extension FilterVC{
                     
                     else if  Int.getInt(dictResult["status"]) == 400{
                         
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                 default:

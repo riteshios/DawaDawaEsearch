@@ -202,6 +202,7 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
                 cell.LeadingOppType.constant = -20
             }
             
+            cell.heightSocialPostCollectionView.constant = 275
 //            if obj.oppimage.count == 0{
 //                cell.heightSocialPostCollectionView.constant = 0
 //            }
@@ -1098,7 +1099,7 @@ extension SearchVC{
                     
                     else if  Int.getInt(dictResult["status"]) == 201{
                         //  CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                 default:
@@ -1142,7 +1143,7 @@ extension SearchVC{
                         self?.userTimeLine = Opportunity.map{SocialPostData(data: kSharedInstance.getDictionary($0))}
                         print("DataallSearchpost=\(self?.userTimeLine)")
                         
-                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //  CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         self?.imgNotfound.isHidden = true
                         self?.tblViewSearchOpp.reloadData()
                     }

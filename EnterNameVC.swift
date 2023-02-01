@@ -28,6 +28,26 @@ class EnterNameVC: UIViewController {
         self.setup()
         self.setuplanguage()
     }
+    
+    override func viewWillLayoutSubviews() {
+            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                DispatchQueue.main.async {
+                    self.txtFieldFirstName.semanticContentAttribute = .forceLeftToRight
+                    self.txtFieldFirstName.textAlignment = .left
+                    self.txtFieldLastName.semanticContentAttribute = .forceLeftToRight
+                    self.txtFieldLastName.textAlignment = .left
+                }
+
+            } else {
+                DispatchQueue.main.async {
+                    self.txtFieldFirstName.semanticContentAttribute = .forceRightToLeft
+                    self.txtFieldFirstName.textAlignment = .right
+                    self.txtFieldLastName.semanticContentAttribute = .forceRightToLeft
+                    self.txtFieldLastName.textAlignment = .right
+                }
+            }
+        }
+    
 // MARK: - Life Cycle
     
     func setup(){

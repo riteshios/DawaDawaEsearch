@@ -30,7 +30,7 @@ class ContactUsVC: UIViewController {
                 //so the mapView is of width 200, height 200 and its center is same as center of the self.view
 //        Mapview?.center = self.view.center
 
-                self.view.addSubview(Mapview!)
+//                self.view.addSubview(Mapview)
     }
     
     //    MARK: - @IBAction
@@ -50,13 +50,25 @@ class ContactUsVC: UIViewController {
     
     @IBAction func btnphonenumberTapped(_ sender: UIButton){
         let phoneNumber = "+966 8465 9556 45"
-        let numberUrl = URL(string: "tel://\(phoneNumber)")
-        if UIApplication.shared.canOpenURL(numberUrl) {
-            UIApplication.shared.open(numberUrl)
-            print("dialer=-=-")
+//        let numberUrl = URL(string: "tel://\(phoneNumber)")
+//        if UIApplication.shared.canOpenURL((numberUrl)!) {
+//            UIApplication.shared.open((numberUrl)!)
+//            print("dialer=-=-")
+//        }
+        
+        if let url = URL(string: "tel://\(phoneNumber)"),
+        UIApplication.shared.canOpenURL(url) {
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
     }
+    
+    @IBAction func btnEmailAddTapped(_ sender: UIButton){
+        
+    }
 }
+
+// MARK: - Localisation
+
 extension ContactUsVC{
     func setuplanguage(){
         lblContactUs.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Contact Us", comment: "")

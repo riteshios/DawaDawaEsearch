@@ -7,11 +7,13 @@ import UIKit
 class LoginSubscriptionPlanVC: UIViewController {
     
     @IBOutlet weak var viewbtn: UIView!
+    @IBOutlet weak var viewSkipForNow: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.viewbtn.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
+        self.viewSkipForNow.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
     }
     
 //    MARK: - @IBAction

@@ -1180,8 +1180,6 @@ extension MiningServiceVC{
         let kMessage = "message"
         let klocalitys = "localitys"
         
-        
-        
         var responsecode = 0
         var status = 0
         var message = ""
@@ -1249,7 +1247,6 @@ extension MiningServiceVC{
             case .failure(let error):
                 completionBlock(0,nil,error.localizedDescription)
             }
-            
         }
     }
     
@@ -1450,12 +1447,12 @@ extension MiningServiceVC{
                         if septoken[0] == "Bearer"{
                             kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
                         }
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         kSharedAppDelegate?.makeRootViewController()
                         
                     }
                     else if  Int.getInt(dictResult["status"]) == 400{
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                 default:
@@ -1542,7 +1539,7 @@ extension MiningServiceVC{
                         if septoken[0] == "Bearer"{
                             kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
                         }
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         kSharedAppDelegate?.makeRootViewController()
                         
                     }
