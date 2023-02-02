@@ -5336,10 +5336,24 @@
                                                     <constraint firstAttribute="height" constant="171" id="sfy-Z2-Tob"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oCM-Kw-YW8" customClass="GMSMapView">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oCM-Kw-YW8">
                                                 <rect key="frame" x="0.0" y="801" width="414" height="311"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XiY-f5-web">
+                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="311"/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <state key="normal" image="Mapsicle Map"/>
+                                                        <connections>
+                                                            <action selector="btnOpenMapTapped:" destination="fkj-Jy-ORZ" eventType="touchUpInside" id="udc-Cs-BCp"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
+                                                    <constraint firstItem="XiY-f5-web" firstAttribute="top" secondItem="oCM-Kw-YW8" secondAttribute="top" id="472-kQ-CTG"/>
+                                                    <constraint firstAttribute="bottom" secondItem="XiY-f5-web" secondAttribute="bottom" id="d5d-WB-WiD"/>
+                                                    <constraint firstItem="XiY-f5-web" firstAttribute="leading" secondItem="oCM-Kw-YW8" secondAttribute="leading" id="iII-TA-e5w"/>
+                                                    <constraint firstAttribute="trailing" secondItem="XiY-f5-web" secondAttribute="trailing" id="irC-Lh-2iw"/>
                                                     <constraint firstAttribute="height" constant="311" id="j0Q-bm-e5R"/>
                                                 </constraints>
                                             </view>
@@ -5400,7 +5414,6 @@
                     </view>
                     <size key="freeformSize" width="414" height="1097"/>
                     <connections>
-                        <outlet property="Mapview" destination="oCM-Kw-YW8" id="hIp-Lj-Zbm"/>
                         <outlet property="btnDropdown" destination="rUM-8J-e5g" id="0lS-xE-TfC"/>
                         <outlet property="btnSend" destination="QHq-02-STs" id="z4v-Kl-6cw"/>
                         <outlet property="lblContactUs" destination="9ju-vH-Gqb" id="nZe-83-Bwx"/>
@@ -7232,7 +7245,7 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iN5-vF-xsh">
                                                         <rect key="frame" x="0.0" y="356" width="414" height="60"/>
                                                         <subviews>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JsM-3f-aV7">
+                                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JsM-3f-aV7">
                                                                 <rect key="frame" x="16" y="10" width="382" height="40.333333333333336"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+Add more documents" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="am5-zW-wVM">
@@ -13686,7 +13699,7 @@ this opportunity?</string>
                                                         </constraints>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Rating" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AeA-4H-v4E">
-                                                        <rect key="frame" x="173.66666666666666" y="26.333333333333371" width="66.666666666666657" height="29.333333333333329"/>
+                                                        <rect key="frame" x="172.33333333333334" y="26.333333333333371" width="69.666666666666657" height="29.333333333333329"/>
                                                         <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="24"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -13706,7 +13719,7 @@ this opportunity?</string>
                                                                 <rect key="frame" x="10" y="5" width="20" height="20"/>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PyB-4u-cVj">
-                                                                <rect key="frame" x="33.333333333333314" y="6.3333333333333712" width="32.666666666666657" height="17"/>
+                                                                <rect key="frame" x="31.666666666666689" y="6.3333333333333712" width="34.333333333333343" height="17"/>
                                                                 <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="14"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -15311,7 +15324,7 @@ this opportunity?</string>
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rating" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PyL-Er-VDN">
-                                        <rect key="frame" x="173.66666666666666" y="20" width="66.666666666666657" height="33"/>
+                                        <rect key="frame" x="172.33333333333334" y="20" width="69.666666666666657" height="33"/>
                                         <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="24"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -15847,7 +15860,7 @@ this Chat?</string>
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h51-OT-Psd">
-                                                <rect key="frame" x="23" y="53" width="24" height="24"/>
+                                                <rect key="frame" x="23" y="53.000000000000007" width="24" height="25.333333333333336"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" image="arrow-left"/>
                                                 <connections>
@@ -15855,7 +15868,7 @@ this Chat?</string>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="User profile" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jdH-bI-xaP">
-                                                <rect key="frame" x="147.33333333333334" y="50.333333333333336" width="119.66666666666666" height="29.333333333333336"/>
+                                                <rect key="frame" x="145.33333333333334" y="51.666666666666657" width="123.33333333333334" height="28"/>
                                                 <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="24"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -15899,19 +15912,19 @@ this Chat?</string>
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Guest User" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xqh-aA-DbI">
-                                                        <rect key="frame" x="112" y="20" width="88" height="22"/>
+                                                        <rect key="frame" x="112" y="20" width="90.666666666666686" height="21"/>
                                                         <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="18"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+91***********" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vho-JX-mCc">
-                                                        <rect key="frame" x="112" y="43" width="88" height="17"/>
+                                                        <rect key="frame" x="112" y="42" width="78.333333333333314" height="17"/>
                                                         <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="14"/>
                                                         <color key="textColor" red="0.65098039220000004" green="0.65098039220000004" blue="0.65098039220000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="example@xyz.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iRH-Lx-9An">
-                                                        <rect key="frame" x="112" y="61" width="113.66666666666669" height="17"/>
+                                                        <rect key="frame" x="112" y="60" width="117" height="17"/>
                                                         <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="14"/>
                                                         <color key="textColor" red="0.65098039220000004" green="0.65098039220000004" blue="0.65098039220000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -15932,14 +15945,14 @@ this Chat?</string>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jCR-eo-Q8S">
-                                                <rect key="frame" x="0.0" y="253" width="414" height="2"/>
+                                                <rect key="frame" x="0.0" y="252" width="414" height="2"/>
                                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="2" id="kwC-5U-e7w"/>
                                                 </constraints>
                                             </view>
                                             <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ozH-Xo-8GJ" customClass="CosmosView" customModule="Cosmos">
-                                                <rect key="frame" x="18" y="280" width="145" height="27"/>
+                                                <rect key="frame" x="18" y="279" width="145" height="27"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="145" id="L7X-Kl-awX"/>
@@ -15947,7 +15960,7 @@ this Chat?</string>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="94X-hk-gzJ">
-                                                <rect key="frame" x="187" y="278.66666666666669" width="60" height="30"/>
+                                                <rect key="frame" x="187" y="277.66666666666669" width="60" height="30"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Star Filled" translatesAutoresizingMaskIntoConstraints="NO" id="f8D-Cg-V6v">
                                                         <rect key="frame" x="7" y="2.3333333333333144" width="25" height="25"/>
@@ -15984,7 +15997,7 @@ this Chat?</string>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eQs-8J-Aa9">
-                                                <rect key="frame" x="291" y="278.66666666666669" width="107" height="30"/>
+                                                <rect key="frame" x="291" y="277.66666666666669" width="107" height="30"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hu8-EW-Xlu">
                                                         <rect key="frame" x="0.0" y="0.0" width="107" height="30"/>
@@ -16014,19 +16027,19 @@ this Chat?</string>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hb4-9l-dJZ">
-                                                <rect key="frame" x="18" y="323.33333333333331" width="54" height="24.333333333333314"/>
+                                                <rect key="frame" x="18" y="322.33333333333331" width="54" height="24.333333333333314"/>
                                                 <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="20"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="64n-dL-tGi">
-                                                <rect key="frame" x="77" y="323.33333333333331" width="40.333333333333343" height="24.333333333333314"/>
+                                                <rect key="frame" x="77" y="322.33333333333331" width="42" height="24.333333333333314"/>
                                                 <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="20"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Umf-gI-r0u">
-                                                <rect key="frame" x="18" y="357.66666666666669" width="386" height="17"/>
+                                                <rect key="frame" x="18" y="356.66666666666669" width="386" height="16.333333333333314"/>
                                                 <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="14"/>
                                                 <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -16607,20 +16620,8 @@ this Chat?</string>
         </scene>
     </scenes>
     <designables>
-        <designable name="Au9-O0-cbA">
-            <size key="intrinsicContentSize" width="120" height="20"/>
-        </designable>
-        <designable name="VSf-iM-2vh">
-            <size key="intrinsicContentSize" width="241" height="44"/>
-        </designable>
-        <designable name="fV5-fA-npc">
-            <size key="intrinsicContentSize" width="120" height="20"/>
-        </designable>
         <designable name="hYJ-9L-6ep">
             <size key="intrinsicContentSize" width="-1" height="49"/>
-        </designable>
-        <designable name="ozH-Xo-8GJ">
-            <size key="intrinsicContentSize" width="120" height="20"/>
         </designable>
     </designables>
     <resources>
@@ -16632,6 +16633,7 @@ this Chat?</string>
         <image name="Frame 65" width="24" height="24"/>
         <image name="Frame 726" width="167" height="135"/>
         <image name="IND" width="16" height="16"/>
+        <image name="Mapsicle Map" width="414" height="311"/>
         <image name="NoOpp" width="410.33334350585938" height="400.66665649414062"/>
         <image name="Rectangle 101" width="11" height="11"/>
         <image name="Rectangle 113" width="414" height="236"/>

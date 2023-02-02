@@ -5,7 +5,7 @@
 import UIKit
 import GoogleMaps
 
-class ContactUsVC: UIViewController {
+class ContactUsVC: UIViewController{
     
     @IBOutlet weak var viewSend: UIView!
     
@@ -24,13 +24,6 @@ class ContactUsVC: UIViewController {
         super.viewDidLoad()
         self.setuplanguage()
         self.viewSend.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
-        
-        Mapview = GMSMapView.map(withFrame: .zero, camera: GMSCameraPosition.camera(withLatitude: 12.862807, longitude: 30.217636, zoom: 5.5))
-
-                //so the mapView is of width 200, height 200 and its center is same as center of the self.view
-//        Mapview?.center = self.view.center
-
-//                self.view.addSubview(Mapview)
     }
     
     //    MARK: - @IBAction
@@ -50,20 +43,36 @@ class ContactUsVC: UIViewController {
     
     @IBAction func btnphonenumberTapped(_ sender: UIButton){
         let phoneNumber = "+966 8465 9556 45"
-//        let numberUrl = URL(string: "tel://\(phoneNumber)")
-//        if UIApplication.shared.canOpenURL((numberUrl)!) {
-//            UIApplication.shared.open((numberUrl)!)
-//            print("dialer=-=-")
-//        }
+        //        let numberUrl = URL(string: "tel://\(phoneNumber)")
+        //        if UIApplication.shared.canOpenURL((numberUrl)!) {
+        //            UIApplication.shared.open((numberUrl)!)
+        //            print("dialer=-=-")
+        //        }
         
         if let url = URL(string: "tel://\(phoneNumber)"),
-        UIApplication.shared.canOpenURL(url) {
-        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+           UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
+        
+        if let url = URL(string: "tel://\(mobileNo.text!)"){
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
     }
     
     @IBAction func btnEmailAddTapped(_ sender: UIButton){
         
+    }
+    
+    @IBAction func btnOpenMapTapped(_ sender: UIButton){
+        let lat = 12.8628
+        let lon = 30.2176
+
+        if UIApplication.shared.canOpenURL(URL(string:"comgooglemaps://")!) {
+            UIApplication.shared.open(URL(string: "comgooglemaps://?center=\(lat),\(lon)&zoom=14&views=traffic&q=loc:\(lat),\(lon)")!, options: [:], completionHandler: nil)
+        } else {
+            print("Can't use comgooglemaps://")
+            UIApplication.shared.open(URL(string: "http://maps.google.com/maps?q=loc:\(lat),\(lon)&zoom=14&views=traffic")!, options: [:], completionHandler: nil)
+        }
     }
 }
 

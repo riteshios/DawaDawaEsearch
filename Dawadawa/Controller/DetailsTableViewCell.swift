@@ -68,6 +68,12 @@ class DetailsTableViewCell: UITableViewCell,UITextViewDelegate {
     @IBOutlet weak var imgOppFlag: UIImageView!
     @IBOutlet weak var btnChat: UIButton!
     @IBOutlet weak var viewSave: UIView!
+    @IBOutlet weak var viewSeeDetails: UIView!
+    @IBOutlet weak var btnViewDetails: UIButton!
+    
+    @IBOutlet weak var viewCategory: UIView!
+    @IBOutlet weak var viewSubCategory: UIView!
+    
     
     weak var celldelegate: DocumentCollectionViewCellDelegate?
     
@@ -255,7 +261,7 @@ extension DetailsTableViewCell: UICollectionViewDelegate,UICollectionViewDataSou
         switch collectionView{
 
         case self.SocialPostCollectionView:
-            return CGSize(width: SocialPostCollectionView.frame.size.width, height: 225)
+            return CGSize(width: SocialPostCollectionView.frame.size.width, height: SocialPostCollectionView.frame.size.height)
             
         case self.DocumentCollectionView:
             return CGSize(width: SocialPostCollectionView.frame.size.width, height: 60)

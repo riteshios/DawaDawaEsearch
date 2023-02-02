@@ -404,6 +404,9 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                 cell.imgOppFlag.isHidden = true
             }
             
+            cell.heightSocialPostCollectionView.constant = 275
+            cell.viewSeeDetails.isHidden = true
+            cell.btnViewDetails.isHidden = true
 //            if Int.getInt(self.userTimeLine?.oppimage.count) == 0{
 //                cell.heightSocialPostCollectionView.constant = 0
 //            }

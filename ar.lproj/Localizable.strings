@@ -49,7 +49,7 @@
 
 "Hello" = "مرحبًا";
 "Please enter your email address that you would like to sign into DawaDawa." = "الرجاء إدخال عنوان بريدك الإلكتروني الذي ترغب في تسجيل الدخول إليه.";
-"Email" = "البريد الإلكتروني";
+"Email*" = "البريد الإلكتروني";
 
 // MARK: - EnterPhoneNumberVC
 
