@@ -166,7 +166,6 @@ extension ForgotPasswordVC{
             CommonUtils.showHudWithNoInteraction(show: false)
             
             if errorType == .requestSuccess {
-                
                 let dictResult = kSharedInstance.getDictionary(result)
                 
                 switch Int.getInt(statusCode) {
@@ -205,10 +204,10 @@ extension ForgotPasswordVC{
                         self?.present(vc, animated: false)
                     }
                     else if  Int.getInt(dictResult["status"]) == 400{
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     else if Int.getInt(dictResult["status"]) == 401{
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                 default:
                     CommonUtils.showError(.info, String.getString(dictResult["message"]))

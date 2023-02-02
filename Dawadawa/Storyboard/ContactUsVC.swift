@@ -42,25 +42,23 @@ class ContactUsVC: UIViewController{
     }
     
     @IBAction func btnphonenumberTapped(_ sender: UIButton){
-        let phoneNumber = "+966 8465 9556 45"
-        //        let numberUrl = URL(string: "tel://\(phoneNumber)")
-        //        if UIApplication.shared.canOpenURL((numberUrl)!) {
-        //            UIApplication.shared.open((numberUrl)!)
-        //            print("dialer=-=-")
-        //        }
-        
-        if let url = URL(string: "tel://\(phoneNumber)"),
-           UIApplication.shared.canOpenURL(url) {
-            UIApplication.shared.open(url, options: [:], completionHandler: nil)
-        }
-        
-        if let url = URL(string: "tel://\(mobileNo.text!)"){
-            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        let phoneNumber = "+9668465955645"
+        let numberUrl = URL(string: "tel://\(phoneNumber)")!
+        if UIApplication.shared.canOpenURL(numberUrl) {
+            UIApplication.shared.open(numberUrl)
         }
     }
     
+    
     @IBAction func btnEmailAddTapped(_ sender: UIButton){
-        
+        let email = "support@dawadawa.com"
+        if let url = URL(string: "mailto:\(email)") {
+          if #available(iOS 10.0, *) {
+            UIApplication.shared.open(url)
+          } else {
+            UIApplication.shared.openURL(url)
+          }
+        }
     }
     
     @IBAction func btnOpenMapTapped(_ sender: UIButton){
