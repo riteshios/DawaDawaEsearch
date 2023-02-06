@@ -72,6 +72,7 @@ class EnterNameVC: UIViewController {
         kSharedAppDelegate?.dropDown(dataSource:dataSource1 , text: btnDropUserType)
         {(Index ,item) in
             self.lblUserType.text = item
+            
             self.usertype = Index
             self.isSelectuser = true
             debugPrint("usertpe=-=-=",self.usertype)

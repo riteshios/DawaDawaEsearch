@@ -2,7 +2,6 @@
 //  Dawadawa
 //  Created by Ritesh Gupta on 13/09/22.
 
-
 import UIKit
 import SwiftUI
 
@@ -60,8 +59,14 @@ class BuyPlanVC: UIViewController {
     }
     
     @IBAction func btnChoosePlanTapped(_ sender: UIButton){
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: ChoosePlanVC.getStoryboardID()) as! ChoosePlanVC
+//        let vc = self.storyboard?.instantiateViewController(withIdentifier: ChoosePlanVC.getStoryboardID()) as! ChoosePlanVC
+//        vc.indexcount = self.indexpathcount
+//        self.navigationController?.pushViewController(vc, animated: true)
+        
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: PaymentVC.getStoryboardID()) as! PaymentVC
+        vc.price = String.getString(self.subsdata[self.indexpathcount].price_month)
         vc.indexcount = self.indexpathcount
+        vc.payment_terms = 1
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -79,7 +84,7 @@ extension BuyPlanVC:UICollectionViewDelegate,UICollectionViewDataSource, UIColle
         let imgUrl = URL(string: self.subsdata[indexPath.row].image)
         cell.imgBG.sd_setImage(with: imgUrl)
         cell.descData = self.subsdata[indexPath.item].description
-       cell.cellnumbercount(num: indexPath.row)
+        cell.cellnumbercount(num: indexPath.row)
         return cell
     }
     

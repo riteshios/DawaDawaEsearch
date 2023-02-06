@@ -57,6 +57,7 @@ extension ViewAllSavedVC:UITableViewDelegate,UITableViewDataSource{
         cell.lblUserName.text = String.getString(obj.userdetail?.name)
         debugPrint("username.....", cell.lblUserName.text)
 //        cell.lblDescribtion.text = String.getString(obj.description)
+        cell.lblCommentCout.text = String.getString(Int.getInt(obj.commentsCount))
         cell.lblRating.text = String.getString(obj.opr_rating)
         cell.img = obj.oppimage
         cell.imgUrl = self.imgUrl
@@ -65,7 +66,6 @@ extension ViewAllSavedVC:UITableViewDelegate,UITableViewDataSource{
         debugPrint("socialprofile......",imguserurl)
         
         cell.Imageuser.downlodeImage(serviceurl: imguserurl , placeHolder: UIImage(named: "Boss"))
-        
         cell.lblLikeCount.text = String.getString(obj.likes) //+ " " + "likes"
         
         cell.imgOpp_plan.image = obj.opp_plan == "Featured" ? UIImage(named: "Star Filled") : obj.opp_plan == "Premium" ? UIImage(named: "Crown") : UIImage(named: "")

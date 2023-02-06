@@ -206,7 +206,7 @@ extension MysubscriptionVC{
         debugPrint("urlhistory==",url)
         
         TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName: url, requestMethod: .GET, requestParameters:[:], withProgressHUD: false) { [self] (result:Any?, error:Error?, errorType:ErrorType?,statusCode:Int?) in
-            CommonUtils.showHudWithNoInteraction(show: false)
+            CommonUtils.showHudWithNoInteraction(show: false    )
             if errorType == .requestSuccess {
                 let dictResult = kSharedInstance.getDictionary(result)
                 

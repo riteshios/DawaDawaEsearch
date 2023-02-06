@@ -1047,6 +1047,7 @@
                 <outlet property="lblBusinessminingType" destination="6wp-Lp-nxT" id="Utx-pi-ayP"/>
                 <outlet property="lblCategory" destination="3vR-gV-iq4" id="MZ5-Fp-is5"/>
                 <outlet property="lblComment" destination="i35-gx-8b4" id="qPe-8g-Dd0"/>
+                <outlet property="lblCommentCout" destination="f6B-kT-NvX" id="Gg1-fu-SAC"/>
                 <outlet property="lblDescribtion" destination="b9e-Y7-QDg" id="l69-6B-VwK"/>
                 <outlet property="lblEmail" destination="oU5-zB-ZiC" id="wuT-w2-2M3"/>
                 <outlet property="lblLikeCount" destination="eY6-kY-aua" id="DNE-6W-1Bl"/>

@@ -192,8 +192,7 @@ extension MyChatVC {
             "login_user_id":UserData.shared.id
         ]
         
-        TANetworkManager.sharedInstance.requestApi(withServiceName:ServiceName.kdeleteUsermessage, requestMethod: .POST,
-                                                   requestParameters:params, withProgressHUD: false)
+        TANetworkManager.sharedInstance.requestApi(withServiceName:ServiceName.kdeleteUsermessage, requestMethod: .POST, requestParameters:params, withProgressHUD: false)
         {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
             
             CommonUtils.showHudWithNoInteraction(show: false)

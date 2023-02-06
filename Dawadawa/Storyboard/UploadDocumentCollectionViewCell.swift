@@ -1,9 +1,6 @@
-//
 //  UploadDocumentCollectionViewCell.swift
 //  Dawadawa
-//
-//  Created by Alekh on 13/07/22.
-//
+//  Created by Ritesh Gupta on 13/07/22.
 
 import UIKit
 

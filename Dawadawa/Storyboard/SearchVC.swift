@@ -125,6 +125,8 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
             cell.lblTitle.text = String.getString(obj.title)
 //            cell.lblDescribtion.text = String.getString(obj.description)
             cell.lblRating.text = String.getString(obj.opr_rating)
+            cell.lblCommentCout.text = String.getString(Int.getInt(obj.commentsCount))
+            
             cell.img = obj.oppimage
             cell.imgUrl = self.imgUrl
             
@@ -132,9 +134,7 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
             debugPrint("socialprofile......",imguserurl)
             
             cell.Imageuser.downlodeImage(serviceurl: imguserurl , placeHolder: UIImage(named: "Boss"))
-            
             cell.lblLikeCount.text = String.getString(obj.likes) //+ " " + "Likes"
-            
             cell.imgOpp_plan.image = obj.opp_plan == "Featured" ? UIImage(named: "Star Filled") : obj.opp_plan == "Premium" ? UIImage(named: "Crown") : UIImage(named: "Folded Booklet")
             
             

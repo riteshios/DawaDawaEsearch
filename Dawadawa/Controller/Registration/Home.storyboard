@@ -7245,7 +7245,7 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iN5-vF-xsh">
                                                         <rect key="frame" x="0.0" y="356" width="414" height="60"/>
                                                         <subviews>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JsM-3f-aV7">
+                                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JsM-3f-aV7">
                                                                 <rect key="frame" x="16" y="10" width="382" height="40.333333333333336"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+Add more documents" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="am5-zW-wVM">
@@ -16622,9 +16622,6 @@ this Chat?</string>
     <designables>
         <designable name="hYJ-9L-6ep">
             <size key="intrinsicContentSize" width="-1" height="49"/>
-        </designable>
-        <designable name="ozH-Xo-8GJ">
-            <size key="intrinsicContentSize" width="120" height="20"/>
         </designable>
     </designables>
     <resources>

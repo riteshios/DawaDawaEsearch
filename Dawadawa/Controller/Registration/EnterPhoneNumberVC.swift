@@ -91,11 +91,12 @@ class EnterPhoneNumberVC: UIViewController {
             showSimpleAlert(message: Notifications.kEnterMobileNumber)
             return
         }
-        else if !String.getString(txtfieldPhoneNumber.text).isPhoneNumber()
-        {
-            self.showSimpleAlert(message: Notifications.kEnterValidMobileNumber)
-            
-        }
+//        else if !String.getString(txtfieldPhoneNumber.text).isPhoneNumber()
+//        {
+//            self.showSimpleAlert(message: Notifications.kEnterValidMobileNumber)
+//
+//        }
+        
         self.view.endEditing(true)
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "EnterResidenceVC") as! EnterResidenceVC
         vc.name = self.name
@@ -104,7 +105,6 @@ class EnterPhoneNumberVC: UIViewController {
         vc.email = self.email
         vc.phone = self.txtfieldPhoneNumber.text ?? ""
         self.navigationController?.pushViewController(vc, animated: true)
-        
     }
 }
 
@@ -125,6 +125,7 @@ extension EnterPhoneNumberVC{
         
     }
 }
+
 extension EnterPhoneNumberVC : SKFlaotingTextFieldDelegate {
     
     func textFieldDidEndEditing(textField: SKFloatingTextField) {

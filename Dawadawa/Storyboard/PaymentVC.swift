@@ -16,7 +16,6 @@ class PaymentVC: UIViewController {
     var paymentIntentClientSecret = ""
     var price = ""
     
-    
     var indexcount = 0
     var subsdata = [Subscription_data]()
     var payment_terms = 0
@@ -99,13 +98,10 @@ class PaymentVC: UIViewController {
             @unknown default:
                 fatalError()
                 break
-                
             }
         }
     }
-    
 }
-
 
 extension PaymentVC: STPAuthenticationContext{
     
@@ -203,9 +199,7 @@ extension PaymentVC{
             CommonUtils.showHudWithNoInteraction(show: false)
             
             if errorType == .requestSuccess {
-                
                 let dictResult = kSharedInstance.getDictionary(result)
-                
                 switch Int.getInt(statusCode) {
                 case 200:
                     
@@ -216,6 +210,7 @@ extension PaymentVC{
                         if septoken[0] == "Bearer"{
                             kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
                         }
+                        
                         let payments_id = String.getString(dictResult["payments_id"])
                         print("payments_idRitesh",payments_id)
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))

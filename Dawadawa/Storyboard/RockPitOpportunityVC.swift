@@ -652,6 +652,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
                 }
             }
             return cell
+
         case self.UploaddocumentCollectionView:
             let cell = UploaddocumentCollectionView.dequeueReusableCell(withReuseIdentifier: "UploadDocumentCollectionViewCell", for: indexPath) as! UploadDocumentCollectionViewCell
             
@@ -774,6 +775,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
         print("doc documentarrCount=-=-=\(documentarr.count)")
         self.UploaddocumentCollectionView.reloadData()
     }
+    
     func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
         self.dismiss(animated: true, completion: nil)
     }
@@ -934,6 +936,7 @@ extension RockPitOpportunityVC{
             }
         }
     }
+
     //    parser
     class getSubCategoryParser : NSObject{
         
@@ -1418,7 +1421,6 @@ extension RockPitOpportunityVC{
         {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
             
             CommonUtils.showHudWithNoInteraction(show: false)
-            
             if errorType == .requestSuccess {
                 
                 let dictResult = kSharedInstance.getDictionary(result)

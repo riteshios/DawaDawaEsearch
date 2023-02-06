@@ -80,32 +80,33 @@ extension PlanCollectionViewCell: UITableViewDelegate,UITableViewDataSource {
             
             //          cell.lblPlan.text = self.plan[cellnumber]
             let obj = self.subsdata
-            cell.lblPlan.text = String.getString(obj?.title)
+            cell.lblPlan.text = String.getString(obj?.planNmae)
             
             if UserData.shared.user_type == "0"{
                 cell.lblPricePerMonth.text = "$" + String.getString(obj?.price_month)
-                cell.lblCutPricePerYear.text = "$" + String.getString(obj?.cut_year_price)
+                cell.lblCutPricePerYear.text = "Price: - $" + String.getString(obj?.cut_year_price)
                 cell.lblPricePerYear.text = "$" + String.getString(obj?.price_year)
                
             }
+            
             else if UserData.shared.user_type == "1"{
                 cell.lblMonth.isHidden = true
                 cell.lblYear.isHidden = true
                 cell.lblPricePerYear.isHidden = true
                 cell.viewLine.isHidden = true
-                cell.lblPricePerMonth.text = "$\(String.getString(obj?.price_month))"
+                cell.lblPricePerMonth.text = "Price: - $\(String.getString(obj?.price_month))"
                 cell.lblCutPricePerYear.text = "No. of create: - \(String.getString(obj?.no_create))"
             }
+            
             else if UserData.shared.user_type == "2"{
                 cell.lblMonth.isHidden = true
                 cell.lblYear.isHidden = true
                 cell.lblPricePerYear.isHidden = true
                 cell.viewLine.isHidden = true
-                cell.lblPricePerMonth.text = "$\(String.getString(obj?.price_month))"
+                cell.lblPricePerMonth.text = "Price: - $\(String.getString(obj?.price_month))"
                 cell.lblCutPricePerYear.text = "No. of create: - \(String.getString(obj?.no_create))"
-                
-                
             }
+            
             return cell
             
         case 1:
@@ -235,7 +236,6 @@ extension UIViewController{
                             kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
                         }
                         
-                        
                         let sub = kSharedInstance.getArray(withDictionary: dictResult["data"])
                         let subData = sub.map{Subscription_data(data: kSharedInstance.getDictionary($0))}
                         print("DataSubsData=\(subData)")
@@ -245,7 +245,7 @@ extension UIViewController{
                     else if  Int.getInt(dictResult["responsecode"]) == 400{
                         //   CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
-                    
+
                     
                 default:
                     CommonUtils.showError(.error, String.getString(dictResult["message"]))

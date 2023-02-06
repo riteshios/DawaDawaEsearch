@@ -217,6 +217,7 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
             cell.lblTitle.text = String.getString(obj.title)
 //            cell.lblDescribtion.text = String.getString(obj.description)
             cell.lblRating.text = String.getString(obj.opr_rating)
+            cell.lblCommentCout.text = String.getString(Int.getInt(obj.commentsCount))
             
             cell.img = obj.oppimage
             cell.imgUrl = self.imgUrl

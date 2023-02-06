@@ -166,6 +166,7 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
             cell.lblUserName.text = String.getString(self.userTimeLine?.userdetail?.name)
             cell.lblDescribtion.text = String.getString(self.userTimeLine?.description)
             cell.lblTitle.text = String.getString(self.userTimeLine?.title)
+            cell.lblCommentCout.text = String.getString(Int.getInt(self.userTimeLine?.commentsCount))
             cell.viewAddComment.isHidden = self.userTimeLine?.isComment == false ? true : false
             cell.heightAddComment.constant = self.userTimeLine?.isComment == false ? 0 : 55
             //          cell.heightViewAddComment.constant = self.userTimeLine?.isComment == false ? 0 : 55

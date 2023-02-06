@@ -84,8 +84,8 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
             cell.lblUserName.text = String.getString(obj.userdetail?.name)
             cell.lblTitle.text = String.getString(obj.title)
 //            cell.lblDescribtion.text = String.getString(obj.description)
-            
             cell.lblRating.text = String.getString(obj.opr_rating)
+            cell.lblCommentCout.text = String.getString(Int.getInt(obj.commentsCount))
             
             let imguserurl = String.getString(obj.userdetail?.social_profile)
             debugPrint("socialprofile......",imguserurl)

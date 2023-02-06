@@ -55,6 +55,8 @@ extension ViewAllInterestedVC:UITableViewDelegate,UITableViewDataSource{
         cell.lblUserName.text = String.getString(obj.userdetail?.name)
         debugPrint("username.....", cell.lblUserName.text)
         //cell.lblDescribtion.text = String.getString(obj.description)
+        cell.lblCommentCout.text = String.getString(Int.getInt(obj.commentsCount))
+        
         cell.lblRating.text = String.getString(obj.opr_rating)
         cell.img = obj.oppimage
         cell.imgUrl = self.imgUrl

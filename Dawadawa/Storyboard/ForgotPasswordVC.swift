@@ -8,11 +8,11 @@ import SKFloatingTextField
 class ForgotPasswordVC: UIViewController {
     
     //    MARK: - Properties
+    
     @IBOutlet weak var viewMain: UIView!
     @IBOutlet weak var viewButtonSendCode: UIView!
     @IBOutlet weak var btnSendEmail_Phone: UIButton!
     @IBOutlet weak var lblSendEmail_Phone: UILabel!
-    
     
     @IBOutlet weak var lblForgotPassword: UILabel!
     @IBOutlet weak var lblSubHeading: UILabel!
@@ -24,8 +24,8 @@ class ForgotPasswordVC: UIViewController {
         super.viewDidLoad()
         self.setuplanguage()
         self.setup()
-        
     }
+    
     // MARK: - Life Cyclye
     func setup(){
         viewMain.clipsToBounds = true

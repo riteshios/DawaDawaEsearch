@@ -28,7 +28,6 @@ class ChoosePlanVC: UIViewController {
         viewMonthlyPlan.addShadowWithBlurOnView(viewMonthlyPlan, spread: 0, blur: 10, color: .black, opacity: 0.16, OffsetX: 0, OffsetY: 1)
         
         viewYearlyPlan.addShadowWithBlurOnView(viewYearlyPlan, spread: 0, blur: 10, color: .black, opacity: 0.16, OffsetX: 0, OffsetY: 1)
-        
     }
     
     func getPlanApi(){
@@ -37,9 +36,8 @@ class ChoosePlanVC: UIViewController {
             CommonUtils.showHudWithNoInteraction(show: false)
             self.subsdata = plan
             
-            
             if UserData.shared.user_type == "0"{
-                self.lblPlanMonthly.text  = self.subsdata[self.indexcount].title
+                self.lblPlanMonthly.text  = self.subsdata[self.indexcount].planNmae
                 self.lblPlanYearly.text   = self.subsdata[self.indexcount].title
                 self.lblPriceMonthly.text = self.subsdata[self.indexcount].price_month
                 print("lblPriceMonthly",self.subsdata[self.indexcount].price_month)
@@ -49,14 +47,14 @@ class ChoosePlanVC: UIViewController {
             else if UserData.shared.user_type == "1"{
                 self.viewYearlyPlan.isHidden = true
                 self.lblMonth.isHidden = true
-                self.lblPlanMonthly.text  = self.subsdata[self.indexcount].title
+                self.lblPlanMonthly.text  = self.subsdata[self.indexcount].planNmae
                 self.lblPriceMonthly.text = "$\(String.getString(self.subsdata[self.indexcount].price_month))"
             }
             
             else if UserData.shared.user_type == "2"{
                 self.viewYearlyPlan.isHidden = true
                 self.lblMonth.isHidden = true
-                self.lblPlanMonthly.text  = self.subsdata[self.indexcount].title
+                self.lblPlanMonthly.text  = self.subsdata[self.indexcount].planNmae
                 self.lblPriceMonthly.text = "$\(String.getString(self.subsdata[self.indexcount].price_month))"
             }
         }

@@ -1,8 +1,6 @@
-//
 //  TANetworkManager.swift
 //  TANetworkingSwift
 
-//
 
 import UIKit
 import Alamofire

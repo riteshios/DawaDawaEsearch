@@ -1,10 +1,7 @@
-//
 //  AppConstant.swift
 //  CommonCode
-//
-//  Created by Shubham Kaliyar on 6/10/17.
-//  Copyright © 2017 Shubham Kaliyar. All rights reserved.
-//
+//  Created by Ritesh Gupta on 6/10/17.
+//  Copyright © 2017 Ritesh Gupta. All rights reserved.
 
 import Foundation
 import UIKit

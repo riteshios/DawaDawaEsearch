@@ -217,7 +217,7 @@
                                 </constraints>
                             </stackView>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" hidesForSinglePage="YES" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="Mtw-CB-bdI">
-                                <rect key="frame" x="130" y="192" width="155.5" height="18"/>
+                                <rect key="frame" x="129.5" y="192" width="156.5" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="18" id="0sn-Vg-HXQ"/>
                                 </constraints>
@@ -956,6 +956,7 @@
                 <outlet property="imglike" destination="Thv-qM-E3K" id="dT8-Ed-Bt1"/>
                 <outlet property="imgsave" destination="634-6R-FaE" id="riU-IY-HIP"/>
                 <outlet property="lblComment" destination="8KF-ic-5v5" id="r5r-l2-uHB"/>
+                <outlet property="lblCommentCout" destination="Mn8-1x-DkR" id="Qci-K0-dC4"/>
                 <outlet property="lblLikeCount" destination="S3U-A1-Y36" id="Zc6-0L-8AG"/>
                 <outlet property="lblRating" destination="RMo-hX-0uv" id="kTH-wC-KGP"/>
                 <outlet property="lblSave" destination="a3U-sN-cao" id="gKs-eS-4tG"/>

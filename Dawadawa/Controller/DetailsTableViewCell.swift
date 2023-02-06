@@ -41,6 +41,8 @@ class DetailsTableViewCell: UITableViewCell,UITextViewDelegate {
     @IBOutlet weak var btnSave: UIButton!
     @IBOutlet weak var lblSave: UILabel!
     
+    @IBOutlet weak var lblCommentCout: UILabel!
+    
     @IBOutlet weak var lblRating: UILabel!
     @IBOutlet weak var WidthViewRating: NSLayoutConstraint!
     

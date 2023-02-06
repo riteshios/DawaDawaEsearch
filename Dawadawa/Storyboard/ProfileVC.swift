@@ -361,6 +361,7 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
             cell.lblUserName.text = String.getString(UserData.shared.name) + " " + String.getString(UserData.shared.last_name)
             cell.lblTitle.text = String.getString(obj.title)
 //            cell.lblDescribtion.text = String.getString(obj.description)
+            cell.lblCommentCout.text = String.getString(Int.getInt(obj.commentsCount))
             cell.lblRating.text = String.getString(obj.opr_rating)
             cell.LeadingOppType.constant = -20
             

@@ -41,6 +41,7 @@ class SocialPostData {
     var is_saved:String?
     var plan_name:String?
     var share_link:String?
+    var commentsCount:Int?
     var isComment = false
     var oppimage = [oppr_image]() // Array of dictionary
     var userdetail:user_detail?  // Simple dictionary
@@ -80,6 +81,7 @@ class SocialPostData {
         self.is_saved = String.getString(data["is_saved"])
         self.plan_name = String.getString(data["plan_name"])
         self.share_link = String.getString(data["share_link"])
+        self.commentsCount = Int.getInt(data["commentsCount"])
         
         let img = kSharedInstance.getArray(withDictionary: data["oppr_image"])
         self.oppimage = img.map{oppr_image(data: kSharedInstance.getDictionary($0))}
@@ -241,6 +243,7 @@ class Subscription_data{
     var user_type:String?
     var type:String?
     var title:String?
+    var planNmae:String? // response m yhi key aa rha h
     var price_month:String?
     var price_year:String?
     var cut_year_price:String?
@@ -248,13 +251,13 @@ class Subscription_data{
     var image:String
     var description = [description_plan]()
     
-    
     init(data:[String:Any]){
         
         self.id = Int.getInt(data["id"])
         self.user_type = String.getString(data["user_type"])
         self.type = String.getString(data["type"])
         self.title = String.getString(data["title"])
+        self.planNmae = String.getString(data["planNmae"])
         self.price_month = String.getString(data["price_month"])
         self.price_year = String.getString(data["price_year"])
         self.cut_year_price = String.getString(data["cut_year_price"])
