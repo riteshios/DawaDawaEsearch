@@ -12,6 +12,8 @@ class BuyPlanVC: UIViewController {
     @IBOutlet weak var PlanCollectionView: UICollectionView!
     @IBOutlet weak var lblUsertype: UILabel!
     @IBOutlet weak var btnChoosethisPlan: UIButton!
+    @IBOutlet weak var viewBuyButton: UIView!
+    @IBOutlet weak var pageController: UIPageControl!
     
     var indexpathcount = 0
     var subsdata = [Subscription_data]()
@@ -25,6 +27,7 @@ class BuyPlanVC: UIViewController {
     }
     
     func fetdata(){
+        self.viewBuyButton.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
         PlanCollectionView.register(UINib(nibName: "PlanCollectionViewCell", bundle: Bundle.main), forCellWithReuseIdentifier: "PlanCollectionViewCell")
         
         if UserData.shared.user_type == "0"{
@@ -47,6 +50,8 @@ class BuyPlanVC: UIViewController {
             CommonUtils.showHudWithNoInteraction(show: false)
             self.subsdata = plan
             DispatchQueue.main.async {
+                self.pageController.numberOfPages = self.subsdata.count
+                self.pageController.currentPage = 0
                 self.PlanCollectionView.reloadData()
             }
         }
@@ -89,17 +94,18 @@ extension BuyPlanVC:UICollectionViewDelegate,UICollectionViewDataSource, UIColle
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) { // Counting the scroll of collection view
+        pageController.currentPage = Int(scrollView.contentOffset.x) / Int(scrollView.frame.width)
         for cell in PlanCollectionView.visibleCells {
             let indexPath = PlanCollectionView.indexPath(for: cell)
             debugPrint("indexPath=-=-",indexPath)
             self.indexpathcount = indexPath?[1] ?? 0
+           
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: PlanCollectionView.frame.size.width, height:  PlanCollectionView.frame.size.height)
     }
-    
 }
 
 extension BuyPlanVC{

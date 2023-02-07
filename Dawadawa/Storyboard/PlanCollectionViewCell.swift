@@ -8,6 +8,7 @@ class PlanCollectionViewCell: UICollectionViewCell{
     
     @IBOutlet weak var imgBG: UIImageView!
     @IBOutlet weak var PlantableView: UITableView!
+    @IBOutlet weak var ViewBG: UIView!
     
     var planimage = [UIImage(named: "Ok"),UIImage(named: "Star Filled"),UIImage(named: "Crown")]
     
@@ -33,6 +34,7 @@ class PlanCollectionViewCell: UICollectionViewCell{
         PlantableView.register(UINib(nibName: "PlanTableViewCell", bundle: nil), forCellReuseIdentifier: "PlanTableViewCell")
         PlantableView.register(UINib(nibName: "PlanListTableViewCell", bundle: nil), forCellReuseIdentifier: "PlanListTableViewCell")
         //        self.getsubsplanapi()
+        self.ViewBG.addShadowWithCornerRadius(ViewBG, cRadius: 5)
         
     }
 
@@ -78,31 +80,31 @@ extension PlanCollectionViewCell: UITableViewDelegate,UITableViewDataSource {
         case 0:
             let cell = self.PlantableView.dequeueReusableCell(withIdentifier: "PlanTableViewCell") as! PlanTableViewCell
             
-            //          cell.lblPlan.text = self.plan[cellnumber]
+            //   cell.lblPlan.text = self.plan[cellnumber]
             let obj = self.subsdata
             cell.lblPlan.text = String.getString(obj?.planNmae)
             
             if UserData.shared.user_type == "0"{
                 cell.lblPricePerMonth.text = "$" + String.getString(obj?.price_month)
-                cell.lblCutPricePerYear.text = "Price: - $" + String.getString(obj?.cut_year_price)
-                cell.lblPricePerYear.text = "$" + String.getString(obj?.price_year)
+//                cell.lblCutPricePerYear.text = "Price: - $" + String.getString(obj?.cut_year_price)
+//                cell.lblPricePerYear.text = "$" + String.getString(obj?.price_year)
                
             }
             
             else if UserData.shared.user_type == "1"{
-                cell.lblMonth.isHidden = true
-                cell.lblYear.isHidden = true
-                cell.lblPricePerYear.isHidden = true
-                cell.viewLine.isHidden = true
+//                cell.lblMonth.isHidden = true
+//                cell.lblYear.isHidden = true
+//                cell.lblPricePerYear.isHidden = true
+//                cell.viewLine.isHidden = true
                 cell.lblPricePerMonth.text = "Price: - $\(String.getString(obj?.price_month))"
                 cell.lblCutPricePerYear.text = "No. of create: - \(String.getString(obj?.no_create))"
             }
             
             else if UserData.shared.user_type == "2"{
-                cell.lblMonth.isHidden = true
-                cell.lblYear.isHidden = true
-                cell.lblPricePerYear.isHidden = true
-                cell.viewLine.isHidden = true
+//                cell.lblMonth.isHidden = true
+//                cell.lblYear.isHidden = true
+//                cell.lblPricePerYear.isHidden = true
+//                cell.viewLine.isHidden = true
                 cell.lblPricePerMonth.text = "Price: - $\(String.getString(obj?.price_month))"
                 cell.lblCutPricePerYear.text = "No. of create: - \(String.getString(obj?.no_create))"
             }
