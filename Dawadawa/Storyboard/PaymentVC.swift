@@ -58,9 +58,7 @@ class PaymentVC: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
-    
     @IBAction func buttonTappedPa(_ sender:UIButton){
-        
         //        let paymentIntentClientSecret = paymentIntentClientSecret
         
         //        else {
@@ -119,7 +117,6 @@ extension PaymentVC{
         let speciDict = [
             "currency": "USD",
             "items": [
-                
                 "amount": amount
             ]
             

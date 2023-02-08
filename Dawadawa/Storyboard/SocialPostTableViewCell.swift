@@ -121,6 +121,10 @@ class SocialPostTableViewCell: UITableViewCell,UITextViewDelegate {
     
     //    MARK: - @IBAction
     
+    @IBAction func btnlistcountTapped(_ sender: UIButton){
+        self.callback?("LikeCount",sender)
+    }
+    
     
     @IBAction func btnProfileImageTapped(_ sender: UIButton) {
         self.callback?("Profileimage",sender)

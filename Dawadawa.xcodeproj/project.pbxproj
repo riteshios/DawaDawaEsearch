@@ -72,6 +72,9 @@
 		048204B0292F716D00863713 /* FilterDataCVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 048204AF292F716D00863713 /* FilterDataCVCell.xib */; };
 		048204B2292F717900863713 /* FilterTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048204B1292F717800863713 /* FilterTVCell.swift */; };
 		048204B4292F718000863713 /* FilterTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 048204B3292F718000863713 /* FilterTVCell.xib */; };
+		04867CB52993C1A6006409EA /* LikelistVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04867CB42993C1A6006409EA /* LikelistVC.swift */; };
+		04867CB92993CF06006409EA /* LikeLIstTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04867CB72993CF06006409EA /* LikeLIstTVC.swift */; };
+		04867CBA2993CF06006409EA /* LikeLIstTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04867CB82993CF06006409EA /* LikeLIstTVC.xib */; };
 		0489D1982892B12300725664 /* SubcategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0489D1962892B12300725664 /* SubcategoryTableViewCell.swift */; };
 		0489D1992892B12300725664 /* SubcategoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0489D1972892B12300725664 /* SubcategoryTableViewCell.xib */; };
 		0489D19C2892B16300725664 /* OpportunityTypeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0489D19A2892B16300725664 /* OpportunityTypeTableViewCell.swift */; };
@@ -753,6 +756,9 @@
 		048204AF292F716D00863713 /* FilterDataCVCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FilterDataCVCell.xib; sourceTree = "<group>"; };
 		048204B1292F717800863713 /* FilterTVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterTVCell.swift; sourceTree = "<group>"; };
 		048204B3292F718000863713 /* FilterTVCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FilterTVCell.xib; sourceTree = "<group>"; };
+		04867CB42993C1A6006409EA /* LikelistVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LikelistVC.swift; path = Dawadawa/Storyboard/LikelistVC.swift; sourceTree = SOURCE_ROOT; };
+		04867CB72993CF06006409EA /* LikeLIstTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeLIstTVC.swift; sourceTree = "<group>"; };
+		04867CB82993CF06006409EA /* LikeLIstTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LikeLIstTVC.xib; sourceTree = "<group>"; };
 		0489D1962892B12300725664 /* SubcategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubcategoryTableViewCell.swift; sourceTree = "<group>"; };
 		0489D1972892B12300725664 /* SubcategoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubcategoryTableViewCell.xib; sourceTree = "<group>"; };
 		0489D19A2892B16300725664 /* OpportunityTypeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpportunityTypeTableViewCell.swift; sourceTree = "<group>"; };
@@ -1539,6 +1545,16 @@
 				04BFFB67289250BA0086DCC1 /* FilterVC.swift */,
 			);
 			name = Ffilter;
+			sourceTree = "<group>";
+		};
+		04867CB62993CE5D006409EA /* LikeList */ = {
+			isa = PBXGroup;
+			children = (
+				04867CB42993C1A6006409EA /* LikelistVC.swift */,
+				04867CB72993CF06006409EA /* LikeLIstTVC.swift */,
+				04867CB82993CF06006409EA /* LikeLIstTVC.xib */,
+			);
+			name = LikeList;
 			sourceTree = "<group>";
 		};
 		0489D19528929D5A00725664 /* Filter */ = {
@@ -2638,6 +2654,7 @@
 		44D7F8EF28536826001554C9 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				04867CB62993CE5D006409EA /* LikeList */,
 				048204AB292F708500863713 /* Ffilter */,
 				0492B5FA28BE23BB00EDAC83 /* HomeSocialMoreSelfVC.swift */,
 				0461E31A288AA29800B7F0E7 /* HomeSocialMoreVC.swift */,
@@ -3205,6 +3222,7 @@
 				447DCDFF2851CB1200C40DDD /* ET.png in Resources */,
 				447DCCA42851CB1100C40DDD /* Iran.png in Resources */,
 				447DCDB52851CB1200C40DDD /* DJ.png in Resources */,
+				04867CBA2993CF06006409EA /* LikeLIstTVC.xib in Resources */,
 				447DCE572851CB1300C40DDD /* countries.json in Resources */,
 				447DCE4A2851CB1300C40DDD /* BQ.png in Resources */,
 				447DCD7A2851CB1200C40DDD /* LT.png in Resources */,
@@ -3428,10 +3446,12 @@
 				045C4E6A28895DC600E831AA /* SearchVC.swift in Sources */,
 				0406DB83287D55DF00B57A0B /* MiningBusinessVC.swift in Sources */,
 				04B2653A2872C84000B2DF7C /* ContactUsVC.swift in Sources */,
+				04867CB52993C1A6006409EA /* LikelistVC.swift in Sources */,
 				0421E86928DAE3B100CB7B38 /* DetailsTableViewCell.swift in Sources */,
 				447DCC5F2851CB1100C40DDD /* OldTAManagerOld.swift in Sources */,
 				04B91912286B1553009ABAE4 /* VerifyNewEmailOTPVC.swift in Sources */,
 				046DCA0B28C608D600B219F4 /* CurrentLocationVC.swift in Sources */,
+				04867CB92993CF06006409EA /* LikeLIstTVC.swift in Sources */,
 				447DCC872851CB1100C40DDD /* String+Utilities.swift in Sources */,
 				447DCE5C2851CB1300C40DDD /* NotificationHalper.swift in Sources */,
 				04F84533286AC52C0081120F /* PasswordChangedSuccessfullyPopUpVC.swift in Sources */,

@@ -172,6 +172,9 @@ struct ServiceName {
     static let ksendmessage            =            "api/send-message"
     static let kgetmessage             =            "api/getmessage"
     static let kdeleteUsermessage      =            "api/delete-user-message"
+    
+//    Like List
+    static let klikelist               =            "api/UserListLikesOpr"
 }
 
 struct Notifications {

@@ -99,7 +99,6 @@ extension BuyPlanVC:UICollectionViewDelegate,UICollectionViewDataSource, UIColle
             let indexPath = PlanCollectionView.indexPath(for: cell)
             debugPrint("indexPath=-=-",indexPath)
             self.indexpathcount = indexPath?[1] ?? 0
-           
         }
     }
     
@@ -108,8 +107,9 @@ extension BuyPlanVC:UICollectionViewDelegate,UICollectionViewDataSource, UIColle
     }
 }
 
+// MARK: - Localisation
+
 extension BuyPlanVC{
-    
     func setuplanguage(){
         btnChoosethisPlan.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "Choose this plan", comment: ""), for: .normal)
     }

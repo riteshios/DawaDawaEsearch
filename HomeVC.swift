@@ -8,7 +8,6 @@ import IQKeyboardManagerSwift
 
 class HomeVC: UIViewController,UITabBarControllerDelegate,PremiumOppCollectionViewCellDelegate{
   
-    
     @IBOutlet weak var tblViewViewPost: UITableView!
     
     var imgUrl = ""
@@ -328,6 +327,23 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                 //                cell.btnviewDetails.isHidden = false
             }
             cell.callback = { txt, sender in
+                
+                if txt == "LikeCount"{
+                    let oppid = Int.getInt(userTimeLine[indexPath.row].id)
+                    
+                    let storyboard = UIStoryboard(name: "Home", bundle: nil)
+                    let vc = storyboard.instantiateViewController(withIdentifier: "LikelistVC") as! LikelistVC
+                    
+                    if #available(iOS 15.0, *) {
+                        if let presentationController = vc.presentationController as? UISheetPresentationController {
+                            presentationController.detents = [.medium(), .large()] /// change to [.medium(), .large()] for a half *and* full screen sheet
+                        }
+                    } else {
+                        // Fallback on earlier versions
+                    }
+                    vc.oppr_id = oppid
+                    self.present(vc, animated: true)
+                }
                 
                 if txt == "Chat"{
                     if UserData.shared.isskiplogin == true{

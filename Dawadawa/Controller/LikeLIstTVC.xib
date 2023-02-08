@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Product Sans Regular.ttf">
+            <string>ProductSans-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="LikeLIstTVC" customModule="Dawadawa" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Swh-w9-i43">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Yl-3q-StE">
+                                <rect key="frame" x="5" y="5" width="34" height="34"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Bhutan.png" translatesAutoresizingMaskIntoConstraints="NO" id="EDz-Vb-lFD">
+                                        <rect key="frame" x="0.0" y="0.0" width="34" height="34"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="EDz-Vb-lFD" secondAttribute="bottom" id="6db-wU-e1n"/>
+                                    <constraint firstAttribute="trailing" secondItem="EDz-Vb-lFD" secondAttribute="trailing" id="FRi-1m-mHl"/>
+                                    <constraint firstItem="EDz-Vb-lFD" firstAttribute="top" secondItem="8Yl-3q-StE" secondAttribute="top" id="Kfm-lb-qH8"/>
+                                    <constraint firstItem="EDz-Vb-lFD" firstAttribute="leading" secondItem="8Yl-3q-StE" secondAttribute="leading" id="SiG-ZW-5cW"/>
+                                    <constraint firstAttribute="width" constant="34" id="nAE-02-ItZ"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius1">
+                                        <real key="value" value="17"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ritesh" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wqf-JL-T7k">
+                                <rect key="frame" x="47" y="14.5" width="268" height="15"/>
+                                <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="12"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="wqf-JL-T7k" firstAttribute="centerY" secondItem="8Yl-3q-StE" secondAttribute="centerY" id="Dkf-RM-fzU"/>
+                            <constraint firstAttribute="bottom" secondItem="8Yl-3q-StE" secondAttribute="bottom" constant="5" id="SDR-uC-pfD"/>
+                            <constraint firstItem="8Yl-3q-StE" firstAttribute="leading" secondItem="Swh-w9-i43" secondAttribute="leading" constant="5" id="ivT-c3-dbf"/>
+                            <constraint firstItem="8Yl-3q-StE" firstAttribute="top" secondItem="Swh-w9-i43" secondAttribute="top" constant="5" id="kU2-Rg-jnf"/>
+                            <constraint firstAttribute="trailing" secondItem="wqf-JL-T7k" secondAttribute="trailing" constant="5" id="lIX-qT-fD6"/>
+                            <constraint firstItem="wqf-JL-T7k" firstAttribute="leading" secondItem="8Yl-3q-StE" secondAttribute="trailing" constant="8" id="zAb-Jm-jjA"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="Swh-w9-i43" secondAttribute="trailing" id="Pvd-uh-EAH"/>
+                    <constraint firstAttribute="bottom" secondItem="Swh-w9-i43" secondAttribute="bottom" id="ZcR-lN-14Q"/>
+                    <constraint firstItem="Swh-w9-i43" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="kjW-2Y-XdX"/>
+                    <constraint firstItem="Swh-w9-i43" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="ogD-sf-7HZ"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <point key="canvasLocation" x="139" y="82"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="Bhutan.png" width="70" height="47"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
