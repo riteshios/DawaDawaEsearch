@@ -417,6 +417,25 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
             
             cell.callback = { txt, tapped in
                 
+                if txt == "LikeCount"{
+                    let oppid = Int.getInt(self.userTimeLine?.id)
+                    let likecount = String.getString(self.userTimeLine?.likes)
+                    
+                    let storyboard = UIStoryboard(name: "Home", bundle: nil)
+                    let vc = storyboard.instantiateViewController(withIdentifier: "LikelistVC") as! LikelistVC
+                    
+                    if #available(iOS 15.0, *) {
+                        if let presentationController = vc.presentationController as? UISheetPresentationController {
+                            presentationController.detents = [.medium(), .large()] /// change to [.medium(), .large()] for a half *and* full screen sheet
+                        }
+                    } else {
+                        // Fallback on earlier versions
+                    }
+                    vc.oppr_id = oppid
+                    vc.likecount = likecount
+                    self.present(vc, animated: true)
+                }
+                
                 if txt == "Profileimage"{
                     let user_id = self.userTimeLine?.user_id
                     let vc = self.storyboard?.instantiateViewController(withIdentifier: UserProfileDetailsVC.getStoryboardID()) as! UserProfileDetailsVC

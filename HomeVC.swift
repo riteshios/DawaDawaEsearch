@@ -330,6 +330,7 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                 
                 if txt == "LikeCount"{
                     let oppid = Int.getInt(userTimeLine[indexPath.row].id)
+                    let likecount = String.getString(userTimeLine[indexPath.row].likes)
                     
                     let storyboard = UIStoryboard(name: "Home", bundle: nil)
                     let vc = storyboard.instantiateViewController(withIdentifier: "LikelistVC") as! LikelistVC
@@ -342,6 +343,7 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                         // Fallback on earlier versions
                     }
                     vc.oppr_id = oppid
+                    vc.likecount = likecount
                     self.present(vc, animated: true)
                 }
                 

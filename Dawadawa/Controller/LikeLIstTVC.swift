@@ -5,6 +5,9 @@
 import UIKit
 
 class LikeLIstTVC: UITableViewCell {
+    
+    @IBOutlet weak var imguser: UIImageView!
+    @IBOutlet weak var lblName: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()

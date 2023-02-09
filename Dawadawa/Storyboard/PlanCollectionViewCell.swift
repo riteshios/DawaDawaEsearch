@@ -96,8 +96,8 @@ extension PlanCollectionViewCell: UITableViewDelegate,UITableViewDataSource {
 //                cell.lblYear.isHidden = true
 //                cell.lblPricePerYear.isHidden = true
 //                cell.viewLine.isHidden = true
-                cell.lblPricePerMonth.text = "Price: - $\(String.getString(obj?.price_month))"
-                cell.lblCutPricePerYear.text = "No. of create: - \(String.getString(obj?.no_create))"
+                cell.lblPricePerMonth.text = "$\(String.getString(obj?.price_month))"
+                cell.lblCutPricePerYear.text = "- \(String.getString(obj?.no_create))"
             }
             
             else if UserData.shared.user_type == "2"{
@@ -105,8 +105,8 @@ extension PlanCollectionViewCell: UITableViewDelegate,UITableViewDataSource {
 //                cell.lblYear.isHidden = true
 //                cell.lblPricePerYear.isHidden = true
 //                cell.viewLine.isHidden = true
-                cell.lblPricePerMonth.text = "Price: - $\(String.getString(obj?.price_month))"
-                cell.lblCutPricePerYear.text = "No. of create: - \(String.getString(obj?.no_create))"
+                cell.lblPricePerMonth.text = "$\(String.getString(obj?.price_month))"
+                cell.lblCutPricePerYear.text = "\(String.getString(obj?.no_create))"
             }
             
             return cell

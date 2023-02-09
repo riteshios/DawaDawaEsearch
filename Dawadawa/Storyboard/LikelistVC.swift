@@ -9,14 +9,19 @@ class LikelistVC: UIViewController,UITableViewDelegate,UITableViewDataSource{
 //    MARK: - Properties
     
     @IBOutlet weak var ListCountTV: UITableView!
+    @IBOutlet weak var lbllikeCount: UILabel!
     var oppr_id = 0
+    var userdetail = [user_detail]()
+    var likecount = ""
     
 //    MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("opr_id=-=LikeList\(self.oppr_id)")
+       
         ListCountTV.register(UINib(nibName: "LikeLIstTVC", bundle: Bundle.main), forCellReuseIdentifier: "LikeLIstTVC")
+        self.likelistyapi()
+        self.lbllikeCount.text = "\(likecount) likes"
     }
     
 //    MARK: - @IBAction
@@ -28,11 +33,16 @@ class LikelistVC: UIViewController,UITableViewDelegate,UITableViewDataSource{
 // MARK: - Table View
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-      return 20
+        return userdetail.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = ListCountTV.dequeueReusableCell(withIdentifier: "LikeLIstTVC") as! LikeLIstTVC
+        let obj = userdetail[indexPath.row]
+        let imgurl = String.getString(obj.social_profile)
+        
+        cell.imguser.downlodeImage(serviceurl: imgurl , placeHolder: UIImage(named: "Boss"))
+        cell.lblName.text = String.getString(obj.name)
         return cell
     }
     
@@ -44,7 +54,6 @@ class LikelistVC: UIViewController,UITableViewDelegate,UITableViewDataSource{
 extension LikelistVC{
    
 //    MARK: - API Call
-    
     
     // api like list
     
@@ -63,8 +72,9 @@ extension LikelistVC{
         
         let params:[String : Any] = [
             "opr_id":self.oppr_id
-          
         ]
+        
+        print("opr_id=-=LikeList\(self.oppr_id)")
         
         debugPrint("user_id......",Int.getInt(UserData.shared.id))
         TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.klikelist, requestMethod: .POST, requestParameters:params, withProgressHUD: false)
@@ -87,15 +97,19 @@ extension LikelistVC{
                             kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
                         }
                         
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        let userdetail = kSharedInstance.getArray(withDictionary: dictResult["data"])
+                        self?.userdetail = userdetail.map{user_detail(data: kSharedInstance.getDictionary($0))}
+                        print("DataUserDetail=-=-\(self?.userdetail)")
                         
+                        self?.ListCountTV.reloadData()
+//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                     else if  Int.getInt(dictResult["status"]) == 404{
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     else if  Int.getInt(dictResult["status"]) == 400{
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                 default:
@@ -109,6 +123,4 @@ extension LikelistVC{
             }
         }
     }
-    
-    
 }

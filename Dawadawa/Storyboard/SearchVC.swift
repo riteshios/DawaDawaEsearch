@@ -228,6 +228,25 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
             
             cell.callback = { txt, sender in
                 
+                if txt == "LikeCount"{
+                    let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
+                    let likecount = String.getString(self.userTimeLine[indexPath.row].likes)
+                    
+                    let storyboard = UIStoryboard(name: "Home", bundle: nil)
+                    let vc = storyboard.instantiateViewController(withIdentifier: "LikelistVC") as! LikelistVC
+                    
+                    if #available(iOS 15.0, *) {
+                        if let presentationController = vc.presentationController as? UISheetPresentationController {
+                            presentationController.detents = [.medium(), .large()] /// change to [.medium(), .large()] for a half *and* full screen sheet
+                        }
+                    } else {
+                        // Fallback on earlier versions
+                    }
+                    vc.oppr_id = oppid
+                    vc.likecount = likecount
+                    self.present(vc, animated: true)
+                }
+                
                 if txt == "Chat"{
                     let userid = Int.getInt(self.userTimeLine[indexPath.row].user_id)
                     let vc = self.storyboard?.instantiateViewController(withIdentifier: ChatVC.getStoryboardID()) as! ChatVC

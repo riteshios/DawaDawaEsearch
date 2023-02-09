@@ -14981,7 +14981,7 @@ this opportunity?</string>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pay" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UI9-VP-YZD">
-                                                <rect key="frame" x="191.66666666666666" y="23" width="31" height="24.333333333333329"/>
+                                                <rect key="frame" x="190" y="23" width="34" height="24.333333333333329"/>
                                                 <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="20"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -16564,6 +16564,7 @@ this Chat?</string>
                     </view>
                     <connections>
                         <outlet property="ListCountTV" destination="sa4-A6-D3k" id="mhM-dD-HeI"/>
+                        <outlet property="lbllikeCount" destination="UFt-lp-UvZ" id="W7W-0V-BON"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oHt-EH-cAV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -16597,7 +16598,7 @@ this Chat?</string>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pay" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w2H-tg-2gi">
-                                                <rect key="frame" x="191.66666666666666" y="23" width="31" height="24.333333333333329"/>
+                                                <rect key="frame" x="190" y="23" width="34" height="24.333333333333329"/>
                                                 <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="20"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -16723,12 +16724,6 @@ this Chat?</string>
     <designables>
         <designable name="Au9-O0-cbA">
             <size key="intrinsicContentSize" width="120" height="20"/>
-        </designable>
-        <designable name="VSf-iM-2vh">
-            <size key="intrinsicContentSize" width="241" height="44"/>
-        </designable>
-        <designable name="Yu0-qF-QgR">
-            <size key="intrinsicContentSize" width="241" height="44"/>
         </designable>
         <designable name="fV5-fA-npc">
             <size key="intrinsicContentSize" width="120" height="20"/>
