@@ -130,9 +130,17 @@
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gh9-yq-8KE">
+                                                <rect key="frame" x="0.0" y="0.0" width="51.5" height="28"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <connections>
+                                                    <action selector="btnRateTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="ZHh-ib-psy"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" red="0.08235294118" green="0.44705882349999998" blue="0.63137254899999995" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="Gh9-yq-8KE" secondAttribute="trailing" id="2LS-HZ-MDN"/>
                                             <constraint firstAttribute="bottom" secondItem="9Pr-Wt-BoE" secondAttribute="bottom" constant="5" id="5QN-vo-XDu"/>
                                             <constraint firstItem="RMo-hX-0uv" firstAttribute="top" secondItem="eKV-fd-kDR" secondAttribute="top" constant="4" id="5gI-fU-GGZ"/>
                                             <constraint firstAttribute="trailing" secondItem="RMo-hX-0uv" secondAttribute="trailing" constant="4" id="6pI-Dc-yiV"/>
@@ -140,6 +148,9 @@
                                             <constraint firstAttribute="trailing" secondItem="RMo-hX-0uv" secondAttribute="trailing" constant="4" id="HWR-vM-cKK"/>
                                             <constraint firstItem="9Pr-Wt-BoE" firstAttribute="leading" secondItem="eKV-fd-kDR" secondAttribute="leading" constant="5" id="JLi-x9-1fh"/>
                                             <constraint firstItem="RMo-hX-0uv" firstAttribute="centerY" secondItem="9Pr-Wt-BoE" secondAttribute="centerY" id="Qir-Iu-01q"/>
+                                            <constraint firstAttribute="bottom" secondItem="Gh9-yq-8KE" secondAttribute="bottom" id="ftS-4J-cf6"/>
+                                            <constraint firstItem="Gh9-yq-8KE" firstAttribute="leading" secondItem="eKV-fd-kDR" secondAttribute="leading" id="hyj-Ci-lVz"/>
+                                            <constraint firstItem="Gh9-yq-8KE" firstAttribute="top" secondItem="eKV-fd-kDR" secondAttribute="top" id="iDc-6l-j05"/>
                                             <constraint firstItem="RMo-hX-0uv" firstAttribute="leading" secondItem="9Pr-Wt-BoE" secondAttribute="trailing" constant="5" id="x8U-sm-2kH"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
@@ -443,23 +454,23 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RA3-Ru-Eio">
-                                                <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RA3-Ru-Eio">
+                                                <rect key="frame" x="0.0" y="0.0" width="50" height="30"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                <connections>
-                                                    <action selector="btnRateTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="wJz-Xf-VRn"/>
-                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" red="1" green="0.94509803920000002" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstItem="Bup-LC-6XM" firstAttribute="leading" secondItem="iEE-b4-MGo" secondAttribute="trailing" constant="3" id="00Z-ly-YM5"/>
+                                            <constraint firstItem="RA3-Ru-Eio" firstAttribute="top" secondItem="HLp-7u-e4I" secondAttribute="top" id="5VJ-Qj-Cye"/>
+                                            <constraint firstAttribute="trailing" secondItem="RA3-Ru-Eio" secondAttribute="trailing" id="CLJ-gQ-3xU"/>
                                             <constraint firstItem="iEE-b4-MGo" firstAttribute="top" secondItem="HLp-7u-e4I" secondAttribute="top" constant="5" id="JBH-FS-lQw"/>
                                             <constraint firstAttribute="trailing" secondItem="Bup-LC-6XM" secondAttribute="trailing" constant="5" id="OI8-ZP-GN4"/>
+                                            <constraint firstItem="RA3-Ru-Eio" firstAttribute="leading" secondItem="HLp-7u-e4I" secondAttribute="leading" id="ZHM-Z8-FVA"/>
                                             <constraint firstAttribute="width" constant="50" id="awG-JM-in2"/>
                                             <constraint firstItem="Bup-LC-6XM" firstAttribute="centerY" secondItem="iEE-b4-MGo" secondAttribute="centerY" id="gxC-3U-jFZ"/>
                                             <constraint firstItem="Bup-LC-6XM" firstAttribute="top" secondItem="HLp-7u-e4I" secondAttribute="top" constant="7" id="hpe-Hz-8tc"/>
+                                            <constraint firstAttribute="bottom" secondItem="RA3-Ru-Eio" secondAttribute="bottom" id="jC0-ry-MPM"/>
                                             <constraint firstAttribute="height" constant="30" id="nTj-jm-PsE"/>
                                         </constraints>
                                     </view>

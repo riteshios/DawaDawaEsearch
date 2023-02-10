@@ -41,11 +41,9 @@ class TabBarVC: UITabBarController, UITabBarControllerDelegate {
                 }
             }
         }
-        
     }
+    
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         print("Selected item")
     }
 }
-    
-

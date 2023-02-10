@@ -74,8 +74,8 @@ class BuyPlanVC: UIViewController {
         vc.payment_terms = 1
         self.navigationController?.pushViewController(vc, animated: true)
     }
-    
 }
+
 // MARK: - Collection
 
 extension BuyPlanVC:UICollectionViewDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{

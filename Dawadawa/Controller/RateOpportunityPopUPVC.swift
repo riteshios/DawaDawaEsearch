@@ -136,8 +136,7 @@ extension RateOpportunityPopUPVC{
         ]
         
         debugPrint("opr_id......",self.oppid)
-        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.krateopp, requestMethod: .POST,
-                                                               requestParameters:params, withProgressHUD: false)
+        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.krateopp, requestMethod: .POST, requestParameters:params, withProgressHUD: false)
         {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
             
             CommonUtils.showHudWithNoInteraction(show: false)

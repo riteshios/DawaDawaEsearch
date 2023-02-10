@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="hCl-Az-dQg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Fkn-5y-BkS">
     <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -755,7 +755,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5h3-lo-mU7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4668" y="-231"/>
+            <point key="canvasLocation" x="5573.913043478261" y="-231.52173913043481"/>
         </scene>
         <!--Activation CodeVC-->
         <scene sceneID="2eA-EJ-5LY">
@@ -1071,7 +1071,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Qm-27-fyz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8806" y="-387"/>
+            <point key="canvasLocation" x="9713.04347826087" y="-387.22826086956525"/>
         </scene>
         <!--Activated Successfully Pop UpVC-->
         <scene sceneID="BG3-rz-t5o">
@@ -1182,7 +1182,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W8N-CR-fa5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="9490" y="-387"/>
+            <point key="canvasLocation" x="10397.101449275364" y="-387.22826086956525"/>
         </scene>
         <!--LoginVC-->
         <scene sceneID="Rol-5t-Zhf">
@@ -1800,7 +1800,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kLA-dV-2Nt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3990" y="-331"/>
+            <point key="canvasLocation" x="4897.1014492753629" y="-331.79347826086956"/>
         </scene>
         <!--EnterNameVC-->
         <scene sceneID="z9a-xT-T73">
@@ -2051,7 +2051,7 @@ last name</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="483-nk-rxf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5339" y="-331"/>
+            <point key="canvasLocation" x="6244.9275362318849" y="-331.79347826086956"/>
         </scene>
         <!--ForgotPasswordVC-->
         <scene sceneID="K7h-PF-pKS">
@@ -2237,7 +2237,7 @@ last name</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4xQ-wM-XOM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="10174" y="-331"/>
+            <point key="canvasLocation" x="11081.159420289856" y="-331.79347826086956"/>
         </scene>
         <!--ResetPasswordVC-->
         <scene sceneID="j0X-0l-mfz">
@@ -2420,7 +2420,7 @@ last name</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TUu-jD-Cxh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="10855" y="-333"/>
+            <point key="canvasLocation" x="11760.869565217392" y="-333.42391304347831"/>
         </scene>
         <!--Web ViewVC-->
         <scene sceneID="se2-E1-DVj">
@@ -2484,7 +2484,7 @@ last name</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S1g-5e-Mze" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="11541" y="-387"/>
+            <point key="canvasLocation" x="12447.826086956522" y="-387.22826086956525"/>
         </scene>
         <!--WelcomeScreenVC-->
         <scene sceneID="rCS-lz-8JS">
@@ -2823,7 +2823,7 @@ last name</string>
                                     <constraint firstItem="dZH-dj-Hz5" firstAttribute="height" secondItem="66G-bY-be3" secondAttribute="height" priority="250" id="PkO-nd-Imw"/>
                                     <constraint firstAttribute="trailing" secondItem="dZH-dj-Hz5" secondAttribute="trailing" id="SY3-2G-l0Q"/>
                                     <constraint firstAttribute="bottom" secondItem="dZH-dj-Hz5" secondAttribute="bottom" id="UUe-b4-gzi"/>
-                                    <constraint firstItem="dZH-dj-Hz5" firstAttribute="top" secondItem="66G-bY-be3" secondAttribute="top" id="bPV-Gj-WiP"/>
+                                    <constraint firstItem="dZH-dj-Hz5" firstAttribute="top" secondItem="66G-bY-be3" secondAttribute="firstBaseline" id="bPV-Gj-WiP"/>
                                     <constraint firstItem="dZH-dj-Hz5" firstAttribute="width" secondItem="66G-bY-be3" secondAttribute="width" id="hmA-JZ-1hT"/>
                                     <constraint firstItem="dZH-dj-Hz5" firstAttribute="leading" secondItem="66G-bY-be3" secondAttribute="leading" id="uZ4-NV-E4x"/>
                                 </constraints>
@@ -2862,24 +2862,7 @@ last name</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="80u-Yf-hnt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3323.1884057971015" y="-312.22826086956525"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="RuB-RH-Nly">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="hCl-Az-dQg" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="DIq-E3-wAp">
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="Cey-Up-8bd" kind="relationship" relationship="rootViewController" id="FCl-0B-oUo"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ktR-iw-faq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2415.9420289855075" y="-312.22826086956525"/>
+            <point key="canvasLocation" x="4230.434782608696" y="-312.22826086956525"/>
         </scene>
         <!--EnterEmailVC-->
         <scene sceneID="kma-0p-9dU">
@@ -3063,7 +3046,7 @@ would like to sign into DawaDawa.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fsY-YC-TDy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6038" y="-332"/>
+            <point key="canvasLocation" x="6944.9275362318849" y="-332.60869565217394"/>
         </scene>
         <!--EnterPhoneNumberVC-->
         <scene sceneID="LCP-ko-bGi">
@@ -3318,7 +3301,7 @@ would like to sign into DawaDawa.</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8lo-gq-3DT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="zAH-TT-2d2" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="6701" y="-331"/>
+            <point key="canvasLocation" x="7607.2463768115949" y="-331.79347826086956"/>
         </scene>
         <!--EnterResidenceVC-->
         <scene sceneID="BWf-gq-rVh">
@@ -3640,7 +3623,7 @@ from the options below</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r9o-XW-RMg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="K2Y-e9-SuS" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="7390" y="-331"/>
+            <point key="canvasLocation" x="8297.1014492753638" y="-331.79347826086956"/>
         </scene>
         <!--EnterPasswordVC-->
         <scene sceneID="h81-sF-6Hl">
@@ -4079,7 +4062,7 @@ from the options below</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fq3-OX-KYa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8100" y="-331"/>
+            <point key="canvasLocation" x="9007.246376811594" y="-331.79347826086956"/>
         </scene>
         <!--Country State Pop UpVC-->
         <scene sceneID="Xdh-TJ-Sbv">
@@ -4191,7 +4174,7 @@ from the options below</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vjB-gu-Q4Y" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7390" y="413"/>
+            <point key="canvasLocation" x="8297.1014492753638" y="412.50000000000006"/>
         </scene>
         <!--LoginSubscriptionPlanVC-->
         <scene sceneID="WuM-6C-Zw9">
@@ -4377,6 +4360,24 @@ from the options below</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rzh-bK-F9d" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3990" y="724"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="5FF-zS-bYg">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Fkn-5y-BkS" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="KmU-Aj-9rf">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Cey-Up-8bd" kind="relationship" relationship="rootViewController" id="zQP-OQ-ply"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Krr-5U-Gfd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3323.1884057971015" y="-312.22826086956525"/>
         </scene>
     </scenes>
     <resources>

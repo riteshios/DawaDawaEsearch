@@ -164,19 +164,30 @@ extension ViewAllInterestedVC:UITableViewDelegate,UITableViewDataSource{
                 let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
                 let likecount = String.getString(self.userTimeLine[indexPath.row].likes)
                 
-                let storyboard = UIStoryboard(name: "Home", bundle: nil)
-                let vc = storyboard.instantiateViewController(withIdentifier: "LikelistVC") as! LikelistVC
-                
-                if #available(iOS 15.0, *) {
-                    if let presentationController = vc.presentationController as? UISheetPresentationController {
-                        presentationController.detents = [.medium(), .large()] /// change to [.medium(), .large()] for a half *and* full screen sheet
+                if likecount == "0"{
+                    if kSharedUserDefaults.getlanguage() as? String == "en"{
+                        self.showSimpleAlert(message: "0 Likes on this opportunity")
                     }
-                } else {
-                    // Fallback on earlier versions
+                    else{
+                        self.showSimpleAlert(message: "0 معجب بهذه الفرصة")
+                    }
                 }
-                vc.oppr_id = oppid
-                vc.likecount = likecount
-                self.present(vc, animated: true)
+                
+                else{
+                    let storyboard = UIStoryboard(name: "Home", bundle: nil)
+                    let vc = storyboard.instantiateViewController(withIdentifier: "LikelistVC") as! LikelistVC
+                    
+                    if #available(iOS 15.0, *) {
+                        if let presentationController = vc.presentationController as? UISheetPresentationController {
+                            presentationController.detents = [.medium(), .large()] /// change to [.medium(), .large()] for a half *and* full screen sheet
+                        }
+                    } else {
+                        // Fallback on earlier versions
+                    }
+                    vc.oppr_id = oppid
+                    vc.likecount = likecount
+                    self.present(vc, animated: true)
+                }
             }
             
             if txt == "Chat"{

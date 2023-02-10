@@ -123,9 +123,7 @@ extension RateUserPopUpVC{
             "message":"Rated"
         ]
         
-       
-        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.krateuser, requestMethod: .POST,
-                                                               requestParameters:params, withProgressHUD: false)
+        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.krateuser, requestMethod: .POST, requestParameters:params, withProgressHUD: false)
         {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
             
             CommonUtils.showHudWithNoInteraction(show: false)
@@ -145,7 +143,6 @@ extension RateUserPopUpVC{
                             kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
                         }
                         
-                        
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         
                     }
@@ -153,7 +150,7 @@ extension RateUserPopUpVC{
                     else if  Int.getInt(dictResult["responsecode"]) == 400{
                         
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                        //                        kSharedAppDelegate?.makeRootViewController()
+                        // kSharedAppDelegate?.makeRootViewController()
                     }
                     
                 default:

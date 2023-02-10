@@ -33,11 +33,22 @@ class ContactUsVC: UIViewController{
     }
     
     @IBAction func btnSelectqueryTapped(_ sender: UIButton) {
-        let dataSource1 = ["Select query Type1","Select query Type2","Select query Type3","Select query Type4"]
-        kSharedAppDelegate?.dropDown(dataSource:dataSource1 , text: btnDropdown)
-        {(Index ,item) in
-            self.lblSelectqueryType.text = item
-            
+        let dataSource1 = ["Regarding subscription","Regarding opportunity issues","Regarding account issues","Regarding payment issues"]
+        let dataSource2 = ["بخصوص الاشتراك" , "بخصوص مشكلات الفرصة" , "بخصوص مشكلات الحساب" , "بخصوص مشكلات الدفع"]
+        
+        if kSharedUserDefaults.getlanguage() as? String == "en"{
+            kSharedAppDelegate?.dropDown(dataSource:dataSource1 , text: btnDropdown)
+            {(Index ,item) in
+                self.lblSelectqueryType.text = item
+                
+            }
+        }
+        else{
+            kSharedAppDelegate?.dropDown(dataSource:dataSource2 , text: btnDropdown)
+            {(Index ,item) in
+                self.lblSelectqueryType.text = item
+                
+            }
         }
     }
     
@@ -48,7 +59,6 @@ class ContactUsVC: UIViewController{
             UIApplication.shared.open(numberUrl)
         }
     }
-    
     
     @IBAction func btnEmailAddTapped(_ sender: UIButton){
         let email = "support@dawadawa.com"
