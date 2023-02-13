@@ -10,7 +10,7 @@ class DocumentWebView: UIViewController, WKNavigationDelegate {
     
     @IBOutlet weak var lblheading: UILabel!
     @IBOutlet weak var webkit: WKWebView!
-    var opr_doc  = "https://demo4esl.com/dawadawa/public/front_assets/assets/media/opportunity_documents/"
+    var opr_doc  = "https://demo4app.com/dawadawa/public/front_assets/assets/media/opportunity_documents/"
     var doclink  = ""
     var heading  = "Document"
     

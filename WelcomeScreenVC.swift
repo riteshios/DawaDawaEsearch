@@ -35,8 +35,6 @@ class WelcomeScreenVC: UIViewController {
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-       
-        
     }
     
     //     MARK: - Life Cycle
@@ -81,8 +79,6 @@ class WelcomeScreenVC: UIViewController {
         kSharedUserDefaults.setLanguage(language: "en")
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "WelcomeScreenVC") as! WelcomeScreenVC
         self.navigationController?.pushViewController(vc, animated: false)
-        print("btnEnglish=-=-")
-        
     }
     
     @IBAction func btnArabicLangTapped(_ sender: UIButton){
@@ -90,7 +86,6 @@ class WelcomeScreenVC: UIViewController {
         kSharedUserDefaults.setLanguage(language: "ar")
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "WelcomeScreenVC") as! WelcomeScreenVC
         self.navigationController?.pushViewController(vc, animated: false)
-        print("btnArabic=-=-")
     }
     
     
@@ -133,4 +128,3 @@ extension WelcomeScreenVC{
         UIView.appearance().semanticContentAttribute =  code == "ar" ? .forceRightToLeft :  .forceLeftToRight
     }
 }
-

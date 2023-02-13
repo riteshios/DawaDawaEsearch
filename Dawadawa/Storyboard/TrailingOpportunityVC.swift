@@ -159,6 +159,7 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
     func setup(){
         self.txtFieldMobileNumber.keyBoardType = .numberPad
         self.txtFieldWhatsappNumber.keyBoardType = .numberPad
+        self.txtFieldPricing.keyBoardType = .numberPad
         self.viewSelectImage.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
         self.viewSelectDocument.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
         self.viewCreateOpportunity.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
@@ -424,7 +425,7 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
             
         }
     }
-    @IBAction func btnLookingForTapped(_ sender: UIButton) {
+    @IBAction func btnLookingForTapped(_ sender: UIButton){
         kSharedAppDelegate?.dropDown(dataSource: getlookingForList.map{String.getString($0.looking_for)}, text: btnLookingFor){
             (index,item) in
             self.lblLookingFor.text = item

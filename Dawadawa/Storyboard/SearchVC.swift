@@ -20,7 +20,6 @@ class SearchVC: UIViewController,UITextFieldDelegate{
         self.setuplanguage()
         self.imgNotfound.isHidden = true
         self.setup()
-        
         viewSearch.addShadowWithBlurOnView(viewSearch, spread: 0, blur: 10, color: .black, opacity: 0.16, OffsetX: 0, OffsetY: 1)
     }
     
@@ -30,6 +29,21 @@ class SearchVC: UIViewController,UITextFieldDelegate{
         self.txtfieldSearch.text = ""
     }
     
+    override func viewWillLayoutSubviews() {
+            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                DispatchQueue.main.async {
+                    self.txtfieldSearch.semanticContentAttribute = .forceLeftToRight
+                    self.txtfieldSearch.textAlignment = .left
+                }
+
+            } else {
+                DispatchQueue.main.async {
+                    self.txtfieldSearch.semanticContentAttribute = .forceRightToLeft
+                    self.txtfieldSearch.textAlignment = .right
+                }
+            }
+        }
+    
     //    override func viewWillAppear(_ animated: Bool) {
     //        self.hidesBottomBarWhenPushed = false
     //        self.tabBarController?.tabBar.isHidden = false
@@ -38,7 +52,6 @@ class SearchVC: UIViewController,UITextFieldDelegate{
     //    }
     
     func setup(){
-        
         tblViewSearchOpp.register(UINib(nibName: "PopularSearchTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "PopularSearchTableViewCell")
         tblViewSearchOpp.register(UINib(nibName: "PremiumOppTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "PremiumOppTableViewCell")
         tblViewSearchOpp.register(UINib(nibName: "SocialPostTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "SocialPostTableViewCell")

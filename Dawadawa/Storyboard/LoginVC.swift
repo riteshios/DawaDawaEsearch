@@ -49,26 +49,25 @@ class LoginVC: UIViewController {
         txtFieldPassword.isSecureTextInput = true
     }
     
+    
     override func viewWillLayoutSubviews() {
-            if kSharedUserDefaults.getlanguage() as? String == "en"{
-                DispatchQueue.main.async {
-                    self.txtFieldPhoneNumer.semanticContentAttribute = .forceLeftToRight
-                    self.txtFieldPhoneNumer.textAlignment = .left
-                    self.txtFieldPassword.semanticContentAttribute = .forceLeftToRight
-                    self.txtFieldPassword.textAlignment = .left
-                }
-
-            } else {
-                DispatchQueue.main.async {
-                    self.txtFieldPhoneNumer.semanticContentAttribute = .forceRightToLeft
-                    self.txtFieldPhoneNumer.textAlignment = .right
-                    self.txtFieldPassword.semanticContentAttribute = .forceRightToLeft
-                    self.txtFieldPassword.textAlignment = .right
-                }
+        if kSharedUserDefaults.getlanguage() as? String == "en"{
+            DispatchQueue.main.async {
+                self.txtFieldPhoneNumer.semanticContentAttribute = .forceLeftToRight
+                self.txtFieldPhoneNumer.textAlignment = .left
+                self.txtFieldPassword.semanticContentAttribute = .forceLeftToRight
+                self.txtFieldPassword.textAlignment = .left
+            }
+            
+        } else {
+            DispatchQueue.main.async {
+                self.txtFieldPhoneNumer.semanticContentAttribute = .forceRightToLeft
+                self.txtFieldPhoneNumer.textAlignment = .right
+                self.txtFieldPassword.semanticContentAttribute = .forceRightToLeft
+                self.txtFieldPassword.textAlignment = .right
             }
         }
-    
-    
+    }
     
     //    MARK: - LIfe Cycle
     
@@ -85,11 +84,11 @@ class LoginVC: UIViewController {
         self.setTextFieldUI(textField: txtFieldPhoneNumer, place: "Phone number/Email", floatingText: "Phone number/Email")
         self.viewDrop.isHidden = true
         self.viewDrop.addShadowWithCornerRadius(viewDrop, cRadius: 5)
+        
         if kSharedUserDefaults.getlanguage() as? String == "en"{
             self.imgDropDownMenu.image = UIImage(named: "IND")
             self.lblDropDownMenu.text = "English-IND"
             UITextField.appearance().semanticContentAttribute = .forceLeftToRight
-            
         }
         else{
             self.imgDropDownMenu.image = UIImage(named: "sudan")
@@ -170,6 +169,7 @@ class LoginVC: UIViewController {
     @IBAction func btnLoginTapped(_ sender: UIButton){
         self.loginapi()
     }
+    
     @IBAction func btnSkipLoginTapped(_ sender: UIButton) {
         UserData.shared.isskiplogin = true
         cameFrom = ""

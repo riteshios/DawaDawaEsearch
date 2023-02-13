@@ -158,6 +158,7 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
     func setup(){
         self.txtFieldMobileNumber.keyBoardType = .numberPad
         self.txtFieldWhatsappNumber.keyBoardType = .numberPad
+        self.txtFieldPricing.keyBoardType = .numberPad
         self.viewSelectImage.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
         self.viewSelectDocument.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
         self.viewCreateOpportunity.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])

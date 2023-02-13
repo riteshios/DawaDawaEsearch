@@ -30,23 +30,25 @@ class EnterNameVC: UIViewController {
     }
     
     override func viewWillLayoutSubviews() {
-            if kSharedUserDefaults.getlanguage() as? String == "en"{
-                DispatchQueue.main.async {
-                    self.txtFieldFirstName.semanticContentAttribute = .forceLeftToRight
-                    self.txtFieldFirstName.textAlignment = .left
-                    self.txtFieldLastName.semanticContentAttribute = .forceLeftToRight
-                    self.txtFieldLastName.textAlignment = .left
-                }
-
-            } else {
-                DispatchQueue.main.async {
-                    self.txtFieldFirstName.semanticContentAttribute = .forceRightToLeft
-                    self.txtFieldFirstName.textAlignment = .right
-                    self.txtFieldLastName.semanticContentAttribute = .forceRightToLeft
-                    self.txtFieldLastName.textAlignment = .right
-                }
+        if kSharedUserDefaults.getlanguage() as? String == "en"{
+            DispatchQueue.main.async {
+                self.txtFieldFirstName.semanticContentAttribute = .forceLeftToRight
+                self.txtFieldFirstName.textAlignment = .left
+                self.txtFieldLastName.semanticContentAttribute = .forceLeftToRight
+                self.txtFieldLastName.textAlignment = .left
+                print("English Changed")
+            }
+            
+        } else {
+            DispatchQueue.main.async {
+                self.txtFieldFirstName.semanticContentAttribute = .forceRightToLeft
+                self.txtFieldFirstName.textAlignment = .right
+                self.txtFieldLastName.semanticContentAttribute = .forceRightToLeft
+                self.txtFieldLastName.textAlignment = .right
+                print("Arabic Changed")
             }
         }
+    }
     
 // MARK: - Life Cycle
     
@@ -58,6 +60,12 @@ class EnterNameVC: UIViewController {
         self.viewContinue.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
         self.setTextFieldUI(textField: txtFieldFirstName, place: "First name*", floatingText: "First name")
         self.setTextFieldUI(textField: txtFieldLastName, place: "Last name*", floatingText: "Last name")
+        if kSharedUserDefaults.getlanguage() as? String == "en"{
+            UITextField.appearance().semanticContentAttribute = .forceLeftToRight
+        }
+        else{
+            UITextField.appearance().semanticContentAttribute = .forceRightToLeft
+        }
     }
     
 //    MARK: - @IBACtion
@@ -65,7 +73,6 @@ class EnterNameVC: UIViewController {
     @IBAction func btnbackTapped(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
     }
-    
    
     @IBAction func btnSelectUserTypeTapped(_ sender: UIButton){
         let dataSource1 = ["Investor","Business Owner","Service Provider"]
