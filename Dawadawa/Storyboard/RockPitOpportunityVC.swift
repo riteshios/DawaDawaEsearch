@@ -156,6 +156,8 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
                 self.txtFieldTitle.textAlignment = .left
                 self.txtFieldLocationName.semanticContentAttribute = .forceLeftToRight
                 self.txtFieldLocationName.textAlignment = .left
+                self.TextViewDescription.semanticContentAttribute = .forceLeftToRight
+                self.TextViewDescription.textAlignment = .left
                 self.txtFieldMobileNumber.semanticContentAttribute = .forceLeftToRight
                 self.txtFieldMobileNumber.textAlignment = .left
                 self.txtFieldWhatsappNumber.semanticContentAttribute = .forceLeftToRight
@@ -163,7 +165,6 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
                 self.txtFieldPricing.semanticContentAttribute = .forceLeftToRight
                 self.txtFieldPricing.textAlignment = .left
             }
-
         }
         else{
             DispatchQueue.main.async {
@@ -171,6 +172,8 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
                 self.txtFieldTitle.textAlignment = .right
                 self.txtFieldLocationName.semanticContentAttribute = .forceRightToLeft
                 self.txtFieldLocationName.textAlignment = .right
+                self.TextViewDescription.semanticContentAttribute = .forceRightToLeft
+                self.TextViewDescription.textAlignment = .right
                 self.txtFieldMobileNumber.semanticContentAttribute = .forceRightToLeft
                 self.txtFieldMobileNumber.textAlignment = .right
                 self.txtFieldWhatsappNumber.semanticContentAttribute = .forceRightToLeft
@@ -208,32 +211,52 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
         
         if self.txtFieldTitle.text == "" {
             self.setTextField(textField: txtFieldTitle, place: "Title", floatingText: "Title")
-            
+            txtFieldTitle.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Title", comment: "")
+            txtFieldTitle.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Title", comment: "")
         }else{
             self.setTextFieldUI(textField: txtFieldTitle, place: "Title", showFloating:true, floatingText: "Title")
+            txtFieldTitle.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Title", comment: "")
+            txtFieldTitle.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Title", comment: "")
         }
+        
         if self.txtFieldLocationName.text == ""{
             self.setTextField(textField: txtFieldLocationName, place: "Location name", floatingText: "Location name")
+            txtFieldLocationName.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Location name", comment: "")
+            txtFieldLocationName.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Location name", comment: "")
         }else{
             self.setTextFieldUI(textField: txtFieldLocationName, place: "Location name", showFloating: true, floatingText: "Location name")
+            txtFieldLocationName.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Location name", comment: "")
+            txtFieldLocationName.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Location name", comment: "")
         }
         if self.txtFieldMobileNumber.text == ""{
             self.setTextField(textField: txtFieldMobileNumber, place: "Mobile number", floatingText: "Mobile number")
+            txtFieldMobileNumber.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Mobile number", comment: "")
+            txtFieldMobileNumber.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Mobile number", comment: "")
         }
         else{
             self.setTextFieldUI(textField: txtFieldMobileNumber, place:  "Mobile number", showFloating: true, floatingText: "Mobile number")
+            txtFieldMobileNumber.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Mobile number", comment: "")
+            txtFieldMobileNumber.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Mobile number", comment: "")
         }
         if self.txtFieldWhatsappNumber.text == ""{
             self.setTextField(textField: txtFieldWhatsappNumber, place: "WhatsApp number", floatingText: "WhatsApp number")
+            txtFieldWhatsappNumber.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Whatsapp number", comment: "")
+            txtFieldWhatsappNumber.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Whatsapp number", comment: "")
         }
         else{
             self.setTextFieldUI(textField: txtFieldWhatsappNumber, place: "WhatsApp number", showFloating: true, floatingText: "WhatsApp number")
+            txtFieldWhatsappNumber.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Whatsapp number", comment: "")
+            txtFieldWhatsappNumber.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Whatsapp number", comment: "")
         }
         if self.txtFieldPricing.text == ""{
             self.setTextField(textField: txtFieldPricing, place: "Price in US Dollar (optional)", floatingText: "Price in US Dollar (optional)")
+            txtFieldPricing.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Price in US Dollar (optional)", comment: "")
+            txtFieldPricing.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Price in US Dollar (optional)", comment: "")
         }
         else{
             self.setTextFieldUI(textField: txtFieldPricing, place: "Price in US Dollar (optional)", showFloating: true, floatingText: "Price in US Dollar (optional)")
+            txtFieldPricing.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Price in US Dollar (optional)", comment: "")
+            txtFieldPricing.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Price in US Dollar (optional)", comment: "")
         }
         
         if kSharedUserDefaults.getlanguage() as? String == "en"{
@@ -1671,19 +1694,11 @@ extension RockPitOpportunityVC{
         lblSelectImages.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Select images", comment: "")
         lblSelectdocuments.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Select documents", comment: "")
         lblSubCategory.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Select subcategory", comment: "")
-        txtFieldTitle.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Title", comment: "")
-        txtFieldTitle.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Title", comment: "")
+        
         lblState.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "State", comment: "")
         lblLocality.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Locality", comment: "")
-        txtFieldLocationName.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Location name", comment: "")
-        txtFieldLocationName.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Location name", comment: "")
-        txtFieldMobileNumber.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Mobile number", comment: "")
-        txtFieldMobileNumber.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Mobile number", comment: "")
-        txtFieldWhatsappNumber.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Whatsapp number", comment: "")
-        txtFieldWhatsappNumber.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Whatsapp number", comment: "")
-        txtFieldPricing.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Price in US Dollar (optional)", comment: "")
-        txtFieldPricing.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Price in US Dollar (optional)", comment: "")
         
+        TextViewDescription.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Opportunity Details/Description", comment: "")
         lblLocationOnMap.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Pin Location on map(optional)", comment: "")
         lblLookingFor.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Looking for", comment: "")
         lblBasic.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Basic", comment: "")

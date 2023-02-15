@@ -9,6 +9,7 @@ import SwiftyJSON
 
 class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UIDocumentPickerDelegate{
     
+    //    MARK: - Properties -
     @IBOutlet weak var txtFieldTitle: SKFloatingTextField!
     @IBOutlet weak var txtFieldLocationName: SKFloatingTextField!
     
@@ -129,7 +130,7 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
                 self.fetchdata()
             }
             else{
-               // self.viewSelectCategoryTop.constant = 420
+                // self.viewSelectCategoryTop.constant = 420
                 self.fetchdata()
             }
         }else{
@@ -138,7 +139,42 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
         self.UploadimageCollectionView.reloadData()
     }
     
-    //    MARK: - Life Cyclye
+    override func viewWillLayoutSubviews(){
+        if kSharedUserDefaults.getlanguage() as? String == "en"{
+            DispatchQueue.main.async {
+                self.txtFieldTitle.semanticContentAttribute = .forceLeftToRight
+                self.txtFieldTitle.textAlignment = .left
+                self.txtFieldLocationName.semanticContentAttribute = .forceLeftToRight
+                self.txtFieldLocationName.textAlignment = .left
+                self.TextViewDescription.semanticContentAttribute = .forceLeftToRight
+                self.TextViewDescription.textAlignment = .left
+                self.txtFieldMobileNumber.semanticContentAttribute = .forceLeftToRight
+                self.txtFieldMobileNumber.textAlignment = .left
+                self.txtFieldWhatsappNumber.semanticContentAttribute = .forceLeftToRight
+                self.txtFieldWhatsappNumber.textAlignment = .left
+                self.txtFieldPricing.semanticContentAttribute = .forceLeftToRight
+                self.txtFieldPricing.textAlignment = .left
+            }
+        }
+        else{
+            DispatchQueue.main.async{
+                self.txtFieldTitle.semanticContentAttribute = .forceRightToLeft
+                self.txtFieldTitle.textAlignment = .right
+                self.txtFieldLocationName.semanticContentAttribute = .forceRightToLeft
+                self.txtFieldLocationName.textAlignment = .right
+                self.TextViewDescription.semanticContentAttribute = .forceRightToLeft
+                self.TextViewDescription.textAlignment = .right
+                self.txtFieldMobileNumber.semanticContentAttribute = .forceRightToLeft
+                self.txtFieldMobileNumber.textAlignment = .right
+                self.txtFieldWhatsappNumber.semanticContentAttribute = .forceRightToLeft
+                self.txtFieldWhatsappNumber.textAlignment = .right
+                self.txtFieldPricing.semanticContentAttribute = .forceRightToLeft
+                self.txtFieldPricing.textAlignment = .right
+            }
+        }
+    }
+    
+    //    MARK: - Life Cyclye -
     
     func initialSetup(){
         self.viewImage.isHidden = true
@@ -162,33 +198,53 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
         self.viewCreateOpportunity.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
         if txtFieldTitle.text == ""{
             self.setTextField(textField: txtFieldTitle, place: "Title", floatingText: "Title")
+            txtFieldTitle.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Title", comment: "")
+            txtFieldTitle.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Title", comment: "")
         }
         else{
             self.setTextFieldUI(textField: txtFieldTitle, place: "Title", showFloating: true, floatingText: "Title")
+            txtFieldTitle.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Title", comment: "")
+            txtFieldTitle.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Title", comment: "")
         }
         if txtFieldLocationName.text == ""{
             self.setTextField(textField: txtFieldLocationName, place: "Location name", floatingText: "Location name")
+            txtFieldLocationName.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Location name", comment: "")
+            txtFieldLocationName.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Location name", comment: "")
         }
         else{
             self.setTextFieldUI(textField: txtFieldLocationName, place: "Location name", showFloating: true, floatingText: "Location name")
+            txtFieldLocationName.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Location name", comment: "")
+            txtFieldLocationName.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Location name", comment: "")
         }
         if txtFieldMobileNumber.text == ""{
-            self.setTextField(textField: txtFieldMobileNumber, place:  "Mobile number", floatingText: "Title")
+            self.setTextField(textField: txtFieldMobileNumber, place:  "Mobile number", floatingText: "Mobile number")
+            txtFieldMobileNumber.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Mobile number", comment: "")
+            txtFieldMobileNumber.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Mobile number", comment: "")
         }
         else{
-            self.setTextFieldUI(textField: txtFieldMobileNumber, place:  "Mobile number", showFloating: true, floatingText: "Title")
+            self.setTextFieldUI(textField: txtFieldMobileNumber, place:  "Mobile number", showFloating: true, floatingText: "Mobile number")
+            txtFieldMobileNumber.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Mobile number", comment: "")
+            txtFieldMobileNumber.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Mobile number", comment: "")
         }
         if txtFieldWhatsappNumber.text == ""{
             self.setTextField(textField: txtFieldWhatsappNumber, place: "WhatsApp number", floatingText: "WhatsApp number")
+            txtFieldWhatsappNumber.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "WhatsApp number", comment: "")
+            txtFieldWhatsappNumber.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "WhatsApp number", comment: "")
         }
         else{
             self.setTextFieldUI(textField: txtFieldWhatsappNumber, place: "WhatsApp number", showFloating: true, floatingText: "WhatsApp number")
+            txtFieldWhatsappNumber.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "WhatsApp number", comment: "")
+            txtFieldWhatsappNumber.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "WhatsApp number", comment: "")
         }
         if txtFieldPricing.text == ""{
             self.setTextField(textField: txtFieldPricing, place: "Price in US Dollar (optional)", floatingText: "Price in US Dollar (optional)")
+            txtFieldPricing.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Price in US Dollar (optional)", comment: "")
+            txtFieldPricing.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Price in US Dollar (optional)", comment: "")
         }
         else{
             self.setTextFieldUI(textField: txtFieldPricing, place: "Price in US Dollar (optional)", showFloating: true, floatingText: "Price in US Dollar (optional)")
+            txtFieldPricing.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Price in US Dollar (optional)", comment: "")
+            txtFieldPricing.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Price in US Dollar (optional)", comment: "")
         }
     }
     
@@ -212,8 +268,8 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
         self.btnCreate_UpdateOpp.setTitle("Update opportunity", for: .normal)
         self.lblSubCategory.text = self.userTimeLineoppdetails?.subcategory_name
         self.txtFieldTitle.text = self.userTimeLineoppdetails?.title
-//        self.lblState.text = self.userTimeLineoppdetails?.opp_state
-//        self.lblLocality.text = self.userTimeLineoppdetails?.opp_locality
+        //        self.lblState.text = self.userTimeLineoppdetails?.opp_state
+        //        self.lblLocality.text = self.userTimeLineoppdetails?.opp_locality
         self.txtFieldLocationName.text = self.userTimeLineoppdetails?.location_name
         
         self.TextViewDescription.text = self.userTimeLineoppdetails?.description
@@ -285,7 +341,7 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
             if txt == "Quit"{
                 vc.dismiss(animated: false){
                     self.navigationController?.popViewController(animated: true)
-                   // kSharedAppDelegate?.makeRootViewController()
+                    // kSharedAppDelegate?.makeRootViewController()
                 }
             }
         }
@@ -318,7 +374,7 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
             else{
                 btnSelectImage.isEnabled = false
             }
-          //  self.viewSelectCategoryTop.constant = 420  // 310
+            //  self.viewSelectCategoryTop.constant = 420  // 310
             self.isSelectimage = true
         }
     }
@@ -359,7 +415,7 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
             if documentarr.count == 0{
                 btnSelectDocument.isEnabled = true
                 self.openFileBrowser()
-             //   self.viewSelectCategoryTop.constant = 420
+                //   self.viewSelectCategoryTop.constant = 420
             }
             else{
                 btnSelectDocument.isEnabled = false
@@ -462,7 +518,7 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
             self.updateopportunityapi()
         }
         else{
-        self.Validation()
+            self.Validation()
         }
     }
     
@@ -484,28 +540,28 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
             debugPrint("looking idddddd.....",self.lookingforid = id)
             self.getlookingforapi(id: self.lookingforid ?? 0)
             self.isSelectLookingFor = true
-            
         }
     }
-    //    MARK: - Validation
+    
+    //    MARK: - Validation -
     
     func Validation(){
-//        if self.isSelectimage == false && self.imagearr.count == 0{
-//            self.showSimpleAlert(message: "Please Select the image")
-//            return
-//        }
-//        else if self.isSelectDocument == false && self.documentarr.count == 0 {
-//            self.showSimpleAlert(message: "Please Select the Document")
-//            return
-//        }
-         if self.isSelectSubcategory == false{
-             if kSharedUserDefaults.getlanguage() as? String == "en"{
-                 self.showSimpleAlert(message: "Please Select the Subcategory")
-             }
-             else{
-                 self.showSimpleAlert(message: "الرجاء تحديد الفئة الفرعية")
-             }
-           
+        //        if self.isSelectimage == false && self.imagearr.count == 0{
+        //            self.showSimpleAlert(message: "Please Select the image")
+        //            return
+        //        }
+        //        else if self.isSelectDocument == false && self.documentarr.count == 0 {
+        //            self.showSimpleAlert(message: "Please Select the Document")
+        //            return
+        //        }
+        if self.isSelectSubcategory == false{
+            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                self.showSimpleAlert(message: "Please Select the Subcategory")
+            }
+            else{
+                self.showSimpleAlert(message: "الرجاء تحديد الفئة الفرعية")
+            }
+            
             return
         }
         else if String.getString(self.txtFieldTitle.text).isEmpty
@@ -525,7 +581,6 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
             else{
                 self.showSimpleAlert(message: "الرجاء تحديد نوع الخدمة")
             }
-            
             return
         }
         else if self.isSelectState == false{
@@ -545,15 +600,15 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
             else{
                 self.showSimpleAlert(message: "الرجاء تحديد المنطقة")
             }
-           
+            
             return
         }
         
-//        else if String.getString(self.txtFieldLocationName.text).isEmpty
-//        {
-//            showSimpleAlert(message: Notifications.kLocationName)
-//            return
-//        }
+        //        else if String.getString(self.txtFieldLocationName.text).isEmpty
+        //        {
+        //            showSimpleAlert(message: Notifications.kLocationName)
+        //            return
+        //        }
         else if String.getString(self.TextViewDescription.text).isEmpty{
             showSimpleAlert(message: Notifications.kDescription)
             return
@@ -569,16 +624,16 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
             return
         }
         
-//        else if String.getString(self.txtFieldWhatsappNumber.text).isEmpty
-//        {
-//            showSimpleAlert(message: Notifications.kwhatsappnumber)
-//            return
-//        }
-//        else if !String.getString(self.txtFieldWhatsappNumber.text).isPhoneNumber()
-//        {
-//            self.showSimpleAlert(message: Notifications.kvalidwhatsappnumber)
-//            return
-//        }
+        //        else if String.getString(self.txtFieldWhatsappNumber.text).isEmpty
+        //        {
+        //            showSimpleAlert(message: Notifications.kwhatsappnumber)
+        //            return
+        //        }
+        //        else if !String.getString(self.txtFieldWhatsappNumber.text).isPhoneNumber()
+        //        {
+        //            self.showSimpleAlert(message: Notifications.kvalidwhatsappnumber)
+        //            return
+        //        }
         else if self.isSelectLookingFor == false{
             if kSharedUserDefaults.getlanguage() as? String == "en"{
                 self.showSimpleAlert(message: "Please Select looking For")
@@ -586,7 +641,7 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
             else{
                 self.showSimpleAlert(message: "يرجى تحديد البحث عن")
             }
-           
+            
             return
         }
         else if self.isSelectopp_planBasic == false && self.isSelectopp_planPremium == false && self.isSelectopp_planFeatured == false{
@@ -596,7 +651,7 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
             else{
                 self.showSimpleAlert(message: "يرجى تحديد خطة الفرصة")
             }
-           
+            
             return
         }
         else if self.isSelectopp_planPremium == true && self.isSelectimage == false && self.imagearr.count == 0{
@@ -624,14 +679,14 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
             else{
                 return self.imagearr.count
             }
-           
+            
             
         case self.UploaddocumentCollectionView:
             if self.isedit == "True"{
                 return self.docarray.count
             }
             else {
-              return self.docummentarray.count
+                return self.docummentarray.count
             }
             
             
@@ -656,9 +711,9 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
                     cell.image.image = self.imgarray[indexPath.item].img
                 }
                 else{
-                let imageurl = "\(self.imgUrl)/\(String.getString(imgurl))"
-                print("-=imageurl=-=-\(imageurl)")
-                cell.image.downlodeImage(serviceurl: imageurl, placeHolder: UIImage(named: "Frame 726"))
+                    let imageurl = "\(self.imgUrl)/\(String.getString(imgurl))"
+                    print("-=imageurl=-=-\(imageurl)")
+                    cell.image.downlodeImage(serviceurl: imageurl, placeHolder: UIImage(named: "Frame 726"))
                 }
                 
                 cell.callback = {
@@ -697,17 +752,17 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
                     self.UploaddocumentCollectionView.reloadData()
                     
                 }
-              
+                
             }
             
             else{
-            cell.lbldocument.text = docummentarray[indexPath.row]
-            cell.callbackclose = {
-                self.docummentarray.remove(at: indexPath.row)
-                self.UploaddocumentCollectionView.reloadData()
-                
+                cell.lbldocument.text = docummentarray[indexPath.row]
+                cell.callbackclose = {
+                    self.docummentarray.remove(at: indexPath.row)
+                    self.UploaddocumentCollectionView.reloadData()
+                    
+                }
             }
-        }
             return cell
             
         default:
@@ -720,7 +775,7 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
         switch collectionView{
         case self.UploadimageCollectionView:
             return CGSize(width: self.UploadimageCollectionView.frame.size.width, height: 235)
-          
+            
         case self.UploaddocumentCollectionView:
             return CGSize(width: self.UploaddocumentCollectionView.frame.size.width, height: 45)
             
@@ -1427,12 +1482,12 @@ extension MiningBusinessVC{
                         if septoken[0] == "Bearer"{
                             kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
                         }
-//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         kSharedAppDelegate?.makeRootViewController()
                         
                     }
                     else if  Int.getInt(dictResult["status"]) == 400{
-//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                 default:
@@ -1441,7 +1496,7 @@ extension MiningBusinessVC{
             } else if errortype == .noNetwork {
                 CommonUtils.showToastForInternetUnavailable()
             } else {
-//                CommonUtils.showToastForDefaultError()
+                //                CommonUtils.showToastForDefaultError()
             }
         }
     }
@@ -1521,7 +1576,7 @@ extension MiningBusinessVC{
                         if septoken[0] == "Bearer"{
                             kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
                         }
-//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         kSharedAppDelegate?.makeRootViewController()
                         
                     }
@@ -1535,64 +1590,64 @@ extension MiningBusinessVC{
             } else if errortype == .noNetwork {
                 CommonUtils.showToastForInternetUnavailable()
             } else {
-//                CommonUtils.showToastForDefaultError()
+                //                CommonUtils.showToastForDefaultError()
             }
         }
     }
     
     //    Delete image Api
-       
-       func deleteimageapi(imageid:Int){
-           CommonUtils.showHud(show: true)
-           
-           if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
-               let endToken = kSharedUserDefaults.getLoggedInAccessToken()
-               let septoken = endToken.components(separatedBy: " ")
-               if septoken[0] != "Bearer"{
-                   let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
-                   kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
-               }
-           }
-           
-           let params:[String : Any] = [
-               "oppr_id":imageid  // its image id
-           ]
-           
-           debugPrint("imageid......",imageid)
-           TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kdeleteoppimage, requestMethod: .POST,requestParameters:params, withProgressHUD: false)
-           {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
-               
-               CommonUtils.showHudWithNoInteraction(show: false)
-               
-               if errorType == .requestSuccess {
-                   let dictResult = kSharedInstance.getDictionary(result)
-                   switch Int.getInt(statusCode) {
-                   case 200:
-                       if Int.getInt(dictResult["status"]) == 200{
-                           
-                           let endToken = kSharedUserDefaults.getLoggedInAccessToken()
-                           let septoken = endToken.components(separatedBy: " ")
-                           if septoken[0] == "Bearer"{
-                               kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
-                           }
-                           CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                       }
-                       
-                       else if  Int.getInt(dictResult["status"]) == 404{
-                           CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                           // kSharedAppDelegate?.makeRootViewController()
-                       }
-                   default:
-                       CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                   }
-               } else if errorType == .noNetwork {
-                   CommonUtils.showToastForInternetUnavailable()
-                   
-               } else {
-//                   CommonUtils.showToastForDefaultError()
-               }
-           }
-       }
+    
+    func deleteimageapi(imageid:Int){
+        CommonUtils.showHud(show: true)
+        
+        if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
+            let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+            let septoken = endToken.components(separatedBy: " ")
+            if septoken[0] != "Bearer"{
+                let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
+                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
+            }
+        }
+        
+        let params:[String : Any] = [
+            "oppr_id":imageid  // its image id
+        ]
+        
+        debugPrint("imageid......",imageid)
+        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kdeleteoppimage, requestMethod: .POST,requestParameters:params, withProgressHUD: false)
+        {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
+            
+            CommonUtils.showHudWithNoInteraction(show: false)
+            
+            if errorType == .requestSuccess {
+                let dictResult = kSharedInstance.getDictionary(result)
+                switch Int.getInt(statusCode) {
+                case 200:
+                    if Int.getInt(dictResult["status"]) == 200{
+                        
+                        let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+                        let septoken = endToken.components(separatedBy: " ")
+                        if septoken[0] == "Bearer"{
+                            kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
+                        }
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    }
+                    
+                    else if  Int.getInt(dictResult["status"]) == 404{
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        // kSharedAppDelegate?.makeRootViewController()
+                    }
+                default:
+                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                }
+            } else if errorType == .noNetwork {
+                CommonUtils.showToastForInternetUnavailable()
+                
+            } else {
+                //                   CommonUtils.showToastForDefaultError()
+            }
+        }
+    }
 }
 
 // MARK: - Localisation
@@ -1601,19 +1656,11 @@ extension MiningBusinessVC{
         lblSelectImages.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Select images", comment: "")
         lblSelectdocuments.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Select documents", comment: "")
         lblSubCategory.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Select subcategory", comment: "")
-        txtFieldTitle.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Title", comment: "")
-        txtFieldTitle.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Title", comment: "")
+        lblServiceType.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Service type", comment: "")
         lblState.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "State", comment: "")
         lblLocality.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Locality", comment: "")
-        txtFieldLocationName.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Location name", comment: "")
-        txtFieldLocationName.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Location name", comment: "")
-        txtFieldMobileNumber.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Mobile number", comment: "")
-        txtFieldMobileNumber.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Mobile number", comment: "")
-        txtFieldWhatsappNumber.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Whatsapp number", comment: "")
-        txtFieldWhatsappNumber.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Whatsapp number", comment: "")
-        txtFieldPricing.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Price in US Dollar (optional)", comment: "")
-        txtFieldPricing.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Price in US Dollar (optional)", comment: "")
         
+        TextViewDescription.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Opportunity Details/Description", comment: "")
         lblLocationOnMap.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Pin Location on map(optional)", comment: "")
         lblLookingFor.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Looking for", comment: "")
         lblBasic.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Basic", comment: "")

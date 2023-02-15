@@ -8,7 +8,7 @@ import Alamofire
 import SwiftyJSON
 class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout, UITextViewDelegate,UIDocumentPickerDelegate {
     
-    //   MARK: - Properties
+    //   MARK: - Properties -
     
     @IBOutlet weak var txtFieldTitle: SKFloatingTextField!
     @IBOutlet weak var txtFieldLocationName: SKFloatingTextField!
@@ -108,7 +108,7 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
     var latitude = Double()
     var longitude = Double()
     
-    //    MARK: - Life Cycle
+    //    MARK: - Life Cycle - 
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -144,6 +144,41 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
         self.UploadimageCollectionView.reloadData()
     }
     
+    override func viewWillLayoutSubviews(){
+        if kSharedUserDefaults.getlanguage() as? String == "en"{
+            DispatchQueue.main.async {
+                self.txtFieldTitle.semanticContentAttribute = .forceLeftToRight
+                self.txtFieldTitle.textAlignment = .left
+                self.txtFieldLocationName.semanticContentAttribute = .forceLeftToRight
+                self.txtFieldLocationName.textAlignment = .left
+                self.txtViewDiscription.semanticContentAttribute = .forceLeftToRight
+                self.txtViewDiscription.textAlignment = .left
+                self.txtFieldMobileNumber.semanticContentAttribute = .forceLeftToRight
+                self.txtFieldMobileNumber.textAlignment = .left
+                self.txtFieldWhatsappNumber.semanticContentAttribute = .forceLeftToRight
+                self.txtFieldWhatsappNumber.textAlignment = .left
+                self.txtFieldPricing.semanticContentAttribute = .forceLeftToRight
+                self.txtFieldPricing.textAlignment = .left
+            }
+        }
+        else{
+            DispatchQueue.main.async {
+                self.txtFieldTitle.semanticContentAttribute = .forceRightToLeft
+                self.txtFieldTitle.textAlignment = .right
+                self.txtFieldLocationName.semanticContentAttribute = .forceRightToLeft
+                self.txtFieldLocationName.textAlignment = .right
+                self.txtViewDiscription.semanticContentAttribute = .forceRightToLeft
+                self.txtViewDiscription.textAlignment = .right
+                self.txtFieldMobileNumber.semanticContentAttribute = .forceRightToLeft
+                self.txtFieldMobileNumber.textAlignment = .right
+                self.txtFieldWhatsappNumber.semanticContentAttribute = .forceRightToLeft
+                self.txtFieldWhatsappNumber.textAlignment = .right
+                self.txtFieldPricing.semanticContentAttribute = .forceRightToLeft
+                self.txtFieldPricing.textAlignment = .right
+            }
+        }
+    }
+    
     func initialSetup(){
         self.viewImage.isHidden = true
         self.heightViewMoreImage.constant = 0
@@ -166,33 +201,53 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
         
         if txtFieldTitle.text == ""{
             self.setTextField(textField: txtFieldTitle, place: "Title", floatingText: "Title")
+            txtFieldTitle.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Title", comment: "")
+            txtFieldTitle.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Title", comment: "")
         }
         else{
             self.setTextFieldUI(textField: txtFieldTitle, place: "Title", showFloating: true, floatingText: "Title")
+            txtFieldTitle.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Title", comment: "")
+            txtFieldTitle.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Title", comment: "")
         }
         if txtFieldLocationName.text == ""{
             self.setTextField(textField: txtFieldLocationName, place: "Location name", floatingText: "Location name")
+            txtFieldLocationName.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Location name", comment: "")
+            txtFieldLocationName.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Location name", comment: "")
         }
         else{
             self.setTextFieldUI(textField: txtFieldLocationName, place: "Location name", showFloating: true, floatingText: "Location name")
+            txtFieldLocationName.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Location name", comment: "")
+            txtFieldLocationName.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Location name", comment: "")
         }
         if txtFieldMobileNumber.text == ""{
-            self.setTextField(textField: txtFieldMobileNumber, place:  "Mobile number", floatingText: "Title")
+            self.setTextField(textField: txtFieldMobileNumber, place:  "Mobile number", floatingText: "Mobile number")
+            txtFieldMobileNumber.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Mobile number", comment: "")
+            txtFieldMobileNumber.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Mobile number", comment: "")
         }
         else{
-            self.setTextFieldUI(textField: txtFieldMobileNumber, place:  "Mobile number", showFloating: true, floatingText: "Title")
+            self.setTextFieldUI(textField: txtFieldMobileNumber, place:  "Mobile number", showFloating: true, floatingText: "Mobile number")
+            txtFieldMobileNumber.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Mobile number", comment: "")
+            txtFieldMobileNumber.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Mobile number", comment: "")
         }
         if txtFieldWhatsappNumber.text == ""{
             self.setTextField(textField: txtFieldWhatsappNumber, place: "WhatsApp number", floatingText: "WhatsApp number")
+            txtFieldWhatsappNumber.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "WhatsApp number", comment: "")
+            txtFieldWhatsappNumber.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "WhatsApp number", comment: "")
         }
         else{
             self.setTextFieldUI(textField: txtFieldWhatsappNumber, place: "WhatsApp number", showFloating: true, floatingText: "WhatsApp number")
+            txtFieldWhatsappNumber.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "WhatsApp number", comment: "")
+            txtFieldWhatsappNumber.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "WhatsApp number", comment: "")
         }
         if txtFieldPricing.text == ""{
             self.setTextField(textField: txtFieldPricing, place: "Price in US Dollar (optional)", floatingText: "Price in US Dollar (optional)")
+            txtFieldPricing.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Price in US Dollar (optional)", comment: "")
+            txtFieldPricing.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Price in US Dollar (optional)", comment: "")
         }
         else{
             self.setTextFieldUI(textField: txtFieldPricing, place: "Price in US Dollar (optional)", showFloating: true, floatingText: "Price in US Dollar (optional)")
+            txtFieldPricing.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Price in US Dollar (optional)", comment: "")
+            txtFieldPricing.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Price in US Dollar (optional)", comment: "")
         }
     }
     
@@ -1491,32 +1546,22 @@ extension TrailingOpportunityVC{
        }
    }
 
-
 // MARK: - Localisation
 extension TrailingOpportunityVC{
     func setuplanguage(){
-        lblSelectImages.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Select images", comment: "")
-        lblSelectdocuments.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Select documents", comment: "")
-        lblSubCategory.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Select subcategory", comment: "")
-        txtFieldTitle.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Title", comment: "")
-        txtFieldTitle.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Title", comment: "")
-        lblState.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "State", comment: "")
-        lblLocality.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Locality", comment: "")
-        txtFieldLocationName.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Location name", comment: "")
-        txtFieldLocationName.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Location name", comment: "")
-        txtFieldMobileNumber.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Mobile number", comment: "")
-        txtFieldMobileNumber.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Mobile number", comment: "")
-        txtFieldWhatsappNumber.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Whatsapp number", comment: "")
-        txtFieldWhatsappNumber.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Whatsapp number", comment: "")
-        txtFieldPricing.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Price in US Dollar (optional)", comment: "")
-        txtFieldPricing.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Price in US Dollar (optional)", comment: "")
-        
-        lblLocationOnMap.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Pin Location on map(optional)", comment: "")
-        lblLookingFor.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Looking for", comment: "")
-        lblBasic.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Basic", comment: "")
-        lblFeature.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Featured", comment: "")
-        lblPremium.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Premium", comment: "")
-        btnCreateOpp.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "Create opportunity", comment: ""), for: .normal)
+    lblSelectImages.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Select images", comment: "")
+    lblSelectdocuments.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Select documents", comment: "")
+    lblSubCategory.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Select subcategory", comment: "")
+       
+    lblState.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "State", comment: "")
+    lblLocality.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Locality", comment: "")
+    txtViewDiscription.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Opportunity Details/Description", comment: "")
+    lblLocationOnMap.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Pin Location on map(optional)", comment: "")
+    lblLookingFor.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Looking for", comment: "")
+    lblBasic.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Basic", comment: "")
+    lblFeature.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Featured", comment: "")
+    lblPremium.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Premium", comment: "")
+    btnCreateOpp.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "Create opportunity", comment: ""), for: .normal)
     }
 }
 

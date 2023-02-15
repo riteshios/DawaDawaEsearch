@@ -333,7 +333,7 @@
 "Locality" = "المنطقة";
 "Select gender" = "حدد نوع الجنس";
 "Select user type*" = "حدد نوع المستخدم *";
-"Whatsapp number" = "رقم الواتس اب";
+"WhatsApp number" = "رقم الواتس اب";
 "Save changes" = "احفظ التغييرات";
 
 // MARK: - ContactUsVC
@@ -341,6 +341,7 @@
 "Contact Us" = "اتصل بنا";
 "Do you have anything to say? Connect with us!" = "هل لديك شيء لتقوله؟ اتصل بنا!";
 "Select query type" = "حدد نوع الاستعلام";
+"Message" = "رسالة";
 "Send" = "إرسال";
 
 // MARK: - SelectCategoryVC
@@ -352,10 +353,13 @@
 "Select images" = "حدد الصور";
 "Select documents" = "حدد المستندات";
 "Select subcategory" = "حدد فئة فرعية";
+"Service type" = "نوع الخدمة";
 "Title" = "عنوان";
 "State" = "حالة";
 "Locality" = "المنطقة";
 "Location name" = "اسم الموقع";
+"Opportunity Details/Description" = "تفاصيل / وصف الفرصة";
+"Mobile number" = "رقم الهاتف المحمول";
 "Whatsapp number" = "رقم الواتس اب";
 "Price in US Dollar (optional)" = "السعر بالدولار الأمريكي (اختياري)";
 "Pin Location on map(optional)" = "تثبيت الموقع على الخريطة (اختياري)";

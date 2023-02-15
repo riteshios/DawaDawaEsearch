@@ -343,6 +343,7 @@
 "Contact Us" = "Contact Us";
 "Do you have anything to say? Connect with us!" = "Do you have anything to say? Connect with us!";
 "Select query type" = "Select query type";
+"Message" = "Message";
 "Send" = "Send";
 
 // MARK: - SelectCategoryVC
@@ -354,11 +355,14 @@
 "Select images" = "Select images";
 "Select documents" = "Select documents";
 "Select subcategory" = "Select subcategory";
+"Service type" = "Service type";
 "Title" = "Title";
 "State" = "State";
 "Locality" = "Locality";
 "Location name" = "Location name";
-"Whatsapp number" = "Whatsapp number";
+"Opportunity Details/Description" = "Opportunity Details/Description";
+"Mobile number" = "Mobile number";
+"WhatsApp number" = "Whatsapp number";
 "Price in US Dollar (optional)" = "Price in US Dollar (optional)";
 "Pin Location on map(optional)" = "Pin Location on map(optional)";
 "Looking for" = "Looking for";

@@ -4,6 +4,7 @@
 
 import UIKit
 import GoogleMaps
+import IQKeyboardManagerSwift
 
 class ContactUsVC: UIViewController{
     
@@ -14,9 +15,7 @@ class ContactUsVC: UIViewController{
     @IBOutlet weak var lblContactUs: UILabel!
     @IBOutlet weak var lblSubheading: UILabel!
     @IBOutlet weak var btnSend: UIButton!
-    @IBOutlet weak var Mapview: GMSMapView!
-    
-    
+    @IBOutlet weak var txtview: IQTextView!
     
     //    MARK: - Life Cycle
     
@@ -47,7 +46,6 @@ class ContactUsVC: UIViewController{
             kSharedAppDelegate?.dropDown(dataSource:dataSource2 , text: btnDropdown)
             {(Index ,item) in
                 self.lblSelectqueryType.text = item
-                
             }
         }
     }
@@ -91,6 +89,7 @@ extension ContactUsVC{
         lblContactUs.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Contact Us", comment: "")
         lblSubheading.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Do you have anything to say? Connect with us!", comment: "")
         lblSelectqueryType.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Select query type", comment: "")
+        txtview.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Message", comment: "")
         btnSend.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "Send", comment: ""), for: .normal)
     }
 }
