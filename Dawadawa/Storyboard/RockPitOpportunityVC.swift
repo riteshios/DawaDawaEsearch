@@ -10,7 +10,7 @@ import MobileCoreServices
 
 class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout, UIDocumentPickerDelegate{
     
-    //   MARK: - Properties
+    //   MARK: - Properties -
     @IBOutlet weak var txtFieldTitle: SKFloatingTextField!
     @IBOutlet weak var txtFieldLocationName: SKFloatingTextField!
     
@@ -46,7 +46,6 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
     @IBOutlet weak var viewCreateOpportunity: UIView!
     // @IBOutlet weak var viewSelectCategoryTop: NSLayoutConstraint!
     
-    
     @IBOutlet weak var viewImage:UIView!
     @IBOutlet weak var heightViewImage: NSLayoutConstraint!
     @IBOutlet weak var viewAddImageMore:UIView!
@@ -54,8 +53,6 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
     @IBOutlet weak var heightCollectionView: NSLayoutConstraint!
     @IBOutlet weak var viewAddMoreDocument:UIView!
     @IBOutlet weak var heightAddMoreDocument: NSLayoutConstraint!
-    
-    
     
     @IBOutlet weak var btnSelectImage: UIButton!
     @IBOutlet weak var btnMoreImage: UIButton!
@@ -120,7 +117,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
     var planamount:plan_amount?
     var amount = 0
     
-    // MARK: - Life Cycle
+    // MARK: - Life Cycle -
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -138,7 +135,6 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
                 //  self.viewSelectCategoryTop.constant = 10
                 self.fetdata()
             }
-            
             else{
                 //  self.viewSelectCategoryTop.constant = 420
                 self.fetdata()
@@ -189,7 +185,6 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
             $0?.delegate = self
             $0?.dataSource = self
         }
-        
         self.viewImage.isHidden = true
         self.heightViewImage.constant = 0
         self.viewAddImageMore.isHidden = true
@@ -310,7 +305,6 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
         if String.getString(self.userTimeLineoppdetails?.opp_plan) == "Basic"{
             self.viewBasic.backgroundColor = UIColor(red: 21, green: 114, blue: 161)
             self.lblBasic.textColor = .white
-            
         }
         else if String.getString(self.userTimeLineoppdetails?.opp_plan) == "Featured"{
             self.viewFeature.backgroundColor = UIColor(red: 21, green: 114, blue: 161)
@@ -322,7 +316,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
         }
         self.setup()
     }
-    // MARK: - @IBActions
+    // MARK: - @IBActions -
     
     @IBAction func btnpinlocationtapped(_ sender: UIButton) {
         
@@ -557,7 +551,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
         }
     }
     
-    //    MARK: - Validation
+    //    MARK: - Validation -
     
     func Validation(){
         //        if self.isSelectimage == false && self.imagearr.count == 0{
@@ -639,7 +633,6 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
             else{
                 self.showSimpleAlert(message: "يرجى تحديد خطة الفرصة")
             }
-            
             return
         }
         else if self.isSelectopp_planPremium == true && self.isSelectimage == false && self.imagearr.count == 0{
@@ -649,7 +642,6 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
             else{
                 self.showSimpleAlert(message: "الرجاء إضافة صورة فرصة واحدة على الأقل")
             }
-            
             return
         }
         self.view.endEditing(true)
@@ -698,7 +690,6 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
                     print("-=imageurl=-=-\(imageurl)")
                     cell.image.downlodeImage(serviceurl: imageurl, placeHolder: UIImage(named: "Frame 726"))
                 }
-                
                 cell.callback = {
                     self.imgarray.remove(at: indexPath.row)
                     let imgid = Int.getInt(self.userTimeLineoppdetails?.oppimage[indexPath.row].id)
@@ -706,7 +697,6 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
                     self.UploadimageCollectionView.reloadData()
                 }
             }
-            
             else{
                 cell.image.image = imagearr[indexPath.row]
                 cell.callback = {
@@ -732,10 +722,8 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
                     let docid = Int.getInt(self.userTimeLineoppdetails?.oppdocument[indexPath.row].id)
                     self.deletedocumentapi(docid: docid)
                     self.UploaddocumentCollectionView.reloadData()
-                    
                 }
             }
-            
             else{
                 cell.lbldocument.text = docummentarray[indexPath.row]
                 cell.callbackclose = {
@@ -747,7 +735,6 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
             
         default:
             return UICollectionViewCell()
-            
         }
     }
     
@@ -1324,7 +1311,7 @@ extension RockPitOpportunityVC{
                         if septoken[0] == "Bearer"{
                             kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
                         }
-                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        // CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         
                         if self.planpayment == 0{
                             kSharedAppDelegate?.makeRootViewController()
@@ -1447,7 +1434,7 @@ extension RockPitOpportunityVC{
                         
                     }
                     else if  Int.getInt(dictResult["status"]) == 401{
-                        // CommonUtils.showError(.info, String.getString(dictResult["message"]))
+//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                 default:
@@ -1517,7 +1504,7 @@ extension RockPitOpportunityVC{
         }
     }
     
-    //    Delete Document Api
+//    Delete Document Api
     
 //    func deletedocumentapi(docid:Int){
 //        CommonUtils.showHud(show: true)
@@ -1542,7 +1529,6 @@ extension RockPitOpportunityVC{
 //            CommonUtils.showHudWithNoInteraction(show: false)
 //
 //            if errorType == .requestSuccess {
-//
 //                let dictResult = kSharedInstance.getDictionary(result)
 //
 //                switch Int.getInt(statusCode) {
@@ -1686,7 +1672,6 @@ extension UIViewController{
     }
 }
 
-
 // MARK: - Localisation
 
 extension RockPitOpportunityVC{
@@ -1697,7 +1682,6 @@ extension RockPitOpportunityVC{
         
         lblState.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "State", comment: "")
         lblLocality.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Locality", comment: "")
-        
         TextViewDescription.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Opportunity Details/Description", comment: "")
         lblLocationOnMap.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Pin Location on map(optional)", comment: "")
         lblLookingFor.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Looking for", comment: "")

@@ -1,6 +1,7 @@
 import UIKit
 
 class SearchVC: UIViewController,UITextFieldDelegate{
+    //    MARK: - Properties -
     
     @IBOutlet weak var tblViewSearchOpp: UITableView!
     @IBOutlet weak var txtfieldSearch: UITextField!
@@ -14,6 +15,8 @@ class SearchVC: UIViewController,UITextFieldDelegate{
     var img = [oppr_image]()
     var comment = [user_comment]()
     var txtcomment = " "
+    
+    //    MARK: - UIView Life Cycle -
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,26 +33,19 @@ class SearchVC: UIViewController,UITextFieldDelegate{
     }
     
     override func viewWillLayoutSubviews() {
-            if kSharedUserDefaults.getlanguage() as? String == "en"{
-                DispatchQueue.main.async {
-                    self.txtfieldSearch.semanticContentAttribute = .forceLeftToRight
-                    self.txtfieldSearch.textAlignment = .left
-                }
-
-            } else {
-                DispatchQueue.main.async {
-                    self.txtfieldSearch.semanticContentAttribute = .forceRightToLeft
-                    self.txtfieldSearch.textAlignment = .right
-                }
+        if kSharedUserDefaults.getlanguage() as? String == "en"{
+            DispatchQueue.main.async {
+                self.txtfieldSearch.semanticContentAttribute = .forceLeftToRight
+                self.txtfieldSearch.textAlignment = .left
+            }
+            
+        } else {
+            DispatchQueue.main.async {
+                self.txtfieldSearch.semanticContentAttribute = .forceRightToLeft
+                self.txtfieldSearch.textAlignment = .right
             }
         }
-    
-    //    override func viewWillAppear(_ animated: Bool) {
-    //        self.hidesBottomBarWhenPushed = false
-    //        self.tabBarController?.tabBar.isHidden = false
-    //        self.tabBarController?.hidesBottomBarWhenPushed = false
-    //        self.tabBarController?.tabBar.layer.zPosition = 0
-    //    }
+    }
     
     func setup(){
         tblViewSearchOpp.register(UINib(nibName: "PopularSearchTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "PopularSearchTableViewCell")
@@ -60,6 +56,8 @@ class SearchVC: UIViewController,UITextFieldDelegate{
         txtfieldSearch.returnKeyType = .search
     }
 }
+//    MARK: - UITableView Delegate and DataSource -
+
 extension SearchVC:UITableViewDelegate,UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -136,7 +134,7 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
             cell.lblUserName.text = String.getString(obj.userdetail?.name)
             debugPrint("username.....", cell.lblUserName.text)
             cell.lblTitle.text = String.getString(obj.title)
-//            cell.lblDescribtion.text = String.getString(obj.description)
+            //            cell.lblDescribtion.text = String.getString(obj.description)
             cell.lblRating.text = String.getString(obj.opr_rating)
             cell.lblCommentCout.text = String.getString(Int.getInt(obj.commentsCount))
             
@@ -208,7 +206,7 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
             if String.getString(obj.is_flag) == "1"{
                 cell.imgOppFlag.isHidden = false
                 cell.LeadingOppType.constant = 17
-            
+                
             }
             else{
                 cell.imgOppFlag.isHidden = true
@@ -216,12 +214,12 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
             }
             
             cell.heightSocialPostCollectionView.constant = 275
-//            if obj.oppimage.count == 0{
-//                cell.heightSocialPostCollectionView.constant = 0
-//            }
-//            else{
-//                cell.heightSocialPostCollectionView.constant = 225
-//            }
+            //            if obj.oppimage.count == 0{
+            //                cell.heightSocialPostCollectionView.constant = 0
+            //            }
+            //            else{
+            //                cell.heightSocialPostCollectionView.constant = 225
+            //            }
             
             if String.getString(obj.opr_rating) == ""{
                 cell.lblRating.text = "0.0"
@@ -270,7 +268,7 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
                         vc.likecount = likecount
                         self.present(vc, animated: true)
                     }
-
+                    
                 }
                 
                 if txt == "Chat"{
@@ -765,14 +763,13 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
     }
 }
 
+//    MARK: - API Call -
 
 extension SearchVC{
-    
     // Search Api
     
     func searchopportunityapi(){
         CommonUtils.showHud(show: true)
-        
         
         if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
             let endToken = kSharedUserDefaults.getLoggedInAccessToken()
@@ -783,23 +780,19 @@ extension SearchVC{
             }
         }
         
-        
         let params:[String : Any] = [
             "search":String.getString(self.txtfieldSearch.text),
             "user_id":Int.getInt(UserData.shared.id)
         ]
         
         debugPrint("SearchTextfield=-=-=-=-",String.getString(self.txtfieldSearch.text))
-        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.ksearchopportunity, requestMethod: .POST,
-                                                               requestParameters:params, withProgressHUD: false)
+        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.ksearchopportunity, requestMethod: .POST, requestParameters:params, withProgressHUD: false)
         {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
             
             CommonUtils.showHudWithNoInteraction(show: false)
             
             if errorType == .requestSuccess {
-                
                 let dictResult = kSharedInstance.getDictionary(result)
-                
                 switch Int.getInt(statusCode) {
                 case 200:
                     
@@ -811,13 +804,12 @@ extension SearchVC{
                             kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
                         }
                         
-                        
                         self?.imgUrl = String.getString(dictResult["oprbase_url"])
                         let Opportunity = kSharedInstance.getArray(withDictionary: dictResult["Opportunity"])
                         self?.userTimeLine = Opportunity.map{SocialPostData(data: kSharedInstance.getDictionary($0))}
                         print("DataallSearchpost=\(self?.userTimeLine)")
                         
-                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        // CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         self?.imgNotfound.isHidden = true
                         self?.tblViewSearchOpp.reloadData()
                     }
@@ -834,7 +826,7 @@ extension SearchVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-                //                CommonUtils.showToastForDefaultError()
+                //     CommonUtils.showToastForDefaultError()
             }
             
         }
@@ -1144,7 +1136,7 @@ extension SearchVC{
                     
                     else if  Int.getInt(dictResult["status"]) == 201{
                         //  CommonUtils.showError(.info, String.getString(dictResult["message"]))
-//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                 default:
@@ -1169,7 +1161,7 @@ extension SearchVC{
         ]
         
         debugPrint("SearchTextfield=-=-=-=-",String.getString(self.txtfieldSearch.text))
-        TANetworkManager.sharedInstance.requestlangApi(withServiceName:ServiceName.kguestsearchopportunity, requestMethod: .POST, requestParameters:params, withProgressHUD: false)
+        TANetworkManager.sharedInstance.requestlangApi(withServiceName:ServiceName.kguestsearchopportunity, requestMethod: .POST,requestParameters:params, withProgressHUD: false)
         {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
             
             CommonUtils.showHudWithNoInteraction(show: false)
@@ -1195,7 +1187,7 @@ extension SearchVC{
                     
                     else if  Int.getInt(dictResult["status"]) == 400{
                         self?.imgNotfound.isHidden = false
-                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //  CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                 default:
@@ -1205,7 +1197,7 @@ extension SearchVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-                //                CommonUtils.showToastForDefaultError()
+                //      CommonUtils.showToastForDefaultError()
             }
         }
     }
@@ -1310,12 +1302,11 @@ extension SearchVC{
                             vc.docarray = self?.UserTimeLineOppdetails?.oppdocument ?? []
                             debugPrint("imgaraay=-=-=-==-=", vc.imgarray)
                         }
-                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //  CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
-                    else if  Int.getInt(dictResult["status"]) == 400{
-                        
-                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    else if Int.getInt(dictResult["status"]) == 400{
+                        //  CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                 default:
@@ -1325,7 +1316,7 @@ extension SearchVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-                //                CommonUtils.showToastForDefaultError()
+                //    CommonUtils.showToastForDefaultError()
             }
         }
     }
