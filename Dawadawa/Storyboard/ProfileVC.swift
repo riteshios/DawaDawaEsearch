@@ -643,9 +643,6 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                                             self.userTimeLine.remove(at: indexPath.row)
                                             self.deletepostoppoertunityapi(oppr_id: oppid)
                                             debugPrint("oppid......",oppid)
-                                            
-                                            //  let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProfileVC") as! ProfileVC
-                                            //                                        self.navigationController?.popViewController(animated: true)
                                         }
                                         
                                     }

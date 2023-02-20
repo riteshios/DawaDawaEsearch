@@ -125,7 +125,6 @@ class SocialPostTableViewCell: UITableViewCell,UITextViewDelegate {
         self.callback?("LikeCount",sender)
     }
     
-    
     @IBAction func btnProfileImageTapped(_ sender: UIButton) {
         self.callback?("Profileimage",sender)
     }
@@ -214,10 +213,9 @@ extension SocialPostTableViewCell: UICollectionViewDelegate,UICollectionViewData
             cell.imgOpportunity.image = UIImage(named: "Banner")
             
         }else{
-            
         let obj = img[indexPath.item].imageurl
         print("imgurl-=-\(obj)")
-        let imageurl = "\(imgUrl)\(String.getString(obj))"
+        let imageurl = "\(imgUrl)/\(String.getString(obj))"
         print("imagebaseurl=-=-\(imageurl)")
         let userUrl = URL(string: imageurl)
 //        cell.imgOpportunity.sd_setImage(with: userUrl, placeholderImage:UIImage(named: "Banner"))
@@ -225,7 +223,6 @@ extension SocialPostTableViewCell: UICollectionViewDelegate,UICollectionViewData
         cell.imgOpportunity.downlodeImage(serviceurl: imageurl, placeHolder: UIImage(named: "Banner"))
         }
         return cell
-            
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

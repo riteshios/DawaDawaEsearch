@@ -42,7 +42,7 @@ class LocalizationSystem:NSObject {
         appleLanguages.remove(at: 0)
         appleLanguages.insert(languageCode, at: 0)
         UserDefaults.standard.set(appleLanguages, forKey: "AppleLanguages")
-        UserDefaults.standard.synchronize() //needs restrat
+        UserDefaults.standard.synchronize() // needs restrat
         
         if let languageDirectoryPath = Bundle.main.path(forResource: languageCode, ofType: "lproj")  {
             bundle = Bundle.init(path: languageDirectoryPath)

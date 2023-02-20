@@ -14,13 +14,13 @@ var cameFrom = ""
 
 class FilterVC: UIViewController {
     
+//    MARK: - Properties -
     @IBOutlet weak var PriceSlider: RangeSeekSlider!
     
     @IBOutlet weak var tblViewOpportunitytype: UITableView!
     @IBOutlet weak var highttblviewOpportunitytype: NSLayoutConstraint!
     
     @IBOutlet weak var tblViewServicetype: UITableView!
-    
     
     @IBOutlet weak var txtfieldStartDate: UITextField!
     @IBOutlet weak var txtfieldEndDate: UITextField!
@@ -138,6 +138,7 @@ class FilterVC: UIViewController {
     var stateid:Int?
     var localityid:Int?
     
+//    MARK: - UIView and Life Cycle -
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setuplanguage()
@@ -226,7 +227,7 @@ class FilterVC: UIViewController {
         self.localityid = Int()
         
     }
-    //    MARK: - @IBActions
+    //    MARK: - @IBActions and Methods -
     
     @IBAction func btnDismissTapped(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: false)
@@ -288,7 +289,6 @@ class FilterVC: UIViewController {
                     break
                 }
             }
-            
         }
     }
     
@@ -392,9 +392,7 @@ class FilterVC: UIViewController {
                     break
                 }
             }
-            
         }
-        
     }
     
     @IBAction func btnSoldTapped(_ sender: UIButton) {
@@ -1019,15 +1017,11 @@ extension FilterVC{
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         self.txtfieldEndDate.text = dateFormatter.string(from: self.timePicker.date)
-        
-        
-        
     }
     
     @objc func cancelClicke() {
         self.view.endEditing(true)
     }
-    
 }
 
 
@@ -1221,9 +1215,7 @@ extension FilterVC{
             case .failure(let error):
                 completionBlock(0,nil,error.localizedDescription)
             }
-            
         }
-        
     }
     
     //    parser
@@ -1233,8 +1225,6 @@ extension FilterVC{
         let kStatus = "status"
         let kMessage = "message"
         let klocalitys = "localitys"
-        
-        
         
         var responsecode = 0
         var status = 0
@@ -1384,11 +1374,10 @@ extension FilterVC{
             if errorType == .requestSuccess {
                 let dictResult = kSharedInstance.getDictionary(result)
                 switch Int.getInt(statusCode) {
-                    
                 case 200:
                     
                     if Int.getInt(dictResult["status"]) == 200{
-                        
+    
                         let endToken = kSharedUserDefaults.getLoggedInAccessToken()
                         let septoken = endToken.components(separatedBy: " ")
                         if septoken[0] == "Bearer"{
@@ -1408,13 +1397,10 @@ extension FilterVC{
                         //                        vc.userTimeLine = self!.userTimeLine
                         //                        self?.navigationController?.pushViewController(vc, animated: true)
                         
-                        
                         cameFrom = "FilterData"
                         let vc = self?.storyboard?.instantiateViewController(withIdentifier: "TabBarVC") as! TabBarVC
                         self?.tabBarController?.selectedIndex = 0
-                        
                         self?.navigationController?.pushViewController(vc, animated: true)
-                        
                     }
                     
                     else if  Int.getInt(dictResult["status"]) == 400{
@@ -1676,16 +1662,12 @@ extension FilterVC{
             "end_date":String.getString(self.txtfieldEndDate.text)
         ]
         
-        TANetworkManager.sharedInstance.requestlangApi(withServiceName:ServiceName.kguestfilter, requestMethod: .POST,
-                                                       requestParameters:params, withProgressHUD: false)
+        TANetworkManager.sharedInstance.requestlangApi(withServiceName:ServiceName.kguestfilter, requestMethod: .POST,requestParameters:params, withProgressHUD: false)
         {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
             
             CommonUtils.showHudWithNoInteraction(show: false)
-            
             if errorType == .requestSuccess {
-                
                 let dictResult = kSharedInstance.getDictionary(result)
-                
                 switch Int.getInt(statusCode) {
                 case 200:
                     

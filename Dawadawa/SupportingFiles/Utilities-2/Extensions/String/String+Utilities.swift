@@ -40,7 +40,6 @@ extension String {
          return passwordText.evaluate(with:self)
     }
     
-    
     func isBackSpace()->Bool {
         if let char = self.cString(using: String.Encoding.utf8) {
             let isBackSpace = strcmp(char, "\\b")
@@ -67,7 +66,6 @@ extension String {
         let passwordRegx = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&<>*~:`-]).{8,15}$"
         let passwordCheck = NSPredicate(format: "SELF MATCHES %@",passwordRegx)
         return passwordCheck.evaluate(with: password)
-
     }
     
     // To Check Whether Phone Number is valid

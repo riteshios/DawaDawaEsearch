@@ -6,6 +6,7 @@ import UIKit
 import SKFloatingTextField
 import Alamofire
 import SwiftyJSON
+import IQKeyboardManagerSwift
 class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout, UITextViewDelegate,UIDocumentPickerDelegate {
     
     //   MARK: - Properties -
@@ -15,7 +16,7 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
     @IBOutlet weak var txtFieldMobileNumber: SKFloatingTextField!
     @IBOutlet weak var txtFieldWhatsappNumber: SKFloatingTextField!
     @IBOutlet weak var txtFieldPricing: SKFloatingTextField!
-    @IBOutlet weak var txtViewDiscription: UITextView!
+    @IBOutlet weak var txtViewDiscription: IQTextView!
     
     @IBOutlet weak var lblSubCategory: UILabel!
     @IBOutlet weak var btnSubCategory: UIButton!
@@ -108,7 +109,7 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
     var latitude = Double()
     var longitude = Double()
     
-    //    MARK: - Life Cycle - 
+    //    MARK: - Life Cycle -
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -262,7 +263,7 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
         self.heightViewImage.constant = self.imgarray.count != 0 ? 236 : 0
         self.viewAddMoreImage.isHidden = self.imgarray.count != 0 ? false : true
         self.heightViewMoreImage.constant = self.imgarray.count != 0 ? 60 : 0
-    
+        
         self.UploaddocumentCollectionView.isHidden = self.docarray.count != 0 ? false : true
         self.heightDocCollectionView.constant = self.docarray.count != 0 ? 60 : 0
         self.viewAddMoreDoc.isHidden = self.docarray.count != 0 ? false : true
@@ -346,7 +347,7 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
             if txt == "Quit"{
                 vc.dismiss(animated: false){
                     self.navigationController?.popViewController(animated: true)
-                  //  kSharedAppDelegate?.makeRootViewController()
+                    //  kSharedAppDelegate?.makeRootViewController()
                 }
             }
         }
@@ -380,7 +381,7 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
             else{
                 btnSelectImage.isEnabled = false
             }
-           // self.viewSelectCategoryTop.constant = 420  // 310
+            // self.viewSelectCategoryTop.constant = 420  // 310
             
         }
     }
@@ -422,7 +423,7 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
             if documentarr.count == 0{
                 btnSelectDocument.isEnabled = true
                 self.openFileBrowser()
-               // self.viewSelectCategoryTop.constant = 420
+                // self.viewSelectCategoryTop.constant = 420
             }
             else{
                 btnSelectDocument.isEnabled = false
@@ -570,11 +571,11 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
             self.showSimpleAlert(message: Notifications.ktitle)
             return
         }
-        else if !String.getString(self.txtFieldTitle.text).isValidTitle()
-        {
-            self.showSimpleAlert(message: Notifications.KValidtitle)
-            return
-        }
+        //        else if !String.getString(self.txtFieldTitle.text).isValidTitle()
+        //        {
+        //            self.showSimpleAlert(message: Notifications.KValidtitle)
+        //            return
+        //        }
         else if self.isSelectState == false{
             if kSharedUserDefaults.getlanguage() as? String == "en"{
                 self.showSimpleAlert(message: "Please Select the State")
@@ -582,7 +583,7 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
             else{
                 self.showSimpleAlert(message: "يرجى تحديد الولاية")
             }
-           
+            
             return
         }
         else if self.isSelectLocality == false{
@@ -592,7 +593,7 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
             else{
                 self.showSimpleAlert(message: "الرجاء تحديد المنطقة")
             }
-           
+            
             return
         }
         
@@ -605,16 +606,16 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
             showSimpleAlert(message: Notifications.kDescription)
             return
         }
-                else if String.getString(self.txtFieldMobileNumber.text).isEmpty
-                {
-                    showSimpleAlert(message: Notifications.kEnterMobileNumber)
-                    return
-                }
-                else if !String.getString(self.txtFieldMobileNumber.text).isPhoneNumber()
-                {
-                    self.showSimpleAlert(message: Notifications.kEnterValidMobileNumber)
-                    return
-                }
+        else if String.getString(self.txtFieldMobileNumber.text).isEmpty
+        {
+            showSimpleAlert(message: Notifications.kEnterMobileNumber)
+            return
+        }
+        else if !String.getString(self.txtFieldMobileNumber.text).isPhoneNumber()
+        {
+            self.showSimpleAlert(message: Notifications.kEnterValidMobileNumber)
+            return
+        }
         
         //        else if String.getString(self.txtFieldWhatsappNumber.text).isEmpty
         //        {
@@ -633,7 +634,7 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
             else{
                 self.showSimpleAlert(message: "يرجى تحديد البحث عن")
             }
-           
+            
             return
         }
         else if self.isSelectopp_planPremium == true && self.isSelectimage == false && self.imagearr.count == 0{
@@ -643,7 +644,7 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
             else{
                 self.showSimpleAlert(message: "الرجاء إضافة صورة فرصة واحدة على الأقل")
             }
-           
+            
             return
         }
         self.view.endEditing(true)
@@ -760,7 +761,7 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
         switch collectionView{
         case self.UploadimageCollectionView:
             return CGSize(width: self.UploadimageCollectionView.frame.size.width, height: 235)
-          
+            
         case self.UploaddocumentCollectionView:
             return CGSize(width: self.UploaddocumentCollectionView.frame.size.width, height: 45)
             
@@ -849,9 +850,9 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
         print("doc documentarr=-=-=\(documentarr)")
         
         DispatchQueue.main.async {
-        self.UploaddocumentCollectionView.reloadData()
+            self.UploaddocumentCollectionView.reloadData()
         }
-       
+        
         
         
     }
@@ -864,7 +865,7 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
     }
     
     func updateImageViewWithExtension(_ fileExtention:String) {
-
+        
     }
     
 }
@@ -1333,7 +1334,7 @@ extension TrailingOpportunityVC{
         
         let lookingforid = Int(self.lookingforid ?? 0)
         debugPrint("checklookingforid",lookingforid)
-
+        
         let params:[String : Any] = [
             "user_id":"\(String(describing: userid))",
             "category_id":"2",
@@ -1360,7 +1361,7 @@ extension TrailingOpportunityVC{
         
         debugPrint("filenames[]......",self.imagearr)
         debugPrint("opportunity_documents[]......",self.documentarr)
-    
+        
         TANetworkManager.sharedInstance.requestMultiPartwithlanguage(withServiceName:ServiceName.kcreateopportunity , requestMethod: .post, requestImages: [:], requestdoc: [:],requestVideos: [:], requestData:params, req: self.imagearr, req:self.documentarr)
         { (result:Any?, error:Error?, errortype:ErrorType?, statusCode:Int?) in
             CommonUtils.showHudWithNoInteraction(show: false)
@@ -1376,12 +1377,12 @@ extension TrailingOpportunityVC{
                         if septoken[0] == "Bearer"{
                             kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
                         }
-//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //     CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         kSharedAppDelegate?.makeRootViewController()
                         
                     }
                     else if  Int.getInt(dictResult["status"]) == 400{
-//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //     CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                 default:
@@ -1390,7 +1391,7 @@ extension TrailingOpportunityVC{
             } else if errortype == .noNetwork {
                 CommonUtils.showToastForInternetUnavailable()
             } else {
-//                CommonUtils.showToastForDefaultError()
+                //          CommonUtils.showToastForDefaultError()
             }
         }
     }
@@ -1472,12 +1473,12 @@ extension TrailingOpportunityVC{
                         if septoken[0] == "Bearer"{
                             kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
                         }
-//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //     CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         kSharedAppDelegate?.makeRootViewController()
                         
                     }
                     else if  Int.getInt(dictResult["status"]) == 400{
-                 //     CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //     CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                 default:
@@ -1486,82 +1487,82 @@ extension TrailingOpportunityVC{
             } else if errortype == .noNetwork {
                 CommonUtils.showToastForInternetUnavailable()
             } else {
-//                CommonUtils.showToastForDefaultError()
+                //             CommonUtils.showToastForDefaultError()
             }
         }
     }
     
     //    Delete image Api
-       
-       func deleteimageapi(imageid:Int){
-           CommonUtils.showHud(show: true)
-           
-           if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
-               let endToken = kSharedUserDefaults.getLoggedInAccessToken()
-               let septoken = endToken.components(separatedBy: " ")
-               if septoken[0] != "Bearer"{
-                   let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
-                   kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
-               }
-           }
-           
-           let params:[String : Any] = [
-               "oppr_id":imageid  // its image id
-           ]
-           
-           debugPrint("imageid......",imageid)
-           TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kdeleteoppimage, requestMethod: .POST,requestParameters:params, withProgressHUD: false)
-           {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
-               
-               CommonUtils.showHudWithNoInteraction(show: false)
-               
-               if errorType == .requestSuccess {
-                   let dictResult = kSharedInstance.getDictionary(result)
-                   switch Int.getInt(statusCode) {
-                   case 200:
-                       if Int.getInt(dictResult["status"]) == 200{
-                           
-                           let endToken = kSharedUserDefaults.getLoggedInAccessToken()
-                           let septoken = endToken.components(separatedBy: " ")
-                           if septoken[0] == "Bearer"{
-                               kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
-                           }
-                           CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                       }
-                       
-                       else if  Int.getInt(dictResult["status"]) == 404{
-//                           CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                           // kSharedAppDelegate?.makeRootViewController()
-                       }
-                   default:
-                       CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                   }
-               } else if errorType == .noNetwork {
-                   CommonUtils.showToastForInternetUnavailable()
-                   
-               } else {
-//                   CommonUtils.showToastForDefaultError()
-               }
-           }
-       }
-   }
+    
+    func deleteimageapi(imageid:Int){
+        CommonUtils.showHud(show: true)
+        
+        if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
+            let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+            let septoken = endToken.components(separatedBy: " ")
+            if septoken[0] != "Bearer"{
+                let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
+                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
+            }
+        }
+        
+        let params:[String : Any] = [
+            "oppr_id":imageid  // its image id
+        ]
+        
+        debugPrint("imageid......",imageid)
+        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kdeleteoppimage, requestMethod: .POST,requestParameters:params, withProgressHUD: false)
+        {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
+            
+            CommonUtils.showHudWithNoInteraction(show: false)
+            
+            if errorType == .requestSuccess {
+                let dictResult = kSharedInstance.getDictionary(result)
+                switch Int.getInt(statusCode) {
+                case 200:
+                    if Int.getInt(dictResult["status"]) == 200{
+                        
+                        let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+                        let septoken = endToken.components(separatedBy: " ")
+                        if septoken[0] == "Bearer"{
+                            kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
+                        }
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    }
+                    
+                    else if  Int.getInt(dictResult["status"]) == 404{
+                        //                           CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        // kSharedAppDelegate?.makeRootViewController()
+                    }
+                default:
+                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                }
+            } else if errorType == .noNetwork {
+                CommonUtils.showToastForInternetUnavailable()
+                
+            } else {
+                //                   CommonUtils.showToastForDefaultError()
+            }
+        }
+    }
+}
 
 // MARK: - Localisation
 extension TrailingOpportunityVC{
     func setuplanguage(){
-    lblSelectImages.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Select images", comment: "")
-    lblSelectdocuments.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Select documents", comment: "")
-    lblSubCategory.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Select subcategory", comment: "")
-       
-    lblState.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "State", comment: "")
-    lblLocality.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Locality", comment: "")
-    txtViewDiscription.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Opportunity Details/Description", comment: "")
-    lblLocationOnMap.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Pin Location on map(optional)", comment: "")
-    lblLookingFor.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Looking for", comment: "")
-    lblBasic.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Basic", comment: "")
-    lblFeature.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Featured", comment: "")
-    lblPremium.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Premium", comment: "")
-    btnCreateOpp.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "Create opportunity", comment: ""), for: .normal)
+        lblSelectImages.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Select images", comment: "")
+        lblSelectdocuments.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Select documents", comment: "")
+        lblSubCategory.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Select subcategory", comment: "")
+        
+        lblState.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "State", comment: "")
+        lblLocality.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Locality", comment: "")
+        txtViewDiscription.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Opportunity Details/Description", comment: "")
+        lblLocationOnMap.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Pin Location on map(optional)", comment: "")
+        lblLookingFor.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Looking for", comment: "")
+        lblBasic.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Basic", comment: "")
+        lblFeature.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Featured", comment: "")
+        lblPremium.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Premium", comment: "")
+        btnCreateOpp.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "Create opportunity", comment: ""), for: .normal)
     }
 }
 
@@ -1572,7 +1573,7 @@ extension UIViewController {
                 if let image = UIImage(data: data) {
                     DispatchQueue.main.async {
                         completionHandler(image)
-                      //  self?.image = image
+                        //  self?.image = image
                     }
                 }
             }

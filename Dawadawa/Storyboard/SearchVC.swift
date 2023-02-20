@@ -134,7 +134,7 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
             cell.lblUserName.text = String.getString(obj.userdetail?.name)
             debugPrint("username.....", cell.lblUserName.text)
             cell.lblTitle.text = String.getString(obj.title)
-            //            cell.lblDescribtion.text = String.getString(obj.description)
+        
             cell.lblRating.text = String.getString(obj.opr_rating)
             cell.lblCommentCout.text = String.getString(Int.getInt(obj.commentsCount))
             
@@ -432,10 +432,8 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
                                     self.opportunitydetailsapi(oppr_id: oppid)
                                 }
                             }
-                            
                         }
                         self.present(vc, animated: false)
-                        
                     }
                     
                     else{
@@ -595,7 +593,7 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
                             cell.imageSubcommentUser.isHidden = true
                             cell.lblsubUserNameandComment.isHidden = true
                             cell.verticalSpacingReply.constant = -10
-                            //                            cell.bottomlblSubcomment.constant = 10
+                            //         cell.bottomlblSubcomment.constant = 10
                             
                             
                             let first = String.getString(userComment.first?.name)
@@ -605,7 +603,6 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
                             
                             attributedString.setColorForText(textToFind: first, withColor: UIColor.black)
                             attributedString.setColorForText(textToFind: second, withColor: UIColor.gray)
-                            
                             
                             cell.lblusernameandcomment.attributedText = attributedString
                             self.searchopportunityapi()
@@ -646,8 +643,6 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
             }
             cell.viewAddComment.isHidden = obj.isComment == true ? false : true
             cell.heightViewAddComment.constant = obj.isComment == true ? 55 : 0
-            
-            
             
             if obj.usercomment.count == 0{
                 cell.viewcomment.isHidden = true
@@ -691,8 +686,7 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
             let imgcommentSubuser = String.getString(obj.usercomment.first?.subcomment.first?.usersubcommentdetails?.image)
             cell.imageSubcommentUser.downlodeImage(serviceurl: imgcommentSubuser, placeHolder: UIImage(named: "Boss"))
             
-            
-            
+
             let first = String.getString(obj.usercomment.first?.name)
             let second = String.getString(obj.usercomment.first?.comments)
             
@@ -713,8 +707,7 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
             cell.lblusernameandcomment.attributedText = attributedStringcomment
             cell.lblsubUserNameandComment.attributedText = attributedStringSubcomment
             
-            
-            
+
             cell.callbacktextviewcomment = {[weak tblViewSearchOpp] (_) in
                 
                 self.txtcomment = cell.txtviewComment.text
@@ -733,19 +726,13 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
         switch indexPath.section{
         case 0:
             return 195
-            
         case 1:
             return UITableView.automaticDimension
-            
         case 2:
-            
             return UITableView.automaticDimension
-            
-            
         default:
             return 0
         }
-        
     }
     //    TextField Delegate
     
@@ -758,7 +745,6 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
         else{
             self.searchopportunityapi()
         }
-        
         return true
     }
 }
@@ -784,8 +770,8 @@ extension SearchVC{
             "search":String.getString(self.txtfieldSearch.text),
             "user_id":Int.getInt(UserData.shared.id)
         ]
+        debugPrint("user_id=-=-=-=",Int.getInt(UserData.shared.id))
         
-        debugPrint("SearchTextfield=-=-=-=-",String.getString(self.txtfieldSearch.text))
         TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.ksearchopportunity, requestMethod: .POST, requestParameters:params, withProgressHUD: false)
         {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
             
@@ -809,14 +795,17 @@ extension SearchVC{
                         self?.userTimeLine = Opportunity.map{SocialPostData(data: kSharedInstance.getDictionary($0))}
                         print("DataallSearchpost=\(self?.userTimeLine)")
                         
-                        // CommonUtils.showError(.info, String.getString(dictResult["message"]))
+            //          CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         self?.imgNotfound.isHidden = true
-                        self?.tblViewSearchOpp.reloadData()
+                        DispatchQueue.main.async {
+                            self?.tblViewSearchOpp.reloadData()
+                        }
+                        
                     }
                     
                     else if  Int.getInt(dictResult["status"]) == 400{
                         self?.imgNotfound.isHidden = false
-                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        // CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                 default:
@@ -828,7 +817,6 @@ extension SearchVC{
             } else {
                 //     CommonUtils.showToastForDefaultError()
             }
-            
         }
     }
     
@@ -836,8 +824,7 @@ extension SearchVC{
     
     func likeOpportunityapi(oppr_id:Int,completion: @escaping(_ countLike: String,_ Sucesscode: Int)->Void){
         CommonUtils.showHud(show: true)
-        
-        
+  
         if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
             let endToken = kSharedUserDefaults.getLoggedInAccessToken()
             let septoken = endToken.components(separatedBy: " ")
@@ -846,7 +833,6 @@ extension SearchVC{
                 kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
             }
         }
-        
         
         let params:[String : Any] = [
             "user_id":Int.getInt(UserData.shared.id),
@@ -858,11 +844,10 @@ extension SearchVC{
         {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
             
             CommonUtils.showHudWithNoInteraction(show: false)
-            
+
             if errorType == .requestSuccess {
                 
                 let dictResult = kSharedInstance.getDictionary(result)
-                
                 switch Int.getInt(statusCode) {
                 case 200:
                     //                    self?.statuslike = Int.getInt(dictResult["status"])
@@ -899,7 +884,7 @@ extension SearchVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-                //                CommonUtils.showToastForDefaultError()
+                //          CommonUtils.showToastForDefaultError()
             }
         }
     }
@@ -965,7 +950,7 @@ extension SearchVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-                //                CommonUtils.showToastForDefaultError()
+                //      CommonUtils.showToastForDefaultError()
             }
         }
     }
@@ -1042,7 +1027,6 @@ extension SearchVC{
                 kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
             }
         }
-        
         
         let params:[String : Any] = [
             "user_id":Int.getInt(UserData.shared.id),
@@ -1136,7 +1120,7 @@ extension SearchVC{
                     
                     else if  Int.getInt(dictResult["status"]) == 201{
                         //  CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //  CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                 default:
@@ -1257,7 +1241,6 @@ extension SearchVC{
                             vc.imgarray  = self?.UserTimeLineOppdetails?.oppimage ?? []
                             vc.docarray = self?.UserTimeLineOppdetails?.oppdocument ?? []
                             debugPrint("imgaraay=-=-=-==-=", vc.imgarray)
-                            
                         }
                         
                         else if Int.getInt(self?.UserTimeLineOppdetails?.category_id) == 2{
@@ -1272,7 +1255,6 @@ extension SearchVC{
                             vc.imgarray  = self?.UserTimeLineOppdetails?.oppimage ?? []
                             vc.docarray = self?.UserTimeLineOppdetails?.oppdocument ?? []
                             debugPrint("imgaraay=-=-=-==-=", vc.imgarray)
-                            
                         }
                         
                         else if Int.getInt(self?.UserTimeLineOppdetails?.category_id) == 3{

@@ -6,6 +6,7 @@ import UIKit
 import SKFloatingTextField
 import Alamofire
 import SwiftyJSON
+import IQKeyboardManagerSwift
 
 class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UIDocumentPickerDelegate {
     
@@ -19,7 +20,7 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
     @IBOutlet weak var txtFieldPricing: SKFloatingTextField!
     @IBOutlet weak var txtFieldBusinessName: SKFloatingTextField!
     @IBOutlet weak var txtFieldBusinessMiningBlock: SKFloatingTextField!
-    @IBOutlet weak var TextViewDescription:UITextView!
+    @IBOutlet weak var TextViewDescription:IQTextView!
     
     @IBOutlet weak var lblSubCategory: UILabel!
     @IBOutlet weak var btnSubCategory: UIButton!
@@ -600,11 +601,11 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
             self.showSimpleAlert(message: Notifications.ktitle)
             return
         }
-        else if !String.getString(self.txtFieldTitle.text).isValidTitle()
-        {
-            self.showSimpleAlert(message: Notifications.KValidtitle)
-            return
-        }
+        //        else if !String.getString(self.txtFieldTitle.text).isValidTitle()
+        //        {
+        //            self.showSimpleAlert(message: Notifications.KValidtitle)
+        //            return
+        //        }
         else if String.getString(self.txtFieldBusinessName.text).isEmpty
         {
             self.showSimpleAlert(message: Notifications.kbusinessname)
@@ -1030,7 +1031,6 @@ extension MiningServiceVC{
                     self.getbusinesstypelist = businessminingdata
                 }
             }
-            
         }
     }
     
@@ -1159,7 +1159,6 @@ extension MiningServiceVC{
             case .failure(let error):
                 completionBlock(0,nil,error.localizedDescription)
             }
-            
         }
     }
     
@@ -1237,7 +1236,6 @@ extension MiningServiceVC{
             case .failure(let error):
                 completionBlock(0,nil,error.localizedDescription)
             }
-            
         }
     }
     
@@ -1676,7 +1674,7 @@ extension MiningServiceVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-                //                       CommonUtils.showToastForDefaultError()
+                //  CommonUtils.showToastForDefaultError()
             }
         }
     }
@@ -1690,7 +1688,7 @@ extension MiningServiceVC{
         
         lblState.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "State", comment: "")
         lblLocality.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Locality", comment: "")
-        TextViewDescription.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Opportunity Details/Description", comment: "")
+        self.TextViewDescription.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Opportunity Details/Description", comment: "")
         lblLocationOnMap.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Pin Location on map(optional)", comment: "")
         lblLookingFor.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Looking for", comment: "")
         lblBasic.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Basic", comment: "")

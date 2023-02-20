@@ -7,6 +7,7 @@ import SKFloatingTextField
 import Alamofire
 import SwiftyJSON
 import MobileCoreServices
+import IQKeyboardManagerSwift
 
 class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout, UIDocumentPickerDelegate{
     
@@ -17,7 +18,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
     @IBOutlet weak var txtFieldMobileNumber: SKFloatingTextField!
     @IBOutlet weak var txtFieldWhatsappNumber: SKFloatingTextField!
     @IBOutlet weak var txtFieldPricing: SKFloatingTextField!
-    @IBOutlet weak var TextViewDescription:UITextView!
+    @IBOutlet weak var TextViewDescription:IQTextView!
     
     @IBOutlet weak var lblSubCategory: UILabel!
     @IBOutlet weak var btnSubCategory: UIButton!
@@ -577,11 +578,11 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
             self.showSimpleAlert(message: Notifications.ktitle)
             return
         }
-        else if !String.getString(self.txtFieldTitle.text).isValidTitle()
-        {
-            self.showSimpleAlert(message: Notifications.KValidtitle)
-            return
-        }
+//        else if !String.getString(self.txtFieldTitle.text).isValidTitle()
+//        {
+//            self.showSimpleAlert(message: Notifications.KValidtitle)
+//            return
+//        }
         else if self.isSelectState == false{
             if kSharedUserDefaults.getlanguage() as? String == "en"{
                 self.showSimpleAlert(message: "Please Select the State")
@@ -789,7 +790,6 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
         //Call Delegate
         documentsPicker.delegate = self
         self.present(documentsPicker, animated: true)
-        
     }
     
     func documentMenu(_ documentMenu: UIDocumentMenuViewController, didPickDocumentPicker documentPicker: UIDocumentPickerViewController) {
@@ -806,8 +806,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
         //          self.urlAttachemnt = url
         //          if self.sizePerMB(url: url) > 500
         //          {
-        //
-        //
+       
         //              NKToastHelper.sharedInstance.showAlert(self, title: warningMessage.title, message: "File size must be lesser or equal to 500MB.")
         //              return
         //
@@ -1682,7 +1681,8 @@ extension RockPitOpportunityVC{
         
         lblState.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "State", comment: "")
         lblLocality.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Locality", comment: "")
-        TextViewDescription.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Opportunity Details/Description", comment: "")
+        
+        self.TextViewDescription.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Opportunity Details/Description", comment: "")
         lblLocationOnMap.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Pin Location on map(optional)", comment: "")
         lblLookingFor.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Looking for", comment: "")
         lblBasic.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Basic", comment: "")

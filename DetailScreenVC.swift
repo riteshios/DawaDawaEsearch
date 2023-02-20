@@ -244,7 +244,6 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                     cell.lbblWhatsappNumber.text = "Not available"
                     cell.lbblWhatsappNumber.textColor = UIColor.gray
                 }
-                
             }
             
             cell.lblCategory.text = String.getString(self.userTimeLine?.category_name)
@@ -781,10 +780,9 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                             debugPrint("lblcommentName====-", cell.lblNameandComment.text )
                             
                             let imgcommentuserurl = String.getString(userComment.first?.image)
-                            
+                            let imgurl = URL(string: imgcommentuserurl)
                             debugPrint("commentuserprofile......",imgcommentuserurl)
-                            
-                            cell.imgCommentUser.downlodeImage(serviceurl: imgcommentuserurl , placeHolder: UIImage(named: "Boss"))
+                            cell.imgCommentUser.sd_setImage(with: imgurl, placeholderImage:UIImage(named: "Boss"))
                             
                             self.getalldetail()
                         }
@@ -802,7 +800,6 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                 self.tblviewDetail?.endUpdates()
             }
             return cell
-            
         }
         else{
             let cell = self.tblviewDetail.dequeueReusableCell(withIdentifier: "SubCommentTableViewCell") as! SubCommentTableViewCell
@@ -1285,7 +1282,6 @@ extension DetailScreenVC{
             } else {
 //                CommonUtils.showToastForDefaultError()
             }
-            
         }
     }
     
@@ -1433,16 +1429,13 @@ extension DetailScreenVC{
         ]
         
         debugPrint("user_id......",Int.getInt(UserData.shared.id))
-        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kcloseopportunity, requestMethod: .POST,
-                                                               requestParameters:params, withProgressHUD: false)
+        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kcloseopportunity, requestMethod: .POST,requestParameters:params, withProgressHUD: false)
         {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
             
             CommonUtils.showHudWithNoInteraction(show: false)
             
             if errorType == .requestSuccess {
-                
                 let dictResult = kSharedInstance.getDictionary(result)
-                
                 switch Int.getInt(statusCode) {
                 case 200:
                     
@@ -1551,7 +1544,7 @@ extension DetailScreenVC{
         }
         
         let params:[String : Any] = [
-            //            "user_id":Int.getInt(UserData.shared.id),
+            //       "user_id":Int.getInt(UserData.shared.id),
             "opr_id":oppr_id
         ]
         
@@ -1562,9 +1555,7 @@ extension DetailScreenVC{
             CommonUtils.showHudWithNoInteraction(show: false)
             
             if errorType == .requestSuccess {
-                
                 let dictResult = kSharedInstance.getDictionary(result)
-                
                 switch Int.getInt(statusCode) {
                 case 200:
                     
@@ -1591,7 +1582,7 @@ extension DetailScreenVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-//                CommonUtils.showToastForDefaultError()
+//              CommonUtils.showToastForDefaultError()
             }
         }
     }

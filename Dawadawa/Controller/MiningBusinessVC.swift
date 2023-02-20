@@ -6,6 +6,7 @@ import UIKit
 import SKFloatingTextField
 import Alamofire
 import SwiftyJSON
+import IQKeyboardManagerSwift
 
 class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UIDocumentPickerDelegate{
     
@@ -16,7 +17,7 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
     @IBOutlet weak var txtFieldMobileNumber: SKFloatingTextField!
     @IBOutlet weak var txtFieldWhatsappNumber: SKFloatingTextField!
     @IBOutlet weak var txtFieldPricing: SKFloatingTextField!
-    @IBOutlet weak var TextViewDescription:UITextView!
+    @IBOutlet weak var TextViewDescription:IQTextView!
     
     @IBOutlet weak var lblSubCategory: UILabel!
     @IBOutlet weak var btnSubCategory: UIButton!
@@ -569,11 +570,11 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
             self.showSimpleAlert(message: Notifications.ktitle)
             return
         }
-        else if !String.getString(self.txtFieldTitle.text).isValidUserName()
-        {
-            self.showSimpleAlert(message: Notifications.KValidtitle)
-            return
-        }
+        //        else if !String.getString(self.txtFieldTitle.text).isValidTitle()
+        //        {
+        //            self.showSimpleAlert(message: Notifications.KValidtitle)
+        //            return
+        //        }
         else if self.isSelectServiceType == false{
             if kSharedUserDefaults.getlanguage() as? String == "en"{
                 self.showSimpleAlert(message: "Please Select Service Type")
@@ -1660,7 +1661,7 @@ extension MiningBusinessVC{
         lblState.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "State", comment: "")
         lblLocality.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Locality", comment: "")
         
-        TextViewDescription.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Opportunity Details/Description", comment: "")
+        self.TextViewDescription.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Opportunity Details/Description", comment: "")
         lblLocationOnMap.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Pin Location on map(optional)", comment: "")
         lblLookingFor.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Looking for", comment: "")
         lblBasic.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Basic", comment: "")
