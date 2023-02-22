@@ -404,15 +404,19 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                 cell.imgOppFlag.isHidden = true
             }
             
+            if Int.getInt(self.userTimeLine?.close_opr) == 0{
+                cell.lblTitle.textColor = .black
+                cell.lblcloseOpportunity.text = "Available"
+                cell.lblcloseOpportunity.textColor = UIColor(hexString: "#20D273")
+            }
+            else {
+                cell.lblcloseOpportunity.text = "Closed"
+                cell.lblcloseOpportunity.textColor = UIColor(hexString: "#FF4C4D")
+            }
+            
             cell.heightSocialPostCollectionView.constant = 275
             cell.viewSeeDetails.isHidden = true
             cell.btnViewDetails.isHidden = true
-//            if Int.getInt(self.userTimeLine?.oppimage.count) == 0{
-//                cell.heightSocialPostCollectionView.constant = 0
-//            }
-//            else{
-//                cell.heightSocialPostCollectionView.constant = 225
-//            }
             
             cell.callback = { txt, tapped in
                 
@@ -605,11 +609,14 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                                         if txt == "Close"{
                                             vc.dismiss(animated: false) {
                                                 let oppid = Int.getInt(self.userTimeLine?.id)
-                                                self.closeopportunityapi(opr_id: oppid)
+                                                self.closeopportunityapi(opr_id: oppid){ sucess in
+                                                    if sucess == 200{
+                                                        cell.lblcloseOpportunity.text = "Closed"
+                                                        cell.lblcloseOpportunity.textColor = UIColor(hexString: "#FF4C4D")
+                                                    }
+                                                    
+                                                }
                                                 debugPrint("oppidclose......",oppid)
-                                                
-                                                //  let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProfileVC") as! ProfileVC
-                                                //                                        self.navigationController?.popViewController(animated: true)
                                             }
                                         }
                                     }
@@ -928,8 +935,7 @@ extension DetailScreenVC{
         ]
         
         debugPrint("user_id......",Int.getInt(UserData.shared.id))
-        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kaddcomment, requestMethod: .POST,
-                                                               requestParameters:params, withProgressHUD: false)
+        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kaddcomment, requestMethod: .POST, requestParameters:params, withProgressHUD: false)
         {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
             
             CommonUtils.showHudWithNoInteraction(show: false)
@@ -1045,245 +1051,6 @@ extension DetailScreenVC{
         }
     }
     
-    //    Api like Opportunity
-    
-    func likeOpportunityapi(oppr_id:Int,completion: @escaping(_ countLike: String,_ Sucesscode: Int)->Void){
-        CommonUtils.showHud(show: true)
-        
-        if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
-            let endToken = kSharedUserDefaults.getLoggedInAccessToken()
-            let septoken = endToken.components(separatedBy: " ")
-            if septoken[0] != "Bearer"{
-                let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
-                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
-            }
-        }
-        
-        let params:[String : Any] = [
-            "user_id":Int.getInt(UserData.shared.id),
-            "opr_id":oppr_id
-        ]
-        
-        debugPrint("user_id......",Int.getInt(UserData.shared.id))
-        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.klikeopportunity, requestMethod: .POST, requestParameters:params, withProgressHUD: false)
-        {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
-            
-            CommonUtils.showHudWithNoInteraction(show: false)
-            if errorType == .requestSuccess {
-                let dictResult = kSharedInstance.getDictionary(result)
-                switch Int.getInt(statusCode) {
-                case 200:
-                    //                    self?.statuslike = Int.getInt(dictResult["status"])
-                    if Int.getInt(dictResult["status"]) == 200{
-                        let endToken = kSharedUserDefaults.getLoggedInAccessToken()
-                        let septoken = endToken.components(separatedBy: " ")
-                        if septoken[0] == "Bearer"{
-                            kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
-                        }
-                        
-                        //                 self?.count = String.getString(dictResult["count"])
-                        //                 debugPrint("likecount=-=-=-=",self?.count)
-                        completion(String.getString(dictResult["count"]),Int.getInt(dictResult["status"]))
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                        
-                    }
-                    
-                    else if  Int.getInt(dictResult["status"]) == 400{
-                        completion(String.getString(dictResult["count"]),Int.getInt(dictResult["status"]))
-                        if kSharedUserDefaults.getlanguage() as? String == "en"{
-                            CommonUtils.showError(.info, String.getString("This Opportunity is unlike by You"))
-                        }
-                        else{
-                            CommonUtils.showError(.info, String.getString("هذه الفرصة تختلف عنك"))
-                        }
-                    }
-                    
-                default:
-                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                }
-            } else if errorType == .noNetwork {
-                CommonUtils.showToastForInternetUnavailable()
-                
-            } else {
-//                CommonUtils.showToastForDefaultError()
-            }
-        }
-    }
-    //    Save Opportunity Api
-    
-    func saveoppoertunityapi(oppr_id:Int){
-        CommonUtils.showHud(show: true)
-        
-        if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
-            let endToken = kSharedUserDefaults.getLoggedInAccessToken()
-            let septoken = endToken.components(separatedBy: " ")
-            if septoken[0] != "Bearer"{
-                let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
-                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
-            }
-        }
-        let params:[String : Any] = [
-            "user_id":Int.getInt(UserData.shared.id),
-            "opr_id":oppr_id
-        ]
-        
-        debugPrint("user_id......",Int.getInt(UserData.shared.id))
-        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.ksaveOpp, requestMethod: .POST, requestParameters:params, withProgressHUD: false)
-        {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
-            
-            CommonUtils.showHudWithNoInteraction(show: false)
-            
-            if errorType == .requestSuccess {
-                
-                let dictResult = kSharedInstance.getDictionary(result)
-                
-                switch Int.getInt(statusCode) {
-                case 200:
-                    
-                    if Int.getInt(dictResult["responsecode"]) == 200{
-                        
-                        let endToken = kSharedUserDefaults.getLoggedInAccessToken()
-                        let septoken = endToken.components(separatedBy: " ")
-                        if septoken[0] == "Bearer"{
-                            kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
-                        }
-                        
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                    }
-                    
-                    else if  Int.getInt(dictResult["responsecode"]) == 400{
-                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                    }
-                    
-                default:
-                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                }
-            } else if errorType == .noNetwork {
-                CommonUtils.showToastForInternetUnavailable()
-                
-            } else {
-//                CommonUtils.showToastForDefaultError()
-            }
-        }
-    }
-    
-    //    Unsaved Opportunity
-    
-    func unsaveoppoertunityapi(oppr_id:Int){
-        CommonUtils.showHud(show: true)
-        
-        if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
-            let endToken = kSharedUserDefaults.getLoggedInAccessToken()
-            let septoken = endToken.components(separatedBy: " ")
-            if septoken[0] != "Bearer"{
-                let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
-                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
-            }
-        }
-        
-        let params:[String : Any] = [
-            "user_id":Int.getInt(UserData.shared.id),
-            "opr_id":oppr_id
-        ]
-        
-        debugPrint("user_id......",Int.getInt(UserData.shared.id))
-        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kunsavedopp, requestMethod: .POST, requestParameters:params, withProgressHUD: false)
-        {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
-            
-            CommonUtils.showHudWithNoInteraction(show: false)
-            
-            if errorType == .requestSuccess {
-                let dictResult = kSharedInstance.getDictionary(result)
-                switch Int.getInt(statusCode) {
-                case 200:
-                    
-                    if Int.getInt(dictResult["responsecode"]) == 200{
-                        
-                        let endToken = kSharedUserDefaults.getLoggedInAccessToken()
-                        let septoken = endToken.components(separatedBy: " ")
-                        if septoken[0] == "Bearer"{
-                            kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
-                        }
-                        
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                        //   self?.TblViewSavedOpp.reloadData()
-                    }
-                    
-                    else if  Int.getInt(dictResult["responsecode"]) == 400{
-                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                    }
-                    
-                default:
-                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                }
-            } else if errorType == .noNetwork {
-                CommonUtils.showToastForInternetUnavailable()
-                
-            } else {
-//                CommonUtils.showToastForDefaultError()
-            }
-        }
-    }
-    
-    //    Delete Post Opportunity Api
-    func deletepostoppoertunityapi(oppr_id:Int){
-        CommonUtils.showHud(show: true)
-        
-        if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
-            let endToken = kSharedUserDefaults.getLoggedInAccessToken()
-            let septoken = endToken.components(separatedBy: " ")
-            if septoken[0] != "Bearer"{
-                let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
-                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
-            }
-        }
-        
-        let params:[String : Any] = [
-            "user_id":Int.getInt(UserData.shared.id),
-            "oppr_id":oppr_id
-        ]
-        
-        debugPrint("user_id......",Int.getInt(UserData.shared.id))
-        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kdeleteopportunity, requestMethod: .POST, requestParameters:params, withProgressHUD: false)
-        {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
-            
-            CommonUtils.showHudWithNoInteraction(show: false)
-            
-            if errorType == .requestSuccess {
-                
-                let dictResult = kSharedInstance.getDictionary(result)
-                
-                switch Int.getInt(statusCode) {
-                case 200:
-                    if Int.getInt(dictResult["status"]) == 200{
-                        let endToken = kSharedUserDefaults.getLoggedInAccessToken()
-                        let septoken = endToken.components(separatedBy: " ")
-                        if septoken[0] == "Bearer"{
-                            kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
-                        }
-                        
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                        kSharedAppDelegate?.makeRootViewController()
-                    }
-                    
-                    else if  Int.getInt(dictResult["status"]) == 400{
-                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                    }
-                    
-                default:
-                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                }
-            } else if errorType == .noNetwork {
-                CommonUtils.showToastForInternetUnavailable()
-                
-            } else {
-//                CommonUtils.showToastForDefaultError()
-            }
-        }
-    }
     
     //    Opportunity Details api
     
@@ -1393,67 +1160,6 @@ extension DetailScreenVC{
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
-                    else if  Int.getInt(dictResult["status"]) == 400{
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                    }
-                    
-                default:
-                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                }
-            } else if errorType == .noNetwork {
-                CommonUtils.showToastForInternetUnavailable()
-                
-            } else {
-//                CommonUtils.showToastForDefaultError()
-            }
-        }
-    }
-    
-    //    Close opportunity api
-    func closeopportunityapi(opr_id:Int){
-        
-        CommonUtils.showHud(show: true)
-        
-        if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
-            let endToken = kSharedUserDefaults.getLoggedInAccessToken()
-            let septoken = endToken.components(separatedBy: " ")
-            if septoken[0] != "Bearer"{
-                let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
-                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
-            }
-        }
-        
-        let params:[String : Any] = [
-            "user_id":Int.getInt(UserData.shared.id),
-            "opr_id":opr_id
-        ]
-        
-        debugPrint("user_id......",Int.getInt(UserData.shared.id))
-        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kcloseopportunity, requestMethod: .POST,requestParameters:params, withProgressHUD: false)
-        {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
-            
-            CommonUtils.showHudWithNoInteraction(show: false)
-            
-            if errorType == .requestSuccess {
-                let dictResult = kSharedInstance.getDictionary(result)
-                switch Int.getInt(statusCode) {
-                case 200:
-                    
-                    if Int.getInt(dictResult["status"]) == 200{
-                        
-                        let endToken = kSharedUserDefaults.getLoggedInAccessToken()
-                        let septoken = endToken.components(separatedBy: " ")
-                        if septoken[0] == "Bearer"{
-                            kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
-                        }
-                        
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                        
-                    }
-                    
-                    else if  Int.getInt(dictResult["status"]) == 404{
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                    }
                     else if  Int.getInt(dictResult["status"]) == 400{
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }

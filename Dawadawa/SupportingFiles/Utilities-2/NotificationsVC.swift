@@ -22,7 +22,7 @@ class NotificationsVC: UIViewController {
         self.getallNotification()
         }
     
-//    MARK: - @IBAction
+//    MARK: - @IBAction and Method - 
     
     @IBAction func btnBackTapped(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)

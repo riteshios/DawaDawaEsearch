@@ -86,9 +86,9 @@ struct ServiceName {
     static let knewemailotpverify     =       "api/change-email-otp-verify"
     
     static let ktermsandcondition     =        "api/terms"
-    static let kprivacypolicy         =         "api/privacy-policy"
-    static let kAboutUs               =         "api/about"
-    static let kFaq                   =         "api/faq"
+    static let kprivacypolicy         =        "api/privacy-policy"
+    static let kAboutUs               =        "api/about"
+    static let kFaq                   =        "api/faq"
    
     static let kgetcategory           =        "api/category"
     static let ksubcategory           =        "api/sub-category"
@@ -199,7 +199,6 @@ struct Notifications {
     static let kvalidfirsname                   =  "Please Enter Valid First Name"
     static let kvalidlastname                   =  "Please Enter Valid Last Name"
     
-    
     static let kGender                          =  "Please select your gender"
     static let knationalid                      =  "Please Enter your NationalID"
     static let Kpassport                        =  "Please Enter your Passport number"
@@ -229,7 +228,6 @@ struct Notifications {
     static let kConfirmpassword                 =  "Please Enter Confirm Password  "
     static let kconfirmMismatch                 =  "Password does not match "
     static let kAllergic                        =  "Please Select Allergic"
-    
     
     static let ktitle                           =  "Please Enter the Title"
     static let KValidtitle                      =  "Please Enter valid title"

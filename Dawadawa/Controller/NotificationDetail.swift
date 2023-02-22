@@ -55,8 +55,7 @@ extension NotificationDetail{
         print("notification_id=-=-=\(self.noti_id)")
         
         
-        TANetworkManager.sharedInstance.requestApi(withServiceName:ServiceName.kreadNotification, requestMethod: .POST,
-                                                   requestParameters:params, withProgressHUD: false)
+        TANetworkManager.sharedInstance.requestApi(withServiceName:ServiceName.kreadNotification, requestMethod: .POST,requestParameters:params, withProgressHUD: false)
         {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
             
             CommonUtils.showHudWithNoInteraction(show: false)
@@ -76,11 +75,11 @@ extension NotificationDetail{
                             kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
                         }
                         
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         
                     }
                     else if Int.getInt(dictResult["status"]) == 401{
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                 default:

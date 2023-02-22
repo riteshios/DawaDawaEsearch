@@ -9,7 +9,7 @@ import IQKeyboardManagerSwift
 var doc_url = ""
 class DetailsTableViewCell: UITableViewCell,UITextViewDelegate {
     
-    //    MARK: - Properties
+    //    MARK: - Properties -
     
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var SocialPostCollectionView: UICollectionView!

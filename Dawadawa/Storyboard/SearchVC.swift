@@ -213,14 +213,6 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
                 cell.LeadingOppType.constant = -20
             }
             
-            cell.heightSocialPostCollectionView.constant = 275
-            //            if obj.oppimage.count == 0{
-            //                cell.heightSocialPostCollectionView.constant = 0
-            //            }
-            //            else{
-            //                cell.heightSocialPostCollectionView.constant = 225
-            //            }
-            
             if String.getString(obj.opr_rating) == ""{
                 cell.lblRating.text = "0.0"
             }
@@ -409,28 +401,86 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
                 
                 if txt == "More" {
                     if UserData.shared.id == Int.getInt(obj.user_id){
-                        
-                        let vc = self.storyboard?.instantiateViewController(withIdentifier: HomeSocialMoreSelfVC.getStoryboardID()) as! HomeSocialMoreSelfVC
+                        let vc = self.storyboard?.instantiateViewController(withIdentifier: ProileSocialMoreVC.getStoryboardID()) as! ProileSocialMoreVC
                         vc.modalTransitionStyle = .crossDissolve
                         vc.modalPresentationStyle = .overCurrentContext
                         vc.callback = { txt in
                             
-                            if txt == "Update"{
-                                if UserData.shared.isskiplogin == true{
-                                    if kSharedUserDefaults.getlanguage() as? String == "en"{
-                                        self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
-                                    }
-                                    else{
-                                        self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
-                                    }
+                            if txt == "Dismiss"{
+                                self.dismiss(animated: true)
+                                //   self.listoppoertunityapi()
+                            }
+                            
+                            if txt == "CopyLink"{
+                                let share_link = String.getString(self.userTimeLine[indexPath.row].share_link)
+                                UIPasteboard.general.string = share_link
+                                print("share_link\(share_link)")
+                                if kSharedUserDefaults.getlanguage() as? String == "en"{
+                                    CommonUtils.showError(.info, String.getString("Link Copied"))
                                 }
                                 else{
-                                    let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
-                                    
-                                    debugPrint("oppid+++++++",oppid)
-                                    
-                                    self.opportunitydetailsapi(oppr_id: oppid)
+                                    CommonUtils.showError(.info, String.getString("تم نسخ الرابط"))
                                 }
+                            }
+                            
+                            if txt == "Update"{
+                                let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
+                                debugPrint("oppid+++++++",oppid)
+                                self.opportunitydetailsapi(oppr_id: oppid)
+                            }
+                            if txt == "Delete"{
+                                self.dismiss(animated: false){
+                                    let vc = self.storyboard?.instantiateViewController(withIdentifier: DeleteOpportunityPopUPVC.getStoryboardID()) as! DeleteOpportunityPopUPVC
+                                    vc.modalTransitionStyle = .crossDissolve
+                                    vc.modalPresentationStyle = .overCurrentContext
+                                    vc.callback = { txt in
+                                        
+                                        if txt == "Delete"{
+                                            vc.dismiss(animated: false) {
+                                                let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
+                                                self.userTimeLine.remove(at: indexPath.row)
+                                                self.deletepostoppoertunityapi(oppr_id: oppid)
+                                                debugPrint("oppid......",oppid)
+                                                self.tblViewSearchOpp.reloadData()
+                                            }
+                                        }
+                                    }
+                                    self.present(vc, animated: false)
+                                }
+                            }
+                            
+                            if txt == "Close"{
+                                self.dismiss(animated: false){
+                                    let vc = self.storyboard?.instantiateViewController(withIdentifier: ClosePopUpVC.getStoryboardID()) as! ClosePopUpVC
+                                    vc.modalTransitionStyle = .crossDissolve
+                                    vc.modalPresentationStyle = .overCurrentContext
+                                    vc.callback = { txt in
+                                        
+                                        if txt == "Close"{
+                                            vc.dismiss(animated: false) {
+                                                let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
+                                                self.closeopportunityapi(opr_id: oppid){ sucess in
+                                                    
+                                                    if sucess == 200{
+                                                        cell.lblcloseOpportunity.text = "Closed"
+                                                        cell.lblcloseOpportunity.textColor = UIColor(hexString: "#FF4C4D")
+                                                    }
+                                                    
+                                                }
+                                                debugPrint("oppidclose......",oppid)
+                                            }
+                                        }
+                                    }
+                                    self.present(vc, animated: false)
+                                }
+                                
+                            }
+                            if txt == "ViewDetail"{
+                                let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
+                                debugPrint("detailsppid=-=-=",oppid)
+                                let vc = self.storyboard?.instantiateViewController(withIdentifier: DetailScreenVC.getStoryboardID()) as! DetailScreenVC
+                                vc.oppid = oppid
+                                self.navigationController?.pushViewController(vc, animated: true)
                             }
                         }
                         self.present(vc, animated: false)
@@ -727,7 +777,12 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
         case 0:
             return 195
         case 1:
-            return UITableView.automaticDimension
+            if UserData.shared.isskiplogin == true{
+                return 90
+            }
+            else{
+                return 300
+            }
         case 2:
             return UITableView.automaticDimension
         default:
@@ -820,75 +875,6 @@ extension SearchVC{
         }
     }
     
-    //    Api like Opportunity
-    
-    func likeOpportunityapi(oppr_id:Int,completion: @escaping(_ countLike: String,_ Sucesscode: Int)->Void){
-        CommonUtils.showHud(show: true)
-  
-        if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
-            let endToken = kSharedUserDefaults.getLoggedInAccessToken()
-            let septoken = endToken.components(separatedBy: " ")
-            if septoken[0] != "Bearer"{
-                let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
-                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
-            }
-        }
-        
-        let params:[String : Any] = [
-            "user_id":Int.getInt(UserData.shared.id),
-            "opr_id":oppr_id
-        ]
-        
-        debugPrint("user_id......",Int.getInt(UserData.shared.id))
-        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.klikeopportunity, requestMethod: .POST,requestParameters:params, withProgressHUD: false)
-        {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
-            
-            CommonUtils.showHudWithNoInteraction(show: false)
-
-            if errorType == .requestSuccess {
-                
-                let dictResult = kSharedInstance.getDictionary(result)
-                switch Int.getInt(statusCode) {
-                case 200:
-                    //                    self?.statuslike = Int.getInt(dictResult["status"])
-                    if Int.getInt(dictResult["status"]) == 200{
-                        
-                        
-                        let endToken = kSharedUserDefaults.getLoggedInAccessToken()
-                        let septoken = endToken.components(separatedBy: " ")
-                        if septoken[0] == "Bearer"{
-                            kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
-                        }
-                        
-                        //     self?.count = String.getString(dictResult["count"])
-                        //     debugPrint("likecount=-=-=-=",self?.count)
-                        completion(String.getString(dictResult["count"]),Int.getInt(dictResult["status"]))
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                    }
-                    
-                    else if  Int.getInt(dictResult["status"]) == 400{
-                        completion(String.getString(dictResult["count"]), Int.getInt(dictResult["status"]))
-                        if kSharedUserDefaults.getlanguage() as? String == "en"{
-                            CommonUtils.showError(.info, String.getString("This Opportunity is unlike by You"))
-                        }
-                        else{
-                            CommonUtils.showError(.info, String.getString("هذه الفرصة تختلف عنك"))
-                        }
-                        //         CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                    }
-                    
-                default:
-                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                }
-            } else if errorType == .noNetwork {
-                CommonUtils.showToastForInternetUnavailable()
-                
-            } else {
-                //          CommonUtils.showToastForDefaultError()
-            }
-        }
-    }
-    
     //    Api comment opportunity
     
     func commentoppoertunityapi(oppr_id:Int,completion: @escaping(_ viewH : [user_comment])->Void){
@@ -951,126 +937,6 @@ extension SearchVC{
                 
             } else {
                 //      CommonUtils.showToastForDefaultError()
-            }
-        }
-    }
-    
-    //    Save Opportunity Api
-    
-    func saveoppoertunityapi(oppr_id:Int){
-        CommonUtils.showHud(show: true)
-        
-        if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
-            let endToken = kSharedUserDefaults.getLoggedInAccessToken()
-            let septoken = endToken.components(separatedBy: " ")
-            if septoken[0] != "Bearer"{
-                let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
-                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
-            }
-        }
-        
-        let params:[String : Any] = [
-            "user_id":Int.getInt(UserData.shared.id),
-            "opr_id":oppr_id
-        ]
-        
-        debugPrint("user_id......",Int.getInt(UserData.shared.id))
-        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.ksaveOpp, requestMethod: .POST, requestParameters:params, withProgressHUD: false)
-        {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
-            
-            CommonUtils.showHudWithNoInteraction(show: false)
-            
-            if errorType == .requestSuccess {
-                let dictResult = kSharedInstance.getDictionary(result)
-                switch Int.getInt(statusCode) {
-                case 200:
-                    
-                    if Int.getInt(dictResult["responsecode"]) == 200{
-                        
-                        let endToken = kSharedUserDefaults.getLoggedInAccessToken()
-                        let septoken = endToken.components(separatedBy: " ")
-                        if septoken[0] == "Bearer"{
-                            kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
-                        }
-                        
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                    }
-                    
-                    else if  Int.getInt(dictResult["responsecode"]) == 400{
-                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                    }
-                    
-                default:
-                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                }
-            } else if errorType == .noNetwork {
-                CommonUtils.showToastForInternetUnavailable()
-                
-            } else {
-                //                CommonUtils.showToastForDefaultError()
-            }
-        }
-    }
-    
-    //    Unsaved Opportunity
-    
-    func unsaveoppoertunityapi(oppr_id:Int){
-        CommonUtils.showHud(show: true)
-        
-        
-        if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
-            let endToken = kSharedUserDefaults.getLoggedInAccessToken()
-            let septoken = endToken.components(separatedBy: " ")
-            if septoken[0] != "Bearer"{
-                let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
-                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
-            }
-        }
-        
-        let params:[String : Any] = [
-            "user_id":Int.getInt(UserData.shared.id),
-            "opr_id":oppr_id
-        ]
-        
-        debugPrint("user_id......",Int.getInt(UserData.shared.id))
-        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kunsavedopp, requestMethod: .POST, requestParameters:params, withProgressHUD: false)
-        {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
-            
-            CommonUtils.showHudWithNoInteraction(show: false)
-            
-            if errorType == .requestSuccess {
-                
-                let dictResult = kSharedInstance.getDictionary(result)
-                
-                switch Int.getInt(statusCode) {
-                case 200:
-                    
-                    if Int.getInt(dictResult["responsecode"]) == 200{
-                        
-                        let endToken = kSharedUserDefaults.getLoggedInAccessToken()
-                        let septoken = endToken.components(separatedBy: " ")
-                        if septoken[0] == "Bearer"{
-                            kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
-                        }
-                        
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                        //                        self?.TblViewSavedOpp.reloadData()
-                    }
-                    
-                    else if  Int.getInt(dictResult["responsecode"]) == 400{
-                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                    }
-                    
-                default:
-                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                }
-            } else if errorType == .noNetwork {
-                CommonUtils.showToastForInternetUnavailable()
-                
-            } else {
-                //                CommonUtils.showToastForDefaultError()
             }
         }
     }
@@ -1141,7 +1007,8 @@ extension SearchVC{
         CommonUtils.showHud(show: true)
         
         let params:[String : Any] = [
-            "search":String.getString(self.txtfieldSearch.text)
+            "search":String.getString(self.txtfieldSearch.text),
+            "user_id":0
         ]
         
         debugPrint("SearchTextfield=-=-=-=-",String.getString(self.txtfieldSearch.text))
@@ -1181,7 +1048,7 @@ extension SearchVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-                //      CommonUtils.showToastForDefaultError()
+                //   CommonUtils.showToastForDefaultError()
             }
         }
     }
@@ -1309,3 +1176,4 @@ extension SearchVC{
         txtfieldSearch.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Search opportunities", comment: "")
     }
 }
+

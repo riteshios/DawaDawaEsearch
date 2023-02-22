@@ -6,7 +6,9 @@ import UIKit
 import IQKeyboardManagerSwift
 
 class FlagPostPopUPVC: UIViewController {
-
+    
+//    MARK: - Properties -
+    
     @IBOutlet weak var viewMain: UIView!
     @IBOutlet weak var textviewReason: IQTextView!
     @IBOutlet weak var lblReasontoFlag: UILabel!
@@ -14,6 +16,7 @@ class FlagPostPopUPVC: UIViewController {
     var callbackClosure:(()->())?
     
     var oppid = 0
+//    MARK: - UIview and Life Cycle -
     
     override func viewDidLoad() {
         super.viewDidLoad()
