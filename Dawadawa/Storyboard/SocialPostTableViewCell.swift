@@ -7,6 +7,8 @@ import IQKeyboardManagerSwift
 
 class SocialPostTableViewCell: UITableViewCell,UITextViewDelegate {
     
+//    MARK: - Properties -
+    
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var SocialPostCollectionView: UICollectionView!
     var callback:((String, UIButton)->())?
@@ -49,7 +51,6 @@ class SocialPostTableViewCell: UITableViewCell,UITextViewDelegate {
     @IBOutlet weak var btnDescription: UIButton!
     @IBOutlet weak var LeadingOppType: NSLayoutConstraint!
     
-    
     @IBOutlet weak var viewSave: UIView!
     
     //    Comment Section
@@ -85,6 +86,7 @@ class SocialPostTableViewCell: UITableViewCell,UITextViewDelegate {
             self.SocialPostCollectionView.reloadData()
         }
     }
+//    MARK: - Life Cycle -
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -119,7 +121,7 @@ class SocialPostTableViewCell: UITableViewCell,UITextViewDelegate {
         callbacktextviewcomment?(textView.text)
     }
     
-    //    MARK: - @IBAction
+    //    MARK: - @IBAction and Methods -
     
     @IBAction func btnlistcountTapped(_ sender: UIButton){
         self.callback?("LikeCount",sender)
@@ -199,6 +201,7 @@ class SocialPostTableViewCell: UITableViewCell,UITextViewDelegate {
     }
     
 }
+//    MARK: - Collection View -
 
 extension SocialPostTableViewCell: UICollectionViewDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     
@@ -234,7 +237,7 @@ extension SocialPostTableViewCell: UICollectionViewDelegate,UICollectionViewData
     }
 }
 
-// MARK: - Localisation
+// MARK: - Localisation -
 
 extension SocialPostTableViewCell{
     func setuplanguage(){

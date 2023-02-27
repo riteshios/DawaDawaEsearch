@@ -58,7 +58,6 @@ class HomeSocialMoreVC: UIViewController {
     
     @IBAction func btnChatwithuserTapped(_ sender: UIButton){
         self.callback?("Chatwithuser")
-        
     }
     
     @IBAction func btnCopyLinkTapped(_ sender: UIButton) {
@@ -68,7 +67,6 @@ class HomeSocialMoreVC: UIViewController {
     
     @IBAction func btnMarkasinterestedTapped(_ sender: UIButton){
         self.callback?("MarkasInterested")
-        
     }
     
     @IBAction func btnFlagPostTapped(_ sender: UIButton) {

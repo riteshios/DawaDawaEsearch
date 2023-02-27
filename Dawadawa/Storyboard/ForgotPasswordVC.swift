@@ -7,7 +7,7 @@ import SKFloatingTextField
 
 class ForgotPasswordVC: UIViewController {
     
-    //    MARK: - Properties
+    //    MARK: - Properties -
     
     @IBOutlet weak var viewMain: UIView!
     @IBOutlet weak var viewButtonSendCode: UIView!
@@ -20,13 +20,28 @@ class ForgotPasswordVC: UIViewController {
     
     @IBOutlet weak var txtFieldPhone_Email: SKFloatingTextField!
     
+//    MARK: - Life Cyclye -
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setuplanguage()
         self.setup()
     }
     
-    // MARK: - Life Cyclye
+    override func viewWillLayoutSubviews() {
+        if kSharedUserDefaults.getlanguage() as? String == "en"{
+            DispatchQueue.main.async {
+                self.txtFieldPhone_Email.semanticContentAttribute = .forceLeftToRight
+                self.txtFieldPhone_Email.textAlignment = .left
+            }
+            
+        } else {
+            DispatchQueue.main.async {
+                self.txtFieldPhone_Email.semanticContentAttribute = .forceRightToLeft
+                self.txtFieldPhone_Email.textAlignment = .right
+            }
+        }
+    }
+   
     func setup(){
         viewMain.clipsToBounds = true
         viewMain.layer.cornerRadius = 25
@@ -41,7 +56,7 @@ class ForgotPasswordVC: UIViewController {
         lblSendEmail_Phone.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Send on email address", comment: "")
     }
     
-    // MARK: - @IBAction
+    // MARK: - @IBAction and Methods -
     
     @IBAction func btnBackTapped(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
@@ -83,7 +98,7 @@ class ForgotPasswordVC: UIViewController {
     }
     
     
-    //  MARK: - Validation
+    //  MARK: - Validation -
     func fieldvalidationPhoneNumber(){
         if String.getString(self.txtFieldPhone_Email.text).isEmpty
         {
@@ -112,7 +127,7 @@ class ForgotPasswordVC: UIViewController {
     }
 }
 
-// MARK: - Textfield Delegate
+// MARK: - Textfield Delegate -
 
 extension ForgotPasswordVC{
     
@@ -147,7 +162,7 @@ extension ForgotPasswordVC : SKFlaotingTextFieldDelegate {
     }
 }
 
-// MARK: - Api Call
+// MARK: - Api Call -
 
 extension ForgotPasswordVC{
     func forgotpasswordapi(){
@@ -222,7 +237,7 @@ extension ForgotPasswordVC{
     }
 }
 
-// MARK: - Localisation
+// MARK: - Localisation -
 
 extension ForgotPasswordVC{
     func setuplanguage(){

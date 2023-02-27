@@ -4,10 +4,9 @@
 
 
 import UIKit
-
 class SaveOpportunityMoreVC: UIViewController {
     
-
+    //    MARK: - Properties -
     var callback:((String)->())?
     
     @IBOutlet weak var lblChatwithuser: UILabel!
@@ -15,27 +14,26 @@ class SaveOpportunityMoreVC: UIViewController {
     @IBOutlet weak var lblFlagpost: UILabel!
     @IBOutlet weak var lblReportuser: UILabel!
     @IBOutlet weak var lblRemovedfromsaved: UILabel!
-
     @IBOutlet weak var Viewmain: UIView!
     
+    //    MARK: - Life Cycle -
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setup()
         self.setuplanguage()
-       
     }
+    
     func setup(){
         Viewmain.clipsToBounds = true
         Viewmain.layer.cornerRadius = 25
         Viewmain.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
         Viewmain.addShadowWithBlurOnView(Viewmain, spread: 0, blur: 10, color: .black, opacity: 0.16, OffsetX: 0, OffsetY: 1)
-       
     }
     
-//    MARK: - @IBAction
+    //    MARK: - @IBAction and Methods -
     
     @IBAction func btnDismissTapped(_ sender: UIButton) {
-//        self.callback?("Dismiss")
+        //     self.callback?("Dismiss")
         self.dismiss(animated: true)
     }
     
@@ -54,8 +52,9 @@ class SaveOpportunityMoreVC: UIViewController {
     @IBAction func btnResavedTapped(_ sender: UIButton) {
         self.callback?("Unsaved")
     }
-    
 }
+//    MARK: - Localisation -
+
 extension SaveOpportunityMoreVC{
     func setuplanguage(){
         lblChatwithuser.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Chat with user", comment: "")

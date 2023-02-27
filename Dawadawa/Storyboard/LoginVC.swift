@@ -386,7 +386,7 @@ extension LoginVC{
         lblGoogle.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Google", comment: "")
         lblFacebook.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Facebook", comment: "")
         lblTwitter.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Twitter", comment: "")
-        lblDontHaveAccount.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Don't have Account", comment: "")
+        lblDontHaveAccount.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Don't have an account?", comment: "")
 //        lblFirstOR.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "or", comment: "")
         lblSecondOR.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "or", comment: "")
         lblThirdOR.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "or", comment: "")

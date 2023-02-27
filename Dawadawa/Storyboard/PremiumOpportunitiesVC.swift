@@ -206,8 +206,6 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
                         vc.likecount = likecount
                         self.present(vc, animated: true)
                     }
-                    
-                    
                 }
                 
                 if txt == "Chat"{
@@ -249,7 +247,6 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
                     let vc = self.storyboard?.instantiateViewController(withIdentifier: UserProfileDetailsVC.getStoryboardID()) as! UserProfileDetailsVC
                     vc.userid = user_id ?? 0
                     self.navigationController?.pushViewController(vc, animated: true)
-                    
                 }
                 
                 if txt == "Like"{
@@ -283,7 +280,6 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
                             cell.lbllike.textColor = UIColor(hexString: "#A6A6A6")
                         }
                     }
-                    
                 }
                 
                 if txt == "Rate"{
@@ -581,9 +577,8 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
                             cell.imageSubcommentUser.isHidden = true
                             cell.lblsubUserNameandComment.isHidden = true
                             cell.verticalSpacingReply.constant = -10
-                            //                            cell.bottomlblSubcomment.constant = 10
-                            
-                            
+                            //   \cell.bottomlblSubcomment.constant = 10
+                    
                             let first = String.getString(userComment.first?.name)
                             let second = String.getString(userComment.first?.comments)
                             
@@ -592,13 +587,12 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
                             attributedString.setColorForText(textToFind: first, withColor: UIColor.black)
                             attributedString.setColorForText(textToFind: second, withColor: UIColor.gray)
                             
-                            
                             cell.lblusernameandcomment.attributedText = attributedString
                             self.getallpremium()
-                            
                         }
                     }
                 }
+                
                 if txt == "Iconusercomment" {
                     let userid = Int.getInt(self.userTimeLine[indexPath.row].usercomment.first?.user_id) ?? 0
                     print("SelfICON\(userid)")
@@ -632,8 +626,7 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
             
             cell.viewAddComment.isHidden = obj.isComment == true ? false : true
             cell.heightViewAddComment.constant = obj.isComment == true ? 55 : 0
-            
-            
+             
             if obj.usercomment.count == 0{
                 cell.viewcomment.isHidden = true
                 cell.heightViewComment.constant  = 0
@@ -644,7 +637,6 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
             else{
                 cell.viewcomment.isHidden = false
                 cell.bottomspacingReply.constant = 0
-                
             }
             
             if obj.usercomment.first?.subcomment.count == 0 {
@@ -660,8 +652,6 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
                 
             }
             
-            
-            
             let imgcomment = "\("https://demo4app.com/dawadawa/public/admin_assets/user_profile/" + String.getString(UserData.shared.social_profile))"
             
             cell.imageUser.downlodeImage(serviceurl: imgcomment , placeHolder: UIImage(named: "Boss")) // commentUserImage
@@ -673,12 +663,9 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
             debugPrint("commentuserprofile......",imgcommentuserurl)
             cell.imageCommentUser.downlodeImage(serviceurl: imgcommentuserurl , placeHolder: UIImage(named: "Boss"))
             
-            
             cell.lblsubUserNameandComment.text = String.getString(obj.usercomment.first?.subcomment.first?.usersubcommentdetails!.name) + "             " + String.getString(obj.usercomment.first?.subcomment.first?.comments) // Sub-Comment
             let imgcommentSubuser = String.getString(obj.usercomment.first?.subcomment.first?.usersubcommentdetails?.image)
             cell.imageSubcommentUser.downlodeImage(serviceurl: imgcommentSubuser, placeHolder: UIImage(named: "Boss"))
-            
-            
             
             let first = String.getString(obj.usercomment.first?.name)
             let second = String.getString(obj.usercomment.first?.comments)
@@ -696,11 +683,8 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
             attributedStringSubcomment.setColorForText(textToFind: thrid, withColor: UIColor.black)
             attributedStringSubcomment.setColorForText(textToFind: fourth, withColor: UIColor.gray)
             
-            
             cell.lblusernameandcomment.attributedText = attributedStringcomment
             cell.lblsubUserNameandComment.attributedText = attributedStringSubcomment
-            
-            
             
             cell.callbacktextviewcomment = {[weak tblViewPremiumOpp] (_) in
                 
@@ -727,9 +711,7 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
         default:
             return 0
         }
-        
     }
-    
 }
 
 // MARK: - Api
@@ -749,7 +731,6 @@ extension PremiumOpportunitiesVC{
                 kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
             }
         }
-        
         
         TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName: ServiceName.kgetpremium, requestMethod: .GET, requestParameters:[:], withProgressHUD: false) { (result:Any?, error:Error?, errorType:ErrorType?,statusCode:Int?) in
             CommonUtils.showHudWithNoInteraction(show: false)
@@ -779,7 +760,6 @@ extension PremiumOpportunitiesVC{
 //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
-                    
                 default:
                     CommonUtils.showError(.error, String.getString(dictResult["message"]))
                 }
@@ -797,7 +777,6 @@ extension PremiumOpportunitiesVC{
     func commentoppoertunityapi(oppr_id:Int,completion: @escaping(_ viewH : [user_comment])->Void){
         CommonUtils.showHud(show: true)
         
-        
         if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
             let endToken = kSharedUserDefaults.getLoggedInAccessToken()
             let septoken = endToken.components(separatedBy: " ")
@@ -806,8 +785,6 @@ extension PremiumOpportunitiesVC{
                 kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
             }
         }
-        
-        
         let params:[String : Any] = [
             "user_id":Int.getInt(UserData.shared.id),
             "opr_id":oppr_id,
@@ -815,16 +792,13 @@ extension PremiumOpportunitiesVC{
         ]
         
         debugPrint("user_id......",Int.getInt(UserData.shared.id))
-        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kaddcomment, requestMethod: .POST,
-                                                               requestParameters:params, withProgressHUD: false)
+        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kaddcomment, requestMethod: .POST, requestParameters:params, withProgressHUD: false)
         {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
             
             CommonUtils.showHudWithNoInteraction(show: false)
             
             if errorType == .requestSuccess {
-                
                 let dictResult = kSharedInstance.getDictionary(result)
-                
                 switch Int.getInt(statusCode) {
                 case 200:
                     
@@ -848,7 +822,7 @@ extension PremiumOpportunitiesVC{
                     }
                     
                     else if  Int.getInt(dictResult["responsecode"]) == 400{
-                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        // CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     

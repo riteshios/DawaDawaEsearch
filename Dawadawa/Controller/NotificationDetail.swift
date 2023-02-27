@@ -5,7 +5,7 @@
 import UIKit
 
 class NotificationDetail: UIViewController {
-    
+//    MARK:- Properties -
     @IBOutlet weak var lblHeading: UILabel!
     @IBOutlet weak var lblSubheading: UILabel!
     
@@ -13,7 +13,7 @@ class NotificationDetail: UIViewController {
     var heading = ""
     var subheading = ""
     
-//    MARK: - Life Cycle
+//    MARK: - Life Cycle -
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +23,7 @@ class NotificationDetail: UIViewController {
         self.readnotificationapi()
     }
     
-//     MARK: - @IBAction
+//     MARK: - @IBAction and Method -
     
     @IBAction func btnBackTapped(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)

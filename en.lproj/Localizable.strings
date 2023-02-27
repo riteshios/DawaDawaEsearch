@@ -85,7 +85,7 @@
 
 "Forgot Password" = "Forgot Password?";
 "Phone number/Email*" = "Phone number/Email*";
-"Dont's have an account" = "Dont's have an account";
+"Don't have an account?" = "Don't have an account?";
 "Skip login" = "Skip login";
 
 // MARK: - ForgotPasswordVC

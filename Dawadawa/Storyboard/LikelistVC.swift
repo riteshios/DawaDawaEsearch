@@ -14,7 +14,7 @@ class LikelistVC: UIViewController,UITableViewDelegate,UITableViewDataSource{
     var userdetail = [user_detail]()
     var likecount = ""
     
-//    MARK: - Life Cycle
+//    MARK: - Life Cycle -
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,13 +24,13 @@ class LikelistVC: UIViewController,UITableViewDelegate,UITableViewDataSource{
         self.lbllikeCount.text = "\(likecount) likes"
     }
     
-//    MARK: - @IBAction
+//    MARK: - @IBAction -
     
     @IBAction func btnDismissTapped(_ sender: UIButton) {
         self.dismiss(animated: false)
     }
 
-// MARK: - Table View
+// MARK: - Table View -
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return userdetail.count
@@ -53,7 +53,7 @@ class LikelistVC: UIViewController,UITableViewDelegate,UITableViewDataSource{
 
 extension LikelistVC{
    
-//    MARK: - API Call
+//    MARK: - API Call -
     
     // api like list
     
@@ -85,7 +85,6 @@ extension LikelistVC{
             if errorType == .requestSuccess {
                 
                 let dictResult = kSharedInstance.getDictionary(result)
-                
                 switch Int.getInt(statusCode) {
                 case 200:
                     

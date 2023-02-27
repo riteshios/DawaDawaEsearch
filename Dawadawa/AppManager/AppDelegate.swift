@@ -159,7 +159,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         dropDown.anchorView = text
         dropDown.dataSource = dataSource
         dropDown.backgroundColor = UIColor.white
-        dropDown.textColor = .black
+        dropDown.textColor = UIColor.init(hexString: "#1572A1")
         dropDown.width = text.frame.size.width
         dropDown.direction = .bottom
         dropDown.selectionBackgroundColor = UIColor.white
@@ -214,13 +214,10 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
     
     
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
-        
         let firebase = fcmToken
         kSharedUserDefaults.setDeviceToken(deviceToken: firebase)
         print("Firebase registration token: \(String(describing: fcmToken))")
-        
     }
-    
     
     func clickOnNotificationBackGround(userInfo: NSDictionary) {
         guard let dict = userInfo["aps"]  as? [String: Any], let _ = dict ["alert"] as? NSDictionary else {

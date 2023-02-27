@@ -8,6 +8,7 @@ import IQKeyboardManagerSwift
 
 class HomeVC: UIViewController,UITabBarControllerDelegate,PremiumOppCollectionViewCellDelegate{
     
+    //    MARK: - Properties -
     @IBOutlet weak var tblViewViewPost: UITableView!
     
     var imgUrl = ""
@@ -21,15 +22,15 @@ class HomeVC: UIViewController,UITabBarControllerDelegate,PremiumOppCollectionVi
     var txtcomment = " "
     
     @IBOutlet weak var viewSearch: UIView!
-    
     @IBOutlet weak var btnSearchOpportunity: UIButton!
-    
     @IBOutlet weak var lblUserName: UILabel!
     @IBOutlet weak var ImgUser: UIImageView!
     
     @IBOutlet weak var imgNotification: UIImageView!
     @IBOutlet weak var lblCountNotification: UILabel!
     @IBOutlet weak var lblHello: UILabel!
+    
+    //    MARK: - UIView Life Cycle -
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,11 +45,9 @@ class HomeVC: UIViewController,UITabBarControllerDelegate,PremiumOppCollectionVi
                 self.guestgetallopportunity()
             }
         }
-        
         else{
             self.fetchdata()
         }
-        
         self.setup()
         viewSearch.addShadowWithBlurOnView(viewSearch, spread: 0, blur: 10, color: .black, opacity: 0.16, OffsetX: 0, OffsetY: 1)
     }
@@ -67,6 +66,21 @@ class HomeVC: UIViewController,UITabBarControllerDelegate,PremiumOppCollectionVi
         }
     }
     
+    override func viewWillLayoutSubviews() {
+        let cell = self.tblViewViewPost.dequeueReusableCell(withIdentifier: "SocialPostTableViewCell") as! SocialPostTableViewCell
+        if kSharedUserDefaults.getlanguage() as? String == "en"{
+            DispatchQueue.main.async {
+                cell.txtviewComment.semanticContentAttribute = .forceLeftToRight
+                cell.txtviewComment.textAlignment = .left
+            }
+            
+        } else {
+            DispatchQueue.main.async {
+                cell.txtviewComment.semanticContentAttribute = .forceRightToLeft
+                cell.txtviewComment.textAlignment = .right
+            }
+        }
+    }
     
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
         //            let tabBarIndex = tabBarController.selectedIndex
@@ -105,6 +119,7 @@ class HomeVC: UIViewController,UITabBarControllerDelegate,PremiumOppCollectionVi
     //            self.tabBarController?.tabBar.isHidden = false
     //            self.tabBarController?.tabBar.layer.zPosition = 0
     //        }
+    //    MARK: - @IBACtion and Methods -
     
     @IBAction func btnSearchTapped(_ sender: UIButton) {
         tabBarController?.selectedIndex = 1
@@ -120,7 +135,7 @@ class HomeVC: UIViewController,UITabBarControllerDelegate,PremiumOppCollectionVi
         }
     }
 }
-
+//    MARK: - Table View -
 extension HomeVC:UITableViewDelegate,UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -214,7 +229,7 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
             cell.lblUserName.text = String.getString(obj.userdetail?.name)
             debugPrint("username.....", cell.lblUserName.text)
             cell.lblTitle.text = String.getString(obj.title)
-            //            cell.lblDescribtion.text = String.getString(obj.description)
+            //    cell.lblDescribtion.text = String.getString(obj.description)
             cell.lblRating.text = String.getString(obj.opr_rating)
             cell.lblCommentCout.text = String.getString(Int.getInt(obj.commentsCount))
             
@@ -944,8 +959,7 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                 cell.viewcomment.isHidden = true
                 cell.heightViewComment.constant  = 0
                 cell.bottomspacingReply.constant = -90
-                //  cell.bottomlblSubcomment.constant = -50
-                
+//                  cell.bottomlblSubcomment.constant = -50
             }
             else{
                 cell.viewcomment.isHidden = false
@@ -962,7 +976,6 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                 cell.imageSubcommentUser.isHidden = false
                 cell.lblsubUserNameandComment.isHidden = false
                 cell.VerticalspacingSubComment.constant = 22
-                
             }
             
             cell.lblusernameandcomment.text = String.getString(obj.usercomment.first?.name)
@@ -1105,7 +1118,7 @@ extension HomeVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-                //                CommonUtils.showToastForDefaultError()
+                //        CommonUtils.showToastForDefaultError()
             }
         }
     }
@@ -1229,7 +1242,7 @@ extension HomeVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-                //        CommonUtils.showToastForDefaultError()
+                //    CommonUtils.showToastForDefaultError()
             }
         }
     }
@@ -1270,7 +1283,7 @@ extension HomeVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-                //                CommonUtils.showToastForDefaultError()
+                //        CommonUtils.showToastForDefaultError()
             }
         }
         
@@ -1319,7 +1332,7 @@ extension HomeVC{
                         userTimeLine = Opportunity.map{SocialPostData(data: kSharedInstance.getDictionary($0))}
                         print("DataAllPremiumPost===\(userTimeLine)")
                         
-                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //   CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     else if  Int.getInt(dictResult["status"]) == 400{
                         //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
@@ -1435,12 +1448,12 @@ extension HomeVC{
                             debugPrint("imgaraay=-=-=-==-=", vc.imgarray)
                             
                         }
-                        //  CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //   CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                     else if  Int.getInt(dictResult["status"]) == 400{
                         
-                        // CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //   CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                 default:
@@ -1450,7 +1463,7 @@ extension HomeVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-                //                CommonUtils.showToastForDefaultError()
+                //       CommonUtils.showToastForDefaultError()
             }
         }
     }
@@ -1495,7 +1508,7 @@ extension HomeVC{
                     }
                     else if  Int.getInt(dictResult["status"]) == 400{
                         // self.imgNotification.isHidden = false
-                        //  self.imgNotification.image = UIImage(named: "notification-bing-1")
+                        // self.imgNotification.image = UIImage(named: "notification-bing-1")
                     }
                     
                 default:
@@ -1505,7 +1518,7 @@ extension HomeVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-                //                CommonUtils.showToastForDefaultError()
+                //       CommonUtils.showToastForDefaultError()
             }
         }
     }

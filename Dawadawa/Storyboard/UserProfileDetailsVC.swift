@@ -7,6 +7,7 @@ import Cosmos
 
 class UserProfileDetailsVC: UIViewController {
     
+    //    MARK: - Properties -
     @IBOutlet weak var ImgUser: UIImageView!
     @IBOutlet weak var lblName: UILabel!
     @IBOutlet weak var lblMobile: UILabel!
@@ -17,6 +18,7 @@ class UserProfileDetailsVC: UIViewController {
     @IBOutlet weak var lblUserName: UILabel!
     @IBOutlet weak var lblAboutDescription: UILabel!
     @IBOutlet weak var lblRating: UILabel!
+    @IBOutlet weak var lblUser_type: UILabel!
     
     @IBOutlet weak var lblUserProfile: UILabel!
     @IBOutlet weak var lblAbout: UILabel!
@@ -30,7 +32,7 @@ class UserProfileDetailsVC: UIViewController {
     var friendimage = ""
     var userdata:user_Data?
     
-//    MARK: - Life Cycle
+    //    MARK: - Life Cycle -
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,6 +64,7 @@ class UserProfileDetailsVC: UIViewController {
         self.lblRating.text = String.getString(self.userdata?.rating)
         self.lblUserName.text = String.getString(self.userdata?.name)
         self.lblAboutDescription.text = String.getString(self.userdata?.about)
+        self.lblUser_type.text = String.getString(self.userdata?.user_type)
         let newRatingValue = Double.getDouble(userdata?.rating)
         self.viewRating.rating = newRatingValue
         self.lblRating.text = String.getString(newRatingValue)
@@ -79,7 +82,7 @@ class UserProfileDetailsVC: UIViewController {
             task.resume()
         }
     }
-    //  MARK: - @IBAction
+    //  MARK: - @IBAction and Methods -
     
     @IBAction func btnBackTapped(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: false)
@@ -105,7 +108,7 @@ class UserProfileDetailsVC: UIViewController {
     }
 }
 
-//    MARK: - API Call
+//    MARK: - API Call -
 extension UserProfileDetailsVC{
     
     //    user data api
@@ -139,11 +142,11 @@ extension UserProfileDetailsVC{
                         self.userdata = user_Data(data: data)
                         print("DataAllUserdetails===\(self.userdata)")
                         self.fetdata()
-//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         
                     }
                     else if  Int.getInt(dictResult["status"]) == 401{
-//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                 default:
                     CommonUtils.showError(.error, String.getString(dictResult["message"]))
@@ -152,11 +155,12 @@ extension UserProfileDetailsVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-//                CommonUtils.showToastForDefaultError()
+                //                CommonUtils.showToastForDefaultError()
             }
         }
     }
 }
+//    MARK: - Localisation -
 
 extension UserProfileDetailsVC {
     func setuplanguage(){

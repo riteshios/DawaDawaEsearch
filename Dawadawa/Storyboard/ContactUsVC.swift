@@ -8,8 +8,9 @@ import IQKeyboardManagerSwift
 
 class ContactUsVC: UIViewController{
     
-    @IBOutlet weak var viewSend: UIView!
+//    MARK: - Properties  -
     
+    @IBOutlet weak var viewSend: UIView!
     @IBOutlet weak var btnDropdown: UIButton!
     @IBOutlet weak var lblSelectqueryType: UILabel!
     @IBOutlet weak var lblContactUs: UILabel!
@@ -17,7 +18,7 @@ class ContactUsVC: UIViewController{
     @IBOutlet weak var btnSend: UIButton!
     @IBOutlet weak var txtview: IQTextView!
     
-    //    MARK: - Life Cycle
+    //    MARK: - Life Cycle -
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +26,7 @@ class ContactUsVC: UIViewController{
         self.viewSend.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
     }
     
-    //    MARK: - @IBAction
+    //    MARK: - @IBAction and Methods -
     
     @IBAction func btnBackTapped(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
@@ -82,7 +83,7 @@ class ContactUsVC: UIViewController{
     }
 }
 
-// MARK: - Localisation
+// MARK: - Localisation -
 
 extension ContactUsVC{
     func setuplanguage(){
