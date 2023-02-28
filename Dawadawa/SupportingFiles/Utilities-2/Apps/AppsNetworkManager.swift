@@ -1,11 +1,7 @@
-//
 //  AppsNetworkManager swift
 //  Shubham Kaliyar
-//
 //  Created by Shubham Kaliyar on 17/09/19.
 //  Copyright © 2019 Shubham Kaliyar. All rights reserved.
-
-
 
 import Foundation
 import UIKit
@@ -13,12 +9,9 @@ import SVProgressHUD
 import AVFoundation
 import Alamofire
 
-
 //MARK:- Globle Variable for AppsNetworkManagerInstanse
 let AppsNetworkManagerInstanse = AppsNetworkManager.sharedInstanse
 let iimageCache = NSCache<NSString, AnyObject>()
-
-
 
 //MARK:-Class For Network Manager For Api Send And Retrived Data To/From Server
 
@@ -41,16 +34,12 @@ public class AppsNetworkManager{
      *  @param responeBlock call back in block
      */
     
-    
-    
-    
     func requestApi(parameters : Dictionary<String , String>, serviceurl:String , methodType:httpMethod, completionClosure: @escaping (_ result: Any?) -> ()) -> Void {
         
         //MARK:- Check the network availability
         //        if  NetworkReachabilityManager()?.isReachable != true {
         //            showAlertMessage.alert(message: AlertMessage.knoNetwork)
         //        }
-        
         
         //MARK:-Show Progress bar Hud
         self.showHudWithNoInteraction(show: true)
@@ -63,7 +52,6 @@ public class AppsNetworkManager{
         let accessToken = kSharedUserDefaults.getLoggedInAccessToken()
         var request = URLRequest(url: url)
         request.httpMethod = methodType.rawValue
-        
         
         guard let httpBody = try? JSONSerialization.data(withJSONObject: methodType.rawValue == httpMethod.get.rawValue ?  [:] : parameters , options: []) else {
             return
@@ -115,7 +103,6 @@ public class AppsNetworkManager{
             
         }.resume()
     }
-    
     
     //Func for Post Api MultiPart Api to send  image ,Video and File
     /**
@@ -267,9 +254,6 @@ public class AppsNetworkManager{
     
 }
 
-
-
-
 //MARK:- Class For Shared Utilities For AppsNetworkManagerInstanse
 extension AppsNetworkManager {
     
@@ -293,9 +277,7 @@ extension AppsNetworkManager {
         alert.addAction(action1)
         UIApplication.shared.windows.first?.rootViewController?.present(alert , animated: true)
     }
-    
 }
-
 
 //MARK:- Constant for Api For Url Sessions
 struct AppsNetworkManagerConstants {
@@ -303,7 +285,6 @@ struct AppsNetworkManagerConstants {
     static let baseUrlForimage       = "http://13.235.174.90/"
     
     static let accessToken           = "accessToken"
-    
 }
 
 //MARK:- Enum For httpsMethos
@@ -313,9 +294,6 @@ enum httpMethod: String {
     case post = "POST"
     case put  = "PUT"
 }
-
-
-
 
 
 //MARK: - Extension for Downlode Image Using URl Sessions
@@ -329,16 +307,14 @@ extension UIImageView {
         guard let url = URL(string: urlString.replacingOccurrences(of:  " ", with: "%20")) else { return }
         
         //MARK:- Check image Store in Cache or not
-      
-            if let cachedImage = iimageCache.object(forKey: urlString.replacingOccurrences(of: " ", with: "%20") as NSString) {
-                if  let image = cachedImage as? UIImage {
-                    self.image = image
-                    print("Find image on Cache : For Key" , urlString.replacingOccurrences(of: " ", with: "%20"))
-                    return
-                }
+        
+        if let cachedImage = iimageCache.object(forKey: urlString.replacingOccurrences(of: " ", with: "%20") as NSString) {
+            if  let image = cachedImage as? UIImage {
+                self.image = image
+                print("Find image on Cache : For Key" , urlString.replacingOccurrences(of: " ", with: "%20"))
+                return
             }
-       
-       
+        }
         
         print("Conecting to Host with Url:-> \(url)")
         URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
@@ -356,15 +332,12 @@ extension UIImageView {
                 }
                 return
             }
-           
-                DispatchQueue.main.async {
-                    if let image = UIImage(data: data!) {
-                        iimageCache.removeAllObjects()
-                        self.image = image
-                        iimageCache.setObject(image, forKey: urlString.replacingOccurrences(of: " ", with: "%20") as NSString)
-                    }
-                
-
+            DispatchQueue.main.async {
+                if let image = UIImage(data: data!) {
+                    iimageCache.removeAllObjects()
+                    self.image = image
+                    iimageCache.setObject(image, forKey: urlString.replacingOccurrences(of: " ", with: "%20") as NSString)
+                }
             }
         }).resume()
     }

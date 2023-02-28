@@ -13,7 +13,7 @@ import UIKit
 class AlertView :  UIViewController{
     var topWindow: UIWindow? = UIWindow(frame: UIScreen.main.bounds)
     static  let instance  = AlertView()
-    //MARK:- One Option Alert View ()Alert
+    //MARK: - One Option Alert View ()Alert
     func alert(message:String) {
         let alert = UIAlertController(title: message, message: nil, preferredStyle: .alert)
         let action1 = UIAlertAction(title: AlertTitle.kOk, style: .cancel, handler: nil)
@@ -21,8 +21,7 @@ class AlertView :  UIViewController{
         UIApplication.shared.windows.first?.rootViewController?.present(alert , animated: true)
     }
     
-    
-    //MARK:- Two Option Alert StyleList
+    //MARK: - Two Option Alert StyleList
     func alert(title :String ,message:String , defaultButton : String , cancelButton: String  , Style : UIAlertController.Style , animated : Bool) {
         let alert = UIAlertController(title: title, message: message , preferredStyle: Style)
         let action1 = UIAlertAction(title: defaultButton, style: .destructive, handler: nil)
@@ -32,7 +31,7 @@ class AlertView :  UIViewController{
         UIApplication.shared.windows.first?.rootViewController?.present(alert , animated: true)
     }
     
-    //MARK:- UiAlert with textfield
+    //MARK: - UiAlert with textfield
     func alertwithTextField(title :String ,message:String , defaultButton : String , cancelButton: String  , Style : UIAlertController.Style , animated : Bool, completionClosure:@escaping (_ result: String?) -> Void ) {
         let alert = UIAlertController(title:title, message: message, preferredStyle: Style)
         let action1 = UIAlertAction(title: defaultButton, style: .default) { (_) in
@@ -49,6 +48,4 @@ class AlertView :  UIViewController{
         alert.addAction(action2)
        UIApplication.shared.windows.first?.rootViewController?.present(alert , animated: true)
     }
-    
-    
 }

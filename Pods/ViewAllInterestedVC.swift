@@ -189,7 +189,7 @@ extension ViewAllInterestedVC:UITableViewDelegate,UITableViewDataSource{
                     self.present(vc, animated: true)
                 }
             }
-            
+
             if txt == "Chat"{
                 let userid = Int.getInt(self.userTimeLine[indexPath.row].user_id)
                 let vc = self.storyboard?.instantiateViewController(withIdentifier: ChatVC.getStoryboardID()) as! ChatVC

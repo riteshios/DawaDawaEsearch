@@ -8,6 +8,7 @@ import UIKit
 class HomeSocialMoreVC: UIViewController {
     
 //    MARK: - Properties -
+    
     var callback:((String)->())?
     @IBOutlet weak var Viewmain: UIView!
     @IBOutlet weak var viewBG:UIView!

@@ -8,14 +8,13 @@ import GoogleSignIn
 
 class LoginVC: UIViewController {
     
-    //     MARK: - Properties
+    //     MARK: - Properties -
     
     @IBOutlet weak var viewMain: UIView!
     @IBOutlet weak var viewButtonLogin: UIView!
     @IBOutlet weak var txtFieldPhoneNumer: SKFloatingTextField!
     @IBOutlet weak var txtFieldPassword: SKFloatingTextField!
    
-    
     @IBOutlet weak var lblLogin: UILabel!
     @IBOutlet weak var lblGoogle: UILabel!
     @IBOutlet weak var lblFacebook: UILabel!
@@ -69,7 +68,7 @@ class LoginVC: UIViewController {
         }
     }
     
-    //    MARK: - LIfe Cycle
+    //    MARK: - LIfe Cycle and Methods -
     
     func setup(){
         //        self.txtFieldPhoneNumer.keyBoardType = .numberPad
@@ -97,7 +96,7 @@ class LoginVC: UIViewController {
         }
 
     }
-    //  MARK: - @IBAction
+    //  MARK: - @IBAction -
     
     @IBAction func btnDropTapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
@@ -214,7 +213,7 @@ class LoginVC: UIViewController {
     //            self.showSimpleAlert(message: Notifications.kEnterValidMobileNumber)
     //            return
     //        }
-    //
+   
     //        else if String.getString(self.txtFieldPassword.text).isEmpty
     //        {
     //            showSimpleAlert(message: Notifications.kPassword)
@@ -230,7 +229,7 @@ class LoginVC: UIViewController {
     //    }
 }
 
-// MARK: - SKFloating
+// MARK: - SKFloating -
 extension LoginVC{
 
     func setTextFieldUI(textField:SKFloatingTextField,place:String ,floatingText:String){
@@ -263,7 +262,7 @@ extension LoginVC : SKFlaotingTextFieldDelegate {
         print("begin editing")
     }
 }
-// MARK: - Api Call
+// MARK: - Api Call -
 
 // Login Api
 extension LoginVC{
@@ -341,7 +340,7 @@ extension LoginVC{
                 let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
                 kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
             }
-            //            headers["token"] = kSharedUserDefaults.getLoggedInAccessToken()
+            //          headers["token"] = kSharedUserDefaults.getLoggedInAccessToken()
         }
         
         let params:[String:Any] = ["username":accountName,

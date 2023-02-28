@@ -7,6 +7,8 @@ import UIKit
 
 class HomeSocialMoreSelfVC: UIViewController {
     
+//    MARK: - Properties -
+    
     var callback:((String)->())?
     @IBOutlet weak var Viewmain: UIView!
     @IBOutlet weak var viewBG:UIView!
@@ -16,7 +18,7 @@ class HomeSocialMoreSelfVC: UIViewController {
     @IBOutlet weak var lblViewDetails: UILabel!
     
     
-//    MARK: - Life Cycle
+//    MARK: - Life Cycle -
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +41,7 @@ class HomeSocialMoreSelfVC: UIViewController {
         Viewmain.addShadowWithBlurOnView(Viewmain, spread: 0, blur: 10, color: .black, opacity: 0.16, OffsetX: 0, OffsetY: 1)
     }
     
-    //    MARK: - @IBAction
+    //    MARK: - @IBAction and Methods -
     
     @IBAction func btnDismissTapped(_ sender: UIButton) {
         //  self.callback?("Dismiss")
@@ -64,7 +66,7 @@ class HomeSocialMoreSelfVC: UIViewController {
     }
 }
 
-// MARK: - Localisation
+// MARK: - Localisation - 
 
 extension HomeSocialMoreSelfVC{
     func setuplanguage(){

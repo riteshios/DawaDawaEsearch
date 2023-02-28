@@ -361,22 +361,22 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
         if self.btnSelectImage.isSelected == true{
             if imagearr.count == 0{
                 btnSelectImage.isEnabled = true
-                    ImagePickerHelper.shared.showPickerController {
-                        image, url in
-                        self.imagearr.append(image ?? UIImage())
-                        print("imgArr .count...",self.imagearr.count)
-                        
-                        let obj = oppr_image(data: [:])
-                        obj.imageurl = ""
-                        obj.img = image
-                        self.imgarray.append(obj)
-                        
-                        self.viewImage.isHidden = self.imagearr.count != 0 ? false : true
-                        self.heightViewImage.constant = self.imagearr.count != 0 ? 236 : 0
-                        self.viewAddImageMore.isHidden = self.imagearr.count != 0 ? false : true
-                        self.heightViewAddImageMore.constant = self.imagearr.count != 0 ? 60 : 0
-                        self.UploadimageCollectionView.reloadData()
-                    }
+                ImagePickerHelper.shared.showPickerController {
+                    image, url in
+                    self.imagearr.append(image ?? UIImage())
+                    print("imgArr .count...",self.imagearr.count)
+                    
+                    let obj = oppr_image(data: [:])
+                    obj.imageurl = ""
+                    obj.img = image
+                    self.imgarray.append(obj)
+                    
+                    self.viewImage.isHidden = self.imagearr.count != 0 ? false : true
+                    self.heightViewImage.constant = self.imagearr.count != 0 ? 236 : 0
+                    self.viewAddImageMore.isHidden = self.imagearr.count != 0 ? false : true
+                    self.heightViewAddImageMore.constant = self.imagearr.count != 0 ? 60 : 0
+                    self.UploadimageCollectionView.reloadData()
+                }
                 debugPrint("imagearraycount..........",self.imagearr.count)
             }
             
@@ -578,11 +578,11 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
             self.showSimpleAlert(message: Notifications.ktitle)
             return
         }
-//        else if !String.getString(self.txtFieldTitle.text).isValidTitle()
-//        {
-//            self.showSimpleAlert(message: Notifications.KValidtitle)
-//            return
-//        }
+        //        else if !String.getString(self.txtFieldTitle.text).isValidTitle()
+        //        {
+        //            self.showSimpleAlert(message: Notifications.KValidtitle)
+        //            return
+        //        }
         else if self.isSelectState == false{
             if kSharedUserDefaults.getlanguage() as? String == "en"{
                 self.showSimpleAlert(message: "Please Select the State")
@@ -706,7 +706,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
                 }
             }
             return cell
-
+            
         case self.UploaddocumentCollectionView:
             let cell = UploaddocumentCollectionView.dequeueReusableCell(withReuseIdentifier: "UploadDocumentCollectionViewCell", for: indexPath) as! UploadDocumentCollectionViewCell
             
@@ -806,7 +806,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
         //          self.urlAttachemnt = url
         //          if self.sizePerMB(url: url) > 500
         //          {
-       
+        
         //              NKToastHelper.sharedInstance.showAlert(self, title: warningMessage.title, message: "File size must be lesser or equal to 500MB.")
         //              return
         //
@@ -876,7 +876,7 @@ extension RockPitOpportunityVC : SKFlaotingTextFieldDelegate {
 
 //MARK: - API Call
 extension RockPitOpportunityVC{
-    //
+    // 
     func getsubcategoryapi(){
         CommonUtils.showHudWithNoInteraction(show: true)
         subcategoryapi(language: "en") { success, catdata, message in
@@ -962,7 +962,7 @@ extension RockPitOpportunityVC{
         
         //
         let url = kBASEURL + ServiceName.ksubcategory
-        //
+        
         //        print("============\(params)")
         print(url)
         
@@ -985,7 +985,7 @@ extension RockPitOpportunityVC{
             }
         }
     }
-
+    
     //    parser
     class getSubCategoryParser : NSObject{
         
@@ -1351,7 +1351,7 @@ extension RockPitOpportunityVC{
             } else if errortype == .noNetwork {
                 CommonUtils.showToastForInternetUnavailable()
             } else {
-//                CommonUtils.showToastForDefaultError()
+                //                CommonUtils.showToastForDefaultError()
             }
         }
     }
@@ -1428,12 +1428,12 @@ extension RockPitOpportunityVC{
                         if septoken[0] == "Bearer"{
                             kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
                         }
-//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         kSharedAppDelegate?.makeRootViewController()
                         
                     }
                     else if  Int.getInt(dictResult["status"]) == 401{
-//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                 default:
@@ -1442,7 +1442,7 @@ extension RockPitOpportunityVC{
             } else if errortype == .noNetwork {
                 CommonUtils.showToastForInternetUnavailable()
             } else {
-//                CommonUtils.showToastForDefaultError()
+                //                CommonUtils.showToastForDefaultError()
             }
         }
     }
@@ -1498,66 +1498,66 @@ extension RockPitOpportunityVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-//                CommonUtils.showToastForDefaultError()
+                //                CommonUtils.showToastForDefaultError()
             }
         }
     }
     
-//    Delete Document Api
+    //    Delete Document Api
     
-//    func deletedocumentapi(docid:Int){
-//        CommonUtils.showHud(show: true)
-//
-//        if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
-//            let endToken = kSharedUserDefaults.getLoggedInAccessToken()
-//            let septoken = endToken.components(separatedBy: " ")
-//            if septoken[0] != "Bearer"{
-//                let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
-//                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
-//            }
-//        }
-//
-//        let params:[String : Any] = [
-//            "oppr_id":docid  // its image id
-//        ]
-//
-//        debugPrint("imageid......",docid)
-//        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kdeleteoppimage, requestMethod: .POST,requestParameters:params, withProgressHUD: false)
-//        {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
-//
-//            CommonUtils.showHudWithNoInteraction(show: false)
-//
-//            if errorType == .requestSuccess {
-//                let dictResult = kSharedInstance.getDictionary(result)
-//
-//                switch Int.getInt(statusCode) {
-//                case 200:
-//
-//                    if Int.getInt(dictResult["status"]) == 200{
-//
-//                        let endToken = kSharedUserDefaults.getLoggedInAccessToken()
-//                        let septoken = endToken.components(separatedBy: " ")
-//                        if septoken[0] == "Bearer"{
-//                            kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
-//                        }
-//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
-//                    }
-//
-//                    else if  Int.getInt(dictResult["status"]) == 404{
-//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
-//                        // kSharedAppDelegate?.makeRootViewController()
-//                    }
-//                default:
-//                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
-//                }
-//            } else if errorType == .noNetwork {
-//                CommonUtils.showToastForInternetUnavailable()
-//
-//            } else {
-//                CommonUtils.showToastForDefaultError()
-//            }
-//        }
-//    }
+    //    func deletedocumentapi(docid:Int){
+    //        CommonUtils.showHud(show: true)
+    //
+    //        if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
+    //            let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+    //            let septoken = endToken.components(separatedBy: " ")
+    //            if septoken[0] != "Bearer"{
+    //                let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
+    //                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
+    //            }
+    //        }
+    //
+    //        let params:[String : Any] = [
+    //            "oppr_id":docid  // its image id
+    //        ]
+    //
+    //        debugPrint("imageid......",docid)
+    //        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kdeleteoppimage, requestMethod: .POST,requestParameters:params, withProgressHUD: false)
+    //        {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
+    //
+    //            CommonUtils.showHudWithNoInteraction(show: false)
+    //
+    //            if errorType == .requestSuccess {
+    //                let dictResult = kSharedInstance.getDictionary(result)
+    //
+    //                switch Int.getInt(statusCode) {
+    //                case 200:
+    //
+    //                    if Int.getInt(dictResult["status"]) == 200{
+    //
+    //                        let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+    //                        let septoken = endToken.components(separatedBy: " ")
+    //                        if septoken[0] == "Bearer"{
+    //                            kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
+    //                        }
+    //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+    //                    }
+    //
+    //                    else if  Int.getInt(dictResult["status"]) == 404{
+    //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+    //                        // kSharedAppDelegate?.makeRootViewController()
+    //                    }
+    //                default:
+    //                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
+    //                }
+    //            } else if errorType == .noNetwork {
+    //                CommonUtils.showToastForInternetUnavailable()
+    //
+    //            } else {
+    //                CommonUtils.showToastForDefaultError()
+    //            }
+    //        }
+    //    }
 }
 
 extension UIViewController{
@@ -1612,7 +1612,7 @@ extension UIViewController{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-//                CommonUtils.showToastForDefaultError()
+                //                CommonUtils.showToastForDefaultError()
             }
         }
     }
@@ -1665,7 +1665,7 @@ extension UIViewController{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-//                CommonUtils.showToastForDefaultError()
+                //                CommonUtils.showToastForDefaultError()
             }
         }
     }

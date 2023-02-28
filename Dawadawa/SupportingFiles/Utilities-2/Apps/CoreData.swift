@@ -33,8 +33,6 @@
 //        }
 //    }
 //
-//
-//
 //    //Func For FatchData From CoreData
 //    func requestforData(entityName:String,forKey:String , completionClosure: @escaping (_ result: Any?) -> ()) -> Void {
 //        let data = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
