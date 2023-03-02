@@ -2,7 +2,6 @@
 //  Dawadawa
 //  Created by Ritesh Gupta on 28/07/22.
 
-
 import UIKit
 import RangeSeekSlider
 import Alamofire
@@ -12,14 +11,13 @@ var filteredArray:[String] = []
 var userTimeLine = [SocialPostData]()
 var cameFrom = ""
 
-class FilterVC: UIViewController {
+class FilterVC: UIViewController{
     
 //    MARK: - Properties -
     @IBOutlet weak var PriceSlider: RangeSeekSlider!
     
     @IBOutlet weak var tblViewOpportunitytype: UITableView!
     @IBOutlet weak var highttblviewOpportunitytype: NSLayoutConstraint!
-    
     @IBOutlet weak var tblViewServicetype: UITableView!
     
     @IBOutlet weak var txtfieldStartDate: UITextField!
@@ -38,7 +36,6 @@ class FilterVC: UIViewController {
     @IBOutlet weak var imgradiopriceHtoL: UIImageView!
     @IBOutlet weak var imgradiodateNtoO: UIImageView!
     @IBOutlet weak var imgradiodateOtoN: UIImageView!
-    
     
     @IBOutlet weak var viewMostLiked: UIView!
     @IBOutlet weak var lblMostLiked: UILabel!
@@ -1271,7 +1268,6 @@ extension FilterVC{
             }
         }
         
-        
         let params:[String : Any] = [
             "category_id":catid
         ]
@@ -1490,9 +1486,7 @@ extension FilterVC{
                             self?.tblViewOpportunitytype.reloadData()
                         }
                     }
-                    
                     else if  Int.getInt(dictResult["status"]) == 400{
-                        
 //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     

@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "41109D3D13EAA205C44B1661D53A9803"
-               BuildableName = "Stripe3DS2.bundle"
-               BlueprintName = "Stripe-Stripe3DS2"
+               BlueprintIdentifier = "A0A5CD13661B8CFFE84656B60459EEF6"
+               BuildableName = "StripeApplePay.framework"
+               BlueprintName = "StripeApplePay"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

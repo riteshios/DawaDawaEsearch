@@ -229,6 +229,7 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
             cell.lblUserName.text = String.getString(obj.userdetail?.name)
             debugPrint("username.....", cell.lblUserName.text)
             cell.lblTitle.text = String.getString(obj.title)
+            cell.lblCategoryName.text = String.getString(obj.category_id)
             //    cell.lblDescribtion.text = String.getString(obj.description)
             cell.lblRating.text = String.getString(obj.opr_rating)
             cell.lblCommentCout.text = String.getString(Int.getInt(obj.commentsCount))

@@ -92,8 +92,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uvL-Ht-fuD">
                                 <rect key="frame" x="2" y="209" width="107" height="28"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ix3-zO-Wq0">
-                                        <rect key="frame" x="5.5" y="5.5" width="96.5" height="17"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ix3-zO-Wq0">
+                                        <rect key="frame" x="5.5" y="0.0" width="96.5" height="28"/>
                                         <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="14"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -101,10 +101,12 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.08235294118" green="0.44705882349999998" blue="0.63137254899999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="ix3-zO-Wq0" firstAttribute="centerY" secondItem="uvL-Ht-fuD" secondAttribute="centerY" id="3vK-TK-tdH"/>
-                                    <constraint firstAttribute="width" constant="107" id="5Ts-EM-Wtp"/>
+                                    <constraint firstItem="ix3-zO-Wq0" firstAttribute="top" secondItem="uvL-Ht-fuD" secondAttribute="top" id="5zK-Qp-UlH"/>
+                                    <constraint firstItem="ix3-zO-Wq0" firstAttribute="leading" secondItem="uvL-Ht-fuD" secondAttribute="leading" constant="5.5" id="E17-HX-Mch"/>
                                     <constraint firstAttribute="height" constant="28" id="Gbt-Nl-ou4"/>
-                                    <constraint firstItem="ix3-zO-Wq0" firstAttribute="centerX" secondItem="uvL-Ht-fuD" secondAttribute="centerX" id="qJf-v8-WFW"/>
+                                    <constraint firstAttribute="bottom" secondItem="ix3-zO-Wq0" secondAttribute="bottom" id="Ug9-tc-W1c"/>
+                                    <constraint firstAttribute="width" secondItem="uvL-Ht-fuD" secondAttribute="height" multiplier="107:28" id="Yoq-0p-MVy"/>
+                                    <constraint firstAttribute="trailing" secondItem="ix3-zO-Wq0" secondAttribute="trailing" constant="5" id="fsj-P9-fiJ"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius1">
@@ -978,6 +980,7 @@
                 <outlet property="imgOpp_plan" destination="mSp-k1-hDp" id="9IR-wP-g9t"/>
                 <outlet property="imglike" destination="Thv-qM-E3K" id="dT8-Ed-Bt1"/>
                 <outlet property="imgsave" destination="634-6R-FaE" id="riU-IY-HIP"/>
+                <outlet property="lblCategoryName" destination="ix3-zO-Wq0" id="cg8-cT-3nG"/>
                 <outlet property="lblComment" destination="8KF-ic-5v5" id="r5r-l2-uHB"/>
                 <outlet property="lblCommentCout" destination="Mn8-1x-DkR" id="Qci-K0-dC4"/>
                 <outlet property="lblLikeCount" destination="S3U-A1-Y36" id="Zc6-0L-8AG"/>

@@ -38,6 +38,7 @@ class SocialPostTableViewCell: UITableViewCell,UITextViewDelegate {
     @IBOutlet weak var lblSave: UILabel!
     
     @IBOutlet weak var lblCommentCout: UILabel!
+    @IBOutlet weak var lblCategoryName: UILabel!
     
     @IBOutlet weak var lblRating: UILabel!
     @IBOutlet weak var WidthViewRating: NSLayoutConstraint!
