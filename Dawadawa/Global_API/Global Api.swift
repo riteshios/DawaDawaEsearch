@@ -202,7 +202,7 @@ extension UIViewController{
     
     //    Save Opportunity Api
     
-    func saveoppoertunityapi(oppr_id:Int){
+    func saveoppoertunityapi(oppr_id:Int,completion: @escaping (_ sucesscode:Int) -> Void){
         CommonUtils.showHud(show: true)
         
         if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
@@ -239,11 +239,12 @@ extension UIViewController{
                         if septoken[0] == "Bearer"{
                             kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
                         }
-                        
+                        completion(Int.getInt(dictResult["responsecode"]))
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                     else if  Int.getInt(dictResult["responsecode"]) == 400{
+                        completion(Int.getInt(dictResult["responsecode"]))
                         // CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
@@ -262,62 +263,62 @@ extension UIViewController{
     
     //    Unsaved Opportunity
     
-    func unsaveoppoertunityapi(oppr_id:Int){
-        CommonUtils.showHud(show: true)
-        
-        if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
-            let endToken = kSharedUserDefaults.getLoggedInAccessToken()
-            let septoken = endToken.components(separatedBy: " ")
-            if septoken[0] != "Bearer"{
-                let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
-                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
-            }
-        }
-        
-        let params:[String : Any] = [
-            "user_id":Int.getInt(UserData.shared.id),
-            "opr_id":oppr_id
-        ]
-        
-        debugPrint("user_id......",Int.getInt(UserData.shared.id))
-        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kunsavedopp, requestMethod: .POST, requestParameters:params, withProgressHUD: false)
-        {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
-            
-            CommonUtils.showHudWithNoInteraction(show: false)
-            
-            if errorType == .requestSuccess {
-                
-                let dictResult = kSharedInstance.getDictionary(result)
-                
-                switch Int.getInt(statusCode) {
-                case 200:
-                    
-                    if Int.getInt(dictResult["responsecode"]) == 200{
-                        
-                        let endToken = kSharedUserDefaults.getLoggedInAccessToken()
-                        let septoken = endToken.components(separatedBy: " ")
-                        if septoken[0] == "Bearer"{
-                            kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
-                        }
-                        
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                        //                        self?.TblViewSavedOpp.reloadData()
-                    }
-                    
-                    else if  Int.getInt(dictResult["responsecode"]) == 400{
-                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                    }
-                    
-                default:
-                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                }
-            } else if errorType == .noNetwork {
-                CommonUtils.showToastForInternetUnavailable()
-                
-            } else {
-                //                CommonUtils.showToastForDefaultError()
-            }
-        }
-    }
+//    func unsaveoppoertunityapi(oppr_id:Int){
+//        CommonUtils.showHud(show: true)
+//
+//        if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
+//            let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+//            let septoken = endToken.components(separatedBy: " ")
+//            if septoken[0] != "Bearer"{
+//                let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
+//                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
+//            }
+//        }
+//
+//        let params:[String : Any] = [
+//            "user_id":Int.getInt(UserData.shared.id),
+//            "opr_id":oppr_id
+//        ]
+//
+//        debugPrint("user_id......",Int.getInt(UserData.shared.id))
+//        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kunsavedopp, requestMethod: .POST, requestParameters:params, withProgressHUD: false)
+//        {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
+//
+//            CommonUtils.showHudWithNoInteraction(show: false)
+//
+//            if errorType == .requestSuccess {
+//
+//                let dictResult = kSharedInstance.getDictionary(result)
+//
+//                switch Int.getInt(statusCode) {
+//                case 200:
+//
+//                    if Int.getInt(dictResult["responsecode"]) == 200{
+//
+//                        let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+//                        let septoken = endToken.components(separatedBy: " ")
+//                        if septoken[0] == "Bearer"{
+//                            kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
+//                        }
+//
+//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+//                        //                        self?.TblViewSavedOpp.reloadData()
+//                    }
+//
+//                    else if  Int.getInt(dictResult["responsecode"]) == 400{
+//                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+//                    }
+//
+//                default:
+//                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
+//                }
+//            } else if errorType == .noNetwork {
+//                CommonUtils.showToastForInternetUnavailable()
+//
+//            } else {
+//                //                CommonUtils.showToastForDefaultError()
+//            }
+//        }
+//    }
 }

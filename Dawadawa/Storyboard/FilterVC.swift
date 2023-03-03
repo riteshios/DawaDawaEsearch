@@ -7,13 +7,13 @@ import RangeSeekSlider
 import Alamofire
 import SwiftyJSON
 
-var filteredArray:[String] = []
+var filteredArray:[String] = [] // Global
 var userTimeLine = [SocialPostData]()
 var cameFrom = ""
 
 class FilterVC: UIViewController{
     
-//    MARK: - Properties -
+    //    MARK: - Properties -
     @IBOutlet weak var PriceSlider: RangeSeekSlider!
     
     @IBOutlet weak var tblViewOpportunitytype: UITableView!
@@ -135,7 +135,7 @@ class FilterVC: UIViewController{
     var stateid:Int?
     var localityid:Int?
     
-//    MARK: - UIView and Life Cycle -
+    //    MARK: - UIView and Life Cycle -
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setuplanguage()
@@ -318,7 +318,7 @@ class FilterVC: UIViewController{
             self.lblClosed.textColor = UIColor(red: 21, green: 114, blue: 161)
             self.viewSold.backgroundColor = UIColor(red: 241, green: 249, blue: 253)
             self.lblSold.textColor = UIColor(red: 21, green: 114, blue: 161)
-//            self.oppstatus = 1
+            //            self.oppstatus = 1
             filteredArray.append("All")
             for i in 0 ..< filteredArray.count - 1{
                 if filteredArray[i] == "Available"{
@@ -406,7 +406,7 @@ class FilterVC: UIViewController{
             self.oppstatus = 5
         }
     }
-
+    
     @IBAction func btnTodayTapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         if self.btnToday.isSelected == true{
@@ -526,7 +526,7 @@ class FilterVC: UIViewController{
             else{
                 self.showSimpleAlert(message: "الرجاء اختيار تاريخ البدء إلى آخر تاريخ")
             }
-           
+            
             filteredArray.append("Custom range")
             for i in 0 ..< filteredArray.count - 1{
                 if filteredArray[i] == "Last week"{
@@ -564,7 +564,6 @@ class FilterVC: UIViewController{
                 self.getlocalityapi(id: self.stateid ?? 0 )
             }
         }
-        
     }
     
     @IBAction func btnLocalityTapped(_ sender: UIButton) {
@@ -579,6 +578,7 @@ class FilterVC: UIViewController{
                 
             }
         }
+        
         else{
             kSharedAppDelegate?.dropDown(dataSource: getlocalitylist.map{String.getString($0.local_name)}, text: btnLocality){
                 (index,item) in
@@ -1062,7 +1062,7 @@ extension FilterVC{
                         }
                     }
                     else if  Int.getInt(dictResult["status"]) == 401{
-//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                     // CommonUtils.showError(.info, String.getString(dictResult["message"]))
@@ -1073,7 +1073,7 @@ extension FilterVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-//                CommonUtils.showToastForDefaultError()
+                //                CommonUtils.showToastForDefaultError()
             }
         }
     }
@@ -1113,7 +1113,7 @@ extension FilterVC{
                         }
                     }
                     else if  Int.getInt(dictResult["status"]) == 401{
-//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                     // CommonUtils.showError(.info, String.getString(dictResult["message"]))
@@ -1124,7 +1124,7 @@ extension FilterVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-//                CommonUtils.showToastForDefaultError()
+                //                CommonUtils.showToastForDefaultError()
             }
         }
     }
@@ -1159,7 +1159,7 @@ extension FilterVC{
                         
                     }
                     else if  Int.getInt(dictResult["status"]) == 401{
-//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                     // CommonUtils.showError(.info, String.getString(dictResult["message"]))
@@ -1170,7 +1170,7 @@ extension FilterVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-//                CommonUtils.showToastForDefaultError()
+                //                CommonUtils.showToastForDefaultError()
             }
         }
     }
@@ -1186,8 +1186,6 @@ extension FilterVC{
         var params = Dictionary<String, String>()
         params.updateValue("\(self.stateid ?? 0)", forKey: "localitys_id")
         debugPrint("stateiddddddd.....",   params.updateValue("\(self.stateid ?? 0)", forKey: "localitys_id"))
-        
-        
         
         let url = kBASEURL + ServiceName.kgetlocality
         //
@@ -1258,7 +1256,6 @@ extension FilterVC{
     func filtersubcategoryapi(catid:String){
         CommonUtils.showHud(show: true)
         
-        
         if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
             let endToken = kSharedUserDefaults.getLoggedInAccessToken()
             let septoken = endToken.components(separatedBy: " ")
@@ -1296,7 +1293,7 @@ extension FilterVC{
                         let Categories = kSharedInstance.getArray(withDictionary: dictResult["Categories"])
                         self?.getfiltersubcatarr = Categories.map{getfiltersubcategoryModel(data: $0)}
                         
-//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         DispatchQueue.main.async {
                             self?.tblViewOpportunitytype.reloadData()
                         }
@@ -1304,7 +1301,7 @@ extension FilterVC{
                     
                     else if  Int.getInt(dictResult["status"]) == 400{
                         self?.getfiltersubcatarr.removeAll()
-//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         DispatchQueue.main.async {
                             self?.tblViewOpportunitytype.reloadData()
                         }
@@ -1317,7 +1314,7 @@ extension FilterVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-//                CommonUtils.showToastForDefaultError()
+                //                CommonUtils.showToastForDefaultError()
             }
         }
     }
@@ -1373,7 +1370,7 @@ extension FilterVC{
                 case 200:
                     
                     if Int.getInt(dictResult["status"]) == 200{
-    
+                        
                         let endToken = kSharedUserDefaults.getLoggedInAccessToken()
                         let septoken = endToken.components(separatedBy: " ")
                         if septoken[0] == "Bearer"{
@@ -1385,7 +1382,7 @@ extension FilterVC{
                         userTimeLine = Opportunity.map{SocialPostData(data: kSharedInstance.getDictionary($0))}
                         print("DataallSearchpost=\(userTimeLine)")
                         
-//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         
                         
                         //                        let vc = self?.storyboard?.instantiateViewController(withIdentifier: HomeVC.getStoryboardID()) as! HomeVC
@@ -1401,7 +1398,7 @@ extension FilterVC{
                     
                     else if  Int.getInt(dictResult["status"]) == 400{
                         
-//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                 default:
@@ -1411,7 +1408,7 @@ extension FilterVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-//                CommonUtils.showToastForDefaultError()
+                //                CommonUtils.showToastForDefaultError()
             }
         }
     }
@@ -1439,7 +1436,7 @@ extension FilterVC{
                         
                     }
                     else if  Int.getInt(dictResult["status"]) == 401{
-//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                     // CommonUtils.showError(.info, String.getString(dictResult["message"]))
@@ -1450,7 +1447,7 @@ extension FilterVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-//                CommonUtils.showToastForDefaultError()
+                //                CommonUtils.showToastForDefaultError()
             }
         }
     }
@@ -1481,13 +1478,13 @@ extension FilterVC{
                         let Categories = kSharedInstance.getArray(withDictionary: dictResult["Categories"])
                         self?.getfiltersubcatarr = Categories.map{getfiltersubcategoryModel(data: $0)}
                         
-//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         DispatchQueue.main.async {
                             self?.tblViewOpportunitytype.reloadData()
                         }
                     }
                     else if  Int.getInt(dictResult["status"]) == 400{
-//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                 default:
@@ -1497,7 +1494,7 @@ extension FilterVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-//                CommonUtils.showToastForDefaultError()
+                //                CommonUtils.showToastForDefaultError()
             }
         }
     }
@@ -1525,7 +1522,7 @@ extension FilterVC{
                         
                     }
                     else if  Int.getInt(dictResult["status"]) == 401{
-//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                     // CommonUtils.showError(.info, String.getString(dictResult["message"]))
@@ -1536,7 +1533,7 @@ extension FilterVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-//                CommonUtils.showToastForDefaultError()
+                //                CommonUtils.showToastForDefaultError()
             }
         }
     }
@@ -1561,7 +1558,7 @@ extension FilterVC{
                         
                     }
                     else if  Int.getInt(dictResult["status"]) == 401{
-//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                 default:
                     CommonUtils.showError(.error, String.getString(dictResult["message"]))
@@ -1570,7 +1567,7 @@ extension FilterVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-//                CommonUtils.showToastForDefaultError()
+                //                CommonUtils.showToastForDefaultError()
             }
         }
     }
@@ -1605,7 +1602,7 @@ extension FilterVC{
                         let localitys = kSharedInstance.getArray(withDictionary: dictResult["localitys"])
                         self?.getguestlocalitylist = localitys.map{getlocalityModel(data: $0)}
                         
-//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         DispatchQueue.main.async {
                             self?.tblViewOpportunitytype.reloadData()
                         }
@@ -1613,7 +1610,7 @@ extension FilterVC{
                     
                     else if  Int.getInt(dictResult["status"]) == 400{
                         
-//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                 default:
@@ -1623,7 +1620,7 @@ extension FilterVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-//                CommonUtils.showToastForDefaultError()
+                //                CommonUtils.showToastForDefaultError()
             }
         }
     }
@@ -1678,7 +1675,7 @@ extension FilterVC{
                         userTimeLine = Opportunity.map{SocialPostData(data: kSharedInstance.getDictionary($0))}
                         print("DataallSearchpost=\(userTimeLine)")
                         
-//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         
                         //                        let vc = self?.storyboard?.instantiateViewController(withIdentifier: HomeVC.getStoryboardID()) as! HomeVC
                         //                        cameFrom = "FilterData"
@@ -1695,7 +1692,7 @@ extension FilterVC{
                     
                     else if  Int.getInt(dictResult["status"]) == 400{
                         
-//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                 default:
@@ -1705,7 +1702,7 @@ extension FilterVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-//                CommonUtils.showToastForDefaultError()
+                //                CommonUtils.showToastForDefaultError()
             }
         }
     }

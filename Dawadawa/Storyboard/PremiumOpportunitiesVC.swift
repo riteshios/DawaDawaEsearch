@@ -37,7 +37,7 @@ class PremiumOpportunitiesVC: UIViewController {
         else if self.camefrom == "search"{
             self.navigationController?.popViewController(animated: true)
         }
-      
+        
     }
     
 }
@@ -83,7 +83,7 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
             cell.SocialPostCollectionView.tag = indexPath.section
             cell.lblUserName.text = String.getString(obj.userdetail?.name)
             cell.lblTitle.text = String.getString(obj.title)
-//            cell.lblDescribtion.text = String.getString(obj.description)
+            //            cell.lblDescribtion.text = String.getString(obj.description)
             cell.lblRating.text = String.getString(obj.opr_rating)
             cell.lblCommentCout.text = String.getString(Int.getInt(obj.commentsCount))
             
@@ -145,7 +145,7 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
             if String.getString(obj.is_flag) == "1"{
                 cell.imgOppFlag.isHidden = false
                 cell.LeadingOppType.constant = 17
-            
+                
             }
             else{
                 cell.imgOppFlag.isHidden = true
@@ -153,12 +153,12 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
             }
             
             cell.heightSocialPostCollectionView.constant = 275
-//            if obj.oppimage.count == 0{
-//                cell.heightSocialPostCollectionView.constant = 0
-//            }
-//            else{
-//                cell.heightSocialPostCollectionView.constant = 225
-//            }
+            //            if obj.oppimage.count == 0{
+            //                cell.heightSocialPostCollectionView.constant = 0
+            //            }
+            //            else{
+            //                cell.heightSocialPostCollectionView.constant = 225
+            //            }
             
             if String.getString(obj.opr_rating) == ""{
                 cell.lblRating.text = "0.0"
@@ -250,10 +250,10 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
                 }
                 
                 if txt == "Like"{
-                
+                    
                     let oppid = self.userTimeLine[indexPath.row].id
                     debugPrint("oppid--=-=-=-",oppid)
-                   
+                    
                     self.likeOpportunityapi(oppr_id: oppid ?? 0) { countLike,sucess  in
                         obj.likes = Int.getInt(countLike)
                         debugPrint("Int.getInt(countLike)",Int.getInt(countLike))
@@ -288,7 +288,7 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
                     vc.modalTransitionStyle = .crossDissolve
                     vc.modalPresentationStyle = .overCurrentContext
                     vc.oppid = oppid ?? 0
-            
+                    
                     vc.callbackClosure = {
                         self.getallpremium()
                     }
@@ -297,43 +297,29 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
                 
                 if txt == "Save"{
                     if tapped.isSelected{
-                        if String.getString(obj.is_saved) == "0"{
-                            let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
-                            debugPrint("saveoppid=-=-=",oppid)
-                            self.saveoppoertunityapi(oppr_id: oppid)
-                            cell.imgsave.image = UIImage(named: "saveopr")
-                            if kSharedUserDefaults.getlanguage() as? String == "en"{
-                                cell.lblSave.text = "Saved"
-                            }
-                            else{
-                                cell.lblSave.text = "تم الحفظ"
-                            }
-                            cell.lblSave.textColor = UIColor(hexString: "#1572A1")
-                        }
-                        else{
-                            let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
-                            self.unsaveoppoertunityapi(oppr_id: oppid)
-                            cell.imgsave.image = UIImage(named: "save-3")
-                            if kSharedUserDefaults.getlanguage() as? String == "en"{
-                                cell.lblSave.text = "Save"
-                            }
-                            else{
-                                cell.lblSave.text = "يحفظ"
-                            }
-                            cell.lblSave.textColor = UIColor(hexString: "#A6A6A6")
-                        }
-                    }
-                    else{
                         let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
-                        self.unsaveoppoertunityapi(oppr_id: oppid)
-                        cell.imgsave.image = UIImage(named: "save-3")
-                        if kSharedUserDefaults.getlanguage() as? String == "en"{
-                            cell.lblSave.text = "Save"
+                        self.saveoppoertunityapi(oppr_id: oppid ?? 0) { sucess in
+                            if sucess == 200{
+                                if kSharedUserDefaults.getlanguage() as? String == "en"{
+                                    cell.lblSave.text = "Saved"
+                                }
+                                else{
+                                    cell.lblSave.text = "تم الحفظ"
+                                }
+                                cell.lblSave.textColor = UIColor(hexString: "#1572A1")
+                                cell.imgsave.image = UIImage(named: "saveopr")
+                            }
+                            else if sucess == 400{
+                                if kSharedUserDefaults.getlanguage() as? String == "en"{
+                                    cell.lblSave.text = "Save"
+                                }
+                                else{
+                                    cell.lblSave.text = "يحفظ"
+                                }
+                                cell.imgsave.image = UIImage(named: "save-3")
+                                cell.lblSave.textColor = UIColor(hexString: "#A6A6A6")
+                            }
                         }
-                        else{
-                            cell.lblSave.text = "يحفظ"
-                        }
-                        cell.lblSave.textColor = UIColor(hexString: "#A6A6A6")
                     }
                 }
                 
@@ -474,7 +460,7 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
                                         vc.callbackClosure = {
                                             self.getallpremium()
                                         }
-//                                        cell.imgOppFlag.isHidden = false
+                                        //                                        cell.imgOppFlag.isHidden = false
                                     }
                                 }
                             }
@@ -511,7 +497,7 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
                     let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
                     debugPrint("detailsppid=-=-=",oppid)
                     let vc = self.storyboard?.instantiateViewController(withIdentifier: DetailScreenVC.getStoryboardID()) as! DetailScreenVC
-    
+                    
                     vc.oppid = oppid
                     self.navigationController?.pushViewController(vc, animated: true)
                 }
@@ -523,7 +509,6 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
                     
                     vc.oppid = oppid
                     self.navigationController?.pushViewController(vc, animated: true)
-                    
                 }
                 
                 if txt == "ClickComment"{
@@ -556,7 +541,6 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
                         else{
                             self.showSimpleAlert(message: "الرجاء إضافة تعليق")
                         }
-                        
                     }
                     else{
                         let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
@@ -578,7 +562,7 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
                             cell.lblsubUserNameandComment.isHidden = true
                             cell.verticalSpacingReply.constant = -10
                             //   \cell.bottomlblSubcomment.constant = 10
-                    
+                            
                             let first = String.getString(userComment.first?.name)
                             let second = String.getString(userComment.first?.comments)
                             
@@ -626,7 +610,7 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
             
             cell.viewAddComment.isHidden = obj.isComment == true ? false : true
             cell.heightViewAddComment.constant = obj.isComment == true ? 55 : 0
-             
+            
             if obj.usercomment.count == 0{
                 cell.viewcomment.isHidden = true
                 cell.heightViewComment.constant  = 0
@@ -752,12 +736,12 @@ extension PremiumOpportunitiesVC{
                         self.userTimeLine = Opportunity.map{SocialPostData(data: kSharedInstance.getDictionary($0))}
                         print("DataAllPremiumPost===\(self.userTimeLine)")
                         
-//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //     CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         self.tblViewPremiumOpp.reloadData()
                         
                     }
                     else if  Int.getInt(dictResult["status"]) == 400{
-//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //    CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                 default:
@@ -767,7 +751,7 @@ extension PremiumOpportunitiesVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-//                CommonUtils.showToastForDefaultError()
+                //           CommonUtils.showToastForDefaultError()
             }
         }
     }
@@ -833,77 +817,14 @@ extension PremiumOpportunitiesVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-//                CommonUtils.showToastForDefaultError()
+                //       CommonUtils.showToastForDefaultError()
             }
-            
         }
     }
     
     //    Markinterestedapi
-        
-        func markinterestedapi(oppr_id:Int){
-            CommonUtils.showHud(show: true)
-            
-            
-            if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
-                let endToken = kSharedUserDefaults.getLoggedInAccessToken()
-                let septoken = endToken.components(separatedBy: " ")
-                if septoken[0] != "Bearer"{
-                    let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
-                    kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
-                }
-            }
-            
-            
-            let params:[String : Any] = [
-                "user_id":Int.getInt(UserData.shared.id),
-                "opr_id":oppr_id
-            ]
-            
-            debugPrint("user_id......",Int.getInt(UserData.shared.id))
-            TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kmarkinterested, requestMethod: .POST,requestParameters:params, withProgressHUD: false)
-            {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
-                
-                CommonUtils.showHudWithNoInteraction(show: false)
-                
-                if errorType == .requestSuccess {
-                    
-                    let dictResult = kSharedInstance.getDictionary(result)
-                    
-                    switch Int.getInt(statusCode) {
-                    case 200:
-                        
-                        if Int.getInt(dictResult["status"]) == 200{
-                            
-                            let endToken = kSharedUserDefaults.getLoggedInAccessToken()
-                            let septoken = endToken.components(separatedBy: " ")
-                            if septoken[0] == "Bearer"{
-                                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
-                            }
-                            
-                            CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                        }
-                        
-                        else if  Int.getInt(dictResult["status"]) == 201{
-                            //  CommonUtils.showError(.info, String.getString(dictResult["message"]))
-//                            CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                        }
-                        
-                    default:
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                    }
-                } else if errorType == .noNetwork {
-                    CommonUtils.showToastForInternetUnavailable()
-                    
-                } else {
-//                    CommonUtils.showToastForDefaultError()
-                }
-            }
-        }
     
-    //    Opportunity Details api
-    
-    func opportunitydetailsapi(oppr_id:Int){
+    func markinterestedapi(oppr_id:Int){
         CommonUtils.showHud(show: true)
         
         
@@ -918,9 +839,68 @@ extension PremiumOpportunitiesVC{
         
         
         let params:[String : Any] = [
+            "user_id":Int.getInt(UserData.shared.id),
+            "opr_id":oppr_id
+        ]
+        
+        debugPrint("user_id......",Int.getInt(UserData.shared.id))
+        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kmarkinterested, requestMethod: .POST,requestParameters:params, withProgressHUD: false)
+        {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
+            
+            CommonUtils.showHudWithNoInteraction(show: false)
+            
+            if errorType == .requestSuccess {
+                
+                let dictResult = kSharedInstance.getDictionary(result)
+                
+                switch Int.getInt(statusCode) {
+                case 200:
+                    
+                    if Int.getInt(dictResult["status"]) == 200{
+                        
+                        let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+                        let septoken = endToken.components(separatedBy: " ")
+                        if septoken[0] == "Bearer"{
+                            kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
+                        }
+                        
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    }
+                    
+                    else if  Int.getInt(dictResult["status"]) == 201{
+                        //  CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //                            CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    }
+                    
+                default:
+                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                }
+            } else if errorType == .noNetwork {
+                CommonUtils.showToastForInternetUnavailable()
+                
+            } else {
+                //                    CommonUtils.showToastForDefaultError()
+            }
+        }
+    }
+    
+    //    Opportunity Details api
+    
+    func opportunitydetailsapi(oppr_id:Int){
+        CommonUtils.showHud(show: true)
+        
+        if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
+            let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+            let septoken = endToken.components(separatedBy: " ")
+            if septoken[0] != "Bearer"{
+                let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
+                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
+            }
+        }
+        
+        let params:[String : Any] = [
             "oppr_id":oppr_id,
             "user_id":UserData.shared.id
-            
         ]
         
         debugPrint("oppr_id...===...",oppr_id)
@@ -963,7 +943,7 @@ extension PremiumOpportunitiesVC{
                             vc.imgarray  = self?.UserTimeLineOppdetails?.oppimage ?? []
                             vc.docarray = self?.UserTimeLineOppdetails?.oppdocument ?? []
                             debugPrint("imgaraay=-=-=-==-=", vc.imgarray)
-                
+                            
                         }
                         
                         else if Int.getInt(self?.UserTimeLineOppdetails?.category_id) == 2{
@@ -993,8 +973,6 @@ extension PremiumOpportunitiesVC{
                             vc.imgarray  = self?.UserTimeLineOppdetails?.oppimage ?? []
                             vc.docarray = self?.UserTimeLineOppdetails?.oppdocument ?? []
                             debugPrint("imgaraay=-=-=-==-=", vc.imgarray)
-                            
-                            
                         }
                         else if Int.getInt(self?.UserTimeLineOppdetails?.category_id) == 4{
                             let vc = self?.storyboard?.instantiateViewController(withIdentifier: MiningServiceVC.getStoryboardID()) as! MiningServiceVC
@@ -1008,14 +986,12 @@ extension PremiumOpportunitiesVC{
                             vc.imgarray  = self?.UserTimeLineOppdetails?.oppimage ?? []
                             vc.docarray = self?.UserTimeLineOppdetails?.oppdocument ?? []
                             debugPrint("imgaraay=-=-=-==-=", vc.imgarray)
-                            
                         }
                         
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                     else if  Int.getInt(dictResult["status"]) == 400{
-                        
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
@@ -1026,9 +1002,8 @@ extension PremiumOpportunitiesVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-//                CommonUtils.showToastForDefaultError()
+                //                CommonUtils.showToastForDefaultError()
             }
-            
         }
     }
 }
@@ -1038,4 +1013,3 @@ extension PremiumOpportunitiesVC{
         lblPremium.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Premium Opportunities", comment: "")
     }
 }
-

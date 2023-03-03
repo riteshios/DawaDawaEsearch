@@ -500,48 +500,31 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                 
                 if txt == "Save"{
                     if tapped.isSelected{
-                        if String.getString(self.userTimeLine?.is_saved) == "0"{
-                            let oppid = Int.getInt(self.userTimeLine?.id)
-                            debugPrint("saveoppid=-=-=",oppid)
-                            self.saveoppoertunityapi(oppr_id: oppid)
-                            cell.imgsave.image = UIImage(named: "saveopr")
-                            if kSharedUserDefaults.getlanguage() as? String == "en"{
-                                cell.lblSave.text = "Saved"
-                            }
-                            else{
-                                cell.lblSave.text = "تم الحفظ"
-                            }
-                            cell.lblSave.textColor = UIColor(hexString: "#1572A1")
-                            self.getalldetail()
-                        }
-                        else{
-                            let oppid = Int.getInt(self.userTimeLine?.id)
-                            self.unsaveoppoertunityapi(oppr_id: oppid)
-                            cell.imgsave.image = UIImage(named: "save-3")
-                            if kSharedUserDefaults.getlanguage() as? String == "en"{
-                                cell.lblSave.text = "Save"
-                            }
-                            else{
-                                cell.lblSave.text = "يحفظ"
-                            }
-                            
-                            cell.lblSave.textColor = UIColor(hexString: "#A6A6A6")
-                            self.getalldetail()
-                        }
-                    }
-                    
-                    else{
+                        //                        if String.getString(self.userTimeLine?.is_saved) == "0"{
                         let oppid = Int.getInt(self.userTimeLine?.id)
-                        self.unsaveoppoertunityapi(oppr_id: oppid)
-                        cell.imgsave.image = UIImage(named: "save-3")
-                        if kSharedUserDefaults.getlanguage() as? String == "en"{
-                            cell.lblSave.text = "Save"
+                        self.saveoppoertunityapi(oppr_id: oppid ?? 0) { sucess in
+                            if sucess == 200{
+                                if kSharedUserDefaults.getlanguage() as? String == "en"{
+                                    cell.lblSave.text = "Saved"
+                                }
+                                else{
+                                    cell.lblSave.text = "تم الحفظ"
+                                }
+                                cell.lblSave.textColor = UIColor(hexString: "#1572A1")
+                                cell.imgsave.image = UIImage(named: "saveopr")
+                            }
+                            else if sucess == 400{
+                                if kSharedUserDefaults.getlanguage() as? String == "en"{
+                                    cell.lblSave.text = "Save"
+                                }
+                                else{
+                                    cell.lblSave.text = "يحفظ"
+                                }
+                                cell.imgsave.image = UIImage(named: "save-3")
+                                cell.lblSave.textColor = UIColor(hexString: "#A6A6A6")
+                            }
                         }
-                        else{
-                            cell.lblSave.text = "يحفظ"
-                        }
-                        cell.lblSave.textColor = UIColor(hexString: "#A6A6A6")
-                        self.getalldetail()
+                        
                     }
                 }
                 
@@ -896,11 +879,11 @@ extension DetailScreenVC{
                         
                         print("DataAlldetails===\(self?.userTimeLine)")
                         
-//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         self?.tblviewDetail.reloadData()
                     }
                     else if  Int.getInt(dictResult["status"]) == 400{
-//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                 default:
                     CommonUtils.showError(.error, String.getString(dictResult["message"]))
@@ -909,11 +892,11 @@ extension DetailScreenVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-//                CommonUtils.showToastForDefaultError()
+                //                CommonUtils.showToastForDefaultError()
             }
         }
     }
-
+    
     //    Api comment opportunity
     
     func commentoppoertunityapi(oppr_id:Int,completion: @escaping(_ viewH : [user_comment])->Void){
@@ -977,7 +960,7 @@ extension DetailScreenVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-//                CommonUtils.showToastForDefaultError()
+                //                CommonUtils.showToastForDefaultError()
             }
         }
     }
@@ -1046,7 +1029,7 @@ extension DetailScreenVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-//                CommonUtils.showToastForDefaultError()
+                //                CommonUtils.showToastForDefaultError()
             }
         }
     }
@@ -1171,7 +1154,7 @@ extension DetailScreenVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-//                CommonUtils.showToastForDefaultError()
+                //                CommonUtils.showToastForDefaultError()
             }
         }
     }
@@ -1220,7 +1203,7 @@ extension DetailScreenVC{
                     
                     else if  Int.getInt(dictResult["status"]) == 201{
                         //  CommonUtils.showError(.info, String.getString(dictResult["message"]))
-//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                 default:
@@ -1230,7 +1213,7 @@ extension DetailScreenVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-//                CommonUtils.showToastForDefaultError()
+                //                CommonUtils.showToastForDefaultError()
             }
         }
     }
@@ -1272,7 +1255,7 @@ extension DetailScreenVC{
                         if septoken[0] == "Bearer"{
                             kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
                         }
-                
+                        
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         kSharedAppDelegate?.makeRootViewController()
                     }
@@ -1288,7 +1271,7 @@ extension DetailScreenVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-//              CommonUtils.showToastForDefaultError()
+                //              CommonUtils.showToastForDefaultError()
             }
         }
     }

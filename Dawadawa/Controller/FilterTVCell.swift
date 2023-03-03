@@ -51,7 +51,7 @@ extension FilterTVCell : UICollectionViewDelegate, UICollectionViewDataSource, U
             label.text = textArray[indexPath.item]
             label.sizeToFit()
             return CGSize(width: label.frame.width + 20, height: 40)
-        }
+    }
 }
 
 // MARK: - Localisation

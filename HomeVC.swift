@@ -461,7 +461,6 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                         let oppid = userTimeLine[indexPath.row].id
                         debugPrint("oppid--=-=-=-",oppid)
                         
-                        
                         self.likeOpportunityapi(oppr_id: oppid ?? 0) { countLike,sucess  in
                             obj.likes = Int.getInt(countLike)
                             debugPrint("Int.getInt(countLike)",Int.getInt(countLike))
@@ -546,48 +545,34 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                         
                     }else{
                         if sender.isSelected{
-                            if String.getString(obj.is_saved) == "0"{
-                                let oppid = Int.getInt(userTimeLine[indexPath.row].id)
-                                debugPrint("saveoppid=-=-=",oppid)
-                                self.saveoppoertunityapi(oppr_id: oppid)
-                                cell.imgsave.image = UIImage(named: "saveopr")
-                                if kSharedUserDefaults.getlanguage() as? String == "en"{
-                                    cell.lblSave.text = "Saved"
-                                }
-                                else{
-                                    cell.lblSave.text = "تم الحفظ"
-                                }
-                                cell.lblSave.textColor = UIColor(hexString: "#1572A1")
-                            }
-                            else{
-                                let oppid = Int.getInt(userTimeLine[indexPath.row].id)
-                                self.unsaveoppoertunityapi(oppr_id: oppid)
-                                cell.imgsave.image = UIImage(named: "save-3")
-                                if kSharedUserDefaults.getlanguage() as? String == "en"{
-                                    cell.lblSave.text = "Save"
-                                }
-                                else{
-                                    cell.lblSave.text = "يحفظ"
-                                }
-                                
-                                cell.lblSave.textColor = UIColor(hexString: "#A6A6A6")
-                            }
-                        }
-                        else{
+                            //                            if String.getString(obj.is_saved) == "0"{
                             let oppid = Int.getInt(userTimeLine[indexPath.row].id)
-                            self.unsaveoppoertunityapi(oppr_id: oppid)
-                            cell.imgsave.image = UIImage(named: "save-3")
-                            if kSharedUserDefaults.getlanguage() as? String == "en"{
-                                cell.lblSave.text = "Save"
+                            debugPrint("saveoppid=-=-=",oppid)
+                            self.saveoppoertunityapi(oppr_id: oppid ?? 0) { sucess in
+                                if sucess == 200{
+                                    if kSharedUserDefaults.getlanguage() as? String == "en"{
+                                        cell.lblSave.text = "Saved"
+                                    }
+                                    else{
+                                        cell.lblSave.text = "تم الحفظ"
+                                    }
+                                    cell.lblSave.textColor = UIColor(hexString: "#1572A1")
+                                    cell.imgsave.image = UIImage(named: "saveopr")
+                                }
+                                else if sucess == 400{
+                                    if kSharedUserDefaults.getlanguage() as? String == "en"{
+                                        cell.lblSave.text = "Save"
+                                    }
+                                    else{
+                                        cell.lblSave.text = "يحفظ"
+                                    }
+                                    cell.imgsave.image = UIImage(named: "save-3")
+                                    cell.lblSave.textColor = UIColor(hexString: "#A6A6A6")
+                                }
                             }
-                            else{
-                                cell.lblSave.text = "يحفظ"
-                            }
-                            cell.lblSave.textColor = UIColor(hexString: "#A6A6A6")
                         }
                     }
                 }
-                
                 if txt == "More" {
                     
                     if UserData.shared.id == Int.getInt(obj.user_id){
@@ -960,7 +945,7 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                 cell.viewcomment.isHidden = true
                 cell.heightViewComment.constant  = 0
                 cell.bottomspacingReply.constant = -90
-//                  cell.bottomlblSubcomment.constant = -50
+                //                  cell.bottomlblSubcomment.constant = -50
             }
             else{
                 cell.viewcomment.isHidden = false
@@ -1540,5 +1525,3 @@ extension HomeVC{
         btnSearchOpportunity.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "Search Opportunities", comment: ""), for: .normal)
     }
 }
-
-
