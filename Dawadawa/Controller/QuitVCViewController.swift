@@ -16,7 +16,7 @@ class QuitVCViewController: UIViewController {
     
     var callbackquit:((String)->())?
 
-    override func viewDidLoad() {
+    override func viewDidLoad(){
         super.viewDidLoad()
         self.setuplanguage()
         viewCancel.addShadowWithBlurOnView(viewCancel, spread: 0, blur: 4, color: .black, opacity: 0.16, OffsetX: 0, OffsetY: 2)
@@ -31,7 +31,6 @@ class QuitVCViewController: UIViewController {
     
     @IBAction func btnCancelTapped(_ sender: UIButton) {
         self.dismiss(animated: true)
-        
     }
     
     @IBAction func btnQuitTapped(_ sender: UIButton) {

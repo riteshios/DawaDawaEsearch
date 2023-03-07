@@ -38,7 +38,7 @@ class SocialPostData {
     var opp_plan:String?
     var flag_user_post:Int?
     var is_user_like:String?
-    var is_saved:String?
+    var is_saved:Int?
     var plan_name:String?
     var share_link:String?
     var commentsCount:Int?
@@ -78,7 +78,7 @@ class SocialPostData {
         self.flag_user_post = Int.getInt(data["flag_user_post"])
         self.opp_plan = String.getString(data["opp_plan"])
         self.is_user_like = String.getString(data["is_user_like"])
-        self.is_saved = String.getString(data["is_saved"])
+        self.is_saved = Int.getInt(data["is_saved"])
         self.plan_name = String.getString(data["plan_name"])
         self.share_link = String.getString(data["share_link"])
         self.commentsCount = Int.getInt(data["commentsCount"])

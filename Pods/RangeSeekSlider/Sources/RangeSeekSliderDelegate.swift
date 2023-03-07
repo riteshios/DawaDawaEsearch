@@ -1,10 +1,6 @@
-//
 //  RangeSeekSliderDelegate.swift
 //  RangeSeekSlider
-//
 //  Created by Keisuke Shoji on 2017/03/09.
-//
-//
 
 import CoreGraphics
 

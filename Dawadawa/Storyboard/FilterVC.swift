@@ -121,11 +121,11 @@ class FilterVC: UIViewController{
     
     var like = ""
     var rating = ""
-    var oppstatus:Int?
+    var oppstatus:String?
     var servicetype:Int?
-    var today:Int?
-    var lastweek:Int?
-    var lastmonth:Int?
+    var today:String?
+    var lastweek:String?
+    var lastmonth:String?
     var sortby:Int?
     var selectedoptype = ""
     var selectedsuboptype = ""
@@ -134,6 +134,9 @@ class FilterVC: UIViewController{
     var timePicker = UIDatePicker()
     var stateid:Int?
     var localityid:Int?
+    
+    var minprice:Int?
+    var maxprice:Int?
     
     //    MARK: - UIView and Life Cycle -
     override func viewDidLoad() {
@@ -164,7 +167,6 @@ class FilterVC: UIViewController{
     }
     
     private func slidersetup() {
-        
         PriceSlider.delegate = self
         PriceSlider.minValue = 0.0
         PriceSlider.maxValue = 100.0
@@ -175,7 +177,7 @@ class FilterVC: UIViewController{
         PriceSlider.colorBetweenHandles = .systemBlue
         PriceSlider.lineHeight = 10.0
         PriceSlider.numberFormatter.positivePrefix = "$"
-        PriceSlider.numberFormatter.positiveSuffix = "M"
+        PriceSlider.numberFormatter.positiveSuffix = ""
     }
     
     private func resetsetup(){
@@ -214,14 +216,16 @@ class FilterVC: UIViewController{
         
         self.like = ""
         self.rating = ""
-        self.oppstatus = Int()
+        self.oppstatus = String()
         self.servicetype = Int()
-        self.today = Int()
-        self.lastweek = Int()
-        self.lastmonth = Int()
+        self.today = String()
+        self.lastweek = String()
+        self.lastmonth = String()
         self.sortby = Int()
         self.stateid = Int()
         self.localityid = Int()
+        self.minprice = Int()
+        self.maxprice = Int()
         
     }
     //    MARK: - @IBActions and Methods -
@@ -307,9 +311,9 @@ class FilterVC: UIViewController{
         }
     }
     
-    @IBAction func btnAllTapped(_ sender: UIButton) {
+     @IBAction func btnAllTapped(_ sender: UIButton) {
         sender.isSelected  = !sender.isSelected
-        if self.btnAll.isSelected == true{
+         if self.btnAll.isSelected == true{
             self.viewAll.backgroundColor = UIColor(red: 21, green: 114, blue: 161)
             self.lblAll.textColor = .white
             self.viewAvailable.backgroundColor = UIColor(red: 241, green: 249, blue: 253)
@@ -318,7 +322,7 @@ class FilterVC: UIViewController{
             self.lblClosed.textColor = UIColor(red: 21, green: 114, blue: 161)
             self.viewSold.backgroundColor = UIColor(red: 241, green: 249, blue: 253)
             self.lblSold.textColor = UIColor(red: 21, green: 114, blue: 161)
-            //            self.oppstatus = 1
+            self.oppstatus = String.getString("all")
             filteredArray.append("All")
             for i in 0 ..< filteredArray.count - 1{
                 if filteredArray[i] == "Available"{
@@ -346,7 +350,7 @@ class FilterVC: UIViewController{
             self.lblClosed.textColor = UIColor(red: 21, green: 114, blue: 161)
             self.viewSold.backgroundColor = UIColor(red: 241, green: 249, blue: 253)
             self.lblSold.textColor = UIColor(red: 21, green: 114, blue: 161)
-            self.oppstatus = 0
+            self.oppstatus = String.getString("available")
             filteredArray.append("Available")
               for i in 0 ..< filteredArray.count - 1{
                         if filteredArray[i] == "All"{
@@ -361,7 +365,6 @@ class FilterVC: UIViewController{
                                     }
                          }
         }
-        
     }
     
     @IBAction func btnClosedTapped(_ sender: UIButton) {
@@ -375,7 +378,7 @@ class FilterVC: UIViewController{
             self.lblAll.textColor = UIColor(red: 21, green: 114, blue: 161)
             self.viewSold.backgroundColor = UIColor(red: 241, green: 249, blue: 253)
             self.lblSold.textColor = UIColor(red: 21, green: 114, blue: 161)
-            self.oppstatus = 1
+            self.oppstatus = String.getString("closed")
             filteredArray.append("Closed")
             for i in 0 ..< filteredArray.count - 1{
                 if filteredArray[i] == "All"{
@@ -403,7 +406,7 @@ class FilterVC: UIViewController{
             self.lblClosed.textColor = UIColor(red: 21, green: 114, blue: 161)
             self.viewAll.backgroundColor = UIColor(red: 241, green: 249, blue: 253)
             self.lblAll.textColor = UIColor(red: 21, green: 114, blue: 161)
-            self.oppstatus = 5
+//            self.oppstatus = 5
         }
     }
     
@@ -418,7 +421,7 @@ class FilterVC: UIViewController{
             self.lblLastmonth.textColor = UIColor(red: 21, green: 114, blue: 161)
             self.viewCustomrange.backgroundColor = UIColor(red: 241, green: 249, blue: 253)
             self.lblCustomrange.textColor =  UIColor(red: 21, green: 114, blue: 161)
-            self.today = 0
+            self.today = String.getString("todaydate")
             filteredArray.append("Today")
             for i in 0 ..< filteredArray.count - 1{
                 if filteredArray[i] == "Last week"{
@@ -452,7 +455,7 @@ class FilterVC: UIViewController{
             self.lblLastmonth.textColor = UIColor(red: 21, green: 114, blue: 161)
             self.viewCustomrange.backgroundColor = UIColor(red: 241, green: 249, blue: 253)
             self.lblCustomrange.textColor =  UIColor(red: 21, green: 114, blue: 161)
-            self.lastweek = 1
+            self.lastweek = String.getString("lastweek")
             filteredArray.append("Last week")
             for i in 0 ..< filteredArray.count - 1{
                 if filteredArray[i] == "Today"{
@@ -475,7 +478,6 @@ class FilterVC: UIViewController{
             }
         }
     }
-    
     @IBAction func btnLastmonthTapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         if self.btnLastmonth.isSelected == true{
@@ -487,7 +489,7 @@ class FilterVC: UIViewController{
             self.lblToday.textColor = UIColor(red: 21, green: 114, blue: 161)
             self.viewCustomrange.backgroundColor = UIColor(red: 241, green: 249, blue: 253)
             self.lblCustomrange.textColor =  UIColor(red: 21, green: 114, blue: 161)
-            self.lastmonth = 2
+            self.lastmonth = String.getString("lastmonth")
             filteredArray.append("Last month")
             for i in 0 ..< filteredArray.count - 1{
                 if filteredArray[i] == "Last week"{
@@ -891,6 +893,8 @@ extension FilterVC: RangeSeekSliderDelegate {
     func rangeSeekSlider(_ slider: RangeSeekSlider, didChange minValue: CGFloat, maxValue: CGFloat) {
         if slider === PriceSlider {
             print("Custom slider updated. Min Value: \(minValue) Max Value: \(maxValue)")
+            self.minprice = Int(minValue)
+            self.maxprice = Int(maxValue)
         }
     }
     
@@ -1293,7 +1297,7 @@ extension FilterVC{
                         let Categories = kSharedInstance.getArray(withDictionary: dictResult["Categories"])
                         self?.getfiltersubcatarr = Categories.map{getfiltersubcategoryModel(data: $0)}
                         
-                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //   CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         DispatchQueue.main.async {
                             self?.tblViewOpportunitytype.reloadData()
                         }
@@ -1344,18 +1348,20 @@ extension FilterVC{
             "user_id":Int.getInt(UserData.shared.id),
             "most_like":String.getString(like),
             "rating":String.getString(rating),
-            "opr_status":Int.getInt(oppstatus),
+            "opr_status":String.getString(oppstatus),
             "opr_type":selectedoptype,
             "opr_subtype":selectedsuboptype,
-            "date":Int.getInt(today),
-            "lastweek":Int.getInt(lastweek),
-            "lastmonth":Int.getInt(lastmonth),
+            "date":String.getString(today),
+            "lastweek":String.getString(lastweek),
+            "lastmonth":String.getString(lastmonth),
             "state":"\(String(describing: stateids))",
             "locality":"\(String(describing: localityid))",
             "services_type":selectedservicetype,
             "sort_by":Int.getInt(sortby),
             "start_date":String.getString(self.txtfieldStartDate.text),
-            "end_date":String.getString(self.txtfieldEndDate.text)
+            "end_date":String.getString(self.txtfieldEndDate.text),
+            "min_price":Int.getInt(minprice),
+            "max_price":Int.getInt(maxprice)
         ]
         
         // Added user id in api url
@@ -1382,10 +1388,9 @@ extension FilterVC{
                         userTimeLine = Opportunity.map{SocialPostData(data: kSharedInstance.getDictionary($0))}
                         print("DataallSearchpost=\(userTimeLine)")
                         
-                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        // CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         
-                        
-                        //                        let vc = self?.storyboard?.instantiateViewController(withIdentifier: HomeVC.getStoryboardID()) as! HomeVC
+                        //  let vc = self?.storyboard?.instantiateViewController(withIdentifier: HomeVC.getStoryboardID()) as! HomeVC
                         //                        vc.cameFrom = "FilterData"
                         //                        vc.userTimeLine = self!.userTimeLine
                         //                        self?.navigationController?.pushViewController(vc, animated: true)
@@ -1398,7 +1403,7 @@ extension FilterVC{
                     
                     else if  Int.getInt(dictResult["status"]) == 400{
                         
-                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //  CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                 default:
@@ -1408,7 +1413,7 @@ extension FilterVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-                //                CommonUtils.showToastForDefaultError()
+                //     CommonUtils.showToastForDefaultError()
             }
         }
     }
@@ -1436,7 +1441,7 @@ extension FilterVC{
                         
                     }
                     else if  Int.getInt(dictResult["status"]) == 401{
-                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //  CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                     // CommonUtils.showError(.info, String.getString(dictResult["message"]))
@@ -1447,7 +1452,7 @@ extension FilterVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-                //                CommonUtils.showToastForDefaultError()
+                //    CommonUtils.showToastForDefaultError()
             }
         }
     }
@@ -1478,13 +1483,13 @@ extension FilterVC{
                         let Categories = kSharedInstance.getArray(withDictionary: dictResult["Categories"])
                         self?.getfiltersubcatarr = Categories.map{getfiltersubcategoryModel(data: $0)}
                         
-                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //   CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         DispatchQueue.main.async {
                             self?.tblViewOpportunitytype.reloadData()
                         }
                     }
                     else if  Int.getInt(dictResult["status"]) == 400{
-                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //     CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                 default:
@@ -1522,7 +1527,7 @@ extension FilterVC{
                         
                     }
                     else if  Int.getInt(dictResult["status"]) == 401{
-                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //    CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                     // CommonUtils.showError(.info, String.getString(dictResult["message"]))
@@ -1558,7 +1563,7 @@ extension FilterVC{
                         
                     }
                     else if  Int.getInt(dictResult["status"]) == 401{
-                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //    CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                 default:
                     CommonUtils.showError(.error, String.getString(dictResult["message"]))
@@ -1602,7 +1607,7 @@ extension FilterVC{
                         let localitys = kSharedInstance.getArray(withDictionary: dictResult["localitys"])
                         self?.getguestlocalitylist = localitys.map{getlocalityModel(data: $0)}
                         
-                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //     CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         DispatchQueue.main.async {
                             self?.tblViewOpportunitytype.reloadData()
                         }
@@ -1610,7 +1615,7 @@ extension FilterVC{
                     
                     else if  Int.getInt(dictResult["status"]) == 400{
                         
-                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //    CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                 default:
@@ -1692,7 +1697,7 @@ extension FilterVC{
                     
                     else if  Int.getInt(dictResult["status"]) == 400{
                         
-                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //  CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                 default:
@@ -1702,7 +1707,7 @@ extension FilterVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-                //                CommonUtils.showToastForDefaultError()
+                //      CommonUtils.showToastForDefaultError()
             }
         }
     }

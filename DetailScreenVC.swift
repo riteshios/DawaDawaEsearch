@@ -374,7 +374,7 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                 
                 cell.lbllike.textColor = UIColor(hexString: "#A6A6A6")
             }
-            if String.getString(self.userTimeLine?.is_saved) == "1"{
+            if Int.getInt(self.userTimeLine?.is_saved) == 1{
                 cell.imgsave.image = UIImage(named: "saveopr")
                 if kSharedUserDefaults.getlanguage() as? String == "en"{
                     cell.lblSave.text = "Saved"

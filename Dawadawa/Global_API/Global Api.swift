@@ -49,11 +49,11 @@ extension UIViewController{
                         }
                         
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                        //                        self?.tblViewViewPost.reloadData()
+                        //  self?.tblViewViewPost.reloadData()
                     }
                     
                     else if  Int.getInt(dictResult["status"]) == 400{
-                        // CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //  CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
@@ -64,9 +64,8 @@ extension UIViewController{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-                //                CommonUtils.showToastForDefaultError()
+                //    CommonUtils.showToastForDefaultError()
             }
-            
         }
     }
     
@@ -74,7 +73,6 @@ extension UIViewController{
     
     func likeOpportunityapi(oppr_id:Int,completion: @escaping(_ countLike: String,_ Sucesscode: Int)->Void){
         CommonUtils.showHud(show: true)
-        
         
         if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
             let endToken = kSharedUserDefaults.getLoggedInAccessToken()
@@ -224,7 +222,6 @@ extension UIViewController{
         {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
             
             CommonUtils.showHudWithNoInteraction(show: false)
-            
             if errorType == .requestSuccess {
                 
                 let dictResult = kSharedInstance.getDictionary(result)

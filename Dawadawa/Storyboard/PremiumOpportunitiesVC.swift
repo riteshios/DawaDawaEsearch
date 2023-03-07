@@ -126,7 +126,7 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
                 }
                 cell.lbllike.textColor = UIColor(hexString: "#A6A6A6")
             }
-            if String.getString(obj.is_saved) == "1"{
+            if Int.getInt(obj.is_saved) == 1{
                 cell.imgsave.image = UIImage(named: "saveopr")
                 cell.lblSave.text = "Saved"
                 cell.lblSave.textColor = UIColor(hexString: "#1572A1")

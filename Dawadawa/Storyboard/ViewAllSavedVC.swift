@@ -57,7 +57,7 @@ extension ViewAllSavedVC:UITableViewDelegate,UITableViewDataSource{
         cell.SocialPostCollectionView.tag = indexPath.section
         cell.lblUserName.text = String.getString(obj.userdetail?.name)
         debugPrint("username.....", cell.lblUserName.text)
-        //        cell.lblDescribtion.text = String.getString(obj.description)
+        //  cell.lblDescribtion.text = String.getString(obj.description)
         cell.lblCommentCout.text = String.getString(Int.getInt(obj.commentsCount))
         cell.lblRating.text = String.getString(obj.opr_rating)
         cell.img = obj.oppimage
@@ -70,7 +70,6 @@ extension ViewAllSavedVC:UITableViewDelegate,UITableViewDataSource{
         cell.lblLikeCount.text = String.getString(obj.likes) //+ " " + "likes"
         
         cell.imgOpp_plan.image = obj.opp_plan == "Featured" ? UIImage(named: "Star Filled") : obj.opp_plan == "Premium" ? UIImage(named: "Crown") : UIImage(named: "")
-        
         
         if Int.getInt(obj.close_opr) == 0{
             cell.lblTitle.text = String.getString(obj.title)
@@ -105,7 +104,7 @@ extension ViewAllSavedVC:UITableViewDelegate,UITableViewDataSource{
             cell.lbllike.textColor = UIColor(hexString: "#A6A6A6")
         }
         
-        if String.getString(obj.is_saved) == "1"{
+        if Int.getInt(obj.is_saved) == 1{
             cell.imgsave.image = UIImage(named: "saveopr")
             if kSharedUserDefaults.getlanguage() as? String == "en"{
                 cell.lblSave.text = "Saved"
@@ -518,7 +517,7 @@ extension ViewAllSavedVC:UITableViewDelegate,UITableViewDataSource{
                 }
             }
             
-            //                       COMMENT PART
+            //                    COMMENT PART
             
             if txt == "reply"{
                 
@@ -537,7 +536,6 @@ extension ViewAllSavedVC:UITableViewDelegate,UITableViewDataSource{
                 
                 vc.oppid = oppid
                 self.navigationController?.pushViewController(vc, animated: true)
-                
             }
             
             if txt == "ClickComment"{
@@ -570,7 +568,6 @@ extension ViewAllSavedVC:UITableViewDelegate,UITableViewDataSource{
                     else{
                         self.showSimpleAlert(message: "الرجاء إضافة تعليق")
                     }
-                    
                 }
                 else{
                     let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
@@ -591,8 +588,7 @@ extension ViewAllSavedVC:UITableViewDelegate,UITableViewDataSource{
                         cell.imageSubcommentUser.isHidden = true
                         cell.lblsubUserNameandComment.isHidden = true
                         cell.verticalSpacingReply.constant = -10
-                        //                        cell.bottomlblSubcomment.constant = 10
-                        
+                        // cell.bottomlblSubcomment.constant = 10
                         
                         let first = String.getString(userComment.first?.name)
                         let second = String.getString(userComment.first?.comments)
@@ -602,10 +598,8 @@ extension ViewAllSavedVC:UITableViewDelegate,UITableViewDataSource{
                         attributedString.setColorForText(textToFind: first, withColor: UIColor.black)
                         attributedString.setColorForText(textToFind: second, withColor: UIColor.gray)
                         
-                        
                         cell.lblusernameandcomment.attributedText = attributedString
                         self.getallsaveopportunity()
-                        
                     }
                 }
             }
@@ -819,13 +813,12 @@ extension ViewAllSavedVC{
                         if septoken[0] == "Bearer"{
                             kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
                         }
-                        
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                     else if  Int.getInt(dictResult["status"]) == 201{
                         //  CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //  CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                 default:
@@ -835,7 +828,7 @@ extension ViewAllSavedVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-                //                CommonUtils.showToastForDefaultError()
+                //     CommonUtils.showToastForDefaultError()
             }
         }
     }

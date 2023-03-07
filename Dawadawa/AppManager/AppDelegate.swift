@@ -203,7 +203,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return false
     }
-    
 }
 
 // Push Notification
