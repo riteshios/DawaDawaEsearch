@@ -100,7 +100,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
     var getlocalitylist    = [getLocalityModel]()
     var getlookingForList  = [getLookingForModel]()
     
-    //update
+    //    update
     var userTimeLineoppdetails:SocialPostData?
     var imgarray = [oppr_image]()
     var docarray = [oppr_document]()
@@ -463,6 +463,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
         kSharedAppDelegate?.dropDown(dataSource: getstatelist.map{String.getString($0.state_name)}, text: btnState){
             (index,item) in
             self.lblState.text = item
+            print("state name tapped\( self.lblState.text)")
             let id = self.getstatelist[index].id
             self.stateid = id
             debugPrint("State idddd.....btnnnnt",  self.stateid = id)
@@ -475,6 +476,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
         kSharedAppDelegate?.dropDown(dataSource: getlocalitylist.map{String.getString($0.local_name)}, text: btnLocality){
             (index,item) in
             self.lblLocality.text = item
+            print("Locality name tapped\( self.lblLocality.text )")
             let id = self.getlocalitylist[index].id
             self.localityid = id
             debugPrint("localityid.....btnnnnt",  self.localityid = id)
@@ -715,7 +717,6 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
                 print("documenturl=-=-=-=\(obj)")
                 let documenturl = "\(self.docUrl)/\(String.getString(obj))"
                 print("fulldocumenturl=-=-=-\(documenturl)")
-                
                 cell.lbldocument.text = obj
                 
                 cell.callbackclose = {
@@ -813,7 +814,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
         //          }
         
         // self.doc = (url)
-        //        print("doc path=-=-=\(doc)")
+        // print("doc path=-=-=\(doc)")
         self.documentarr.append(url)
         self.UploaddocumentCollectionView.isHidden = self.documentarr.count != 0 ? false : true
         self.heightCollectionView.constant = self.documentarr.count != 0 ? 60 : 0
@@ -876,7 +877,7 @@ extension RockPitOpportunityVC : SKFlaotingTextFieldDelegate {
 
 //MARK: - API Call
 extension RockPitOpportunityVC{
-    // 
+    //
     func getsubcategoryapi(){
         CommonUtils.showHudWithNoInteraction(show: true)
         subcategoryapi(language: "en") { success, catdata, message in
@@ -933,7 +934,8 @@ extension RockPitOpportunityVC{
                 }
             }
             else{
-                CommonUtils.showError(.error, String.getString(message))
+               
+//                CommonUtils.showError(.error, String.getString(message))
             }
         }
     }
@@ -1033,7 +1035,7 @@ extension RockPitOpportunityVC{
         var params = Dictionary<String, String>()
         let url = kBASEURL + ServiceName.kgetstate
         
-        //        print("============\(params)")
+        //       print("============\(params)")
         print(url)
         
         Alamofire.request(url,method: .get, parameters : params, headers: headers).responseJSON { response in
@@ -1103,10 +1105,10 @@ extension RockPitOpportunityVC{
         
         var params = Dictionary<String, String>()
         params.updateValue("\(self.stateid ?? 0)", forKey: "localitys_id")
-        debugPrint("stateiddddddd.....",   params.updateValue("\(self.stateid ?? 0)", forKey: "localitys_id"))
+        debugPrint("stateiddddddd.....", params.updateValue("\(self.stateid ?? 0)", forKey: "localitys_id"))
         
         let url = kBASEURL + ServiceName.kgetlocality
-        //
+        
         //        print("============\(params)")
         print(url)
         
@@ -1428,12 +1430,12 @@ extension RockPitOpportunityVC{
                         if septoken[0] == "Bearer"{
                             kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
                         }
-                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //   CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         kSharedAppDelegate?.makeRootViewController()
                         
                     }
                     else if  Int.getInt(dictResult["status"]) == 401{
-                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //    CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                 default:
@@ -1442,7 +1444,7 @@ extension RockPitOpportunityVC{
             } else if errortype == .noNetwork {
                 CommonUtils.showToastForInternetUnavailable()
             } else {
-                //                CommonUtils.showToastForDefaultError()
+                //      CommonUtils.showToastForDefaultError()
             }
         }
     }
@@ -1498,7 +1500,7 @@ extension RockPitOpportunityVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-                //                CommonUtils.showToastForDefaultError()
+                //       CommonUtils.showToastForDefaultError()
             }
         }
     }
@@ -1689,5 +1691,21 @@ extension RockPitOpportunityVC{
         lblFeature.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Featured", comment: "")
         lblPremium.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Premium", comment: "")
         btnCreateOpp.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "Create opportunity", comment: ""), for: .normal)
+    }
+}
+extension RockPitOpportunityVC:UITextViewDelegate{
+    //max Length
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        // get the current text, or use an empty string if that failed
+        let currentText = self.txtFieldMobileNumber.text ?? ""
+
+        // attempt to read the range they are trying to change, or exit if we can't
+        guard let stringRange = Range(range, in: currentText) else { return false }
+
+        // add their new text to the existing text
+        let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
+
+        // make sure the result is under 10 characters
+        return updatedText.count <= 10
     }
 }

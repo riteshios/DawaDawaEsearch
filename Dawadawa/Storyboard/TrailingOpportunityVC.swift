@@ -1030,9 +1030,7 @@ extension TrailingOpportunityVC{
         let kStatus = "status"
         let kMessage = "message"
         let kCategories = "Categories"
-        
-        
-        
+    
         var responsecode = 0
         var status = 0
         var message = ""
@@ -1063,7 +1061,7 @@ extension TrailingOpportunityVC{
         }
     }
     
-    // State API
+    //  State API
     func stateapi(language:String, completionBlock: @escaping (_ success: Int, _ statedata : [getStateModel]?, _ message: String) -> Void) {
         
         
@@ -1072,8 +1070,6 @@ extension TrailingOpportunityVC{
         
         var params = Dictionary<String, String>()
         //        params.updateValue("1", forKey: "category_id")
-        
-        
         
         //
         let url = kBASEURL + ServiceName.kgetstate
@@ -1111,8 +1107,6 @@ extension TrailingOpportunityVC{
         let kStatus = "status"
         let kMessage = "message"
         let kState = "state"
-        
-        
         
         var responsecode = 0
         var status = 0
@@ -1319,7 +1313,6 @@ extension TrailingOpportunityVC{
             //            headers["token"] = kSharedUserDefaults.getLoggedInAccessToken()
         }
         
-        
         let userid = Int(UserData.shared.id ?? 0)  // For Remove Optional
         debugPrint("checkuserid",userid)
         
@@ -1343,7 +1336,6 @@ extension TrailingOpportunityVC{
             "opp_state":"\(String(describing: stateid))",
             "opp_locality":"\(String(describing: localityid))",
             "location_name":String.getString(self.txtFieldLocationName.text),
-            
             "description":String.getString(self.txtViewDiscription.text),
             "mobile_num":String.getString(self.txtFieldMobileNumber.text),
             "whatsaap_num":String.getString(self.txtFieldWhatsappNumber.text),
