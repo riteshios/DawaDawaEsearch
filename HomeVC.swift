@@ -230,16 +230,18 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
             debugPrint("username.....", cell.lblUserName.text)
             cell.lblTitle.text = String.getString(obj.title)
             cell.lblCategoryName.text = String.getString(obj.category_id)
-            //    cell.lblDescribtion.text = String.getString(obj.description)
             cell.lblRating.text = String.getString(obj.opr_rating)
-            cell.lblCommentCout.text = String.getString(Int.getInt(obj.commentsCount))
             
+            cell.lblpricing.text = String.getString(obj.pricing)
+            cell.lblposted.text =  String(String.getString(obj.created_at).prefix(10))
+            cell.lblClosed.text = String(String.getString(obj.close_opr_date).prefix(10))
+            cell.lblCommentCout.text = String.getString(Int.getInt(obj.commentsCount))
             cell.img = obj.oppimage
             cell.imgUrl = self.imgUrl
             
             let imguserurl = String.getString(obj.userdetail?.social_profile)
-            //     debugPrint("socialprofile......",imguserurl)
-            //     cell.Imageuser.downlodeImage(serviceurl: imguserurl , placeHolder: UIImage(named: "Boss"))
+            //   debugPrint("socialprofile......",imguserurl)
+            //   cell.Imageuser.downlodeImage(serviceurl: imguserurl , placeHolder: UIImage(named: "Boss"))
             
             let userUrl = URL(string: imguserurl)
             cell.Imageuser.sd_setImage(with: userUrl, placeholderImage:UIImage(named: "Boss") )

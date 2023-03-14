@@ -43,6 +43,9 @@ class SocialPostTableViewCell: UITableViewCell,UITextViewDelegate {
     @IBOutlet weak var lblRating: UILabel!
     @IBOutlet weak var WidthViewRating: NSLayoutConstraint!
     
+    @IBOutlet weak var lblpricing: UILabel!
+    @IBOutlet weak var lblposted: UILabel!
+    @IBOutlet weak var lblClosed: UILabel!
     @IBOutlet weak var heightSocialPostCollectionView: NSLayoutConstraint!
     
     @IBOutlet weak var imgOppFlag: UIImageView!

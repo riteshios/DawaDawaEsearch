@@ -290,7 +290,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
         self.TextViewDescription.text = self.userTimeLineoppdetails?.description
         self.txtFieldMobileNumber.text = self.userTimeLineoppdetails?.mobile_num
         self.txtFieldWhatsappNumber.text = self.userTimeLineoppdetails?.whatsaap_num
-        self.txtFieldPricing.text = self.userTimeLineoppdetails?.pricing
+        self.txtFieldPricing.text = String.getString( self.userTimeLineoppdetails?.pricing)
         
         if self.userTimeLineoppdetails?.looking_for == "0"{
             self.lblLookingFor.text = "Investor"

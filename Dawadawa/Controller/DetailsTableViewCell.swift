@@ -5,7 +5,6 @@
 import UIKit
 import IQKeyboardManagerSwift
 
-
 var doc_url = ""
 class DetailsTableViewCell: UITableViewCell,UITextViewDelegate {
     
@@ -44,6 +43,10 @@ class DetailsTableViewCell: UITableViewCell,UITextViewDelegate {
     @IBOutlet weak var lblCommentCout: UILabel!
     
     @IBOutlet weak var lblRating: UILabel!
+    @IBOutlet weak var lblpricing: UILabel!
+    @IBOutlet weak var lblposted: UILabel!
+    @IBOutlet weak var lblClosed: UILabel!
+    
     @IBOutlet weak var WidthViewRating: NSLayoutConstraint!
     
     @IBOutlet weak var lblCategory: UILabel!

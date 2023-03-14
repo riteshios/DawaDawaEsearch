@@ -78,7 +78,20 @@ class EnterPhoneNumberVC: UIViewController {
     }
     
     @IBAction func btnContinueTapped(_ sender : UIButton) {
-        self.validation()
+        self.checkphonenumberapi(phone: Int.getInt(self.txtfieldPhoneNumber.text)) { sucess in
+            
+            if sucess == 200 {
+                self.validation()
+            }
+            else if sucess == 400 {
+                if kSharedUserDefaults.getlanguage() as? String == "en" {
+                    self.showSimpleAlert(message: "The phone number has already been taken.")
+                }
+                else{
+                    self.showSimpleAlert(message: "تم أخذ رقم الهاتف بالفعل.")
+                }
+            }
+        }
     }
     
     

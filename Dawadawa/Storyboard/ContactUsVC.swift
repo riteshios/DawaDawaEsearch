@@ -94,3 +94,13 @@ extension ContactUsVC{
         btnSend.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "Send", comment: ""), for: .normal)
     }
 }
+
+// MARK: - Api Call
+
+extension ContactUsVC{
+    
+//    contactusapi
+    
+    
+    
+}

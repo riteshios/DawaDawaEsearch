@@ -56,8 +56,23 @@ class EnterEmailVC: UIViewController {
     }
     
     @IBAction func btnContinueTapped(_ sender: UIButton) {
-        self.validation()
+        self.checkemailapi(email: self.txtfldEmail.text ?? " ") { sucess in
+            
+            if sucess == 200 {
+                self.validation()
+                
+            }
+            else if sucess == 400 {
+                if kSharedUserDefaults.getlanguage() as? String == "en" {
+                    self.showSimpleAlert(message: "The email has already been taken.")
+                }
+                else{
+                    self.showSimpleAlert(message: "البريد الإلكتروني تم أخذه.")
+                }
+            }
+        }
     }
+    
     
     
     // MARK: - Validation
@@ -129,3 +144,4 @@ extension EnterEmailVC{
         
     }
 }
+

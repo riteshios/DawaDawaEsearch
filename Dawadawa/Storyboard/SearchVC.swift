@@ -134,7 +134,9 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
             cell.lblUserName.text = String.getString(obj.userdetail?.name)
             debugPrint("username.....", cell.lblUserName.text)
             cell.lblTitle.text = String.getString(obj.title)
-        
+            cell.lblpricing.text = String.getString(obj.pricing)
+            cell.lblposted.text =  String(String.getString(obj.created_at).prefix(10))
+            cell.lblClosed.text = String(String.getString(obj.close_opr_date).prefix(10))
             cell.lblRating.text = String.getString(obj.opr_rating)
             cell.lblCommentCout.text = String.getString(Int.getInt(obj.commentsCount))
             

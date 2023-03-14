@@ -258,64 +258,77 @@ extension UIViewController{
         }
     }
     
-    //    Unsaved Opportunity
+//   Check Email Address
     
-//    func unsaveoppoertunityapi(oppr_id:Int){
-//        CommonUtils.showHud(show: true)
+    func checkemailapi(email:String,completion: @escaping (_ sucesscode:Int) -> Void){
+
+        CommonUtils.showHud(show: true)
+        let params: [String:Any] = [
+            "email":email
+        ]
+
+        TANetworkManager.sharedInstance.requestApi(withServiceName: ServiceName.kcheckemail, requestMethod: .POST, requestParameters: params, withProgressHUD: false) { (result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
+
+            if errorType == .requestSuccess {
+                let dictResult = kSharedInstance.getDictionary(result)
+
+                switch Int.getInt(statusCode){
+                case 200:
+
+                    if Int.getInt(dictResult["status"]) == 200{
+                        completion(Int.getInt(dictResult["status"]))
+                        
+                    }
+                    else if Int.getInt(dictResult["status"]) == 400{
+                        completion(Int.getInt(dictResult["status"]))
+                    }
 //
-//        if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
-//            let endToken = kSharedUserDefaults.getLoggedInAccessToken()
-//            let septoken = endToken.components(separatedBy: " ")
-//            if septoken[0] != "Bearer"{
-//                let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
-//                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
-//            }
-//        }
-//
-//        let params:[String : Any] = [
-//            "user_id":Int.getInt(UserData.shared.id),
-//            "opr_id":oppr_id
-//        ]
-//
-//        debugPrint("user_id......",Int.getInt(UserData.shared.id))
-//        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kunsavedopp, requestMethod: .POST, requestParameters:params, withProgressHUD: false)
-//        {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
-//
-//            CommonUtils.showHudWithNoInteraction(show: false)
-//
-//            if errorType == .requestSuccess {
-//
-//                let dictResult = kSharedInstance.getDictionary(result)
-//
-//                switch Int.getInt(statusCode) {
-//                case 200:
-//
-//                    if Int.getInt(dictResult["responsecode"]) == 200{
-//
-//                        let endToken = kSharedUserDefaults.getLoggedInAccessToken()
-//                        let septoken = endToken.components(separatedBy: " ")
-//                        if septoken[0] == "Bearer"{
-//                            kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
-//                        }
-//
-//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
-//                        //                        self?.TblViewSavedOpp.reloadData()
-//                    }
-//
-//                    else if  Int.getInt(dictResult["responsecode"]) == 400{
-//                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
-//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
-//                    }
-//
-//                default:
-//                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
-//                }
-//            } else if errorType == .noNetwork {
-//                CommonUtils.showToastForInternetUnavailable()
-//
-//            } else {
-//                //                CommonUtils.showToastForDefaultError()
-//            }
-//        }
-//    }
+                default:
+                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                }
+            }else if errorType == .noNetwork {
+                CommonUtils.showToastForInternetUnavailable()
+
+            } else {
+//                CommonUtils.showToastForDefaultError()
+            }
+        }
+    }
+    
+    //   Check Phone Number
+        
+        func checkphonenumberapi(phone:Int,completion: @escaping (_ sucesscode:Int) -> Void){
+
+            CommonUtils.showHud(show: true)
+            let params: [String:Any] = [
+                "phone":phone
+            ]
+
+            TANetworkManager.sharedInstance.requestApi(withServiceName: ServiceName.kcheckphone, requestMethod: .POST, requestParameters: params, withProgressHUD: false) { (result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
+
+                if errorType == .requestSuccess {
+                    let dictResult = kSharedInstance.getDictionary(result)
+
+                    switch Int.getInt(statusCode){
+                    case 200:
+
+                        if Int.getInt(dictResult["status"]) == 200{
+                            completion(Int.getInt(dictResult["status"]))
+                            
+                        }
+                        else if Int.getInt(dictResult["status"]) == 400{
+                            completion(Int.getInt(dictResult["status"]))
+                        }
+    //
+                    default:
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    }
+                }else if errorType == .noNetwork {
+                    CommonUtils.showToastForInternetUnavailable()
+
+                } else {
+    //                CommonUtils.showToastForDefaultError()
+                }
+            }
+        }
 }

@@ -25,11 +25,9 @@ class getServicetypeModel{
     let services_type: String?
     var isselection = false
     
-    
     init(data:[String:Any]){
         self.id = Int.getInt(data["id"])
         self.services_type = String.getString(data["services_type"])
-       
     }
 }
 
@@ -63,6 +61,7 @@ class getlocalityModel{
         self.local_name = String.getString(data["local_name"])
     }
 }
+
 // Category Model
 //class getCartegoryModel:NSObject{
 //    enum keys:String, CodingKey{
@@ -73,9 +72,8 @@ class getlocalityModel{
 //    var id = ""
 //    var category_name = ""
 //    var cat_image = ""
-//
-//
-//
+
+
 //    override init(){
 //        super.init()
 //
@@ -125,19 +123,18 @@ class getStateModel:NSObject{
     enum keys:String, CodingKey{
         case id = "id"
         case state_name = "state_name"
-        
     }
+    
     var id:Int?
     var state_name = ""
     
     override init(){
         super.init()
-        
     }
+    
     init(dictionary:[String:AnyObject]){
         if let id = dictionary[keys.id.stringValue] as? Int{
             self.id = id
-            
         }
         if let state_name = dictionary[keys.state_name.stringValue] as? String{
             self.state_name = state_name

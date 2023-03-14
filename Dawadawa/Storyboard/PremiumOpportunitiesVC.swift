@@ -83,8 +83,10 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
             cell.SocialPostCollectionView.tag = indexPath.section
             cell.lblUserName.text = String.getString(obj.userdetail?.name)
             cell.lblTitle.text = String.getString(obj.title)
-            //            cell.lblDescribtion.text = String.getString(obj.description)
             cell.lblRating.text = String.getString(obj.opr_rating)
+            cell.lblpricing.text = String.getString(obj.pricing)
+            cell.lblposted.text =  String(String.getString(obj.created_at).prefix(10))
+            cell.lblClosed.text = String(String.getString(obj.close_opr_date).prefix(10))
             cell.lblCommentCout.text = String.getString(Int.getInt(obj.commentsCount))
             
             let imguserurl = String.getString(obj.userdetail?.social_profile)
@@ -490,7 +492,7 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
                     }
                 }
                 
-                //                       COMMENT PART
+                //                     COMMENT PART
                 
                 if txt == "reply"{
                     
@@ -751,7 +753,7 @@ extension PremiumOpportunitiesVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-                //           CommonUtils.showToastForDefaultError()
+                //         CommonUtils.showToastForDefaultError()
             }
         }
     }

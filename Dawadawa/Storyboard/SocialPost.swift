@@ -13,7 +13,7 @@ class SocialPostData {
     var user_id:Int?
     var title:String?
     var oppr_type:String?
-    var category_id:String?
+    var category_id:Int?
     var business_name:String?
     var subcategory_name:String?
     var services_type:String?
@@ -32,7 +32,9 @@ class SocialPostData {
     var category_name:String?
     var mobile_num:String?
     var whatsaap_num:String?
-    var pricing:String?
+    var pricing:Int?
+    var created_at:String?
+    var close_opr_date:String?
     var looking_for:String?
     var close_opr:Int?
     var opp_plan:String?
@@ -53,7 +55,7 @@ class SocialPostData {
         self.user_id = Int.getInt(data["user_id"])
         self.title = String.getString(data["title"])
         self.oppr_type = String.getString(data["oppr_type"])
-        self.category_id = String.getString(data["category_id"])
+        self.category_id = Int.getInt(data["category_id"])
         self.business_name = String.getString(data["business_name"])
         self.subcategory_name = String.getString(data["subcategory_name"])
         self.services_type = String.getString(data["services_type"])
@@ -72,7 +74,9 @@ class SocialPostData {
         self.category_name = String.getString(data["category_name"])
         self.mobile_num = String.getString(data["mobile_num"])
         self.whatsaap_num = String.getString(data["whatsaap_num"])
-        self.pricing = String.getString(data["pricing"])
+        self.pricing = Int.getInt(data["pricing"])
+        self.created_at = String.getString(data["created_at"])
+        self.close_opr_date = String.getString(data["close_opr_date"])
         self.looking_for = String.getString(data["looking_for"])
         self.close_opr = Int.getInt(data["close_opr"])
         self.flag_user_post = Int.getInt(data["flag_user_post"])

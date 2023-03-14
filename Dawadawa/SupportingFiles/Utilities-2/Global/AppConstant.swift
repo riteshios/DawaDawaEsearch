@@ -174,6 +174,11 @@ struct ServiceName {
     
 //    Like List
     static let klikelist               =            "api/UserListLikesOpr"
+    
+//    Check Email and Phone
+    static let kcheckemail             =            "api/email-already-exists"
+    static let kcheckphone             =            "api/phone-already-exists"
+    static let kcontactus              =            "api/contact_us"
 }
 
 struct Notifications {

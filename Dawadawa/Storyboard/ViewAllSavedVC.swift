@@ -57,9 +57,11 @@ extension ViewAllSavedVC:UITableViewDelegate,UITableViewDataSource{
         cell.SocialPostCollectionView.tag = indexPath.section
         cell.lblUserName.text = String.getString(obj.userdetail?.name)
         debugPrint("username.....", cell.lblUserName.text)
-        //  cell.lblDescribtion.text = String.getString(obj.description)
         cell.lblCommentCout.text = String.getString(Int.getInt(obj.commentsCount))
         cell.lblRating.text = String.getString(obj.opr_rating)
+        cell.lblpricing.text = String.getString(obj.pricing)
+        cell.lblposted.text =  String(String.getString(obj.created_at).prefix(10))
+        cell.lblClosed.text = String(String.getString(obj.close_opr_date).prefix(10))
         cell.img = obj.oppimage
         cell.imgUrl = self.imgUrl
         

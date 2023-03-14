@@ -360,9 +360,12 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
             
             cell.lblUserName.text = String.getString(UserData.shared.name) + " " + String.getString(UserData.shared.last_name)
             cell.lblTitle.text = String.getString(obj.title)
-//            cell.lblDescribtion.text = String.getString(obj.description)
+           
             cell.lblCommentCout.text = String.getString(Int.getInt(obj.commentsCount))
             cell.lblRating.text = String.getString(obj.opr_rating)
+            cell.lblpricing.text = String.getString(obj.pricing)
+            cell.lblposted.text =  String(String.getString(obj.created_at).prefix(10))
+            cell.lblClosed.text = String(String.getString(obj.close_opr_date).prefix(10))
             cell.LeadingOppType.constant = -20
             
             cell.Imageuser.downlodeImage(serviceurl: profilrimageurl, placeHolder: UIImage(named: "Boss"))

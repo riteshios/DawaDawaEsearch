@@ -299,7 +299,7 @@
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" $0k" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="39z-Sv-NOP">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" $0k" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="39z-Sv-NOP">
                                                         <rect key="frame" x="53" y="5.5" width="30.5" height="18.5"/>
                                                         <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="15"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -981,6 +981,7 @@
                 <outlet property="imglike" destination="Thv-qM-E3K" id="dT8-Ed-Bt1"/>
                 <outlet property="imgsave" destination="634-6R-FaE" id="riU-IY-HIP"/>
                 <outlet property="lblCategoryName" destination="ix3-zO-Wq0" id="cg8-cT-3nG"/>
+                <outlet property="lblClosed" destination="2k6-oo-3Ke" id="ZVN-YW-AS9"/>
                 <outlet property="lblComment" destination="8KF-ic-5v5" id="r5r-l2-uHB"/>
                 <outlet property="lblCommentCout" destination="Mn8-1x-DkR" id="Qci-K0-dC4"/>
                 <outlet property="lblLikeCount" destination="S3U-A1-Y36" id="Zc6-0L-8AG"/>
@@ -991,6 +992,8 @@
                 <outlet property="lblUserName" destination="BiR-8u-SdH" id="AAy-8b-WUz"/>
                 <outlet property="lblcloseOpportunity" destination="SWX-Vx-fvq" id="bvH-cW-TRc"/>
                 <outlet property="lbllike" destination="70w-nw-z2Q" id="5t1-3c-fOw"/>
+                <outlet property="lblposted" destination="9Yb-QZ-n20" id="Mo1-xA-kAu"/>
+                <outlet property="lblpricing" destination="39z-Sv-NOP" id="RqR-3P-rRV"/>
                 <outlet property="lblsubUserNameandComment" destination="MrB-ll-bmv" id="4OA-iA-075"/>
                 <outlet property="lblusernameandcomment" destination="53I-4I-wgV" id="GX4-cI-EtB"/>
                 <outlet property="pageControl" destination="Mtw-CB-bdI" id="tUS-cX-BXq"/>
