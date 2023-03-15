@@ -1038,7 +1038,7 @@ public class TANetworkManager {
         if String.getString(kSharedUserDefaults.getlanguage()) != ""{
             headers["Accept-Language"] = String.getString(kSharedUserDefaults.getlanguage())
         }
-        
+      
         else {
             headers["Accept-Language"] = "en"
         }

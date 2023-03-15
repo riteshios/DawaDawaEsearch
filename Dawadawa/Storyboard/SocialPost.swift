@@ -5,6 +5,7 @@
 import Foundation
 import UIKit
 import SwiftyJSON
+import StripeApplePay
 
 // Model for all and Profile Post Opportunity
 class SocialPostData {
@@ -410,5 +411,23 @@ class Message_data{
         self.message = String.getString(data["message"])
         self.is_read = Int.getInt(data["is_read"])
         self.created_at = String.getString(data["created_at"])
+    }
+}
+
+// Contact - Us
+
+class contact_us{
+    var address: String?
+    var phone_no: String?
+    var email: String?
+    var en_contact: String?
+    var en_subtitle: String?
+    
+    init(data:[String:Any]){
+        self.address = String.getString(data["address"])
+        self.phone_no = String.getString(data["phone_no"])
+        self.email = String.getString(data["email"])
+        self.en_contact = String.getString(data["en_contact"])
+        self.en_subtitle = String.getString(data["en_contact"])
     }
 }

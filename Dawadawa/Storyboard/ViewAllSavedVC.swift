@@ -57,6 +57,7 @@ extension ViewAllSavedVC:UITableViewDelegate,UITableViewDataSource{
         cell.SocialPostCollectionView.tag = indexPath.section
         cell.lblUserName.text = String.getString(obj.userdetail?.name)
         debugPrint("username.....", cell.lblUserName.text)
+        cell.lblCategoryName.text = String.getString(obj.category_name)
         cell.lblCommentCout.text = String.getString(Int.getInt(obj.commentsCount))
         cell.lblRating.text = String.getString(obj.opr_rating)
         cell.lblpricing.text = String.getString(obj.pricing)

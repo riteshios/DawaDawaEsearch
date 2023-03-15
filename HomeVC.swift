@@ -229,7 +229,7 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
             cell.lblUserName.text = String.getString(obj.userdetail?.name)
             debugPrint("username.....", cell.lblUserName.text)
             cell.lblTitle.text = String.getString(obj.title)
-            cell.lblCategoryName.text = String.getString(obj.category_id)
+            cell.lblCategoryName.text = String.getString(obj.category_name)
             cell.lblRating.text = String.getString(obj.opr_rating)
             
             cell.lblpricing.text = String.getString(obj.pricing)
@@ -245,7 +245,7 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
             
             let userUrl = URL(string: imguserurl)
             cell.Imageuser.sd_setImage(with: userUrl, placeholderImage:UIImage(named: "Boss") )
-            
+           
             cell.lblLikeCount.text = String.getString(obj.likes) //+ " " + "Likes"
             
             cell.imgOpp_plan.image = obj.opp_plan == "Featured" ? UIImage(named: "Star Filled") : obj.opp_plan == "Premium" ? UIImage(named: "Crown") : UIImage(named: "Folded Booklet")

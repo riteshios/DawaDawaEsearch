@@ -83,6 +83,7 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
             cell.SocialPostCollectionView.tag = indexPath.section
             cell.lblUserName.text = String.getString(obj.userdetail?.name)
             cell.lblTitle.text = String.getString(obj.title)
+            cell.lblCategoryName.text = String.getString(obj.category_name)
             cell.lblRating.text = String.getString(obj.opr_rating)
             cell.lblpricing.text = String.getString(obj.pricing)
             cell.lblposted.text =  String(String.getString(obj.created_at).prefix(10))

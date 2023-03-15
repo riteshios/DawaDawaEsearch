@@ -112,14 +112,14 @@ class FilterVC: UIViewController{
     var getguestlocalitylist   =      [getlocalityModel]()
     //    var userTimeLine           =      [SocialPostData]()
     
-    
     var selectedIds:[String] = []
     var selectedsubids:[String] = []
     var selectedservicetypesids:[String] = []
     var stringcatid = ""
     var imgUrl = ""
     
-    var like = ""
+    var mostlike = ""
+    var leastlike = ""
     var rating = ""
     var oppstatus:String?
     var servicetype:Int?
@@ -168,7 +168,7 @@ class FilterVC: UIViewController{
     
     private func slidersetup() {
         PriceSlider.delegate = self
-        PriceSlider.minValue = 0.0
+        PriceSlider.minValue = 1.0
         PriceSlider.maxValue = 100.0
         PriceSlider.selectedMinValue = 40.0
         PriceSlider.selectedMaxValue = 60.0
@@ -214,7 +214,8 @@ class FilterVC: UIViewController{
         self.lblState.text = "State"
         self.lblLocality.text = "Locality"
         
-        self.like = ""
+        self.mostlike = ""
+        self.leastlike = ""
         self.rating = ""
         self.oppstatus = String()
         self.servicetype = Int()
@@ -226,7 +227,6 @@ class FilterVC: UIViewController{
         self.localityid = Int()
         self.minprice = Int()
         self.maxprice = Int()
-        
     }
     //    MARK: - @IBActions and Methods -
     
@@ -245,7 +245,7 @@ class FilterVC: UIViewController{
             self.lblMostLiked.textColor = .white
             self.viewLeastLiked.backgroundColor = UIColor(red: 241, green: 249, blue: 253)
             self.lblLeastLiked.textColor = UIColor(red: 21, green: 114, blue: 161)
-            self.like = "DESC"
+            self.mostlike = "DESC"
             filteredArray.append("Most liked")
             for i in 0 ..< filteredArray.count - 1{
                 if filteredArray[i] == "Least liked"{
@@ -263,7 +263,7 @@ class FilterVC: UIViewController{
             self.lblLeastLiked.textColor = .white
             self.viewMostLiked.backgroundColor = UIColor(red: 241, green: 249, blue: 253)
             self.lblMostLiked.textColor = UIColor(red: 21, green: 114, blue: 161)
-            self.like = "ASC"
+            self.leastlike = "ASC"
             
             filteredArray.append("Least liked")
             for i in 0 ..< filteredArray.count - 1{
@@ -1346,7 +1346,8 @@ extension FilterVC{
         
         let params:[String : Any] = [
             "user_id":Int.getInt(UserData.shared.id),
-            "most_like":String.getString(like),
+            "most_like":String.getString(mostlike),
+            "least_like":String.getString(leastlike),
             "rating":String.getString(rating),
             "opr_status":String.getString(oppstatus),
             "opr_type":selectedoptype,
@@ -1642,7 +1643,8 @@ extension FilterVC{
         debugPrint("checklocalityid",localityid)
         
         let params:[String : Any] = [
-            "most_like":String.getString(like),
+            "most_like":String.getString(mostlike),
+            "least_like":String.getString(leastlike),
             "rating":String.getString(rating),
             "opp_status":Int.getInt(oppstatus),
             "opr_type":selectedoptype,

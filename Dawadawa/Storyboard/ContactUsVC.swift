@@ -16,7 +16,11 @@ class ContactUsVC: UIViewController{
     @IBOutlet weak var lblContactUs: UILabel!
     @IBOutlet weak var lblSubheading: UILabel!
     @IBOutlet weak var btnSend: UIButton!
+    @IBOutlet weak var lblAddress: UILabel!
+    @IBOutlet weak var lblPhone: UILabel!
+    @IBOutlet weak var lblmail: UILabel!
     @IBOutlet weak var txtview: IQTextView!
+    var contactus:contact_us?
     
     //    MARK: - Life Cycle -
     
@@ -24,6 +28,14 @@ class ContactUsVC: UIViewController{
         super.viewDidLoad()
         self.setuplanguage()
         self.viewSend.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
+        self.getcontacusapi()
+    }
+    
+     func fetchdata(){
+        self.lblAddress.text = self.contactus?.address
+        self.lblPhone.text = self.contactus?.phone_no
+        self.lblmail.text = self.contactus?.email
+        self.lblContactUs.text = self.contactus?.en_subtitle
     }
     
     //    MARK: - @IBAction and Methods -
@@ -46,6 +58,7 @@ class ContactUsVC: UIViewController{
         else{
             kSharedAppDelegate?.dropDown(dataSource:dataSource2 , text: btnDropdown)
             {(Index ,item) in
+                
                 self.lblSelectqueryType.text = item
             }
         }
@@ -101,6 +114,49 @@ extension ContactUsVC{
     
 //    contactusapi
     
-    
-    
+    func getcontacusapi(){
+        CommonUtils.showHudWithNoInteraction(show: true)
+        
+        if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
+            let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+            let septoken = endToken.components(separatedBy: " ")
+            if septoken[0] != "Bearer"{
+                let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
+                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
+            }
+        }
+        
+        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName: ServiceName.kgetcontactus, requestMethod: .GET, requestParameters:[:], withProgressHUD: false) { (result:Any?, error:Error?, errorType:ErrorType?,statusCode:Int?) in
+            CommonUtils.showHudWithNoInteraction(show: false)
+            if errorType == .requestSuccess {
+                let dictResult = kSharedInstance.getDictionary(result)
+                switch Int.getInt(statusCode) {
+                case 200:
+                    if Int.getInt(dictResult["status"]) == 200{
+                        let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+                        let septoken = endToken.components(separatedBy: " ")
+                        if septoken[0] == "Bearer"{
+                            kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
+                        }
+                        self.contactus = contact_us(data: dictResult)
+                        print(self.contactus)
+                        self.fetchdata()
+                        //     CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                       
+                    }
+                    else if  Int.getInt(dictResult["status"]) == 400{
+                        //    CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    }
+                    
+                default:
+                    CommonUtils.showError(.error, String.getString(dictResult["message"]))
+                }
+            }else if errorType == .noNetwork {
+                CommonUtils.showToastForInternetUnavailable()
+                
+            } else {
+                //      CommonUtils.showToastForDefaultError()
+            }
+        }
+    }
 }

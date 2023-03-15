@@ -178,7 +178,7 @@ struct ServiceName {
 //    Check Email and Phone
     static let kcheckemail             =            "api/email-already-exists"
     static let kcheckphone             =            "api/phone-already-exists"
-    static let kcontactus              =            "api/contact_us"
+    static let kgetcontactus              =            "api/contact_us"
 }
 
 struct Notifications {

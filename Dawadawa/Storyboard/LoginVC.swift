@@ -276,8 +276,7 @@ extension LoginVC{
             "device_id":kSharedUserDefaults.getDeviceToken()
         ]
         
-        TANetworkManager.sharedInstance.requestApi(withServiceName:ServiceName.klogin, requestMethod: .POST,
-                                                   requestParameters:params, withProgressHUD: false)
+        TANetworkManager.sharedInstance.requestApi(withServiceName:ServiceName.klogin, requestMethod: .POST,requestParameters:params, withProgressHUD: false)
         {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
             
             CommonUtils.showHudWithNoInteraction(show: false)
