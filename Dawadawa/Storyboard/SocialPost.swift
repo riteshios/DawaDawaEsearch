@@ -189,14 +189,12 @@ class sub_Comment{
     
     var comments:String?
     var usersubcommentdetails:subcomment_userdetails?
-    
     init(data:[String:Any]){
         
         self.comments = String.getString(data["comments"])
         self.usersubcommentdetails = subcomment_userdetails(data: kSharedInstance.getDictionary(data["user"]))
         
     }
-    
 }
 
 
@@ -380,6 +378,7 @@ struct SecretKeyParser {
 
 class Notification_data{
     var id:Int?
+    var oppr_id:Int?
     var user_id:Int?
     var title:String?
     var body:String?
@@ -387,6 +386,7 @@ class Notification_data{
     
     init(data:[String:Any]){
         self.id = Int.getInt(data["id"])
+        self.oppr_id = Int.getInt(data["oppr_id"])
         self.user_id = Int.getInt(data["user_id"])
         self.title = String.getString(data["title"])
         self.body = String.getString(data["body"])

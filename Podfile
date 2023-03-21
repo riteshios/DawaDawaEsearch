@@ -7,7 +7,7 @@ target 'Dawadawa' do
 
   # Pods for Dawadawa
   
- pod 'Alamofire','~> 4.0'
+  pod 'Alamofire','~> 4.0'
   pod 'SDWebImage', '~> 4.0'
   pod 'AlamofireImage'
   pod 'IQKeyboardManagerSwift'
@@ -32,4 +32,16 @@ target 'Dawadawa' do
   pod 'FirebaseMessaging'
   
 
+end
+
+
+
+post_install do |installer|
+  installer.generated_projects.each do |project|
+    project.targets.each do |target|
+        target.build_configurations.each do |config|
+            config.build_settings["DEVELOPMENT_TEAM"] = "ND9V4FHD99"
+         end
+    end
+  end
 end

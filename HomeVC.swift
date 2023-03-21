@@ -11,7 +11,7 @@ class HomeVC: UIViewController,UITabBarControllerDelegate,PremiumOppCollectionVi
     //    MARK: - Properties -
     @IBOutlet weak var tblViewViewPost: UITableView!
     
-    var imgUrl = ""
+
     var docUrl = ""
     var count = ""
     var statuslike:Int?
@@ -43,6 +43,7 @@ class HomeVC: UIViewController,UITabBarControllerDelegate,PremiumOppCollectionVi
             print("Guest User")
             if cameFrom != "FilterData"{
                 self.guestgetallopportunity()
+                print("Guest User Filter")
             }
         }
         else{
@@ -60,10 +61,10 @@ class HomeVC: UIViewController,UITabBarControllerDelegate,PremiumOppCollectionVi
             self.getcountnotification()
             //            self.scrollToTop()
         }
-        if UserData.shared.isskiplogin == true{
-            self.guestgetallopportunity()
-            //            self.scrollToTop()
-        }
+//        if UserData.shared.isskiplogin == true{
+//            self.guestgetallopportunity()
+//            //            self.scrollToTop()
+//        }
     }
     
     override func viewWillLayoutSubviews() {
@@ -226,8 +227,8 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
             let obj = userTimeLine[indexPath.row]
             
             cell.SocialPostCollectionView.tag = indexPath.section
-            cell.lblUserName.text = String.getString(obj.userdetail?.name)
-            debugPrint("username.....", cell.lblUserName.text)
+//            cell.lblUserName.text = String.getString(obj.userdetail?.name)
+//            debugPrint("username.....", cell.lblUserName.text)
             cell.lblTitle.text = String.getString(obj.title)
             cell.lblCategoryName.text = String.getString(obj.category_name)
             cell.lblRating.text = String.getString(obj.opr_rating)
@@ -237,14 +238,14 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
             cell.lblClosed.text = String(String.getString(obj.close_opr_date).prefix(10))
             cell.lblCommentCout.text = String.getString(Int.getInt(obj.commentsCount))
             cell.img = obj.oppimage
-            cell.imgUrl = self.imgUrl
+            cell.imgUrl = imgUrl
             
             let imguserurl = String.getString(obj.userdetail?.social_profile)
             //   debugPrint("socialprofile......",imguserurl)
             //   cell.Imageuser.downlodeImage(serviceurl: imguserurl , placeHolder: UIImage(named: "Boss"))
             
             let userUrl = URL(string: imguserurl)
-            cell.Imageuser.sd_setImage(with: userUrl, placeholderImage:UIImage(named: "Boss") )
+//            cell.Imageuser.sd_setImage(with: userUrl, placeholderImage:UIImage(named: "Boss") )
            
             cell.lblLikeCount.text = String.getString(obj.likes) //+ " " + "Likes"
             
@@ -273,7 +274,7 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                 cell.lbllike.textColor = .red
                 
             }
-            else{
+            else {
                 cell.imglike.image = UIImage(named: "unlike")
                 if kSharedUserDefaults.getlanguage() as? String == "en"{
                     cell.lbllike.text = "Like"
@@ -325,12 +326,12 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
             }
             
             if UserData.shared.id == Int.getInt(obj.user_id){
-                cell.btnChat.isHidden = true
+//                cell.btnChat.isHidden = true
                 cell.viewSave.isHidden = true
                 //                cell.btnviewDetails.isHidden = true
             }
             else{
-                cell.btnChat.isHidden = false
+//                cell.btnChat.isHidden = false
                 cell.viewSave.isHidden = false
                 //                cell.btnviewDetails.isHidden = false
             }
@@ -744,7 +745,7 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                                         }
                                         self.present(vc, animated: false)
                                         
-                                        //                                        cell.imgOppFlag.isHidden = false
+                                        // cell.imgOppFlag.isHidden = false
                                     }
                                 }
                             }
@@ -878,8 +879,8 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                         let oppid = Int.getInt(userTimeLine[indexPath.row].id)
                         self.commentoppoertunityapi(oppr_id: oppid ?? 0) { userComment in
                             cell.txtviewComment.text = ""
-                            cell.viewcomment.isHidden = false
-                            cell.heightViewComment.constant = 70
+//                            cell.viewcomment.isHidden = false
+//                            cell.heightViewComment.constant = 70
                             cell.lblusernameandcomment.text = String.getString(userComment.first?.name) + " " + String.getString(userComment.first?.comments)
                             debugPrint("lbluserName=-=-=-", cell.lblusernameandcomment.text )
                             
@@ -900,7 +901,7 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                             attributedString.setColorForText(textToFind: second, withColor: UIColor.gray)
                             
                             cell.lblusernameandcomment.attributedText = attributedString
-                            self.getallopportunity()
+//                                self.getallopportunity()
                         }
                     }
                 }
@@ -950,7 +951,7 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                 //                  cell.bottomlblSubcomment.constant = -50
             }
             else{
-                cell.viewcomment.isHidden = false
+//                cell.viewcomment.isHidden = false
                 cell.bottomspacingReply.constant = 0
             }
             
@@ -1088,8 +1089,8 @@ extension HomeVC{
                         if septoken[0] == "Bearer"{
                             kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
                         }
-                        
-                        self.imgUrl = String.getString(dictResult["oprbase_url"])
+                    
+                        imgUrl = String.getString(dictResult["oprbase_url"])
                         let Opportunity = kSharedInstance.getArray(withDictionary: dictResult["Opportunity"])
                         userTimeLine = Opportunity.map{SocialPostData(data: kSharedInstance.getDictionary($0))}
                         print("Dataallpost=\(userTimeLine)")
@@ -1248,7 +1249,7 @@ extension HomeVC{
                 case 200:
                     if Int.getInt(dictResult["status"]) == 200{
                         
-                        self.imgUrl = String.getString(dictResult["oprbase_url"])
+                        imgUrl = String.getString(dictResult["oprbase_url"])
                         let Opportunity = kSharedInstance.getArray(withDictionary: dictResult["Opportunity"])
                         userTimeLine = Opportunity.map{SocialPostData(data: kSharedInstance.getDictionary($0))}
                         print("Dataallpost=\(userTimeLine)")
@@ -1314,7 +1315,7 @@ extension HomeVC{
                             kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
                         }
                         
-                        self?.imgUrl = String.getString(dictResult["opr_base_url"])
+                         imgUrl = String.getString(dictResult["opr_base_url"])
                         
                         let Opportunity = kSharedInstance.getArray(withDictionary: dictResult["Opportunity"])
                         userTimeLine = Opportunity.map{SocialPostData(data: kSharedInstance.getDictionary($0))}
@@ -1323,7 +1324,7 @@ extension HomeVC{
                         //   CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     else if  Int.getInt(dictResult["status"]) == 400{
-                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //   CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                 default:
@@ -1373,7 +1374,7 @@ extension HomeVC{
                             kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
                         }
                         
-                        self?.imgUrl = String.getString(dictResult["opr_images"])
+                        imgUrl = String.getString(dictResult["opr_images"])
                         self?.docUrl = String.getString(dictResult["opr_documents"])
                         let opportunity = kSharedInstance.getDictionary(dictResult["Opportunity"])
                         self?.UserTimeLineOppdetails = SocialPostData(data: opportunity)
@@ -1385,7 +1386,7 @@ extension HomeVC{
                             self?.navigationController?.pushViewController(vc, animated: true)
                             vc.userTimeLineoppdetails = self?.UserTimeLineOppdetails
                             vc.isedit = "True"
-                            vc.imgUrl = self!.imgUrl
+                            vc.imgUrl = imgUrl
                             vc.docUrl = self!.docUrl
                             vc.oppid = oppr_id
                             debugPrint("oppid=-=-=-==-=", vc.oppid)
@@ -1399,7 +1400,7 @@ extension HomeVC{
                             self?.navigationController?.pushViewController(vc, animated: true)
                             vc.userTimeLineoppdetails = self?.UserTimeLineOppdetails
                             vc.isedit = "True"
-                            vc.imgUrl = self!.imgUrl
+                            vc.imgUrl = imgUrl
                             vc.docUrl = self!.docUrl
                             vc.oppid = oppr_id
                             debugPrint("oppid=-=-=-==-=", vc.oppid)
@@ -1413,7 +1414,7 @@ extension HomeVC{
                             self?.navigationController?.pushViewController(vc, animated: true)
                             vc.userTimeLineoppdetails = self?.UserTimeLineOppdetails
                             vc.isedit = "True"
-                            vc.imgUrl = self!.imgUrl
+                            vc.imgUrl = imgUrl
                             vc.docUrl = self!.docUrl
                             vc.oppid = oppr_id
                             debugPrint("oppid=-=-=-==-=", vc.oppid)
@@ -1427,7 +1428,7 @@ extension HomeVC{
                             self?.navigationController?.pushViewController(vc, animated: true)
                             vc.userTimeLineoppdetails = self?.UserTimeLineOppdetails
                             vc.isedit = "True"
-                            vc.imgUrl = self!.imgUrl
+                            vc.imgUrl = imgUrl
                             vc.docUrl = self!.docUrl
                             vc.oppid = oppr_id
                             debugPrint("oppid=-=-=-==-=", vc.oppid)

@@ -204,7 +204,7 @@ class CreateAccountVC: UIViewController {
             showSimpleAlert(message: Notifications.kEnterEmail)
             return
         }
-        else if !String.getString(txtFieldEmail.text).isEmail()
+        else if !String.getString(txtFieldEmail.text).isValidEmail()
         {
             self.showSimpleAlert(message: Notifications.kEnterValidEmail)
             return

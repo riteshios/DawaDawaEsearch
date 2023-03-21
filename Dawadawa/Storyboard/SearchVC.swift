@@ -131,8 +131,8 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
             let obj = userTimeLine[indexPath.row]
             
             cell.SocialPostCollectionView.tag = indexPath.section
-            cell.lblUserName.text = String.getString(obj.userdetail?.name)
-            debugPrint("username.....", cell.lblUserName.text)
+//            cell.lblUserName.text = String.getString(obj.userdetail?.name)
+//            debugPrint("username.....", cell.lblUserName.text)
             cell.lblTitle.text = String.getString(obj.title)
             cell.lblCategoryName.text = String.getString(obj.category_name)
             cell.lblpricing.text = String.getString(obj.pricing)
@@ -147,7 +147,7 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
             let imguserurl = String.getString(obj.userdetail?.social_profile)
             debugPrint("socialprofile......",imguserurl)
             
-            cell.Imageuser.downlodeImage(serviceurl: imguserurl , placeHolder: UIImage(named: "Boss"))
+//            cell.Imageuser.downlodeImage(serviceurl: imguserurl , placeHolder: UIImage(named: "Boss"))
             cell.lblLikeCount.text = String.getString(obj.likes) //+ " " + "Likes"
             cell.imgOpp_plan.image = obj.opp_plan == "Featured" ? UIImage(named: "Star Filled") : obj.opp_plan == "Premium" ? UIImage(named: "Crown") : UIImage(named: "Folded Booklet")
             
@@ -224,11 +224,11 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
             }
             
             if UserData.shared.id == Int.getInt(obj.user_id){
-                cell.btnChat.isHidden = true
+//                cell.btnChat.isHidden = true
                 cell.viewSave.isHidden = true
             }
             else{
-                cell.btnChat.isHidden = false
+//                cell.btnChat.isHidden = false
                 cell.viewSave.isHidden = false
             }
             
@@ -267,27 +267,60 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
                 }
                 
                 if txt == "Chat"{
-                    let userid = Int.getInt(self.userTimeLine[indexPath.row].user_id)
-                    let vc = self.storyboard?.instantiateViewController(withIdentifier: ChatVC.getStoryboardID()) as! ChatVC
-                    vc.friendid = userid
-                    vc.friendname = String.getString(obj.userdetail?.name)
-                    vc.friendimage = imguserurl
-                    self.navigationController?.pushViewController(vc, animated: true)
+                    if UserData.shared.isskiplogin == true{
+                        if kSharedUserDefaults.getlanguage() as? String == "en"{
+                            self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                        }
+                        else{
+                            self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
+                        }
+                    }
+                    else{
+                        let userid = Int.getInt(self.userTimeLine[indexPath.row].user_id)
+                        let vc = self.storyboard?.instantiateViewController(withIdentifier: ChatVC.getStoryboardID()) as! ChatVC
+                        vc.friendid = userid
+                        vc.friendname = String.getString(obj.userdetail?.name)
+                        vc.friendimage = imguserurl
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    }
+                    
                 }
                 if txt == "viewDetails"{
-                    let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
-                    debugPrint("detailsppid=-=-=",oppid)
-                    let vc = self.storyboard?.instantiateViewController(withIdentifier: DetailScreenVC.getStoryboardID()) as! DetailScreenVC
-                    vc.oppid = oppid
-                    self.navigationController?.pushViewController(vc, animated: true)
+                    if UserData.shared.isskiplogin == true{
+                        if kSharedUserDefaults.getlanguage() as? String == "en"{
+                            self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                        }
+                        else{
+                            self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
+                        }
+                    }
+                    else{
+                        let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
+                        debugPrint("detailsppid=-=-=",oppid)
+                        let vc = self.storyboard?.instantiateViewController(withIdentifier: DetailScreenVC.getStoryboardID()) as! DetailScreenVC
+                        vc.oppid = oppid
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    }
+                    
                 }
                 
                 if txt == "viewDetails2"{
-                    let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
-                    debugPrint("detailsppid=-=-=",oppid)
-                    let vc = self.storyboard?.instantiateViewController(withIdentifier: DetailScreenVC.getStoryboardID()) as! DetailScreenVC
-                    vc.oppid = oppid
-                    self.navigationController?.pushViewController(vc, animated: true)
+                    if UserData.shared.isskiplogin == true{
+                        if kSharedUserDefaults.getlanguage() as? String == "en"{
+                            self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                        }
+                        else{
+                            self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
+                        }
+                    }
+                    else{
+                        let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
+                        debugPrint("detailsppid=-=-=",oppid)
+                        let vc = self.storyboard?.instantiateViewController(withIdentifier: DetailScreenVC.getStoryboardID()) as! DetailScreenVC
+                        vc.oppid = oppid
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    }
+                   
                 }
                 
                 if txt == "Description"{
@@ -348,20 +381,40 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
                 }
                 
                 if txt == "Rate"{
-                    let oppid = self.userTimeLine[indexPath.row].id
-                    let vc = self.storyboard?.instantiateViewController(withIdentifier: RateOpportunityPopUPVC.getStoryboardID()) as! RateOpportunityPopUPVC
-                    vc.modalTransitionStyle = .crossDissolve
-                    vc.modalPresentationStyle = .overCurrentContext
-                    vc.oppid = oppid ?? 0
-                    
-                    vc.callbackClosure = {
-                        self.searchopportunityapi()
+                    if UserData.shared.isskiplogin == true{
+                        if kSharedUserDefaults.getlanguage() as? String == "en"{
+                            self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                        }
+                        else{
+                            self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
+                        }
                     }
-                    self.present(vc, animated: false)
+                    else{
+                        let oppid = self.userTimeLine[indexPath.row].id
+                        let vc = self.storyboard?.instantiateViewController(withIdentifier: RateOpportunityPopUPVC.getStoryboardID()) as! RateOpportunityPopUPVC
+                        vc.modalTransitionStyle = .crossDissolve
+                        vc.modalPresentationStyle = .overCurrentContext
+                        vc.oppid = oppid ?? 0
+                        
+                        vc.callbackClosure = {
+                            self.searchopportunityapi()
+                        }
+                        self.present(vc, animated: false)
+                    }
+                   
                 }
                 
                 if txt == "Save"{
                     if sender.isSelected{
+                        if UserData.shared.isskiplogin == true{
+                            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                                self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                            }
+                            else{
+                                self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
+                            }
+                        }
+                        else{
                             let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
                            self.saveoppoertunityapi(oppr_id: oppid ?? 0) { sucess in
                             if sucess == 200{
@@ -385,6 +438,8 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
                                 cell.lblSave.textColor = UIColor(hexString: "#A6A6A6")
                             }
                         }
+                        }
+                          
                     }
                 }
                 
@@ -413,63 +468,107 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
                             }
                             
                             if txt == "Update"{
-                                let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
-                                debugPrint("oppid+++++++",oppid)
-                                self.opportunitydetailsapi(oppr_id: oppid)
+                                if UserData.shared.isskiplogin == true{
+                                    if kSharedUserDefaults.getlanguage() as? String == "en"{
+                                        self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                                    }
+                                    else{
+                                        self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
+                                    }
+                                }
+                                else{
+                                    let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
+                                    debugPrint("oppid+++++++",oppid)
+                                    self.opportunitydetailsapi(oppr_id: oppid)
+                                }
+                               
                             }
                             if txt == "Delete"{
                                 self.dismiss(animated: false){
-                                    let vc = self.storyboard?.instantiateViewController(withIdentifier: DeleteOpportunityPopUPVC.getStoryboardID()) as! DeleteOpportunityPopUPVC
-                                    vc.modalTransitionStyle = .crossDissolve
-                                    vc.modalPresentationStyle = .overCurrentContext
-                                    vc.callback = { txt in
-                                        
-                                        if txt == "Delete"{
-                                            vc.dismiss(animated: false) {
-                                                let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
-                                                self.userTimeLine.remove(at: indexPath.row)
-                                                self.deletepostoppoertunityapi(oppr_id: oppid)
-                                                debugPrint("oppid......",oppid)
-                                                self.tblViewSearchOpp.reloadData()
+                                    if UserData.shared.isskiplogin == true{
+                                        if kSharedUserDefaults.getlanguage() as? String == "en"{
+                                            self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                                        }
+                                        else{
+                                            self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
+                                        }
+                                    }
+                                    else{
+                                        let vc = self.storyboard?.instantiateViewController(withIdentifier: DeleteOpportunityPopUPVC.getStoryboardID()) as! DeleteOpportunityPopUPVC
+                                        vc.modalTransitionStyle = .crossDissolve
+                                        vc.modalPresentationStyle = .overCurrentContext
+                                        vc.callback = { txt in
+                                            
+                                            if txt == "Delete"{
+                                                vc.dismiss(animated: false) {
+                                                    let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
+                                                    self.userTimeLine.remove(at: indexPath.row)
+                                                    self.deletepostoppoertunityapi(oppr_id: oppid)
+                                                    debugPrint("oppid......",oppid)
+                                                    self.tblViewSearchOpp.reloadData()
+                                                }
                                             }
                                         }
                                     }
+                                    
                                     self.present(vc, animated: false)
                                 }
                             }
                             
                             if txt == "Close"{
                                 self.dismiss(animated: false){
-                                    let vc = self.storyboard?.instantiateViewController(withIdentifier: ClosePopUpVC.getStoryboardID()) as! ClosePopUpVC
-                                    vc.modalTransitionStyle = .crossDissolve
-                                    vc.modalPresentationStyle = .overCurrentContext
-                                    vc.callback = { txt in
-                                        
-                                        if txt == "Close"{
-                                            vc.dismiss(animated: false) {
-                                                let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
-                                                self.closeopportunityapi(opr_id: oppid){ sucess in
-                                                    
-                                                    if sucess == 200{
-                                                        cell.lblcloseOpportunity.text = "Closed"
-                                                        cell.lblcloseOpportunity.textColor = UIColor(hexString: "#FF4C4D")
-                                                    }
-                                                    
-                                                }
-                                                debugPrint("oppidclose......",oppid)
-                                            }
+                                    if UserData.shared.isskiplogin == true{
+                                        if kSharedUserDefaults.getlanguage() as? String == "en"{
+                                            self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
                                         }
+                                        else{
+                                            self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
+                                        }
+                                    }
+                                    else{
+                                        let vc = self.storyboard?.instantiateViewController(withIdentifier: ClosePopUpVC.getStoryboardID()) as! ClosePopUpVC
+                                        vc.modalTransitionStyle = .crossDissolve
+                                        vc.modalPresentationStyle = .overCurrentContext
+                                        vc.callback = { txt in
+                                            
+                                            if txt == "Close"{
+                                                vc.dismiss(animated: false) {
+                                                    let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
+                                                    self.closeopportunityapi(opr_id: oppid){ sucess in
+                                                        
+                                                        if sucess == 200{
+                                                            cell.lblcloseOpportunity.text = "Closed"
+                                                            cell.lblcloseOpportunity.textColor = UIColor(hexString: "#FF4C4D")
+                                                        }
+                                                        
+                                                    }
+                                                    debugPrint("oppidclose......",oppid)
+                                                }
+                                            }
+                                    }
+                                    
                                     }
                                     self.present(vc, animated: false)
                                 }
                                 
                             }
                             if txt == "ViewDetail"{
-                                let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
-                                debugPrint("detailsppid=-=-=",oppid)
-                                let vc = self.storyboard?.instantiateViewController(withIdentifier: DetailScreenVC.getStoryboardID()) as! DetailScreenVC
-                                vc.oppid = oppid
-                                self.navigationController?.pushViewController(vc, animated: true)
+                                if UserData.shared.isskiplogin == true{
+                                    if kSharedUserDefaults.getlanguage() as? String == "en"{
+                                        self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                                    }
+                                    else{
+                                        self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
+                                    }
+                                }
+                                else{
+                                    let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
+                                    debugPrint("detailsppid=-=-=",oppid)
+                                    let vc = self.storyboard?.instantiateViewController(withIdentifier: DetailScreenVC.getStoryboardID()) as! DetailScreenVC
+                                    vc.oppid = oppid
+                                    self.navigationController?.pushViewController(vc, animated: true)
+                                }
+                                
                             }
                         }
                         self.present(vc, animated: false)
@@ -483,14 +582,24 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
                         vc.callback = { txt in
                             
                             if txt == "Chatwithuser"{
-                                
-                                let userid = Int.getInt(self.userTimeLine[indexPath.row].user_id)
-                                let vc = self.storyboard?.instantiateViewController(withIdentifier: ChatVC.getStoryboardID()) as! ChatVC
-                                vc.friendid = userid
-                                vc.friendname = String.getString(obj.userdetail?.name)
-                                vc.friendimage = imguserurl
-                                self.navigationController?.pushViewController(vc, animated: true)
-                                self.dismiss(animated: true)
+                                if UserData.shared.isskiplogin == true{
+                                    if kSharedUserDefaults.getlanguage() as? String == "en"{
+                                        self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                                    }
+                                    else{
+                                        self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
+                                    }
+                                }
+                                else{
+                                    let userid = Int.getInt(self.userTimeLine[indexPath.row].user_id)
+                                    let vc = self.storyboard?.instantiateViewController(withIdentifier: ChatVC.getStoryboardID()) as! ChatVC
+                                    vc.friendid = userid
+                                    vc.friendname = String.getString(obj.userdetail?.name)
+                                    vc.friendimage = imguserurl
+                                    self.navigationController?.pushViewController(vc, animated: true)
+                                    self.dismiss(animated: true)
+                                }
+                               
                             }
                             if txt == "CopyLink"{
                                 let share_link = String.getString(self.userTimeLine[indexPath.row].share_link)
@@ -505,9 +614,20 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
                             }
                             
                             if txt == "MarkasInterested"{
-                                let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
-                                self.markinterestedapi(oppr_id: oppid)
-                                self.dismiss(animated: true)
+                                if UserData.shared.isskiplogin == true{
+                                    if kSharedUserDefaults.getlanguage() as? String == "en"{
+                                        self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                                    }
+                                    else{
+                                        self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
+                                    }
+                                }
+                                else{
+                                    let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
+                                    self.markinterestedapi(oppr_id: oppid)
+                                    self.dismiss(animated: true)
+                                }
+                               
                             }
                             
                             if txt == "Flag"{
@@ -552,6 +672,24 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
                                         vc.userid = userid
                                         self.present(vc, animated: false)
                                     }
+                                }
+                            }
+                            if txt == "viewdetails"{
+                                if UserData.shared.isskiplogin == true{
+                                    if kSharedUserDefaults.getlanguage() as? String == "en"{
+                                        self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                                    }
+                                    else{
+                                        self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
+                                    }
+                                }
+                                else{
+                                    let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
+                                    debugPrint("detailsppid=-=-=",oppid)
+                                    let vc = self.storyboard?.instantiateViewController(withIdentifier: DetailScreenVC.getStoryboardID()) as! DetailScreenVC
+                                    
+                                    vc.oppid = oppid
+                                    self.navigationController?.pushViewController(vc, animated: true)
                                 }
                             }
                         }
@@ -644,7 +782,7 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
                             attributedString.setColorForText(textToFind: second, withColor: UIColor.gray)
                             
                             cell.lblusernameandcomment.attributedText = attributedString
-                            self.searchopportunityapi()
+//                            self.searchopportunityapi()
                             
                         }
                     }

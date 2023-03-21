@@ -87,7 +87,10 @@ class SocialPostTableViewCell: UITableViewCell,UITextViewDelegate {
         didSet{
             pageControl.isHidden = true
             pageControl.numberOfPages = img.count
-            self.SocialPostCollectionView.reloadData()
+            DispatchQueue.main.async {
+                self.SocialPostCollectionView.reloadData()
+            }
+           
         }
     }
 //    MARK: - Life Cycle -
@@ -218,8 +221,8 @@ extension SocialPostTableViewCell: UICollectionViewDelegate,UICollectionViewData
         let cell = SocialPostCollectionView.dequeueReusableCell(withReuseIdentifier: "SocialPostCollectionViewCell", for: indexPath) as! SocialPostCollectionViewCell
         if self.img.count == 0{
             cell.imgOpportunity.image = UIImage(named: "Banner")
-            
-        }else{
+        }
+        else{
         let obj = img[indexPath.item].imageurl
         print("imgurl-=-\(obj)")
         let imageurl = "\(imgUrl)/\(String.getString(obj))"

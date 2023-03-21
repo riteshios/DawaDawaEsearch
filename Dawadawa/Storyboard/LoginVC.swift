@@ -166,7 +166,8 @@ class LoginVC: UIViewController {
     //    }
     
     @IBAction func btnLoginTapped(_ sender: UIButton){
-        self.loginapi()
+       // self.loginapi()
+        self.validation()
     }
     
     @IBAction func btnSkipLoginTapped(_ sender: UIButton) {
@@ -200,7 +201,7 @@ class LoginVC: UIViewController {
             return
         }
         self.view.endEditing(true)
-//        self.loginapi()
+       self.loginapi()
     }
     //    func validation(){
     //        if String.getString(self.txtFieldPhoneNumer.text).isEmpty

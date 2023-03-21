@@ -11,7 +11,7 @@ import UIKit
 
 extension String {
     // To Check Whether Email is valid
-    func isEmail() -> Bool {
+    func isValidEmail() -> Bool {
         let emailRegex = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,4})$" as String
         let emailText = NSPredicate(format: "SELF MATCHES %@",emailRegex)
         let isValid  = emailText.evaluate(with: self) as Bool

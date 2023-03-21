@@ -25,7 +25,7 @@ class EnterPhoneNumberVC: UIViewController {
     var email = ""
     
     
-    //    MARK:  -Life Cycle
+    //    MARK:  -Life Cycle -
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,21 +36,21 @@ class EnterPhoneNumberVC: UIViewController {
     
     
     override func viewWillLayoutSubviews() {
-            if kSharedUserDefaults.getlanguage() as? String == "en"{
-                DispatchQueue.main.async {
-                    self.txtfieldPhoneNumber.semanticContentAttribute = .forceLeftToRight
-                    self.txtfieldPhoneNumber.textAlignment = .left
-                }
-
-            } else {
-                DispatchQueue.main.async {
-                    self.txtfieldPhoneNumber.semanticContentAttribute = .forceRightToLeft
-                    self.txtfieldPhoneNumber.textAlignment = .right
-                }
+        if kSharedUserDefaults.getlanguage() as? String == "en"{
+            DispatchQueue.main.async {
+                self.txtfieldPhoneNumber.semanticContentAttribute = .forceLeftToRight
+                self.txtfieldPhoneNumber.textAlignment = .left
+            }
+            
+        } else {
+            DispatchQueue.main.async {
+                self.txtfieldPhoneNumber.semanticContentAttribute = .forceRightToLeft
+                self.txtfieldPhoneNumber.textAlignment = .right
             }
         }
+    }
     
-//    MARK: - Life Cycle
+    //    MARK: - Life Cycle
     
     func setup(){
         self.viewContinue.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
@@ -78,22 +78,8 @@ class EnterPhoneNumberVC: UIViewController {
     }
     
     @IBAction func btnContinueTapped(_ sender : UIButton) {
-        self.checkphonenumberapi(phone: Int.getInt(self.txtfieldPhoneNumber.text)) { sucess in
-            
-            if sucess == 200 {
-                self.validation()
-            }
-            else if sucess == 400 {
-                if kSharedUserDefaults.getlanguage() as? String == "en" {
-                    self.showSimpleAlert(message: "The phone number has already been taken.")
-                }
-                else{
-                    self.showSimpleAlert(message: "تم أخذ رقم الهاتف بالفعل.")
-                }
-            }
-        }
+        self.validation()
     }
-    
     
     // MARK: - Validation
     
@@ -104,20 +90,15 @@ class EnterPhoneNumberVC: UIViewController {
             showSimpleAlert(message: Notifications.kEnterMobileNumber)
             return
         }
-//        else if !String.getString(txtfieldPhoneNumber.text).isPhoneNumber()
-//        {
-//            self.showSimpleAlert(message: Notifications.kEnterValidMobileNumber)
-//
-//        }
+        else if !String.getString(txtfieldPhoneNumber.text).isPhoneNumber()
+        {
+            self.showSimpleAlert(message: Notifications.kEnterValidMobileNumber)
+            return
+            
+        }
         
         self.view.endEditing(true)
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "EnterResidenceVC") as! EnterResidenceVC
-        vc.name = self.name
-        vc.lastame = self.lastame
-        vc.usertype = self.usertype
-        vc.email = self.email
-        vc.phone = self.txtfieldPhoneNumber.text ?? ""
-        self.navigationController?.pushViewController(vc, animated: true)
+        self.checkphonenumberapi()
     }
 }
 
@@ -142,15 +123,68 @@ extension EnterPhoneNumberVC{
 extension EnterPhoneNumberVC : SKFlaotingTextFieldDelegate {
     
     func textFieldDidEndEditing(textField: SKFloatingTextField) {
-        print("end editing")
+        
+        print("****end editing")
     }
     
     func textFieldDidChangeSelection(textField: SKFloatingTextField) {
-        print("changing text")
+        print("-----changing text")
+        
     }
     
     func textFieldDidBeginEditing(textField: SKFloatingTextField) {
-        print("begin editing")
+        print("#####begin editing")
+    }
+}
+
+//    MARK: - Api Call -
+extension EnterPhoneNumberVC{
+    
+    //   Check Phone Number
+    
+    func checkphonenumberapi(){
+        
+        CommonUtils.showHud(show: true)
+        let params: [String:Any] = [
+            "phone":Int.getInt(self.txtfieldPhoneNumber.text)
+        ]
+        
+        TANetworkManager.sharedInstance.requestApi(withServiceName: ServiceName.kcheckphone, requestMethod: .POST, requestParameters: params, withProgressHUD: false) { (result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
+            
+            if errorType == .requestSuccess {
+                let dictResult = kSharedInstance.getDictionary(result)
+                
+                switch Int.getInt(statusCode){
+                case 200:
+                    
+                    if Int.getInt(dictResult["status"]) == 200{
+                        let vc = self.storyboard?.instantiateViewController(withIdentifier: "EnterResidenceVC") as! EnterResidenceVC
+                        vc.name = self.name
+                        vc.lastame = self.lastame
+                        vc.usertype = self.usertype
+                        vc.email = self.email
+                        vc.phone = self.txtfieldPhoneNumber.text ?? ""
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    }
+                    else if Int.getInt(dictResult["status"]) == 400{
+                        if kSharedUserDefaults.getlanguage() as? String == "en" {
+                            self.showSimpleAlert(message: "The phone number has already been taken.")
+                        }
+                        else{
+                            self.showSimpleAlert(message: "تم أخذ رقم الهاتف بالفعل.")
+                        }
+                    }
+                    //
+                default:
+                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                }
+            }else if errorType == .noNetwork {
+                CommonUtils.showToastForInternetUnavailable()
+                
+            } else {
+                //                CommonUtils.showToastForDefaultError()
+            }
+        }
     }
 }
 

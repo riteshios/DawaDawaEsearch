@@ -142,11 +142,11 @@ extension UserProfileDetailsVC{
                         self.userdata = user_Data(data: data)
                         print("DataAllUserdetails===\(self.userdata)")
                         self.fetdata()
-                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //  CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         
                     }
                     else if  Int.getInt(dictResult["status"]) == 401{
-                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //   CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                 default:
                     CommonUtils.showError(.error, String.getString(dictResult["message"]))
@@ -155,7 +155,7 @@ extension UserProfileDetailsVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-                //                CommonUtils.showToastForDefaultError()
+                //    CommonUtils.showToastForDefaultError()
             }
         }
     }

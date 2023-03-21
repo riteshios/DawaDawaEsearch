@@ -55,8 +55,8 @@ extension ViewAllSavedVC:UITableViewDelegate,UITableViewDataSource{
         let obj = userTimeLine[indexPath.row]
         
         cell.SocialPostCollectionView.tag = indexPath.section
-        cell.lblUserName.text = String.getString(obj.userdetail?.name)
-        debugPrint("username.....", cell.lblUserName.text)
+//        cell.lblUserName.text = String.getString(obj.userdetail?.name)
+//        debugPrint("username.....", cell.lblUserName.text)
         cell.lblCategoryName.text = String.getString(obj.category_name)
         cell.lblCommentCout.text = String.getString(Int.getInt(obj.commentsCount))
         cell.lblRating.text = String.getString(obj.opr_rating)
@@ -69,7 +69,7 @@ extension ViewAllSavedVC:UITableViewDelegate,UITableViewDataSource{
         let imguserurl = String.getString(obj.userdetail?.social_profile)
         debugPrint("socialprofile......",imguserurl)
         
-        cell.Imageuser.downlodeImage(serviceurl: imguserurl , placeHolder: UIImage(named: "Boss"))
+//        cell.Imageuser.downlodeImage(serviceurl: imguserurl , placeHolder: UIImage(named: "Boss"))
         cell.lblLikeCount.text = String.getString(obj.likes) //+ " " + "likes"
         
         cell.imgOpp_plan.image = obj.opp_plan == "Featured" ? UIImage(named: "Star Filled") : obj.opp_plan == "Premium" ? UIImage(named: "Crown") : UIImage(named: "")
@@ -148,11 +148,11 @@ extension ViewAllSavedVC:UITableViewDelegate,UITableViewDataSource{
         }
         
         if UserData.shared.id == Int.getInt(obj.user_id){
-            cell.btnChat.isHidden = true
+//            cell.btnChat.isHidden = true
             cell.viewSave.isHidden = true
         }
         else{
-            cell.btnChat.isHidden = false
+//            cell.btnChat.isHidden = false
             cell.viewSave.isHidden = false
         }
         
@@ -602,7 +602,7 @@ extension ViewAllSavedVC:UITableViewDelegate,UITableViewDataSource{
                         attributedString.setColorForText(textToFind: second, withColor: UIColor.gray)
                         
                         cell.lblusernameandcomment.attributedText = attributedString
-                        self.getallsaveopportunity()
+//                        self.getallsaveopportunity()
                     }
                 }
             }

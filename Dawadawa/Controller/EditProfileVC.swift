@@ -205,7 +205,7 @@ class EditProfileVC: UIViewController {
             self.showSimpleAlert(message: Notifications.kvalidlastname)
             return
         }
-        else if !String.getString(txtFieldEmailAddress.text).isEmail()
+        else if !String.getString(txtFieldEmailAddress.text).isValidEmail()
         {
             self.showSimpleAlert(message: Notifications.kEnterValidEmail)
             return

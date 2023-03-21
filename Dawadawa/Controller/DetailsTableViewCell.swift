@@ -65,7 +65,6 @@ class DetailsTableViewCell: UITableViewCell,UITextViewDelegate {
     
     
     @IBOutlet weak var heightSocialPostCollectionView: NSLayoutConstraint!
-    
     @IBOutlet weak var heightDocumentcollectionview: NSLayoutConstraint!
     
     @IBOutlet weak var heightViewBusinessName: NSLayoutConstraint!
@@ -79,6 +78,8 @@ class DetailsTableViewCell: UITableViewCell,UITextViewDelegate {
     @IBOutlet weak var viewCategory: UIView!
     @IBOutlet weak var viewSubCategory: UIView!
     
+    
+    @IBOutlet weak var lblCategoryName: UILabel!
     
     weak var celldelegate: DocumentCollectionViewCellDelegate?
     

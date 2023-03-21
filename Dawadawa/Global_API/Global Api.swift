@@ -294,41 +294,4 @@ extension UIViewController{
             }
         }
     }
-    
-    //   Check Phone Number
-        
-        func checkphonenumberapi(phone:Int,completion: @escaping (_ sucesscode:Int) -> Void){
-
-            CommonUtils.showHud(show: true)
-            let params: [String:Any] = [
-                "phone":phone
-            ]
-
-            TANetworkManager.sharedInstance.requestApi(withServiceName: ServiceName.kcheckphone, requestMethod: .POST, requestParameters: params, withProgressHUD: false) { (result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
-
-                if errorType == .requestSuccess {
-                    let dictResult = kSharedInstance.getDictionary(result)
-
-                    switch Int.getInt(statusCode){
-                    case 200:
-
-                        if Int.getInt(dictResult["status"]) == 200{
-                            completion(Int.getInt(dictResult["status"]))
-                            
-                        }
-                        else if Int.getInt(dictResult["status"]) == 400{
-                            completion(Int.getInt(dictResult["status"]))
-                        }
-    //
-                    default:
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                    }
-                }else if errorType == .noNetwork {
-                    CommonUtils.showToastForInternetUnavailable()
-
-                } else {
-    //                CommonUtils.showToastForDefaultError()
-                }
-            }
-        }
 }

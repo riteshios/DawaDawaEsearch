@@ -248,7 +248,7 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                     cell.lbblWhatsappNumber.textColor = UIColor.gray
                 }
             }
-            
+            cell.lblCategoryName.text = String.getString(self.userTimeLine?.category_name)
             cell.lblCategory.text = String.getString(self.userTimeLine?.category_name)
             cell.lblSub_category.text = String.getString(self.userTimeLine?.subcategory_name)
             

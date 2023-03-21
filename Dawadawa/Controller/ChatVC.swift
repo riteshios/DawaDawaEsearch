@@ -7,6 +7,7 @@ import IQKeyboardManagerSwift
 
 class ChatVC: UIViewController{
     
+//    MARK: - Properties -
     @IBOutlet weak var viewTop: UIView!
     @IBOutlet weak var tableViewChat: UITableView!
     @IBOutlet weak var txtViewMessage: IQTextView!
@@ -23,6 +24,7 @@ class ChatVC: UIViewController{
     var isNewDataLoading = true
     var isOnScreen = true
     
+//    MARK: - Life Cycle -
     override func viewDidLoad() {
         super.viewDidLoad()
         self.addfriendapi()
@@ -50,7 +52,7 @@ class ChatVC: UIViewController{
         }
     }
     
-//    MARK: - @IBAction
+//    MARK: - @IBAction -
     
     @IBAction func btnBackTapped(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
@@ -159,7 +161,7 @@ extension ChatVC:UITableViewDelegate,UITableViewDataSource {
     }
 }
 
-// MARK: - Api call
+// MARK: - Api call -
 
 extension ChatVC {
     //    Api call

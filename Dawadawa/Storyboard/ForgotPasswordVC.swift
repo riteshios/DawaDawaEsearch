@@ -84,7 +84,8 @@ class ForgotPasswordVC: UIViewController {
     
     
     @IBAction func btnsendCodeTapped(_ sender: UIButton) {
-        self.forgotpasswordapi()
+       // self.forgotpasswordapi()
+        self.fieldvalidationPhoneNumbe()
 //        if self.lblSendEmail_Phone.text == LocalizationSystem.sharedInstance.localizedStringForKey(key: "Send on email address", comment: "")
 //        {
 //            self.fieldvalidationPhoneNumber()
@@ -117,7 +118,7 @@ class ForgotPasswordVC: UIViewController {
             showSimpleAlert(message: Notifications.kEnterEmail)
             return
         }
-        else if !String.getString(txtFieldPhone_Email.text).isEmail()
+        else if !String.getString(txtFieldPhone_Email.text).isValidEmail()
         {
             self.showSimpleAlert(message: Notifications.kEnterValidEmail)
             return
@@ -125,8 +126,20 @@ class ForgotPasswordVC: UIViewController {
         self.view.endEditing(true)
         self.forgotpasswordapi()
     }
+
+
+func fieldvalidationPhoneNumbe(){
+    if String.getString(self.txtFieldPhone_Email.text).isEmpty
+    {
+        showSimpleAlert(message: Notifications.kentermobileemail)
+        return
+    }
+    
+    self.view.endEditing(true)
+    self.forgotpasswordapi()
 }
 
+}
 // MARK: - Textfield Delegate -
 
 extension ForgotPasswordVC{
@@ -219,7 +232,7 @@ extension ForgotPasswordVC{
                         self?.present(vc, animated: false)
                     }
                     else if  Int.getInt(dictResult["status"]) == 400{
-//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     else if Int.getInt(dictResult["status"]) == 401{
 //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))

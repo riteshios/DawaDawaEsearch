@@ -52,8 +52,8 @@ extension ViewAllInterestedVC:UITableViewDelegate,UITableViewDataSource{
         let obj = userTimeLine[indexPath.row]
         
         cell.SocialPostCollectionView.tag = indexPath.section
-        cell.lblUserName.text = String.getString(obj.userdetail?.name)
-        debugPrint("username.....", cell.lblUserName.text)
+//        cell.lblUserName.text = String.getString(obj.userdetail?.name)
+//        debugPrint("username.....", cell.lblUserName.text)
         //cell.lblDescribtion.text = String.getString(obj.description)
         cell.lblCommentCout.text = String.getString(Int.getInt(obj.commentsCount))
         
@@ -64,7 +64,7 @@ extension ViewAllInterestedVC:UITableViewDelegate,UITableViewDataSource{
         let imguserurl = String.getString(obj.userdetail?.social_profile)
         debugPrint("socialprofile......",imguserurl)
         
-        cell.Imageuser.downlodeImage(serviceurl: imguserurl , placeHolder: UIImage(named: "Boss"))
+//        cell.Imageuser.downlodeImage(serviceurl: imguserurl , placeHolder: UIImage(named: "Boss"))
         
         cell.lblLikeCount.text = String.getString(obj.likes) //+ " " + "likes"
         
@@ -150,11 +150,11 @@ extension ViewAllInterestedVC:UITableViewDelegate,UITableViewDataSource{
         }
         
         if UserData.shared.id == Int.getInt(obj.user_id){
-            cell.btnChat.isHidden = true
+//            cell.btnChat.isHidden = true
             cell.viewSave.isHidden = true
         }
         else{
-            cell.btnChat.isHidden = false
+//            cell.btnChat.isHidden = false
             cell.viewSave.isHidden = false
         }
                     

@@ -9,6 +9,7 @@ import SwiftyJSON
 
 var filteredArray:[String] = [] // Global
 var userTimeLine = [SocialPostData]()
+var imgUrl = ""
 var cameFrom = ""
 
 class FilterVC: UIViewController{
@@ -116,11 +117,12 @@ class FilterVC: UIViewController{
     var selectedsubids:[String] = []
     var selectedservicetypesids:[String] = []
     var stringcatid = ""
-    var imgUrl = ""
+    
     
     var mostlike = ""
     var leastlike = ""
-    var rating = ""
+    var mostrating = ""
+    var leastrating = ""
     var oppstatus:String?
     var servicetype:Int?
     var today:String?
@@ -142,7 +144,7 @@ class FilterVC: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setuplanguage()
-        
+        self.tblViewOpportunitytype.allowsMultipleSelection = false
         if UserData.shared.isskiplogin == true{
             self.guestcategory()
             self.guestservicetype()
@@ -216,7 +218,8 @@ class FilterVC: UIViewController{
         
         self.mostlike = ""
         self.leastlike = ""
-        self.rating = ""
+        self.mostrating = ""
+        self.leastrating = ""
         self.oppstatus = String()
         self.servicetype = Int()
         self.today = String()
@@ -282,7 +285,7 @@ class FilterVC: UIViewController{
             self.lblMostrated.textColor = .white
             self.viewLeastrated.backgroundColor = UIColor(red: 241, green: 249, blue: 253)
             self.lblLeastrated.textColor = UIColor(red: 21, green: 114, blue: 161)
-            self.rating = "DESC"
+            self.mostrating = "DESC"
             filteredArray.append("Most rated")
             for i in 0 ..< filteredArray.count - 1{
                 if filteredArray[i] == "Least rated"{
@@ -300,7 +303,7 @@ class FilterVC: UIViewController{
             self.lblLeastrated.textColor = .white
             self.viewMostRated.backgroundColor = UIColor(red: 241, green: 249, blue: 253)
             self.lblMostrated.textColor = UIColor(red: 21, green: 114, blue: 161)
-            self.rating = "ASC"
+            self.leastrating = "ASC"
             filteredArray.append("Least rated")
             for i in 0 ..< filteredArray.count - 1{
                 if filteredArray[i] == "Most rated"{
@@ -378,7 +381,7 @@ class FilterVC: UIViewController{
             self.lblAll.textColor = UIColor(red: 21, green: 114, blue: 161)
             self.viewSold.backgroundColor = UIColor(red: 241, green: 249, blue: 253)
             self.lblSold.textColor = UIColor(red: 21, green: 114, blue: 161)
-            self.oppstatus = String.getString("closed")
+            self.oppstatus = String.getString("close")
             filteredArray.append("Closed")
             for i in 0 ..< filteredArray.count - 1{
                 if filteredArray[i] == "All"{
@@ -1348,7 +1351,8 @@ extension FilterVC{
             "user_id":Int.getInt(UserData.shared.id),
             "most_like":String.getString(mostlike),
             "least_like":String.getString(leastlike),
-            "rating":String.getString(rating),
+            "most_rating":String.getString(mostrating),
+            "least_rating":String.getString(leastrating),
             "opr_status":String.getString(oppstatus),
             "opr_type":selectedoptype,
             "opr_subtype":selectedsuboptype,
@@ -1384,7 +1388,7 @@ extension FilterVC{
                             kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
                         }
                         
-                        self?.imgUrl = String.getString(dictResult["oprbase_url"])
+                        imgUrl = String.getString(dictResult["oprbase_url"])
                         let Opportunity = kSharedInstance.getArray(withDictionary: dictResult["Opportunity"])
                         userTimeLine = Opportunity.map{SocialPostData(data: kSharedInstance.getDictionary($0))}
                         print("DataallSearchpost=\(userTimeLine)")
@@ -1645,19 +1649,22 @@ extension FilterVC{
         let params:[String : Any] = [
             "most_like":String.getString(mostlike),
             "least_like":String.getString(leastlike),
-            "rating":String.getString(rating),
+            "most_rating":String.getString(mostrating),
+            "least_rating":String.getString(leastrating),
             "opp_status":Int.getInt(oppstatus),
             "opr_type":selectedoptype,
             "opr_subtype":selectedsuboptype,
-            "date":Int.getInt(today),
-            "lastweek":Int.getInt(lastweek),
-            "lastmonth":Int.getInt(lastmonth),
+            "date":String.getString(today),
+            "lastweek":String.getString(lastweek),
+            "lastmonth":String.getString(lastmonth),
             "state":"\(String(describing: stateids))",
             "locality":"\(String(describing: localityid))",
             "services_type":selectedservicetype,
             "sort_by":Int.getInt(sortby),
             "start_date":String.getString(self.txtfieldStartDate.text),
-            "end_date":String.getString(self.txtfieldEndDate.text)
+            "end_date":String.getString(self.txtfieldEndDate.text),
+            "min_price":Int.getInt(minprice),
+            "max_price":Int.getInt(maxprice)
         ]
         
         TANetworkManager.sharedInstance.requestlangApi(withServiceName:ServiceName.kguestfilter, requestMethod: .POST,requestParameters:params, withProgressHUD: false)
@@ -1676,8 +1683,8 @@ extension FilterVC{
                         if septoken[0] == "Bearer"{
                             kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
                         }
-                        
-                        self?.imgUrl = String.getString(dictResult["oprbase_url"])
+                       
+                        imgUrl = String.getString(dictResult["oprbase_url"])
                         let Opportunity = kSharedInstance.getArray(withDictionary: dictResult["Opportunity"])
                         userTimeLine = Opportunity.map{SocialPostData(data: kSharedInstance.getDictionary($0))}
                         print("DataallSearchpost=\(userTimeLine)")
@@ -1688,7 +1695,7 @@ extension FilterVC{
                         //                        cameFrom = "FilterData"
                         //                        vc.userTimeLine = self!.userTimeLine
                         //                        vc.hidesBottomBarWhenPushed = false
-                        //                       vc.tabBarController?.hidesBottomBarWhenPushed = false
+                        //                        vc.tabBarController?.hidesBottomBarWhenPushed = false
                         
                         cameFrom = "FilterData"
                         let vc = self?.storyboard?.instantiateViewController(withIdentifier: "TabBarVC") as! TabBarVC

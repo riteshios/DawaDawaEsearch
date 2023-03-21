@@ -351,14 +351,14 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
             let cell = self.tblViewSocialPost.dequeueReusableCell(withIdentifier: "SocialPostTableViewCell") as! SocialPostTableViewCell
             cell.SocialPostCollectionView.tag = indexPath.section
             
-            cell.btnChat.isHidden = true
+//            cell.btnChat.isHidden = true
             cell.viewSave.isHidden = true
             
             let profilrimageurl = "\("https://demo4esl.com/dawadawa/public/admin_assets/user_profile/" + String.getString(UserData.shared.social_profile))"
             
             let obj = userTimeLine[indexPath.row]
             
-            cell.lblUserName.text = String.getString(UserData.shared.name) + " " + String.getString(UserData.shared.last_name)
+//            cell.lblUserName.text = String.getString(UserData.shared.name) + " " + String.getString(UserData.shared.last_name)
             cell.lblTitle.text = String.getString(obj.title)
             cell.lblCategoryName.text = String.getString(obj.category_name)
             cell.lblCommentCout.text = String.getString(Int.getInt(obj.commentsCount))
@@ -368,7 +368,7 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
             cell.lblClosed.text = String(String.getString(obj.close_opr_date).prefix(10))
             cell.LeadingOppType.constant = -20
             
-            cell.Imageuser.downlodeImage(serviceurl: profilrimageurl, placeHolder: UIImage(named: "Boss"))
+//            cell.Imageuser.downlodeImage(serviceurl: profilrimageurl, placeHolder: UIImage(named: "Boss"))
             print("-=-opp_plan=-=-\(String.getString(obj.opp_plan))")
             
             cell.imgOpp_plan.image = obj.opp_plan == "Featured" ? UIImage(named: "Star Filled") : obj.opp_plan == "Premium" ? UIImage(named: "Crown") : UIImage(named: "Folded Booklet")
@@ -773,7 +773,7 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                             
                             cell.lblusernameandcomment.attributedText = attributedString
                             
-                            self.listoppoertunityapi()
+//                            self.listoppoertunityapi()
                             
                         }
                     }

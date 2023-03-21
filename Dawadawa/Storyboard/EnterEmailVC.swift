@@ -27,22 +27,22 @@ class EnterEmailVC: UIViewController {
     }
     
     override func viewWillLayoutSubviews() {
-            if kSharedUserDefaults.getlanguage() as? String == "en"{
-                DispatchQueue.main.async {
-                    self.txtfldEmail.semanticContentAttribute = .forceLeftToRight
-                    self.txtfldEmail.textAlignment = .left
-                }
-
-            } else {
-                DispatchQueue.main.async {
-                    self.txtfldEmail.semanticContentAttribute = .forceRightToLeft
-                    self.txtfldEmail.textAlignment = .right
-                }
+        if kSharedUserDefaults.getlanguage() as? String == "en"{
+            DispatchQueue.main.async {
+                self.txtfldEmail.semanticContentAttribute = .forceLeftToRight
+                self.txtfldEmail.textAlignment = .left
+            }
+            
+        } else {
+            DispatchQueue.main.async {
+                self.txtfldEmail.semanticContentAttribute = .forceRightToLeft
+                self.txtfldEmail.textAlignment = .right
             }
         }
+    }
     
     
-//    MARK: - Life Cycle
+    //    MARK: - Life Cycle
     
     func setup(){
         self.viewContinue.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
@@ -56,23 +56,8 @@ class EnterEmailVC: UIViewController {
     }
     
     @IBAction func btnContinueTapped(_ sender: UIButton) {
-        self.checkemailapi(email: self.txtfldEmail.text ?? " ") { sucess in
-            
-            if sucess == 200 {
-                self.validation()
-                
-            }
-            else if sucess == 400 {
-                if kSharedUserDefaults.getlanguage() as? String == "en" {
-                    self.showSimpleAlert(message: "The email has already been taken.")
-                }
-                else{
-                    self.showSimpleAlert(message: "البريد الإلكتروني تم أخذه.")
-                }
-            }
-        }
+        self.validation()
     }
-    
     
     
     // MARK: - Validation
@@ -84,18 +69,14 @@ class EnterEmailVC: UIViewController {
             showSimpleAlert(message: Notifications.kEnterEmail)
             return
         }
-        else if !String.getString(txtfldEmail.text).isEmail()
+        else if !String.getString(txtfldEmail.text).isValidEmail()
         {
             self.showSimpleAlert(message: Notifications.kEnterValidEmail)
+            return
             
         }
         self.view.endEditing(true)
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "EnterPhoneNumberVC") as! EnterPhoneNumberVC
-        vc.name = self.name
-        vc.lastame = self.lastame
-        vc.usertype = self.usertype
-        vc.email = self.txtfldEmail.text ?? ""
-        self.navigationController?.pushViewController(vc, animated: true)
+        self.checkemailapi()
     }
 }
 
@@ -128,6 +109,58 @@ extension EnterEmailVC : SKFlaotingTextFieldDelegate {
     
     func textFieldDidBeginEditing(textField: SKFloatingTextField) {
         print("begin editing")
+    }
+}
+
+//    MARK: - Api call -
+
+extension EnterEmailVC{
+    
+    //   Check Email Address
+    
+    func checkemailapi(){
+        
+        CommonUtils.showHud(show: true)
+        let params: [String:Any] = [
+            "email": String.getString(self.txtfldEmail.text)
+        ]
+        
+        TANetworkManager.sharedInstance.requestApi(withServiceName: ServiceName.kcheckemail, requestMethod: .POST, requestParameters: params, withProgressHUD: false) { (result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
+            
+            if errorType == .requestSuccess {
+                let dictResult = kSharedInstance.getDictionary(result)
+                
+                switch Int.getInt(statusCode){
+                case 200:
+                    
+                    if Int.getInt(dictResult["status"]) == 200{
+                        let vc = self.storyboard?.instantiateViewController(withIdentifier: "EnterPhoneNumberVC") as! EnterPhoneNumberVC
+                        vc.name = self.name
+                        vc.lastame = self.lastame
+                        vc.usertype = self.usertype
+                        vc.email = self.txtfldEmail.text ?? ""
+                        self.navigationController?.pushViewController(vc, animated: true)
+                        
+                    }
+                    else if Int.getInt(dictResult["status"]) == 400{
+                        if kSharedUserDefaults.getlanguage() as? String == "en" {
+                            self.showSimpleAlert(message: "The email has already been taken.")
+                        }
+                        else{
+                            self.showSimpleAlert(message: "البريد الإلكتروني تم أخذه.")
+                        }
+                    }
+                    //
+                default:
+                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                }
+            }else if errorType == .noNetwork {
+                CommonUtils.showToastForInternetUnavailable()
+                
+            } else {
+                //                CommonUtils.showToastForDefaultError()
+            }
+        }
     }
 }
 
