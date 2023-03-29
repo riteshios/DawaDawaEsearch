@@ -1,7 +1,5 @@
-//
 //  locationManager.swift
 //  Kawader
-//
 //  Created by  on 12/03/20.
 //  Copyright © 2020 . All rights reserved.
 
@@ -20,6 +18,7 @@ class LocationManager:NSObject,CLLocationManagerDelegate{
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         cllocations = locations
 //        self.stopUpdatingLocation()
+        
         self.latitiude = locations.first?.coordinate.latitude ?? 0.0
         self.longitude = locations.first?.coordinate.longitude ?? 0.0
         print("latitude \(latitiude),longitude \(longitude)")

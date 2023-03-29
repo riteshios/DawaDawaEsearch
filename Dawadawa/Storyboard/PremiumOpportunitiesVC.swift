@@ -15,6 +15,9 @@ class PremiumOpportunitiesVC: UIViewController {
     var comment = [user_comment]()
     var txtcomment = " "
     var camefrom = " "
+    lazy var  globalApi = {
+        GlobalApi()
+    }()
     
     @IBOutlet weak var lblPremium: UILabel!
     
@@ -257,7 +260,7 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
                     let oppid = self.userTimeLine[indexPath.row].id
                     debugPrint("oppid--=-=-=-",oppid)
                     
-                    self.likeOpportunityapi(oppr_id: oppid ?? 0) { countLike,sucess  in
+                    self.globalApi.likeOpportunityapi(oppr_id: oppid ?? 0) { countLike,sucess  in
                         obj.likes = Int.getInt(countLike)
                         debugPrint("Int.getInt(countLike)",Int.getInt(countLike))
                         cell.lblLikeCount.text = String.getString(obj.likes) //+ " " + "likes"
@@ -301,7 +304,7 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
                 if txt == "Save"{
                     if tapped.isSelected{
                         let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
-                        self.saveoppoertunityapi(oppr_id: oppid ?? 0) { sucess in
+                        self.globalApi.saveoppoertunityapi(oppr_id: oppid ?? 0) { sucess in
                             if sucess == 200{
                                 if kSharedUserDefaults.getlanguage() as? String == "en"{
                                     cell.lblSave.text = "Saved"
@@ -367,7 +370,7 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
                                             vc.dismiss(animated: false) {
                                                 let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
                                                 self.userTimeLine.remove(at: indexPath.row)
-                                                self.deletepostoppoertunityapi(oppr_id: oppid)
+                                                self.globalApi.deletepostoppoertunityapi(oppr_id: oppid)
                                                 debugPrint("oppid......",oppid)
                                                 self.tblViewPremiumOpp.reloadData()
                                             }
@@ -387,13 +390,13 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
                                         if txt == "Close"{
                                             vc.dismiss(animated: false) {
                                                 let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
-                                                self.closeopportunityapi(opr_id: oppid){ sucess in
-                                                    
-                                                    if sucess == 200{
-                                                        cell.lblcloseOpportunity.text = "Closed"
-                                                        cell.lblcloseOpportunity.textColor = UIColor(hexString: "#FF4C4D")
-                                                    }
-                                                }
+//                                                self.closeopportunityapi(opr_id: oppid){ sucess in
+//
+//                                                    if sucess == 200{
+//                                                        cell.lblcloseOpportunity.text = "Closed"
+//                                                        cell.lblcloseOpportunity.textColor = UIColor(hexString: "#FF4C4D")
+//                                                    }
+//                                                }
                                                 debugPrint("oppidclose......",oppid)
                                             }
                                         }

@@ -243,32 +243,32 @@ extension ViewAllInterestedVC:UITableViewDelegate,UITableViewDataSource{
                         let oppid = self.userTimeLine[indexPath.row].id
                         debugPrint("oppid--=-=-=-",oppid)
                         
-                        self.likeOpportunityapi(oppr_id: oppid ?? 0) { countLike,sucess  in
-                            obj.likes = Int.getInt(countLike)
-                            debugPrint("Int.getInt(countLike)",Int.getInt(countLike))
-                            cell.lblLikeCount.text = String.getString(obj.likes) //+ " " + "likes"
-                            
-                            if sucess == 200{
-                                cell.imglike.image = UIImage(named: "dil")
-                                if kSharedUserDefaults.getlanguage() as? String == "en"{
-                                    cell.lbllike.text = "Liked"
-                                }
-                                else{
-                                    cell.lbllike.text = "احب"
-                                }
-                                cell.lbllike.textColor = .red
-                            }
-                            else if sucess == 400{
-                                cell.imglike.image = UIImage(named: "unlike")
-                                if kSharedUserDefaults.getlanguage() as? String == "en"{
-                                    cell.lbllike.text = "Like"
-                                }
-                                else{
-                                    cell.lbllike.text = "مثل"
-                                }
-                                cell.lbllike.textColor = UIColor(hexString: "#A6A6A6")
-                            }
-                        }
+//                        self.likeOpportunityapi(oppr_id: oppid ?? 0) { countLike,sucess  in
+//                            obj.likes = Int.getInt(countLike)
+//                            debugPrint("Int.getInt(countLike)",Int.getInt(countLike))
+//                            cell.lblLikeCount.text = String.getString(obj.likes) //+ " " + "likes"
+//                            
+//                            if sucess == 200{
+//                                cell.imglike.image = UIImage(named: "dil")
+//                                if kSharedUserDefaults.getlanguage() as? String == "en"{
+//                                    cell.lbllike.text = "Liked"
+//                                }
+//                                else{
+//                                    cell.lbllike.text = "احب"
+//                                }
+//                                cell.lbllike.textColor = .red
+//                            }
+//                            else if sucess == 400{
+//                                cell.imglike.image = UIImage(named: "unlike")
+//                                if kSharedUserDefaults.getlanguage() as? String == "en"{
+//                                    cell.lbllike.text = "Like"
+//                                }
+//                                else{
+//                                    cell.lbllike.text = "مثل"
+//                                }
+//                                cell.lbllike.textColor = UIColor(hexString: "#A6A6A6")
+//                            }
+//                        }
                         
                     }
 //                }
@@ -365,11 +365,11 @@ extension ViewAllInterestedVC:UITableViewDelegate,UITableViewDataSource{
                                     if txt == "Close"{
                                         vc.dismiss(animated: false) {
                                             let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
-                                            self.closeopportunityapi(opr_id: oppid){ sucess in
-                                                if sucess == 200{
-                                                    
-                                                }
-                                            }
+//                                            self.closeopportunityapi(opr_id: oppid){ sucess in
+//                                                if sucess == 200{
+//                                                    
+//                                                }
+//                                            }
                                             debugPrint("oppidclose......",oppid)
                                             self.getallinterestedapi()
                                         }

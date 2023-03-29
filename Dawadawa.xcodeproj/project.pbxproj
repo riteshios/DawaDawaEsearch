@@ -143,6 +143,8 @@
 		04FD1D342860429C00BE414A /* TabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FD1D332860429C00BE414A /* TabBarVC.swift */; };
 		04FD1D37286077E800BE414A /* MoreVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FD1D36286077E800BE414A /* MoreVC.swift */; };
 		04FD1D392860794E00BE414A /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FD1D382860794E00BE414A /* ProfileVC.swift */; };
+		18700D0E29D047CD009476FA /* SocialPostTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18700D0C29D047CD009476FA /* SocialPostTVC.swift */; };
+		18700D0F29D047CD009476FA /* SocialPostTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18700D0D29D047CD009476FA /* SocialPostTVC.xib */; };
 		1883224629C9761900BB3832 /* success.gif in Resources */ = {isa = PBXBuildFile; fileRef = 1883201629C9761500BB3832 /* success.gif */; };
 		1883224729C9761900BB3832 /* Product Sans Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1883201829C9761500BB3832 /* Product Sans Regular.ttf */; };
 		1883224829C9761900BB3832 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1883201929C9761500BB3832 /* Assets.xcassets */; };
@@ -675,6 +677,8 @@
 		1883245729C9761B00BB3832 /* SharedClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1883224329C9761800BB3832 /* SharedClass.swift */; };
 		1883245829C9761B00BB3832 /* CommonUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1883224429C9761800BB3832 /* CommonUtils.swift */; };
 		1883245929C9761B00BB3832 /* client_636451100488-8ubqbrf0lvtoldssc8t9td5cjhh20i7j.apps.googleusercontent.com.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1883224529C9761800BB3832 /* client_636451100488-8ubqbrf0lvtoldssc8t9td5cjhh20i7j.apps.googleusercontent.com.plist */; };
+		188E9D7629D15598005D0EBD /* NewSocialPostCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188E9D7429D15598005D0EBD /* NewSocialPostCVC.swift */; };
+		188E9D7729D15598005D0EBD /* NewSocialPostCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 188E9D7529D15598005D0EBD /* NewSocialPostCVC.xib */; };
 		3D0B08522854B8F700590891 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D0B08512854B8F700590891 /* LoginVC.swift */; };
 		3D0C964628557FC2000384BD /* ForgotPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D0C964528557FC2000384BD /* ForgotPasswordVC.swift */; };
 		3D0C9648285581F6000384BD /* ResetPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D0C9647285581F6000384BD /* ResetPasswordVC.swift */; };
@@ -830,6 +834,8 @@
 		04FD1D332860429C00BE414A /* TabBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TabBarVC.swift; path = Dawadawa/Storyboard/TabBarVC.swift; sourceTree = SOURCE_ROOT; };
 		04FD1D36286077E800BE414A /* MoreVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreVC.swift; sourceTree = "<group>"; };
 		04FD1D382860794E00BE414A /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProfileVC.swift; path = Dawadawa/Storyboard/ProfileVC.swift; sourceTree = SOURCE_ROOT; };
+		18700D0C29D047CD009476FA /* SocialPostTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialPostTVC.swift; sourceTree = "<group>"; };
+		18700D0D29D047CD009476FA /* SocialPostTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SocialPostTVC.xib; sourceTree = "<group>"; };
 		1883201629C9761500BB3832 /* success.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = success.gif; sourceTree = "<group>"; };
 		1883201829C9761500BB3832 /* Product Sans Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Product Sans Regular.ttf"; sourceTree = "<group>"; };
 		1883201929C9761500BB3832 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -1362,6 +1368,8 @@
 		1883224329C9761800BB3832 /* SharedClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedClass.swift; sourceTree = "<group>"; };
 		1883224429C9761800BB3832 /* CommonUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonUtils.swift; sourceTree = "<group>"; };
 		1883224529C9761800BB3832 /* client_636451100488-8ubqbrf0lvtoldssc8t9td5cjhh20i7j.apps.googleusercontent.com.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "client_636451100488-8ubqbrf0lvtoldssc8t9td5cjhh20i7j.apps.googleusercontent.com.plist"; sourceTree = "<group>"; };
+		188E9D7429D15598005D0EBD /* NewSocialPostCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSocialPostCVC.swift; sourceTree = SOURCE_ROOT; };
+		188E9D7529D15598005D0EBD /* NewSocialPostCVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewSocialPostCVC.xib; sourceTree = SOURCE_ROOT; };
 		2522D7B03C7ACB4C435A7D51 /* Pods_Dawadawa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Dawadawa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D0B08512854B8F700590891 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginVC.swift; path = Dawadawa/Storyboard/LoginVC.swift; sourceTree = SOURCE_ROOT; };
 		3D0C964528557FC2000384BD /* ForgotPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ForgotPasswordVC.swift; path = Dawadawa/Storyboard/ForgotPasswordVC.swift; sourceTree = SOURCE_ROOT; };
@@ -1464,14 +1472,8 @@
 		045C4E6F28895EF300E831AA /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				04067753288831290061AE70 /* SocialPostTableViewCell.swift */,
-				04067754288831290061AE70 /* SocialPostTableViewCell.xib */,
-				045EE012288912F600E45E79 /* SocialPostCollectionViewCell.swift */,
-				045EE013288912F600E45E79 /* SocialPostCollectionViewCell.xib */,
-				040677492887FFEA0061AE70 /* ViewPostTableViewCell.swift */,
-				0406774A2887FFEA0061AE70 /* ViewPostTableViewCell.xib */,
-				0406774F288820B60061AE70 /* PremiumOppCollectionViewCell.swift */,
-				04067750288820B60061AE70 /* PremiumOppCollectionViewCell.xib */,
+				188E9D7329D154B3005D0EBD /* OldSocialPostDesign */,
+				188E9D7229D15499005D0EBD /* SocialPost */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -2554,6 +2556,32 @@
 			path = Global;
 			sourceTree = "<group>";
 		};
+		188E9D7229D15499005D0EBD /* SocialPost */ = {
+			isa = PBXGroup;
+			children = (
+				18700D0C29D047CD009476FA /* SocialPostTVC.swift */,
+				18700D0D29D047CD009476FA /* SocialPostTVC.xib */,
+				188E9D7429D15598005D0EBD /* NewSocialPostCVC.swift */,
+				188E9D7529D15598005D0EBD /* NewSocialPostCVC.xib */,
+				040677492887FFEA0061AE70 /* ViewPostTableViewCell.swift */,
+				0406774A2887FFEA0061AE70 /* ViewPostTableViewCell.xib */,
+				0406774F288820B60061AE70 /* PremiumOppCollectionViewCell.swift */,
+				04067750288820B60061AE70 /* PremiumOppCollectionViewCell.xib */,
+			);
+			name = SocialPost;
+			sourceTree = "<group>";
+		};
+		188E9D7329D154B3005D0EBD /* OldSocialPostDesign */ = {
+			isa = PBXGroup;
+			children = (
+				04067753288831290061AE70 /* SocialPostTableViewCell.swift */,
+				04067754288831290061AE70 /* SocialPostTableViewCell.xib */,
+				045EE012288912F600E45E79 /* SocialPostCollectionViewCell.swift */,
+				045EE013288912F600E45E79 /* SocialPostCollectionViewCell.xib */,
+			);
+			name = OldSocialPostDesign;
+			sourceTree = "<group>";
+		};
 		446E66A428531BF8006D4692 /* Registration */ = {
 			isa = PBXGroup;
 			children = (
@@ -2879,6 +2907,7 @@
 				188322F029C9761A00BB3832 /* Antigua-and-Barbuda.png in Resources */,
 				1883230929C9761A00BB3832 /* Bangladesh.png in Resources */,
 				188322E529C9761A00BB3832 /* Solomon-Islands.png in Resources */,
+				188E9D7729D15598005D0EBD /* NewSocialPostCVC.xib in Resources */,
 				188323CF29C9761B00BB3832 /* ER.png in Resources */,
 				188323F429C9761B00BB3832 /* SN.png in Resources */,
 				1883235129C9761A00BB3832 /* AQ.png in Resources */,
@@ -3069,6 +3098,7 @@
 				1883241D29C9761B00BB3832 /* BA.png in Resources */,
 				1883244A29C9761B00BB3832 /* Archive.zip in Resources */,
 				1883230329C9761A00BB3832 /* Saint-Lucia.png in Resources */,
+				18700D0F29D047CD009476FA /* SocialPostTVC.xib in Resources */,
 				1883234729C9761A00BB3832 /* TG.png in Resources */,
 				188322FD29C9761A00BB3832 /* Mauritius.png in Resources */,
 				1883237F29C9761A00BB3832 /* YE.png in Resources */,
@@ -3359,6 +3389,7 @@
 				0411EDD5291E7F1D0055AD30 /* DeleteChatPopUPVC.swift in Sources */,
 				04B5993D28993091008366DC /* PlanTableViewCell.swift in Sources */,
 				048204AE292F716100863713 /* FilterDataCVCell.swift in Sources */,
+				188E9D7629D15598005D0EBD /* NewSocialPostCVC.swift in Sources */,
 				1883224B29C9761900BB3832 /* CornerWithShadow.swift in Sources */,
 				0461E314288A76F800B7F0E7 /* ProileSocialMoreVC.swift in Sources */,
 				045EE014288912F600E45E79 /* SocialPostCollectionViewCell.swift in Sources */,
@@ -3434,6 +3465,7 @@
 				04B9190C286B1372009ABAE4 /* ChangeEmailVC.swift in Sources */,
 				0464E3362910F94B00EC10E3 /* MyChatTableViewCell.swift in Sources */,
 				04A606FE28F41B9200C980D3 /* NotificationTableViewCell.swift in Sources */,
+				18700D0E29D047CD009476FA /* SocialPostTVC.swift in Sources */,
 				0406DB86287D5CEB00B57A0B /* MiningServiceVC.swift in Sources */,
 				1883225929C9761900BB3832 /* UIColor+Extensions.swift in Sources */,
 				0490F3DB2876E7E300F8A84A /* UploadImageCollectionViewCell.swift in Sources */,

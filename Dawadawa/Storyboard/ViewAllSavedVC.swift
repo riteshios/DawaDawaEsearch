@@ -18,6 +18,10 @@ class ViewAllSavedVC: UIViewController {
     var comment = [user_comment]()
     var txtcomment = " "
     
+    lazy var globalApi = {
+        GlobalApi()
+    }()
+    
     //    MARK: - UILife Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -242,30 +246,30 @@ extension ViewAllSavedVC:UITableViewDelegate,UITableViewDataSource{
                         let oppid = self.userTimeLine[indexPath.row].id
                         debugPrint("oppid--=-=-=-",oppid)
                         //                            self.likeOpportunityapi(oppr_id: oppid ?? 0)
-                        self.likeOpportunityapi(oppr_id: oppid ?? 0) { countLike,sucess  in
-                            obj.likes = Int.getInt(countLike)
-                            cell.lblLikeCount.text = String.getString(obj.likes) //+ " " + "likes"
-                            if sucess == 200{
-                                cell.imglike.image = UIImage(named: "dil")
-                                if kSharedUserDefaults.getlanguage() as? String == "en"{
-                                    cell.lbllike.text = "Liked"
-                                }
-                                else{
-                                    cell.lbllike.text = "احب"
-                                }
-                                cell.lbllike.textColor = .red
-                            }
-                            else if sucess == 400{
-                                cell.imglike.image = UIImage(named: "unlike")
-                                if kSharedUserDefaults.getlanguage() as? String == "en"{
-                                    cell.lbllike.text = "Like"
-                                }
-                                else{
-                                    cell.lbllike.text = "مثل"
-                                }
-                                cell.lbllike.textColor = UIColor(hexString: "#A6A6A6")
-                            }
-                        }
+//                        self.likeOpportunityapi(oppr_id: oppid ?? 0) { countLike,sucess  in
+//                            obj.likes = Int.getInt(countLike)
+//                            cell.lblLikeCount.text = String.getString(obj.likes) //+ " " + "likes"
+//                            if sucess == 200{
+//                                cell.imglike.image = UIImage(named: "dil")
+//                                if kSharedUserDefaults.getlanguage() as? String == "en"{
+//                                    cell.lbllike.text = "Liked"
+//                                }
+//                                else{
+//                                    cell.lbllike.text = "احب"
+//                                }
+//                                cell.lbllike.textColor = .red
+//                            }
+//                            else if sucess == 400{
+//                                cell.imglike.image = UIImage(named: "unlike")
+//                                if kSharedUserDefaults.getlanguage() as? String == "en"{
+//                                    cell.lbllike.text = "Like"
+//                                }
+//                                else{
+//                                    cell.lbllike.text = "مثل"
+//                                }
+//                                cell.lbllike.textColor = UIColor(hexString: "#A6A6A6")
+//                            }
+//                        }
                     }
                 }
             }
@@ -288,7 +292,7 @@ extension ViewAllSavedVC:UITableViewDelegate,UITableViewDataSource{
             if txt == "Save"{
                 //       if String.getString(obj.is_saved) == "0"{
                 let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
-                self.saveoppoertunityapi(oppr_id: oppid ?? 0) { sucess in
+                self.globalApi.saveoppoertunityapi(oppr_id: oppid ?? 0) { sucess in
                     if sucess == 200{
                         if kSharedUserDefaults.getlanguage() as? String == "en"{
                             cell.lblSave.text = "Saved"
@@ -353,7 +357,7 @@ extension ViewAllSavedVC:UITableViewDelegate,UITableViewDataSource{
                                         vc.dismiss(animated: false) {
                                             let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
                                             self.userTimeLine.remove(at: indexPath.row)
-                                            self.deletepostoppoertunityapi(oppr_id: oppid)
+                                            self.globalApi.deletepostoppoertunityapi(oppr_id: oppid)
                                             debugPrint("oppid......",oppid)
                                             self.TblViewSavedOpp.reloadData()
                                         }
@@ -373,14 +377,14 @@ extension ViewAllSavedVC:UITableViewDelegate,UITableViewDataSource{
                                     if txt == "Close"{
                                         vc.dismiss(animated: false) {
                                             let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
-                                            self.closeopportunityapi(opr_id: oppid){ sucess in
-                                                
-                                                if sucess == 200{
-                                                    cell.lblcloseOpportunity.text = "Closed"
-                                                    cell.lblcloseOpportunity.textColor = UIColor(hexString: "#FF4C4D")
-                                                }
-                                                
-                                            }
+//                                            self.closeopportunityapi(opr_id: oppid){ sucess in
+//                                                
+//                                                if sucess == 200{
+//                                                    cell.lblcloseOpportunity.text = "Closed"
+//                                                    cell.lblcloseOpportunity.textColor = UIColor(hexString: "#FF4C4D")
+//                                                }
+//                                                
+//                                            }
                                             debugPrint("oppidclose......",oppid)
                                         }
                                     }

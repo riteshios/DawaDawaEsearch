@@ -1,10 +1,7 @@
-//
 //  String+Utilities.swift
 //  HealthTotal
-//
 //  Created by Office on 23/05/16.
 //  Copyright © 2016 Collabroo. All rights reserved.
-//
 
 import Foundation
 import UIKit

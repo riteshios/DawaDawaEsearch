@@ -16,6 +16,10 @@ class SearchVC: UIViewController,UITextFieldDelegate{
     var comment = [user_comment]()
     var txtcomment = " "
     
+    lazy var globalApi = {
+        GlobalApi()
+    }()
+    
     //    MARK: - UIView Life Cycle -
     
     override func viewDidLoad() {
@@ -351,32 +355,32 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
                         let oppid = self.userTimeLine[indexPath.row].id
                         debugPrint("oppid--=-=-=-",oppid)
                         
-                        self.likeOpportunityapi(oppr_id: oppid ?? 0) { countLike,sucess  in
-                            obj.likes = Int.getInt(countLike)
-                            debugPrint("Int.getInt(countLike)",Int.getInt(countLike))
-                            cell.lblLikeCount.text = String.getString(obj.likes) //+ " " + "likes"
-                            
-                            if sucess == 200{
-                                cell.imglike.image = UIImage(named: "dil")
-                                if kSharedUserDefaults.getlanguage() as? String == "en"{
-                                    cell.lbllike.text = "Liked"
-                                }
-                                else{
-                                    cell.lbllike.text = "احب"
-                                }
-                                cell.lbllike.textColor = .red
-                            }
-                            else if sucess == 400{
-                                cell.imglike.image = UIImage(named: "unlike")
-                                if kSharedUserDefaults.getlanguage() as? String == "en"{
-                                    cell.lbllike.text = "Like"
-                                }
-                                else{
-                                    cell.lbllike.text = "مثل"
-                                }
-                                cell.lbllike.textColor = UIColor(hexString: "#A6A6A6")
-                            }
-                        }
+//                        self.likeOpportunityapi(oppr_id: oppid ?? 0) { countLike,sucess  in
+//                            obj.likes = Int.getInt(countLike)
+//                            debugPrint("Int.getInt(countLike)",Int.getInt(countLike))
+//                            cell.lblLikeCount.text = String.getString(obj.likes) //+ " " + "likes"
+//                            
+//                            if sucess == 200{
+//                                cell.imglike.image = UIImage(named: "dil")
+//                                if kSharedUserDefaults.getlanguage() as? String == "en"{
+//                                    cell.lbllike.text = "Liked"
+//                                }
+//                                else{
+//                                    cell.lbllike.text = "احب"
+//                                }
+//                                cell.lbllike.textColor = .red
+//                            }
+//                            else if sucess == 400{
+//                                cell.imglike.image = UIImage(named: "unlike")
+//                                if kSharedUserDefaults.getlanguage() as? String == "en"{
+//                                    cell.lbllike.text = "Like"
+//                                }
+//                                else{
+//                                    cell.lbllike.text = "مثل"
+//                                }
+//                                cell.lbllike.textColor = UIColor(hexString: "#A6A6A6")
+//                            }
+//                        }
                     }
                 }
                 
@@ -416,28 +420,28 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
                         }
                         else{
                             let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
-                           self.saveoppoertunityapi(oppr_id: oppid ?? 0) { sucess in
-                            if sucess == 200{
-                                if kSharedUserDefaults.getlanguage() as? String == "en"{
-                                    cell.lblSave.text = "Saved"
-                                }
-                                else{
-                                    cell.lblSave.text = "تم الحفظ"
-                                }
-                                cell.lblSave.textColor = UIColor(hexString: "#1572A1")
-                                cell.imgsave.image = UIImage(named: "saveopr")
-                            }
-                            else if sucess == 400{
-                                if kSharedUserDefaults.getlanguage() as? String == "en"{
-                                    cell.lblSave.text = "Save"
-                                }
-                                else{
-                                    cell.lblSave.text = "يحفظ"
-                                }
-                                cell.imgsave.image = UIImage(named: "save-3")
-                                cell.lblSave.textColor = UIColor(hexString: "#A6A6A6")
-                            }
-                        }
+//                           self.saveoppoertunityapi(oppr_id: oppid ?? 0) { sucess in
+//                            if sucess == 200{
+//                                if kSharedUserDefaults.getlanguage() as? String == "en"{
+//                                    cell.lblSave.text = "Saved"
+//                                }
+//                                else{
+//                                    cell.lblSave.text = "تم الحفظ"
+//                                }
+//                                cell.lblSave.textColor = UIColor(hexString: "#1572A1")
+//                                cell.imgsave.image = UIImage(named: "saveopr")
+//                            }
+//                            else if sucess == 400{
+//                                if kSharedUserDefaults.getlanguage() as? String == "en"{
+//                                    cell.lblSave.text = "Save"
+//                                }
+//                                else{
+//                                    cell.lblSave.text = "يحفظ"
+//                                }
+//                                cell.imgsave.image = UIImage(named: "save-3")
+//                                cell.lblSave.textColor = UIColor(hexString: "#A6A6A6")
+//                            }
+//                        }
                         }
                           
                     }
@@ -503,7 +507,7 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
                                                 vc.dismiss(animated: false) {
                                                     let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
                                                     self.userTimeLine.remove(at: indexPath.row)
-                                                    self.deletepostoppoertunityapi(oppr_id: oppid)
+                                                    self.globalApi.deletepostoppoertunityapi(oppr_id: oppid)
                                                     debugPrint("oppid......",oppid)
                                                     self.tblViewSearchOpp.reloadData()
                                                 }
@@ -534,13 +538,13 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
                                             if txt == "Close"{
                                                 vc.dismiss(animated: false) {
                                                     let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
-                                                    self.closeopportunityapi(opr_id: oppid){ sucess in
-                                                        
+                                                    self.globalApi.closeopportunityapi(opr_id: oppid){ sucess in
+
                                                         if sucess == 200{
                                                             cell.lblcloseOpportunity.text = "Closed"
                                                             cell.lblcloseOpportunity.textColor = UIColor(hexString: "#FF4C4D")
                                                         }
-                                                        
+
                                                     }
                                                     debugPrint("oppidclose......",oppid)
                                                 }

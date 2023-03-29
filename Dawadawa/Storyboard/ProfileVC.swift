@@ -28,6 +28,10 @@ class ProfileVC: UIViewController {
     var isbtnPremiumSelect = false
     var isbtnFeaturedSelect = false
     
+    lazy var globalApi = {
+        GlobalApi()
+    }()
+    
     
     @IBOutlet weak var tblViewSocialPost: UITableView!
     
@@ -499,36 +503,36 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                     self.navigationController?.pushViewController(vc, animated: true)
                 }
                 
-                if txt == "Like"{
-                    let oppid = self.userTimeLine[indexPath.row].id
-                    debugPrint("oppid--=-=-=-",oppid)
-                    
-                    self.likeOpportunityapi(oppr_id: oppid ?? 0) { countLike,sucess  in
-                        obj.likes = Int.getInt(countLike)
-                        cell.lblLikeCount.text = String.getString(obj.likes) //+ " " + "likes"
-                        
-                        if sucess == 200{
-                            cell.imglike.image = UIImage(named: "dil")
-                            if kSharedUserDefaults.getlanguage() as? String == "en"{
-                                cell.lbllike.text = "Liked"
-                            }
-                            else{
-                                cell.lbllike.text = "احب"
-                            }
-                            cell.lbllike.textColor = .red
-                        }
-                        else if sucess == 400{
-                            cell.imglike.image = UIImage(named: "unlike")
-                            if kSharedUserDefaults.getlanguage() as? String == "en"{
-                                cell.lbllike.text = "Like"
-                            }
-                            else{
-                                cell.lbllike.text = "مثل"
-                            }
-                            cell.lbllike.textColor = UIColor(hexString: "#A6A6A6")
-                        }
-                    }
-                }
+//                if txt == "Like"{
+//                    let oppid = self.userTimeLine[indexPath.row].id
+//                    debugPrint("oppid--=-=-=-",oppid)
+//
+//                    self.likeOpportunityapi(oppr_id: oppid ?? 0) { countLike,sucess  in
+//                        obj.likes = Int.getInt(countLike)
+//                        cell.lblLikeCount.text = String.getString(obj.likes) //+ " " + "likes"
+//
+//                        if sucess == 200{
+//                            cell.imglike.image = UIImage(named: "dil")
+//                            if kSharedUserDefaults.getlanguage() as? String == "en"{
+//                                cell.lbllike.text = "Liked"
+//                            }
+//                            else{
+//                                cell.lbllike.text = "احب"
+//                            }
+//                            cell.lbllike.textColor = .red
+//                        }
+//                        else if sucess == 400{
+//                            cell.imglike.image = UIImage(named: "unlike")
+//                            if kSharedUserDefaults.getlanguage() as? String == "en"{
+//                                cell.lbllike.text = "Like"
+//                            }
+//                            else{
+//                                cell.lbllike.text = "مثل"
+//                            }
+//                            cell.lbllike.textColor = UIColor(hexString: "#A6A6A6")
+//                        }
+//                    }
+//                }
                 
                 if txt == "Rate"{
                     let oppid = self.userTimeLine[indexPath.row].id
@@ -639,11 +643,10 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                                         vc.dismiss(animated: false) {
                                             let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
                                             self.userTimeLine.remove(at: indexPath.row)
-                                            self.deletepostoppoertunityapi(oppr_id: oppid)
+                                            self.globalApi.deletepostoppoertunityapi(oppr_id: oppid)
                                             debugPrint("oppid......",oppid)
                                             self.tblViewSocialPost.reloadData()
                                         }
-                                        
                                     }
                                 }
                                 self.present(vc, animated: false)
@@ -660,8 +663,8 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                                     if txt == "Close"{
                                         vc.dismiss(animated: false) {
                                             let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
-                                            self.closeopportunityapi(opr_id: oppid){ sucess in
-                                                
+                                            self.globalApi.closeopportunityapi(opr_id: oppid){ sucess in
+
                                                 if sucess == 200{
                                                     cell.lblcloseOpportunity.text = "Closed"
                                                     cell.lblcloseOpportunity.textColor = UIColor(hexString: "#FF4C4D")

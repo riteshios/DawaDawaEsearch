@@ -7,7 +7,7 @@ import UIKit
 
 // Global Api
 
-extension UIViewController{
+class GlobalApi: NSObject{
     
     //    Delete Post Opportunity Api
     func deletepostoppoertunityapi(oppr_id:Int){

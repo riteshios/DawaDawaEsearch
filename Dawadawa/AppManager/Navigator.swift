@@ -1,9 +1,6 @@
-//
 //  Navigator.swift
 //  Dawadawa
-//
 //  Created by Ritesh Gupta on 10/10/22.
-//
 
 import Foundation
 import UIKit

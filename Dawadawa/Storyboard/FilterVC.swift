@@ -1651,7 +1651,7 @@ extension FilterVC{
             "least_like":String.getString(leastlike),
             "most_rating":String.getString(mostrating),
             "least_rating":String.getString(leastrating),
-            "opp_status":Int.getInt(oppstatus),
+            "opr_status":String.getString(oppstatus),
             "opr_type":selectedoptype,
             "opr_subtype":selectedsuboptype,
             "date":String.getString(today),

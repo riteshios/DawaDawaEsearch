@@ -5,8 +5,8 @@
 import UIKit
 
 var opppreid = 0
+
 class ViewPostTableViewCell: UITableViewCell{
-    
     @IBOutlet weak var lblPremium_opp: UILabel!
     @IBOutlet weak var btnViewAll: UIButton!
     @IBOutlet weak var ColllectionViewPremiumOpp: UICollectionView!
@@ -21,7 +21,6 @@ class ViewPostTableViewCell: UITableViewCell{
     var img = [oppr_image]()
     
     weak var celldelegate: PremiumOppCollectionViewCellDelegate?
-
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -46,6 +45,9 @@ class ViewPostTableViewCell: UITableViewCell{
     }
     
 }
+
+//    MARK: - Table View Delegate -
+
 extension ViewPostTableViewCell: UICollectionViewDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     
     //    Collection View
@@ -69,12 +71,11 @@ extension ViewPostTableViewCell: UICollectionViewDelegate,UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
        
            let oppid = userTimeLine[indexPath.row].id
-        opppreid = oppid ?? 0
+           opppreid = oppid ?? 0
         
             let cell = ColllectionViewPremiumOpp.cellForItem(at: indexPath) as! PremiumOppCollectionViewCell
             self.celldelegate?.collectionView(collectionviewcell: cell, index: indexPath.item, didTappedInTableViewCell: self)
             return
-        
         }
 
     

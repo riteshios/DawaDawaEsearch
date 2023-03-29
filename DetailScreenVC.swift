@@ -7,6 +7,9 @@ import StripeUICore
 
 class DetailScreenVC: UIViewController,DocumentCollectionViewCellDelegate{
     
+    lazy var globalApi  = {
+        GlobalApi()
+    }()
     
     @IBOutlet weak var tblviewDetail: UITableView!
     @IBOutlet weak var lblDetailScreen: UILabel!
@@ -253,23 +256,23 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
             cell.lblSub_category.text = String.getString(self.userTimeLine?.subcategory_name)
             
             if UserData.shared.id == self.userTimeLine?.user_id{
-                cell.btnChat.isHidden = true
+//                cell.btnChat.isHidden = true
                 cell.viewSave.isHidden = true
             }
             else{
-                cell.btnChat.isHidden = false
+//                cell.btnChat.isHidden = false
                 cell.viewSave.isHidden = false
             }
             
             if String.getString(self.userTimeLine?.business_name) == "Null"{
-                cell.heightViewBusinessName.constant = 0
+//                cell.heightViewBusinessName.constant = 0
                 cell.ViewBusinessName.isHidden = true
             }
             else{
                 cell.lblBusinessName.text = String.getString(self.userTimeLine?.business_name)
             }
             if String.getString(self.userTimeLine?.business_mining_type) == "Null"{
-                cell.heightviewBusinessminingtype.constant = 0
+//                cell.heightviewBusinessminingtype.constant = 0
                 cell.viewBusinessminingType.isHidden = true
             }
             else{
@@ -419,7 +422,7 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
             
             cell.heightSocialPostCollectionView.constant = 275
             cell.viewSeeDetails.isHidden = true
-            cell.btnViewDetails.isHidden = true
+//            cell.btnViewDetails.isHidden = true
             
             cell.callback = { txt, tapped in
                 
@@ -460,7 +463,7 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                     let oppid = Int.getInt(self.userTimeLine?.id)
                     debugPrint("oppid--=-=-=-",oppid)
                     
-                    self.likeOpportunityapi(oppr_id: oppid ?? 0) { countLike,sucess  in
+                    self.globalApi.likeOpportunityapi(oppr_id: oppid ?? 0) { countLike,sucess  in
                         self.userTimeLine?.likes = Int.getInt(countLike)
                         debugPrint("Int.getInt(countLike)",Int.getInt(countLike))
                         cell.lblLikeCount.text = String.getString(self.userTimeLine?.likes) // + " " + "likes"
@@ -503,9 +506,9 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                 
                 if txt == "Save"{
                     if tapped.isSelected{
-                        //                        if String.getString(self.userTimeLine?.is_saved) == "0"{
+                        //   if String.getString(self.userTimeLine?.is_saved) == "0"{
                         let oppid = Int.getInt(self.userTimeLine?.id)
-                        self.saveoppoertunityapi(oppr_id: oppid ?? 0) { sucess in
+                        self.globalApi.saveoppoertunityapi(oppr_id: oppid ?? 0) { sucess in
                             if sucess == 200{
                                 if kSharedUserDefaults.getlanguage() as? String == "en"{
                                     cell.lblSave.text = "Saved"
@@ -527,7 +530,6 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                                 cell.lblSave.textColor = UIColor(hexString: "#A6A6A6")
                             }
                         }
-                        
                     }
                 }
                 
@@ -574,7 +576,7 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                                             vc.dismiss(animated: false) {
                                                 let oppid = Int.getInt(self.userTimeLine?.id)
                                                 // self.userTimeLine.remove(at: indexPath.row)
-                                                self.deletepostoppoertunityapi(oppr_id: oppid)
+                                                self.globalApi.deletepostoppoertunityapi(oppr_id: oppid)
                                                 debugPrint("oppid......",oppid)
                                                 //  let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProfileVC") as! ProfileVC
                                                 //                                        self.navigationController?.popViewController(animated: true)
@@ -595,7 +597,7 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                                         if txt == "Close"{
                                             vc.dismiss(animated: false) {
                                                 let oppid = Int.getInt(self.userTimeLine?.id)
-                                                self.closeopportunityapi(opr_id: oppid){ sucess in
+                                                self.globalApi.closeopportunityapi(opr_id: oppid){ sucess in
                                                     if sucess == 200{
                                                         cell.lblcloseOpportunity.text = "Closed"
                                                         cell.lblcloseOpportunity.textColor = UIColor(hexString: "#FF4C4D")
@@ -853,6 +855,7 @@ extension DetailScreenVC{
                 kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
             }
         }
+        
         let params:[String : Any] = [
             "oppr_id":self.oppid,
             "user_id":UserData.shared.id
