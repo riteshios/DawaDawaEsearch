@@ -4,12 +4,12 @@
 
 import UIKit
 
-class PremiumOpportunitiesVC: UIViewController {
+class PremiumOpportunitiesVC: UIViewController,NewSocialPostCVCDelegate{
     
     @IBOutlet weak var tblViewPremiumOpp: UITableView!
     var imgUrl = ""
     var docUrl = ""
-    var userTimeLine = [SocialPostData]()
+    //    var userTimeLine = [SocialPostData]()
     var UserTimeLineOppdetails:SocialPostData?
     var img = [oppr_image]()
     var comment = [user_comment]()
@@ -23,9 +23,10 @@ class PremiumOpportunitiesVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        userTimeLine.removeAll()
         self.setuplanguage()
         tblViewPremiumOpp.register(UINib(nibName: "PremiumTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "PremiumTableViewCell")
-        tblViewPremiumOpp.register(UINib(nibName: "SocialPostTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "SocialPostTableViewCell")
+        tblViewPremiumOpp.register(UINib(nibName: "SocialPostTVC", bundle: Bundle.main), forCellReuseIdentifier: "SocialPostTVC")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -40,9 +41,7 @@ class PremiumOpportunitiesVC: UIViewController {
         else if self.camefrom == "search"{
             self.navigationController?.popViewController(animated: true)
         }
-        
     }
-    
 }
 
 extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
@@ -58,7 +57,8 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
             return 1
             
         case 1:
-            return self.userTimeLine.count
+            //    return self.userTimeLine.count
+            return 1
             
         default:
             return 0
@@ -80,609 +80,12 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
             return cell
             
         case 1:
-            let cell = self.tblViewPremiumOpp.dequeueReusableCell(withIdentifier: "SocialPostTableViewCell") as! SocialPostTableViewCell
-            let obj = userTimeLine[indexPath.row]
             
-            cell.SocialPostCollectionView.tag = indexPath.section
-//            cell.lblUserName.text = String.getString(obj.userdetail?.name)
-            cell.lblTitle.text = String.getString(obj.title)
-            cell.lblCategoryName.text = String.getString(obj.category_name)
-            cell.lblRating.text = String.getString(obj.opr_rating)
-            cell.lblpricing.text = String.getString(obj.pricing)
-            cell.lblposted.text =  String(String.getString(obj.created_at).prefix(10))
-            cell.lblClosed.text = String(String.getString(obj.close_opr_date).prefix(10))
-            cell.lblCommentCout.text = String.getString(Int.getInt(obj.commentsCount))
-            
-            let imguserurl = String.getString(obj.userdetail?.social_profile)
-            debugPrint("socialprofile......",imguserurl)
-//            cell.Imageuser.downlodeImage(serviceurl: imguserurl , placeHolder: UIImage(named: "Boss"))
-            cell.img = obj.oppimage
-            cell.imgUrl = self.imgUrl
-            
-            cell.lblLikeCount.text = String.getString(obj.likes) //+ " " + "Likes"
-            
-            if Int.getInt(obj.close_opr) == 0{
-                cell.lblTitle.text = String.getString(obj.title)
-                cell.lblTitle.textColor = .black
-                cell.lblcloseOpportunity.text = "Available"
-                cell.lblcloseOpportunity.textColor = UIColor(hexString: "#20D273")
-            }
-            else{
-                cell.lblcloseOpportunity.text = "Closed"
-                cell.lblcloseOpportunity.textColor = UIColor(hexString: "#FF4C4D")
-            }
-            if String.getString(obj.is_user_like) == "1"{
-                cell.imglike.image = UIImage(named: "dil")
-                if kSharedUserDefaults.getlanguage() as? String == "en"{
-                    cell.lbllike.text = "Liked"
-                }
-                else{
-                    cell.lbllike.text = "احب"
-                }
-                cell.lbllike.textColor = .red
-                
-            }
-            else{
-                cell.imglike.image = UIImage(named: "unlike")
-                if kSharedUserDefaults.getlanguage() as? String == "en"{
-                    cell.lbllike.text = "Like"
-                }
-                else{
-                    cell.lbllike.text = "مثل"
-                }
-                cell.lbllike.textColor = UIColor(hexString: "#A6A6A6")
-            }
-            if Int.getInt(obj.is_saved) == 1{
-                cell.imgsave.image = UIImage(named: "saveopr")
-                cell.lblSave.text = "Saved"
-                cell.lblSave.textColor = UIColor(hexString: "#1572A1")
-            }
-            else{
-                cell.imgsave.image = UIImage(named: "save-3")
-                if kSharedUserDefaults.getlanguage() as? String == "en"{
-                    cell.lblSave.text = "Saved"
-                }
-                else{
-                    cell.lblSave.text = "تم الحفظ"
-                }
-                cell.lblSave.textColor = UIColor(hexString: "#A6A6A6")
-            }
-            
-            if String.getString(obj.is_flag) == "1"{
-                cell.imgOppFlag.isHidden = false
-                cell.LeadingOppType.constant = 17
-                
-            }
-            else{
-                cell.imgOppFlag.isHidden = true
-                cell.LeadingOppType.constant = -20
-            }
-            
-            cell.heightSocialPostCollectionView.constant = 275
-            //            if obj.oppimage.count == 0{
-            //                cell.heightSocialPostCollectionView.constant = 0
-            //            }
-            //            else{
-            //                cell.heightSocialPostCollectionView.constant = 225
-            //            }
-            
-            if String.getString(obj.opr_rating) == ""{
-                cell.lblRating.text = "0.0"
-            }
-            else{
-                cell.lblRating.text = String.getString(obj.opr_rating)
-            }
-            
-            if UserData.shared.id == Int.getInt(obj.user_id){
-//                cell.btnChat.isHidden = true
-                cell.viewSave.isHidden = true
-            }
-            else{
-//                cell.btnChat.isHidden = false
-                cell.viewSave.isHidden = false
-            }
-            
-            cell.callback = { txt, tapped in
-                
-                if txt == "LikeCount"{
-                    let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
-                    let likecount = String.getString(self.userTimeLine[indexPath.row].likes)
-                    
-                    if likecount == "0"{
-                        if kSharedUserDefaults.getlanguage() as? String == "en"{
-                            self.showSimpleAlert(message: "0 Likes on this opportunity")
-                        }
-                        else{
-                            self.showSimpleAlert(message: "0 معجب بهذه الفرصة")
-                        }
-                    }
-                    else
-                    {
-                        let storyboard = UIStoryboard(name: "Home", bundle: nil)
-                        let vc = storyboard.instantiateViewController(withIdentifier: "LikelistVC") as! LikelistVC
-                        
-                        if #available(iOS 15.0, *) {
-                            if let presentationController = vc.presentationController as? UISheetPresentationController {
-                                presentationController.detents = [.medium(), .large()] /// change to [.medium(), .large()] for a half *and* full screen sheet
-                            }
-                        } else {
-                            // Fallback on earlier versions
-                        }
-                        vc.oppr_id = oppid
-                        vc.likecount = likecount
-                        self.present(vc, animated: true)
-                    }
-                }
-                
-                if txt == "Chat"{
-                    
-                    let userid = Int.getInt(self.userTimeLine[indexPath.row].user_id)
-                    let vc = self.storyboard?.instantiateViewController(withIdentifier: ChatVC.getStoryboardID()) as! ChatVC
-                    vc.friendid = userid
-                    vc.friendname = String.getString(obj.userdetail?.name)
-                    vc.friendimage = imguserurl
-                    self.navigationController?.pushViewController(vc, animated: true)
-                }
-                
-                if txt == "viewDetails"{
-                    let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
-                    debugPrint("detailsppid=-=-=",oppid)
-                    let vc = self.storyboard?.instantiateViewController(withIdentifier: DetailScreenVC.getStoryboardID()) as! DetailScreenVC
-                    vc.oppid = oppid
-                    self.navigationController?.pushViewController(vc, animated: true)
-                }
-                
-                if txt == "viewDetails2"{
-                    let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
-                    debugPrint("detailsppid=-=-=",oppid)
-                    let vc = self.storyboard?.instantiateViewController(withIdentifier: DetailScreenVC.getStoryboardID()) as! DetailScreenVC
-                    vc.oppid = oppid
-                    self.navigationController?.pushViewController(vc, animated: true)
-                }
-                
-                if txt == "Description"{
-                    let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
-                    debugPrint("detailsppid=-=-=",oppid)
-                    let vc = self.storyboard?.instantiateViewController(withIdentifier: DetailScreenVC.getStoryboardID()) as! DetailScreenVC
-                    vc.oppid = oppid
-                    self.navigationController?.pushViewController(vc, animated: true)
-                }
-                
-                if txt == "Profileimage"{
-                    let user_id = self.userTimeLine[indexPath.row].user_id
-                    let vc = self.storyboard?.instantiateViewController(withIdentifier: UserProfileDetailsVC.getStoryboardID()) as! UserProfileDetailsVC
-                    vc.userid = user_id ?? 0
-                    self.navigationController?.pushViewController(vc, animated: true)
-                }
-                
-                if txt == "Like"{
-                    
-                    let oppid = self.userTimeLine[indexPath.row].id
-                    debugPrint("oppid--=-=-=-",oppid)
-                    
-                    self.globalApi.likeOpportunityapi(oppr_id: oppid ?? 0) { countLike,sucess  in
-                        obj.likes = Int.getInt(countLike)
-                        debugPrint("Int.getInt(countLike)",Int.getInt(countLike))
-                        cell.lblLikeCount.text = String.getString(obj.likes) //+ " " + "likes"
-                        
-                        if sucess == 200{
-                            cell.imglike.image = UIImage(named: "dil")
-                            if kSharedUserDefaults.getlanguage() as? String == "en"{
-                                cell.lbllike.text = "Liked"
-                            }
-                            else{
-                                cell.lbllike.text = "احب"
-                            }
-                            cell.lbllike.textColor = .red
-                        }
-                        else if sucess == 400{
-                            cell.imglike.image = UIImage(named: "unlike")
-                            if kSharedUserDefaults.getlanguage() as? String == "en"{
-                                cell.lbllike.text = "Like"
-                            }
-                            else{
-                                cell.lbllike.text = "مثل"
-                            }
-                            cell.lbllike.textColor = UIColor(hexString: "#A6A6A6")
-                        }
-                    }
-                }
-                
-                if txt == "Rate"{
-                    let oppid = self.userTimeLine[indexPath.row].id
-                    let vc = self.storyboard?.instantiateViewController(withIdentifier: RateOpportunityPopUPVC.getStoryboardID()) as! RateOpportunityPopUPVC
-                    vc.modalTransitionStyle = .crossDissolve
-                    vc.modalPresentationStyle = .overCurrentContext
-                    vc.oppid = oppid ?? 0
-                    
-                    vc.callbackClosure = {
-                        self.getallpremium()
-                    }
-                    self.present(vc, animated: false)
-                }
-                
-                if txt == "Save"{
-                    if tapped.isSelected{
-                        let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
-                        self.globalApi.saveoppoertunityapi(oppr_id: oppid ?? 0) { sucess in
-                            if sucess == 200{
-                                if kSharedUserDefaults.getlanguage() as? String == "en"{
-                                    cell.lblSave.text = "Saved"
-                                }
-                                else{
-                                    cell.lblSave.text = "تم الحفظ"
-                                }
-                                cell.lblSave.textColor = UIColor(hexString: "#1572A1")
-                                cell.imgsave.image = UIImage(named: "saveopr")
-                            }
-                            else if sucess == 400{
-                                if kSharedUserDefaults.getlanguage() as? String == "en"{
-                                    cell.lblSave.text = "Save"
-                                }
-                                else{
-                                    cell.lblSave.text = "يحفظ"
-                                }
-                                cell.imgsave.image = UIImage(named: "save-3")
-                                cell.lblSave.textColor = UIColor(hexString: "#A6A6A6")
-                            }
-                        }
-                    }
-                }
-                
-                if txt == "More" {
-                    if UserData.shared.id == Int.getInt(obj.user_id){
-                        
-                        let vc = self.storyboard?.instantiateViewController(withIdentifier: ProileSocialMoreVC.getStoryboardID()) as! ProileSocialMoreVC
-                        vc.modalTransitionStyle = .crossDissolve
-                        vc.modalPresentationStyle = .overCurrentContext
-                        vc.callback = { txt in
-                            
-                            if txt == "Dismiss"{
-                                self.dismiss(animated: true)
-                                //   self.listoppoertunityapi()
-                            }
-                            
-                            if txt == "CopyLink"{
-                                let share_link = String.getString(self.userTimeLine[indexPath.row].share_link)
-                                UIPasteboard.general.string = share_link
-                                print("share_link\(share_link)")
-                                if kSharedUserDefaults.getlanguage() as? String == "en"{
-                                    CommonUtils.showError(.info, String.getString("Link Copied"))
-                                }
-                                else{
-                                    CommonUtils.showError(.info, String.getString("تم نسخ الرابط"))
-                                }
-                            }
-                            
-                            if txt == "Update"{
-                                let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
-                                debugPrint("oppid+++++++",oppid)
-                                self.opportunitydetailsapi(oppr_id: oppid)
-                            }
-                            if txt == "Delete"{
-                                self.dismiss(animated: false){
-                                    let vc = self.storyboard?.instantiateViewController(withIdentifier: DeleteOpportunityPopUPVC.getStoryboardID()) as! DeleteOpportunityPopUPVC
-                                    vc.modalTransitionStyle = .crossDissolve
-                                    vc.modalPresentationStyle = .overCurrentContext
-                                    vc.callback = { txt in
-                                        
-                                        if txt == "Delete"{
-                                            vc.dismiss(animated: false) {
-                                                let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
-                                                self.userTimeLine.remove(at: indexPath.row)
-                                                self.globalApi.deletepostoppoertunityapi(oppr_id: oppid)
-                                                debugPrint("oppid......",oppid)
-                                                self.tblViewPremiumOpp.reloadData()
-                                            }
-                                        }
-                                    }
-                                    self.present(vc, animated: false)
-                                }
-                            }
-                            
-                            if txt == "Close"{
-                                self.dismiss(animated: false){
-                                    let vc = self.storyboard?.instantiateViewController(withIdentifier: ClosePopUpVC.getStoryboardID()) as! ClosePopUpVC
-                                    vc.modalTransitionStyle = .crossDissolve
-                                    vc.modalPresentationStyle = .overCurrentContext
-                                    vc.callback = { txt in
-                                        
-                                        if txt == "Close"{
-                                            vc.dismiss(animated: false) {
-                                                let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
-//                                                self.closeopportunityapi(opr_id: oppid){ sucess in
-//
-//                                                    if sucess == 200{
-//                                                        cell.lblcloseOpportunity.text = "Closed"
-//                                                        cell.lblcloseOpportunity.textColor = UIColor(hexString: "#FF4C4D")
-//                                                    }
-//                                                }
-                                                debugPrint("oppidclose......",oppid)
-                                            }
-                                        }
-                                    }
-                                    self.present(vc, animated: false)
-                                }
-                                
-                            }
-                            if txt == "ViewDetail"{
-                                let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
-                                debugPrint("detailsppid=-=-=",oppid)
-                                let vc = self.storyboard?.instantiateViewController(withIdentifier: DetailScreenVC.getStoryboardID()) as! DetailScreenVC
-                                vc.oppid = oppid
-                                self.navigationController?.pushViewController(vc, animated: true)
-                            }
-                        }
-                        self.present(vc, animated: false)
-                    }
-                    
-                    else{
-                        
-                        let vc = self.storyboard?.instantiateViewController(withIdentifier: HomeSocialMoreVC.getStoryboardID()) as! HomeSocialMoreVC
-                        vc.modalTransitionStyle = .crossDissolve
-                        vc.modalPresentationStyle = .overCurrentContext
-                        vc.callback = { txt in
-                            
-                            if txt == "Chatwithuser"{
-                                
-                                let userid = Int.getInt(self.userTimeLine[indexPath.row].user_id)
-                                let vc = self.storyboard?.instantiateViewController(withIdentifier: ChatVC.getStoryboardID()) as! ChatVC
-                                vc.friendid = userid
-                                vc.friendname = String.getString(obj.userdetail?.name)
-                                vc.friendimage = imguserurl
-                                self.navigationController?.pushViewController(vc, animated: true)
-                                self.dismiss(animated: true)
-                            }
-                            
-                            if txt == "CopyLink"{
-                                let share_link = String.getString(self.userTimeLine[indexPath.row].share_link)
-                                UIPasteboard.general.string = share_link
-                                print("share_link\(share_link)")
-                            }
-                            
-                            if txt == "MarkasInterested"{
-                                let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
-                                self.markinterestedapi(oppr_id: oppid)
-                                self.dismiss(animated: true)
-                            }
-                            
-                            if txt == "Flag"{
-                                if UserData.shared.isskiplogin == true{
-                                    if kSharedUserDefaults.getlanguage() as? String == "en"{
-                                        self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
-                                    }
-                                    else{
-                                        self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
-                                    }
-                                }
-                                else{
-                                    self.dismiss(animated: false){
-                                        let vc = self.storyboard?.instantiateViewController(withIdentifier: FlagPostPopUPVC.getStoryboardID()) as! FlagPostPopUPVC
-                                        vc.modalTransitionStyle = .crossDissolve
-                                        vc.modalPresentationStyle = .overCurrentContext
-                                        let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
-                                        vc.oppid = oppid
-                                        self.present(vc, animated: false)
-                                        vc.callbackClosure = {
-                                            self.getallpremium()
-                                        }
-                                        //                                        cell.imgOppFlag.isHidden = false
-                                    }
-                                }
-                            }
-                            
-                            if txt == "Report"{
-                                if UserData.shared.isskiplogin == true{
-                                    if kSharedUserDefaults.getlanguage() as? String == "en"{
-                                        self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
-                                    }
-                                    else{
-                                        self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
-                                    }
-                                }
-                                else{
-                                    self.dismiss(animated: false){
-                                        let vc = self.storyboard?.instantiateViewController(withIdentifier: ReportUserPopUpVC.getStoryboardID()) as! ReportUserPopUpVC
-                                        vc.modalTransitionStyle = .crossDissolve
-                                        vc.modalPresentationStyle = .overCurrentContext
-                                        let userid = Int.getInt(self.userTimeLine[indexPath.row].user_id)
-                                        vc.userid = userid
-                                        self.present(vc, animated: false)
-                                    }
-                                }
-                            }
-                        }
-                        self.present(vc, animated: false)
-                    }
-                }
-                
-                //                     COMMENT PART
-                
-                if txt == "reply"{
-                    
-                    let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
-                    debugPrint("detailsppid=-=-=",oppid)
-                    let vc = self.storyboard?.instantiateViewController(withIdentifier: DetailScreenVC.getStoryboardID()) as! DetailScreenVC
-                    
-                    vc.oppid = oppid
-                    self.navigationController?.pushViewController(vc, animated: true)
-                }
-                
-                if txt == "Seemorecomment"{
-                    let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
-                    debugPrint("detailsppid=-=-=",oppid)
-                    let vc = self.storyboard?.instantiateViewController(withIdentifier: DetailScreenVC.getStoryboardID()) as! DetailScreenVC
-                    
-                    vc.oppid = oppid
-                    self.navigationController?.pushViewController(vc, animated: true)
-                }
-                
-                if txt == "ClickComment"{
-                    if tapped.isSelected{
-                        if obj.isComment == false{
-                            obj.isComment = true
-                            self.tblViewPremiumOpp.reloadData()
-                        }
-                        else{
-                            obj.isComment = false
-                            self.tblViewPremiumOpp.reloadData()
-                        }
-                    }else{
-                        if obj.isComment == false{
-                            obj.isComment = true
-                            self.tblViewPremiumOpp.reloadData()
-                        }
-                        else{
-                            obj.isComment = false
-                            self.tblViewPremiumOpp.reloadData()
-                        }
-                    }
-                }
-                
-                if txt == "AddComment"{
-                    if cell.txtviewComment.text == ""{
-                        if kSharedUserDefaults.getlanguage() as? String == "en"{
-                            self.showSimpleAlert(message: "Please add comment")
-                        }
-                        else{
-                            self.showSimpleAlert(message: "الرجاء إضافة تعليق")
-                        }
-                    }
-                    else{
-                        let oppid = Int.getInt(self.userTimeLine[indexPath.row].id)
-                        self.commentoppoertunityapi(oppr_id: oppid ?? 0) { userComment in
-                            cell.txtviewComment.text = ""
-                            cell.viewcomment.isHidden = false
-                            cell.heightViewComment.constant = 70
-                            cell.lblusernameandcomment.text = String.getString(userComment.first?.name) + " " + String.getString(userComment.first?.comments)
-                            debugPrint("lbluserName=-=-=-", cell.lblusernameandcomment.text )
-                            
-                            let imgcommentuserurl = String.getString(userComment.first?.image)
-                            debugPrint("commentuserprofile......",imgcommentuserurl)
-                            
-                            cell.imageCommentUser.downlodeImage(serviceurl: imgcommentuserurl , placeHolder: UIImage(named: "Boss"))
-                            
-                            cell.viewcomment.isHidden = false
-                            
-                            cell.imageSubcommentUser.isHidden = true
-                            cell.lblsubUserNameandComment.isHidden = true
-                            cell.verticalSpacingReply.constant = -10
-                            //   \cell.bottomlblSubcomment.constant = 10
-                            
-                            let first = String.getString(userComment.first?.name)
-                            let second = String.getString(userComment.first?.comments)
-                            
-                            let attributedString: NSMutableAttributedString = NSMutableAttributedString(string: "\(first)  \(second)")
-                            
-                            attributedString.setColorForText(textToFind: first, withColor: UIColor.black)
-                            attributedString.setColorForText(textToFind: second, withColor: UIColor.gray)
-                            
-                            cell.lblusernameandcomment.attributedText = attributedString
-//                            self.getallpremium()
-                        }
-                    }
-                }
-                
-                if txt == "Iconusercomment" {
-                    let userid = Int.getInt(self.userTimeLine[indexPath.row].usercomment.first?.user_id) ?? 0
-                    print("SelfICON\(userid)")
-                    print("selfuserid\(UserData.shared.id)")
-                    
-                    if UserData.shared.id == userid{
-                        print("Self")
-                    }
-                    else{
-                        let vc = self.storyboard?.instantiateViewController(withIdentifier: UserProfileDetailsVC.getStoryboardID()) as! UserProfileDetailsVC
-                        vc.userid = userid
-                        vc.friendname = String.getString(self.userTimeLine[indexPath.row].usercomment.first?.name)
-                        vc.friendimage = String.getString(self.userTimeLine[indexPath.row].usercomment.first?.image)
-                        self.navigationController?.pushViewController(vc, animated: true)
-                    }
-                }
-                if txt == "IconuserSubcomment"{
-                    let userid = Int.getInt(self.userTimeLine[indexPath.row].usercomment.first?.subcomment.first?.usersubcommentdetails?.id) ?? 0
-                    if UserData.shared.id == userid{
-                        print("Self")
-                    }
-                    else{
-                        let vc = self.storyboard?.instantiateViewController(withIdentifier: UserProfileDetailsVC.getStoryboardID()) as! UserProfileDetailsVC
-                        vc.userid = userid
-                        vc.friendname = String.getString(self.userTimeLine[indexPath.row].usercomment.first?.subcomment.first?.usersubcommentdetails?.name)
-                        vc.friendimage = String.getString(obj.usercomment.first?.subcomment.first?.usersubcommentdetails?.image)
-                        self.navigationController?.pushViewController(vc, animated: true)
-                    }
-                }
-            }
-            
-            cell.viewAddComment.isHidden = obj.isComment == true ? false : true
-            cell.heightViewAddComment.constant = obj.isComment == true ? 55 : 0
-            
-            if obj.usercomment.count == 0{
-                cell.viewcomment.isHidden = true
-                cell.heightViewComment.constant  = 0
-                cell.bottomspacingReply.constant = -90
-                //                cell.bottomlblSubcomment.constant = -50
-                
-            }
-            else{
-                cell.viewcomment.isHidden = false
-                cell.bottomspacingReply.constant = 0
-            }
-            
-            if obj.usercomment.first?.subcomment.count == 0 {
-                cell.imageSubcommentUser.isHidden = true
-                cell.lblsubUserNameandComment.isHidden = true
-                cell.VerticalspacingSubComment.constant = 0
-                //                cell.bottomlblSubcomment.constant = 10
-            }
-            else{
-                cell.imageSubcommentUser.isHidden = false
-                cell.lblsubUserNameandComment.isHidden = false
-                cell.VerticalspacingSubComment.constant = 22
-                
-            }
-            
-            let imgcomment = "\("https://demo4app.com/dawadawa/public/admin_assets/user_profile/" + String.getString(UserData.shared.social_profile))"
-            
-            cell.imageUser.downlodeImage(serviceurl: imgcomment , placeHolder: UIImage(named: "Boss")) // commentUserImage
-            
-            cell.lblusernameandcomment.text = String.getString(obj.usercomment.first?.name)
-            + "  " + String.getString(obj.usercomment.first?.comments)
-            
-            let imgcommentuserurl = String.getString(obj.usercomment.first?.image)
-            debugPrint("commentuserprofile......",imgcommentuserurl)
-            cell.imageCommentUser.downlodeImage(serviceurl: imgcommentuserurl , placeHolder: UIImage(named: "Boss"))
-            
-            cell.lblsubUserNameandComment.text = String.getString(obj.usercomment.first?.subcomment.first?.usersubcommentdetails!.name) + "             " + String.getString(obj.usercomment.first?.subcomment.first?.comments) // Sub-Comment
-            let imgcommentSubuser = String.getString(obj.usercomment.first?.subcomment.first?.usersubcommentdetails?.image)
-            cell.imageSubcommentUser.downlodeImage(serviceurl: imgcommentSubuser, placeHolder: UIImage(named: "Boss"))
-            
-            let first = String.getString(obj.usercomment.first?.name)
-            let second = String.getString(obj.usercomment.first?.comments)
-            
-            let thrid = String.getString(obj.usercomment.first?.subcomment.first?.usersubcommentdetails!.name)
-            let fourth = String.getString(obj.usercomment.first?.subcomment.first?.comments)
-            
-            let attributedStringcomment: NSMutableAttributedString = NSMutableAttributedString(string: "\(first)  \(second)")
-            
-            let attributedStringSubcomment: NSMutableAttributedString = NSMutableAttributedString(string: "\(thrid)  \(fourth)")
-            
-            attributedStringcomment.setColorForText(textToFind: first, withColor: UIColor.black)
-            attributedStringcomment.setColorForText(textToFind: second, withColor: UIColor.gray)
-            
-            attributedStringSubcomment.setColorForText(textToFind: thrid, withColor: UIColor.black)
-            attributedStringSubcomment.setColorForText(textToFind: fourth, withColor: UIColor.gray)
-            
-            cell.lblusernameandcomment.attributedText = attributedStringcomment
-            cell.lblsubUserNameandComment.attributedText = attributedStringSubcomment
-            
-            cell.callbacktextviewcomment = {[weak tblViewPremiumOpp] (_) in
-                
-                self.txtcomment = cell.txtviewComment.text
-                self.tblViewPremiumOpp?.beginUpdates()
-                self.tblViewPremiumOpp?.endUpdates()
-            }
-            
+            let cell = self.tblViewPremiumOpp.dequeueReusableCell(withIdentifier: "SocialPostTVC") as! SocialPostTVC
+            cell.SocialPostCV.tag = indexPath.section
+            cell.celldelegate = self
+            //              cell.HeightSocialPostCV.constant = cell.SocialPostCV.contentSize.height
+            cell.SocialPostCV.reloadData()
             return cell
             
         default:
@@ -702,8 +105,285 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
             return 0
         }
     }
+    
+    
+    //    MARK: - Protocol Delegate
+    
+    func SeeDetails(collectionviewcell: NewSocialPostCVC?, index: Int, didTappedInTableViewCell: SocialPostTVC) {
+        
+        if UserData.shared.isskiplogin == true{
+            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+            }
+            else{
+                self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
+            }
+        }
+        else{
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "DetailScreenVC") as! DetailScreenVC
+            vc.oppid = opppreid
+            print("Tapped=-=-=")
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    func likecount(collectionviewcell: NewSocialPostCVC?, index: Int, didTappedintableviewcell: SocialPostTVC){
+        if UserData.shared.isskiplogin == true{
+            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+            }
+            else{
+                self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
+            }
+        }
+        else{
+            if likeCount == "0"{
+                if kSharedUserDefaults.getlanguage() as? String == "en"{
+                    self.showSimpleAlert(message: "0 Likes on this opportunity")
+                }
+                else{
+                    self.showSimpleAlert(message: "0 معجب بهذه الفرصة")
+                }
+            }
+            else{
+                let storyboard = UIStoryboard(name: "Home", bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: "LikelistVC") as! LikelistVC
+                
+                if #available(iOS 15.0, *) {
+                    if let presentationController = vc.presentationController as? UISheetPresentationController {
+                        presentationController.detents = [.medium(), .large()] /// change to [.medium(), .large()] for a half *and* full screen sheet
+                    }
+                } else {
+                    // Fallback on earlier versions
+                }
+                vc.oppr_id = opppreid
+                vc.likecount = likeCount
+                self.present(vc, animated: true)
+            }
+        }
+    }
+    
+    func More(collectionviewcell: NewSocialPostCVC?, index: Int, didTappedintableviewcell: SocialPostTVC) {
+        
+        if UserData.shared.id == Int.getInt(user_id){
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: ProileSocialMoreVC.getStoryboardID()) as! ProileSocialMoreVC
+            vc.modalTransitionStyle = .crossDissolve
+            vc.modalPresentationStyle = .overCurrentContext
+            vc.callback = { txt in
+                
+                if txt == "Dismiss"{
+                    self.dismiss(animated: true)
+                    //   self.listoppoertunityapi()
+                }
+                
+                if txt == "CopyLink"{
+                    let share_link = String.getString(sharelink)
+                    UIPasteboard.general.string = share_link
+                    print("share_link\(share_link)")
+                    if kSharedUserDefaults.getlanguage() as? String == "en"{
+                        CommonUtils.showError(.info, String.getString("Link Copied"))
+                    }
+                    else{
+                        CommonUtils.showError(.info, String.getString("تم نسخ الرابط"))
+                    }
+                }
+                
+                if txt == "Update"{
+                    let oppid = Int.getInt(opppreid)
+                    debugPrint("oppid+++++++",oppid)
+                    self.opportunitydetailsapi(oppr_id: oppid)
+                }
+                if txt == "Delete"{
+                    self.dismiss(animated: false){
+                        let vc = self.storyboard?.instantiateViewController(withIdentifier: DeleteOpportunityPopUPVC.getStoryboardID()) as! DeleteOpportunityPopUPVC
+                        vc.modalTransitionStyle = .crossDissolve
+                        vc.modalPresentationStyle = .overCurrentContext
+                        vc.callback = { txt in
+                            
+                            if txt == "Delete"{
+                                vc.dismiss(animated: false) {
+                                    let oppid = Int.getInt(opppreid)
+                                    userTimeLine.remove(at: index)
+                                    self.globalApi.deletepostoppoertunityapi(oppr_id: oppid)
+                                    debugPrint("oppid......",oppid)
+                                    self.tblViewPremiumOpp.reloadData()
+                                }
+                            }
+                        }
+                        self.present(vc, animated: false)
+                    }
+                }
+                
+                if txt == "Close"{
+                    self.dismiss(animated: false){
+                        let vc = self.storyboard?.instantiateViewController(withIdentifier: ClosePopUpVC.getStoryboardID()) as! ClosePopUpVC
+                        vc.modalTransitionStyle = .crossDissolve
+                        vc.modalPresentationStyle = .overCurrentContext
+                        vc.callback = { txt in
+                            
+                            if txt == "Close"{
+                                vc.dismiss(animated: false) {
+                                    let oppid = Int.getInt(opppreid)
+                                    self.globalApi.closeopportunityapi(opr_id: oppid ?? 0) { sucess in
+                                        if sucess == 200 {
+                                            
+                                            statuscode = sucess
+                                            print("\(statuscode)statuscodecloseopp=-=-=-")
+                                            //                                            cell.lblcloseOpportunity.text = "Closed"
+                                            //                                            cell.lblcloseOpportunity.textColor = UIColor(hexString: "#FF4C4D")
+                                            self.tblViewPremiumOpp.reloadData()
+                                        }
+                                        
+                                        else if sucess == 400{
+                                            
+                                        }
+                                    }
+                                    debugPrint("oppidclose......",oppid)
+                                }
+                            }
+                        }
+                        self.present(vc, animated: false)
+                    }
+                    
+                }
+                if txt == "ViewDetail"{
+                    let oppid = Int.getInt(opppreid)
+                    debugPrint("detailsppid=-=-=",oppid)
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: DetailScreenVC.getStoryboardID()) as! DetailScreenVC
+                    vc.oppid = oppid
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
+            }
+            self.present(vc, animated: false)
+        }
+        
+        else{
+            
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: HomeSocialMoreVC.getStoryboardID()) as! HomeSocialMoreVC
+            vc.modalTransitionStyle = .crossDissolve
+            vc.modalPresentationStyle = .overCurrentContext
+            vc.callback = { txt in
+                
+                if txt == "Chatwithuser"{
+                    if UserData.shared.isskiplogin == true{
+                        if kSharedUserDefaults.getlanguage() as? String == "en"{
+                            self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                        }
+                        else{
+                            self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
+                        }
+                        
+                    }
+                    else{
+                        let userid = Int.getInt(opppreid)
+                        let vc = self.storyboard?.instantiateViewController(withIdentifier: ChatVC.getStoryboardID()) as! ChatVC
+                        vc.friendid = userid
+                        vc.friendname = frnd_name
+                        vc.friendimage = imguser_url
+                        self.navigationController?.pushViewController(vc, animated: true)
+                        self.dismiss(animated: true)
+                    }
+                }
+                if txt == "CopyLink"{
+                    let share_link = String.getString(sharelink)
+                    UIPasteboard.general.string = share_link
+                    print("share_link\(share_link)")
+                    if kSharedUserDefaults.getlanguage() as? String == "en"{
+                        CommonUtils.showError(.info, String.getString("Link Copied"))
+                    }
+                    else{
+                        CommonUtils.showError(.info, String.getString("تم نسخ الرابط"))
+                    }
+                    
+                }
+                
+                if txt == "MarkasInterested"{
+                    if UserData.shared.isskiplogin == true{
+                        if kSharedUserDefaults.getlanguage() as? String == "en"{
+                            self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                        }
+                        else{
+                            self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
+                        }
+                    }
+                    else{
+                        let oppid = Int.getInt(user_id)
+                        self.markinterestedapi(oppr_id: oppid)
+                        self.dismiss(animated: true)
+                    }
+                }
+                
+                if txt == "Flag"{
+                    if UserData.shared.isskiplogin == true{
+                        if kSharedUserDefaults.getlanguage() as? String == "en"{
+                            self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                        }
+                        else{
+                            self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
+                        }
+                    }
+                    else{
+                        self.dismiss(animated: false){
+                            let vc = self.storyboard?.instantiateViewController(withIdentifier: FlagPostPopUPVC.getStoryboardID()) as! FlagPostPopUPVC
+                            vc.modalTransitionStyle = .crossDissolve
+                            vc.modalPresentationStyle = .overCurrentContext
+                            let oppid = Int.getInt(user_id)
+                            vc.oppid = oppid
+                            
+                            vc.callbackClosure = {
+                                self.getallpremium()
+                            }
+                            self.present(vc, animated: false)
+                            
+                            // cell.imgOppFlag.isHidden = false
+                        }
+                    }
+                }
+                
+                if txt == "Report"{
+                    if UserData.shared.isskiplogin == true{
+                        if kSharedUserDefaults.getlanguage() as? String == "en"{
+                            self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                        }
+                        else{
+                            self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
+                        }
+                    }
+                    else{
+                        self.dismiss(animated: false){
+                            let vc = self.storyboard?.instantiateViewController(withIdentifier: ReportUserPopUpVC.getStoryboardID()) as! ReportUserPopUpVC
+                            vc.modalTransitionStyle = .crossDissolve
+                            vc.modalPresentationStyle = .overCurrentContext
+                            let userid = Int.getInt(user_id)
+                            vc.userid = userid
+                            self.present(vc, animated: false)
+                        }
+                    }
+                }
+                
+                if txt == "viewdetails"{
+                    if UserData.shared.isskiplogin == true{
+                        if kSharedUserDefaults.getlanguage() as? String == "en"{
+                            self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                        }
+                        else{
+                            self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
+                        }
+                    }
+                    else{
+                        let oppid = Int.getInt(user_id)
+                        debugPrint("detailsppid=-=-=",oppid)
+                        let vc = self.storyboard?.instantiateViewController(withIdentifier: DetailScreenVC.getStoryboardID()) as! DetailScreenVC
+                        
+                        vc.oppid = oppid
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    }
+                }
+            }
+            self.present(vc, animated: false)
+        }
+    }
+    
 }
-
 // MARK: - Api
 extension PremiumOpportunitiesVC{
     
@@ -739,8 +419,8 @@ extension PremiumOpportunitiesVC{
                         self.imgUrl = String.getString(dictResult["opr_base_url"])
                         debugPrint("PreimiumImgurl=====", self.imgUrl)
                         let Opportunity = kSharedInstance.getArray(withDictionary: dictResult["Opportunity"])
-                        self.userTimeLine = Opportunity.map{SocialPostData(data: kSharedInstance.getDictionary($0))}
-                        print("DataAllPremiumPost===\(self.userTimeLine)")
+                        userTimeLine = Opportunity.map{SocialPostData(data: kSharedInstance.getDictionary($0))}
+                        print("DataAllPremiumPost===\(userTimeLine)")
                         
                         //     CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         self.tblViewPremiumOpp.reloadData()
@@ -1008,7 +688,7 @@ extension PremiumOpportunitiesVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-                //                CommonUtils.showToastForDefaultError()
+                //    CommonUtils.showToastForDefaultError()
             }
         }
     }

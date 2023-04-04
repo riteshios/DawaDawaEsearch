@@ -8,8 +8,6 @@ import IQKeyboardManagerSwift
 
 class HomeVC: UIViewController,UITabBarControllerDelegate,PremiumOppCollectionViewCellDelegate,NewSocialPostCVCDelegate{
     
-    
-    
     //    MARK: - Properties -
     @IBOutlet weak var tblViewViewPost: UITableView!
     
@@ -31,6 +29,10 @@ class HomeVC: UIViewController,UITabBarControllerDelegate,PremiumOppCollectionVi
     @IBOutlet weak var imgNotification: UIImageView!
     @IBOutlet weak var lblCountNotification: UILabel!
     @IBOutlet weak var lblHello: UILabel!
+    
+    lazy var globalApi = {
+        GlobalApi()
+    }()
     
     //    MARK: - UIView Life Cycle -
     
@@ -73,21 +75,21 @@ class HomeVC: UIViewController,UITabBarControllerDelegate,PremiumOppCollectionVi
         }
     }
     
-//    override func viewWillLayoutSubviews() {
-//        let cell = self.tblViewViewPost.dequeueReusableCell(withIdentifier: "SocialPostTableViewCell") as! SocialPostTableViewCell
-//        if kSharedUserDefaults.getlanguage() as? String == "en"{
-//            DispatchQueue.main.async {
-//                cell.txtviewComment.semanticContentAttribute = .forceLeftToRight
-//                cell.txtviewComment.textAlignment = .left
-//            }
-//
-//        } else {
-//            DispatchQueue.main.async {
-//                cell.txtviewComment.semanticContentAttribute = .forceRightToLeft
-//                cell.txtviewComment.textAlignment = .right
-//            }
-//        }
-//    }
+    //    override func viewWillLayoutSubviews() {
+    //        let cell = self.tblViewViewPost.dequeueReusableCell(withIdentifier: "SocialPostTableViewCell") as! SocialPostTableViewCell
+    //        if kSharedUserDefaults.getlanguage() as? String == "en"{
+    //            DispatchQueue.main.async {
+    //                cell.txtviewComment.semanticContentAttribute = .forceLeftToRight
+    //                cell.txtviewComment.textAlignment = .left
+    //            }
+    //
+    //        } else {
+    //            DispatchQueue.main.async {
+    //                cell.txtviewComment.semanticContentAttribute = .forceRightToLeft
+    //                cell.txtviewComment.textAlignment = .right
+    //            }
+    //        }
+    //    }
     
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
         //            let tabBarIndex = tabBarController.selectedIndex
@@ -106,7 +108,7 @@ class HomeVC: UIViewController,UITabBarControllerDelegate,PremiumOppCollectionVi
     func fetchdata(){
         
         self.lblUserName.text = String.getString(UserData.shared.name) + " " + String.getString(UserData.shared.last_name)
-        if let url = URL(string: "\("https://demo4esl.com/dawadawa/public/admin_assets/user_profile/" + String.getString(UserData.shared.social_profile))"){
+        if let url = URL(string: "\("https://demo4app.com/dawadawa/public/admin_assets/user_profile/" + String.getString(UserData.shared.social_profile))"){
             debugPrint("url...",  url)
             
             let task = URLSession.shared.dataTask(with: url) { data, response, error in
@@ -156,7 +158,7 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
         case 1:
             return 1
         case 2:
-//            return userTimeLine.count
+            //            return userTimeLine.count
             return 1
         default:
             return 0
@@ -233,8 +235,8 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
             let cell = self.tblViewViewPost.dequeueReusableCell(withIdentifier: "SocialPostTVC") as! SocialPostTVC
             cell.SocialPostCV.tag = indexPath.section
             cell.celldelegate = self
-//            cell.HeightSocialPostCV.constant = cell.SocialPostCV.contentSize.height
-//            cell.SocialPostCV.reloadData()
+            //            cell.HeightSocialPostCV.constant = cell.SocialPostCV.contentSize.height
+            cell.SocialPostCV.reloadData()
             return cell
         default:
             return UITableViewCell()
@@ -254,12 +256,12 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                 return 300
             }
         case 2:
-           return UITableView.automaticDimension
+            return UITableView.automaticDimension
         default:
             return 0
         }
     }
-//    MARK: - Protocol Delegate Method
+    //    MARK: - Protocol Delegate Method
     
     func collectionView(collectionviewcell: PremiumOppCollectionViewCell?, index: Int, didTappedInTableViewCell: ViewPostTableViewCell) {
         
@@ -286,6 +288,274 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }
+    func likecount(collectionviewcell: NewSocialPostCVC?, index: Int, didTappedintableviewcell: SocialPostTVC){
+        if UserData.shared.isskiplogin == true{
+            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+            }
+            else{
+                self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
+            }
+        }
+        else{
+            if likeCount == "0"{
+                if kSharedUserDefaults.getlanguage() as? String == "en"{
+                    self.showSimpleAlert(message: "0 Likes on this opportunity")
+                }
+                else{
+                    self.showSimpleAlert(message: "0 معجب بهذه الفرصة")
+                }
+            }
+            else{
+                let storyboard = UIStoryboard(name: "Home", bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: "LikelistVC") as! LikelistVC
+                
+                if #available(iOS 15.0, *) {
+                    if let presentationController = vc.presentationController as? UISheetPresentationController {
+                        presentationController.detents = [.medium(), .large()] /// change to [.medium(), .large()] for a half *and* full screen sheet
+                    }
+                } else {
+                    // Fallback on earlier versions
+                }
+                vc.oppr_id = opppreid
+                vc.likecount = likeCount
+                self.present(vc, animated: true)
+            }
+        }
+    }
+    
+    func More(collectionviewcell: NewSocialPostCVC?, index: Int, didTappedintableviewcell: SocialPostTVC) {
+        
+        if UserData.shared.id == Int.getInt(user_id){
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: ProileSocialMoreVC.getStoryboardID()) as! ProileSocialMoreVC
+            vc.modalTransitionStyle = .crossDissolve
+            vc.modalPresentationStyle = .overCurrentContext
+            vc.callback = { txt in
+                
+                if txt == "Dismiss"{
+                    self.dismiss(animated: true)
+                    //   self.listoppoertunityapi()
+                }
+                
+                if txt == "CopyLink"{
+                    if UserData.shared.isskiplogin == true{
+                        if kSharedUserDefaults.getlanguage() as? String == "en"{
+                            self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                        }
+                        else{
+                            self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
+                        }
+                        
+                    }
+                    else{
+                        let share_link = String.getString(sharelink)
+                        UIPasteboard.general.string = share_link
+                        print("share_link\(share_link)")
+                        if kSharedUserDefaults.getlanguage() as? String == "en"{
+                            CommonUtils.showError(.info, String.getString("Link Copied"))
+                        }
+                        else{
+                            CommonUtils.showError(.info, String.getString("تم نسخ الرابط"))
+                        }
+                    }
+                    
+                }
+                
+                if txt == "Update"{
+                    let oppid = Int.getInt(opppreid)
+                    debugPrint("oppid+++++++",oppid)
+                    self.opportunitydetailsapi(oppr_id: oppid)
+                }
+                if txt == "Delete"{
+                    self.dismiss(animated: false){
+                        let vc = self.storyboard?.instantiateViewController(withIdentifier: DeleteOpportunityPopUPVC.getStoryboardID()) as! DeleteOpportunityPopUPVC
+                        vc.modalTransitionStyle = .crossDissolve
+                        vc.modalPresentationStyle = .overCurrentContext
+                        vc.callback = { txt in
+                            
+                            if txt == "Delete"{
+                                vc.dismiss(animated: false) {
+                                    let oppid = Int.getInt(opppreid)
+                                    userTimeLine.remove(at: index)
+                                    self.globalApi.deletepostoppoertunityapi(oppr_id: oppid)
+                                    debugPrint("oppid......",oppid)
+                                    self.tblViewViewPost.reloadData()
+                                }
+                            }
+                        }
+                        self.present(vc, animated: false)
+                    }
+                }
+                
+                if txt == "Close"{
+                    self.dismiss(animated: false){
+                        let vc = self.storyboard?.instantiateViewController(withIdentifier: ClosePopUpVC.getStoryboardID()) as! ClosePopUpVC
+                        vc.modalTransitionStyle = .crossDissolve
+                        vc.modalPresentationStyle = .overCurrentContext
+                        vc.callback = { txt in
+                            
+                            if txt == "Close"{
+                                vc.dismiss(animated: false) {
+                                    let oppid = Int.getInt(opppreid)
+                                    self.globalApi.closeopportunityapi(opr_id: oppid ?? 0) { sucess in
+                                        if sucess == 200 {
+                                            
+                                            statuscode = sucess
+                                            print("\(statuscode)statuscodecloseopp=-=-=-")
+                                            //                                            cell.lblcloseOpportunity.text = "Closed"
+                                            //                                            cell.lblcloseOpportunity.textColor = UIColor(hexString: "#FF4C4D")
+                                            self.tblViewViewPost.reloadData()
+                                        }
+                                        
+                                        else if sucess == 400{
+                                            
+                                        }
+                                    }
+                                    debugPrint("oppidclose......",oppid)
+                                }
+                            }
+                        }
+                        self.present(vc, animated: false)
+                    }
+                    
+                }
+                if txt == "ViewDetail"{
+                    let oppid = Int.getInt(opppreid)
+                    debugPrint("detailsppid=-=-=",oppid)
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: DetailScreenVC.getStoryboardID()) as! DetailScreenVC
+                    vc.oppid = oppid
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
+            }
+            self.present(vc, animated: false)
+        }
+        
+        else{
+            
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: HomeSocialMoreVC.getStoryboardID()) as! HomeSocialMoreVC
+            vc.modalTransitionStyle = .crossDissolve
+            vc.modalPresentationStyle = .overCurrentContext
+            vc.callback = { txt in
+                
+                if txt == "Chatwithuser"{
+                    if UserData.shared.isskiplogin == true{
+                        if kSharedUserDefaults.getlanguage() as? String == "en"{
+                            self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                        }
+                        else{
+                            self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
+                        }
+                        
+                    }
+                    else{
+                        let userid = Int.getInt(opppreid)
+                        let vc = self.storyboard?.instantiateViewController(withIdentifier: ChatVC.getStoryboardID()) as! ChatVC
+                        vc.friendid = userid
+                        vc.friendname = frnd_name
+                        vc.friendimage = imguser_url
+                        self.navigationController?.pushViewController(vc, animated: true)
+                        self.dismiss(animated: true)
+                    }
+                }
+                if txt == "CopyLink"{
+                    let share_link = String.getString(sharelink)
+                    UIPasteboard.general.string = share_link
+                    print("share_link\(share_link)")
+                    if kSharedUserDefaults.getlanguage() as? String == "en"{
+                        CommonUtils.showError(.info, String.getString("Link Copied"))
+                    }
+                    else{
+                        CommonUtils.showError(.info, String.getString("تم نسخ الرابط"))
+                    }
+                    
+                }
+                
+                if txt == "MarkasInterested"{
+                    if UserData.shared.isskiplogin == true{
+                        if kSharedUserDefaults.getlanguage() as? String == "en"{
+                            self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                        }
+                        else{
+                            self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
+                        }
+                    }
+                    else{
+                        let oppid = Int.getInt(user_id)
+                        self.markinterestedapi(oppr_id: oppid)
+                        self.dismiss(animated: true)
+                    }
+                }
+                
+                if txt == "Flag"{
+                    if UserData.shared.isskiplogin == true{
+                        if kSharedUserDefaults.getlanguage() as? String == "en"{
+                            self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                        }
+                        else{
+                            self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
+                        }
+                    }
+                    else{
+                        self.dismiss(animated: false){
+                            let vc = self.storyboard?.instantiateViewController(withIdentifier: FlagPostPopUPVC.getStoryboardID()) as! FlagPostPopUPVC
+                            vc.modalTransitionStyle = .crossDissolve
+                            vc.modalPresentationStyle = .overCurrentContext
+                            let oppid = Int.getInt(user_id)
+                            vc.oppid = oppid
+                            
+                            vc.callbackClosure = {
+                                self.getallopportunity()
+                            }
+                            self.present(vc, animated: false)
+                            
+                            // cell.imgOppFlag.isHidden = false
+                        }
+                    }
+                }
+                
+                if txt == "Report"{
+                    if UserData.shared.isskiplogin == true{
+                        if kSharedUserDefaults.getlanguage() as? String == "en"{
+                            self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                        }
+                        else{
+                            self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
+                        }
+                    }
+                    else{
+                        self.dismiss(animated: false){
+                            let vc = self.storyboard?.instantiateViewController(withIdentifier: ReportUserPopUpVC.getStoryboardID()) as! ReportUserPopUpVC
+                            vc.modalTransitionStyle = .crossDissolve
+                            vc.modalPresentationStyle = .overCurrentContext
+                            let userid = Int.getInt(user_id)
+                            vc.userid = userid
+                            self.present(vc, animated: false)
+                        }
+                    }
+                }
+                
+                if txt == "viewdetails"{
+                    if UserData.shared.isskiplogin == true{
+                        if kSharedUserDefaults.getlanguage() as? String == "en"{
+                            self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                        }
+                        else{
+                            self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
+                        }
+                    }
+                    else{
+                        let oppid = Int.getInt(user_id)
+                        debugPrint("detailsppid=-=-=",oppid)
+                        let vc = self.storyboard?.instantiateViewController(withIdentifier: DetailScreenVC.getStoryboardID()) as! DetailScreenVC
+                        
+                        vc.oppid = oppid
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    }
+                }
+            }
+            self.present(vc, animated: false)
+        }
+    }
     
     private func scrollToTop() { // Scroll table view to Top
         let topRow = IndexPath(row: 0,section: 0)
@@ -296,7 +566,7 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
         else{
             self.getallopportunity()
         }
-       
+        
     }
     
     @objc func buttonTappedFilter(_ sender:UIButton){

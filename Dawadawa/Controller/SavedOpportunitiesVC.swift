@@ -20,7 +20,7 @@ class SavedOpportunitiesVC: UIViewController,UICollectionViewDelegate,UICollecti
     
     @IBOutlet weak var imgNoOpp: UIImageView!
     var imgUrl = ""
-    var userTimeLine = [SocialPostData]()
+//    var userTimeLine = [SocialPostData]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,14 +46,14 @@ class SavedOpportunitiesVC: UIViewController,UICollectionViewDelegate,UICollecti
     @IBAction func BtnViewAllTSavedapped(_ sender: UIButton) {
         let vc = self.storyboard!.instantiateViewController(withIdentifier: ViewAllSavedVC.getStoryboardID()) as! ViewAllSavedVC
         vc.imgUrl = self.imgUrl
-        vc.userTimeLine = self.userTimeLine
+//        vc.userTimeLine = userTimeLine
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @IBAction func btnViewAllInterestedTapped(_ sender: UIButton) {
         let vc = self.storyboard!.instantiateViewController(withIdentifier: ViewAllInterestedVC.getStoryboardID()) as! ViewAllInterestedVC
         vc.imgUrl = self.imgUrl
-        vc.userTimeLine = self.userTimeLine
+//        vc.userTimeLine = self.userTimeLine
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -130,8 +130,8 @@ extension SavedOpportunitiesVC{
                         
                         self.imgUrl = String.getString(dictResult["oprbase_url"])
                         let Opportunity = kSharedInstance.getArray(withDictionary: dictResult["Opportunity"])
-                        self.userTimeLine = Opportunity.map{SocialPostData(data: kSharedInstance.getDictionary($0))}
-                        print("Dataallpost=\(self.userTimeLine)")
+                        userTimeLine = Opportunity.map{SocialPostData(data: kSharedInstance.getDictionary($0))}
+                        print("Dataallpost=\(userTimeLine)")
                         
                         
                         self.imgNoOpp.isHidden = true
@@ -139,7 +139,7 @@ extension SavedOpportunitiesVC{
                         
                     }
                     else if  Int.getInt(dictResult["responsecode"]) == 400{
-                        self.userTimeLine.removeAll()
+                        userTimeLine.removeAll()
                         self.CollectionViewSave.reloadData()
 //                        self.lblSaved.isHidden = true
                         self.btnViewAllSaved.isHidden = true
@@ -188,8 +188,8 @@ extension SavedOpportunitiesVC{
                         
                         self.imgUrl = String.getString(dictResult["oprbase_url"])
                         let Opportunity = kSharedInstance.getArray(withDictionary: dictResult["Opportunity"])
-                        self.userTimeLine = Opportunity.map{SocialPostData(data: kSharedInstance.getDictionary($0))}
-                        print("Dataallinterested=\(self.userTimeLine)")
+                        userTimeLine = Opportunity.map{SocialPostData(data: kSharedInstance.getDictionary($0))}
+                        print("Dataallinterested=\(userTimeLine)")
                         self.CollectionViewInterested.reloadData()
                         
                     }

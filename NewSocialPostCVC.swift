@@ -6,7 +6,8 @@ import UIKit
 
 protocol NewSocialPostCVCDelegate: class {
     func SeeDetails(collectionviewcell: NewSocialPostCVC?, index: Int, didTappedInTableViewCell: SocialPostTVC)
-//    func likeOpp(collectionviewcell:NewSocialPostCVC?, index: Int, didTappedintableviewcell: SocialPostTVC)
+    func More(collectionviewcell:NewSocialPostCVC?, index: Int, didTappedintableviewcell: SocialPostTVC)
+    func likecount(collectionviewcell:NewSocialPostCVC?, index: Int, didTappedintableviewcell: SocialPostTVC)
     // other delegate methods that you can define to perform action in viewcontroller
 }
 
@@ -46,6 +47,10 @@ class NewSocialPostCVC: UICollectionViewCell{
     
     @IBAction func BtnLikeTapped(_ sender: UIButton){
         self.callback?("Like", sender)
+    }
+    
+    @IBAction func BtnLikeCountTapped(_ sender: UIButton){
+        self.callback?("LikeCount", sender)
     }
     
 }

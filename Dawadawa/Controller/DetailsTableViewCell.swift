@@ -68,6 +68,8 @@ class DetailsTableViewCell: UITableViewCell,UITextViewDelegate {
     
     @IBOutlet weak var heightViewBusinessName: NSLayoutConstraint!
     @IBOutlet weak var heightviewBusinessminingtype: NSLayoutConstraint!
+    
+    @IBOutlet weak var WidthViewFlag: NSLayoutConstraint!
     @IBOutlet weak var imgOppFlag: UIImageView!
     @IBOutlet weak var btnChat: UIButton!
     @IBOutlet weak var viewSave: UIView!
@@ -171,6 +173,10 @@ class DetailsTableViewCell: UITableViewCell,UITextViewDelegate {
         self.callback?("Rate",sender)
     }
     
+    @IBAction func btnShareTapped(_ sender: UIButton){
+        self.callback?("Share",sender)
+    }
+    
     
     @IBAction func btnSavedTapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
@@ -194,7 +200,9 @@ class DetailsTableViewCell: UITableViewCell,UITextViewDelegate {
         self.callback?("Seemorecomment",sender)
         
     }
-    
+    @IBAction func BtnLikeCountTapped(_ sender: UIButton){
+        self.callback?("LikeCount",sender)
+    }
 }
 
 

@@ -5,6 +5,7 @@
 import UIKit
 
 var opppreid = 0
+var likeCount = ""
 
 class ViewPostTableViewCell: UITableViewCell{
     @IBOutlet weak var lblPremium_opp: UILabel!

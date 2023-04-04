@@ -251,10 +251,9 @@ public class AppsNetworkManager{
         body.append("--\(boundary)--\r\n")
         return body
     }
-    
 }
 
-//MARK:- Class For Shared Utilities For AppsNetworkManagerInstanse
+//  MARK:- Class For Shared Utilities For AppsNetworkManagerInstanse
 extension AppsNetworkManager {
     
     //MARK:- Func For Show Hud

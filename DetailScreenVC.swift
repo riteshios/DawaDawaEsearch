@@ -80,8 +80,9 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
             attributedStringcomment.setColorForText(textToFind: second, withColor: UIColor.gray)
             view.labelName.attributedText = attributedStringcomment
             
-            let imgurl = URL(string: String.getString(obj?.image))
-            view.labelImage.sd_setImage(with: imgurl)
+//            let imgurl = URL(string: String.getString(obj?.image))
+//            view.labelImage.sd_setImage(with: imgurl)
+            view.labelImage.downlodeImage(serviceurl: obj?.image ?? "" , placeHolder: UIImage(named: "Boss"))
             
             view.callBack = { txt in
                 if txt == "detail"{
@@ -164,7 +165,7 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
             
             //  cell.viewLine.isHidden = true
             //  cell.SocialPostCollectionView.tag = indexPath.section
-            // cell.DocumentCollectionView.tag = indexPath.section
+            //  cell.DocumentCollectionView.tag = indexPath.section
             cell.celldelegate = self
             cell.lblUserName.text = String.getString(self.userTimeLine?.userdetail?.name)
             cell.lblDescribtion.text = String.getString(self.userTimeLine?.description)
@@ -265,14 +266,14 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
             }
             
             if String.getString(self.userTimeLine?.business_name) == "Null"{
-//                cell.heightViewBusinessName.constant = 0
+                cell.heightViewBusinessName.constant = 0
                 cell.ViewBusinessName.isHidden = true
             }
             else{
                 cell.lblBusinessName.text = String.getString(self.userTimeLine?.business_name)
             }
             if String.getString(self.userTimeLine?.business_mining_type) == "Null"{
-//                cell.heightviewBusinessminingtype.constant = 0
+                cell.heightviewBusinessminingtype.constant = 0
                 cell.viewBusinessminingType.isHidden = true
             }
             else{
@@ -408,6 +409,7 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
             }
             else{
                 cell.imgOppFlag.isHidden = true
+                cell.WidthViewFlag.constant = 30
             }
             
             if Int.getInt(self.userTimeLine?.close_opr) == 0{
@@ -421,7 +423,7 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
             }
             
             cell.heightSocialPostCollectionView.constant = 275
-            cell.viewSeeDetails.isHidden = true
+//            cell.viewSeeDetails.isHidden = true
 //            cell.btnViewDetails.isHidden = true
             
             cell.callback = { txt, tapped in
@@ -502,6 +504,14 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                         self.getalldetail()
                     }
                     self.present(vc, animated: false)
+                }
+                
+                if txt == "Share" {
+                    let image = String.getString(self.userTimeLine?.share_link)
+                    let imageShare = [ image ]
+                    let activityViewController = UIActivityViewController(activityItems: imageShare, applicationActivities: nil)
+                    activityViewController.popoverPresentationController?.sourceView = self.view
+                    self.present(activityViewController, animated: true, completion: nil)
                 }
                 
                 if txt == "Save"{
@@ -885,7 +895,7 @@ extension DetailScreenVC{
                         
                         print("DataAlldetails===\(self?.userTimeLine)")
                         
-                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //   CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         self?.tblviewDetail.reloadData()
                     }
                     else if  Int.getInt(dictResult["status"]) == 400{
@@ -898,7 +908,7 @@ extension DetailScreenVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-                //                CommonUtils.showToastForDefaultError()
+                //      CommonUtils.showToastForDefaultError()
             }
         }
     }
@@ -1059,7 +1069,6 @@ extension DetailScreenVC{
         let params:[String : Any] = [
             "oppr_id":oppr_id,
             "user_id":UserData.shared.id
-            
         ]
         
         debugPrint("oppr_id...===...",oppr_id)
@@ -1160,7 +1169,7 @@ extension DetailScreenVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-                //                CommonUtils.showToastForDefaultError()
+                //  CommonUtils.showToastForDefaultError()
             }
         }
     }
@@ -1209,7 +1218,7 @@ extension DetailScreenVC{
                     
                     else if  Int.getInt(dictResult["status"]) == 201{
                         //  CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //  CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                 default:
@@ -1219,7 +1228,7 @@ extension DetailScreenVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-                //                CommonUtils.showToastForDefaultError()
+                //       CommonUtils.showToastForDefaultError()
             }
         }
     }
@@ -1277,7 +1286,7 @@ extension DetailScreenVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-                //              CommonUtils.showToastForDefaultError()
+                //        CommonUtils.showToastForDefaultError()
             }
         }
     }
@@ -1288,6 +1297,3 @@ extension DetailScreenVC{
         lblDetailScreen.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Detail Screen", comment: "")
     }
 }
-
-
-
