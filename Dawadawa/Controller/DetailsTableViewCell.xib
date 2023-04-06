@@ -185,14 +185,14 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="otG-Jl-z5q">
                                                 <rect key="frame" x="0.0" y="0.0" width="130" height="30"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nzY-XN-TKY">
-                                                        <rect key="frame" x="5" y="5" width="39" height="19.5"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nzY-XN-TKY">
+                                                        <rect key="frame" x="5" y="5" width="42.5" height="19.5"/>
                                                         <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="16"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" $0k" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QzT-NL-PtF">
-                                                        <rect key="frame" x="48" y="5.5" width="28.5" height="18.5"/>
+                                                        <rect key="frame" x="51.5" y="5.5" width="28.5" height="18.5"/>
                                                         <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="15"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -632,7 +632,6 @@
                                     <constraint firstAttribute="trailing" secondItem="3vR-gV-iq4" secondAttribute="trailing" id="774-fX-j3x"/>
                                     <constraint firstItem="3vR-gV-iq4" firstAttribute="top" secondItem="dpK-kh-ecG" secondAttribute="top" constant="5" id="B2a-gZ-AjE"/>
                                     <constraint firstAttribute="bottom" secondItem="3vR-gV-iq4" secondAttribute="bottom" constant="5" id="BVm-Oy-n9d"/>
-                                    <constraint firstAttribute="height" constant="32" id="ol9-8P-ptf"/>
                                     <constraint firstItem="3vR-gV-iq4" firstAttribute="leading" secondItem="dpK-kh-ecG" secondAttribute="leading" constant="5" id="ynQ-XV-OK9"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>

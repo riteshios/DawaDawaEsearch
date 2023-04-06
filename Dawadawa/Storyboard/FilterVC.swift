@@ -230,6 +230,7 @@ class FilterVC: UIViewController{
         self.localityid = Int()
         self.minprice = Int()
         self.maxprice = Int()
+        filteredArray = []
     }
     //    MARK: - @IBActions and Methods -
     
@@ -314,9 +315,9 @@ class FilterVC: UIViewController{
         }
     }
     
-     @IBAction func btnAllTapped(_ sender: UIButton) {
+    @IBAction func btnAllTapped(_ sender: UIButton) {
         sender.isSelected  = !sender.isSelected
-         if self.btnAll.isSelected == true{
+        if self.btnAll.isSelected == true{
             self.viewAll.backgroundColor = UIColor(red: 21, green: 114, blue: 161)
             self.lblAll.textColor = .white
             self.viewAvailable.backgroundColor = UIColor(red: 241, green: 249, blue: 253)
@@ -409,7 +410,7 @@ class FilterVC: UIViewController{
             self.lblClosed.textColor = UIColor(red: 21, green: 114, blue: 161)
             self.viewAll.backgroundColor = UIColor(red: 241, green: 249, blue: 253)
             self.lblAll.textColor = UIColor(red: 21, green: 114, blue: 161)
-//            self.oppstatus = 5
+            //            self.oppstatus = 5
         }
     }
     
@@ -571,16 +572,15 @@ class FilterVC: UIViewController{
         }
     }
     
+    
     @IBAction func btnLocalityTapped(_ sender: UIButton) {
         if UserData.shared.isskiplogin == true{
-            
             kSharedAppDelegate?.dropDown(dataSource: getguestlocalitylist.map{String.getString($0.local_name)}, text: btnLocality){
                 (index,item) in
                 self.lblLocality.text = item
                 let id  = self.getguestlocalitylist[index].id
                 self.localityid = id
                 debugPrint("localityid....",self.localityid)
-                
             }
         }
         
@@ -591,7 +591,6 @@ class FilterVC: UIViewController{
                 let id  = self.getlocalitylist[index].id
                 self.localityid = id
                 debugPrint("localityid....",self.localityid)
-                
             }
         }
     }
@@ -650,6 +649,7 @@ class FilterVC: UIViewController{
     }
     
     //   MARK: - APICALL
+    
     func getlocalityapi(id:Int){
         CommonUtils.showHudWithNoInteraction(show: true)
         localityapi(language: "en"){ sucess, localdata, message in
@@ -1338,7 +1338,7 @@ extension FilterVC{
                 let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
                 kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
             }
-            //            headers["token"] = kSharedUserDefaults.getLoggedInAccessToken()
+            //   headers["token"] = kSharedUserDefaults.getLoggedInAccessToken()
         }
         
         let stateids = Int(self.stateid ?? 0) // For remove optional
@@ -1418,7 +1418,7 @@ extension FilterVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-                //     CommonUtils.showToastForDefaultError()
+                //   CommonUtils.showToastForDefaultError()
             }
         }
     }
@@ -1457,7 +1457,7 @@ extension FilterVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-                //    CommonUtils.showToastForDefaultError()
+                //   CommonUtils.showToastForDefaultError()
             }
         }
     }
@@ -1504,7 +1504,7 @@ extension FilterVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-                //                CommonUtils.showToastForDefaultError()
+                //     CommonUtils.showToastForDefaultError()
             }
         }
     }
@@ -1543,7 +1543,7 @@ extension FilterVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-                //                CommonUtils.showToastForDefaultError()
+                // CommonUtils.showToastForDefaultError()
             }
         }
     }
@@ -1577,7 +1577,7 @@ extension FilterVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-                //                CommonUtils.showToastForDefaultError()
+                //      CommonUtils.showToastForDefaultError()
             }
         }
     }
@@ -1630,7 +1630,7 @@ extension FilterVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-                //                CommonUtils.showToastForDefaultError()
+                //    CommonUtils.showToastForDefaultError()
             }
         }
     }
@@ -1683,13 +1683,13 @@ extension FilterVC{
                         if septoken[0] == "Bearer"{
                             kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
                         }
-                       
+                        
                         imgUrl = String.getString(dictResult["oprbase_url"])
                         let Opportunity = kSharedInstance.getArray(withDictionary: dictResult["Opportunity"])
                         userTimeLine = Opportunity.map{SocialPostData(data: kSharedInstance.getDictionary($0))}
                         print("DataallSearchpost=\(userTimeLine)")
                         
-                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+//                                                CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         
                         //                        let vc = self?.storyboard?.instantiateViewController(withIdentifier: HomeVC.getStoryboardID()) as! HomeVC
                         //                        cameFrom = "FilterData"

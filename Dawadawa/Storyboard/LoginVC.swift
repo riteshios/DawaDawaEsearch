@@ -186,7 +186,12 @@ class LoginVC: UIViewController {
         }
         else if !String.getString(self.txtFieldPhoneNumer.text).isphoneandemail()
         {
-            self.showSimpleAlert(message: Notifications.kentervalidphoneemail)
+            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                self.showSimpleAlert(message: Notifications.kentervalidphoneemail)
+            }
+            else{
+                self.showSimpleAlert(message: Notifications.karabicentervalidphoneemail)
+            }
             return
         }
         

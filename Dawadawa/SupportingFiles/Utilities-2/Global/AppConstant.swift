@@ -188,6 +188,7 @@ struct Notifications {
     static let kentermobileemail                =  "Please Enter Your Mobile Number/Email Address"
     static let kEnterValidMobileNumber          =  "Please Enter Valid Mobile Number"
     static let kentervalidphoneemail            =  "Please Enter Valid Mobile Number/Email Address"
+    static let karabicentervalidphoneemail      =  "الرجاء إدخال رقم هاتف / عنوان بريد إلكتروني صالح"
     static let kcountrycode                     =  "Please Select Country Code"
     static let kEnterUserId                     =  "Please Enter User Id"
     static let kEnterEmail                      =  "Please Enter your EmailId"

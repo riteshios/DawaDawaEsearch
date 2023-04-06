@@ -6,7 +6,7 @@ import UIKit
 
 class ProfileVC: UIViewController,NewSocialPostCVCDelegate{
     
-    //    MARK: - Properties
+    //    MARK: - Properties -
     
     @IBOutlet weak var ImageProfile: UIImageView!
     @IBOutlet weak var lblFullName: UILabel!
@@ -38,7 +38,7 @@ class ProfileVC: UIViewController,NewSocialPostCVCDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        userTimeLine.removeAll()
         self.viewNoOpp.isHidden = true
         
         //        self.listoppoertunityapi()
@@ -87,7 +87,7 @@ class ProfileVC: UIViewController,NewSocialPostCVCDelegate{
         }
     }
     
-    // MARK: - @IBAction
+    // MARK: - @IBAction -
     
     @IBAction func btnEditImage(_ sender: UIButton) {
         if UserData.shared.isskiplogin == true{
@@ -214,7 +214,7 @@ class ProfileVC: UIViewController,NewSocialPostCVCDelegate{
         }
     }
 }
-// MARK: - Table View
+// MARK: - Table View -
 
 extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
     
@@ -276,13 +276,13 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                         cell.lblPlan.text = "عدد المشاهدات"
                         cell.lblOpportunity.text = "الفرص التي تم وضع علامة عليها"
                     }
-                    
                     cell.lblshowplan.text = String.getString(self.datadashboard?.no_view)
                     cell.lblshowOpportunity.text = String.getString(self.datadashboard?.no_flag)
-                    
                 }
+                
                 else if UserData.shared.user_type == "2"{
                     cell.lblshowdata.text = String.getString(self.datadashboard?.total_create)
+                    cell.lbltotalused.text = String.getString(self.datadashboard?.total_used) + "/"
                     if kSharedUserDefaults.getlanguage() as? String == "en"{
                         cell.lblDate.text = "Total Create"
                         cell.lblPlan.text = "Total views"
@@ -293,17 +293,13 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                         cell.lblPlan.text = "عدد المشاهدات"
                         cell.lblOpportunity.text = "الفرص التي تم وضع علامة عليها"
                     }
-                    
-                    cell.lbltotalused.isHidden = true
+//                    cell.lbltotalused.isHidden = true
                     cell.lblshowplan.text = String.getString(self.datadashboard?.no_view)
-                    
                     cell.lblshowOpportunity.text = String.getString(self.datadashboard?.no_flag)
-                    
                 }
             }
             cell.callbackbtnSelect = { txt in
                 if txt == "All"{
-                    
                     if UserData.shared.isskiplogin == true{
                         if kSharedUserDefaults.getlanguage() as? String == "en"{
                             self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
@@ -317,10 +313,8 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                         self.isbtnAllSelect  = true
                         self.listoppoertunityapi()
                     }
-                    
                 }
                 if txt == "Premium"{
-                   
                     if UserData.shared.isskiplogin == true{
                         if kSharedUserDefaults.getlanguage() as? String == "en"{
                             self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
@@ -331,14 +325,11 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                         self.viewNoOpp.isHidden = false
                     }
                     else{
-                        
                         self.isbtnPremiumSelect = true
                         self.getallpremiumapi()
                     }
-                    
                 }
                 if txt == "Featured"{
-                   
                     if UserData.shared.isskiplogin == true{
                         if kSharedUserDefaults.getlanguage() as? String == "en"{
                             self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
@@ -389,7 +380,7 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
         }
     }
     
-    //    MARK: - Protocol Delegate
+    //    MARK: - Protocol Delegate -
     
     func SeeDetails(collectionviewcell: NewSocialPostCVC?, index: Int, didTappedInTableViewCell: SocialPostTVC) {
         
@@ -460,12 +451,12 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
                     let share_link = String.getString(sharelink)
                     UIPasteboard.general.string = share_link
                     print("share_link\(share_link)")
-                    if kSharedUserDefaults.getlanguage() as? String == "en"{
-                        CommonUtils.showError(.info, String.getString("Link Copied"))
-                    }
-                    else{
-                        CommonUtils.showError(.info, String.getString("تم نسخ الرابط"))
-                    }
+//                    if kSharedUserDefaults.getlanguage() as? String == "en"{
+//                        CommonUtils.showError(.info, String.getString("Link Copied"))
+//                    }
+//                    else{
+//                        CommonUtils.showError(.info, String.getString("تم نسخ الرابط"))
+//                    }
                 }
                 
                 if txt == "Update"{
@@ -539,7 +530,7 @@ extension ProfileVC: UITableViewDelegate,UITableViewDataSource{
     }
 }
 
-// MARK: -API call
+// MARK: -API call -
 
 extension ProfileVC{
     
@@ -599,7 +590,7 @@ extension ProfileVC{
         }
     }
     
-    // Api Dashboard
+    // Api Dashboard -
     
     func dashboardapi(){
         
@@ -612,6 +603,7 @@ extension ProfileVC{
                 kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
             }
         }
+        
         let params:[String : Any] = [
             "user_id":Int.getInt(UserData.shared.id),
             "user_type":Int.getInt(String.getString(UserData.shared.user_type))
@@ -619,8 +611,7 @@ extension ProfileVC{
         
         debugPrint("usertype......",Int.getInt(String.getString(UserData.shared.user_type)))
         
-        TANetworkManager.sharedInstance.requestApi(withServiceName:ServiceName.kdashboard, requestMethod: .POST,
-                                                   requestParameters:params, withProgressHUD: false)
+        TANetworkManager.sharedInstance.requestApi(withServiceName:ServiceName.kdashboard, requestMethod: .POST,requestParameters:params, withProgressHUD: false)
         {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
             
             CommonUtils.showHudWithNoInteraction(show: false)
@@ -645,7 +636,7 @@ extension ProfileVC{
                         
                         print("Datadashboard====-=\(self?.datadashboard)")
                         self?.tblViewSocialPost.reloadData()
-                        // CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //  CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         
                         CommonUtils.showHudWithNoInteraction(show: false)
                     }
@@ -662,7 +653,7 @@ extension ProfileVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-                //                CommonUtils.showToastForDefaultError()
+                //  CommonUtils.showToastForDefaultError()
             }
         }
     }
@@ -701,7 +692,6 @@ extension ProfileVC{
                 case 200:
                    
                     if Int.getInt(dictResult["status"]) == 200{
-                        userTimeLine.removeAll()
                         let endToken = kSharedUserDefaults.getLoggedInAccessToken()
                         let septoken = endToken.components(separatedBy: " ")
                         if septoken[0] == "Bearer"{
@@ -772,7 +762,7 @@ extension ProfileVC{
                 switch Int.getInt(statusCode) {
                 case 200:
                     if Int.getInt(dictResult["status"]) == 200{
-                        userTimeLine.removeAll()
+                       
                         let endToken = kSharedUserDefaults.getLoggedInAccessToken()
                         let septoken = endToken.components(separatedBy: " ")
                         if septoken[0] == "Bearer"{
@@ -843,7 +833,7 @@ extension ProfileVC{
                 case 200:
                     
                     if Int.getInt(dictResult["status"]) == 200{
-                        userTimeLine.removeAll()
+                        
                         let endToken = kSharedUserDefaults.getLoggedInAccessToken()
                         let septoken = endToken.components(separatedBy: " ")
                         if septoken[0] == "Bearer"{
@@ -1049,7 +1039,7 @@ extension ProfileVC{
                             vc.docarray = self?.UserTimeLineOppdetails?.oppdocument ?? []
                             debugPrint("imgaraay=-=-=-==-=", vc.imgarray)
                         }
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                     else if  Int.getInt(dictResult["status"]) == 400{

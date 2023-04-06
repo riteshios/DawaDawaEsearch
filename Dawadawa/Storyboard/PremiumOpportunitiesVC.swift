@@ -179,12 +179,12 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
                     let share_link = String.getString(sharelink)
                     UIPasteboard.general.string = share_link
                     print("share_link\(share_link)")
-                    if kSharedUserDefaults.getlanguage() as? String == "en"{
-                        CommonUtils.showError(.info, String.getString("Link Copied"))
-                    }
-                    else{
-                        CommonUtils.showError(.info, String.getString("تم نسخ الرابط"))
-                    }
+//                    if kSharedUserDefaults.getlanguage() as? String == "en"{
+//                        CommonUtils.showError(.info, String.getString("Link Copied"))
+//                    }
+//                    else{
+//                        CommonUtils.showError(.info, String.getString("تم نسخ الرابط"))
+//                    }
                 }
                 
                 if txt == "Update"{
@@ -287,12 +287,12 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
                     let share_link = String.getString(sharelink)
                     UIPasteboard.general.string = share_link
                     print("share_link\(share_link)")
-                    if kSharedUserDefaults.getlanguage() as? String == "en"{
-                        CommonUtils.showError(.info, String.getString("Link Copied"))
-                    }
-                    else{
-                        CommonUtils.showError(.info, String.getString("تم نسخ الرابط"))
-                    }
+//                    if kSharedUserDefaults.getlanguage() as? String == "en"{
+//                        CommonUtils.showError(.info, String.getString("Link Copied"))
+//                    }
+//                    else{
+//                        CommonUtils.showError(.info, String.getString("تم نسخ الرابط"))
+//                    }
                     
                 }
                 

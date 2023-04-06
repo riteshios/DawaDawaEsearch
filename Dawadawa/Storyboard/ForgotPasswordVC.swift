@@ -20,7 +20,7 @@ class ForgotPasswordVC: UIViewController {
     
     @IBOutlet weak var txtFieldPhone_Email: SKFloatingTextField!
     
-//    MARK: - Life Cyclye -
+    //    MARK: - Life Cyclye -
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setuplanguage()
@@ -41,7 +41,7 @@ class ForgotPasswordVC: UIViewController {
             }
         }
     }
-   
+    
     func setup(){
         viewMain.clipsToBounds = true
         viewMain.layer.cornerRadius = 25
@@ -84,18 +84,18 @@ class ForgotPasswordVC: UIViewController {
     
     
     @IBAction func btnsendCodeTapped(_ sender: UIButton) {
-       // self.forgotpasswordapi()
+        // self.forgotpasswordapi()
         self.fieldvalidationPhoneNumbe()
-//        if self.lblSendEmail_Phone.text == LocalizationSystem.sharedInstance.localizedStringForKey(key: "Send on email address", comment: "")
-//        {
-//            self.fieldvalidationPhoneNumber()
-//        }
-//
-//        else if  lblSendEmail_Phone.text == LocalizationSystem.sharedInstance.localizedStringForKey(key: "Send on phone number", comment: "")
-//
-//        {
-//            self.fieldvalidationEmailAdress()
-//        }
+        //        if self.lblSendEmail_Phone.text == LocalizationSystem.sharedInstance.localizedStringForKey(key: "Send on email address", comment: "")
+        //        {
+        //            self.fieldvalidationPhoneNumber()
+        //        }
+        //
+        //        else if  lblSendEmail_Phone.text == LocalizationSystem.sharedInstance.localizedStringForKey(key: "Send on phone number", comment: "")
+        //
+        //        {
+        //            self.fieldvalidationEmailAdress()
+        //        }
     }
     
     
@@ -126,19 +126,19 @@ class ForgotPasswordVC: UIViewController {
         self.view.endEditing(true)
         self.forgotpasswordapi()
     }
-
-
-func fieldvalidationPhoneNumbe(){
-    if String.getString(self.txtFieldPhone_Email.text).isEmpty
-    {
-        showSimpleAlert(message: Notifications.kentermobileemail)
-        return
+    
+    
+    func fieldvalidationPhoneNumbe(){
+        if String.getString(self.txtFieldPhone_Email.text).isEmpty
+        {
+            showSimpleAlert(message: Notifications.kentermobileemail)
+            return
+        }
+        
+        self.view.endEditing(true)
+        self.forgotpasswordapi()
     }
     
-    self.view.endEditing(true)
-    self.forgotpasswordapi()
-}
-
 }
 // MARK: - Textfield Delegate -
 
@@ -235,7 +235,7 @@ extension ForgotPasswordVC{
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     else if Int.getInt(dictResult["status"]) == 401{
-//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                 default:
                     CommonUtils.showError(.info, String.getString(dictResult["message"]))
@@ -244,7 +244,7 @@ extension ForgotPasswordVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-//                CommonUtils.showToastForDefaultError()
+                //                CommonUtils.showToastForDefaultError()
             }
         }
     }

@@ -1548,7 +1548,7 @@ extension TrailingOpportunityVC{
         
         lblState.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "State", comment: "")
         lblLocality.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Locality", comment: "")
-        txtViewDiscription.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Opportunity Details/Description", comment: "")
+        self.txtViewDiscription.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Opportunity Details/Description", comment: "")
         lblLocationOnMap.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Pin Location on map(optional)", comment: "")
         lblLookingFor.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Looking for", comment: "")
         lblBasic.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Basic", comment: "")

@@ -351,12 +351,12 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                         let share_link = String.getString(sharelink)
                         UIPasteboard.general.string = share_link
                         print("share_link\(share_link)")
-                        if kSharedUserDefaults.getlanguage() as? String == "en"{
-                            CommonUtils.showError(.info, String.getString("Link Copied"))
-                        }
-                        else{
-                            CommonUtils.showError(.info, String.getString("تم نسخ الرابط"))
-                        }
+//                        if kSharedUserDefaults.getlanguage() as? String == "en"{
+//                            CommonUtils.showError(.info, String.getString("Link Copied"))
+//                        }
+//                        else{
+//                            CommonUtils.showError(.info, String.getString("تم نسخ الرابط"))
+//                        }
                     }
                     
                 }
@@ -458,16 +458,26 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                     }
                 }
                 if txt == "CopyLink"{
-                    let share_link = String.getString(sharelink)
-                    UIPasteboard.general.string = share_link
-                    print("share_link\(share_link)")
-                    if kSharedUserDefaults.getlanguage() as? String == "en"{
-                        CommonUtils.showError(.info, String.getString("Link Copied"))
+                    if UserData.shared.isskiplogin == true{
+                        if kSharedUserDefaults.getlanguage() as? String == "en"{
+                            self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                        }
+                        else{
+                            self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
+                        }
+                        
                     }
                     else{
-                        CommonUtils.showError(.info, String.getString("تم نسخ الرابط"))
+                        let share_link = String.getString(sharelink)
+                        UIPasteboard.general.string = share_link
+                        print("share_link\(share_link)")
+//                        if kSharedUserDefaults.getlanguage() as? String == "en"{
+//                            CommonUtils.showError(.info, String.getString("Link Copied"))
+//                        }
+//                        else{
+//                            CommonUtils.showError(.info, String.getString("تم نسخ الرابط"))
+//                        }
                     }
-                    
                 }
                 
                 if txt == "MarkasInterested"{

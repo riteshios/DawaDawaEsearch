@@ -99,7 +99,7 @@ class GlobalApi: NSObject{
                 let dictResult = kSharedInstance.getDictionary(result)
                 switch Int.getInt(statusCode) {
                 case 200:
-                    //                    self?.statuslike = Int.getInt(dictResult["status"])
+                    //    self?.statuslike = Int.getInt(dictResult["status"])
                     if Int.getInt(dictResult["status"]) == 200{
                         
                         let endToken = kSharedUserDefaults.getLoggedInAccessToken()
@@ -120,7 +120,7 @@ class GlobalApi: NSObject{
                             CommonUtils.showError(.info, String.getString("هذه الفرصة تختلف عنك"))
                         }
                         
-                        //      CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //    CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                 default:
@@ -130,7 +130,7 @@ class GlobalApi: NSObject{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-                //                CommonUtils.showToastForDefaultError()
+                //      CommonUtils.showToastForDefaultError()
             }
         }
     }
@@ -193,7 +193,7 @@ class GlobalApi: NSObject{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-                //                CommonUtils.showToastForDefaultError()
+                //       CommonUtils.showToastForDefaultError()
             }
         }
     }

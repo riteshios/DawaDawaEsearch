@@ -1,10 +1,7 @@
-//
 //  CommonUtils.swift
 //  SwiftClasses
-//
 //  Created by Nitin Aggarwal on 6/11/17.
 //  Copyright © 2020 Nitin Aggarwal. All rights reserved.
-//
 
 import Foundation
 import UIKit
@@ -134,26 +131,26 @@ class CommonUtils {
     }
     
     
-    //    // MARK: - Toast Popup Methods
-    //
+    //    // MARK: - Toast Popup Methods -
+    
     //    // To show toast popup with message.
     //    static func showToast(message: String) {
     //        FTIndicator.showNotification(withTitle: kAlertTitle,
     //                                     message: message.count>0 ? message: "Message")
     //    }
-    //
+    
     //    // To show toast popup for no internet available.
     //    static func showToastForInternetUnavailable() {
     //        FTIndicator.showNotification(withTitle: kAlertTitle,
     //                                     message: kNoInternetMsg)
     //    }
-    //
+    
     //    // To show toast popup for under development.
     //    static func showToastForUnderDevelopment() {
     //        FTIndicator.showNotification(withTitle: kAlertTitle,
     //                                     message: "Under Development")
     //    }
-    //
+    
     //    // To show toast popup for any error.
     //    static func showToastForDefaultError() {
     //        FTIndicator.showNotification(withTitle: kAlertTitle,
@@ -192,7 +189,7 @@ class CommonUtils {
     }
     
     
-    // MARK: - HUD Methods
+    // MARK: - HUD Methods -
     
     static func showHud(show: Bool) {
         if show == true {
@@ -223,8 +220,7 @@ class CommonUtils {
         return NSStringFromClass(vc.classForCoder).components(separatedBy:".").last!
     }
     
-    
-    // MARK: - Other Methods
+    // MARK: - Other Methods -
     
     static func animate(view: UIView) {
         let expendTransform = CGAffineTransform.init(scaleX: 1.15, y: 1.15)
@@ -240,7 +236,6 @@ class CommonUtils {
             
         }
     }
-    
     
     static func makeConversationKey(senderId : Int , receiverId: Int) -> String {
         
@@ -286,10 +281,7 @@ class CommonUtils {
             "MF" : "590","PM" : "508","VC" : "1","ST" : "239","SO" : "252",
             "SJ" : "47","SY" : "963","TW" : "886","TZ" : "255","TL" : "670","VE" : "58","VN" : "84","VG" : "1","VI" : "1","IN":"91","AQ":"672","EH":"212","UM":"1","CW":"599","SS":"211","Bes":"599","TF":"262"]
         return String.getString("+\(dictCodes[code] ?? "00")")
-        
     }
-    
-    
     
     
     static func getThumbnailImage(forUrl url: URL) -> UIImage? {
@@ -324,7 +316,7 @@ class CommonUtils {
     }
     
     
-    //MARK: - Formatter Methods
+    //MARK: - Formatter Methods -
     static func localToUTC(date:String, fromFormat: String, toFormat: String) -> String {
         
         let dateFormatter = DateFormatter()
@@ -370,30 +362,22 @@ class CommonUtils {
         dateFormatter.dateFormat = "EEEE"
         return dateFormatter.string(from: date)
     }
+    
     static func imagePickerCamera(viewController:UIViewController){
         let imagePicker = UIImagePickerController()
-        
         imagePicker.delegate = viewController as? UIImagePickerControllerDelegate & UINavigationControllerDelegate
-        
         imagePicker.allowsEditing = true
         if UIImagePickerController.isSourceTypeAvailable(.camera){
-            
             imagePicker.sourceType = .camera
-            
             viewController.present(imagePicker, animated: true, completion: {
-                
                 imagePicker.delegate = viewController as? UIImagePickerControllerDelegate & UINavigationControllerDelegate
-                
             })
-            
         }
-        
         else {
-            
             CommonUtils.showError(.warning, "Camera not found")
-            
         }
     }
+    
     static func imagePickerGallery(viewController:UIViewController){
         let imagePicker = UIImagePickerController()
         
@@ -420,17 +404,11 @@ class CommonUtils {
         let actionSheet = UIAlertController(title: "Photo Source ", message: "Choose a source", preferredStyle: .actionSheet)
         
         actionSheet.addAction(UIAlertAction(title: "Camera", style: .default, handler: {(action :UIAlertAction) in
-            
             if UIImagePickerController.isSourceTypeAvailable(.camera){
-                
                 imagePicker.sourceType = .camera
-                
                 viewController.present(imagePicker, animated: true, completion: {
-                    
                     imagePicker.delegate = viewController as? UIImagePickerControllerDelegate & UINavigationControllerDelegate
-                    
                 })
-                
             }
             
             else {
@@ -440,51 +418,34 @@ class CommonUtils {
         }))
         
         actionSheet.addAction(UIAlertAction(title: "Photo Library", style: .default, handler: {(action :UIAlertAction) in imagePicker.sourceType = .photoLibrary
-            
             viewController.present(imagePicker, animated: true, completion: {
-                
                 imagePicker.delegate = viewController as? UIImagePickerControllerDelegate & UINavigationControllerDelegate
-                
             })
             
         }))
         
-        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler:
-                                                
-                                                nil))
-        
+        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler:nil))
         viewController.present(actionSheet, animated: true, completion: nil )
-        
     }
-    
     
     //function for opening camera
     
     static func openCamera(viewController:UIViewController){
         
         let imagePicker = UIImagePickerController()
-        
         imagePicker.delegate = viewController as? UIImagePickerControllerDelegate & UINavigationControllerDelegate
         
         // imagePicker.allowsEditing = true
         
-        
         if UIImagePickerController.isSourceTypeAvailable(.camera){
-            
             imagePicker.sourceType = .camera
-            
             viewController.present(imagePicker, animated: true, completion: {
-                
                 imagePicker.delegate = viewController as? UIImagePickerControllerDelegate & UINavigationControllerDelegate
-                
             })
-            
         }
         
         else {
-            
             CommonUtils.showError(.error, "Camera not found")
-            
         }
         
     }
@@ -507,7 +468,6 @@ class CommonUtils {
         return docsDir
     }
     
-    
     class func saveFileToDocumentDirectory(url: URL?, fileName: String, completionHandler: @escaping (Bool?) -> ()){
         
         if url != nil {
@@ -528,7 +488,6 @@ class CommonUtils {
         }else {
             completionHandler(false)
         }
-        
     }
     
     class func moveFileFrom(sourcePath: URL?, destinationPath: URL?) {
@@ -638,12 +597,4 @@ class CommonUtils {
         }
         return 0
     }
-    
 }
-
-
-
-
-
-
-
