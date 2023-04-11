@@ -281,7 +281,8 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
         self.heightAddMoreDocument.constant = self.docarray.count != 0 ? 60 : 0
         
         self.btnCreate_UpdateOpp.setTitle("Update opportunity", for: .normal)
-        self.lblSubCategory.text = self.userTimeLineoppdetails?.subcategory_name
+        self.lblSubCategory.text = self.userTimeLineoppdetails?.sub_category_name
+        print("lblSubCategory=-=-\( self.lblSubCategory.text)")
         self.txtFieldTitle.text = self.userTimeLineoppdetails?.title
         // self.lblState.text = self.userTimeLineoppdetails?.opp_state
         // self.lblLocality.text = self.userTimeLineoppdetails?.opp_locality
@@ -1679,8 +1680,8 @@ extension RockPitOpportunityVC{
     func setuplanguage(){
         lblSelectImages.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Select images", comment: "")
         lblSelectdocuments.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Select documents", comment: "")
-        lblSubCategory.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Select subcategory", comment: "")
-        
+//        lblSubCategory.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Select subcategory", comment: "")
+//        print(" lblSubCategorsetuplang=-=-\(lblSubCategory.text)")
         lblState.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "State", comment: "")
         lblLocality.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Locality", comment: "")
         

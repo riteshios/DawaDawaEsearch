@@ -351,12 +351,12 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                         let share_link = String.getString(sharelink)
                         UIPasteboard.general.string = share_link
                         print("share_link\(share_link)")
-//                        if kSharedUserDefaults.getlanguage() as? String == "en"{
-//                            CommonUtils.showError(.info, String.getString("Link Copied"))
-//                        }
-//                        else{
-//                            CommonUtils.showError(.info, String.getString("تم نسخ الرابط"))
-//                        }
+                        //                        if kSharedUserDefaults.getlanguage() as? String == "en"{
+                        //                            CommonUtils.showError(.info, String.getString("Link Copied"))
+                        //                        }
+                        //                        else{
+                        //                            CommonUtils.showError(.info, String.getString("تم نسخ الرابط"))
+                        //                        }
                     }
                     
                 }
@@ -456,6 +456,7 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                         self.navigationController?.pushViewController(vc, animated: true)
                         self.dismiss(animated: true)
                     }
+                    
                 }
                 if txt == "CopyLink"{
                     if UserData.shared.isskiplogin == true{
@@ -465,18 +466,17 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                         else{
                             self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
                         }
-                        
                     }
                     else{
                         let share_link = String.getString(sharelink)
                         UIPasteboard.general.string = share_link
                         print("share_link\(share_link)")
-//                        if kSharedUserDefaults.getlanguage() as? String == "en"{
-//                            CommonUtils.showError(.info, String.getString("Link Copied"))
-//                        }
-//                        else{
-//                            CommonUtils.showError(.info, String.getString("تم نسخ الرابط"))
-//                        }
+                        //                        if kSharedUserDefaults.getlanguage() as? String == "en"{
+                        //                            CommonUtils.showError(.info, String.getString("Link Copied"))
+                        //                        }
+                        //                        else{
+                        //                            CommonUtils.showError(.info, String.getString("تم نسخ الرابط"))
+                        //                        }
                     }
                 }
                 
@@ -490,7 +490,7 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                         }
                     }
                     else{
-                        let oppid = Int.getInt(user_id)
+                        let oppid = Int.getInt(opppreid)
                         self.markinterestedapi(oppr_id: oppid)
                         self.dismiss(animated: true)
                     }
@@ -510,7 +510,7 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                             let vc = self.storyboard?.instantiateViewController(withIdentifier: FlagPostPopUPVC.getStoryboardID()) as! FlagPostPopUPVC
                             vc.modalTransitionStyle = .crossDissolve
                             vc.modalPresentationStyle = .overCurrentContext
-                            let oppid = Int.getInt(user_id)
+                            let oppid = Int.getInt(opppreid)
                             vc.oppid = oppid
                             
                             vc.callbackClosure = {
@@ -537,7 +537,7 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                             let vc = self.storyboard?.instantiateViewController(withIdentifier: ReportUserPopUpVC.getStoryboardID()) as! ReportUserPopUpVC
                             vc.modalTransitionStyle = .crossDissolve
                             vc.modalPresentationStyle = .overCurrentContext
-                            let userid = Int.getInt(user_id)
+                            let userid = Int.getInt(opppreid)
                             vc.userid = userid
                             self.present(vc, animated: false)
                         }
@@ -554,7 +554,7 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                         }
                     }
                     else{
-                        let oppid = Int.getInt(user_id)
+                        let oppid = Int.getInt(opppreid)
                         debugPrint("detailsppid=-=-=",oppid)
                         let vc = self.storyboard?.instantiateViewController(withIdentifier: DetailScreenVC.getStoryboardID()) as! DetailScreenVC
                         
@@ -576,7 +576,6 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
         else{
             self.getallopportunity()
         }
-        
     }
     
     @objc func buttonTappedFilter(_ sender:UIButton){
@@ -1031,6 +1030,7 @@ extension HomeVC{
                         print("count=-==\(count)")
                         
                         self.lblCountNotification.text = count
+                        
                         //  self.imgNotification.isHidden = false
                         //  CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         

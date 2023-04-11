@@ -138,8 +138,8 @@ class ForgotPasswordVC: UIViewController {
         self.view.endEditing(true)
         self.forgotpasswordapi()
     }
-    
 }
+
 // MARK: - Textfield Delegate -
 
 extension ForgotPasswordVC{
@@ -179,16 +179,14 @@ extension ForgotPasswordVC : SKFlaotingTextFieldDelegate {
 
 extension ForgotPasswordVC{
     func forgotpasswordapi(){
-        
         CommonUtils.showHud(show: true)
         let accessToken = kSharedUserDefaults.getLoggedInAccessToken()
         
         let params:[String : Any] = [
             "email":String.getString(self.txtFieldPhone_Email.text),
         ]
-        
         TANetworkManager.sharedInstance.requestApi(withServiceName:ServiceName.kforgotpassword, requestMethod: .POST,requestParameters:params, withProgressHUD: false)
-        
+
         {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
             
             CommonUtils.showHudWithNoInteraction(show: false)
@@ -232,10 +230,16 @@ extension ForgotPasswordVC{
                         self?.present(vc, animated: false)
                     }
                     else if  Int.getInt(dictResult["status"]) == 400{
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        if kSharedUserDefaults.getlanguage() as? String == "en"{
+                            CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        }
+                        else{
+                            CommonUtils.showError(.info, String.getString("لا يمكننا العثور على مستخدم بعنوان البريد الإلكتروني هذا!"))
+                        }
+                       
                     }
                     else if Int.getInt(dictResult["status"]) == 401{
-                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //     CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                 default:
                     CommonUtils.showError(.info, String.getString(dictResult["message"]))
@@ -244,7 +248,7 @@ extension ForgotPasswordVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-                //                CommonUtils.showToastForDefaultError()
+                //      CommonUtils.showToastForDefaultError()
             }
         }
     }

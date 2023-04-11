@@ -1085,7 +1085,6 @@ extension FilterVC{
         }
     }
     
-    
     //   Api Service Type
     
     func getservicetypeapi(){
@@ -1098,7 +1097,6 @@ extension FilterVC{
                 kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
             }
         }
-        
         
         TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName: ServiceName.kgetSerivetype, requestMethod: .GET, requestParameters:[:], withProgressHUD: false) { (result:Any?, error:Error?, errorType:ErrorType?,statusCode:Int?) in
             CommonUtils.showHudWithNoInteraction(show: false)
@@ -1308,7 +1306,7 @@ extension FilterVC{
                     
                     else if  Int.getInt(dictResult["status"]) == 400{
                         self?.getfiltersubcatarr.removeAll()
-                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //      CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         DispatchQueue.main.async {
                             self?.tblViewOpportunitytype.reloadData()
                         }
@@ -1321,7 +1319,7 @@ extension FilterVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-                //                CommonUtils.showToastForDefaultError()
+                //     CommonUtils.showToastForDefaultError()
             }
         }
     }

@@ -389,10 +389,20 @@ class EditProfileVC: UIViewController {
     
     @IBAction func btnDropGender(_ sender: UIButton){
         let dataSource1 = ["Male","Female"]
-        kSharedAppDelegate?.dropDown(dataSource:dataSource1 , text: btnDropGender)
-        {(Index ,item) in
-            self.lblGender.text = item
+        let dataSource2 = ["ذكر","أنثى"]
+        if kSharedUserDefaults.getlanguage() as? String == "en"{
+            kSharedAppDelegate?.dropDown(dataSource:dataSource1 , text: btnDropGender)
+            {(Index ,item) in
+                self.lblGender.text = item
+            }
         }
+        else{
+            kSharedAppDelegate?.dropDown(dataSource:dataSource2 , text: btnDropGender)
+            {(Index ,item) in
+                self.lblGender.text = item
+            }
+        }
+        
     }
     
 }

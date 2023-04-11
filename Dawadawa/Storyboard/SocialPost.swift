@@ -16,7 +16,7 @@ class SocialPostData {
     var oppr_type:String?
     var category_id:Int?
     var business_name:String?
-    var subcategory_name:String?
+    var sub_category_name:String?
     var services_type:String?
     var business_mining_type:String?
     var business_mining_block:String?
@@ -58,7 +58,7 @@ class SocialPostData {
         self.oppr_type = String.getString(data["oppr_type"])
         self.category_id = Int.getInt(data["category_id"])
         self.business_name = String.getString(data["business_name"])
-        self.subcategory_name = String.getString(data["subcategory_name"])
+        self.sub_category_name = String.getString(data["sub_category_name"])
         self.services_type = String.getString(data["services_type"])
         self.business_mining_type = String.getString(data["business_mining_type"])
         self.business_mining_block = String.getString(data["business_mining_block"])

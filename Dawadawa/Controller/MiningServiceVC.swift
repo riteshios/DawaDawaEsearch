@@ -295,7 +295,7 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
         self.hieghtViewMoreDoc.constant = self.docarray.count != 0 ? 60 : 0
         
         self.btnCreate_UpdateOpp.setTitle("Update opportunity", for: .normal)
-        self.lblSubCategory.text = self.userTimeLineoppdetails?.subcategory_name
+        self.lblSubCategory.text = self.userTimeLineoppdetails?.sub_category_name
         self.txtFieldTitle.text = self.userTimeLineoppdetails?.title
         self.txtFieldBusinessName.text = self.userTimeLineoppdetails?.business_name
         self.lblBusinesstype.text = self.userTimeLineoppdetails?.business_mining_type

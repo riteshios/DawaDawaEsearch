@@ -264,7 +264,7 @@ extension ViewAllSavedVC:UITableViewDelegate,UITableViewDataSource{
                         }
                     }
                     else{
-                        let oppid = Int.getInt(user_id)
+                        let oppid = Int.getInt(opppreid)
                         self.markinterestedapi(oppr_id: oppid)
                         self.dismiss(animated: true)
                     }
@@ -284,7 +284,7 @@ extension ViewAllSavedVC:UITableViewDelegate,UITableViewDataSource{
                             let vc = self.storyboard?.instantiateViewController(withIdentifier: FlagPostPopUPVC.getStoryboardID()) as! FlagPostPopUPVC
                             vc.modalTransitionStyle = .crossDissolve
                             vc.modalPresentationStyle = .overCurrentContext
-                            let oppid = Int.getInt(user_id)
+                            let oppid = Int.getInt(opppreid)
                             vc.oppid = oppid
                             
                             vc.callbackClosure = {
@@ -311,7 +311,7 @@ extension ViewAllSavedVC:UITableViewDelegate,UITableViewDataSource{
                             let vc = self.storyboard?.instantiateViewController(withIdentifier: ReportUserPopUpVC.getStoryboardID()) as! ReportUserPopUpVC
                             vc.modalTransitionStyle = .crossDissolve
                             vc.modalPresentationStyle = .overCurrentContext
-                            let userid = Int.getInt(user_id)
+                            let userid = Int.getInt(opppreid)
                             vc.userid = userid
                             self.present(vc, animated: false)
                         }
@@ -328,7 +328,7 @@ extension ViewAllSavedVC:UITableViewDelegate,UITableViewDataSource{
                         }
                     }
                     else{
-                        let oppid = Int.getInt(user_id)
+                        let oppid = Int.getInt(opppreid)
                         debugPrint("detailsppid=-=-=",oppid)
                         let vc = self.storyboard?.instantiateViewController(withIdentifier: DetailScreenVC.getStoryboardID()) as! DetailScreenVC
                         

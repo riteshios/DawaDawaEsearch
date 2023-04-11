@@ -270,7 +270,7 @@ class TrailingOpportunityVC: UIViewController,UICollectionViewDelegate,UICollect
         self.heightViewMoreDoc.constant = self.docarray.count != 0 ? 60 : 0
         
         self.btnCreate_UpdateOpp.setTitle("Update opportunity", for: .normal)
-        self.lblSubCategory.text = self.userTimeLineoppdetails?.subcategory_name
+        self.lblSubCategory.text = self.userTimeLineoppdetails?.sub_category_name
         self.txtFieldTitle.text = self.userTimeLineoppdetails?.title
         //        self.lblState.text = self.userTimeLineoppdetails?.opp_state
         //        self.lblLocality.text = self.userTimeLineoppdetails?.opp_locality

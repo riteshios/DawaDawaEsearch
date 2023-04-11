@@ -254,7 +254,7 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
             }
             cell.lblCategoryName.text = String.getString(self.userTimeLine?.category_name)
             cell.lblCategory.text = String.getString(self.userTimeLine?.category_name)
-            cell.lblSub_category.text = String.getString(self.userTimeLine?.subcategory_name)
+            cell.lblSub_category.text = String.getString(self.userTimeLine?.sub_category_name)
             
             if UserData.shared.id == self.userTimeLine?.user_id{
 //                cell.btnChat.isHidden = true

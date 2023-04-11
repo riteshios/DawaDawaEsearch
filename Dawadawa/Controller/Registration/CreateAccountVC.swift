@@ -140,12 +140,22 @@ class CreateAccountVC: UIViewController {
     
     @IBAction func btnDropSelectUserType(_ sender: UIButton){
         let dataSource1 = ["Investor","Business Owner","Service Provider"]
-        kSharedAppDelegate?.dropDown(dataSource:dataSource1 , text: btnDropUserType)
-        {(Index ,item) in
-            self.lblUserType.text = item
-            self.usertype = Index
-            debugPrint("usertpe=-=-=",self.usertype)
+        let dataSource2 = ["المستثمر","صاحب العمل","مقدم الخدمة"]
+        if kSharedUserDefaults.getlanguage() as? String == "en"{
+            kSharedAppDelegate?.dropDown(dataSource:dataSource1 , text: btnDropUserType)
+            {(Index ,item) in
+                self.lblUserType.text = item
+                self.usertype = Index
+            }
         }
+        else{
+            kSharedAppDelegate?.dropDown(dataSource:dataSource2 , text: btnDropUserType)
+            {(Index ,item) in
+                self.lblUserType.text = item
+                self.usertype = Index
+            }
+        }
+       
     }
     
     @IBAction func btnSecurePasswordTapped(_ sender: UIButton) {

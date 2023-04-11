@@ -108,16 +108,16 @@ class GlobalApi: NSObject{
                             kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
                         }
                         completion(String.getString(dictResult["count"]),Int.getInt(dictResult["status"]))
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                     else if  Int.getInt(dictResult["status"]) == 400{
                         completion(String.getString(dictResult["count"]), Int.getInt(dictResult["status"]))
                         if kSharedUserDefaults.getlanguage() as? String == "en"{
-                            CommonUtils.showError(.info, String.getString("This Opportunity is unlike by You"))
+//                            CommonUtils.showError(.info, String.getString("This Opportunity is unlike by You"))
                         }
                         else{
-                            CommonUtils.showError(.info, String.getString("هذه الفرصة تختلف عنك"))
+//                            CommonUtils.showError(.info, String.getString("هذه الفرصة تختلف عنك"))
                         }
                         
                         //    CommonUtils.showError(.info, String.getString(dictResult["message"]))
@@ -236,14 +236,14 @@ class GlobalApi: NSObject{
                         if septoken[0] == "Bearer"{
                             kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
                         }
-                        completion(Int.getInt(dictResult["responsecode"]))
+//                        completion(Int.getInt(dictResult["responsecode"]))
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                     else if  Int.getInt(dictResult["responsecode"]) == 400{
                         completion(Int.getInt(dictResult["responsecode"]))
                         // CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                 default:

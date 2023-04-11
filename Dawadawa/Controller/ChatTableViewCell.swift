@@ -1,6 +1,5 @@
 //  ChatTableViewCell.swift
 //  Dawadawa
-
 //  Created by Ritesh Gupta on 01/11/22.
 
 
@@ -40,19 +39,16 @@ class ChatTableViewCell: UITableViewCell {
             lblNameSender.text = "You"
             ViewReciver.isHidden = true
             ViewSender.isHidden = false
-//            heightCustomerView.constant = 0
+//          heightCustomerView.constant = 0
             
         }else{
             lblStatusReceiver.text = date
-//            lblNameReceiver.text = user
+//          lblNameReceiver.text = user
             lblMessageReceiver.text = message
             ViewReciver.isHidden = false
             ViewSender.isHidden = true
-//            heightUserView.constant = 0
+//          heightUserView.constant = 0
           
         }
-        
     }
-
-    
 }

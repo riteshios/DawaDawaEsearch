@@ -67,7 +67,6 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         switch indexPath.section{
         case 0:
             let cell = self.tblViewPremiumOpp.dequeueReusableCell(withIdentifier: "PremiumTableViewCell") as! PremiumTableViewCell
@@ -306,7 +305,7 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
                         }
                     }
                     else{
-                        let oppid = Int.getInt(user_id)
+                        let oppid = Int.getInt(opppreid)
                         self.markinterestedapi(oppr_id: oppid)
                         self.dismiss(animated: true)
                     }
@@ -326,7 +325,7 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
                             let vc = self.storyboard?.instantiateViewController(withIdentifier: FlagPostPopUPVC.getStoryboardID()) as! FlagPostPopUPVC
                             vc.modalTransitionStyle = .crossDissolve
                             vc.modalPresentationStyle = .overCurrentContext
-                            let oppid = Int.getInt(user_id)
+                            let oppid = Int.getInt(opppreid)
                             vc.oppid = oppid
                             
                             vc.callbackClosure = {
@@ -353,7 +352,7 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
                             let vc = self.storyboard?.instantiateViewController(withIdentifier: ReportUserPopUpVC.getStoryboardID()) as! ReportUserPopUpVC
                             vc.modalTransitionStyle = .crossDissolve
                             vc.modalPresentationStyle = .overCurrentContext
-                            let userid = Int.getInt(user_id)
+                            let userid = Int.getInt(opppreid)
                             vc.userid = userid
                             self.present(vc, animated: false)
                         }
@@ -370,7 +369,7 @@ extension PremiumOpportunitiesVC:UITableViewDelegate,UITableViewDataSource{
                         }
                     }
                     else{
-                        let oppid = Int.getInt(user_id)
+                        let oppid = Int.getInt(opppreid)
                         debugPrint("detailsppid=-=-=",oppid)
                         let vc = self.storyboard?.instantiateViewController(withIdentifier: DetailScreenVC.getStoryboardID()) as! DetailScreenVC
                         
@@ -513,7 +512,6 @@ extension PremiumOpportunitiesVC{
     func markinterestedapi(oppr_id:Int){
         CommonUtils.showHud(show: true)
         
-        
         if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
             let endToken = kSharedUserDefaults.getLoggedInAccessToken()
             let septoken = endToken.components(separatedBy: " ")
@@ -522,7 +520,6 @@ extension PremiumOpportunitiesVC{
                 kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
             }
         }
-        
         
         let params:[String : Any] = [
             "user_id":Int.getInt(UserData.shared.id),
@@ -555,7 +552,7 @@ extension PremiumOpportunitiesVC{
                     
                     else if  Int.getInt(dictResult["status"]) == 201{
                         //  CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                        //                            CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //  CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                 default:
@@ -565,7 +562,7 @@ extension PremiumOpportunitiesVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-                //                    CommonUtils.showToastForDefaultError()
+                //   CommonUtils.showToastForDefaultError()
             }
         }
     }
