@@ -42,7 +42,7 @@ class EnterEmailVC: UIViewController {
     }
     
     
-    //    MARK: - Life Cycle
+    //    MARK: - Life Cycle -
     
     func setup(){
         self.viewContinue.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
@@ -66,14 +66,23 @@ class EnterEmailVC: UIViewController {
         
         if String.getString(self.txtfldEmail.text).isEmpty
         {
-            showSimpleAlert(message: Notifications.kEnterEmail)
+            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                showSimpleAlert(message: Notifications.kEnterEmail)
+            }
+            else{
+                showSimpleAlert(message: Notifications.karEnterEmail)
+            }
             return
         }
         else if !String.getString(txtfldEmail.text).isValidEmail()
         {
-            self.showSimpleAlert(message: Notifications.kEnterValidEmail)
+            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                self.showSimpleAlert(message: Notifications.kEnterValidEmail)
+            }
+            else{
+                self.showSimpleAlert(message: Notifications.karEnterValidEmail)
+            }
             return
-            
         }
         self.view.endEditing(true)
         self.checkemailapi()

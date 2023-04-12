@@ -24,7 +24,6 @@ class EnterPhoneNumberVC: UIViewController {
     var usertype = 0
     var email = ""
     
-    
     //    MARK:  -Life Cycle -
     
     override func viewDidLoad() {
@@ -33,7 +32,6 @@ class EnterPhoneNumberVC: UIViewController {
         self.setup()
         self.setuplanguage()
     }
-    
     
     override func viewWillLayoutSubviews() {
         if kSharedUserDefaults.getlanguage() as? String == "en"{
@@ -50,14 +48,14 @@ class EnterPhoneNumberVC: UIViewController {
         }
     }
     
-    //    MARK: - Life Cycle
+    //    MARK: - Life Cycle -
     
     func setup(){
         self.viewContinue.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
         self.setTextFieldUI(textField: txtfieldPhoneNumber, place: "Phone Number*", floatingText: "Phone Number")
     }
     
-    //    MARK: - @IBAction
+    //    MARK: - @IBAction -
     
     @IBAction func btnbackTapped(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
@@ -81,18 +79,30 @@ class EnterPhoneNumberVC: UIViewController {
         self.validation()
     }
     
-    // MARK: - Validation
+    // MARK: - Validation -
     
     func validation(){
         
         if String.getString(self.txtfieldPhoneNumber.text).isEmpty
         {
-            showSimpleAlert(message: Notifications.kEnterMobileNumber)
+            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                self.showSimpleAlert(message: Notifications.kEnterMobileNumber)
+            }
+            else{
+                self.showSimpleAlert(message: Notifications.karEnterMobbileNumber)
+            }
+            
             return
         }
         else if !String.getString(txtfieldPhoneNumber.text).isPhoneNumber()
         {
-            self.showSimpleAlert(message: Notifications.kEnterValidMobileNumber)
+            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                self.showSimpleAlert(message: Notifications.kEnterValidMobileNumber)
+            }
+            else{
+                self.showSimpleAlert(message: Notifications.karEnterValidMobileNumber)
+            }
+           
             return
             
         }
@@ -182,13 +192,13 @@ extension EnterPhoneNumberVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-                //                CommonUtils.showToastForDefaultError()
+                //   CommonUtils.showToastForDefaultError()
             }
         }
     }
 }
 
-// MARK: - Localisation
+// MARK: - Localisation -
 
 extension EnterPhoneNumberVC{
     func setuplanguage(){

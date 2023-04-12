@@ -55,10 +55,14 @@ class EnterPasswordVC: UIViewController, UITextFieldDelegate {
                 DispatchQueue.main.async {
                     self.txtFieldPassword.semanticContentAttribute = .forceLeftToRight
                     self.txtFieldPassword.textAlignment = .left
+                    self.txtFieldConfirmPassword.semanticContentAttribute = .forceLeftToRight
+                    self.txtFieldPassword.textAlignment = .left
                 }
 
             } else {
                 DispatchQueue.main.async {
+                    self.txtFieldPassword.semanticContentAttribute = .forceRightToLeft
+                    self.txtFieldPassword.textAlignment = .right
                     self.txtFieldConfirmPassword.semanticContentAttribute = .forceRightToLeft
                     self.txtFieldConfirmPassword.textAlignment = .right
                 }
@@ -119,25 +123,55 @@ class EnterPasswordVC: UIViewController, UITextFieldDelegate {
     
     func validation(){
         if String.getString(self.txtFieldPassword.text).isEmpty{
-          showSimpleAlert(message: Notifications.kPassword)
+            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                showSimpleAlert(message: Notifications.kPassword)
+            }
+            else{
+                showSimpleAlert(message: Notifications.karPassword)
+            }
+         
           return
       }
         else if !String.getString(txtFieldPassword.text).isValidPassword()
         {
-            self.showSimpleAlert(message: Notifications.kValidPassword)
+            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                self.showSimpleAlert(message: Notifications.kValidPassword)
+            }
+            else{
+                self.showSimpleAlert(message: Notifications.karValidPassword)
+            }
+            
             return
         }
         else if String.getString(txtFieldConfirmPassword.text).isEmpty {
-            self.showSimpleAlert(message: Notifications.kConfirmPassword)
+            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                self.showSimpleAlert(message: Notifications.kConfirmPassword)
+            }
+            else{
+                self.showSimpleAlert(message: Notifications.karConfirmPassword)
+            }
+           
             return
         }
         else if(txtFieldPassword.text != self.txtFieldConfirmPassword.text)
         {
-            self.showSimpleAlert(message: Notifications.kMatchPassword)
+            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                self.showSimpleAlert(message: Notifications.kMatchPassword)
+            }
+            else{
+                self.showSimpleAlert(message: Notifications.karMatchPassword)
+            }
+           
             return
         }
         else if self.isprivacypolicy == false{
-            self.showSimpleAlert(message: "Please Select T&C and Privacy Policy")
+            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                self.showSimpleAlert(message: "Please Select T&C and Privacy Policy")
+            }
+            else{
+                self.showSimpleAlert(message: "يرجى تحديد الشروط والأحكام وسياسة الخصوصية")
+            }
+           
             return
         }
         self.view.endEditing(true)

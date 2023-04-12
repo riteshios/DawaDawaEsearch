@@ -13,6 +13,8 @@ class EnterResidenceVC: UIViewController {
     @IBOutlet weak var labelState:UILabel!
     @IBOutlet weak var viewContinue: UIView!
     @IBOutlet weak var btnContinue: UIButton!
+    @IBOutlet weak var btnCountry: UIButton!
+    @IBOutlet weak var btnState: UIButton!
     
     var name = ""
     var lastame = ""
@@ -32,27 +34,31 @@ class EnterResidenceVC: UIViewController {
     
     
     override func viewWillLayoutSubviews() {
-            if kSharedUserDefaults.getlanguage() as? String == "en"{
-                DispatchQueue.main.async {
-                    self.txtfieldLocality.semanticContentAttribute = .forceLeftToRight
-                    self.txtfieldLocality.textAlignment = .left
-                }
-
-            } else {
-                DispatchQueue.main.async {
-                    self.txtfieldLocality.semanticContentAttribute = .forceRightToLeft
-                    self.txtfieldLocality.textAlignment = .right
-                }
+        if kSharedUserDefaults.getlanguage() as? String == "en"{
+            DispatchQueue.main.async {
+                self.btnCountry.semanticContentAttribute = .forceLeftToRight
+                self.btnState.semanticContentAttribute = .forceLeftToRight
+                self.txtfieldLocality.semanticContentAttribute = .forceLeftToRight
+                self.txtfieldLocality.textAlignment = .left
+            }
+            
+        } else {
+            DispatchQueue.main.async {
+                self.btnState.semanticContentAttribute = .forceRightToLeft
+                self.btnCountry.semanticContentAttribute = .forceRightToLeft
+                self.txtfieldLocality.semanticContentAttribute = .forceRightToLeft
+                self.txtfieldLocality.textAlignment = .right
             }
         }
+    }
     
-//    MARK: - Life Cycle
+    //    MARK: - Life Cycle -
     
     func setup(){
         self.viewContinue.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
     }
     
-    //    MARK: - @IBAction
+    //    MARK: - @IBAction -
     
     @IBAction func btnbackTapped(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
@@ -77,7 +83,13 @@ class EnterResidenceVC: UIViewController {
     
     @IBAction func buttonTappedState(_ sender:UIButton){
         if self.labelCountry.text == "Country"{
-            self.showSimpleAlert(message: "Please Select Country")
+            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                self.showSimpleAlert(message: "Please Select Country")
+            }
+            else{
+                self.showSimpleAlert(message: "يرجى تحديد الدولة")
+            }
+            
             return
         }else{
             
@@ -116,15 +128,32 @@ class EnterResidenceVC: UIViewController {
     func validation(){
         
         if self.labelCountry.text == "Country"{
-            self.showSimpleAlert(message: "Please Select Country")
+            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                self.showSimpleAlert(message: "Please Select Country")
+            }
+            else{
+                self.showSimpleAlert(message: "يرجى تحديد الدولة")
+            }
+            
             return
         }
         else if self.labelState.text == "State"{
-            self.showSimpleAlert(message: "Please Select State")
+            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                self.showSimpleAlert(message: "Please Select State")
+            }
+            else{
+                self.showSimpleAlert(message: "يرجى تحديد الولاية")
+            }
+            
             return
         }
         else if String.getString(self.txtfieldLocality.text).isEmpty{
-            self.showSimpleAlert(message: "Please Enter Locality")
+            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                self.showSimpleAlert(message: "Please Enter Locality")
+            }
+            else{
+                self.showSimpleAlert(message: "الرجاء إدخال المنطقة")
+            }
         }
         self.view.endEditing(true)
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "EnterPasswordVC") as! EnterPasswordVC
@@ -146,9 +175,7 @@ extension EnterResidenceVC{
         let url = "https://countriesnow.space/api/v0.1/countries/states"
         CommonUtils.showHudWithNoInteraction(show: true)
         TANetworkManager.sharedInstance.requestApi(withServiceName: url, requestMethod: .GET, requestParameters: [:], withProgressHUD: false) {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
-            
             CommonUtils.showHudWithNoInteraction(show: false)
-            
             if errorType == .requestSuccess {
                 
                 let dictResult = kSharedInstance.getDictionary(result)
@@ -165,7 +192,7 @@ extension EnterResidenceVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-//                CommonUtils.showToastForDefaultError()
+                //  CommonUtils.showToastForDefaultError()
             }
         }
     }

@@ -8,7 +8,7 @@ import IQKeyboardManagerSwift
 
 class HomeVC: UIViewController,UITabBarControllerDelegate,PremiumOppCollectionViewCellDelegate,NewSocialPostCVCDelegate{
     
-    //    MARK: - Properties -
+    //    MARK: - Properties -    
     @IBOutlet weak var tblViewViewPost: UITableView!
     
     
