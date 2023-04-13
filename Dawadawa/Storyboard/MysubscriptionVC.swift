@@ -52,6 +52,11 @@ class MysubscriptionVC: UIViewController {
         }
     }
     
+    @IBAction func btnChoosePlan(_ sender: UIButton){
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: BuyPlanVC.getStoryboardID()) as! BuyPlanVC
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
     @IBAction func btnBuyPlans(_ sender: UIButton) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: BuyPlanVC.getStoryboardID()) as! BuyPlanVC
         self.navigationController?.pushViewController(vc, animated: true)

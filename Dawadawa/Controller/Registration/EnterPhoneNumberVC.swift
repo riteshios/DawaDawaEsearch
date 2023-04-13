@@ -31,6 +31,7 @@ class EnterPhoneNumberVC: UIViewController {
         self.lblname.text = self.name
         self.setup()
         self.setuplanguage()
+        self.txtfieldPhoneNumber.keyBoardType = .numberPad
     }
     
     override func viewWillLayoutSubviews() {
@@ -104,9 +105,7 @@ class EnterPhoneNumberVC: UIViewController {
             }
            
             return
-            
         }
-        
         self.view.endEditing(true)
         self.checkphonenumberapi()
     }

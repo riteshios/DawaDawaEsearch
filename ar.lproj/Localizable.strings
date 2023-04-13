@@ -4,7 +4,7 @@
   Created by Ritesh Gupta on 15/06/22.
 
 */
-// MARK: - CreateAccountVC
+// MARK: - CreateAccountVC -
 
 "Create account" = "إصنع حساب";
 "Google" = "جوجل";
@@ -26,7 +26,7 @@
 "Login" = "تسجيل الدخول";
 "Skip registration" = "تخطي تسجيل";
 
-// MARK: - WelcomeScreenVC
+// MARK: - WelcomeScreenVC -
 
 "DawaDawa" = "الدعوة";
 "Login" = "تسجيل الدخول";
@@ -87,7 +87,16 @@
 "Skip login" = "تخطي تسجيل الدخول";
 "Don't have Account" = "ليس لديك حساب";
 
-// MARK: - ForgotPasswordVC
+// MARK: - LoginSubscriptionPlanVC -
+
+"Welcome To DawaDawa" = "مرحبا بكم في دواداوا";
+"To Visit and run the DawaDawa App You Should Take Subscription plan. These Details are Under Help Section To Take the Plan Click on Buy Subscription Button" = "لزيارة وتشغيل تطبيق DawaDawa ، يجب أن تأخذ خطة الاشتراك. هذه التفاصيل موجودة في قسم المساعدة للحصول على الخطة ، انقر فوق زر شراء الاشتراك";
+"Help" = "يساعد";
+"Logout" = "تسجيل خروج";
+"Buy plans" = "خطط الشراء";
+"Skip for now" = "تخطي في الوقت الراهن";
+
+// MARK: - ForgotPasswordVC -
 
 "Provide your registered email address or phone number to reset your password " = "أدخل عنوان بريدك الإلكتروني المسجل أو رقم هاتفك لإعادة تعيين كلمة المرور الخاصة بك";
 "Send on email address" = "أرسل على عنوان البريد الإلكتروني";
@@ -97,7 +106,7 @@
 "Phone number" = "رقم الهاتف";
 "Phone number / Email Address" = "رقم الهاتف / عنوان البريد الإلكتروني";
 
-// MARK: - ResetPasswordVC
+// MARK: - ResetPasswordVC -
 
 "Reset Password" = "إعادة تعيين كلمة المرور";
 "Enter a new password for your account" = "أدخل كلمة مرور جديدة لحسابك";
@@ -105,7 +114,7 @@
 "Confirm password" = "تأكيد كلمة المرور";
 
 
-// MARK: - ActivationCodeVC
+// MARK: - ActivationCodeVC -
 
 "Activate account" = "تفعيل حساب";
 "An account activation code has been sent to your email address and phone number" = "تم إرسال رمز تفعيل الحساب إلى عنوان بريدك الإلكتروني ورقم هاتفك";
@@ -115,7 +124,7 @@
 "Resend code" = "أعد إرسال الرمز";
 "Wrong code" = "دبليو";
 
-// MARK: - ActivatedSuccessfullyPopUpVC
+// MARK: - ActivatedSuccessfullyPopUpVC -
 
 "Account activated successfully" = "تم تفعيل الحساب بنجاح";
 "Your account activated successfully, now you can explore all the exclusive opportunities" = "تم تفعيل حسابك بنجاح ، يمكنك الآن استكشاف جميع الفرص الحصرية";
@@ -126,7 +135,7 @@
 
 
 
-// MARK: - MoreVC
+// MARK: - MoreVC -
 
 "Settings" = "ضبط";
 "Edit Profile" = "تعديل الملف الشخصي";
@@ -136,13 +145,14 @@
 "Contact Us" = "اتصل بنا";
 "Logout" = "تسجيل خروج";
 
-// MARK: - LogOutVC
+// MARK: - LogOutVC  -
 
 "Logout" = "تسجيل خروج";
 "Do you really want to log out?" = "هل تريد حقًا تسجيل الخروج؟";
 "Cancel" = "يلغي";
 
-// MARK: - SettingVC
+// MARK: - SettingVC -
+
 "Settings" = "إعدادات";
 "About Us" = "معلومات عنا";
 "Subscriptions" = "الاشتراكات";
@@ -150,7 +160,7 @@
 "Privacy Policy" = "سياسة الخصوصية";
 "FAQ’s" = "الأسئلة الشائعة";
 
-// MARK: - FilterVC
+// MARK: - FilterVC -
 
 "Filter" = "منقي";
 "Likes" = "الإعجابات";
@@ -183,26 +193,26 @@
 "Reset" = "إعادة ضبط";
 "Apply Filter" = "تطبيق عامل التصفية";
 
-// MARK: - RateOpportunityPopUPVC
+// MARK: - RateOpportunityPopUPVC -
 
 "Rating" = "تقييم";
 "Submit" = "يُقدِّم";
 
-// MARk: - UserProfileDetailsVC
+// MARk: - UserProfileDetailsVC -
 
 "User Profile" = "ملف تعريفي للمستخدم";
 "About" = "حول";
 "Rate user" = "قيم المستخدم";
 "Chat with user" = "الدردشة مع المستخدم";
 
-// MARK: - HomeSocialMoreSelfVC
+// MARK: - HomeSocialMoreSelfVC -
 
 "Update" = "تحديث";
 "Close" = "قريب";
 "Copy Link" = "انسخ الرابط";
 "View Details" = "عرض التفاصيل";
 
-// MARK: - HomeSocialMoreVC
+// MARK: - HomeSocialMoreVC -
 
 "Chat with user" = "الدردشة مع المستخدم";
 "Copy Link" = "انسخ الرابط";
@@ -211,67 +221,67 @@
 "Report User" = "أبلغ عن مستخدم";
 "View Details" = "عرض التفاصيل";
 
-// MARK: - FlagPostPopUPVC
+// MARK: - FlagPostPopUPVC -
 
 "Reason to flag" = "سبب العلم";
 "Report" = "تقرير";
 
-// MARK: - ReportUserPopUpVC
+// MARK: - ReportUserPopUpVC -
 
 "Report User" = "أبلغ عن مستخدم";
 
-// MARK: - DeleteOpportunityPopUPVC
+// MARK: - DeleteOpportunityPopUPVC -
 
 "Delete Opportunity" = "احذف الفرصة";
 "Do you really want to delete this opportunity?" = "هل تريد حقًا حذف هذه الفرصة؟";
 "Cancel" = "يلغي";
 "Delete" = "حذف";
 
-// MARK: - ClosePopUpVC
+// MARK: - ClosePopUpVC -
 
 "Close Opportunity" = "فرصة قريبة";
 "Do you really want to close this opportunity?" = "هل تريد حقًا إغلاق هذه الفرصة؟";
 
-// MARK: - PremiumOpportunitiesVC
+// MARK: - PremiumOpportunitiesVC -
 
 "Premium Opportunities" = "فرص مميزة";
 
-// MARK: - HomeVC
+// MARK: - HomeVC -
 
 "Hello," = "مرحبًا,";
 "Search Opportunities" = "فرص البحث";
 
-// MARK: - SearchVC
+// MARK: - SearchVC -
 
 "Search opportunities" = "فرص البحث";
 
-// MARK: - CurrentLocationVC
+// MARK: - CurrentLocationVC -
 
 "Current Location" = "الموقع الحالي";
 "Use this location" = "استخدم هذا الموقع";
 
-// MARK: - BuyPlanVC
+// MARK: - BuyPlanVC -
 
 "Investor" = "المستثمر";
 "Business Owner" = "صاحب العمل";
 "Service Provider"= "مقدم الخدمة";
 "Choose this plan"="اختر هذه الخطة";
 
-// MARK: - ChoosePlanVC
+// MARK: - ChoosePlanVC -
 
 "Choose plan" = "اختر الخطة";
 
-// MARK: - PaymentVC
+// MARK: - PaymentVC -
 
 "Pay" = "يدفع";
 
-// MARK: - NumberChangedSuccessfulPopUpVC
+// MARK: - NumberChangedSuccessfulPopUpVC -
 
 "Number changed successfully"="تم تغيير الرقم بنجاح";
 "Your mobile number changed successfully"="تم تغيير رقم هاتفك المحمول بنجاح";
 "Close"="قريب";
 
-// MARK: - ChangePasswordOTPVerifyVC
+// MARK: - ChangePasswordOTPVerifyVC -
 
 "Verify Account" = "التحقق من الحساب";
 "Password change code is sent on your email address" = "يتم إرسال رمز تغيير كلمة المرور على عنوان بريدك الإلكتروني";
@@ -279,20 +289,20 @@
 "Resend code" = "أعد إرسال الرمز";
 "Verify" = "يؤكد";
 
-// MARK: - ChangePasswordVC
+// MARK: - ChangePasswordVC -
 
 "Change Password" = "غير كلمة السر";
 "Enter new password for your account" = "أدخل كلمة مرور جديدة لحسابك";
 "New password" = "كلمة السر الجديدة";
 "Confirm password" = "تأكيد كلمة المرور";
 
-// MARK: - PasswordChangedSuccessfullyPopUpVC
+// MARK: - PasswordChangedSuccessfullyPopUpVC -
 
 "Password changed successfully" = "تم تغيير الرقم السري بنجاح";
 "Your password changed successfully, now you can loggin to your account" = "تم تغيير كلمة المرور الخاصة بك بنجاح ، يمكنك الآن تسجيل الدخول إلى حسابك";
 "Close" = "قريب";
 
-// MARK: - VerifyEmailOTPVC
+// MARK: - VerifyEmailOTPVC -
 
 "Verify it’s you" = "إثبات هويتك";
 "Phone number verification code is sent on your email" = "يتم إرسال رمز التحقق من رقم الهاتف على بريدك الإلكتروني";
@@ -300,27 +310,27 @@
 "Resend code" = "أعد إرسال الرمز";
 "Verify" = "يؤكد";
 
-// MARK: - ChangeEmailVC
+// MARK: - ChangeEmailVC -
 
 "Change Email" = "تغيير الايميل";
 "Enter new email address for your account" = "أدخل عنوان البريد الإلكتروني الجديد لحسابك";
 "Enter new email address" = "أدخل عنوان البريد الإلكتروني الجديد";
 "Send code" = "أرسل الرمز";
 
-// MARK: - VerifyNewEmailOTPVC
+// MARK: - VerifyNewEmailOTPVC -
 
 "Verify new email address" = "تحقق من عنوان البريد الإلكتروني الجديد";
 "Email verification code is sent on your email address" = "يتم إرسال رمز التحقق من البريد الإلكتروني على عنوان بريدك الإلكتروني";
 "Wrong code entered!" = "تم إدخال رمز خاطئ!";
 "Resend code" = "أعد إرسال الرمز";
 
-// MARK: - EmailChangedSuccessfullyPopUpVC
+// MARK: - EmailChangedSuccessfullyPopUpVC -
 
 "Email changed successfully" = "تم تغيير البريد الإلكتروني بنجاح";
 "Your email address changed successfully" = "تم تغيير عنوان بريدك الإلكتروني بنجاح";
 "Close" = "قريب";
 
-// MARK: - EditProfileVC
+// MARK: - EditProfileVC -
 
 "Edit profile" = "تعديل الملف الشخصي";
 "Phone number" = "رقم الهاتف";
@@ -336,7 +346,7 @@
 "WhatsApp number" = "رقم الواتس اب";
 "Save changes" = "احفظ التغييرات";
 
-// MARK: - ContactUsVC
+// MARK: - ContactUsVC -
 
 "Contact Us" = "اتصل بنا";
 "Do you have anything to say? Connect with us!" = "هل لديك شيء لتقوله؟ اتصل بنا!";
@@ -344,11 +354,11 @@
 "Message" = "رسالة";
 "Send" = "إرسال";
 
-// MARK: - SelectCategoryVC
+// MARK: - SelectCategoryVC -
 
 "Select Category" = "اختر الفئة";
 
-// MARK: - RockPitOpportunityVC
+// MARK: - RockPitOpportunityVC -
 
 "Select images" = "حدد الصور";
 "Select documents" = "حدد المستندات";
@@ -371,24 +381,24 @@
 "Business name" = "الاسم التجاري";
 "Business mining BLOCK" = "كتلة التعدين الأعمال";
 
-// MARK: - QuitVCViewController
+// MARK: - QuitVCViewController -
 
 "Quit" = "يترك";
 "Do you really want to quit now?" = "هل تريد حقًا الإقلاع عن التدخين الآن؟";
 "Cancel" = "يلغي";
 
-// MARK: - ProileSocialMoreVC
+// MARK: - ProileSocialMoreVC -
 
 "Copy link" = "انسخ الرابط";
 "Update" = "تحديث";
 "Delete" = "حذف";
 "Close" = "قريب";
 
-// MARK: - ViewAllSavedVC
+// MARK: - ViewAllSavedVC -
 
 "Saved" = "أنقذ";
 
-// MARK: - SaveOpportunityMoreVC
+// MARK: - SaveOpportunityMoreVC  -
 
 "Chat with user" = "الدردشة مع المستخدم";
 "Copy link" = "انسخ الرابط";
@@ -396,18 +406,18 @@
 "Report user" = "أبلغ عن مستخدم";
 "Removed from saved" = "تمت إزالته من المحفوظة";
 
-// MARK: - DetailScreenVC
+// MARK: - DetailScreenVC -
 
 "Detail Screen" = "شاشة التفاصيل";
 
-// MARK: - SavedOpportunitiesVC
+// MARK: - SavedOpportunitiesVC -
 
 "Saved/Interested opportunities" = "الفرص المحفوظة / المهتمة";
 "Saved" = "أنقذ";
 "Interested" = "يستفد";
 "View All" = "مشاهدة الكل";
 
-// MARK: - MysubscriptionVC
+// MARK: - MysubscriptionVC -
 
 "Subscription" = "الاشتراك";
 "No transaction history" = "لا يوجد سجل معاملات";
@@ -415,48 +425,48 @@
 "Buy Plans" = "خطط الشراء";
 "Choose Plan" = "اختر خطة";
 
-// MARK: - NotificationsVC
+// MARK: - NotificationsVC -
 
 "Notifications" = "إشعارات";
 "Mark all as read" = "اشر عليها بانها قرات";
 
-// MARK: - PaymentForFeatureandPremiumPopUPVC
+// MARK: - PaymentForFeatureandPremiumPopUPVC -
 
 "Payment" = "دفع";
 "Payment: - $" = "الدفع: - دولار";
 "Cancel" = "يلغي";
 "Proceed To Pay" = "المضي قدما في الدفع";
 
-// MARK: - PaymentforFeaturePremiumVC
+// MARK: - PaymentforFeaturePremiumVC -
 
 "Pay" = "يدفع";
 
-// MARK: - DeleteChatPopUPVC
+// MARK: - DeleteChatPopUPVC -
 
 "Delete Chat" = "حذف الدردشة";
 "Do you really want to delete this Chat?" = "هل تريد حقًا حذف هذه الدردشة؟";
 "Cancel" = "يلغي";
 "Delete" = "حذف";
 
-// MARK: - MyChatVC
+// MARK: - MyChatVC -
 
 "My Chat" = "الدردشة الخاصة بي";
 "Search Names" = "أسماء البحث";
 
-// MARK: - ViewAllInterestedVC
+// MARK: - ViewAllInterestedVC -
 
 "Interested" = "يستفد";
 
-// MARK: - FilterTVCell
+// MARK: - FilterTVCell -
 
 "Filters" = "المرشحات";
 "Clear" = "صافي";
-// MARK: - ViewPostTableViewCell
+// MARK: - ViewPostTableViewCell -
 
 "Premium opportunities" = "فرص متميزة";
 "View all" = "مشاهدة الكل";
 
-// MARK: - SocialPostTableViewCell
+// MARK: - SocialPostTableViewCell -
 
 "Like" = "مثل";
 "Comment" = "تعليق";
@@ -467,11 +477,11 @@
 "This opportunity has been closed" = "تم إغلاق هذه الفرصة";
 "Can we connect? I need service" = "هل يمكننا الاتصال؟ أحتاج خدمة";
 
-// MARK: - PopularSearchTableViewCell
+// MARK: - PopularSearchTableViewCell -
 
 "Popular searches" = "عمليات البحث الشعبية";
 
-// MARK: - OpportunitypostedTableViewCell
+// MARK: - OpportunitypostedTableViewCell -
 
 "All" = "الجميع";
 "Premium" = "الممتازة";

@@ -4355,6 +4355,12 @@ from the options below</string>
                     </view>
                     <size key="freeformSize" width="414" height="874"/>
                     <connections>
+                        <outlet property="btnBuyPlan" destination="lza-bK-b7E" id="P4K-fr-s4S"/>
+                        <outlet property="btnHelp" destination="spt-Jd-VIA" id="UTC-hJ-KPo"/>
+                        <outlet property="btnLogOut" destination="wzD-NZ-rTk" id="o8b-NX-87U"/>
+                        <outlet property="btnSkipNow" destination="wBI-o2-2eC" id="w4s-zi-bZb"/>
+                        <outlet property="lblHeading" destination="cgH-4u-fbA" id="CQc-zS-4WO"/>
+                        <outlet property="lblSubHeading" destination="Egi-Fk-kS0" id="H9k-TL-d4B"/>
                         <outlet property="viewSkipForNow" destination="69I-FD-bXF" id="k1g-mm-xOI"/>
                         <outlet property="viewbtn" destination="XMa-A0-w7D" id="Rzn-qe-zWd"/>
                     </connections>

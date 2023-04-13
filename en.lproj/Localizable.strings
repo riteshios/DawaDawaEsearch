@@ -5,7 +5,7 @@
   Created by Ritesh Gupta on 15/06/22.
 
 */
-// MARK: - CreateAccountVC
+// MARK: - CreateAccountVC -
 
 "Create account" = "Create account";
 "Google" = "Google";
@@ -27,7 +27,7 @@
 "Login" = "Login";
 "Skip registration" = "Skip registration";
 
-// MARK: - WelcomeScreenVC
+// MARK: - WelcomeScreenVC -
 
 "DawaDawa" = "DawaDawa";
 "Login" = "Login";
@@ -36,7 +36,7 @@
 "English-IND" = "English-IND";
 "Arabic" = "Arabic";
 
-// MARK: - EnterNameVC
+// MARK: - EnterNameVC -
 
 "Enter your first name and last name" = "Enter your first name and last name";
 "Please enter your legal name that will be associated with your account." = "Please enter your legal name that will be associated with your account.";
@@ -46,18 +46,18 @@
 "Continue" = "Continue";
 "Select user type" = "Select user type";
 
-// MARK: - EnterEmailVC
+// MARK: - EnterEmailVC -
 
 "Hello" = "Hello";
 "Please enter your email address that you would like to sign into DawaDawa." = "Please enter your email address that you would like to sign into DawaDawa.";
 "Email*" = "Email*";
 
-// MARK: - EnterPhoneNumberVC
+// MARK: - EnterPhoneNumberVC -
 
 "Please enter your phone number that you would like to sign into DawaDawa." = "Please enter your phone number that you would like to sign into DawaDawa.";
 "Phone Number*" = "Phone Number*";
 
-// MARK: - EnterResidenceVC
+// MARK: - EnterResidenceVC -
 
 "Let's get started with country of residence" = "Let's get started with country of residence";
 "Please choose your country of residence from the options below" = "Please choose your country of residence from the options below";
@@ -65,7 +65,7 @@
 "State" = "State";
 "Locality" = "Locality";
 
-// MARK: - EnterPasswordVC
+// MARK: - EnterPasswordVC -
 
 "Set up a password" = "Set up a password";
 "To allow you to sign in on multiple devices, you will need a password." = "To allow you to sign in on multiple devices, you will need a password.";
@@ -81,14 +81,24 @@
 "Privacy Policy" = "Privacy Policy";
 
 
-// MARK: - LoginVC
+// MARK: - LoginVC -
 
 "Forgot Password" = "Forgot Password?";
 "Phone number/Email*" = "Phone number/Email*";
 "Don't have an account?" = "Don't have an account?";
 "Skip login" = "Skip login";
 
-// MARK: - ForgotPasswordVC
+
+// MARK: - LoginSubscriptionPlanVC -
+
+"Welcome To DawaDawa" = "Welcome To DawaDawa";
+"To Visit and run the DawaDawa App You Should Take Subscription plan. These Details are Under Help Section To Take the Plan Click on Buy Subscription Button" = "To Visit and run the DawaDawa App You Should Take Subscription plan. These Details are Under Help Section To Take the Plan Click on Buy Subscription Button";
+"Help" = "Help";
+"Logout" = "Logout";
+"Buy plans" = "Buy plans";
+"Skip for now" = "Skip for now";
+
+// MARK: - ForgotPasswordVC -
 
 "Provide your registered email address or phone number to reset your password " = "Provide your registered email address or phone number to reset your password";
 "Send on email address" = "Send on email address";
@@ -98,7 +108,7 @@
 "Phone number" = "Phone number";
 "Phone number / Email Address" = "Phone number / Email Address";
 
-// MARK: - ResetPasswordVC
+// MARK: - ResetPasswordVC -
 
 "Reset Password" = "Reset Password";
 "Enter a new password for your account" = "Enter a new password for your account";
@@ -106,7 +116,7 @@
 "Confirm password" = "Confirm password";
 
 
-// MARK: - ActivationCodeVC
+// MARK: - ActivationCodeVC -
 
 "Activate account" = "Activate account";
 "An account activation code has been sent to your email address and phone number" = "An account activation code has been sent to your email address and phone number";
@@ -116,7 +126,7 @@
 "Resend code" = "Resend code";
 "Wrong code" = "Wrong code";
 
-// MARK: - ActivatedSuccessfullyPopUpVC
+// MARK: - ActivatedSuccessfullyPopUpVC -
 
 "Account activated successfully" = "Account activated successfully";
 "Your account activated successfully, now you can explore all the exclusive opportunities" = "Your account activated successfully, now you can explore all the exclusive opportunities";
@@ -125,7 +135,7 @@
 "Successfully reset your password, now you can login to your account" = "Successfully reset your password, now you can login to your account";
 "Close" = "Close";
 
-// MARK: - MoreVC
+// MARK: - MoreVC -
 
 "Settings" = "Settings";
 "Edit Profile" = "Edit Profile";
@@ -136,13 +146,13 @@
 "Logout" = "Logout";
 
 
-// MARK: - LogOutVC
+// MARK: - LogOutVC -
 
 "Logout" = "Logout";
 "Do you really want to log out?" = "Do you really want to log out?";
 "Cancel" = "Cancel";
 
-// MARK: - SettingVC
+// MARK: - SettingVC -
 
 "Settings" = "Settings";
 "About Us" = "About Us";
@@ -151,7 +161,7 @@
 "Privacy Policy" = "Privacy Policy";
 "FAQ’s" = "FAQ’s";
 
-// MARK: - FilterVC
+// MARK: - FilterVC -
 
 "Filter" = "Filter";
 "Likes" = "Likes";

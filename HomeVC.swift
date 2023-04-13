@@ -11,7 +11,6 @@ class HomeVC: UIViewController,UITabBarControllerDelegate,PremiumOppCollectionVi
     //    MARK: - Properties -    
     @IBOutlet weak var tblViewViewPost: UITableView!
     
-    
     var docUrl = ""
     var count = ""
     var statuslike:Int?
@@ -106,7 +105,6 @@ class HomeVC: UIViewController,UITabBarControllerDelegate,PremiumOppCollectionVi
     }
     
     func fetchdata(){
-        
         self.lblUserName.text = String.getString(UserData.shared.name) + " " + String.getString(UserData.shared.last_name)
         if let url = URL(string: "\("https://demo4app.com/dawadawa/public/admin_assets/user_profile/" + String.getString(UserData.shared.social_profile))"){
             debugPrint("url...",  url)

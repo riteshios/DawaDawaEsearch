@@ -1519,7 +1519,13 @@ extension MiningServiceVC{
                         
                     }
                     else if  Int.getInt(dictResult["status"]) == 400{
-                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        if kSharedUserDefaults.getlanguage() as? String == "en"{
+                            CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        }
+                        else{
+                            CommonUtils.showError(.info, String.getString("ليس لديك رصيد كاف لخلق فرصة!"))
+                        }
+                        
                     }
                     
                 default:
@@ -1611,8 +1617,14 @@ extension MiningServiceVC{
                         
                     }
                     else if  Int.getInt(dictResult["status"]) == 400{
-                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        if kSharedUserDefaults.getlanguage() as? String == "en"{
+                            CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        }
+                        else{
+                            CommonUtils.showError(.info, String.getString("ليس لديك رصيد كاف لخلق فرصة!"))
+                        }
                     }
+                    
                     
                 default:
                     CommonUtils.showError(.info, String.getString(dictResult["message"]))

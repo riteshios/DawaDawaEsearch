@@ -935,8 +935,8 @@ extension RockPitOpportunityVC{
                 }
             }
             else{
-               
-//                CommonUtils.showError(.error, String.getString(message))
+                
+                //                CommonUtils.showError(.error, String.getString(message))
             }
         }
     }
@@ -1345,7 +1345,13 @@ extension RockPitOpportunityVC{
                         }
                     }
                     else if  Int.getInt(dictResult["status"]) == 400{
-                        // CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        if kSharedUserDefaults.getlanguage() as? String == "en"{
+                            CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        }
+                        else{
+                            CommonUtils.showError(.info, String.getString("ليس لديك رصيد كاف لخلق فرصة!"))
+                        }
+                        
                     }
                     
                 default:
@@ -1436,7 +1442,12 @@ extension RockPitOpportunityVC{
                         
                     }
                     else if  Int.getInt(dictResult["status"]) == 401{
-                        //    CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        if kSharedUserDefaults.getlanguage() as? String == "en"{
+                            CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        }
+                        else{
+                            CommonUtils.showError(.info, String.getString("ليس لديك رصيد كاف لخلق فرصة!"))
+                        }
                     }
                     
                 default:
@@ -1680,8 +1691,8 @@ extension RockPitOpportunityVC{
     func setuplanguage(){
         lblSelectImages.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Select images", comment: "")
         lblSelectdocuments.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Select documents", comment: "")
-//        lblSubCategory.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Select subcategory", comment: "")
-//        print(" lblSubCategorsetuplang=-=-\(lblSubCategory.text)")
+        //        lblSubCategory.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Select subcategory", comment: "")
+        //        print(" lblSubCategorsetuplang=-=-\(lblSubCategory.text)")
         lblState.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "State", comment: "")
         lblLocality.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Locality", comment: "")
         

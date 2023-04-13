@@ -90,6 +90,51 @@ class EditProfileVC: UIViewController {
         }
     }
     
+    override func viewWillLayoutSubviews() {
+        if kSharedUserDefaults.getlanguage() as? String == "en"{
+            DispatchQueue.main.async {
+                self.txtfieldLocality.semanticContentAttribute = .forceLeftToRight
+                self.txtfieldLocality.textAlignment = .left
+                self.txtfieldEnterAbout.semanticContentAttribute = .forceLeftToRight
+                self.txtfieldEnterAbout.textAlignment = .left
+                self.txtFieldLastName.semanticContentAttribute = .forceLeftToRight
+                self.txtFieldLastName.textAlignment = .left
+                self.txtFieldFirstName.semanticContentAttribute = .forceLeftToRight
+                self.txtFieldFirstName.textAlignment = .left
+                self.txtFieldPhoneNumber.semanticContentAttribute = .forceLeftToRight
+                self.txtFieldPhoneNumber.textAlignment = .left
+                self.txtFieldEmailAddress.semanticContentAttribute = .forceLeftToRight
+                self.txtFieldEmailAddress.textAlignment = .left
+                self.txtFieldWhatsappNumber.semanticContentAttribute = .forceLeftToRight
+                self.txtFieldWhatsappNumber.textAlignment = .left
+                self.textfieldDATE.semanticContentAttribute = .forceLeftToRight
+                self.textfieldDATE.textAlignment = .left
+                print("English Changed")
+            }
+            
+        } else {
+            DispatchQueue.main.async {
+                self.txtfieldLocality.semanticContentAttribute = .forceRightToLeft
+                self.txtfieldLocality.textAlignment = .right
+                self.txtfieldEnterAbout.semanticContentAttribute = .forceRightToLeft
+                self.txtfieldEnterAbout.textAlignment = .right
+                self.txtFieldLastName.semanticContentAttribute = .forceRightToLeft
+                self.txtFieldLastName.textAlignment = .right
+                self.txtFieldFirstName.semanticContentAttribute = .forceRightToLeft
+                self.txtFieldFirstName.textAlignment = .right
+                self.txtFieldPhoneNumber.semanticContentAttribute = .forceRightToLeft
+                self.txtFieldPhoneNumber.textAlignment = .right
+                self.txtFieldEmailAddress.semanticContentAttribute = .forceRightToLeft
+                self.txtFieldEmailAddress.textAlignment = .right
+                self.txtFieldWhatsappNumber.semanticContentAttribute = .forceRightToLeft
+                self.txtFieldWhatsappNumber.textAlignment = .right
+                self.textfieldDATE.semanticContentAttribute = .forceRightToLeft
+                self.textfieldDATE.textAlignment = .right
+                print("Arabic Changed")
+            }
+        }
+    }
+    
     //    MARK: - Life Cycle
     
     func setup(){
@@ -120,7 +165,7 @@ class EditProfileVC: UIViewController {
         
         self.txtFieldPhoneNumber.delegate = self
         self.txtFieldEmailAddress.delegate = self
-        //        self.txtFieldDOB.delegate = self
+        //  self.txtFieldDOB.delegate = self
         self.txtFieldFirstName.delegate = self
         self.txtFieldLastName.delegate = self
         self.txtFieldWhatsappNumber.delegate = self
@@ -135,6 +180,19 @@ class EditProfileVC: UIViewController {
         self.txtFieldPhoneNumber.isUserInteractionEnabled = false
         self.txtFieldEmailAddress.isUserInteractionEnabled = false
         
+            
+            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                self.viewEnglish.backgroundColor = UIColor(red: 21, green: 114, blue: 161)
+                self.lblArabic.textColor = UIColor(red: 21, green: 114, blue: 161)
+                self.lblEnglish.textColor = UIColor.systemBackground
+                self.viewArabic.backgroundColor = UIColor.systemBackground
+            }
+            else{
+                self.viewArabic.backgroundColor =  UIColor(red: 21, green: 114, blue: 161)
+                self.lblEnglish.textColor = UIColor(red: 21, green: 114, blue: 161)
+                self.lblArabic.textColor = UIColor.systemBackground
+                self.viewEnglish.backgroundColor = UIColor.systemBackground
+            }
     }
     
     func fetchdata(){
@@ -244,9 +302,10 @@ class EditProfileVC: UIViewController {
             self.lblEnglish.textColor = UIColor.systemBackground
             self.viewArabic.backgroundColor = UIColor.systemBackground
         }
-        
-        UserDefaults.standard.set("en", forKey: "Language")
-        UIView.appearance().semanticContentAttribute = .forceLeftToRight
+        self.setupUpdateView(languageCode: "en")
+        kSharedUserDefaults.setLanguage(language: "en")
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "EditProfileVC") as! EditProfileVC
+        self.navigationController?.pushViewController(vc, animated: false)
     }
     @IBAction func btnArabicLanguageTapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
@@ -257,8 +316,16 @@ class EditProfileVC: UIViewController {
             self.viewEnglish.backgroundColor = UIColor.systemBackground
         }
         
-        UserDefaults.standard.set("ar", forKey: "Language")
-        UIView.appearance().semanticContentAttribute = .forceRightToLeft
+        self.setupUpdateView(languageCode: "ar")
+        kSharedUserDefaults.setLanguage(language: "ar")
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "EditProfileVC") as! EditProfileVC
+        self.navigationController?.pushViewController(vc, animated: false)
+        
+    }
+    
+    func setupUpdateView(languageCode code: String){
+        LocalizationSystem.sharedInstance.setLanguage(languageCode: code)
+        UIView.appearance().semanticContentAttribute =  code == "ar" ? .forceRightToLeft :  .forceLeftToRight
         
     }
     //    @IBAction func btnDobTapped(_ sender: UIButton) {
@@ -285,7 +352,8 @@ class EditProfileVC: UIViewController {
         
     }
     @IBAction func btnBackTapped(_ sender: UIButton) {
-        self.navigationController?.popViewController(animated: true)
+        kSharedAppDelegate?.makeRootViewController()
+//        self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func btnChangePhoneNumberTapped(_ sender: UIButton) {
@@ -402,9 +470,7 @@ class EditProfileVC: UIViewController {
                 self.lblGender.text = item
             }
         }
-        
     }
-    
 }
 
 extension EditProfileVC{
