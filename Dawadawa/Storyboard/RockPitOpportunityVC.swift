@@ -1351,7 +1351,6 @@ extension RockPitOpportunityVC{
                         else{
                             CommonUtils.showError(.info, String.getString("ليس لديك رصيد كاف لخلق فرصة!"))
                         }
-                        
                     }
                     
                 default:

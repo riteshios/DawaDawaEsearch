@@ -6,7 +6,7 @@ import UIKit
 
 class VerifyEmailOTPVC: UIViewController {
     
-    //     MARK: - Properties
+    //     MARK: - Properties - 
     @IBOutlet weak var lblWrongCode: UILabel!
     @IBOutlet weak var lblSubHeading: UILabel!
     @IBOutlet weak var txtfieldOtp1: UITextField!
@@ -24,10 +24,11 @@ class VerifyEmailOTPVC: UIViewController {
     @IBOutlet weak var viewOtp5: UIView!
     @IBOutlet weak var viewVerify: UIView!
     
-    
     @IBOutlet weak var lblVerifyYou: UILabel!
     @IBOutlet weak var btnVerify: UIButton!
     @IBOutlet weak var btnResendcode: UIButton!
+    
+    @IBOutlet weak var viewBG:UIView!
     
     var callbackOTP1:(()->())?
     var otp = ""
@@ -70,6 +71,14 @@ class VerifyEmailOTPVC: UIViewController {
         self.viewOtp6.borderColor = UIColor(hexString: "#FF4C4D")
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if let touch = touches.first{
+            if viewBG == touch.view{
+                self.dismiss(animated: true)
+            }
+        }
+    }
+//    MARK: - @IBAction -
     
     @IBAction func BtnVerifyTapped(_ sender: UIButton) {
         self.otp = String.getString(self.txtfieldOtp1.text) + String.getString(self.txtfieldOtp2.text) + String.getString(self.txtfieldOtp3.text) + String.getString(self.txtfieldOtp4.text) +
@@ -91,8 +100,6 @@ class VerifyEmailOTPVC: UIViewController {
     @IBAction func BtnAResendTapped(_ sender: UIButton) {
         self.resendOtpApi()
     }
-    
-    
     
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -144,7 +151,7 @@ class VerifyEmailOTPVC: UIViewController {
     }
 }
 
-// MARK: - TextField Delegate
+// MARK: - TextField Delegate -
 
 extension VerifyEmailOTPVC: UITextFieldDelegate{
     func textFieldDidBeginEditing(_ textField: UITextField){
@@ -176,7 +183,7 @@ extension VerifyEmailOTPVC: UITextFieldDelegate{
     }
 }
 
-// MARK: - API call
+// MARK: - API call -
 
 extension VerifyEmailOTPVC{
     func verifyemailotpapi(){
@@ -231,8 +238,7 @@ extension VerifyEmailOTPVC{
             "email":UserData.shared.email
         ]
         
-        TANetworkManager.sharedInstance.requestApi(withServiceName:ServiceName.kresendotp,                                                   requestMethod: .POST,
-                                                   requestParameters:params, withProgressHUD: false)
+        TANetworkManager.sharedInstance.requestApi(withServiceName:ServiceName.kresendotp,                                                   requestMethod: .POST,requestParameters:params, withProgressHUD: false)
         {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
             
             CommonUtils.showHudWithNoInteraction(show: false)
@@ -249,7 +255,6 @@ extension VerifyEmailOTPVC{
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                 default:
-                    
                     CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     
                 }

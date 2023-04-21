@@ -14,7 +14,8 @@ class SearchVC: UIViewController,UITextFieldDelegate,NewSocialPostCVCDelegate{
     var UserTimeLineOppdetails:SocialPostData?
     var img = [oppr_image]()
     var comment = [user_comment]()
-    var txtcomment = " "
+    var txtcomment = ""
+    var isSearch = ""
     
     lazy var globalApi = {
         GlobalApi()
@@ -34,6 +35,7 @@ class SearchVC: UIViewController,UITextFieldDelegate,NewSocialPostCVCDelegate{
         super.viewWillAppear(animated)
         self.imgNotfound.isHidden = true
         self.txtfieldSearch.text = ""
+        self.isSearch = ""
     }
     
     override func viewWillLayoutSubviews() {
@@ -147,7 +149,13 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section{
         case 0:
-            return 195
+            if self.isSearch == "True"{
+                return 0
+            }
+            else{
+                return 195
+            }
+           
         case 1:
             if UserData.shared.isskiplogin == true{
                 return 90
@@ -331,7 +339,7 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
                         
                     }
                     else{
-                        let userid = Int.getInt(opppreid)
+                        let userid = Int.getInt(user_id)
                         let vc = self.storyboard?.instantiateViewController(withIdentifier: ChatVC.getStoryboardID()) as! ChatVC
                         vc.friendid = userid
                         vc.friendname = frnd_name
@@ -410,7 +418,7 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
                             let vc = self.storyboard?.instantiateViewController(withIdentifier: ReportUserPopUpVC.getStoryboardID()) as! ReportUserPopUpVC
                             vc.modalTransitionStyle = .crossDissolve
                             vc.modalPresentationStyle = .overCurrentContext
-                            let userid = Int.getInt(opppreid)
+                            let userid = Int.getInt(user_id)
                             vc.userid = userid
                             self.present(vc, animated: false)
                         }
@@ -447,9 +455,11 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
         txtfieldSearch.resignFirstResponder()
         if UserData.shared.isskiplogin == true{
             self.guestsearchopportunityapi()
+            self.isSearch = "True"
         }
         else{
             self.searchopportunityapi()
+            self.isSearch = "True"
         }
         return true
     }

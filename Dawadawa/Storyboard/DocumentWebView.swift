@@ -25,8 +25,18 @@ class DocumentWebView: UIViewController, WKNavigationDelegate {
     func doc(){
         CommonUtils.showHudWithNoInteraction(show: true)
         let docurl   = "\(self.opr_doc)\(self.doclink)"
+        print("\(docurl)dockurlcheck=-=-=-")
         self.lblheading.text = self.heading
-        webkit.load(URLRequest(url: URL(string: docurl)!))
+//        webkit.load(URLRequest(url: URL(string: docurl)!))
+        
+        if let encodedDocurl = docurl.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
+           let url = URL(string: encodedDocurl) {
+            webkit.load(URLRequest(url: url))
+        } else {
+            print("Invalid URL string: \(docurl)")
+        }
+
+
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {

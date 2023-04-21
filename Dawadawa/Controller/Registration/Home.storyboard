@@ -3664,6 +3664,7 @@
                         <outlet property="txtfieldOtp4" destination="gBV-uf-QOd" id="O4F-ID-ILn"/>
                         <outlet property="txtfieldOtp5" destination="uOB-15-mLi" id="YGV-DH-623"/>
                         <outlet property="txtfieldOtp6" destination="Vnk-55-WoA" id="Uyu-Rn-UCQ"/>
+                        <outlet property="viewBG" destination="zbo-RW-736" id="84q-aE-tSK"/>
                         <outlet property="viewOtp1" destination="8qq-K6-azc" id="2LX-H8-tei"/>
                         <outlet property="viewOtp2" destination="5X4-Qm-MVH" id="aq1-8u-N2z"/>
                         <outlet property="viewOtp3" destination="kBV-rC-WcF" id="VmB-hK-IQe"/>
@@ -4066,6 +4067,9 @@
                                         <state key="normal" title="Resend code">
                                             <color key="titleColor" red="0.08235294118" green="0.44705882349999998" blue="0.63137254899999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="btnresendotp:" destination="cn9-sB-IuX" eventType="touchUpInside" id="ua9-jY-Osl"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -7268,7 +7272,7 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iN5-vF-xsh">
                                                         <rect key="frame" x="0.0" y="356" width="414" height="60"/>
                                                         <subviews>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JsM-3f-aV7">
+                                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JsM-3f-aV7">
                                                                 <rect key="frame" x="16" y="10" width="382" height="40.333333333333336"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+Add more documents" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="am5-zW-wVM">
@@ -16746,9 +16750,6 @@ this Chat?</string>
         </scene>
     </scenes>
     <designables>
-        <designable name="Au9-O0-cbA">
-            <size key="intrinsicContentSize" width="120" height="20"/>
-        </designable>
         <designable name="hYJ-9L-6ep">
             <size key="intrinsicContentSize" width="-1" height="49"/>
         </designable>

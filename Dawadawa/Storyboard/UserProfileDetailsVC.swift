@@ -46,9 +46,11 @@ class UserProfileDetailsVC: UIViewController {
         
         if UserData.shared.id == self.userid{
             self.ViewRateUser.isHidden = true
+            self.viewChatwithuser.isHidden = true
         }
         else{
             self.ViewRateUser.isHidden = false
+            self.viewChatwithuser.isHidden = false
         }
     }
     
@@ -76,7 +78,8 @@ class UserProfileDetailsVC: UIViewController {
                 guard let data = data, error == nil else { return }
                 
                 DispatchQueue.main.async { /// execute on main thread
-                    self.ImgUser.image = UIImage(data: data)
+//                    self.ImgUser.image = UIImage(data: data)
+                    self.ImgUser.downlodeImage(serviceurl: String.getString(self.userdata?.image) , placeHolder: UIImage(named: "Boss"))
                 }
             }
             task.resume()

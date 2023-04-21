@@ -7,7 +7,7 @@ import SwiftUI
 
 class BuyPlanVC: UIViewController {
     
-//    MARK: - Properties
+    //    MARK: - Properties
     
     @IBOutlet weak var PlanCollectionView: UICollectionView!
     @IBOutlet weak var lblUsertype: UILabel!
@@ -18,7 +18,7 @@ class BuyPlanVC: UIViewController {
     var indexpathcount = 0
     var subsdata = [Subscription_data]()
     
-//    MARK: - Life Cycle
+    //    MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setuplanguage()
@@ -57,16 +57,16 @@ class BuyPlanVC: UIViewController {
         }
     }
     
-//    MARK: - @IBAction
+    //    MARK: - @IBAction
     
     @IBAction func btnDismissTapped(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func btnChoosePlanTapped(_ sender: UIButton){
-//        let vc = self.storyboard?.instantiateViewController(withIdentifier: ChoosePlanVC.getStoryboardID()) as! ChoosePlanVC
-//        vc.indexcount = self.indexpathcount
-//        self.navigationController?.pushViewController(vc, animated: true)
+        //        let vc = self.storyboard?.instantiateViewController(withIdentifier: ChoosePlanVC.getStoryboardID()) as! ChoosePlanVC
+        //        vc.indexcount = self.indexpathcount
+        //        self.navigationController?.pushViewController(vc, animated: true)
         
         let vc = self.storyboard?.instantiateViewController(withIdentifier: PaymentVC.getStoryboardID()) as! PaymentVC
         vc.price = String.getString(self.subsdata[self.indexpathcount].price_month)

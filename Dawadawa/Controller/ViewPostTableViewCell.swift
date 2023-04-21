@@ -5,6 +5,7 @@
 import UIKit
 
 var opppreid = 0
+var userid = 0
 var likeCount = ""
 
 class ViewPostTableViewCell: UITableViewCell{
@@ -73,6 +74,9 @@ extension ViewPostTableViewCell: UICollectionViewDelegate,UICollectionViewDataSo
        
            let oppid = userTimeLine[indexPath.row].id
            opppreid = oppid ?? 0
+        
+        let user_id = userTimeLine[indexPath.row].user_id
+        userid = user_id ?? 0
         
             let cell = ColllectionViewPremiumOpp.cellForItem(at: indexPath) as! PremiumOppCollectionViewCell
             self.celldelegate?.collectionView(collectionviewcell: cell, index: indexPath.item, didTappedInTableViewCell: self)

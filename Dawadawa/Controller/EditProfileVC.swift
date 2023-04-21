@@ -454,7 +454,6 @@ class EditProfileVC: UIViewController {
         }
     }
     
-    
     @IBAction func btnDropGender(_ sender: UIButton){
         let dataSource1 = ["Male","Female"]
         let dataSource2 = ["ذكر","أنثى"]
@@ -622,8 +621,7 @@ extension EditProfileVC{
             "email":String.getString(self.txtFieldEmailAddress.text),
         ]
         
-        TANetworkManager.sharedInstance.requestApi(withServiceName:ServiceName.kforgotpassword, requestMethod: .POST,
-                                                   requestParameters:params, withProgressHUD: false)
+        TANetworkManager.sharedInstance.requestApi(withServiceName:ServiceName.kforgotpassword, requestMethod: .POST,requestParameters:params, withProgressHUD: false)
         {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
             
             CommonUtils.showHudWithNoInteraction(show: false)

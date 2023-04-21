@@ -85,13 +85,13 @@ class ChatVC: UIViewController{
     @IBAction func btnSendTapped(_ sender: UIButton) {
         if self.txtViewMessage.text == ""{
             if kSharedUserDefaults.getlanguage() as? String == "en"{
-                self.showSimpleAlert(message: "أدرج رسالتك من فضلك")
+                self.showSimpleAlert(message: "Please enter your message")
             }
             else{
-                
+                self.showSimpleAlert(message: "أدرج رسالتك من فضلك")
             }
-           
         }
+        
         else{
             //   self.tableViewScrollToBottom(animated: true)
             self.isNewDataLoading = true
@@ -241,7 +241,6 @@ extension ChatVC {
             "receiver_id":friendid,
             "message":String.getString(self.txtViewMessage.text)
         ]
-        
         
         TANetworkManager.sharedInstance.requestApi(withServiceName:ServiceName.ksendmessage, requestMethod: .POST,
                                                    requestParameters:params, withProgressHUD: false)

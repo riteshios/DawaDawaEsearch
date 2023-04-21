@@ -43,7 +43,6 @@ class MysubscriptionVC: UIViewController {
     //    MARK: - @IBAction
     
     @IBAction func btnBackTapped(_ sender: UIButton) {
-        
         if self.hascomefrom == "paymentVC"{
             kSharedAppDelegate?.makeRootViewController()
         }
@@ -62,6 +61,7 @@ class MysubscriptionVC: UIViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
+
 extension MysubscriptionVC:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -189,7 +189,7 @@ extension MysubscriptionVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-//                CommonUtils.showToastForDefaultError()
+                //                CommonUtils.showToastForDefaultError()
             }
         }
     }
@@ -246,7 +246,7 @@ extension MysubscriptionVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-//                CommonUtils.showToastForDefaultError()
+                //     CommonUtils.showToastForDefaultError()
             }
         }
     }

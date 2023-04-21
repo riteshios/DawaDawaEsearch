@@ -446,7 +446,7 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                         
                     }
                     else{
-                        let userid = Int.getInt(opppreid)
+                        let userid = Int.getInt(user_id)
                         let vc = self.storyboard?.instantiateViewController(withIdentifier: ChatVC.getStoryboardID()) as! ChatVC
                         vc.friendid = userid
                         vc.friendname = frnd_name
@@ -535,7 +535,7 @@ extension HomeVC:UITableViewDelegate,UITableViewDataSource{
                             let vc = self.storyboard?.instantiateViewController(withIdentifier: ReportUserPopUpVC.getStoryboardID()) as! ReportUserPopUpVC
                             vc.modalTransitionStyle = .crossDissolve
                             vc.modalPresentationStyle = .overCurrentContext
-                            let userid = Int.getInt(opppreid)
+                            let userid = Int.getInt(user_id)
                             vc.userid = userid
                             self.present(vc, animated: false)
                         }

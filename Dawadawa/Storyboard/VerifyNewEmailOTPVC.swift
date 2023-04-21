@@ -5,7 +5,8 @@
 import UIKit
 
 class VerifyNewEmailOTPVC: UIViewController {
-    //    MARK: - Properties
+    
+    //    MARK: - Properties -
     @IBOutlet weak var lblVerifyNewEmail: UILabel!
     @IBOutlet weak var lblWrongCode: UILabel!
     @IBOutlet weak var lblSubHeading: UILabel!
@@ -29,7 +30,8 @@ class VerifyNewEmailOTPVC: UIViewController {
     var email:String?
     var otp = ""
     
-    // MARK: - Life Cycle
+    // MARK: - Life Cycle -
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setuplanguage()
@@ -112,7 +114,7 @@ class VerifyNewEmailOTPVC: UIViewController {
         }
     }
     
-    // MARK: - @IBAction
+    // MARK: - @IBAction -
     
     @IBAction func btnVerifyTapped(_ sender: UIButton) {
         self.otp = String.getString(self.txtfieldOtp1.text) + String.getString(self.txtfieldOtp2.text) + String.getString(self.txtfieldOtp3.text) + String.getString(self.txtfieldOtp4.text) +
@@ -129,6 +131,10 @@ class VerifyNewEmailOTPVC: UIViewController {
     
     @IBAction func btnDismiss(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func btnresendotp(_ sender: UIButton){
+        self.resendOtpApi()
     }
     
 }
@@ -173,16 +179,13 @@ extension VerifyNewEmailOTPVC{
                 kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
             }
             
-            
-            
             let params:[String : Any] = [
                 "user_id":UserData.shared.id,
                 "email":self.email,
                 "otp":self.otp]
             
             debugPrint("params==",params)
-            TANetworkManager.sharedInstance.requestApi(withServiceName:ServiceName.knewemailotpverify, requestMethod: .POST,
-                                                       requestParameters:params, withProgressHUD: false)
+            TANetworkManager.sharedInstance.requestApi(withServiceName:ServiceName.knewemailotpverify, requestMethod: .POST,requestParameters:params, withProgressHUD: false)
             {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
                 
                 CommonUtils.showHudWithNoInteraction(show: false)
@@ -222,6 +225,42 @@ extension VerifyNewEmailOTPVC{
                 } else {
 //                    CommonUtils.showToastForDefaultError()
                 }
+            }
+        }
+    }
+    
+    func resendOtpApi(){
+        CommonUtils.showHudWithNoInteraction(show: true)
+        let params:[String : Any] = [
+            "email":self.email
+        ]
+        
+        TANetworkManager.sharedInstance.requestApi(withServiceName:ServiceName.kresendotp,                                                   requestMethod: .POST,requestParameters:params, withProgressHUD: false)
+        {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
+            
+            CommonUtils.showHudWithNoInteraction(show: false)
+            
+            if errorType == .requestSuccess {
+                let dictResult = kSharedInstance.getDictionary(result)
+                
+                switch Int.getInt(statusCode) {
+                case 200:
+                    if Int.getInt(dictResult["status"]) == 200{
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    }
+                    else if  Int.getInt(dictResult["status"]) == 400{
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    }
+                default:
+                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                    
+                }
+            }
+            else if errorType == .noNetwork {
+                CommonUtils.showToastForInternetUnavailable()
+                
+            } else {
+//                CommonUtils.showToastForDefaultError()
             }
         }
     }
