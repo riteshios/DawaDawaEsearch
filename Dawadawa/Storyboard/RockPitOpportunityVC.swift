@@ -512,6 +512,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
             self.viewPremium.backgroundColor = .white
             self.lblPremium.textColor =  UIColor(red: 21, green: 114, blue: 161)
             self.isSelectopp_planBasic = true
+            self.isSelectopp_planPremium = false
             
         }
     }
@@ -544,7 +545,6 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
             self.lblBasic.textColor = UIColor(red: 21, green: 114, blue: 161)
             self.viewFeature.backgroundColor = .white
             self.lblFeature.textColor =  UIColor(red: 21, green: 114, blue: 161)
-            
             self.isSelectopp_planPremium = true
         }
     }
@@ -581,7 +581,13 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
         }
         else if String.getString(self.txtFieldTitle.text).isEmpty
         {
-            self.showSimpleAlert(message: Notifications.ktitle)
+            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                self.showSimpleAlert(message: Notifications.ktitle)
+            }
+            else{
+                self.showSimpleAlert(message: Notifications.kartitle)
+            }
+           
             return
         }
         //        else if !String.getString(self.txtFieldTitle.text).isValidTitle()
@@ -615,22 +621,46 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
         //            return
         //        }
         else if String.getString(self.TextViewDescription.text).isEmpty{
-            showSimpleAlert(message: Notifications.kDescription)
+            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                showSimpleAlert(message: Notifications.kDescription)
+            }
+            else{
+                showSimpleAlert(message: Notifications.karDescription)
+            }
+          
             return
         }
         else if String.getString(self.txtFieldMobileNumber.text).isEmpty
         {
-            showSimpleAlert(message: Notifications.kEnterMobileNumber)
+            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                showSimpleAlert(message: Notifications.kEnterMobileNumber)
+            }
+            else{
+                showSimpleAlert(message: Notifications.karEnterMobbileNumber)
+            }
+            
             return
         }
         else if !String.getString(self.txtFieldMobileNumber.text).isPhoneNumber()
         {
-            self.showSimpleAlert(message: Notifications.kEnterValidMobileNumber)
+            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                self.showSimpleAlert(message: Notifications.kEnterValidMobileNumber)
+            }
+            else{
+                self.showSimpleAlert(message: Notifications.karEnterValidMobileNumber)
+            }
+            
             return
         }
         
         else if self.isSelectLookingFor == false{
-            self.showSimpleAlert(message: "Please Select looking For")
+            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                self.showSimpleAlert(message: "Please Select looking For")
+            }
+            else{
+                self.showSimpleAlert(message: "يرجى تحديد البحث عن")
+            }
+            
             return
         }
         else if self.isSelectopp_planBasic == false && self.isSelectopp_planPremium == false && self.isSelectopp_planFeatured == false{

@@ -538,6 +538,7 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
             self.viewPremium.backgroundColor = .white
             self.lblPremium.textColor =  UIColor(red: 21, green: 114, blue: 161)
             self.isSelectopp_planBasic = true
+            self.isSelectopp_planPremium = false
         }
     }
     
@@ -545,6 +546,7 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
         sender.isSelected = !sender.isSelected
         if self.btnFeature.isSelected == true{
             self.plan = "Featured"
+            planpayment = 1
             self.viewFeature.backgroundColor = UIColor(red: 21, green: 114, blue: 161)
             self.lblFeature.textColor = .white
             self.viewBasic.backgroundColor = .white
@@ -553,7 +555,6 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
             self.lblPremium.textColor =  UIColor(red: 21, green: 114, blue: 161)
             self.isSelectopp_planFeatured = true
             self.isSelectopp_planPremium = false
-            
         }
     }
     
@@ -561,6 +562,7 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
         sender.isSelected = !sender.isSelected
         if self.btnPremium.isSelected == true{
             self.plan = "Premium"
+            planpayment = 2
             self.viewPremium.backgroundColor = UIColor(red: 21, green: 114, blue: 161)
             self.lblPremium.textColor = .white
             self.viewBasic.backgroundColor = .white
@@ -599,7 +601,13 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
         //            }
         if String.getString(self.txtFieldTitle.text).isEmpty
         {
-            self.showSimpleAlert(message: Notifications.ktitle)
+            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                self.showSimpleAlert(message: Notifications.ktitle)
+            }
+            else{
+                self.showSimpleAlert(message: Notifications.kartitle)
+            }
+            
             return
         }
         //        else if !String.getString(self.txtFieldTitle.text).isValidTitle()
@@ -624,7 +632,13 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
         }
         else if String.getString(self.txtFieldBusinessMiningBlock.text).isEmpty
         {
-            self.showSimpleAlert(message: Notifications.kbusinessBlock)
+            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                self.showSimpleAlert(message: Notifications.kbusinessBlock)
+            }
+            else{
+                self.showSimpleAlert(message: Notifications.karbusinessBlock)
+            }
+           
             return
         }
         
@@ -654,18 +668,36 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
         //            return
         //        }
         else if String.getString(self.TextViewDescription.text).isEmpty{
-            showSimpleAlert(message: Notifications.kDescription)
+            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                showSimpleAlert(message: Notifications.kDescription)
+            }
+            else{
+                showSimpleAlert(message: Notifications.karDescription)
+            }
+            
             return
         }
         
         else if String.getString(self.txtFieldMobileNumber.text).isEmpty
         {
-            showSimpleAlert(message: Notifications.kEnterMobileNumber)
+            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                showSimpleAlert(message: Notifications.kEnterMobileNumber)
+            }
+            else{
+                showSimpleAlert(message: Notifications.karEnterMobbileNumber)
+            }
+          
             return
         }
         else if !String.getString(self.txtFieldMobileNumber.text).isPhoneNumber()
         {
-            self.showSimpleAlert(message: Notifications.kEnterValidMobileNumber)
+            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                self.showSimpleAlert(message: Notifications.kEnterValidMobileNumber)
+            }
+            else{
+                self.showSimpleAlert(message: Notifications.karEnterValidMobileNumber)
+            }
+           
             return
         }
         
@@ -706,7 +738,6 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
             else{
                 self.showSimpleAlert(message: "الرجاء إضافة صورة فرصة واحدة على الأقل")
             }
-            
             return
         }
         self.view.endEditing(true)

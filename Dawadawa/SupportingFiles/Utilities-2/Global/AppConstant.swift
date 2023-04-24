@@ -244,14 +244,17 @@ struct Notifications {
     static let kAllergic                        =  "Please Select Allergic"
     
     static let ktitle                           =  "Please Enter the Title"
+    static let kartitle                         =  "الرجاء إدخال العنوان"
     static let KValidtitle                      =  "Please Enter valid title"
     static let kLocationName                    =  "Please Enter the Location Name"
     static let kvalidlocationname               =  "Please Enter the Valild Location Name"
     static let kDescription                     =  "Please Enter the description"
+    static let karDescription                   =   "الرجاء إدخال الوصف"
     static let kwhatsappnumber                  =  "Please Enter the whatsapp Number"
     static let kvalidwhatsappnumber             =  "Please Enter Valid Whatstapp Number"
     static let kbusinessname                    =  "Please Enter Business Name"
     static let kbusinessBlock                   =  "Please Enter Business Mining Block"
+    static let karbusinessBlock                 =  "الرجاء إدخال كتلة تعدين الأعمال"
     
 }
 
