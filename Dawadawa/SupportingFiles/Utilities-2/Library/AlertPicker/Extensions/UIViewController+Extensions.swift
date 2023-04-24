@@ -49,6 +49,23 @@ extension UIViewController {
         
         self.present(alert, animated: false, completion: nil)
     }
+    
+    func showalertarabic(){
+        let alert = UIAlertController(title: kAppName, message: "غير متاح للمستخدم الضيف ، يرجى التسجيل أو تسجيل الدخول للوصول الكامل إلى ميزات الحساب.", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "يتخطى", style: UIAlertAction.Style.default, handler: { _ in
+            //Cancel Action
+        }))
+        alert.addAction(UIAlertAction(title: "تسجيل الدخول",
+                                      style: UIAlertAction.Style.default,
+                                      handler: {(_: UIAlertAction!) in
+            
+            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
+            self.navigationController?.pushViewController(vc, animated: true)
+        }))
+        
+        self.present(alert, animated: false, completion: nil)
+    }
 }
 
 

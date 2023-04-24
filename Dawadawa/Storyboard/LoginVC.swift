@@ -14,7 +14,7 @@ class LoginVC: UIViewController {
     @IBOutlet weak var viewButtonLogin: UIView!
     @IBOutlet weak var txtFieldPhoneNumer: SKFloatingTextField!
     @IBOutlet weak var txtFieldPassword: SKFloatingTextField!
-   
+    
     @IBOutlet weak var lblLogin: UILabel!
     @IBOutlet weak var lblGoogle: UILabel!
     @IBOutlet weak var lblFacebook: UILabel!
@@ -79,7 +79,7 @@ class LoginVC: UIViewController {
         self.viewButtonLogin.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
         
         self.setTextFieldUI(textField: txtFieldPassword, place: "Password", floatingText: "Password")
-      
+        
         self.setTextFieldUI(textField: txtFieldPhoneNumer, place: "Phone number/Email", floatingText: "Phone number/Email")
         self.viewDrop.isHidden = true
         self.viewDrop.addShadowWithCornerRadius(viewDrop, cRadius: 5)
@@ -94,7 +94,7 @@ class LoginVC: UIViewController {
             self.lblDropDownMenu.text = "عربي"
             UITextField.appearance().semanticContentAttribute = .forceRightToLeft
         }
-
+        
     }
     //  MARK: - @IBAction -
     
@@ -111,7 +111,7 @@ class LoginVC: UIViewController {
     @IBAction func btnEnglishLangTapped(_ sender: UIButton){
         self.setupUpdateView(languageCode: "en")
         kSharedUserDefaults.setLanguage(language: "en")
-       
+        
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
         self.navigationController?.pushViewController(vc, animated: false)
     }
@@ -119,10 +119,10 @@ class LoginVC: UIViewController {
     @IBAction func btnArabicLangTapped(_ sender: UIButton){
         self.setupUpdateView(languageCode: "ar")
         kSharedUserDefaults.setLanguage(language: "ar")
-       
+        
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
         self.navigationController?.pushViewController(vc, animated: false)
-       
+        
     }
     
     @IBAction func btnGoogleTapped(_ sender: UIButton) {
@@ -166,7 +166,7 @@ class LoginVC: UIViewController {
     //    }
     
     @IBAction func btnLoginTapped(_ sender: UIButton){
-       // self.loginapi()
+        // self.loginapi()
         self.validation()
     }
     
@@ -202,11 +202,17 @@ class LoginVC: UIViewController {
         }
         else if !String.getString(txtFieldPassword.text).isValidPassword()
         {
-            self.showSimpleAlert(message: Notifications.kValidPassword)
+            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                self.showSimpleAlert(message: Notifications.kValidPassword)
+            }
+            else{
+                self.showSimpleAlert(message: Notifications.karValidPassword)
+            }
+            
             return
         }
         self.view.endEditing(true)
-       self.loginapi()
+        self.loginapi()
     }
     //    func validation(){
     //        if String.getString(self.txtFieldPhoneNumer.text).isEmpty
@@ -219,7 +225,7 @@ class LoginVC: UIViewController {
     //            self.showSimpleAlert(message: Notifications.kEnterValidMobileNumber)
     //            return
     //        }
-   
+    
     //        else if String.getString(self.txtFieldPassword.text).isEmpty
     //        {
     //            showSimpleAlert(message: Notifications.kPassword)
@@ -237,9 +243,9 @@ class LoginVC: UIViewController {
 
 // MARK: - SKFloating -
 extension LoginVC{
-
+    
     func setTextFieldUI(textField:SKFloatingTextField,place:String ,floatingText:String){
-
+        
         textField.placeholder = place
         textField.activeBorderColor = .init(red: 21, green: 114, blue: 161)
         textField.floatingLabelText = floatingText
@@ -247,23 +253,23 @@ extension LoginVC{
         //floatingTextField.setRectTFUI()
         //floatingTextField.setRoundTFUI()
         //floatingTextField.setOnlyBottomBorderTFUI()
-//                textField.setCircularTFUI()
+        //                textField.setCircularTFUI()
         textField.setRoundTFUI()
         textField.delegate = self
         //floatingTextField.errorLabelText = "Error"
-
+        
     }
 }
 extension LoginVC : SKFlaotingTextFieldDelegate {
-
+    
     func textFieldDidEndEditing(textField: SKFloatingTextField) {
         print("end editing")
     }
-
+    
     func textFieldDidChangeSelection(textField: SKFloatingTextField) {
         print("changing text")
     }
-
+    
     func textFieldDidBeginEditing(textField: SKFloatingTextField) {
         print("begin editing")
     }
@@ -306,22 +312,28 @@ extension LoginVC{
                         
                         if Int.getInt(UserData.shared.check_sub_plan) == 1{
                             kSharedAppDelegate?.makeRootViewController()
-                           
+                            
                         }
                         else if Int.getInt(UserData.shared.check_sub_plan) == 0{
-
+                            
                             let vc = self?.storyboard?.instantiateViewController(withIdentifier: "LoginSubscriptionPlanVC") as! LoginSubscriptionPlanVC
                             self?.navigationController?.pushViewController(vc, animated: true)
-                
+                            
                         }
-//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     else if  Int.getInt(dictResult["status"]) == 400{
                         //   CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     else if Int.getInt(dictResult["status"]) == 401{
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        if kSharedUserDefaults.getlanguage() as? String == "en"{
+                            CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        }
+                        else{
+                            CommonUtils.showError(.info, "كلمة المرور غير صحيحة!")
+                        }
+                        
                     }
                 default:
                     CommonUtils.showError(.info, String.getString(dictResult["message"]))
@@ -330,7 +342,7 @@ extension LoginVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-//                CommonUtils.showToastForDefaultError()
+                //                CommonUtils.showToastForDefaultError()
             }
         }
     }
@@ -375,10 +387,10 @@ extension LoginVC{
                     CommonUtils.showError(.info, String.getString(dictResult["message"]))
                 }
             }else if errorType == .noNetwork {
-                CommonUtils.showToastForInternetUnavailable()
+                   CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-//                CommonUtils.showToastForDefaultError()
+                //  CommonUtils.showToastForDefaultError()
             }
         }
     }
@@ -391,7 +403,7 @@ extension LoginVC{
         lblFacebook.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Facebook", comment: "")
         lblTwitter.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Twitter", comment: "")
         lblDontHaveAccount.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Don't have an account?", comment: "")
-//        lblFirstOR.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "or", comment: "")
+        //        lblFirstOR.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "or", comment: "")
         lblSecondOR.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "or", comment: "")
         lblThirdOR.text = LocalizationSystem.sharedInstance.localizedStringForKey(key: "or", comment: "")
         btnCreateAccount.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "Create account", comment: ""), for: .normal)
@@ -403,7 +415,7 @@ extension LoginVC{
         txtFieldPhoneNumer.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Phone number/Email*", comment: "")
         txtFieldPassword.floatingLabelText = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Password", comment: "")
         txtFieldPassword.placeholder = LocalizationSystem.sharedInstance.localizedStringForKey(key: "Password", comment: "")
-
+        
     }
     
     func setupUpdateView(languageCode code: String){

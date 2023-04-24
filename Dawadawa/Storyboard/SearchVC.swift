@@ -155,7 +155,7 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
             else{
                 return 195
             }
-           
+            
         case 1:
             if UserData.shared.isskiplogin == true{
                 return 90
@@ -241,15 +241,27 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
                 }
                 
                 if txt == "CopyLink"{
-                    let share_link = String.getString(sharelink)
-                    UIPasteboard.general.string = share_link
-                    print("share_link\(share_link)")
-//                    if kSharedUserDefaults.getlanguage() as? String == "en"{
-//                        CommonUtils.showError(.info, String.getString("Link Copied"))
-//                    }
-//                    else{
-//                        CommonUtils.showError(.info, String.getString("تم نسخ الرابط"))
-//                    }
+                    if UserData.shared.isskiplogin == true{
+                        if kSharedUserDefaults.getlanguage() as? String == "en"{
+                            self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                        }
+                        else{
+                            self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
+                        }
+                        
+                    }
+                    else{
+                        let share_link = String.getString(sharelink)
+                        UIPasteboard.general.string = share_link
+                        print("share_link\(share_link)")
+                    }
+                    
+                    //                    if kSharedUserDefaults.getlanguage() as? String == "en"{
+                    //                        CommonUtils.showError(.info, String.getString("Link Copied"))
+                    //                    }
+                    //                    else{
+                    //                        CommonUtils.showError(.info, String.getString("تم نسخ الرابط"))
+                    //                    }
                 }
                 
                 if txt == "Update"{
@@ -349,15 +361,27 @@ extension SearchVC:UITableViewDelegate,UITableViewDataSource{
                     }
                 }
                 if txt == "CopyLink"{
-                    let share_link = String.getString(sharelink)
-                    UIPasteboard.general.string = share_link
-                    print("share_link\(share_link)")
-//                    if kSharedUserDefaults.getlanguage() as? String == "en"{
-//                        CommonUtils.showError(.info, String.getString("Link Copied"))
-//                    }
-//                    else{
-//                        CommonUtils.showError(.info, String.getString("تم نسخ الرابط"))
-//                    }
+                    if UserData.shared.isskiplogin == true{
+                        if kSharedUserDefaults.getlanguage() as? String == "en"{
+                            self.showSimpleAlert(message: "Not Available for Guest User Please Register for Full Access")
+                        }
+                        else{
+                            self.showSimpleAlert(message: "غير متاح للمستخدم الضيف يرجى التسجيل للوصول الكامل")
+                        }
+                    }
+                    
+                    else{
+                        let share_link = String.getString(sharelink)
+                        UIPasteboard.general.string = share_link
+                        print("share_link\(share_link)")
+                    }
+                    
+                    //                    if kSharedUserDefaults.getlanguage() as? String == "en"{
+                    //                        CommonUtils.showError(.info, String.getString("Link Copied"))
+                    //                    }
+                    //                    else{
+                    //                        CommonUtils.showError(.info, String.getString("تم نسخ الرابط"))
+                    //                    }
                     
                 }
                 

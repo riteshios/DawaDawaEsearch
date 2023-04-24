@@ -786,18 +786,17 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" An account activation code has been sent to your email address and phone number " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O17-sR-qc5" userLabel="An account activation code has been sent to your email address and phone number">
-                                        <rect key="frame" x="28" y="85.333333333333343" width="326" height="44"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" An account activation code has been sent to your email address and phone number/email address" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O17-sR-qc5" userLabel="An account activation code has been sent to your email address and phone number">
+                                        <rect key="frame" x="28" y="85.333333333333343" width="326" height="61"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="326" id="87P-9i-Ucf"/>
-                                            <constraint firstAttribute="height" constant="44" id="aqe-Cy-CrI"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.65098039215686276" green="0.65098039215686276" blue="0.65098039215686276" alpha="0.8575660728615937" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Nke-9S-gey">
-                                        <rect key="frame" x="21" y="150.33333333333334" width="340" height="50"/>
+                                        <rect key="frame" x="21" y="167.33333333333334" width="340" height="50"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cQk-l4-OsE">
                                                 <rect key="frame" x="0.0" y="0.0" width="52.666666666666664" height="50"/>
@@ -996,13 +995,13 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wrong code entered!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lm7-VH-IT4">
-                                        <rect key="frame" x="25" y="226.00000000000003" width="160.66666666666666" height="20.333333333333343"/>
+                                        <rect key="frame" x="25" y="243.00000000000003" width="160.66666666666666" height="20.333333333333343"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="1" green="0.29803921570000003" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1oX-SX-abe">
-                                        <rect key="frame" x="278" y="221.66666666666666" width="79" height="29"/>
+                                        <rect key="frame" x="278" y="238.66666666666666" width="79" height="28.999999999999972"/>
                                         <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="14"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" title="Resend code">

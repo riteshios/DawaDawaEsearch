@@ -11,6 +11,8 @@ import SwiftyGif
 
 class ActivatedSuccessfullyPopUpVC: UIViewController {
     
+//    MARK: - Properties -
+    
     @IBOutlet weak var lblHeading: UILabel!
     @IBOutlet weak var lblSubHeading: UILabel!
     @IBOutlet weak var btnContinue: UIButton!
@@ -21,6 +23,8 @@ class ActivatedSuccessfullyPopUpVC: UIViewController {
     var isSignup = false
     var isReset = false
     var callback1:(()->())?
+    
+//    MARK: - Life Cycle -
     
     override func viewDidLoad() {
         super.viewDidLoad()

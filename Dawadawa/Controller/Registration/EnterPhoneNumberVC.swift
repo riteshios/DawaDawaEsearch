@@ -103,7 +103,6 @@ class EnterPhoneNumberVC: UIViewController {
             else{
                 self.showSimpleAlert(message: Notifications.karEnterValidMobileNumber)
             }
-           
             return
         }
         self.view.endEditing(true)

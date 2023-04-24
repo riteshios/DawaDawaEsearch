@@ -8,7 +8,7 @@ import IQKeyboardManagerSwift
 
 class HomeVC: UIViewController,UITabBarControllerDelegate,PremiumOppCollectionViewCellDelegate,NewSocialPostCVCDelegate{
     
-    //    MARK: - Properties -    
+    //    MARK: - Properties -
     @IBOutlet weak var tblViewViewPost: UITableView!
     
     var docUrl = ""
@@ -134,7 +134,12 @@ class HomeVC: UIViewController,UITabBarControllerDelegate,PremiumOppCollectionVi
     
     @IBAction func btnNotificationTapped(_ sender: UIButton) {
         if UserData.shared.isskiplogin == true{
-            self.showAlert()
+            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                self.showAlert()
+            }
+            else{
+                self.showalertarabic()
+            }
         }
         else{
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "NotificationsVC") as! NotificationsVC

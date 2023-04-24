@@ -9,6 +9,9 @@ import SwiftyJSON
 import MobileCoreServices
 import IQKeyboardManagerSwift
 
+var planpayment = 0
+var amount = 0
+
 class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout, UIDocumentPickerDelegate{
     
     //   MARK: - Properties -
@@ -91,7 +94,6 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
     var isSelectopp_planFeatured = false
     
     var plan = ""
-    var planpayment = 0
     var oppidget:Int?
     
     var getCategorylist    = [getCartegoryModel]()
@@ -116,7 +118,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
     
     //    Get Plan Amount
     var planamount:plan_amount?
-    var amount = 0
+   
     
     // MARK: - Life Cycle -
     
@@ -502,7 +504,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
         sender.isSelected = !sender.isSelected
         if self.btnBasic.isSelected == true{
             self.plan = "Basic"
-            self.planpayment = 0
+            planpayment = 0
             self.viewBasic.backgroundColor = UIColor(red: 21, green: 114, blue: 161)
             self.lblBasic.textColor = .white
             self.viewFeature.backgroundColor = .white
@@ -518,7 +520,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
         sender.isSelected = !sender.isSelected
         if self.btnFeature.isSelected == true{
             self.plan = "Featured"
-            self.planpayment = 1
+            planpayment = 1
             self.viewFeature.backgroundColor = UIColor(red: 21, green: 114, blue: 161)
             self.lblFeature.textColor = .white
             self.viewBasic.backgroundColor = .white
@@ -526,6 +528,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
             self.viewPremium.backgroundColor = .white
             self.lblPremium.textColor =  UIColor(red: 21, green: 114, blue: 161)
             self.isSelectopp_planFeatured = true
+            self.isSelectopp_planPremium = false
             
         }
     }
@@ -534,7 +537,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
         sender.isSelected = !sender.isSelected
         if self.btnPremium.isSelected == true{
             self.plan = "Premium"
-            self.planpayment = 2
+            planpayment = 2
             self.viewPremium.backgroundColor = UIColor(red: 21, green: 114, blue: 161)
             self.lblPremium.textColor = .white
             self.viewBasic.backgroundColor = .white
@@ -1315,7 +1318,7 @@ extension RockPitOpportunityVC{
                         }
                         // CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         
-                        if self.planpayment == 0{
+                        if planpayment == 0{
                             kSharedAppDelegate?.makeRootViewController()
                         }
                         
@@ -1323,11 +1326,11 @@ extension RockPitOpportunityVC{
                             let vc = self.storyboard?.instantiateViewController(withIdentifier: PaymentForFeatureandPremiumPopUPVC.getStoryboardID()) as! PaymentForFeatureandPremiumPopUPVC
                             vc.modalTransitionStyle = .crossDissolve
                             vc.modalPresentationStyle = .overCurrentContext
-                            vc.plan = self.planpayment
+                            vc.plan = planpayment
                             
                             vc.callbackamount = { Price in
-                                self.amount = Price
-                                print("amount=-=-\(self.amount)")
+                                amount = Price
+                                print("amount=-=-\(amount)")
                             }
                             
                             vc.callback = { txt in
@@ -1335,8 +1338,8 @@ extension RockPitOpportunityVC{
                                 if txt == "Pay"{
                                     vc.dismiss(animated: false) {
                                         let vc = UIStoryboard(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "PaymentforFeaturePremiumVC") as! PaymentforFeaturePremiumVC
-                                        vc.price = self.amount
-                                        vc.opptype = self.planpayment
+                                        vc.price = amount
+                                        vc.opptype = planpayment
                                         self.navigationController?.pushViewController(vc, animated: true)
                                     }
                                 }

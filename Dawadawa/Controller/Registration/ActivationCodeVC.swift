@@ -252,7 +252,13 @@ extension ActivationCodeVC{
                         self?.callback?()
                     }
                     else if  Int.getInt(dictResult["status"]) == 400{
-                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        if kSharedUserDefaults.getlanguage() as? String == "en"{
+                            CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        }
+                        else{
+                            CommonUtils.showError(.info, "OTP خاطئ")
+                        }
+                        
                         self?.lblWrongCode.isHidden = false
                         self?.changebordercolor()
                         

@@ -7,7 +7,7 @@ import Cosmos
 
 class RateOpportunityPopUPVC: UIViewController {
     
-    //    MARK: - Properties
+    //    MARK: - Properties -
     
     @IBOutlet weak var Viewmain: UIView!
     @IBOutlet weak var viewSubmit: UIView!
@@ -19,7 +19,7 @@ class RateOpportunityPopUPVC: UIViewController {
     @IBOutlet weak var lblRatingatheading: UILabel!
     @IBOutlet weak var btnSubmit: UIButton!
     
-    private let startRating: Float = 3.7
+    private let startRating: Float = 0.0
     var callbackClosure:(()->())?
     
     
@@ -28,7 +28,7 @@ class RateOpportunityPopUPVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-    //    MARK: -------- view controller lifecycle ----------
+        //    MARK: - view controller lifecycle -
         
         self.setup()
         self.setuplanguage()
@@ -64,17 +64,30 @@ class RateOpportunityPopUPVC: UIViewController {
         
     }
     
-    //    MARK: - @IBAction
+    //    MARK: - @IBAction -
     
     @IBAction func btnDismissTapped(_ sender: UIButton) {
-//        self.callback?("Dismiss")
+        //        self.callback?("Dismiss")
         self.dismiss(animated: true)
     }
     
     @IBAction func btnSubmitTapped(_ sender: UIButton) {
+        self.validation()
+    }
+    
+    func validation(){
+        if self.RatingSlider?.value == 0.0{
+            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                self.showSimpleAlert(message: "Please select rating")
+            }
+            else{
+                self.showSimpleAlert(message: "الرجاء تحديد التصنيف")
+            }
+            return
+        }
+        self.view.endEditing(true)
         self.rateopportunityapi()
         self.dismiss(animated: true)
-        
     }
     
     private func updateRating(requiredRating: Double?) {
@@ -156,7 +169,6 @@ extension RateOpportunityPopUPVC{
                             kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
                         }
                         
-                        
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                         
                     }
@@ -174,7 +186,7 @@ extension RateOpportunityPopUPVC{
                 CommonUtils.showToastForInternetUnavailable()
                 
             } else {
-//                CommonUtils.showToastForDefaultError()
+                //                CommonUtils.showToastForDefaultError()
             }
             
         }

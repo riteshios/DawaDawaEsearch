@@ -131,10 +131,14 @@ class ForgotPasswordVC: UIViewController {
     func fieldvalidationPhoneNumbe(){
         if String.getString(self.txtFieldPhone_Email.text).isEmpty
         {
-            showSimpleAlert(message: Notifications.kentermobileemail)
+            if kSharedUserDefaults.getlanguage() as? String == "en"{
+                showSimpleAlert(message: Notifications.kentermobileemail)
+            }
+            else{
+                showSimpleAlert(message: Notifications.karabicentermobileemail)
+            }
             return
         }
-        
         self.view.endEditing(true)
         self.forgotpasswordapi()
     }
@@ -145,7 +149,6 @@ class ForgotPasswordVC: UIViewController {
 extension ForgotPasswordVC{
     
     func setTextFieldUI(textField:SKFloatingTextField,place:String ,floatingText:String){
-        
         textField.placeholder = place
         textField.activeBorderColor = .init(red: 21, green: 114, blue: 161)
         textField.floatingLabelText = floatingText
@@ -157,7 +160,6 @@ extension ForgotPasswordVC{
         textField.setRoundTFUI()
         textField.delegate = self
         //floatingTextField.errorLabelText = "Error"
-        
     }
 }
 extension ForgotPasswordVC : SKFlaotingTextFieldDelegate {

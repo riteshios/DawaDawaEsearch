@@ -497,6 +497,7 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
             self.viewPremium.backgroundColor = .white
             self.lblPremium.textColor =  UIColor(red: 21, green: 114, blue: 161)
             self.isSelectopp_planFeatured = true
+            self.isSelectopp_planPremium = false
         }
     }
     
@@ -1484,7 +1485,34 @@ extension MiningBusinessVC{
                             kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
                         }
                         //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                        kSharedAppDelegate?.makeRootViewController()
+                        if planpayment == 0{
+                            kSharedAppDelegate?.makeRootViewController()
+                        }
+                        
+                        else{
+                            let vc = self.storyboard?.instantiateViewController(withIdentifier: PaymentForFeatureandPremiumPopUPVC.getStoryboardID()) as! PaymentForFeatureandPremiumPopUPVC
+                            vc.modalTransitionStyle = .crossDissolve
+                            vc.modalPresentationStyle = .overCurrentContext
+                            vc.plan = planpayment
+                            
+                            vc.callbackamount = { Price in
+                                amount = Price
+                                print("amount=-=-\(amount)")
+                            }
+                            
+                            vc.callback = { txt in
+                                
+                                if txt == "Pay"{
+                                    vc.dismiss(animated: false) {
+                                        let vc = UIStoryboard(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "PaymentforFeaturePremiumVC") as! PaymentforFeaturePremiumVC
+                                        vc.price = amount
+                                        vc.opptype = planpayment
+                                        self.navigationController?.pushViewController(vc, animated: true)
+                                    }
+                                }
+                            }
+                            self.present(vc, animated: false)
+                        }
                         
                     }
                     else if  Int.getInt(dictResult["status"]) == 400{
