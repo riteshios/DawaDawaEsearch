@@ -80,8 +80,8 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
             attributedStringcomment.setColorForText(textToFind: second, withColor: UIColor.gray)
             view.labelName.attributedText = attributedStringcomment
             
-//            let imgurl = URL(string: String.getString(obj?.image))
-//            view.labelImage.sd_setImage(with: imgurl)
+            //            let imgurl = URL(string: String.getString(obj?.image))
+            //            view.labelImage.sd_setImage(with: imgurl)
             view.labelImage.downlodeImage(serviceurl: obj?.image ?? "" , placeHolder: UIImage(named: "Boss"))
             
             view.callBack = { txt in
@@ -257,11 +257,11 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
             cell.lblSub_category.text = String.getString(self.userTimeLine?.sub_category_name)
             
             if UserData.shared.id == self.userTimeLine?.user_id{
-//                cell.btnChat.isHidden = true
+                //                cell.btnChat.isHidden = true
                 cell.viewSave.isHidden = true
             }
             else{
-//                cell.btnChat.isHidden = false
+                //                cell.btnChat.isHidden = false
                 cell.viewSave.isHidden = false
             }
             
@@ -423,8 +423,8 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
             }
             
             cell.heightSocialPostCollectionView.constant = 275
-//            cell.viewSeeDetails.isHidden = true
-//            cell.btnViewDetails.isHidden = true
+            //            cell.viewSeeDetails.isHidden = true
+            //            cell.btnViewDetails.isHidden = true
             
             cell.callback = { txt, tapped in
                 
@@ -561,12 +561,12 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                                 let share_link = String.getString(self.userTimeLine?.share_link)
                                 UIPasteboard.general.string = share_link
                                 print("share_link\(share_link)")
-//                                if kSharedUserDefaults.getlanguage() as? String == "en"{
-//                                    CommonUtils.showError(.info, String.getString("Link Copied"))
-//                                }
-//                                else{
-//                                    CommonUtils.showError(.info, String.getString("تم نسخ الرابط"))
-//                                }
+                                //                                if kSharedUserDefaults.getlanguage() as? String == "en"{
+                                //                                    CommonUtils.showError(.info, String.getString("Link Copied"))
+                                //                                }
+                                //                                else{
+                                //                                    CommonUtils.showError(.info, String.getString("تم نسخ الرابط"))
+                                //                                }
                             }
                             
                             if txt == "Update"{
@@ -657,12 +657,12 @@ extension DetailScreenVC:UITableViewDelegate,UITableViewDataSource{
                                 let share_link = String.getString(self.userTimeLine?.share_link)
                                 UIPasteboard.general.string = share_link
                                 print("share_link\(share_link)")
-//                                if kSharedUserDefaults.getlanguage() as? String == "en"{
-//                                    CommonUtils.showError(.info, String.getString("Link Copied"))
-//                                }
-//                                else{
-//                                    CommonUtils.showError(.info, String.getString("تم نسخ الرابط"))
-//                                }
+                                //                                if kSharedUserDefaults.getlanguage() as? String == "en"{
+                                //                                    CommonUtils.showError(.info, String.getString("Link Copied"))
+                                //                                }
+                                //                                else{
+                                //                                    CommonUtils.showError(.info, String.getString("تم نسخ الرابط"))
+                                //                                }
                             }
                             
                             if txt == "MarkasInterested"{
@@ -1155,11 +1155,11 @@ extension DetailScreenVC{
                             debugPrint("imgaraay=-=-=-==-=", vc.imgarray)
                             
                         }
-//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                     else if  Int.getInt(dictResult["status"]) == 400{
-//                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
                     
                 default:

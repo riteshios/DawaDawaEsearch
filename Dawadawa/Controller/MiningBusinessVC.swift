@@ -577,7 +577,7 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
             else{
                 self.showSimpleAlert(message: Notifications.kartitle)
             }
-           
+            
             return
         }
         //        else if !String.getString(self.txtFieldTitle.text).isValidTitle()
@@ -649,7 +649,7 @@ class MiningBusinessVC: UIViewController, UICollectionViewDelegate,UICollectionV
             else{
                 self.showSimpleAlert(message: Notifications.karEnterValidMobileNumber)
             }
-           
+            
             return
         }
         
@@ -1550,172 +1550,172 @@ extension MiningBusinessVC{
                             CommonUtils.showError(.info, String.getString("ليس لديك رصيد كاف لخلق فرصة!"))
                         }
                     }
-                
-                
-            default:
-                CommonUtils.showError(.info, String.getString(dictResult["message"]))
-            }
-        } else if errortype == .noNetwork {
-            CommonUtils.showToastForInternetUnavailable()
-        } else {
-            //                CommonUtils.showToastForDefaultError()
-        }
-    }
-}
-
-// Update Opportunity Api
-
-func updateopportunityapi(){
-    CommonUtils.showHud(show: true)
-    
-    if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
-        let endToken = kSharedUserDefaults.getLoggedInAccessToken()
-        let septoken = endToken.components(separatedBy: " ")
-        if septoken[0] != "Bearer"{
-            let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
-            kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
-        }
-        //            headers["token"] = kSharedUserDefaults.getLoggedInAccessToken()
-    }
-    
-    let oppid = Int(self.oppid ?? 0) // For remove optional
-    debugPrint("checkoppid",oppid)
-    
-    let subcatid = Int(self.subcatid ?? 0)
-    debugPrint("checksubcatid",subcatid)
-    
-    let stateid = Int(self.stateid ?? 0)
-    debugPrint("checkstateid",stateid)
-    
-    let localityid = Int(self.localityid ?? 0)
-    debugPrint("checklocalityid",localityid)
-    
-    let lookingforid = Int(self.lookingforid ?? 0)
-    debugPrint("checklookingforid",lookingforid)
-    
-    let params:[String : Any] = [
-        "oppr_id":"\(String(describing: oppid))",
-        "category_id":"3",
-        "sub_category":"\(String(describing: subcatid))",
-        "title":String.getString(self.txtFieldTitle.text),
-        "services_type":Int.getInt(self.ServiceType),
-        "opp_state":"\(String(describing: stateid))",
-        "opp_locality":"\(String(describing: localityid))",
-        "location_name":String.getString(self.txtFieldLocationName.text),
-        
-        "description":String.getString(self.TextViewDescription.text),
-        "mobile_num":String.getString(self.txtFieldMobileNumber.text),
-        "whatsaap_num":String.getString(self.txtFieldWhatsappNumber.text),
-        "pricing":String.getString(self.txtFieldPricing.text),
-        "looking_for":"\(String(describing: lookingforid))",
-        "plan":String.getString(plan),
-        "location_map":String.getString(self.lblLocationOnMap.text),
-        "latitude":String.getString(self.latitude),
-        "longitude":String.getString(self.longitude),
-        "opr_status":3 // detail wale api se milega isko implement krna h
-        //   "cat_type_id":"0"
-    ]
-    
-    let uploadimage:[String:Any] = ["image[]":self.imagearr]
-    let uploaddocument:[String:Any] = ["opportunity_documents[]":self.documentarr]
-    
-    debugPrint("image[]......",self.imagearr)
-    debugPrint("opportunity_documents[]......",self.documentarr)
-    
-    TANetworkManager.sharedInstance.UpdatetMultiPartwithlanguage(withServiceName:ServiceName.kupdateopportunity , requestMethod: .post, requestImages: [:], requestdoc: [:],requestVideos: [:], requestData:params, req: self.imagearr, req:self.documentarr)
-    { (result:Any?, error:Error?, errortype:ErrorType?, statusCode:Int?) in
-        CommonUtils.showHudWithNoInteraction(show: false)
-        if errortype == .requestSuccess {
-            debugPrint("result=====",result)
-            let dictResult = kSharedInstance.getDictionary(result)
-            debugPrint("dictResult====",dictResult)
-            switch Int.getInt(statusCode) {
-            case 200:
-                
-                if Int.getInt(dictResult["status"]) == 200{
-                    let endToken = kSharedUserDefaults.getLoggedInAccessToken()
-                    let septoken = endToken.components(separatedBy: " ")
-                    if septoken[0] == "Bearer"{
-                        kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
-                    }
-                    //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                    kSharedAppDelegate?.makeRootViewController()
                     
+                    
+                default:
+                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
                 }
-                else if  Int.getInt(dictResult["status"]) == 400{
-                    if kSharedUserDefaults.getlanguage() as? String == "en"{
+            } else if errortype == .noNetwork {
+                CommonUtils.showToastForInternetUnavailable()
+            } else {
+                //                CommonUtils.showToastForDefaultError()
+            }
+        }
+    }
+    
+    // Update Opportunity Api
+    
+    func updateopportunityapi(){
+        CommonUtils.showHud(show: true)
+        
+        if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
+            let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+            let septoken = endToken.components(separatedBy: " ")
+            if septoken[0] != "Bearer"{
+                let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
+                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
+            }
+            //            headers["token"] = kSharedUserDefaults.getLoggedInAccessToken()
+        }
+        
+        let oppid = Int(self.oppid ?? 0) // For remove optional
+        debugPrint("checkoppid",oppid)
+        
+        let subcatid = Int(self.subcatid ?? 0)
+        debugPrint("checksubcatid",subcatid)
+        
+        let stateid = Int(self.stateid ?? 0)
+        debugPrint("checkstateid",stateid)
+        
+        let localityid = Int(self.localityid ?? 0)
+        debugPrint("checklocalityid",localityid)
+        
+        let lookingforid = Int(self.lookingforid ?? 0)
+        debugPrint("checklookingforid",lookingforid)
+        
+        let params:[String : Any] = [
+            "oppr_id":"\(String(describing: oppid))",
+            "category_id":"3",
+            "sub_category":"\(String(describing: subcatid))",
+            "title":String.getString(self.txtFieldTitle.text),
+            "services_type":Int.getInt(self.ServiceType),
+            "opp_state":"\(String(describing: stateid))",
+            "opp_locality":"\(String(describing: localityid))",
+            "location_name":String.getString(self.txtFieldLocationName.text),
+            
+            "description":String.getString(self.TextViewDescription.text),
+            "mobile_num":String.getString(self.txtFieldMobileNumber.text),
+            "whatsaap_num":String.getString(self.txtFieldWhatsappNumber.text),
+            "pricing":String.getString(self.txtFieldPricing.text),
+            "looking_for":"\(String(describing: lookingforid))",
+            "plan":String.getString(plan),
+            "location_map":String.getString(self.lblLocationOnMap.text),
+            "latitude":String.getString(self.latitude),
+            "longitude":String.getString(self.longitude),
+            "opr_status":3 // detail wale api se milega isko implement krna h
+            //   "cat_type_id":"0"
+        ]
+        
+        let uploadimage:[String:Any] = ["image[]":self.imagearr]
+        let uploaddocument:[String:Any] = ["opportunity_documents[]":self.documentarr]
+        
+        debugPrint("image[]......",self.imagearr)
+        debugPrint("opportunity_documents[]......",self.documentarr)
+        
+        TANetworkManager.sharedInstance.UpdatetMultiPartwithlanguage(withServiceName:ServiceName.kupdateopportunity , requestMethod: .post, requestImages: [:], requestdoc: [:],requestVideos: [:], requestData:params, req: self.imagearr, req:self.documentarr)
+        { (result:Any?, error:Error?, errortype:ErrorType?, statusCode:Int?) in
+            CommonUtils.showHudWithNoInteraction(show: false)
+            if errortype == .requestSuccess {
+                debugPrint("result=====",result)
+                let dictResult = kSharedInstance.getDictionary(result)
+                debugPrint("dictResult====",dictResult)
+                switch Int.getInt(statusCode) {
+                case 200:
+                    
+                    if Int.getInt(dictResult["status"]) == 200{
+                        let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+                        let septoken = endToken.components(separatedBy: " ")
+                        if septoken[0] == "Bearer"{
+                            kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
+                        }
+                        //                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        kSharedAppDelegate?.makeRootViewController()
+                        
+                    }
+                    else if  Int.getInt(dictResult["status"]) == 400{
+                        if kSharedUserDefaults.getlanguage() as? String == "en"{
+                            CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        }
+                        else{
+                            CommonUtils.showError(.info, String.getString("ليس لديك رصيد كاف لخلق فرصة!"))
+                        }
+                    }
+                    
+                    
+                default:
+                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                }
+            } else if errortype == .noNetwork {
+                CommonUtils.showToastForInternetUnavailable()
+            } else {
+                //                CommonUtils.showToastForDefaultError()
+            }
+        }
+    }
+    
+    //    Delete image Api
+    
+    func deleteimageapi(imageid:Int){
+        CommonUtils.showHud(show: true)
+        
+        if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
+            let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+            let septoken = endToken.components(separatedBy: " ")
+            if septoken[0] != "Bearer"{
+                let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
+                kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
+            }
+        }
+        
+        let params:[String : Any] = [
+            "oppr_id":imageid  // its image id
+        ]
+        
+        debugPrint("imageid......",imageid)
+        TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kdeleteoppimage, requestMethod: .POST,requestParameters:params, withProgressHUD: false)
+        {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
+            
+            CommonUtils.showHudWithNoInteraction(show: false)
+            
+            if errorType == .requestSuccess {
+                let dictResult = kSharedInstance.getDictionary(result)
+                switch Int.getInt(statusCode) {
+                case 200:
+                    if Int.getInt(dictResult["status"]) == 200{
+                        
+                        let endToken = kSharedUserDefaults.getLoggedInAccessToken()
+                        let septoken = endToken.components(separatedBy: " ")
+                        if septoken[0] == "Bearer"{
+                            kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
+                        }
                         CommonUtils.showError(.info, String.getString(dictResult["message"]))
                     }
-                    else{
-                        CommonUtils.showError(.info, String.getString("ليس لديك رصيد كاف لخلق فرصة!"))
-                    }
-                }
-            
-            
-        default:
-            CommonUtils.showError(.info, String.getString(dictResult["message"]))
-        }
-    } else if errortype == .noNetwork {
-        CommonUtils.showToastForInternetUnavailable()
-    } else {
-        //                CommonUtils.showToastForDefaultError()
-    }
-}
-}
-
-//    Delete image Api
-
-func deleteimageapi(imageid:Int){
-    CommonUtils.showHud(show: true)
-    
-    if String.getString(kSharedUserDefaults.getLoggedInAccessToken()) != "" {
-        let endToken = kSharedUserDefaults.getLoggedInAccessToken()
-        let septoken = endToken.components(separatedBy: " ")
-        if septoken[0] != "Bearer"{
-            let token = "Bearer " + kSharedUserDefaults.getLoggedInAccessToken()
-            kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: token)
-        }
-    }
-    
-    let params:[String : Any] = [
-        "oppr_id":imageid  // its image id
-    ]
-    
-    debugPrint("imageid......",imageid)
-    TANetworkManager.sharedInstance.requestwithlanguageApi(withServiceName:ServiceName.kdeleteoppimage, requestMethod: .POST,requestParameters:params, withProgressHUD: false)
-    {[weak self](result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
-        
-        CommonUtils.showHudWithNoInteraction(show: false)
-        
-        if errorType == .requestSuccess {
-            let dictResult = kSharedInstance.getDictionary(result)
-            switch Int.getInt(statusCode) {
-            case 200:
-                if Int.getInt(dictResult["status"]) == 200{
                     
-                    let endToken = kSharedUserDefaults.getLoggedInAccessToken()
-                    let septoken = endToken.components(separatedBy: " ")
-                    if septoken[0] == "Bearer"{
-                        kSharedUserDefaults.setLoggedInAccessToken(loggedInAccessToken: septoken[1])
+                    else if  Int.getInt(dictResult["status"]) == 404{
+                        CommonUtils.showError(.info, String.getString(dictResult["message"]))
+                        // kSharedAppDelegate?.makeRootViewController()
                     }
+                default:
                     CommonUtils.showError(.info, String.getString(dictResult["message"]))
                 }
+            } else if errorType == .noNetwork {
+                CommonUtils.showToastForInternetUnavailable()
                 
-                else if  Int.getInt(dictResult["status"]) == 404{
-                    CommonUtils.showError(.info, String.getString(dictResult["message"]))
-                    // kSharedAppDelegate?.makeRootViewController()
-                }
-            default:
-                CommonUtils.showError(.info, String.getString(dictResult["message"]))
+            } else {
+                //                   CommonUtils.showToastForDefaultError()
             }
-        } else if errorType == .noNetwork {
-            CommonUtils.showToastForInternetUnavailable()
-            
-        } else {
-            //                   CommonUtils.showToastForDefaultError()
         }
     }
-}
 }
 
 // MARK: - Localisation
@@ -1737,6 +1737,3 @@ extension MiningBusinessVC{
         btnCreateOpp.setTitle(LocalizationSystem.sharedInstance.localizedStringForKey(key: "Create opportunity", comment: ""), for: .normal)
     }
 }
-
-
-

@@ -78,7 +78,7 @@ class DetailsTableViewCell: UITableViewCell,UITextViewDelegate {
     
     @IBOutlet weak var viewCategory: UIView!
     @IBOutlet weak var viewSubCategory: UIView!
-    
+    @IBOutlet weak var lblratingOpp: UILabel!
     @IBOutlet weak var lblCategoryName: UILabel!
     
     weak var celldelegate: DocumentCollectionViewCellDelegate?

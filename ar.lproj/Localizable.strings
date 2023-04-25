@@ -486,3 +486,10 @@
 "All" = "الجميع";
 "Premium" = "الممتازة";
 "Featured" = "متميز";
+
+// MARK: - NewSocialPostCVC -
+
+"Cat:" = "قطة";
+"UserName:-" = "اسم المستخدم";
+"More" = "أكثر";
+"See Details" = "انظر التفاصيل";

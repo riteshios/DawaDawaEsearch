@@ -489,3 +489,10 @@
 "All" = "All";
 "Premium" = "Premium";
 "Featured" = "Featured";
+
+// MARK: - NewSocialPostCVC -
+
+"Cat:" = "Cat:";
+"UserName:-" = "UserName:-";
+"More" = "More";
+"See Details" = "See Details";

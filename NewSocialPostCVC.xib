@@ -84,20 +84,23 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mill Complex for sale at" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nIq-vQ-KS5">
-                                <rect key="frame" x="10" y="170" width="188" height="26"/>
+                                <rect key="frame" x="10" y="170" width="180" height="26"/>
                                 <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="Cat:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Qo-d2-FIk">
                                 <rect key="frame" x="9.9999999999999982" y="203.66666666666666" width="25.333333333333329" height="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="25.329999999999998" id="QkS-EV-MWn"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="14"/>
                                 <color key="textColor" red="0.08235294118" green="0.44705882349999998" blue="0.63137254899999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mill Complex" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sev-P2-WKB">
-                                <rect key="frame" x="40.333333333333329" y="203.66666666666666" width="154.66666666666669" height="17"/>
-                                <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="14"/>
+                                <rect key="frame" x="40.333333333333329" y="205" width="149.66666666666669" height="14.666666666666657"/>
+                                <fontDescription key="fontDescription" name="ProductSans-Regular" family="Product Sans" pointSize="12"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -324,10 +327,10 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="ssL-Dk-3rV" secondAttribute="trailing" constant="5" id="0uz-tV-0M5"/>
                             <constraint firstItem="2iT-pT-8QN" firstAttribute="leading" secondItem="tdj-lu-2Zg" secondAttribute="leading" id="1Eg-nL-Phe"/>
-                            <constraint firstAttribute="trailing" secondItem="nIq-vQ-KS5" secondAttribute="trailing" constant="2" id="1Xr-le-p6h"/>
+                            <constraint firstAttribute="trailing" secondItem="nIq-vQ-KS5" secondAttribute="trailing" constant="10" id="1Xr-le-p6h"/>
                             <constraint firstItem="BQR-zQ-lwo" firstAttribute="top" secondItem="tdj-lu-2Zg" secondAttribute="top" id="1ZH-N3-Te8"/>
                             <constraint firstItem="OJY-A4-2dp" firstAttribute="leading" secondItem="yWX-bb-TMi" secondAttribute="trailing" constant="5" id="2k6-4Y-57Q"/>
-                            <constraint firstAttribute="trailing" secondItem="sev-P2-WKB" secondAttribute="trailing" constant="5" id="6iM-B0-wXZ"/>
+                            <constraint firstAttribute="trailing" secondItem="sev-P2-WKB" secondAttribute="trailing" constant="10" id="6iM-B0-wXZ"/>
                             <constraint firstItem="sev-P2-WKB" firstAttribute="centerY" secondItem="7Qo-d2-FIk" secondAttribute="centerY" id="FtE-40-5p5"/>
                             <constraint firstItem="2iT-pT-8QN" firstAttribute="top" secondItem="tdj-lu-2Zg" secondAttribute="top" id="GMT-Vh-gCi"/>
                             <constraint firstAttribute="bottom" secondItem="8Oh-tN-j6f" secondAttribute="bottom" constant="5" id="J2N-ic-dgW"/>
@@ -339,6 +342,7 @@
                             <constraint firstItem="8Oh-tN-j6f" firstAttribute="trailing" secondItem="F1e-EW-GJy" secondAttribute="trailing" id="RF1-Yc-0eo"/>
                             <constraint firstItem="8Oh-tN-j6f" firstAttribute="top" secondItem="F1e-EW-GJy" secondAttribute="bottom" constant="5" id="So8-tw-HVH"/>
                             <constraint firstAttribute="trailing" secondItem="2iT-pT-8QN" secondAttribute="trailing" id="SrP-cP-TX6"/>
+                            <constraint firstItem="7Qo-d2-FIk" firstAttribute="leading" secondItem="tdj-lu-2Zg" secondAttribute="leading" constant="10" id="UbZ-4Z-Mhp"/>
                             <constraint firstItem="OJY-A4-2dp" firstAttribute="top" secondItem="7Qo-d2-FIk" secondAttribute="bottom" constant="7.3333333333333428" id="bXp-oE-Bfa"/>
                             <constraint firstAttribute="trailing" secondItem="BQR-zQ-lwo" secondAttribute="trailing" id="dAO-Sz-yow"/>
                             <constraint firstItem="sev-P2-WKB" firstAttribute="leading" secondItem="7Qo-d2-FIk" secondAttribute="trailing" constant="5" id="dga-xj-Z6O"/>
@@ -364,13 +368,17 @@
             </constraints>
             <connections>
                 <outlet property="ViewAvailable" destination="BQR-zQ-lwo" id="v3C-bW-If0"/>
+                <outlet property="btnSeeDetail" destination="SLI-q9-ap4" id="Mhl-OX-kVM"/>
                 <outlet property="imgOpportunity" destination="2iT-pT-8QN" id="6Tn-kZ-LfZ"/>
                 <outlet property="imglike" destination="GrI-jf-baN" id="g76-pK-aq1"/>
+                <outlet property="lblCat" destination="7Qo-d2-FIk" id="R3Q-ge-zGn"/>
                 <outlet property="lblCategoryName" destination="sev-P2-WKB" id="Tjf-DM-fCk"/>
                 <outlet property="lblCommentCout" destination="ouV-bR-O0b" id="FIV-Ds-qIf"/>
                 <outlet property="lblLikeCount" destination="4cl-DS-epJ" id="Ypc-6h-5hI"/>
+                <outlet property="lblMore" destination="5Vl-TM-zFL" id="GKR-2h-dui"/>
                 <outlet property="lblRating" destination="8D3-Eb-JbS" id="BHl-j7-9yd"/>
                 <outlet property="lblTitle" destination="nIq-vQ-KS5" id="5T9-i5-86t"/>
+                <outlet property="lblUser" destination="yWX-bb-TMi" id="s3b-ph-hNs"/>
                 <outlet property="lblUserName" destination="OJY-A4-2dp" id="4eC-cQ-6Vt"/>
                 <outlet property="lblcloseOpportunity" destination="6rH-2p-KiB" id="jTj-8c-x16"/>
             </connections>

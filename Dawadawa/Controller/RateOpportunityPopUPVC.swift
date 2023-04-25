@@ -61,14 +61,13 @@ class RateOpportunityPopUPVC: UIViewController {
         Viewmain?.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
         Viewmain?.addShadowWithBlurOnView(Viewmain, spread: 0, blur: 10, color: .black, opacity: 0.16, OffsetX: 0, OffsetY: 1)
         self.viewSubmit?.applyGradient(colours: [UIColor(red: 21, green: 114, blue: 161), UIColor(red: 39, green: 178, blue: 247)])
-        
     }
     
     //    MARK: - @IBAction -
     
+    
     @IBAction func btnDismissTapped(_ sender: UIButton) {
-        //        self.callback?("Dismiss")
-        self.dismiss(animated: true)
+        self.dismiss(animated: false)
     }
     
     @IBAction func btnSubmitTapped(_ sender: UIButton) {

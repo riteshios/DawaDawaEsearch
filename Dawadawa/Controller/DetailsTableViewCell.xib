@@ -1046,6 +1046,7 @@
                 <outlet property="lbllike" destination="WTN-rt-eCP" id="FOv-tv-3nX"/>
                 <outlet property="lblposted" destination="YFk-FP-yAo" id="A7J-AL-oPj"/>
                 <outlet property="lblpricing" destination="QzT-NL-PtF" id="1bH-qx-Tii"/>
+                <outlet property="lblratingOpp" destination="Prl-Fn-bT7" id="Wcv-h3-sos"/>
                 <outlet property="llbMobileNumber" destination="nwr-33-Wqq" id="txg-AV-t8B"/>
                 <outlet property="pageControl" destination="42W-28-CfC" id="PhL-sZ-bRM"/>
                 <outlet property="txtviewComment" destination="lmb-94-SVK" id="hvh-zR-107"/>
