@@ -1,9 +1,6 @@
-//
 //  CornerWithShadow.swift
 //  WajBatUser
-//
 //  Created by  on 13/01/22.
-//
 
 import Foundation
 import UIKit

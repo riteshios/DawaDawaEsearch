@@ -732,6 +732,7 @@ class RockPitOpportunityVC: UIViewController,UICollectionViewDelegate,UICollecti
                     let imgid = Int.getInt(self.userTimeLineoppdetails?.oppimage[indexPath.row].id)
                     self.deleteimageapi(imageid: imgid)
                     self.UploadimageCollectionView.reloadData()
+                   
                 }
             }
             else{
@@ -1428,7 +1429,7 @@ extension RockPitOpportunityVC{
         debugPrint("checklookingforid",lookingforid)
         
         let params:[String : Any] = [
-            "oppr_id":700,
+            "oppr_id":"\(String(describing: oppid))",
             "category_id":"1",
             "sub_category":"\(String(describing: subcatid))",
             "title":String.getString(self.txtFieldTitle.text),

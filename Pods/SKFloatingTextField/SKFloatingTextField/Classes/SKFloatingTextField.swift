@@ -19,6 +19,7 @@ public class SKFloatingTextField : UIView {
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var bottomErrorLabel: UILabel!
     
+    @IBOutlet weak var viewBG: UIView!
     private var rightViewTapAction : ( (UIButton) -> () )?
     /**
      *Member Variables
@@ -89,6 +90,7 @@ public class SKFloatingTextField : UIView {
             return textField.delegate
         }
     }
+    
     public var floatingLabelText : String? {
         set {
             self.titleLabel.text = newValue
@@ -159,12 +161,12 @@ public class SKFloatingTextField : UIView {
     }
     public var borderWidth : CGFloat = 1 {
         didSet{
-            self.textField.layer.borderWidth = self.borderWidth
+            self.textField.layer.borderWidth = 0//self.borderWidth
         }
     }
     public var cornerRadius : CGFloat? {
         didSet{
-            self.textField.layer.cornerRadius = self.cornerRadius ?? 0
+            self.textField.layer.cornerRadius = 0//self.cornerRadius ?? 0
         }
     }
     public var textAlignment : NSTextAlignment = .left{
@@ -197,9 +199,15 @@ public class SKFloatingTextField : UIView {
         contentView.frame = self.bounds
         contentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         self.textField.placeholder = nil
+        self.viewBG.layer.borderColor = self.borderColor.cgColor
+        self.viewBG.layer.borderWidth = 1
+        self.viewBG.layer.cornerRadius = 12//self.cornerRadius ?? 0
+       // self.textField.leadingAnchor.constraint(equalTo:contentView.leadingAnchor, constant: -10).isActive = true
+        self.textField.trailingAnchor.constraint(equalTo:contentView.trailingAnchor, constant: -15).isActive = true
         self.titleView.isHidden = true
+        self.titleView.layer.backgroundColor = UIColor.white.cgColor
         self.bottomErrorLabel.isHidden = true
-        self.textField.layer.borderColor = self.borderColor.cgColor
+       // self.textField.layer.borderColor = self.borderColor.cgColor
         self.borderWidth = 1
         self.floatingLabelFont = UIFont.systemFont(ofSize: 12, weight: .regular)
         self.textFieldFont = UIFont.systemFont(ofSize: 14, weight: .semibold)

@@ -1,10 +1,7 @@
-//
 //  NetworkManagerOld.swift
 //  Hlthera
-//
 //  Created by Prashant Panchal on 24/04/21.
 //  Copyright © 2021 . All rights reserved.
-//
 
 import Foundation
 import Alamofire

@@ -787,20 +787,18 @@ class MiningServiceVC: UIViewController,UICollectionViewDelegate,UICollectionVie
                     cell.image.downlodeImage(serviceurl: imageurl, placeHolder: UIImage(named: "Frame 726"))
                 }
                 
-                
                 cell.callback = {
                     self.imgarray.remove(at: indexPath.row)
+                    let imgid = Int.getInt(self.userTimeLineoppdetails?.oppimage[indexPath.row].id)
+                    self.deleteimageapi(imageid: imgid)
                     self.UploadimageCollectionView.reloadData()
-                    
+                   
                 }
-                
             }
             else{
                 cell.image.image = imagearr[indexPath.row]
                 cell.callback = {
                     self.imagearr.remove(at: indexPath.row)
-                    let imgid = Int.getInt(self.userTimeLineoppdetails?.oppimage[indexPath.row].id)
-                    self.deleteimageapi(imageid: imgid)
                     self.UploadimageCollectionView.reloadData()
                 }
             }
